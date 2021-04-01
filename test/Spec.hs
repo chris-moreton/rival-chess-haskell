@@ -51,8 +51,25 @@ main = hspec $ do
       rankBits "P7" 'P' `shouldBe` [1,0,0,0,0,0,0,0]
       rankBits "1p2q2p" 'p' `shouldBe` [0,1,0,0,0,0,0,1]
 
---    it "returns the first element of an *arbitrary* list" $
---      property $ \x xs -> head (x:xs) == (x :: Int)
---
---    it "throws an exception if used with an empty list" $ do
---      evaluate (head []) `shouldThrow` anyException
+  describe "boardBits" $ do
+    it "Converts from FEN string into char array of 64 0s and 1s for a given piece" $ do
+      let fen = "6k1/6p1/1p2q2p/1p5P/1P3RP1/2PK1B2/1r2N3/8 b kQKq g3 5 56"
+      boardBits (fenRanks (fenBoardPart fen)) 'p' `shouldBe` [0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,1,0,0,0,0,0,1,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
+
+  describe "pieceBitboard" $ do
+    it "Converts from FEN rank string into char array of eight 0s and 1s" $ do
+      let fen = "6k1/6p1/1p2q2p/1p5P/1P3RP1/2PK1B2/1r2N3/8 b Q g3 5 56"
+      pieceBitboard (fenRanks (fenBoardPart fen)) 'p' `shouldBe` 634693087133696
+
+  describe "algebraicSquareRefFromBitRef" $ do
+    it "Converts a bitRef to an algebraic square" $ do
+      algebraicSquareRefFromBitRef 63 `shouldBe` "a8"
+      algebraicSquareRefFromBitRef 0 `shouldBe` "h1"
+      algebraicSquareRefFromBitRef 7 `shouldBe` "a1"
+
+  describe "bitRefFromAlgebraicSquareRef" $ do
+    it "Converts an algebraic square to a bit reference" $ do
+      bitRefFromAlgebraicSquareRef "a8" `shouldBe` 63
+      bitRefFromAlgebraicSquareRef "h1" `shouldBe` 0
+      bitRefFromAlgebraicSquareRef "g1" `shouldBe` 1
+
