@@ -3,6 +3,7 @@ import Test.QuickCheck
 import Control.Exception (evaluate)
 import Util.Bitboards
 import Util.Fen
+import Model.Game
 
 main :: IO ()
 main = hspec $ do
@@ -39,7 +40,7 @@ main = hspec $ do
 
   describe "fenRanks" $ do
     it "Extracts ranks from FEN board part from" $ do
-      fenRanks "6k1/6p1/1p2q2p/1p5P/1P3RP1/2PK1B2/1r2N3/8" `shouldBe` ["6k1","6p1","1p2q2p","1p5P","1P3RP1","2PK1B2","1r2N3","8"]
+      getFenRanks "6k1/6p1/1p2q2p/1p5P/1P3RP1/2PK1B2/1r2N3/8" `shouldBe` ["6k1","6p1","1p2q2p","1p5P","1P3RP1","2PK1B2","1r2N3","8"]
 
   describe "rankBits" $ do
     it "Converts from FEN rank string into char array of eight 0s and 1s for a given piece" $ do
@@ -54,12 +55,12 @@ main = hspec $ do
   describe "boardBits" $ do
     it "Converts from FEN string into char array of 64 0s and 1s for a given piece" $ do
       let fen = "6k1/6p1/1p2q2p/1p5P/1P3RP1/2PK1B2/1r2N3/8 b kQKq g3 5 56"
-      boardBits (fenRanks (fenBoardPart fen)) 'p' `shouldBe` [0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,1,0,0,0,0,0,1,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
+      boardBits (getFenRanks (fenBoardPart fen)) 'p' `shouldBe` [0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,1,0,0,0,0,0,1,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
 
   describe "pieceBitboard" $ do
     it "Converts from FEN rank string into char array of eight 0s and 1s" $ do
       let fen = "6k1/6p1/1p2q2p/1p5P/1P3RP1/2PK1B2/1r2N3/8 b Q g3 5 56"
-      pieceBitboard (fenRanks (fenBoardPart fen)) 'p' `shouldBe` 634693087133696
+      pieceBitboard (getFenRanks (fenBoardPart fen)) 'p' `shouldBe` 634693087133696
 
   describe "algebraicSquareRefFromBitRef" $ do
     it "Converts a bitRef to an algebraic square" $ do
@@ -73,3 +74,38 @@ main = hspec $ do
       bitRefFromAlgebraicSquareRef "h1" `shouldBe` 0
       bitRefFromAlgebraicSquareRef "g1" `shouldBe` 1
 
+  describe "algebraicMoveFromCompactMove" $ do
+    it "Converts a compact move to an algebraic move" $ do
+      algebraicMoveFromCompactMove 458808 `shouldBe` "a1h8"
+
+  describe "boardFromFen" $ do
+    it "Converts from FEN to board type (Test 1)" $ do
+      let fen = "6k1/6p1/1p2q2p/1p5P/1P3RP1/2PK1B2/1r2N3/8 b q g3 5 56"
+      let position = getPosition fen
+      let bitboards = positionBitboards position
+      whitePawnBitboard bitboards `shouldBe` 5404360704
+      whiteKnightBitboard bitboards `shouldBe` 2048
+      whiteKingBitboard bitboards `shouldBe` 1048576
+      whiteBishopBitboard bitboards `shouldBe` 262144
+      whiteQueenBitboard bitboards `shouldBe` 0
+      whiteRookBitboard bitboards `shouldBe` 67108864
+      blackPawnBitboard bitboards `shouldBe` 634693087133696
+      blackKnightBitboard bitboards `shouldBe` 0
+      blackKingBitboard bitboards `shouldBe` 144115188075855872
+      blackBishopBitboard bitboards `shouldBe` 0
+      blackQueenBitboard bitboards `shouldBe` 8796093022208
+      blackRookBitboard bitboards `shouldBe` 16384
+      mover position `shouldBe` Black
+      enPassantSquare position `shouldBe` 17
+
+    it "Converts from FEN to board type (Test 2)" $ do
+      let fen = "6k1/6p1/1p2q2p/1p5P/1P3RP1/2PK1B2/1r2N3/8 w kQ - 5 56"
+      let position = getPosition fen
+      let castlePrivs = positionCastlePrivs position
+      enPassantSquare position `shouldBe` -1
+      halfMoves position `shouldBe` 5
+      mover position `shouldBe` White
+      whiteKingCastleAvailable castlePrivs `shouldBe` False
+      whiteQueenCastleAvailable castlePrivs `shouldBe` True
+      blackKingCastleAvailable castlePrivs `shouldBe` True
+      blackQueenCastleAvailable castlePrivs `shouldBe` False

@@ -1,24 +1,22 @@
-{-# LANGUAGE ViewPatterns #-}
+{-# LANGUAGE ViewPatterns, OverloadedStrings #-}
 
-module Util.Fen (
-     fenRanks
-   , fenBoardPart
-   , rankBits
-   , boardBits
-   , pieceBitboard
-   , algebraicSquareRefFromBitRef
-   , bitRefFromAlgebraicSquareRef)
-    where
+module Util.Fen where
+
+import Model.Game
 
 import Data.List.Split
 import Data.Char
 import Data.Bits
+import qualified Data.Text as T
 
+fenPart :: String -> Int -> String
+fenPart fen index = splitOn " " fen !! index
+  
 fenBoardPart :: String -> String
 fenBoardPart fen = head (splitOn " " fen)
 
-fenRanks :: String -> [String]
-fenRanks = splitOn "/"
+getFenRanks :: String -> [String]
+getFenRanks = splitOn "/"
 
 isFileNumber :: Char -> Bool
 isFileNumber c = ord c >= 49 && ord c <= 56
@@ -67,3 +65,56 @@ bitRefFromAlgebraicSquareRef algebraic = do
   let fileNum = ord (head algebraic) - 97
   let rankNum = ord (head (tail algebraic)) - 49
   (rankNum * 8) + (7 - fileNum)
+
+algebraicMoveFromCompactMove :: Int -> String
+algebraicMoveFromCompactMove compactMove = do
+  let fromSquare = shiftR compactMove 16
+  let toSquare = (.&.) 63 compactMove
+  algebraicSquareRefFromBitRef fromSquare ++ algebraicSquareRefFromBitRef toSquare
+
+getMover :: String -> Mover
+getMover fen = if fenPart fen 1 == "w" then White else Black
+    
+pieceBitboards :: String -> PieceBitboards
+pieceBitboards fen = do
+  let fenRanks = getFenRanks (fenBoardPart fen)
+  PieceBitboards {
+      whitePawnBitboard = pieceBitboard fenRanks 'P'
+    , whiteKnightBitboard = pieceBitboard fenRanks 'N'
+    , whiteBishopBitboard = pieceBitboard fenRanks 'B'
+    , whiteQueenBitboard = pieceBitboard fenRanks 'Q'
+    , whiteKingBitboard = pieceBitboard fenRanks 'K'
+    , whiteRookBitboard = pieceBitboard fenRanks 'R'
+    , blackPawnBitboard = pieceBitboard fenRanks 'p'
+    , blackKnightBitboard = pieceBitboard fenRanks 'n'
+    , blackBishopBitboard = pieceBitboard fenRanks 'b'
+    , blackQueenBitboard = pieceBitboard fenRanks 'q'
+    , blackKingBitboard = pieceBitboard fenRanks 'k'
+    , blackRookBitboard = pieceBitboard fenRanks 'r'
+  }
+
+enpassantFenPart :: String -> String
+enpassantFenPart fen = fenPart fen 3
+
+enPassantBitRef :: String -> Int
+enPassantBitRef enPassantFenPart =
+  if enPassantFenPart == "-" then -1 else bitRefFromAlgebraicSquareRef enPassantFenPart
+
+getCastlePrivs :: String -> CastlePrivileges
+getCastlePrivs fen =
+  CastlePrivileges {
+      whiteKingCastleAvailable = T.isInfixOf "K" castlePart
+    , whiteQueenCastleAvailable = T.isInfixOf "Q" castlePart
+    , blackKingCastleAvailable = T.isInfixOf "k" castlePart
+    , blackQueenCastleAvailable = T.isInfixOf "q" castlePart
+  } where castlePart = T.pack (fenPart fen 2)
+
+getPosition :: String -> Position
+getPosition fen = Position {
+    positionBitboards = pieceBitboards fen
+  , mover = getMover fen
+  , enPassantSquare = enPassantBitRef (enpassantFenPart fen)
+  , positionCastlePrivs = getCastlePrivs fen
+  , halfMoves = read (fenPart fen 4) :: Int
+  , moveNumber = read (fenPart fen 5) :: Int
+}

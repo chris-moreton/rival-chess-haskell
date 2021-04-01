@@ -1,36 +1,4 @@
-module Util.Bitboards
-    ( southFill
-    , northFill
-    , rank1Bits
-    , rank2Bits
-    , rank3Bits
-    , rank4Bits
-    , rank5Bits
-    , rank6Bits
-    , rank7Bits
-    , rank8Bits
-    , fileABits
-    , fileBBits
-    , fileCBits
-    , fileDBits
-    , fileEBits
-    , fileFBits
-    , fileGBits
-    , fileHBits
-    , middleFiles8Bit
-    , nonMidFiles8Bit
-    , f1G1Bits
-    , g1H1Bits
-    , a1B1Bits
-    , b1C1Bits
-    , f8G8Bits
-    , g8H8Bits
-    , a8B8Bits
-    , b8C8Bits
-    , darkSquaresBits
-    , lightSquaresBits
-    , low32Bits
-    ) where
+module Util.Bitboards where
 
 import Data.Bits
 

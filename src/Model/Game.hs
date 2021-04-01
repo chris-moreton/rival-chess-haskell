@@ -4,7 +4,7 @@ type Square = Int
 type Bitboard = Int
 type Move = Int
 
-data Mover = White | Black deriving (Enum)
+data Mover = White | Black deriving (Enum,Show,Eq)
 
 bitboardWhitePawnIndex = 0 :: Int
 bitboardWhiteKnightIndex = 1 :: Int
@@ -34,14 +34,14 @@ data PieceBitboards = PieceBitboards {
   , whiteKnightBitboard :: Bitboard
   , whiteBishopBitboard :: Bitboard
   , whiteQueenBitboard :: Bitboard
-  , whiteKing :: Bitboard
-  , whiteRookBitboard :: Bitboard  
+  , whiteKingBitboard :: Bitboard
+  , whiteRookBitboard :: Bitboard
   , blackPawnBitboard :: Bitboard
   , blackKnightBitboard :: Bitboard
   , blackBishopBitboard :: Bitboard
   , blackQueenBitboard :: Bitboard
-  , blackKing :: Bitboard
-  , blackRookBitboard :: Bitboard  
+  , blackKingBitboard :: Bitboard
+  , blackRookBitboard :: Bitboard
 }
 
 data CastlePrivileges = CastlePrivileges {
@@ -52,15 +52,15 @@ data CastlePrivileges = CastlePrivileges {
 }
 
 data Position = Position {
-    bitboards :: PieceBitboards
+    positionBitboards :: PieceBitboards
   , mover :: Mover
   , enPassantSquare :: Square
-  , castlePrivs :: CastlePrivileges
+  , positionCastlePrivs :: CastlePrivileges
   , halfMoves :: Int
   , moveNumber :: Int
 }
 
 data Game = Game {
-    position :: Position
-  , moves :: [Move]
+    gamePosition :: Position
+  , gameMoves :: [Move]
 }
