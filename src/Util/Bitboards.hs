@@ -1,4 +1,4 @@
-module Bitboards
+module Util.Bitboards
     ( southFill
     , northFill
     , rank1Bits

@@ -27,13 +27,15 @@ source-repository head
 
 library
   exposed-modules:
-      Bitboards
+      Util.Bitboards
+      Util.Fen
   other-modules:
       Paths_rival
   hs-source-dirs:
       src
   build-depends:
       base >=4.7 && <5
+    , split
   default-language: Haskell2010
 
 executable rival-exe

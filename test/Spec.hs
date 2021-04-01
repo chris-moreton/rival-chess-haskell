@@ -1,7 +1,8 @@
 import Test.Hspec
 import Test.QuickCheck
 import Control.Exception (evaluate)
-import Bitboards
+import Util.Bitboards
+import Util.Fen
 
 main :: IO ()
 main = hspec $ do
@@ -32,6 +33,23 @@ main = hspec $ do
       darkSquaresBits `shouldBe` 6172840429334713770
       low32Bits `shouldBe` 4294967295
 
+  describe "fenBoardPart" $ do
+    it "Extracts board part from FEN" $ do
+      fenBoardPart "6k1/6p1/1p2q2p/1p5P/1P3RP1/2PK1B2/1r2N3/8 b - g3 5 56" `shouldBe` "6k1/6p1/1p2q2p/1p5P/1P3RP1/2PK1B2/1r2N3/8"
+
+  describe "fenRanks" $ do
+    it "Extracts ranks from FEN board part from" $ do
+      fenRanks "6k1/6p1/1p2q2p/1p5P/1P3RP1/2PK1B2/1r2N3/8" `shouldBe` ["6k1","6p1","1p2q2p","1p5P","1P3RP1","2PK1B2","1r2N3","8"]
+
+  describe "rankBits" $ do
+    it "Converts from FEN rank string into char array of eight 0s and 1s for a given piece" $ do
+      rankBits "8" 'Q' `shouldBe` [0,0,0,0,0,0,0,0]
+      rankBits "6k1" 'k' `shouldBe` [0,0,0,0,0,0,1,0]
+      rankBits "6k1" 'q' `shouldBe` [0,0,0,0,0,0,0,0]
+      rankBits "6p1" 'p' `shouldBe` [0,0,0,0,0,0,1,0]
+      rankBits "6pp" 'p' `shouldBe` [0,0,0,0,0,0,1,1]
+      rankBits "P7" 'P' `shouldBe` [1,0,0,0,0,0,0,0]
+      rankBits "1p2q2p" 'p' `shouldBe` [0,1,0,0,0,0,0,1]
 
 --    it "returns the first element of an *arbitrary* list" $
 --      property $ \x xs -> head (x:xs) == (x :: Int)
