@@ -3,6 +3,7 @@ module Types where
 type Square = Int
 type Bitboard = Int
 type Move = Int
+type BitRef = Int
 
 data Mover = White | Black deriving (Enum,Show,Eq)
 data Piece = Pawn | King | Queen | Bishop | Knight | Rook deriving (Enum,Show,Eq)

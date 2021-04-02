@@ -128,3 +128,10 @@ main = hspec $ do
       bitboardForMover position Queen `shouldNotBe` whiteQueenBitboard bitboards
       bitboardForMover position Bishop `shouldBe` blackBishopBitboard bitboards
       bitboardForMover position Bishop `shouldNotBe` whiteBishopBitboard bitboards
+
+  describe "bitRefList" $ do
+    it "Gets a list of set bits in a bitboard" $ do
+      let position = getPosition "n5k1/6n1/1n2q2p/1p5P/1P3RP1/2PK1B2/1r2N3/8 b kQKq g3 5 56"
+      let bitboards = positionBitboards position
+      bitRefList (blackKnightBitboard bitboards) `shouldBe` [46,49,63]
+      
