@@ -3,6 +3,7 @@
 module Util.Fen where
 
 import Model.Game
+import Types
 
 import Data.List.Split
 import Data.Char

@@ -30,6 +30,8 @@ library
       Util.Bitboards
       Util.Fen
       Model.Game
+      Search.MoveGenerator
+      Types
   other-modules:
       Paths_rival
   hs-source-dirs:

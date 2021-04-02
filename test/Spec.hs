@@ -4,6 +4,8 @@ import Control.Exception (evaluate)
 import Util.Bitboards
 import Util.Fen
 import Model.Game
+import Search.MoveGenerator
+import Types
 
 main :: IO ()
 main = hspec $ do
@@ -109,3 +111,20 @@ main = hspec $ do
       whiteQueenCastleAvailable castlePrivs `shouldBe` True
       blackKingCastleAvailable castlePrivs `shouldBe` True
       blackQueenCastleAvailable castlePrivs `shouldBe` False
+
+  describe "getPieceBitboardForColour" $ do
+    it "Gets piece bitboard for colour" $ do
+      let position = getPosition "6k1/6p1/1p2q2p/1p5P/1P3RP1/2PK1B2/1r2N3/8 b kQKq g3 5 56"
+      let bitboards = positionBitboards position
+      bitboardForMover position Pawn `shouldBe` blackPawnBitboard bitboards
+      bitboardForMover position Pawn `shouldNotBe` whitePawnBitboard bitboards
+      bitboardForMover position Rook `shouldBe` blackRookBitboard bitboards
+      bitboardForMover position Rook `shouldNotBe` whiteRookBitboard bitboards
+      bitboardForMover position King `shouldBe` blackKingBitboard bitboards
+      bitboardForMover position King `shouldNotBe` whiteKingBitboard bitboards
+      bitboardForMover position Knight `shouldBe` blackKnightBitboard bitboards
+      bitboardForMover position Knight `shouldNotBe` whiteKnightBitboard bitboards
+      bitboardForMover position Queen `shouldBe` blackQueenBitboard bitboards
+      bitboardForMover position Queen `shouldNotBe` whiteQueenBitboard bitboards
+      bitboardForMover position Bishop `shouldBe` blackBishopBitboard bitboards
+      bitboardForMover position Bishop `shouldNotBe` whiteBishopBitboard bitboards
