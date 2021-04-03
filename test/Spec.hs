@@ -168,3 +168,10 @@ main = hspec $ do
         `shouldBe` ["g8f7","g8f8","g8h7","g8h8"]
       sort (map algebraicMoveFromCompactMove (generateKingMoves (getPosition "n5k1/6n1/1n2q2p/1p5P/1P3RP1/2PK1B2/1r2N3/8 w kQKq g3 5 56")))
         `shouldBe` ["d3c2","d3c4","d3d2","d3d4","d3e3","d3e4"]
+
+  describe "generateBishopMoves" $ do
+    it "Generates bishop moves from a given FEN (ignoring checks)" $ do
+      sort (map algebraicMoveFromCompactMove (generateBishopMoves (getPosition "n5k1/6n1/1n2q2p/1p5P/1P3RP1/2PK1B2/1r2N3/8 b kQKq g3 5 56")))
+        `shouldBe` []
+      sort (map algebraicMoveFromCompactMove (generateBishopMoves (getPosition "n5k1/6n1/1n2q2p/1p5P/1P3RP1/2PK1B2/1r2N3/7R w kQKq g3 5 56")))
+        `shouldBe` ["f3e4","f3d5","f3c6","f3b7","f3a8","f3g2"]

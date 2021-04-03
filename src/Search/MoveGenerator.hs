@@ -4,6 +4,7 @@ import Types
 import Data.Word
 import Data.Bits
 import Util.Bitboards
+import Util.MagicBitboards
 
 bitboardForMover :: Position -> Piece -> Bitboard
 bitboardForMover position = bitboardForColour (positionBitboards position) (mover position)
@@ -83,3 +84,46 @@ generateKingMoves position = do
   let kingSquare = countTrailingZeros (bitboardForMover position King)
   let toSquares = bitRefList ((.&.) (kingMovesBitboards!!kingSquare) (allBitsExceptFriendlyPieces position))
   movesFromToSquares kingSquare toSquares
+
+generateBishopMoves :: Position -> [CompactMove]
+generateBishopMoves position = generateSliderMoves position Bishop
+
+generateRookMoves :: Position -> [CompactMove]
+generateRookMoves position = generateSliderMoves position Rook
+
+generateSliderMoves :: Position -> Piece -> [CompactMove]
+generateSliderMoves position piece = do
+  let bitboards = positionBitboards position
+  let magicVars = if piece == Bishop then magicBishopVars else magicRookVars
+  let thisMover = mover position
+  let bitboard = (.|.) (bitboardForColour bitboards thisMover piece) (bitboardForColour bitboards thisMover Queen)
+  let fromSquares = bitRefList bitboard
+  recurGenerateSliderMoves fromSquares position magicVars []
+
+recurGenerateSliderMoves :: [Square] -> Position -> MagicVars -> [CompactMove] -> [CompactMove]
+recurGenerateSliderMoves [] _ _ result = result
+recurGenerateSliderMoves fromSquares position magicVars result = do
+  let fromSquare = head fromSquares
+
+  let moves = magicMoves magicVars
+  let numbers = magicNumber magicVars
+  let shifts = magicNumberShifts magicVars
+  let mask = occupancyMask magicVars
+
+  let toSquaresMagicIndex = ((.&.) (allPiecesBitboard position) (mask!!fromSquare) * (numbers!!fromSquare)) `shiftR` shifts!!fromSquare
+  let toSquaresBitboard = (.&.) ((magicMoves magicVars!!fromSquare)!!toSquaresMagicIndex) (allBitsExceptFriendlyPieces position)
+
+  let fromShifted = shiftL fromSquare 16
+  let toSquares = bitRefList toSquaresBitboard
+
+  let thisResult = recurGenerateSliderMovesWithToSquares fromSquare toSquares result
+
+  recurGenerateSliderMoves (tail fromSquares) position magicVars (result ++ thisResult)
+
+recurGenerateSliderMovesWithToSquares :: Square -> [Square] -> [CompactMove] -> [CompactMove]
+recurGenerateSliderMovesWithToSquares fromSquare [] result = result
+recurGenerateSliderMovesWithToSquares fromSquare toSquares result = do
+  let fromShifted = shiftL fromSquare 16
+  let toSquare = head toSquares
+  let thisResult = (.|.) fromShifted toSquare
+  recurGenerateSliderMovesWithToSquares fromSquare (tail toSquares) (result ++ [thisResult])
