@@ -1,23 +1,24 @@
 module Util.Bitboards where
 
 import Data.Bits
+import Types
 
-orWithURightShiftedSelf :: Int -> Int -> Int
+orWithURightShiftedSelf :: Bitboard -> Int -> Bitboard
 orWithURightShiftedSelf x y = (.|.) x (shiftR x y)
 
-orWithULeftShiftedSelf :: Int -> Int -> Int
+orWithULeftShiftedSelf :: Bitboard -> Int -> Bitboard
 orWithULeftShiftedSelf x y = (.|.) x (shiftL x y)
 
-southFill :: Int -> Int
+southFill :: Bitboard -> Bitboard
 southFill x = orWithURightShiftedSelf (orWithURightShiftedSelf (orWithURightShiftedSelf x 8) 16) 32
 
-northFill :: Int -> Int
+northFill :: Bitboard -> Bitboard
 northFill x = orWithULeftShiftedSelf (orWithULeftShiftedSelf (orWithULeftShiftedSelf x 8) 16) 32
 
-everyEighthBitFrom :: Int -> Int
+everyEighthBitFrom :: Bitboard -> Bitboard
 everyEighthBitFrom x = if x < 8 then shiftL 1 x else (.|.) (shiftL 1 x) (everyEighthBitFrom ((-) x 8))
 
-setBits :: [Int] -> Int
+setBits :: [Int] -> Bitboard
 setBits [] = 0
 setBits [x] = shiftL 1 x
 setBits xs = (.|.) (shiftL 1 (head xs)) (setBits (tail xs))
@@ -49,14 +50,14 @@ g8H8Bits = setBits [g8Bit,h8Bit]
 a8B8Bits = setBits [a8Bit,b8Bit]
 b8C8Bits = setBits [b8Bit,c8Bit]
 
-a1Bit = 7 :: Int
-b1Bit = 6 :: Int
-c1Bit = 5 :: Int
-d1Bit = 4 :: Int
-e1Bit = 3 :: Int
-f1Bit = 2 :: Int
-g1Bit = 1 :: Int
-h1Bit = 0 :: Int
+a1Bit = 7 :: Bitboard
+b1Bit = 6 :: Bitboard
+c1Bit = 5 :: Bitboard
+d1Bit = 4 :: Bitboard
+e1Bit = 3 :: Bitboard
+f1Bit = 2 :: Bitboard
+g1Bit = 1 :: Bitboard
+h1Bit = 0 :: Bitboard
 
 a2Bit = (+) a1Bit 8
 b2Bit = (+) b1Bit 8
@@ -137,4 +138,4 @@ knightMoves = [0x20400,
                0x5080008050000, 0xa1100110a0000, 0x14220022140000, 0x28440044280000, 0x50880088500000, 0xa0100010a00000, 0x40200020400000, 0x204000402000000,
                0x508000805000000, 0xa1100110a000000, 0x1422002214000000, 0x2844004428000000, 0x5088008850000000, -0x5fefffef60000000, 0x4020002040000000, 0x400040200000000,
                0x800080500000000, 0x1100110a00000000, 0x2200221400000000, 0x4400442800000000, -0x77ff77b000000000, 0x100010a000000000, 0x2000204000000000, 0x4020000000000,
-               0x8050000000000, 0x110a0000000000, 0x22140000000000, 0x44280000000000, 0x88500000000000, 0x10a00000000000, 0x20400000000000]
+               0x8050000000000, 0x110a0000000000, 0x22140000000000, 0x44280000000000, 0x88500000000000, 0x10a00000000000, 0x20400000000000] :: [Bitboard]

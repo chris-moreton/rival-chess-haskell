@@ -4,6 +4,7 @@ type Square = Int
 type Bitboard = Int
 type Move = Int
 type BitRef = Int
+type CompactMove = Int
 
 data Mover = White | Black deriving (Enum,Show,Eq)
 data Piece = Pawn | King | Queen | Bishop | Knight | Rook deriving (Enum,Show,Eq)

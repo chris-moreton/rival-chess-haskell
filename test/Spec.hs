@@ -6,6 +6,8 @@ import Util.Fen
 import Model.Game
 import Search.MoveGenerator
 import Types
+import Data.Bits
+import Data.Sort
 
 main :: IO ()
 main = hspec $ do
@@ -134,4 +136,28 @@ main = hspec $ do
       let position = getPosition "n5k1/6n1/1n2q2p/1p5P/1P3RP1/2PK1B2/1r2N3/8 b kQKq g3 5 56"
       let bitboards = positionBitboards position
       bitRefList (blackKnightBitboard bitboards) `shouldBe` [46,49,63]
-      
+
+  describe "bitString" $ do
+    it "Converts a bitboard to a string of 1s and 0s" $ do
+      bitString 15 `shouldBe` "0000000000000000000000000000000000000000000000000000000000001111"
+
+  describe "allBitsExceptFriendlyPieces" $ do
+    it "Gets a bitboard with all bit set, except for friendly pieces" $ do
+      let position = getPosition "n5k1/6n1/1n2q2p/1p5P/1P3RP1/2PK1B2/1r2N3/8 b kQKq g3 5 56"
+      bitString (allBitsExceptFriendlyPieces position) `shouldBe` "0111110111111101101101101011111111111111111111111011111111111111"
+
+  describe "allPiecesBitboard" $ do
+    it "Gets a bitboard with bits set for all pieces" $ do
+      let position  = getPosition "n5k1/6n1/1n2q2p/1p5P/1P3RP1/2PK1B2/1r2N3/8 b kQKq g3 5 56"
+      bitString (allPiecesBitboard position) `shouldBe` "1000001000000010010010010100000101000110001101000100100000000000"
+
+  describe "movesFromToSquares" $ do
+    it "Creates a list of moves from a fromSquare and a list of toSquares" $ do
+      movesFromToSquares 11 [22,33,44] `shouldBe` [720918,720929,720940]
+
+  describe "knightMoves" $ do
+    it "Generates knight moves from a given FEN" $ do
+      sort (map algebraicMoveFromCompactMove (generateKnightMoves (getPosition "n5k1/6n1/1n2q2p/1p5P/1P3RP1/2PK1B2/1r2N3/8 b kQKq g3 5 56")))
+        `shouldBe` ["a8c7","b6a4","b6c4","b6c8","b6d5","b6d7","g7e8","g7f5","g7h5"]
+      sort (map algebraicMoveFromCompactMove (generateKnightMoves (getPosition "n5k1/6n1/1n2q2p/1p5P/1P3RP1/2PK1B2/1r2N3/8 w kQKq g3 5 56")))
+        `shouldBe` ["e2c1","e2d4","e2g1","e2g3"]

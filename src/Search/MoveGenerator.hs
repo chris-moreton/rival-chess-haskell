@@ -3,6 +3,7 @@ module Search.MoveGenerator where
 import Types
 import Data.Word
 import Data.Bits
+import Util.Bitboards
 
 bitboardForMover :: Position -> Piece -> Bitboard
 bitboardForMover position = bitboardForColour (positionBitboards position) (mover position)
@@ -30,3 +31,49 @@ recurBitRefList bitboard result = do
   let square = countTrailingZeros bitboard
   let bitMask = shiftL 1 square
   recurBitRefList (xor bitboard bitMask) (result ++ [square])
+
+bitString :: Bitboard -> String
+bitString bitboard = recurBitString bitboard 63 ""
+  
+recurBitString :: Bitboard -> Int -> String -> String
+recurBitString _ (-1) result = result
+recurBitString bitboard bitRef result = do
+  let bitMask = shiftL 1 bitRef
+  recurBitString (xor bitboard bitMask) (bitRef - 1) (result ++ if bitMask == (.&.) bitMask bitboard then "1" else "0")
+        
+bitboardListForColour :: Position -> Mover -> [Bitboard]
+bitboardListForColour position colour = do
+  let bitboards = positionBitboards position
+  if colour == White
+  then
+    [whitePawnBitboard bitboards,whiteKnightBitboard bitboards,whiteKingBitboard bitboards,whiteBishopBitboard bitboards,whiteQueenBitboard bitboards,whiteRookBitboard bitboards]
+  else
+    [blackPawnBitboard bitboards,blackKnightBitboard bitboards,blackKingBitboard bitboards,blackBishopBitboard bitboards,blackQueenBitboard bitboards,blackRookBitboard bitboards]
+          
+allBitsExceptFriendlyPieces :: Position -> Bitboard
+allBitsExceptFriendlyPieces position = complement (foldl (.|.) 0 (bitboardListForColour position (mover position)))
+
+allPiecesBitboard :: Position -> Bitboard
+allPiecesBitboard position = foldl (.|.) 0 (bitboardListForColour position White ++ bitboardListForColour position Black)
+
+movesFromToSquares :: Square -> [Square] -> [CompactMove]
+movesFromToSquares fromSquare toSquares = recurMovesFromToSquares fromSquare toSquares []
+
+recurMovesFromToSquares :: Square -> [Square] -> [CompactMove] -> [CompactMove]
+recurMovesFromToSquares fromSquare [] result = result
+recurMovesFromToSquares fromSquare toSquares result = do
+  let shiftedFrom = shiftL fromSquare 16
+  recurMovesFromToSquares fromSquare (tail toSquares) (result ++ [(.|.) shiftedFrom (head toSquares)])
+
+generateKnightMoves :: Position -> [CompactMove]
+generateKnightMoves position = do
+  let bitboard = bitboardForMover position Knight
+  let fromSquares = bitRefList bitboard
+  recurKnightMoves position fromSquares []
+
+recurKnightMoves :: Position -> [BitRef] -> [CompactMove] -> [CompactMove]
+recurKnightMoves _ [] result = result
+recurKnightMoves position fromSquares result = do
+  let fromSquare = head fromSquares
+  let toSquares = bitRefList ((.&.) (knightMoves!!fromSquare) (allBitsExceptFriendlyPieces position))
+  recurKnightMoves position (tail fromSquares) (result ++ movesFromToSquares fromSquare toSquares)
