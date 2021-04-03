@@ -156,8 +156,15 @@ main = hspec $ do
       movesFromToSquares 11 [22,33,44] `shouldBe` [720918,720929,720940]
 
   describe "knightMoves" $ do
-    it "Generates knight moves from a given FEN" $ do
+    it "Generates knight moves from a given FEN (ignoring checks)" $ do
       sort (map algebraicMoveFromCompactMove (generateKnightMoves (getPosition "n5k1/6n1/1n2q2p/1p5P/1P3RP1/2PK1B2/1r2N3/8 b kQKq g3 5 56")))
         `shouldBe` ["a8c7","b6a4","b6c4","b6c8","b6d5","b6d7","g7e8","g7f5","g7h5"]
       sort (map algebraicMoveFromCompactMove (generateKnightMoves (getPosition "n5k1/6n1/1n2q2p/1p5P/1P3RP1/2PK1B2/1r2N3/8 w kQKq g3 5 56")))
         `shouldBe` ["e2c1","e2d4","e2g1","e2g3"]
+
+  describe "kingMoves" $ do
+    it "Generates king moves from a given FEN (ignoring checks)" $ do
+      sort (map algebraicMoveFromCompactMove (generateKingMoves (getPosition "n5k1/6n1/1n2q2p/1p5P/1P3RP1/2PK1B2/1r2N3/8 b kQKq g3 5 56")))
+        `shouldBe` ["g8f7","g8f8","g8h7","g8h8"]
+      sort (map algebraicMoveFromCompactMove (generateKingMoves (getPosition "n5k1/6n1/1n2q2p/1p5P/1P3RP1/2PK1B2/1r2N3/8 w kQKq g3 5 56")))
+        `shouldBe` ["d3c2","d3c4","d3d2","d3d4","d3e3","d3e4"]

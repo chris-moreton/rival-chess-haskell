@@ -75,5 +75,11 @@ recurKnightMoves :: Position -> [BitRef] -> [CompactMove] -> [CompactMove]
 recurKnightMoves _ [] result = result
 recurKnightMoves position fromSquares result = do
   let fromSquare = head fromSquares
-  let toSquares = bitRefList ((.&.) (knightMoves!!fromSquare) (allBitsExceptFriendlyPieces position))
+  let toSquares = bitRefList ((.&.) (knightMovesBitboards!!fromSquare) (allBitsExceptFriendlyPieces position))
   recurKnightMoves position (tail fromSquares) (result ++ movesFromToSquares fromSquare toSquares)
+
+generateKingMoves :: Position -> [CompactMove]
+generateKingMoves position = do
+  let kingSquare = countTrailingZeros (bitboardForMover position King)
+  let toSquares = bitRefList ((.&.) (kingMovesBitboards!!kingSquare) (allBitsExceptFriendlyPieces position))
+  movesFromToSquares kingSquare toSquares
