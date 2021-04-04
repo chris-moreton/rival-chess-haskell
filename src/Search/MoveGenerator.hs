@@ -111,14 +111,14 @@ recurGenerateSliderMoves fromSquares position magicVars result = do
   let maskMagic = occupancyMask magicVars!!fromSquare -- 18049651768822272
 
   let occupancy = (.&.) (allPiecesBitboard position) maskMagic -- 33556480
-  let rawIndex = (.&.) (occupancy * numberMagic) all64BitsSet
-  let toSquaresMagicIndex = shiftR rawIndex shiftMagic -- 46
+  let rawIndex = fromIntegral(occupancy * numberMagic) :: Word
+
+  let toSquaresMagicIndex = fromIntegral(shiftR rawIndex shiftMagic) :: Int
   let toSquaresBitboard = (.&.) (moveMagic!!toSquaresMagicIndex) (allBitsExceptFriendlyPieces position)
 
   let toSquares = bitRefList toSquaresBitboard
 
   let thisResult = recurGenerateSliderMovesWithToSquares fromSquare toSquares result
-
   recurGenerateSliderMoves (tail fromSquares) position magicVars (result ++ thisResult)
 
 recurGenerateSliderMovesWithToSquares :: Square -> [Square] -> [CompactMove] -> [CompactMove]

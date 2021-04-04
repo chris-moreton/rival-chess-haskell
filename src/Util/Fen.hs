@@ -50,7 +50,7 @@ recurBitArrayToDecimal bits bitnum result = do
   let thisResult = if head bits == 1 then shiftL 1 bitnum else 0
   recurBitArrayToDecimal (tail bits) (bitnum - 1) (result + thisResult)
 
-pieceBitboard :: [String] -> Char -> Int
+pieceBitboard :: [String] -> Char -> Bitboard
 pieceBitboard fenRanks pieceChar = bitArrayToDecimal (boardBits fenRanks pieceChar)
 
 algebraicSquareRefFromBitRef :: Int -> String
