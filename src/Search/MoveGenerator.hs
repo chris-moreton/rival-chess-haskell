@@ -118,7 +118,7 @@ recurGenerateSliderMoves fromSquares position magicVars result = do
 
   let toSquares = bitRefList toSquaresBitboard
 
-  let thisResult = recurGenerateSliderMovesWithToSquares fromSquare toSquares result
+  let thisResult = recurGenerateSliderMovesWithToSquares fromSquare toSquares []
   recurGenerateSliderMoves (tail fromSquares) position magicVars (result ++ thisResult)
 
 recurGenerateSliderMovesWithToSquares :: Square -> [Square] -> [CompactMove] -> [CompactMove]
