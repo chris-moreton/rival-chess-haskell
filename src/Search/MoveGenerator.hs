@@ -106,11 +106,11 @@ recurGenerateSliderMoves fromSquares position magicVars result = do
   let fromSquare = head fromSquares
 
   let moveMagic = magicMoves magicVars!!fromSquare
-  let numberMagic = magicNumber magicVars!!fromSquare -- 291612620082513304
-  let shiftMagic = magicNumberShifts magicVars!!fromSquare -- 57
-  let maskMagic = occupancyMask magicVars!!fromSquare -- 18049651768822272
+  let numberMagic = magicNumber magicVars!!fromSquare
+  let shiftMagic = magicNumberShifts magicVars!!fromSquare
+  let maskMagic = occupancyMask magicVars!!fromSquare
 
-  let occupancy = (.&.) (allPiecesBitboard position) maskMagic -- 33556480
+  let occupancy = (.&.) (allPiecesBitboard position) maskMagic
   let rawIndex = fromIntegral(occupancy * numberMagic) :: Word
 
   let toSquaresMagicIndex = fromIntegral(shiftR rawIndex shiftMagic) :: Int
