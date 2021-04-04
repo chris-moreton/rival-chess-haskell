@@ -23,6 +23,8 @@ setBits [] = 0
 setBits [x] = shiftL 1 x
 setBits xs = (.|.) (shiftL 1 (head xs)) (setBits (tail xs))
 
+all64BitsSet = 18446744073709551615 :: Int
+
 rank1Bits = setBits [0,1,2,3,4,5,6,7]
 rank2Bits = shiftL rank1Bits 8
 rank3Bits = shiftL rank2Bits 8

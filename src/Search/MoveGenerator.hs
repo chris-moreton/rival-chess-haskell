@@ -105,15 +105,16 @@ recurGenerateSliderMoves [] _ _ result = result
 recurGenerateSliderMoves fromSquares position magicVars result = do
   let fromSquare = head fromSquares
 
-  let moves = magicMoves magicVars
-  let numbers = magicNumber magicVars
-  let shifts = magicNumberShifts magicVars
-  let mask = occupancyMask magicVars
+  let moveMagic = magicMoves magicVars!!fromSquare
+  let numberMagic = magicNumber magicVars!!fromSquare -- 291612620082513304
+  let shiftMagic = magicNumberShifts magicVars!!fromSquare -- 57
+  let maskMagic = occupancyMask magicVars!!fromSquare -- 18049651768822272
 
-  let toSquaresMagicIndex = ((.&.) (allPiecesBitboard position) (mask!!fromSquare) * (numbers!!fromSquare)) `shiftR` shifts!!fromSquare
-  let toSquaresBitboard = (.&.) ((magicMoves magicVars!!fromSquare)!!toSquaresMagicIndex) (allBitsExceptFriendlyPieces position)
+  let occupancy = (.&.) (allPiecesBitboard position) maskMagic -- 33556480
+  let rawIndex = (.&.) (occupancy * numberMagic) all64BitsSet
+  let toSquaresMagicIndex = shiftR rawIndex shiftMagic -- 46
+  let toSquaresBitboard = (.&.) (moveMagic!!toSquaresMagicIndex) (allBitsExceptFriendlyPieces position)
 
-  let fromShifted = shiftL fromSquare 16
   let toSquares = bitRefList toSquaresBitboard
 
   let thisResult = recurGenerateSliderMovesWithToSquares fromSquare toSquares result
