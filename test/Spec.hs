@@ -191,6 +191,6 @@ main = hspec $ do
   describe "generatePawnMovesFromToSquares" $ do
     it "Creates a list of moves from a given From Square and a list of To Squares" $ do
       sort (map algebraicMoveFromCompactMove (generatePawnMovesFromToSquares 54 [63,62,61]))
-        `shouldBe` ["b7a8","b7a8","b7a8","b7a8","b7b8","b7b8","b7b8","b7b8","b7c8","b7c8","b7c8","b7c8"]
+        `shouldBe` ["b7a8b","b7a8n","b7a8q","b7a8r","b7b8b","b7b8n","b7b8q","b7b8r","b7c8b","b7c8n","b7c8q","b7c8r"]
       sort (map algebraicMoveFromCompactMove (generatePawnMovesFromToSquares 46 [55,54,53]))
         `shouldBe` ["b6a7","b6b7","b6c7"]

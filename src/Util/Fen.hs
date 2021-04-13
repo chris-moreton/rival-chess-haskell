@@ -4,6 +4,7 @@ module Util.Fen where
 
 import Model.Game
 import Types
+import Search.MoveConstants
 
 import Data.List.Split
 import Data.Char
@@ -67,11 +68,19 @@ bitRefFromAlgebraicSquareRef algebraic = do
   let rankNum = ord (head (tail algebraic)) - 49
   (rankNum * 8) + (7 - fileNum)
 
-algebraicMoveFromCompactMove :: Int -> String
+promotionPart :: Move -> String
+promotionPart move
+    | (.&.) promotionFullMoveMask move == promotionQueenMoveMask = "q"
+    | (.&.) promotionFullMoveMask move == promotionRookMoveMask = "r"
+    | (.&.) promotionFullMoveMask move == promotionBishopMoveMask = "b"
+    | (.&.) promotionFullMoveMask move == promotionKnightMoveMask = "n"
+    | otherwise = ""
+
+algebraicMoveFromCompactMove :: Move -> String
 algebraicMoveFromCompactMove compactMove = do
   let fromSquare = shiftR compactMove 16
   let toSquare = (.&.) 63 compactMove
-  algebraicSquareRefFromBitRef fromSquare ++ algebraicSquareRefFromBitRef toSquare
+  algebraicSquareRefFromBitRef fromSquare ++ algebraicSquareRefFromBitRef toSquare ++ promotionPart compactMove
 
 getMover :: String -> Mover
 getMover fen = if fenPart fen 1 == "w" then White else Black

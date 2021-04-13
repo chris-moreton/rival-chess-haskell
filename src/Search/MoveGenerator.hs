@@ -68,7 +68,7 @@ movesFromToSquares :: Square -> [Square] -> [CompactMove]
 movesFromToSquares fromSquare toSquares = recurMovesFromToSquares fromSquare toSquares []
 
 recurMovesFromToSquares :: Square -> [Square] -> [CompactMove] -> [CompactMove]
-recurMovesFromToSquares fromSquare [] result = result
+recurMovesFromToSquares _ [] result = result
 recurMovesFromToSquares fromSquare toSquares result = do
   let shiftedFrom = shiftL fromSquare 16
   recurMovesFromToSquares fromSquare (tail toSquares) (result ++ [(.|.) shiftedFrom (head toSquares)])
@@ -136,6 +136,13 @@ recurGenerateSliderMovesWithToSquares fromSquare toSquares result = do
   let thisResult = (.|.) fromShifted toSquare
   recurGenerateSliderMovesWithToSquares fromSquare (tail toSquares) (result ++ [thisResult])
 
+promotionMoves :: Move -> [Move]
+promotionMoves move = [
+    (.|.) move promotionQueenMoveMask
+  , (.|.) move promotionRookMoveMask
+  , (.|.) move promotionBishopMoveMask
+  , (.|.) move promotionKnightMoveMask]
+
 generatePawnMovesFromToSquares :: Square -> [Square] -> [Move]
 generatePawnMovesFromToSquares fromSquare toSquares = do
   let mask = fromSquareMask fromSquare
@@ -146,8 +153,8 @@ recurGeneratePawnMovesFromToSquares _ [] result = result
 recurGeneratePawnMovesFromToSquares mask toSquares result = do
   let thisToSquare = head toSquares
   let baseMove = (.|.) mask thisToSquare
-  let newResult = if thisToSquare >= 56 || thisToSquare <= 7 then (.|.) baseMove promotionQueenMoveMask : (.|.) baseMove promotionRookMoveMask : (.|.) baseMove promotionBishopMoveMask : (.|.) baseMove promotionKnightMoveMask : result else baseMove : result
-  recurGeneratePawnMovesFromToSquares mask (tail toSquares) newResult
+  let newResult = if thisToSquare >= 56 || thisToSquare <= 7 then promotionMoves baseMove else [baseMove]
+  recurGeneratePawnMovesFromToSquares mask (tail toSquares) newResult ++ result
 
 generatePawnMoves :: Position -> [CompactMove]
 generatePawnMoves position = do

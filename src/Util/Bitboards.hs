@@ -129,9 +129,12 @@ nonMidFiles8Bit = setBits [a1Bit,b1Bit,c1Bit,f1Bit,g1Bit,h1Bit]
 
 low32Bits = (.|.) rank1Bits ((.|.) rank2Bits ((.|.) rank3Bits rank4Bits))
 
+darkSquaresBits :: Bitboard
 darkSquaresBits = setBits [a1Bit,a3Bit,a5Bit,a7Bit,b2Bit,b4Bit,b6Bit,b8Bit,c1Bit,c3Bit,c5Bit,c7Bit,d2Bit,d4Bit,d6Bit,d8Bit,e1Bit,e3Bit,e5Bit,e7Bit,f2Bit,f4Bit,f6Bit,f8Bit,g1Bit,g3Bit,g5Bit,g7Bit,h2Bit,h4Bit,h6Bit,h8Bit] :: Bitboard
+lightSquaresBits :: Bitboard
 lightSquaresBits = setBits [a2Bit,a4Bit,a6Bit,a8Bit,b1Bit,b3Bit,b5Bit,b7Bit,c2Bit,c4Bit,c6Bit,c8Bit,d1Bit,d3Bit,d5Bit,d7Bit,e2Bit,e4Bit,e6Bit,e8Bit,f1Bit,f3Bit,f5Bit,f7Bit,g2Bit,g4Bit,g6Bit,g8Bit,h1Bit,h3Bit,h5Bit,h7Bit] :: Bitboard
 
+knightMovesBitboards :: [Bitboard]
 knightMovesBitboards = [0x20400,
          0x50800, 0xa1100, 0x142200, 0x284400, 0x508800, 0xa01000, 0x402000, 0x2040004,
          0x5080008, 0xa110011, 0x14220022, 0x28440044, 0x50880088, 0xa0100010, 0x40200020, 0x204000402,
@@ -142,6 +145,7 @@ knightMovesBitboards = [0x20400,
          0x800080500000000, 0x1100110a00000000, 0x2200221400000000, 0x4400442800000000, -0x77ff77b000000000, 0x100010a000000000, 0x2000204000000000, 0x4020000000000,
          0x8050000000000, 0x110a0000000000, 0x22140000000000, 0x44280000000000, 0x88500000000000, 0x10a00000000000, 0x20400000000000] :: [Bitboard]
 
+kingMovesBitboards :: [Bitboard]
 kingMovesBitboards = [
         0x302,
         0x705, 0xe0a, 0x1c14, 0x3828, 0x7050, 0xe0a0, 0xc040, 0x30203,
@@ -153,6 +157,7 @@ kingMovesBitboards = [
         0x705070000000000, 0xe0a0e0000000000, 0x1c141c0000000000, 0x3828380000000000, 0x7050700000000000, -0x1f5f200000000000, -0x3fbf400000000000, 0x203000000000000,
         0x507000000000000, 0xa0e000000000000, 0x141c000000000000, 0x2838000000000000, 0x5070000000000000, -0x5f20000000000000, 0x40c0000000000000] :: [Bitboard]
 
+whitePawnMovesForward :: [Bitboard]
 whitePawnMovesForward = [
         0x100, 0x200, 0x400, 0x800, 0x1000, 0x2000, 0x4000, 0x8000,
         0x10000, 0x20000, 0x40000, 0x80000, 0x100000, 0x200000, 0x400000, 0x800000,
@@ -163,6 +168,7 @@ whitePawnMovesForward = [
         0x100000000000000, 0x200000000000000, 0x400000000000000, 0x800000000000000, 0x1000000000000000, 0x2000000000000000, 0x4000000000000000, 1 `shiftL` 63,
         0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0] :: [Bitboard]
 
+whitePawnMovesCapture :: [Bitboard]
 whitePawnMovesCapture = [
         0x200, 0x500, 0xa00, 0x1400, 0x2800, 0x5000, 0xa000, 0x4000,
         0x20000, 0x50000, 0xa0000, 0x140000, 0x280000, 0x500000, 0xa00000, 0x400000,
@@ -173,6 +179,7 @@ whitePawnMovesCapture = [
         0x200000000000000, 0x500000000000000, 0xa00000000000000, 0x1400000000000000, 0x2800000000000000, 0x5000000000000000, -0x6000000000000000, 0x4000000000000000,
         0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0] :: [Bitboard]
 
+blackPawnMovesForward :: [Bitboard]
 blackPawnMovesForward = [
         0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0,
         0x1, 0x2, 0x4, 0x8, 0x10, 0x20, 0x40, 0x80,
@@ -183,6 +190,7 @@ blackPawnMovesForward = [
         0x10000000000, 0x20000000000, 0x40000000000, 0x80000000000, 0x100000000000, 0x200000000000, 0x400000000000, 0x800000000000,
         0x1000000000000, 0x2000000000000, 0x4000000000000, 0x8000000000000, 0x10000000000000, 0x20000000000000, 0x40000000000000, 0x80000000000000] :: [Bitboard]
 
+blackPawnMovesCapture :: [Bitboard]
 blackPawnMovesCapture = [
         0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0,
         0x2, 0x5, 0xa, 0x14, 0x28, 0x50, 0xa0, 0x40,
@@ -193,6 +201,7 @@ blackPawnMovesCapture = [
         0x20000000000, 0x50000000000, 0xa0000000000, 0x140000000000, 0x280000000000, 0x500000000000, 0xa00000000000, 0x400000000000,
         0x2000000000000, 0x5000000000000, 0xa000000000000, 0x14000000000000, 0x28000000000000, 0x50000000000000, 0xa0000000000000, 0x40000000000000] :: [Bitboard]
 
+whitePassedPawnMask :: [Bitboard]
 whitePassedPawnMask = [
         0, 0, 0, 0, 0, 0, 0, 0,
         0x0003030303030000, 0x0007070707070000, 0x000E0E0E0E0E0000, 0x001C1C1C1C1C0000, 0x0038383838380000, 0x0070707070700000, 0x00E0E0E0E0E00000, 0x00C0C0C0C0C00000,
@@ -203,6 +212,7 @@ whitePassedPawnMask = [
         0, 0, 0, 0, 0, 0, 0, 0,
         0, 0, 0, 0, 0, 0, 0, 0] :: [Bitboard]
 
+blackPassedPawnMask :: [Bitboard]
 blackPassedPawnMask = [
         0, 0, 0, 0, 0, 0, 0, 0,
         0, 0, 0, 0, 0, 0, 0, 0,
