@@ -5,6 +5,7 @@ import Data.Word
 import Data.Bits
 import Util.Bitboards
 import Util.MagicBitboards
+import Search.MoveConstants
 
 bitboardForMover :: Position -> Piece -> Bitboard
 bitboardForMover position = bitboardForColour (positionBitboards position) (mover position)
@@ -22,6 +23,9 @@ bitboardForColour pieceBitboards Black Rook = blackRookBitboard pieceBitboards
 bitboardForColour pieceBitboards Black Knight = blackKnightBitboard pieceBitboards
 bitboardForColour pieceBitboards Black Bishop = blackBishopBitboard pieceBitboards
 bitboardForColour pieceBitboards Black Pawn = blackPawnBitboard pieceBitboards
+
+fromSquareMask :: Square -> MoveMask
+fromSquareMask sq = sq `shiftL` 16
 
 bitRefList :: Bitboard -> [BitRef]
 bitRefList bitboard = recurBitRefList bitboard []
@@ -56,6 +60,9 @@ allBitsExceptFriendlyPieces position = complement (foldl (.|.) 0 (bitboardListFo
 
 allPiecesBitboard :: Position -> Bitboard
 allPiecesBitboard position = foldl (.|.) 0 (bitboardListForColour position White ++ bitboardListForColour position Black)
+
+emptySquaresBitboard :: Position -> Bitboard
+emptySquaresBitboard position = complement (allPiecesBitboard position)
 
 movesFromToSquares :: Square -> [Square] -> [CompactMove]
 movesFromToSquares fromSquare toSquares = recurMovesFromToSquares fromSquare toSquares []
@@ -128,3 +135,29 @@ recurGenerateSliderMovesWithToSquares fromSquare toSquares result = do
   let toSquare = head toSquares
   let thisResult = (.|.) fromShifted toSquare
   recurGenerateSliderMovesWithToSquares fromSquare (tail toSquares) (result ++ [thisResult])
+
+generatePawnMovesFromToSquares :: Square -> [Square] -> [Move]
+generatePawnMovesFromToSquares fromSquare toSquares = do
+  let mask = fromSquareMask fromSquare
+  recurGeneratePawnMovesFromToSquares mask toSquares []
+
+recurGeneratePawnMovesFromToSquares :: MoveMask -> [Square] -> [Move] -> [Move]
+recurGeneratePawnMovesFromToSquares _ [] result = result
+recurGeneratePawnMovesFromToSquares mask toSquares result = do
+  let thisToSquare = head toSquares
+  let baseMove = (.|.) mask thisToSquare
+  let newResult = if thisToSquare >= 56 || thisToSquare <= 7 then (.|.) baseMove promotionQueenMoveMask : (.|.) baseMove promotionRookMoveMask : (.|.) baseMove promotionBishopMoveMask : (.|.) baseMove promotionKnightMoveMask : result else baseMove : result
+  recurGeneratePawnMovesFromToSquares mask (tail toSquares) newResult
+
+generatePawnMoves :: Position -> [CompactMove]
+generatePawnMoves position = do
+  let bitboard = bitboardForMover position Pawn
+  recurGeneratePawnMoves (bitRefList bitboard) position (emptySquaresBitboard position) bitboard []
+
+recurGeneratePawnMoves :: [Square] -> Position -> Bitboard -> Bitboard -> [CompactMove] -> [CompactMove]
+recurGeneratePawnMoves [] _ _ _ result = result
+recurGeneratePawnMoves fromSquares position emptySquares pawns result = []
+
+
+
+

@@ -148,9 +148,14 @@ main = hspec $ do
 
   describe "allPiecesBitboard" $ do
     it "Gets a bitboard with bits set for all pieces" $ do
-      let position  = getPosition "n5k1/6n1/1n2q2p/1p5P/1P3RP1/2PK1B2/1r2N3/8 b kQKq g3 5 56"
+      let position = getPosition "n5k1/6n1/1n2q2p/1p5P/1P3RP1/2PK1B2/1r2N3/8 b kQKq g3 5 56"
       bitString (allPiecesBitboard position) `shouldBe` "1000001000000010010010010100000101000110001101000100100000000000"
 
+  describe "emptySquaresBitboard" $ do
+    it "Gets a bitboard with bits set for all empty squares" $ do
+      let position = getPosition "n5k1/6n1/1n2q2p/1p5P/1P3RP1/2PK1B2/1r2N3/8 b kQKq g3 5 56"
+      bitString (emptySquaresBitboard position) `shouldBe` "0111110111111101101101101011111010111001110010111011011111111111"
+      
   describe "movesFromToSquares" $ do
     it "Creates a list of moves from a fromSquare and a list of toSquares" $ do
       movesFromToSquares 11 [22,33,44] `shouldBe` [720918,720929,720940]
@@ -170,15 +175,22 @@ main = hspec $ do
         `shouldBe` ["d3c2","d3c4","d3d2","d3d4","d3e3","d3e4"]
 
   describe "generateBishopMoves" $ do
-    it "Generates bishop moves from a given FEN (ignoring checks)" $ do
+    it "Generates bishop moves (including diagonal queen moves) from a given FEN (ignoring checks)" $ do
       sort (map algebraicMoveFromCompactMove (generateBishopMoves (getPosition "n5k1/6n1/1n2q2p/1p5P/1P3RP1/2PK1B2/1r2N3/7R w kQKq g3 5 56")))
         `shouldBe` ["f3a8","f3b7","f3c6","f3d5","f3e4","f3g2"]
       sort (map algebraicMoveFromCompactMove (generateBishopMoves (getPosition "n5k1/6n1/1n2q2p/1p5P/1P3RP1/2PK1B2/1r2N3/8 b kQKq g3 5 56")))
         `shouldBe` ["e6a2","e6b3","e6c4","e6c8","e6d5","e6d7","e6f5","e6f7","e6g4"]
 
   describe "generateRookMoves" $ do
-    it "Generates rook moves from a given FEN (ignoring checks)" $ do
+    it "Generates rook moves (including non-diagonal queen moves) from a given FEN (ignoring checks)" $ do
       sort (map algebraicMoveFromCompactMove (generateRookMoves (getPosition "n5k1/6n1/1n2q2p/1p5P/1P3RP1/2PK1B2/1r2N3/8 w kQKq g3 5 56")))
         `shouldBe` ["f4c4","f4d4","f4e4","f4f5","f4f6","f4f7","f4f8"]
       sort (map algebraicMoveFromCompactMove (generateRookMoves (getPosition "n5k1/6n1/1n2q2p/1p5P/1P3RP1/2PK1B2/1r2N3/6r1 b kQKq g3 5 56")))
         `shouldBe` ["b2a2","b2b1","b2b3","b2b4","b2c2","b2d2","b2e2","e6c6","e6d6","e6e2","e6e3","e6e4","e6e5","e6e7","e6e8","e6f6","e6g6","g1a1","g1b1","g1c1","g1d1","g1e1","g1f1","g1g2","g1g3","g1g4","g1h1"]
+
+  describe "generatePawnMovesFromToSquares" $ do
+    it "Creates a list of moves from a given From Square and a list of To Squares" $ do
+      sort (map algebraicMoveFromCompactMove (generatePawnMovesFromToSquares 54 [63,62,61]))
+        `shouldBe` ["b7a8","b7a8","b7a8","b7a8","b7b8","b7b8","b7b8","b7b8","b7c8","b7c8","b7c8","b7c8"]
+      sort (map algebraicMoveFromCompactMove (generatePawnMovesFromToSquares 46 [55,54,53]))
+        `shouldBe` ["b6a7","b6b7","b6c7"]
