@@ -2,7 +2,6 @@ module Types where
 
 type Square = Int
 type Bitboard = Int
-type Move = Int
 type MoveMask = Int
 type BitRef = Int
 type CompactMove = Int
@@ -43,5 +42,5 @@ data Position = Position {
 
 data Game = Game {
     gamePosition :: Position
-  , gameMoves :: [Move]
+  , gameMoves :: [CompactMove]
 }

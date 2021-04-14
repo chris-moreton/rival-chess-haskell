@@ -68,7 +68,7 @@ bitRefFromAlgebraicSquareRef algebraic = do
   let rankNum = ord (head (tail algebraic)) - 49
   (rankNum * 8) + (7 - fileNum)
 
-promotionPart :: Move -> String
+promotionPart :: CompactMove -> String
 promotionPart move
     | (.&.) promotionFullMoveMask move == promotionQueenMoveMask = "q"
     | (.&.) promotionFullMoveMask move == promotionRookMoveMask = "r"
@@ -76,7 +76,7 @@ promotionPart move
     | (.&.) promotionFullMoveMask move == promotionKnightMoveMask = "n"
     | otherwise = ""
 
-algebraicMoveFromCompactMove :: Move -> String
+algebraicMoveFromCompactMove :: CompactMove -> String
 algebraicMoveFromCompactMove compactMove = do
   let fromSquare = shiftR compactMove 16
   let toSquare = (.&.) 63 compactMove
