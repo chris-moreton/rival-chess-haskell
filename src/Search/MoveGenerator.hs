@@ -58,6 +58,12 @@ bitboardListForColour position colour = do
 allBitsExceptFriendlyPieces :: Position -> Bitboard
 allBitsExceptFriendlyPieces position = complement (foldl (.|.) 0 (bitboardListForColour position (mover position)))
 
+opponent :: Position -> Mover
+opponent mover = if ((mover position) == White) then Black else White
+
+enemyBitboard :: Position -> Bitboard
+enemyBitboard position = foldl (.|.) 0 (bitboardListForColour position (opponent position))
+
 allPiecesBitboard :: Position -> Bitboard
 allPiecesBitboard position = foldl (.|.) 0 (bitboardListForColour position White ++ bitboardListForColour position Black)
 
@@ -130,11 +136,8 @@ recurGenerateSliderMoves fromSquares position magicVars result = do
 
 recurGenerateSliderMovesWithToSquares :: Square -> [Square] -> [CompactMove] -> [CompactMove]
 recurGenerateSliderMovesWithToSquares fromSquare [] result = result
-recurGenerateSliderMovesWithToSquares fromSquare toSquares result = do
-  let fromShifted = shiftL fromSquare 16
-  let toSquare = head toSquares
-  let thisResult = (.|.) fromShifted toSquare
-  recurGenerateSliderMovesWithToSquares fromSquare (tail toSquares) (result ++ [thisResult])
+recurGenerateSliderMovesWithToSquares fromSquare toSquares result =
+  recurGenerateSliderMovesWithToSquares fromSquare (tail toSquares) (result ++ [(.|.) (fromSquareMask fromSquare) (head toSquares)])
 
 promotionMoves :: Move -> [Move]
 promotionMoves move = [
@@ -159,12 +162,30 @@ recurGeneratePawnMovesFromToSquares mask toSquares result = do
 generatePawnMoves :: Position -> [CompactMove]
 generatePawnMoves position = do
   let bitboard = bitboardForMover position Pawn
-  recurGeneratePawnMoves (bitRefList bitboard) position (emptySquaresBitboard position) bitboard []
+  let forwardPawnMoves = if (mover position == White) then whitePawnMovesForward else blackPawnMovesForward
+  let capturePawnMoves = if (mover position == White) then whitePawnMovesCapture else blackPawnMovesCapture
+  recurGeneratePawnMoves (bitRefList bitboard) position forwardPawnMoves capturePawnMoves (emptySquaresBitboard position) bitboard []
 
-recurGeneratePawnMoves :: [Square] -> Position -> Bitboard -> Bitboard -> [CompactMove] -> [CompactMove]
-recurGeneratePawnMoves [] _ _ _ result = result
-recurGeneratePawnMoves fromSquares position emptySquares pawns result = []
+recurGeneratePawnMoves :: [Square] -> Position -> [Bitboard] -> [Bitboard] -> Bitboard -> Bitboard -> [CompactMove] -> [CompactMove]
+recurGeneratePawnMoves [] _ _ _ _ _ result = result
+recurGeneratePawnMoves fromSquares position forwardPawnMoves capturePawnMoves emptySquares moverPawns result = do
+  let fromSquare = fromSquareMask (head fromSquares)
+  let pawnForwardAndCaptureMoves = (pawnForwardAndCaptureMovesBitboard fromSquare capturePawnMoves (pawnForwardMovesBitboard ((.&.) forwardPawnMoves!!fromSquare emptySquares) position))
+  let thisResult = generatePawnMovesFromToSquares(fromSquare pawnForwardAndCaptureMoves)
+  recurGeneratePawnMoves (tail fromSquares) position forwardPawnMoves capturePawnMoves emptySquares moverPawns (result ++ [thisResult])
 
+pawnMovesForwardBitboard :: Bitboard -> Position -> Bitboard
+pawnMovesForwardBitboard pawnMoves position = (.|.) pawnMoves ((.&.) (potentialPawnJumpMoves pawnMoves) (complement (allPiecesBitboard position)))
 
+enPassantCaptureRank :: Mover -> Bitboard
+enPassantCaptureRank mover = if (mover == White) rank6Bits else rank3Bits
 
+pawnForwardAndCaptureMovesBitboard :: Square -> [Bitboard] -> Bitboard -> Position -> Bitboard
+pawnForwardAndCaptureMovesBitboard fromSquare capturePawnMoves pawnMoves position =
+  (.|.) pawnMoves (if (.&.) (enPassantSquare position) (enPassantRank (mover position)) then (pawnCapturesPlusEnPassantSquare pawnMoves fromSquare) else pawnCaptures(pawnMoves square (enemyBitboard position)))
 
+pawnCapturesPlusEnPassantSquare :: [Bitboard] -> Square -> Position -> Bitboard
+pawnCapturesPlusEnPassantSquare bs sq position = (.|.) (pawnCaptures bs sq (enemyBitboard position)) (pawnCaptures bs square (enPassantSquare position))
+
+pawnCaptures :: [Bitboard] -> Square -> Bitboard -> Bitboard
+pawnCaptures captureMask square enPassantBit = (.&.) captureMask!!square enPassantBit
