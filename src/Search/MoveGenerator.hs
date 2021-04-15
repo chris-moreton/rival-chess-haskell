@@ -59,7 +59,7 @@ allBitsExceptFriendlyPieces :: Position -> Bitboard
 allBitsExceptFriendlyPieces position = complement (foldl (.|.) 0 (bitboardListForColour position (mover position)))
 
 opponent :: Position -> Mover
-opponent position = if ((mover position) == White) then Black else White
+opponent position = if mover position == White then Black else White
 
 enemyBitboard :: Position -> Bitboard
 enemyBitboard position = foldl (.|.) 0 (bitboardListForColour position (opponent position))

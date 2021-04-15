@@ -146,7 +146,7 @@ main = hspec $ do
   describe "allBitsExceptFriendlyPieces" $ do
     it "Gets a bitboard with all bit set, except for friendly pieces" $ do
       let position = getPosition "n5k1/6n1/1n2q2p/1p5P/1P3RP1/2PK1B2/1r2N3/8 b kQKq g3 5 56"
-      bitString (allBitsExceptFriendlyPieces position) `shouldBe` "0111110111111101101101101011111111111111111111111011111111111111"
+      allBitsExceptFriendlyPieces position `shouldBe` 0b0111110111111101101101101011111111111111111111111011111111111111
 
   describe "allPiecesBitboard" $ do
     it "Gets a bitboard with bits set for all pieces" $ do
@@ -197,6 +197,11 @@ main = hspec $ do
       sort (map algebraicMoveFromCompactMove (generatePawnMovesFromToSquares 46 [55,54,53]))
         `shouldBe` ["b6a7","b6b7","b6c7"]
 
+  describe "pawnCaptures" $ do
+    it "Returns a bitboard showing target squares for pawn captures, from a given square and an enemy piece bitboard" $ do
+      pawnCaptures whitePawnMovesCapture 29 (enemyBitboard (getPosition "n5k1/1P4n1/1n2q2p/Pp3P2/3P1R2/3K1B2/1r2N2P/6r1 w - - 0 1"))
+        `shouldBe` 0b0000000000000000000000000100000000000000000000000000000000000000
+        
   describe "potentialPawnJumpMoves" $ do
     it "Returns a bitboard showing target squares for pawn moves that would land on the two-move rank if moved one more rank" $ do
       potentialPawnJumpMoves 0b0101000000000100010000011000000001000000010101010000001100010001 (getPosition "n5k1/1P2P1n1/1n2q2p/Pp6/3P1R2/3K1B2/1r2N2P/6r1 w - - 0 1")
