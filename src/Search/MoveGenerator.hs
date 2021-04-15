@@ -171,7 +171,7 @@ recurGeneratePawnMoves [] _ _ _ _ _ result = result
 recurGeneratePawnMoves fromSquares position forwardPawnMoves capturePawnMoves emptySquares moverPawns result = do
   let fromSquare = head fromSquares
   let pawnForwardAndCaptureMoves = pawnForwardAndCaptureMovesBitboard fromSquare capturePawnMoves (pawnForwardMovesBitboard ((.&.) (forwardPawnMoves!!fromSquare) emptySquares) position) position
-  let thisResult = generatePawnMovesFromToSquares (fromSquareMask fromSquare) (bitRefList pawnForwardAndCaptureMoves)
+  let thisResult = generatePawnMovesFromToSquares fromSquare (bitRefList pawnForwardAndCaptureMoves)
   recurGeneratePawnMoves (tail fromSquares) position forwardPawnMoves capturePawnMoves emptySquares moverPawns (result ++ thisResult)
 
 pawnForwardMovesBitboard :: Bitboard -> Position -> Bitboard
