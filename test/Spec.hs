@@ -1,3 +1,5 @@
+{-# LANGUAGE BinaryLiterals #-}
+
 import Test.Hspec
 import Test.QuickCheck
 import Control.Exception (evaluate)
@@ -195,7 +197,12 @@ main = hspec $ do
       sort (map algebraicMoveFromCompactMove (generatePawnMovesFromToSquares 46 [55,54,53]))
         `shouldBe` ["b6a7","b6b7","b6c7"]
 
-  describe "generatePawnMoves" $ do
-    it "Generates pawn moves from a given FEN (ignoring checks)" $ do
-      sort (map algebraicMoveFromCompactMove (generatePawnMoves (getPosition "n5k1/1P2P1n1/1n2q2p/Pp6/3P1R2/3K1B2/1r2N2P/6r1 w - - 0 1")))
-        `shouldBe` ["a5a6","a5b6","b7a8b","b7a8n","b7a8q","b7a8r","b7b8b","b7b8n","b7b8q","b7b8r","d4d5","f5e6","f5f6","h2h3","h2h4"]
+  describe "potentialPawnJumpMoves" $ do
+    it "Returns a bitboard showing target squares for pawn moves that would land on the two-move rank if moved one more rank" $ do
+      potentialPawnJumpMoves 0b0101000000000100010000011000000001000000010101010000001100010001 (getPosition "n5k1/1P2P1n1/1n2q2p/Pp6/3P1R2/3K1B2/1r2N2P/6r1 w - - 0 1")
+        `shouldBe` 0b0000000000000000000000000000000001010101000000000000000000000000
+
+--  describe "generatePawnMoves" $ do
+--    it "Generates pawn moves from a given FEN (ignoring checks)" $ do
+--      sort (map algebraicMoveFromCompactMove (generatePawnMoves (getPosition "n5k1/1P2P1n1/1n2q2p/Pp6/3P1R2/3K1B2/1r2N2P/6r1 w - - 0 1")))
+--        `shouldBe` ["a5a6","a5b6","b7a8b","b7a8n","b7a8q","b7a8r","b7b8b","b7b8n","b7b8q","b7b8r","d4d5","f5e6","f5f6","h2h3","h2h4"]
