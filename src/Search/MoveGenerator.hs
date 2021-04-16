@@ -196,3 +196,11 @@ pawnCaptures captureMask square = (.&.) (captureMask !! square)
 
 potentialPawnJumpMoves :: Bitboard -> Position -> Bitboard
 potentialPawnJumpMoves bb position = if mover position == White then (.&.) (bb `shiftL` 8) rank4Bits else (.&.) (bb `shiftR` 8) rank5Bits
+
+moves :: Position -> [CompactMove]
+moves position =
+  generatePawnMoves position ++
+  generateKnightMoves position ++
+  generateBishopMoves position ++
+  generateRookMoves position ++
+  generateKingMoves position

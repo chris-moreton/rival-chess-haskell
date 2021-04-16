@@ -242,3 +242,18 @@ main = hspec $ do
         `shouldBe` ["e7e8b","e7e8n","e7e8q","e7e8r"]
       sort (map algebraicMoveFromCompactMove (generatePawnMoves (getPosition "n5k1/1P2P1n1/1n2q2p/P1pP4/5R2/3K1B2/1r2N2P/6r1 w - c6 0 1")))
         `shouldBe` ["a5a6","a5b6","b7a8b","b7a8n","b7a8q","b7a8r","b7b8b","b7b8n","b7b8q","b7b8r","d5c6","d5d6","d5e6","e7e8b","e7e8n","e7e8q","e7e8r","h2h3","h2h4"]
+
+  describe "moves" $ do
+    it "Get all moves for a position" $ do
+      sort (map algebraicMoveFromCompactMove (moves (getPosition "n5k1/1P2P1n1/1n2q2p/P1pP4/5R2/3K1B2/1r2N2P/6r1 w - c6 0 1")))
+        `shouldBe` [
+              "a5a6","a5b6"
+            , "b7a8b","b7a8n","b7a8q","b7a8r","b7b8b","b7b8n","b7b8q","b7b8r"
+            , "d3c2","d3c3","d3c4","d3d2","d3d4","d3e3","d3e4"
+            , "d5c6","d5d6","d5e6"
+            , "e2c1","e2c3","e2d4","e2g1","e2g3"
+            , "e7e8b","e7e8n","e7e8q","e7e8r"
+            , "f3e4","f3g2","f3g4","f3h1","f3h5"
+            , "f4a4","f4b4","f4c4","f4d4","f4e4","f4f5","f4f6","f4f7","f4f8","f4g4","f4h4"
+            , "h2h3","h2h4"
+         ]
