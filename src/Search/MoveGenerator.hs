@@ -208,7 +208,7 @@ generateCastleMoves position = do
 generateCastleMovesForMover :: Square -> Square -> Mover -> Bool -> Bool -> Bitboard -> Bitboard -> Bitboard -> [CompactMove]
 generateCastleMovesForMover kingStartSquare queenStartSquare opponent canKing canQueen kingSpaces queenSpaces allPieces =
   ([(.|.) (fromSquareMask kingStartSquare) ((-) kingStartSquare 2) | canKing && (.&.) allPieces kingSpaces == 0]) ++
-  [(.|.) (fromSquareMask kingStartSquare) ((+) queenStartSquare 1) | canQueen && ((.&.) allPieces queenSpaces) == 0]
+  [(.|.) (fromSquareMask kingStartSquare) ((+) queenStartSquare 1) | canQueen && (.&.) allPieces queenSpaces == 0]
 
 isSquareAttackedBy :: Position -> Square -> Mover -> Bool
 isSquareAttackedBy _ _ _ = False

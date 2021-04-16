@@ -248,6 +248,27 @@ main = hspec $ do
       let position = getPosition "n5k1/1P2P1n1/1n2q2p/P1pP4/5R2/5B2/1r2N2P/R3K1r1 w Q - 0 1"
       sort (map algebraicMoveFromCompactMove (generateCastleMovesForMover 3 4 Black True True castleSquaresWhiteKing castleSquaresWhiteQueen (allPiecesBitboard position)))
         `shouldBe` ["e1c1"]
+      let position = getPosition "n5k1/1P2P1n1/1n2q2p/P1pP4/5R2/5B2/1r2N2P/R3K2R w Q - 0 1"
+      sort (map algebraicMoveFromCompactMove (generateCastleMovesForMover 3 4 Black True True castleSquaresWhiteKing castleSquaresWhiteQueen (allPiecesBitboard position)))
+        `shouldBe` ["e1c1","e1g1"]
+      sort (map algebraicMoveFromCompactMove (generateCastleMovesForMover 3 4 Black False True castleSquaresWhiteKing castleSquaresWhiteQueen (allPiecesBitboard position)))
+        `shouldBe` ["e1c1"]
+      sort (map algebraicMoveFromCompactMove (generateCastleMovesForMover 3 4 Black True False castleSquaresWhiteKing castleSquaresWhiteQueen (allPiecesBitboard position)))
+        `shouldBe` ["e1g1"]
+      sort (map algebraicMoveFromCompactMove (generateCastleMovesForMover 3 4 Black False False castleSquaresWhiteKing castleSquaresWhiteQueen (allPiecesBitboard position)))
+        `shouldBe` []
+      let position = getPosition "r3k1R1/1P2P1n1/1n2q2p/P1pP4/5R2/5B2/1r2N2P/R3K1r1 b Q - 0 1"
+      sort (map algebraicMoveFromCompactMove (generateCastleMovesForMover 59 60 White True True castleSquaresBlackKing castleSquaresBlackQueen (allPiecesBitboard position)))
+        `shouldBe` ["e8c8"]
+      let position = getPosition "r3k2r/1P2P1n1/1n2q2p/P1pP4/5R2/5B2/1r2N2P/R3K2R w Q - 0 1"
+      sort (map algebraicMoveFromCompactMove (generateCastleMovesForMover 59 60 White True True castleSquaresBlackKing castleSquaresBlackQueen (allPiecesBitboard position)))
+        `shouldBe` ["e8c8","e8g8"]
+      sort (map algebraicMoveFromCompactMove (generateCastleMovesForMover 59 60 White False True castleSquaresBlackKing castleSquaresBlackQueen (allPiecesBitboard position)))
+        `shouldBe` ["e8c8"]
+      sort (map algebraicMoveFromCompactMove (generateCastleMovesForMover 59 60 White True False castleSquaresBlackKing castleSquaresBlackQueen (allPiecesBitboard position)))
+        `shouldBe` ["e8g8"]
+      sort (map algebraicMoveFromCompactMove (generateCastleMovesForMover 59 60 White False False castleSquaresBlackKing castleSquaresBlackQueen (allPiecesBitboard position)))
+        `shouldBe` []
 
   describe "moves" $ do
     it "Get all moves for a position" $ do
