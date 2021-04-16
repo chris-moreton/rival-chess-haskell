@@ -189,7 +189,7 @@ pawnForwardAndCaptureMovesBitboard fromSquare capturePawnMoves nonCaptures posit
   (.|.) nonCaptures captures
 
 pawnCapturesPlusEnPassantSquare :: [Bitboard] -> Square -> Position -> Bitboard
-pawnCapturesPlusEnPassantSquare bs square position = (.|.) (pawnCaptures bs square (enemyBitboard position)) (pawnCaptures bs square (enPassantSquare position))
+pawnCapturesPlusEnPassantSquare bs square position = (.|.) (pawnCaptures bs square (enemyBitboard position)) (pawnCaptures bs square (1 `shiftL` enPassantSquare position))
 
 pawnCaptures :: [Bitboard] -> Square -> Bitboard -> Bitboard
 pawnCaptures captureMask square = (.&.) (captureMask !! square)
