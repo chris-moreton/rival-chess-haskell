@@ -213,6 +213,51 @@ generateCastleMovesForMover kingStartSquare queenStartSquare opponent canKing ca
 isSquareAttackedBy :: Position -> Square -> Mover -> Bool
 isSquareAttackedBy _ _ _ = False
 
+--fun getPawnMovesCaptureOfColour(colour: Colour): LongArray =
+--        if (colour == Colour.WHITE) whitePawnMovesCapture else blackPawnMovesCapture
+--
+--fun isBishopAttackingSquare(attackedSquare: Int, pieceSquare: Int, allPieceBitboard: Long) =
+--    (MagicBitboards.magicMovesBishop[pieceSquare][getMagicIndexForBishop(pieceSquare, allPieceBitboard)] and (1L shl attackedSquare)) != 0L
+--    
+--fun isRookAttackingSquare(attackedSquare: Int, pieceSquare: Int, allPieceBitboard: Long) =
+--    (MagicBitboards.magicMovesRook[pieceSquare][getMagicIndexForRook(pieceSquare, allPieceBitboard)] and (1L shl attackedSquare)) != 0L
+--    
+--    fun getMagicIndexForBishop(pieceSquare: Int, allPieceBitboard: Long) =
+--        ((allPieceBitboard and MagicBitboards.occupancyMaskBishop[pieceSquare]) *
+--                MagicBitboards.magicNumberBishop[pieceSquare] ushr
+--                MagicBitboards.magicNumberShiftsBishop[pieceSquare]).toInt()
+--                
+--    fun getMagicIndexForRook(pieceSquare: Int, allPieceBitboard: Long) =
+--        ((allPieceBitboard and MagicBitboards.occupancyMaskRook[pieceSquare]) *
+--                MagicBitboards.magicNumberRook[pieceSquare] ushr
+--                MagicBitboards.magicNumberShiftsRook[pieceSquare]).toInt()
+--
+--    private fun getRookMovePiecesBitboard(colour: Colour) =
+--        if (colour == Colour.WHITE) pieceBitboards[BITBOARD_WR] or pieceBitboards[BITBOARD_WQ] else
+--            pieceBitboards[BITBOARD_BR] or pieceBitboards[BITBOARD_BQ]
+--
+--    private fun getBishopMovePiecesBitboard(colour: Colour) =
+--        if (colour == Colour.WHITE) pieceBitboards[BITBOARD_WB] or pieceBitboards[BITBOARD_WQ] else
+--            pieceBitboards[BITBOARD_BB] or pieceBitboards[BITBOARD_BQ]
+--            
+--    fun isSquareAttackedBy(attackedSquare: Int, attacker: Colour): Boolean {
+--
+--        if (pieceBitboards[if (attacker == Colour.WHITE) BITBOARD_WN else BITBOARD_BN] and knightMoves[attackedSquare] != 0L ||
+--                pieceBitboards[if (attacker == Colour.WHITE) BITBOARD_WK else BITBOARD_BK] and kingMoves[attackedSquare] != 0L ||
+--                (pieceBitboards[if (attacker == Colour.WHITE) BITBOARD_WP else BITBOARD_BP] and
+--                        getPawnMovesCaptureOfColour(attacker.opponent())[attackedSquare]) != 0L) return true
+--
+--        applyToSquares(getBishopMovePiecesBitboard(attacker)) {
+--            if (isBishopAttackingSquare(attackedSquare, it, pieceBitboards[BITBOARD_ALL])) return true
+--        }
+--
+--        applyToSquares(getRookMovePiecesBitboard(attacker)) {
+--            if (isRookAttackingSquare(attackedSquare, it, pieceBitboards[BITBOARD_ALL])) return true
+--        }
+--
+--        return false
+--    }
+    
 moves :: Position -> [CompactMove]
 moves position =
   generatePawnMoves position ++
