@@ -181,9 +181,12 @@ enPassantCaptureRank :: Mover -> Bitboard
 enPassantCaptureRank mover = if mover == White then rank6Bits else rank3Bits
 
 pawnForwardAndCaptureMovesBitboard :: Square -> [Bitboard] -> Bitboard -> Position -> Bitboard
-pawnForwardAndCaptureMovesBitboard fromSquare capturePawnMoves pawnMoves position = do
-  let targets = if (.&.) (enPassantSquare position) (enPassantCaptureRank (mover position)) /= 0 then pawnCapturesPlusEnPassantSquare capturePawnMoves fromSquare position else pawnCaptures capturePawnMoves fromSquare (enemyBitboard position)
-  (.|.) pawnMoves targets
+pawnForwardAndCaptureMovesBitboard fromSquare capturePawnMoves nonCaptures position = do
+  let eps = enPassantSquare position
+  let captures = if eps > -1 && (.&.) (1 `shiftL` eps) (enPassantCaptureRank (mover position)) /= 0
+                  then pawnCapturesPlusEnPassantSquare capturePawnMoves fromSquare position
+                  else pawnCaptures capturePawnMoves fromSquare (enemyBitboard position)
+  (.|.) nonCaptures captures
 
 pawnCapturesPlusEnPassantSquare :: [Bitboard] -> Square -> Position -> Bitboard
 pawnCapturesPlusEnPassantSquare bs square position = (.|.) (pawnCaptures bs square (enemyBitboard position)) (pawnCaptures bs square (enPassantSquare position))

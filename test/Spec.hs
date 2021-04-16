@@ -210,13 +210,35 @@ main = hspec $ do
         `shouldBe` 0b0000000000000000000000000000000000000000000000000000000000000000
       pawnCaptures whitePawnMovesCapture 54 (enemyBitboard (getPosition "n5k1/1P2P1n1/1n2q2p/Pp1pP3/3P1R2/3K1B2/1r2N2P/6r1 w - - 0 1"))
         `shouldBe` 0b1000000000000000000000000000000000000000000000000000000000000000
+      pawnCaptures whitePawnMovesCapture 51 (enemyBitboard (getPosition "n5k1/4P1n1/1n2q2p/1p1p4/5R2/3K1B2/1r2N3/6r1 w - - 0 1"))
+        `shouldBe` 0b0000000000000000000000000000000000000000000000000000000000000000
 
   describe "potentialPawnJumpMoves" $ do
     it "Returns a bitboard showing target squares for pawn moves that would land on the two-move rank if moved one more rank" $ do
       potentialPawnJumpMoves 0b0101000000000100010000011000000001000000010101010000001100010001 (getPosition "n5k1/1P2P1n1/1n2q2p/Pp6/3P1R2/3K1B2/1r2N2P/6r1 w - d5 0 1")
         `shouldBe` 0b0000000000000000000000000000000001010101000000000000000000000000
 
+  describe "enPassantSquare position" $ do
+    it "Identifies the enPassant square from a position" $ do
+      enPassantSquare (getPosition "n5k1/4P1n1/4q2p/PpP1n3/3P1R2/3K1B2/1r2N2P/6r1 w - b6 0 1") `shouldBe` 46
+      enPassantSquare (getPosition "n5k1/4P1n1/4q2p/PpP1n3/3P1R2/3K1B2/1r2N2P/6r1 w - - 0 1") `shouldBe` -1
+
+  describe "pawnForwardAndCaptureMovesBitboard" $ do
+    it "Returns a bitboard showing available landing squares (capture and non-capture) for a pawn on a given square" $ do
+      let position = getPosition "n5k1/4P1n1/1n2q2p/1p1p4/5R2/3K1B2/1r2N3/6r1 w - - 0 1"
+      let emptySquares = emptySquaresBitboard position
+      emptySquares `shouldBe` 0b0111110111110101101101101010111111111011111010111011011111111101
+      let fromSquare = 51
+      let forwardMovesForSquare = whitePawnMovesForward!!fromSquare
+      forwardMovesForSquare `shouldBe` 0b0000100000000000000000000000000000000000000000000000000000000000
+      let pfmb = pawnForwardMovesBitboard ((Data.Bits..&.) forwardMovesForSquare emptySquares) position
+      pfmb `shouldBe` 0b0000100000000000000000000000000000000000000000000000000000000000
+      pawnForwardAndCaptureMovesBitboard fromSquare whitePawnMovesCapture pfmb position
+        `shouldBe` 0b0000100000000000000000000000000000000000000000000000000000000000
+
   describe "generatePawnMoves" $ do
     it "Generates pawn moves from a given FEN (ignoring checks)" $ do
-      sort (map algebraicMoveFromCompactMove (generatePawnMoves (getPosition "n5k1/1P2P1n1/1n2q2p/Pp6/3P1R2/3K1B2/1r2N2P/6r1 w - - 0 1")))
-        `shouldBe` ["a5a6","a5b6","b7a8b","b7a8n","b7a8q","b7a8r","b7b8b","b7b8n","b7b8q","b7b8r","e5d6","e7e8b","e7e8n","e7e8q","e7e8r","h2h3","h2h4"]
+      sort (map algebraicMoveFromCompactMove (generatePawnMoves (getPosition "n5k1/4P1n1/1n2q2p/1p1p4/5R2/3K1B2/1r2N3/6r1 w - - 0 1")))
+        `shouldBe` ["e7e8b","e7e8n","e7e8q","e7e8r"]
+      sort (map algebraicMoveFromCompactMove (generatePawnMoves (getPosition "n5k1/1P2P1n1/1n2q2p/P1pP4/5R2/3K1B2/1r2N2P/6r1 w - c6 0 1")))
+        `shouldBe` ["a5a6","a5b6","b7a8b","b7a8n","b7a8q","b7a8r","b7b8b","b7b8n","b7b8q","b7b8r","d5c6","d5d6","d5e6","e7e8b","e7e8n","e7e8q","e7e8r","h2h3","h2h4"]
