@@ -219,4 +219,5 @@ moves position =
   generateKnightMoves position ++
   generateBishopMoves position ++
   generateRookMoves position ++
-  generateKingMoves position
+  generateKingMoves position ++
+  generateCastleMoves position

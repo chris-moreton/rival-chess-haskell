@@ -284,16 +284,17 @@ main = hspec $ do
             , "f4a4","f4b4","f4c4","f4d4","f4e4","f4f5","f4f6","f4f7","f4f8","f4g4","f4h4"
             , "h2h3","h2h4"
          ]
---      sort (map algebraicMoveFromCompactMove (moves (getPosition "n5k1/1P2P1n1/1n2q2p/P1pP4/5R2/5B2/1r2N2P/R3K1r1 w Q - 0 1")))
---        `shouldBe` [
---              "a1a2","a1a3","a1a4"
---            , "a5a6","a5b6"
---            , "b7a8b","b7a8n","b7a8q","b7a8r","b7b8b","b7b8n","b7b8q","b7b8r"
---            , "e1c1","e1d1","e1d2","e1f1","e1f2"
---            , "d5d6","d5e6"
---            , "e2c1","e2c3","e2d4","e2g1","e2g3"
---            , "e7e8b","e7e8n","e7e8q","e7e8r"
---            , "f3e4","f3g2","f3g4","f3h1","f3h5"
---            , "f4a4","f4b4","f4c4","f4d4","f4e4","f4f5","f4f6","f4f7","f4f8","f4g4","f4h4"
---            , "h2h3","h2h4"
---         ]
+      sort (map algebraicMoveFromCompactMove (moves (getPosition "n5k1/1P2P1n1/1n2q2p/P1pP4/3p1R2/2p2B2/1rPPN2P/R3K1r1 w Q - 0 1")))
+        `shouldBe` [
+              "a1a2","a1a3","a1a4","a1b1","a1c1","a1d1"
+            , "a5a6","a5b6"
+            , "b7a8b","b7a8n","b7a8q","b7a8r","b7b8b","b7b8n","b7b8q","b7b8r"
+            , "d2c3","d2d3"
+            , "d5d6","d5e6"
+            , "e1c1","e1d1","e1f1","e1f2"
+            , "e2c1","e2c3","e2d4","e2g1","e2g3"
+            , "e7e8b","e7e8n","e7e8q","e7e8r"
+            , "f3e4","f3g2","f3g4","f3h1","f3h5"
+            , "f4d4","f4e4","f4f5","f4f6","f4f7","f4f8","f4g4","f4h4"
+            , "h2h3","h2h4"
+         ]
