@@ -222,4 +222,33 @@ blackPassedPawnMask = [
         0x0000000303030300, 0x0000000707070700, 0x0000000E0E0E0E00, 0x0000001C1C1C1C00, 0x0000003838383800, 0x0000007070707000, 0x000000E0E0E0E000, 0x000000C0C0C0C000,
         0x0000030303030300, 0x0000070707070700, 0x00000E0E0E0E0E00, 0x00001C1C1C1C1C00, 0x0000383838383800, 0x0000707070707000, 0x0000E0E0E0E0E000, 0x0000C0C0C0C0C000,
         0, 0, 0, 0, 0, 0, 0, 0] :: [Bitboard]
-        
+
+castlePrivWhiteKing :: Bitboard
+castlePrivWhiteKing = 1
+
+castlePrivWhiteQueen :: Bitboard
+castlePrivWhiteQueen = 2
+
+castlePrivBlackKing :: Bitboard
+castlePrivBlackKing = 4
+
+castlePrivBlackQueen :: Bitboard
+castlePrivBlackQueen = 8
+
+castlePrivBlackNone :: Bitboard
+castlePrivBlackNone = (.&.) (complement castlePrivBlackKing) (complement castlePrivBlackQueen)
+
+castlePrivWhiteNone :: Bitboard
+castlePrivWhiteNone = (.&.) (complement castlePrivWhiteKing) (complement castlePrivWhiteQueen)
+
+castleSquaresWhiteKing :: Bitboard
+castleSquaresWhiteKing = (.|.) (1 `shiftL` 1) (1 `shiftL` 2)
+
+castleSquaresWhiteQueen :: Bitboard
+castleSquaresWhiteQueen = (.|.) (1 `shiftL` 4) ((.|.) (1 `shiftL` 5) (1 `shiftL` 6))
+
+castleSquaresBlackKing :: Bitboard
+castleSquaresBlackKing = (.|.) (1 `shiftL` 57) (1 `shiftL` 58)
+
+castleSquaresBlackQueen :: Bitboard
+castleSquaresBlackQueen = (.|.) (1 `shiftL` 62) ((.|.) (1 `shiftL` 61) (1 `shiftL` 60))

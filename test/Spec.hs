@@ -243,6 +243,12 @@ main = hspec $ do
       sort (map algebraicMoveFromCompactMove (generatePawnMoves (getPosition "n5k1/1P2P1n1/1n2q2p/P1pP4/5R2/3K1B2/1r2N2P/6r1 w - c6 0 1")))
         `shouldBe` ["a5a6","a5b6","b7a8b","b7a8n","b7a8q","b7a8r","b7b8b","b7b8n","b7b8q","b7b8r","d5c6","d5d6","d5e6","e7e8b","e7e8n","e7e8q","e7e8r","h2h3","h2h4"]
 
+  describe "generateCastleMovesForMover" $ do
+    it "Generates castle moves for a given mover" $ do
+      let position = getPosition "n5k1/1P2P1n1/1n2q2p/P1pP4/5R2/5B2/1r2N2P/R3K1r1 w Q - 0 1"
+      sort (map algebraicMoveFromCompactMove (generateCastleMovesForMover 3 4 Black True True castleSquaresWhiteKing castleSquaresWhiteQueen (allPiecesBitboard position)))
+        `shouldBe` ["e1c1"]
+
   describe "moves" $ do
     it "Get all moves for a position" $ do
       sort (map algebraicMoveFromCompactMove (moves (getPosition "n5k1/1P2P1n1/1n2q2p/P1pP4/5R2/3K1B2/1r2N2P/6r1 w - c6 0 1")))
@@ -257,3 +263,16 @@ main = hspec $ do
             , "f4a4","f4b4","f4c4","f4d4","f4e4","f4f5","f4f6","f4f7","f4f8","f4g4","f4h4"
             , "h2h3","h2h4"
          ]
+--      sort (map algebraicMoveFromCompactMove (moves (getPosition "n5k1/1P2P1n1/1n2q2p/P1pP4/5R2/5B2/1r2N2P/R3K1r1 w Q - 0 1")))
+--        `shouldBe` [
+--              "a1a2","a1a3","a1a4"
+--            , "a5a6","a5b6"
+--            , "b7a8b","b7a8n","b7a8q","b7a8r","b7b8b","b7b8n","b7b8q","b7b8r"
+--            , "e1c1","e1d1","e1d2","e1f1","e1f2"
+--            , "d5d6","d5e6"
+--            , "e2c1","e2c3","e2d4","e2g1","e2g3"
+--            , "e7e8b","e7e8n","e7e8q","e7e8r"
+--            , "f3e4","f3g2","f3g4","f3h1","f3h5"
+--            , "f4a4","f4b4","f4c4","f4d4","f4e4","f4f5","f4f6","f4f7","f4f8","f4g4","f4h4"
+--            , "h2h3","h2h4"
+--         ]

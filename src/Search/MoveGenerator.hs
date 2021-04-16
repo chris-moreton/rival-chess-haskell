@@ -197,6 +197,22 @@ pawnCaptures captureMask square = (.&.) (captureMask !! square)
 potentialPawnJumpMoves :: Bitboard -> Position -> Bitboard
 potentialPawnJumpMoves bb position = if mover position == White then (.&.) (bb `shiftL` 8) rank4Bits else (.&.) (bb `shiftR` 8) rank5Bits
 
+generateCastleMoves :: Position -> [CompactMove]
+generateCastleMoves position = do
+  let castlePrivs = positionCastlePrivs position
+  let allPieces = allPiecesBitboard position
+  if mover position == White
+    then generateCastleMovesForMover 3 4 Black (whiteKingCastleAvailable castlePrivs) (whiteQueenCastleAvailable castlePrivs) castleSquaresWhiteKing castleSquaresWhiteQueen allPieces
+    else generateCastleMovesForMover 59 60 White (blackKingCastleAvailable castlePrivs) (blackQueenCastleAvailable castlePrivs) castleSquaresBlackKing castleSquaresBlackQueen allPieces
+
+generateCastleMovesForMover :: Square -> Square -> Mover -> Bool -> Bool -> Bitboard -> Bitboard -> Bitboard -> [CompactMove]
+generateCastleMovesForMover kingStartSquare queenStartSquare opponent canKing canQueen kingSpaces queenSpaces allPieces =
+  ([(.|.) (fromSquareMask kingStartSquare) ((-) kingStartSquare 2) | canKing && (.&.) allPieces kingSpaces == 0]) ++
+  [(.|.) (fromSquareMask kingStartSquare) ((+) queenStartSquare 1) | canQueen && ((.&.) allPieces queenSpaces) == 0]
+
+isSquareAttackedBy :: Position -> Square -> Mover -> Bool
+isSquareAttackedBy _ _ _ = False
+
 moves :: Position -> [CompactMove]
 moves position =
   generatePawnMoves position ++
