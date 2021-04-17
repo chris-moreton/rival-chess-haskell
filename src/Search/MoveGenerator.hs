@@ -1,5 +1,3 @@
-{-# LANGUAGE TypeOperators #-}
-
 module Search.MoveGenerator where
   
 import Types
@@ -217,6 +215,18 @@ anySquaresInBitboardAttacked position attacker bitboard = any (\x -> isSquareAtt
 
 pawnMovesCaptureOfColour :: Mover -> [Bitboard]
 pawnMovesCaptureOfColour mover = if mover == White then whitePawnMovesCapture else blackPawnMovesCapture
+
+kingSquare :: Position -> Mover -> Square
+kingSquare position colour = do
+  let bb = positionBitboards position
+  if colour == White
+    then head (bitRefList (whiteKingBitboard bb))
+    else head (bitRefList (blackKingBitboard bb))
+
+isCheck :: Position -> Mover -> Bool
+isCheck position colour = do
+  let ks = kingSquare position colour
+  isSquareAttackedBy position ks (if colour == White then Black else White)
 
 isBishopAttackingSquare :: Square -> Square -> Bitboard -> Bool
 isBishopAttackingSquare attackedSquare pieceSquare allPieceBitboard =

@@ -402,7 +402,23 @@ main = hspec $ do
       isSquareAttackedBy position 63 White `shouldBe` True
       isSquareAttackedBy position 63 Black `shouldBe` True
                         
-      
-      
+  describe "isCheck" $ do
+    it "Determines if the given side's king is attacked by at least one of the other side's pieces" $ do
+      let position = getPosition "n5k1/1P2P1n1/1n5p/P1pP4/5R2/1q3B2/4Nr1P/R3K2R w Q - 0 1"
+      isCheck position White `shouldBe` False
+      isCheck position Black `shouldBe` False
+      let position = getPosition "n4Rk1/1P2P1n1/1n5p/P1pP4/8/1q3B2/4Nr1P/R3K2R w Q - 0 1"
+      isCheck position White `shouldBe` False
+      isCheck position Black `shouldBe` True
+      let position = getPosition "n4Rk1/1P2P1n1/1n5p/P1pP4/8/2q2B2/4Nr1P/R3K2R w Q - 0 1"
+      isCheck position White `shouldBe` True
+      isCheck position Black `shouldBe` True
+      let position = getPosition "n5k1/1P3Pn1/1n5p/P1pP1R2/8/3q1B2/4Nr1P/R3K2R w Q - 0 1"
+      isCheck position White `shouldBe` False
+      isCheck position Black `shouldBe` True
+      let position = getPosition "n5k1/1P2P1n1/1n5p/P1pP1R2/8/3q1B2/4N2P/R3Kr1R w Q - 0 1"
+      isCheck position White `shouldBe` True
+      isCheck position Black `shouldBe` False
+
       
       
