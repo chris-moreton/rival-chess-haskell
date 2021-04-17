@@ -210,38 +210,52 @@ generateCastleMovesForMover kingStartSquare queenStartSquare opponent canKing ca
   ([(.|.) (fromSquareMask kingStartSquare) ((-) kingStartSquare 2) | canKing && (.&.) allPieces kingSpaces == 0]) ++
   [(.|.) (fromSquareMask kingStartSquare) ((+) queenStartSquare 1) | canQueen && (.&.) allPieces queenSpaces == 0]
 
-isSquareAttackedBy :: Position -> Square -> Mover -> Bool
-isSquareAttackedBy _ _ _ = False
+pawnMovesCaptureOfColour :: Mover -> [Bitboard]
+pawnMovesCaptureOfColour mover = if mover == White then whitePawnMovesCapture else blackPawnMovesCapture
 
---fun getPawnMovesCaptureOfColour(colour: Colour): LongArray =
---        if (colour == Colour.WHITE) whitePawnMovesCapture else blackPawnMovesCapture
---
---fun isBishopAttackingSquare(attackedSquare: Int, pieceSquare: Int, allPieceBitboard: Long) =
---    (MagicBitboards.magicMovesBishop[pieceSquare][getMagicIndexForBishop(pieceSquare, allPieceBitboard)] and (1L shl attackedSquare)) != 0L
---    
---fun isRookAttackingSquare(attackedSquare: Int, pieceSquare: Int, allPieceBitboard: Long) =
---    (MagicBitboards.magicMovesRook[pieceSquare][getMagicIndexForRook(pieceSquare, allPieceBitboard)] and (1L shl attackedSquare)) != 0L
---    
---    fun getMagicIndexForBishop(pieceSquare: Int, allPieceBitboard: Long) =
---        ((allPieceBitboard and MagicBitboards.occupancyMaskBishop[pieceSquare]) *
---                MagicBitboards.magicNumberBishop[pieceSquare] ushr
---                MagicBitboards.magicNumberShiftsBishop[pieceSquare]).toInt()
---                
---    fun getMagicIndexForRook(pieceSquare: Int, allPieceBitboard: Long) =
---        ((allPieceBitboard and MagicBitboards.occupancyMaskRook[pieceSquare]) *
---                MagicBitboards.magicNumberRook[pieceSquare] ushr
---                MagicBitboards.magicNumberShiftsRook[pieceSquare]).toInt()
---
---    private fun getRookMovePiecesBitboard(colour: Colour) =
---        if (colour == Colour.WHITE) pieceBitboards[BITBOARD_WR] or pieceBitboards[BITBOARD_WQ] else
---            pieceBitboards[BITBOARD_BR] or pieceBitboards[BITBOARD_BQ]
---
---    private fun getBishopMovePiecesBitboard(colour: Colour) =
---        if (colour == Colour.WHITE) pieceBitboards[BITBOARD_WB] or pieceBitboards[BITBOARD_WQ] else
---            pieceBitboards[BITBOARD_BB] or pieceBitboards[BITBOARD_BQ]
---            
---    fun isSquareAttackedBy(attackedSquare: Int, attacker: Colour): Boolean {
---
+isBishopAttackingSquare :: Square -> Square -> Bitboard -> Bool
+isBishopAttackingSquare attackedSquare pieceSquare allPieceBitboard =
+  (.&.) ((magicMoves magicBishopVars !! pieceSquare) !! magicIndexForBishop pieceSquare allPieceBitboard) (1 `shiftL` attackedSquare) /= 0
+
+isRookAttackingSquare :: Square -> Square -> Bitboard -> Bool
+isRookAttackingSquare attackedSquare pieceSquare allPieceBitboard =
+  (.&.) ((magicMoves magicRookVars !! pieceSquare) !! magicIndexForRook pieceSquare allPieceBitboard) (1 `shiftL` attackedSquare) /= 0
+
+magicIndexForBishop :: Square -> Bitboard -> Int
+magicIndexForBishop pieceSquare allPieceBitboard =
+        (.&.) allPieceBitboard (occupancyMaskBishop!!pieceSquare) *
+                (magicNumberBishop!!pieceSquare `shiftR` magicNumberShiftsBishop!!pieceSquare)
+
+magicIndexForRook :: Square -> Bitboard -> Int
+magicIndexForRook pieceSquare allPieceBitboard =
+        (.&.) allPieceBitboard (occupancyMaskRook!!pieceSquare) *
+                (magicNumberRook!!pieceSquare `shiftR` magicNumberShiftsRook!!pieceSquare)
+
+rookMovePiecesBitboard :: Position -> Mover -> Bitboard
+rookMovePiecesBitboard position mover = do
+  let pb = positionBitboards position
+  if mover == White
+    then (.|.) (whiteRookBitboard pb) (whiteQueenBitboard pb)
+    else (.|.) (blackRookBitboard pb) (blackQueenBitboard pb)
+
+bishopMovePiecesBitboard :: Position -> Mover -> Bitboard
+bishopMovePiecesBitboard position mover = do
+  let pb = positionBitboards position
+  if mover == White
+    then (.|.) (whiteBishopBitboard pb) (whiteBishopBitboard pb)
+    else (.|.) (blackBishopBitboard pb) (blackBishopBitboard pb)
+
+isSquareAttackedBy :: Position -> Square -> Mover -> Bool
+isSquareAttackedBy position attackedSquare attacker = do
+  let pb = positionBitboards position
+  let knightBitboard = if attacker == White then whiteKnightBitboard pb else blackKnightBitboard pb
+  let kingBitboard = if attacker == White then whiteKingBitboard pb else blackKingBitboard pb
+  let pawnBitboard = if attacker == White then whitePawnBitboard pb else blackPawnBitboard pb
+  let pawnAttack = (.&.) pawnBitboard (pawnMovesCaptureOfColour attacker!!attackedSquare) /= 0
+  let knightAttack = (.&.) knightBitboard (knightMovesBitboards!!attackedSquare) /= 0
+  let kingAttack = (.&.) kingBitboard (kingMovesBitboards!!attackedSquare) /= 0
+  pawnAttack || knightAttack || kingAttack
+
 --        if (pieceBitboards[if (attacker == Colour.WHITE) BITBOARD_WN else BITBOARD_BN] and knightMoves[attackedSquare] != 0L ||
 --                pieceBitboards[if (attacker == Colour.WHITE) BITBOARD_WK else BITBOARD_BK] and kingMoves[attackedSquare] != 0L ||
 --                (pieceBitboards[if (attacker == Colour.WHITE) BITBOARD_WP else BITBOARD_BP] and
@@ -257,7 +271,7 @@ isSquareAttackedBy _ _ _ = False
 --
 --        return false
 --    }
-    
+
 moves :: Position -> [CompactMove]
 moves position =
   generatePawnMoves position ++
