@@ -252,10 +252,11 @@ isSquareAttackedBy :: Position -> Square -> Mover -> Bool
 isSquareAttackedBy position attackedSquare attacker = do
   let pb = positionBitboards position
   let apb = allPiecesBitboard position
+  let defenderColour = if mover position == White then Black else White
   let knightBitboard = if attacker == White then whiteKnightBitboard pb else blackKnightBitboard pb
   let kingBitboard = if attacker == White then whiteKingBitboard pb else blackKingBitboard pb
   let pawnBitboard = if attacker == White then whitePawnBitboard pb else blackPawnBitboard pb
-  let pawnAttack = (.&.) pawnBitboard (pawnMovesCaptureOfColour attacker!!attackedSquare) /= 0
+  let pawnAttack = (.&.) pawnBitboard (pawnMovesCaptureOfColour defenderColour !! attackedSquare) /= 0
   let knightAttack = (.&.) knightBitboard (knightMovesBitboards!!attackedSquare) /= 0
   let kingAttack = (.&.) kingBitboard (kingMovesBitboards!!attackedSquare) /= 0
   let bishopAttack = any (\x -> isBishopAttackingSquare attackedSquare x apb) (bitRefList (bishopMovePiecesBitboard position attacker))

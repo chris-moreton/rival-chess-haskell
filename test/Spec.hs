@@ -312,3 +312,56 @@ main = hspec $ do
       isSquareAttackedBy position 3 Black `shouldBe` True
       isSquareAttackedBy position 4 White `shouldBe` True
       isSquareAttackedBy position 4 Black `shouldBe` False
+      isSquareAttackedBy position 5 White `shouldBe` True
+      isSquareAttackedBy position 5 Black `shouldBe` False
+      isSquareAttackedBy position 6 White `shouldBe` True
+      isSquareAttackedBy position 6 Black `shouldBe` True
+      isSquareAttackedBy position 7 White `shouldBe` False
+      isSquareAttackedBy position 7 Black `shouldBe` False
+      isSquareAttackedBy position 8 White `shouldBe` False
+      isSquareAttackedBy position 8 Black `shouldBe` False
+      isSquareAttackedBy position 9 White `shouldBe` True
+      isSquareAttackedBy position 9 Black `shouldBe` True
+      isSquareAttackedBy position 10 White `shouldBe` True
+      isSquareAttackedBy position 10 Black `shouldBe` False
+      isSquareAttackedBy position 11 White `shouldBe` True
+      isSquareAttackedBy position 11 Black `shouldBe` True
+      isSquareAttackedBy position 12 White `shouldBe` True
+      isSquareAttackedBy position 12 Black `shouldBe` True
+      isSquareAttackedBy position 13 White `shouldBe` False
+      isSquareAttackedBy position 13 Black `shouldBe` True
+      isSquareAttackedBy position 14 White `shouldBe` False
+      isSquareAttackedBy position 14 Black `shouldBe` False
+      isSquareAttackedBy position 15 White `shouldBe` True
+      isSquareAttackedBy position 15 Black `shouldBe` True
+      isSquareAttackedBy position 16 White `shouldBe` False
+      isSquareAttackedBy position 16 Black `shouldBe` False
+      isSquareAttackedBy position 17 White `shouldBe` True
+      isSquareAttackedBy position 17 Black `shouldBe` True
+      isSquareAttackedBy position 18 White `shouldBe` True
+      isSquareAttackedBy position 18 Black `shouldBe` False
+      isSquareAttackedBy position 19 White `shouldBe` False
+      isSquareAttackedBy position 19 Black `shouldBe` True
+      isSquareAttackedBy position 40 White `shouldBe` False 
+      isSquareAttackedBy position 40 Black `shouldBe` True
+      isSquareAttackedBy position 41 White `shouldBe` False 
+      isSquareAttackedBy position 41 Black `shouldBe` True
+      isSquareAttackedBy position 42 White `shouldBe` True
+      isSquareAttackedBy position 42 Black `shouldBe` True
+      isSquareAttackedBy position 43 White `shouldBe` True
+      isSquareAttackedBy position 43 Black `shouldBe` True
+      isSquareAttackedBy position 44 White `shouldBe` False
+      isSquareAttackedBy position 44 Black `shouldBe` True
+      isSquareAttackedBy position 45 White `shouldBe` True 
+      isSquareAttackedBy position 45 Black `shouldBe` True
+      isSquareAttackedBy position 61 White `shouldBe` True
+      isSquareAttackedBy position 61 Black `shouldBe` True
+      isSquareAttackedBy position 62 White `shouldBe` False
+      isSquareAttackedBy position 62 Black `shouldBe` False
+      isSquareAttackedBy position 63 White `shouldBe` True
+      isSquareAttackedBy position 63 Black `shouldBe` True
+                        
+      
+      
+      
+      
