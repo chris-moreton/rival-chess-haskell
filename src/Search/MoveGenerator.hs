@@ -1,3 +1,5 @@
+{-# LANGUAGE TypeOperators #-}
+
 module Search.MoveGenerator where
   
 import Types
@@ -215,21 +217,22 @@ pawnMovesCaptureOfColour mover = if mover == White then whitePawnMovesCapture el
 
 isBishopAttackingSquare :: Square -> Square -> Bitboard -> Bool
 isBishopAttackingSquare attackedSquare pieceSquare allPieceBitboard =
-  (.&.) ((magicMoves magicBishopVars !! pieceSquare) !! magicIndexForBishop pieceSquare allPieceBitboard) (1 `shiftL` attackedSquare) /= 0
+  (.&.) ((magicMoves magicBishopVars !! pieceSquare) !! magicIndexForPiece Bishop pieceSquare allPieceBitboard) (1 `shiftL` attackedSquare) /= 0
 
 isRookAttackingSquare :: Square -> Square -> Bitboard -> Bool
 isRookAttackingSquare attackedSquare pieceSquare allPieceBitboard =
-  (.&.) ((magicMoves magicRookVars !! pieceSquare) !! magicIndexForRook pieceSquare allPieceBitboard) (1 `shiftL` attackedSquare) /= 0
+  (.&.) ((magicMoves magicRookVars !! pieceSquare) !! magicIndexForPiece Rook pieceSquare allPieceBitboard) (1 `shiftL` attackedSquare) /= 0
 
-magicIndexForBishop :: Square -> Bitboard -> Int
-magicIndexForBishop pieceSquare allPieceBitboard =
-        (.&.) allPieceBitboard (occupancyMaskBishop!!pieceSquare) *
-                (magicNumberBishop!!pieceSquare `shiftR` magicNumberShiftsBishop!!pieceSquare)
-
-magicIndexForRook :: Square -> Bitboard -> Int
-magicIndexForRook pieceSquare allPieceBitboard =
-        (.&.) allPieceBitboard (occupancyMaskRook!!pieceSquare) *
-                (magicNumberRook!!pieceSquare `shiftR` magicNumberShiftsRook!!pieceSquare)
+magicIndexForPiece :: Piece -> Square -> Bitboard -> Int
+magicIndexForPiece piece pieceSquare allPieceBitboard = do
+    let magicVars = if piece == Rook then magicRookVars else magicBishopVars
+    let moveMagic = magicMoves magicVars!!pieceSquare
+    let numberMagic = magicNumber magicVars!!pieceSquare
+    let shiftMagic = magicNumberShifts magicVars!!pieceSquare
+    let maskMagic = occupancyMask magicVars!!pieceSquare
+    let occupancy = (.&.) allPieceBitboard maskMagic
+    let rawIndex = fromIntegral(occupancy * numberMagic) :: Word
+    fromIntegral(shiftR rawIndex shiftMagic) :: Int
 
 rookMovePiecesBitboard :: Position -> Mover -> Bitboard
 rookMovePiecesBitboard position mover = do
@@ -248,29 +251,16 @@ bishopMovePiecesBitboard position mover = do
 isSquareAttackedBy :: Position -> Square -> Mover -> Bool
 isSquareAttackedBy position attackedSquare attacker = do
   let pb = positionBitboards position
+  let apb = allPiecesBitboard position
   let knightBitboard = if attacker == White then whiteKnightBitboard pb else blackKnightBitboard pb
   let kingBitboard = if attacker == White then whiteKingBitboard pb else blackKingBitboard pb
   let pawnBitboard = if attacker == White then whitePawnBitboard pb else blackPawnBitboard pb
   let pawnAttack = (.&.) pawnBitboard (pawnMovesCaptureOfColour attacker!!attackedSquare) /= 0
   let knightAttack = (.&.) knightBitboard (knightMovesBitboards!!attackedSquare) /= 0
   let kingAttack = (.&.) kingBitboard (kingMovesBitboards!!attackedSquare) /= 0
-  pawnAttack || knightAttack || kingAttack
-
---        if (pieceBitboards[if (attacker == Colour.WHITE) BITBOARD_WN else BITBOARD_BN] and knightMoves[attackedSquare] != 0L ||
---                pieceBitboards[if (attacker == Colour.WHITE) BITBOARD_WK else BITBOARD_BK] and kingMoves[attackedSquare] != 0L ||
---                (pieceBitboards[if (attacker == Colour.WHITE) BITBOARD_WP else BITBOARD_BP] and
---                        getPawnMovesCaptureOfColour(attacker.opponent())[attackedSquare]) != 0L) return true
---
---        applyToSquares(getBishopMovePiecesBitboard(attacker)) {
---            if (isBishopAttackingSquare(attackedSquare, it, pieceBitboards[BITBOARD_ALL])) return true
---        }
---
---        applyToSquares(getRookMovePiecesBitboard(attacker)) {
---            if (isRookAttackingSquare(attackedSquare, it, pieceBitboards[BITBOARD_ALL])) return true
---        }
---
---        return false
---    }
+  let bishopAttack = any (\x -> isBishopAttackingSquare attackedSquare x apb) (bitRefList (bishopMovePiecesBitboard position attacker))
+  let rookAttack = any (\x -> isRookAttackingSquare attackedSquare x apb) (bitRefList (rookMovePiecesBitboard position attacker))
+  pawnAttack || knightAttack || kingAttack || bishopAttack || rookAttack
 
 moves :: Position -> [CompactMove]
 moves position =

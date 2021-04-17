@@ -298,3 +298,17 @@ main = hspec $ do
             , "f4d4","f4e4","f4f5","f4f6","f4f7","f4f8","f4g4","f4h4"
             , "h2h3","h2h4"
          ]
+
+  describe "isSquareAttackedBy" $ do
+    it "Determines if a given square is attacked by a given colour in a given position" $ do
+      let position = getPosition "n5k1/1P2P1n1/1n2q2p/P1pP4/5R2/5B2/1r2N2P/R3K1r1 w Q - 0 1"
+      isSquareAttackedBy position 0 White `shouldBe` True
+      isSquareAttackedBy position 0 Black `shouldBe` True
+      isSquareAttackedBy position 1 White `shouldBe` True
+      isSquareAttackedBy position 1 Black `shouldBe` False
+      isSquareAttackedBy position 2 White `shouldBe` True
+      isSquareAttackedBy position 2 Black `shouldBe` True
+      isSquareAttackedBy position 3 White `shouldBe` True
+      isSquareAttackedBy position 3 Black `shouldBe` True
+      isSquareAttackedBy position 4 White `shouldBe` True
+      isSquareAttackedBy position 4 Black `shouldBe` False
