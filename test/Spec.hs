@@ -243,32 +243,62 @@ main = hspec $ do
       sort (map algebraicMoveFromCompactMove (generatePawnMoves (getPosition "n5k1/1P2P1n1/1n2q2p/P1pP4/5R2/3K1B2/1r2N2P/6r1 w - c6 0 1")))
         `shouldBe` ["a5a6","a5b6","b7a8b","b7a8n","b7a8q","b7a8r","b7b8b","b7b8n","b7b8q","b7b8r","d5c6","d5d6","d5e6","e7e8b","e7e8n","e7e8q","e7e8r","h2h3","h2h4"]
 
+  describe "anySquaresInBitboardAttacked" $ do
+    it "Returns True if any squares set in the bitboard are attacked by the given attacker" $ do
+      let position = getPosition "n5k1/1P2P1n1/1n2q2p/P1pP4/5R2/5B2/1r2N2P/R3K1r1 w Q - 0 1"
+      let bitboard = 0b0000000000000000000000000000000000000000010110000000000000000000
+      anySquaresInBitboardAttacked position White bitboard `shouldBe` False
+      let bitboard = 0b0000000000000000000000000000000000000000111110000000000000000000
+      anySquaresInBitboardAttacked position White bitboard `shouldBe` True
+      anySquaresInBitboardAttacked position Black emptyCastleSquaresWhiteQueen `shouldBe` True
+      let position = getPosition "n5k1/1P2P1n1/1n2q2p/P1pP4/5R2/5B2/1r2N2P/R3K2R w Q - 0 1"
+      anySquaresInBitboardAttacked position Black ((.|.) (1 `shiftL` 3) (1 `shiftL` 2)) `shouldBe` False
+      anySquaresInBitboardAttacked position Black ((.|.) (1 `shiftL` 3) (1 `shiftL` 4)) `shouldBe` False
+      let position = getPosition "n5k1/1P2P1n1/1n5p/P1pP4/5R2/1q3B2/4Nr1P/R3K2R w Q - 0 1"
+      anySquaresInBitboardAttacked position Black ((.|.) (1 `shiftL` 3) (1 `shiftL` 2)) `shouldBe` True
+      anySquaresInBitboardAttacked position Black (0b0000000000000000000000000000000000000000000000000000000000011000) `shouldBe` True
+
   describe "generateCastleMovesForMover" $ do
     it "Generates castle moves for a given mover" $ do
       let position = getPosition "n5k1/1P2P1n1/1n2q2p/P1pP4/5R2/5B2/1r2N2P/R3K1r1 w Q - 0 1"
-      sort (map algebraicMoveFromCompactMove (generateCastleMovesForMover 3 4 Black True True castleSquaresWhiteKing castleSquaresWhiteQueen (allPiecesBitboard position)))
-        `shouldBe` ["e1c1"]
+      sort (map algebraicMoveFromCompactMove (generateCastleMovesForMover position 3 4 Black True True emptyCastleSquaresWhiteKing emptyCastleSquaresWhiteQueen (allPiecesBitboard position)))
+        `shouldBe` []
       let position = getPosition "n5k1/1P2P1n1/1n2q2p/P1pP4/5R2/5B2/1r2N2P/R3K2R w Q - 0 1"
-      sort (map algebraicMoveFromCompactMove (generateCastleMovesForMover 3 4 Black True True castleSquaresWhiteKing castleSquaresWhiteQueen (allPiecesBitboard position)))
+      sort (map algebraicMoveFromCompactMove (generateCastleMovesForMover position 3 4 Black True True emptyCastleSquaresWhiteKing emptyCastleSquaresWhiteQueen (allPiecesBitboard position)))
         `shouldBe` ["e1c1","e1g1"]
-      sort (map algebraicMoveFromCompactMove (generateCastleMovesForMover 3 4 Black False True castleSquaresWhiteKing castleSquaresWhiteQueen (allPiecesBitboard position)))
-        `shouldBe` ["e1c1"]
-      sort (map algebraicMoveFromCompactMove (generateCastleMovesForMover 3 4 Black True False castleSquaresWhiteKing castleSquaresWhiteQueen (allPiecesBitboard position)))
+      let position = getPosition "n5k1/1P2P1n1/1n2q2p/P1pP4/5R2/5B2/3rN2P/R3K2R w Q - 0 1"
+      sort (map algebraicMoveFromCompactMove (generateCastleMovesForMover position 3 4 Black True True emptyCastleSquaresWhiteKing emptyCastleSquaresWhiteQueen (allPiecesBitboard position)))
         `shouldBe` ["e1g1"]
-      sort (map algebraicMoveFromCompactMove (generateCastleMovesForMover 3 4 Black False False castleSquaresWhiteKing castleSquaresWhiteQueen (allPiecesBitboard position)))
+      let position = getPosition "n5k1/1P2P1n1/1n2q2p/P1pP4/5R2/5B2/4Nr1P/R3K2R w Q - 0 1"
+      sort (map algebraicMoveFromCompactMove (generateCastleMovesForMover position 3 4 Black True True emptyCastleSquaresWhiteKing emptyCastleSquaresWhiteQueen (allPiecesBitboard position)))
+        `shouldBe` ["e1c1"]
+      let position = getPosition "n5k1/1P2P1n1/1n5p/P1pP4/5R2/1q3B2/4Nr1P/R3K2R w Q - 0 1"
+      sort (map algebraicMoveFromCompactMove (generateCastleMovesForMover position 3 4 Black True True emptyCastleSquaresWhiteKing emptyCastleSquaresWhiteQueen (allPiecesBitboard position)))
+        `shouldBe` []
+      sort (map algebraicMoveFromCompactMove (generateCastleMovesForMover position 3 4 Black False True emptyCastleSquaresWhiteKing emptyCastleSquaresWhiteQueen (allPiecesBitboard position)))
+        `shouldBe` []
+      sort (map algebraicMoveFromCompactMove (generateCastleMovesForMover position 3 4 Black True False emptyCastleSquaresWhiteKing emptyCastleSquaresWhiteQueen (allPiecesBitboard position)))
+        `shouldBe` []
+      sort (map algebraicMoveFromCompactMove (generateCastleMovesForMover position 3 4 Black False False emptyCastleSquaresWhiteKing emptyCastleSquaresWhiteQueen (allPiecesBitboard position)))
         `shouldBe` []
       let position = getPosition "r3k1R1/1P2P1n1/1n2q2p/P1pP4/5R2/5B2/1r2N2P/R3K1r1 b Q - 0 1"
-      sort (map algebraicMoveFromCompactMove (generateCastleMovesForMover 59 60 White True True castleSquaresBlackKing castleSquaresBlackQueen (allPiecesBitboard position)))
-        `shouldBe` ["e8c8"]
-      let position = getPosition "r3k2r/1P2P1n1/1n2q2p/P1pP4/5R2/5B2/1r2N2P/R3K2R w Q - 0 1"
-      sort (map algebraicMoveFromCompactMove (generateCastleMovesForMover 59 60 White True True castleSquaresBlackKing castleSquaresBlackQueen (allPiecesBitboard position)))
-        `shouldBe` ["e8c8","e8g8"]
-      sort (map algebraicMoveFromCompactMove (generateCastleMovesForMover 59 60 White False True castleSquaresBlackKing castleSquaresBlackQueen (allPiecesBitboard position)))
-        `shouldBe` ["e8c8"]
-      sort (map algebraicMoveFromCompactMove (generateCastleMovesForMover 59 60 White True False castleSquaresBlackKing castleSquaresBlackQueen (allPiecesBitboard position)))
-        `shouldBe` ["e8g8"]
-      sort (map algebraicMoveFromCompactMove (generateCastleMovesForMover 59 60 White False False castleSquaresBlackKing castleSquaresBlackQueen (allPiecesBitboard position)))
+      sort (map algebraicMoveFromCompactMove (generateCastleMovesForMover position 59 60 White True True emptyCastleSquaresBlackKing emptyCastleSquaresBlackQueen (allPiecesBitboard position)))
         `shouldBe` []
+      let position = getPosition "r3k2r/1P2P1n1/1n2q2p/P1pP4/5R2/5B2/1r2N2P/R3K2R b Q - 0 1"
+      sort (map algebraicMoveFromCompactMove (generateCastleMovesForMover position 59 60 White True True emptyCastleSquaresBlackKing emptyCastleSquaresBlackQueen (allPiecesBitboard position)))
+        `shouldBe` []
+      let position = getPosition "r3k2r/1P2PRn1/1n2q2p/P1pP4/8/5B2/1r2N2P/R3K2R b Q - 0 1"
+      sort (map algebraicMoveFromCompactMove (generateCastleMovesForMover position 59 60 White True True emptyCastleSquaresBlackKing emptyCastleSquaresBlackQueen (allPiecesBitboard position)))
+        `shouldBe` []
+      sort (map algebraicMoveFromCompactMove (generateCastleMovesForMover position 59 60 White False True emptyCastleSquaresBlackKing emptyCastleSquaresBlackQueen (allPiecesBitboard position)))
+        `shouldBe` []
+      sort (map algebraicMoveFromCompactMove (generateCastleMovesForMover position 59 60 White True False emptyCastleSquaresBlackKing emptyCastleSquaresBlackQueen (allPiecesBitboard position)))
+        `shouldBe` []
+      sort (map algebraicMoveFromCompactMove (generateCastleMovesForMover position 59 60 White False False emptyCastleSquaresBlackKing emptyCastleSquaresBlackQueen (allPiecesBitboard position)))
+        `shouldBe` []
+      let position = getPosition "r3k2r/1P3Rn1/1n2q2p/P1pP2P1/8/5B2/1r2N2P/R3K2R b Q - 0 1"
+      sort (map algebraicMoveFromCompactMove (generateCastleMovesForMover position 59 60 White True True emptyCastleSquaresBlackKing emptyCastleSquaresBlackQueen (allPiecesBitboard position)))
+        `shouldBe` ["e8c8"]
 
   describe "moves" $ do
     it "Get all moves for a position" $ do
@@ -301,6 +331,11 @@ main = hspec $ do
 
   describe "isSquareAttackedBy" $ do
     it "Determines if a given square is attacked by a given colour in a given position" $ do
+      let position = getPosition "n5k1/1P2P1n1/1n5p/P1pP4/5R2/1q3B2/4Nr1P/R3K2R w Q - 0 1"
+      anySquaresInBitboardAttacked position Black ((.|.) (1 `shiftL` 3) (1 `shiftL` 2)) `shouldBe` True
+      isBishopAttackingSquare 4 22 (allPiecesBitboard position) `shouldBe` True
+      isBishopAttackingSquare 5 22 (allPiecesBitboard position) `shouldBe` False
+      isSquareAttackedBy position 4 Black `shouldBe` True
       let position = getPosition "n5k1/1P2P1n1/1n2q2p/P1pP4/5R2/5B2/1r2N2P/R3K1r1 w Q - 0 1"
       isSquareAttackedBy position 0 White `shouldBe` True
       isSquareAttackedBy position 0 Black `shouldBe` True
@@ -342,9 +377,9 @@ main = hspec $ do
       isSquareAttackedBy position 18 Black `shouldBe` False
       isSquareAttackedBy position 19 White `shouldBe` False
       isSquareAttackedBy position 19 Black `shouldBe` True
-      isSquareAttackedBy position 40 White `shouldBe` False 
+      isSquareAttackedBy position 40 White `shouldBe` False
       isSquareAttackedBy position 40 Black `shouldBe` True
-      isSquareAttackedBy position 41 White `shouldBe` False 
+      isSquareAttackedBy position 41 White `shouldBe` False
       isSquareAttackedBy position 41 Black `shouldBe` True
       isSquareAttackedBy position 42 White `shouldBe` True
       isSquareAttackedBy position 42 Black `shouldBe` True
@@ -352,7 +387,7 @@ main = hspec $ do
       isSquareAttackedBy position 43 Black `shouldBe` True
       isSquareAttackedBy position 44 White `shouldBe` False
       isSquareAttackedBy position 44 Black `shouldBe` True
-      isSquareAttackedBy position 45 White `shouldBe` True 
+      isSquareAttackedBy position 45 White `shouldBe` True
       isSquareAttackedBy position 45 Black `shouldBe` True
       isSquareAttackedBy position 61 White `shouldBe` True
       isSquareAttackedBy position 61 Black `shouldBe` True

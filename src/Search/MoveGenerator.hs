@@ -204,13 +204,16 @@ generateCastleMoves position = do
   let castlePrivs = positionCastlePrivs position
   let allPieces = allPiecesBitboard position
   if mover position == White
-    then generateCastleMovesForMover 3 4 Black (whiteKingCastleAvailable castlePrivs) (whiteQueenCastleAvailable castlePrivs) castleSquaresWhiteKing castleSquaresWhiteQueen allPieces
-    else generateCastleMovesForMover 59 60 White (blackKingCastleAvailable castlePrivs) (blackQueenCastleAvailable castlePrivs) castleSquaresBlackKing castleSquaresBlackQueen allPieces
+    then generateCastleMovesForMover position 3 4 Black (whiteKingCastleAvailable castlePrivs) (whiteQueenCastleAvailable castlePrivs) emptyCastleSquaresWhiteKing emptyCastleSquaresWhiteQueen allPieces
+    else generateCastleMovesForMover position 59 60 White (blackKingCastleAvailable castlePrivs) (blackQueenCastleAvailable castlePrivs) emptyCastleSquaresBlackKing emptyCastleSquaresBlackQueen allPieces
 
-generateCastleMovesForMover :: Square -> Square -> Mover -> Bool -> Bool -> Bitboard -> Bitboard -> Bitboard -> [CompactMove]
-generateCastleMovesForMover kingStartSquare queenStartSquare opponent canKing canQueen kingSpaces queenSpaces allPieces =
-  ([(.|.) (fromSquareMask kingStartSquare) ((-) kingStartSquare 2) | canKing && (.&.) allPieces kingSpaces == 0]) ++
-  [(.|.) (fromSquareMask kingStartSquare) ((+) queenStartSquare 1) | canQueen && (.&.) allPieces queenSpaces == 0]
+generateCastleMovesForMover :: Position -> Square -> Square -> Mover -> Bool -> Bool -> Bitboard -> Bitboard -> Bitboard -> [CompactMove]
+generateCastleMovesForMover position kingStartSquare queenStartSquare opponent canKing canQueen kingSpaces queenSpaces allPieces =
+  ([(.|.) (fromSquareMask kingStartSquare) ((-) kingStartSquare 2) | canKing && (.&.) allPieces kingSpaces == 0 && not (anySquaresInBitboardAttacked position opponent ((.|.) (1 `shiftL` kingStartSquare) (1 `shiftL` kingStartSquare - 1)))]) ++
+  [(.|.) (fromSquareMask kingStartSquare) ((+) queenStartSquare 1) | canQueen && (.&.) allPieces queenSpaces == 0 && not (anySquaresInBitboardAttacked position opponent ((.|.) (1 `shiftL` kingStartSquare) (1 `shiftL` queenStartSquare)))]
+
+anySquaresInBitboardAttacked :: Position -> Mover -> Bitboard -> Bool
+anySquaresInBitboardAttacked position attacker bitboard = any (\x -> isSquareAttackedBy position x attacker) (bitRefList bitboard)
 
 pawnMovesCaptureOfColour :: Mover -> [Bitboard]
 pawnMovesCaptureOfColour mover = if mover == White then whitePawnMovesCapture else blackPawnMovesCapture
@@ -245,8 +248,8 @@ bishopMovePiecesBitboard :: Position -> Mover -> Bitboard
 bishopMovePiecesBitboard position mover = do
   let pb = positionBitboards position
   if mover == White
-    then (.|.) (whiteBishopBitboard pb) (whiteBishopBitboard pb)
-    else (.|.) (blackBishopBitboard pb) (blackBishopBitboard pb)
+    then (.|.) (whiteBishopBitboard pb) (whiteQueenBitboard pb)
+    else (.|.) (blackBishopBitboard pb) (blackQueenBitboard pb)
 
 isSquareAttackedBy :: Position -> Square -> Mover -> Bool
 isSquareAttackedBy position attackedSquare attacker = do

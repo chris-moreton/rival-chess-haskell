@@ -241,14 +241,14 @@ castlePrivBlackNone = (.&.) (complement castlePrivBlackKing) (complement castleP
 castlePrivWhiteNone :: Bitboard
 castlePrivWhiteNone = (.&.) (complement castlePrivWhiteKing) (complement castlePrivWhiteQueen)
 
-castleSquaresWhiteKing :: Bitboard
-castleSquaresWhiteKing = (.|.) (1 `shiftL` 1) (1 `shiftL` 2)
+emptyCastleSquaresWhiteKing :: Bitboard
+emptyCastleSquaresWhiteKing = (.|.) (1 `shiftL` 1) (1 `shiftL` 2)
 
-castleSquaresWhiteQueen :: Bitboard
-castleSquaresWhiteQueen = (.|.) (1 `shiftL` 4) ((.|.) (1 `shiftL` 5) (1 `shiftL` 6))
+emptyCastleSquaresWhiteQueen :: Bitboard
+emptyCastleSquaresWhiteQueen = (.|.) (1 `shiftL` 4) ((.|.) (1 `shiftL` 5) (1 `shiftL` 6))
 
-castleSquaresBlackKing :: Bitboard
-castleSquaresBlackKing = (.|.) (1 `shiftL` 57) (1 `shiftL` 58)
+emptyCastleSquaresBlackKing :: Bitboard
+emptyCastleSquaresBlackKing = (.|.) (1 `shiftL` 57) (1 `shiftL` 58)
 
-castleSquaresBlackQueen :: Bitboard
-castleSquaresBlackQueen = (.|.) (1 `shiftL` 62) ((.|.) (1 `shiftL` 61) (1 `shiftL` 60))
+emptyCastleSquaresBlackQueen :: Bitboard
+emptyCastleSquaresBlackQueen = (.|.) (1 `shiftL` 62) ((.|.) (1 `shiftL` 61) (1 `shiftL` 60))
