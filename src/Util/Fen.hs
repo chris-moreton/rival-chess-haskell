@@ -11,6 +11,8 @@ import Data.Char
 import Data.Bits
 import qualified Data.Text as T
 
+import Util.Utils
+
 fenPart :: String -> Int -> String
 fenPart fen index = splitOn " " fen !! index
   
@@ -68,7 +70,7 @@ bitRefFromAlgebraicSquareRef algebraic = do
   let rankNum = ord (head (tail algebraic)) - 49
   (rankNum * 8) + (7 - fileNum)
 
-promotionPart :: CompactMove -> String
+promotionPart :: Move -> String
 promotionPart move
     | (.&.) promotionFullMoveMask move == promotionQueenMoveMask = "q"
     | (.&.) promotionFullMoveMask move == promotionRookMoveMask = "r"
@@ -76,11 +78,14 @@ promotionPart move
     | (.&.) promotionFullMoveMask move == promotionKnightMoveMask = "n"
     | otherwise = ""
 
-algebraicMoveFromCompactMove :: CompactMove -> String
-algebraicMoveFromCompactMove compactMove = do
-  let fromSquare = shiftR compactMove 16
-  let toSquare = (.&.) 63 compactMove
-  algebraicSquareRefFromBitRef fromSquare ++ algebraicSquareRefFromBitRef toSquare ++ promotionPart compactMove
+algebraicMoveFromMove :: Move -> String
+algebraicMoveFromMove move = do
+  let fromSquare = shiftR move 16
+  let toSquare = (.&.) 63 move
+  algebraicSquareRefFromBitRef fromSquare ++ algebraicSquareRefFromBitRef toSquare ++ promotionPart move
+
+moveFromAlgebraicMove :: String -> Move
+moveFromAlgebraicMove moveString = fromSquareMask (bitRefFromAlgebraicSquareRef (substring moveString 0 2)) + bitRefFromAlgebraicSquareRef (substring moveString 2 4)
 
 getMover :: String -> Mover
 getMover fen = if fenPart fen 1 == "w" then White else Black

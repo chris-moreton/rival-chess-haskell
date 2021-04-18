@@ -80,10 +80,10 @@ main = hspec $ do
       bitRefFromAlgebraicSquareRef "h1" `shouldBe` 0
       bitRefFromAlgebraicSquareRef "g1" `shouldBe` 1
 
-  describe "algebraicMoveFromCompactMove" $ do
+  describe "algebraicMoveFromMove" $ do
     it "Converts a compact move to an algebraic move" $ do
-      algebraicMoveFromCompactMove 458808 `shouldBe` "a1h8"
-      map algebraicMoveFromCompactMove [] `shouldBe` []
+      algebraicMoveFromMove 458808 `shouldBe` "a1h8"
+      map algebraicMoveFromMove [] `shouldBe` []
 
   describe "boardFromFen" $ do
     it "Converts from FEN to board type (Test 1)" $ do
@@ -165,37 +165,37 @@ main = hspec $ do
 
   describe "generateKnightMoves" $ do
     it "Generates knight moves from a given FEN (ignoring checks)" $ do
-      sort (map algebraicMoveFromCompactMove (generateKnightMoves (getPosition "n5k1/6n1/1n2q2p/1p5P/1P3RP1/2PK1B2/1r2N3/8 b kQKq g3 5 56")))
+      sort (map algebraicMoveFromMove (generateKnightMoves (getPosition "n5k1/6n1/1n2q2p/1p5P/1P3RP1/2PK1B2/1r2N3/8 b kQKq g3 5 56")))
         `shouldBe` ["a8c7","b6a4","b6c4","b6c8","b6d5","b6d7","g7e8","g7f5","g7h5"]
-      sort (map algebraicMoveFromCompactMove (generateKnightMoves (getPosition "n5k1/6n1/1n2q2p/1p5P/1P3RP1/2PK1B2/1r2N3/8 w kQKq g3 5 56")))
+      sort (map algebraicMoveFromMove (generateKnightMoves (getPosition "n5k1/6n1/1n2q2p/1p5P/1P3RP1/2PK1B2/1r2N3/8 w kQKq g3 5 56")))
         `shouldBe` ["e2c1","e2d4","e2g1","e2g3"]
 
   describe "generateKingMoves" $ do
     it "Generates king moves from a given FEN (ignoring checks)" $ do
-      sort (map algebraicMoveFromCompactMove (generateKingMoves (getPosition "n5k1/6n1/1n2q2p/1p5P/1P3RP1/2PK1B2/1r2N3/8 b kQKq g3 5 56")))
+      sort (map algebraicMoveFromMove (generateKingMoves (getPosition "n5k1/6n1/1n2q2p/1p5P/1P3RP1/2PK1B2/1r2N3/8 b kQKq g3 5 56")))
         `shouldBe` ["g8f7","g8f8","g8h7","g8h8"]
-      sort (map algebraicMoveFromCompactMove (generateKingMoves (getPosition "n5k1/6n1/1n2q2p/1p5P/1P3RP1/2PK1B2/1r2N3/8 w kQKq g3 5 56")))
+      sort (map algebraicMoveFromMove (generateKingMoves (getPosition "n5k1/6n1/1n2q2p/1p5P/1P3RP1/2PK1B2/1r2N3/8 w kQKq g3 5 56")))
         `shouldBe` ["d3c2","d3c4","d3d2","d3d4","d3e3","d3e4"]
 
   describe "generateBishopMoves" $ do
     it "Generates bishop moves (including diagonal queen moves) from a given FEN (ignoring checks)" $ do
-      sort (map algebraicMoveFromCompactMove (generateBishopMoves (getPosition "n5k1/6n1/1n2q2p/1p5P/1P3RP1/2PK1B2/1r2N3/7R w kQKq g3 5 56")))
+      sort (map algebraicMoveFromMove (generateBishopMoves (getPosition "n5k1/6n1/1n2q2p/1p5P/1P3RP1/2PK1B2/1r2N3/7R w kQKq g3 5 56")))
         `shouldBe` ["f3a8","f3b7","f3c6","f3d5","f3e4","f3g2"]
-      sort (map algebraicMoveFromCompactMove (generateBishopMoves (getPosition "n5k1/6n1/1n2q2p/1p5P/1P3RP1/2PK1B2/1r2N3/8 b kQKq g3 5 56")))
+      sort (map algebraicMoveFromMove (generateBishopMoves (getPosition "n5k1/6n1/1n2q2p/1p5P/1P3RP1/2PK1B2/1r2N3/8 b kQKq g3 5 56")))
         `shouldBe` ["e6a2","e6b3","e6c4","e6c8","e6d5","e6d7","e6f5","e6f7","e6g4"]
 
   describe "generateRookMoves" $ do
     it "Generates rook moves (including non-diagonal queen moves) from a given FEN (ignoring checks)" $ do
-      sort (map algebraicMoveFromCompactMove (generateRookMoves (getPosition "n5k1/6n1/1n2q2p/1p5P/1P3RP1/2PK1B2/1r2N3/8 w kQKq g3 5 56")))
+      sort (map algebraicMoveFromMove (generateRookMoves (getPosition "n5k1/6n1/1n2q2p/1p5P/1P3RP1/2PK1B2/1r2N3/8 w kQKq g3 5 56")))
         `shouldBe` ["f4c4","f4d4","f4e4","f4f5","f4f6","f4f7","f4f8"]
-      sort (map algebraicMoveFromCompactMove (generateRookMoves (getPosition "n5k1/6n1/1n2q2p/1p5P/1P3RP1/2PK1B2/1r2N3/6r1 b kQKq g3 5 56")))
+      sort (map algebraicMoveFromMove (generateRookMoves (getPosition "n5k1/6n1/1n2q2p/1p5P/1P3RP1/2PK1B2/1r2N3/6r1 b kQKq g3 5 56")))
         `shouldBe` ["b2a2","b2b1","b2b3","b2b4","b2c2","b2d2","b2e2","e6c6","e6d6","e6e2","e6e3","e6e4","e6e5","e6e7","e6e8","e6f6","e6g6","g1a1","g1b1","g1c1","g1d1","g1e1","g1f1","g1g2","g1g3","g1g4","g1h1"]
 
   describe "generatePawnMovesFromToSquares" $ do
     it "Creates a list of moves from a given From Square and a list of To Squares" $ do
-      sort (map algebraicMoveFromCompactMove (generatePawnMovesFromToSquares 54 [63,62,61]))
+      sort (map algebraicMoveFromMove (generatePawnMovesFromToSquares 54 [63,62,61]))
         `shouldBe` ["b7a8b","b7a8n","b7a8q","b7a8r","b7b8b","b7b8n","b7b8q","b7b8r","b7c8b","b7c8n","b7c8q","b7c8r"]
-      sort (map algebraicMoveFromCompactMove (generatePawnMovesFromToSquares 46 [55,54,53]))
+      sort (map algebraicMoveFromMove (generatePawnMovesFromToSquares 46 [55,54,53]))
         `shouldBe` ["b6a7","b6b7","b6c7"]
 
   describe "enemyBitboard" $ do
@@ -239,9 +239,9 @@ main = hspec $ do
 
   describe "generatePawnMoves" $ do
     it "Generates pawn moves from a given FEN (ignoring checks)" $ do
-      sort (map algebraicMoveFromCompactMove (generatePawnMoves (getPosition "n5k1/4P1n1/1n2q2p/1p1p4/5R2/3K1B2/1r2N3/6r1 w - - 0 1")))
+      sort (map algebraicMoveFromMove (generatePawnMoves (getPosition "n5k1/4P1n1/1n2q2p/1p1p4/5R2/3K1B2/1r2N3/6r1 w - - 0 1")))
         `shouldBe` ["e7e8b","e7e8n","e7e8q","e7e8r"]
-      sort (map algebraicMoveFromCompactMove (generatePawnMoves (getPosition "n5k1/1P2P1n1/1n2q2p/P1pP4/5R2/3K1B2/1r2N2P/6r1 w - c6 0 1")))
+      sort (map algebraicMoveFromMove (generatePawnMoves (getPosition "n5k1/1P2P1n1/1n2q2p/P1pP4/5R2/3K1B2/1r2N2P/6r1 w - c6 0 1")))
         `shouldBe` ["a5a6","a5b6","b7a8b","b7a8n","b7a8q","b7a8r","b7b8b","b7b8n","b7b8q","b7b8r","d5c6","d5d6","d5e6","e7e8b","e7e8n","e7e8q","e7e8r","h2h3","h2h4"]
 
   describe "anySquaresInBitboardAttacked" $ do
@@ -267,46 +267,46 @@ main = hspec $ do
   describe "generateCastleMovesForMover" $ do
     it "Generates castle moves for a given mover" $ do
       let position = getPosition "n5k1/1P2P1n1/1n2q2p/P1pP4/5R2/5B2/1r2N2P/R3K1r1 w Q - 0 1"
-      sort (map algebraicMoveFromCompactMove (generateCastleMovesForMover position 3 4 Black True True emptyCastleSquaresWhiteKing emptyCastleSquaresWhiteQueen (allPiecesBitboard position)))
+      sort (map algebraicMoveFromMove (generateCastleMovesForMover position 3 4 Black True True emptyCastleSquaresWhiteKing emptyCastleSquaresWhiteQueen (allPiecesBitboard position)))
         `shouldBe` []
       let position = getPosition "n5k1/1P2P1n1/1n2q2p/P1pP4/5R2/5B2/1r2N2P/R3K2R w Q - 0 1"
-      sort (map algebraicMoveFromCompactMove (generateCastleMovesForMover position 3 4 Black True True emptyCastleSquaresWhiteKing emptyCastleSquaresWhiteQueen (allPiecesBitboard position)))
+      sort (map algebraicMoveFromMove (generateCastleMovesForMover position 3 4 Black True True emptyCastleSquaresWhiteKing emptyCastleSquaresWhiteQueen (allPiecesBitboard position)))
         `shouldBe` ["e1c1","e1g1"]
       let position = getPosition "n5k1/1P2P1n1/1n2q2p/P1pP4/5R2/5B2/3rN2P/R3K2R w Q - 0 1"
-      sort (map algebraicMoveFromCompactMove (generateCastleMovesForMover position 3 4 Black True True emptyCastleSquaresWhiteKing emptyCastleSquaresWhiteQueen (allPiecesBitboard position)))
+      sort (map algebraicMoveFromMove (generateCastleMovesForMover position 3 4 Black True True emptyCastleSquaresWhiteKing emptyCastleSquaresWhiteQueen (allPiecesBitboard position)))
         `shouldBe` ["e1g1"]
       let position = getPosition "n5k1/1P2P1n1/1n2q2p/P1pP4/5R2/5B2/4Nr1P/R3K2R w Q - 0 1"
-      sort (map algebraicMoveFromCompactMove (generateCastleMovesForMover position 3 4 Black True True emptyCastleSquaresWhiteKing emptyCastleSquaresWhiteQueen (allPiecesBitboard position)))
+      sort (map algebraicMoveFromMove (generateCastleMovesForMover position 3 4 Black True True emptyCastleSquaresWhiteKing emptyCastleSquaresWhiteQueen (allPiecesBitboard position)))
         `shouldBe` ["e1c1"]
       let position = getPosition "n5k1/1P2P1n1/1n5p/P1pP4/5R2/1q3B2/4Nr1P/R3K2R w Q - 0 1"
-      sort (map algebraicMoveFromCompactMove (generateCastleMovesForMover position 3 4 Black True True emptyCastleSquaresWhiteKing emptyCastleSquaresWhiteQueen (allPiecesBitboard position)))
+      sort (map algebraicMoveFromMove (generateCastleMovesForMover position 3 4 Black True True emptyCastleSquaresWhiteKing emptyCastleSquaresWhiteQueen (allPiecesBitboard position)))
         `shouldBe` []
-      sort (map algebraicMoveFromCompactMove (generateCastleMovesForMover position 3 4 Black False True emptyCastleSquaresWhiteKing emptyCastleSquaresWhiteQueen (allPiecesBitboard position)))
+      sort (map algebraicMoveFromMove (generateCastleMovesForMover position 3 4 Black False True emptyCastleSquaresWhiteKing emptyCastleSquaresWhiteQueen (allPiecesBitboard position)))
         `shouldBe` []
-      sort (map algebraicMoveFromCompactMove (generateCastleMovesForMover position 3 4 Black True False emptyCastleSquaresWhiteKing emptyCastleSquaresWhiteQueen (allPiecesBitboard position)))
+      sort (map algebraicMoveFromMove (generateCastleMovesForMover position 3 4 Black True False emptyCastleSquaresWhiteKing emptyCastleSquaresWhiteQueen (allPiecesBitboard position)))
         `shouldBe` []
-      sort (map algebraicMoveFromCompactMove (generateCastleMovesForMover position 3 4 Black False False emptyCastleSquaresWhiteKing emptyCastleSquaresWhiteQueen (allPiecesBitboard position)))
+      sort (map algebraicMoveFromMove (generateCastleMovesForMover position 3 4 Black False False emptyCastleSquaresWhiteKing emptyCastleSquaresWhiteQueen (allPiecesBitboard position)))
         `shouldBe` []
       let position = getPosition "r3k1R1/1P2P1n1/1n2q2p/P1pP4/5R2/5B2/1r2N2P/R3K1r1 b Q - 0 1"
-      sort (map algebraicMoveFromCompactMove (generateCastleMovesForMover position 59 60 White True True emptyCastleSquaresBlackKing emptyCastleSquaresBlackQueen (allPiecesBitboard position))) `shouldBe` []
+      sort (map algebraicMoveFromMove (generateCastleMovesForMover position 59 60 White True True emptyCastleSquaresBlackKing emptyCastleSquaresBlackQueen (allPiecesBitboard position))) `shouldBe` []
       let position = getPosition "r3k2r/1P2P1n1/1n2q2p/P1pP4/5R2/5B2/1r2N2P/R3K2R b Q - 0 1"
-      sort (map algebraicMoveFromCompactMove (generateCastleMovesForMover position 59 60 White True True emptyCastleSquaresBlackKing emptyCastleSquaresBlackQueen (allPiecesBitboard position))) `shouldBe` []
+      sort (map algebraicMoveFromMove (generateCastleMovesForMover position 59 60 White True True emptyCastleSquaresBlackKing emptyCastleSquaresBlackQueen (allPiecesBitboard position))) `shouldBe` []
       let position = getPosition "r3k2r/1P2PRn1/1n2q2p/P1pP4/8/5B2/1r2N2P/R3K2R b Q - 0 1"
-      sort (map algebraicMoveFromCompactMove (generateCastleMovesForMover position 59 60 White True True emptyCastleSquaresBlackKing emptyCastleSquaresBlackQueen (allPiecesBitboard position)))
+      sort (map algebraicMoveFromMove (generateCastleMovesForMover position 59 60 White True True emptyCastleSquaresBlackKing emptyCastleSquaresBlackQueen (allPiecesBitboard position)))
         `shouldBe` []
-      sort (map algebraicMoveFromCompactMove (generateCastleMovesForMover position 59 60 White False True emptyCastleSquaresBlackKing emptyCastleSquaresBlackQueen (allPiecesBitboard position)))
+      sort (map algebraicMoveFromMove (generateCastleMovesForMover position 59 60 White False True emptyCastleSquaresBlackKing emptyCastleSquaresBlackQueen (allPiecesBitboard position)))
         `shouldBe` []
-      sort (map algebraicMoveFromCompactMove (generateCastleMovesForMover position 59 60 White True False emptyCastleSquaresBlackKing emptyCastleSquaresBlackQueen (allPiecesBitboard position)))
+      sort (map algebraicMoveFromMove (generateCastleMovesForMover position 59 60 White True False emptyCastleSquaresBlackKing emptyCastleSquaresBlackQueen (allPiecesBitboard position)))
         `shouldBe` []
-      sort (map algebraicMoveFromCompactMove (generateCastleMovesForMover position 59 60 White False False emptyCastleSquaresBlackKing emptyCastleSquaresBlackQueen (allPiecesBitboard position)))
+      sort (map algebraicMoveFromMove (generateCastleMovesForMover position 59 60 White False False emptyCastleSquaresBlackKing emptyCastleSquaresBlackQueen (allPiecesBitboard position)))
         `shouldBe` []
       let position = getPosition "r3k2r/1P3Rn1/1n2q2p/P1pP2P1/8/5B2/1r2N2P/R3K2R b Q - 0 1"
-      sort (map algebraicMoveFromCompactMove (generateCastleMovesForMover position 59 60 White True True emptyCastleSquaresBlackKing emptyCastleSquaresBlackQueen (allPiecesBitboard position)))
+      sort (map algebraicMoveFromMove (generateCastleMovesForMover position 59 60 White True True emptyCastleSquaresBlackKing emptyCastleSquaresBlackQueen (allPiecesBitboard position)))
         `shouldBe` ["e8c8"]
 
   describe "moves" $ do
     it "Get all moves for a position" $ do
-      sort (map algebraicMoveFromCompactMove (moves (getPosition "n5k1/1P2P1n1/1n2q2p/P1pP4/5R2/3K1B2/1r2N2P/6r1 w - c6 0 1")))
+      sort (map algebraicMoveFromMove (moves (getPosition "n5k1/1P2P1n1/1n2q2p/P1pP4/5R2/3K1B2/1r2N2P/6r1 w - c6 0 1")))
         `shouldBe` [
               "a5a6","a5b6"
             , "b7a8b","b7a8n","b7a8q","b7a8r","b7b8b","b7b8n","b7b8q","b7b8r"
@@ -318,7 +318,7 @@ main = hspec $ do
             , "f4a4","f4b4","f4c4","f4d4","f4e4","f4f5","f4f6","f4f7","f4f8","f4g4","f4h4"
             , "h2h3","h2h4"
          ]
-      sort (map algebraicMoveFromCompactMove (moves (getPosition "n5k1/1P2P1n1/1n2q2p/P1pP4/3p1R2/2p2B2/1rPPN2P/R3K1r1 w Q - 0 1")))
+      sort (map algebraicMoveFromMove (moves (getPosition "n5k1/1P2P1n1/1n2q2p/P1pP4/3p1R2/2p2B2/1rPPN2P/R3K1r1 w Q - 0 1")))
         `shouldBe` [
               "a1a2","a1a3","a1a4","a1b1","a1c1","a1d1"
             , "a5a6","a5b6"

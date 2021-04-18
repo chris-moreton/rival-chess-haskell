@@ -3,8 +3,7 @@ module Types where
 type Square = Int
 type Bitboard = Int
 type MoveMask = Int
-type BitRef = Int
-type CompactMove = Int
+type Move = Int
 
 data Mover = White | Black deriving (Enum,Show,Eq)
 data Piece = Pawn | King | Queen | Bishop | Knight | Rook deriving (Enum,Show,Eq)
@@ -42,5 +41,5 @@ data Position = Position {
 
 data Game = Game {
     gamePosition :: Position
-  , gameMoves :: [CompactMove]
+  , gameMoves :: [Move]
 }
