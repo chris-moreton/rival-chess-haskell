@@ -32,8 +32,11 @@ library
       Util.MagicMovesBishop
       Util.MagicMovesRook
       Util.Fen
+      Util.Utils
       Model.Game
+      Search.MakeMove
       Search.MoveGenerator
+      Search.MoveConstants
       Types
   other-modules:
       Paths_rival
@@ -69,6 +72,7 @@ test-suite rival-test
   build-depends:
       base >=4.7 && <5
     , hspec
+    , hspec-discover
     , QuickCheck
     , rival
     , sort

@@ -1,4 +1,9 @@
-module MakeMove where
+module MakeMoveSpec where
+
+import Test.Hspec
+import Test.QuickCheck
+import Control.Exception (evaluate)
+import Util.Fen
 
 main :: IO ()
 main = hspec $ do
@@ -8,4 +13,4 @@ main = hspec $ do
 
   describe "makeMove" $ do
     it "Makes a move from a position and returns a new position" $ do
-      algebraicMoveFromCompactMove (moveFromAlgebraicMove "a1h8") `shouldBe` "a1h8"
+      algebraicMoveFromMove (moveFromAlgebraicMove "a1h8") `shouldBe` "a1h8"

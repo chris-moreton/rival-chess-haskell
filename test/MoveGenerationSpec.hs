@@ -1,5 +1,7 @@
 {-# LANGUAGE BinaryLiterals,NegativeLiterals #-}
 
+module MoveGenerationSpec where
+
 import Test.Hspec
 import Test.QuickCheck
 import Control.Exception (evaluate)
@@ -420,7 +422,5 @@ main = hspec $ do
       isCheck position White `shouldBe` True
       isCheck position Black `shouldBe` False
 
-  describe "makeMove" $ do
-    it "Makes a move from a position and returns a new position" $ do
-      algebraicMoveFromMove (moveFromAlgebraicMove "a1h8") `shouldBe` "a1h8"
+      
       
