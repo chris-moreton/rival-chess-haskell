@@ -5,6 +5,7 @@ import Test.QuickCheck
 import Control.Exception (evaluate)
 import Util.Bitboards
 import Util.Fen
+import Util.Utils
 import Model.Game
 import Search.MoveGenerator
 import Types
@@ -426,10 +427,18 @@ main = hspec $ do
       algebraicMoveFromMove (moveFromAlgebraicMove "a1h8") `shouldBe` "a1h8"
       algebraicMoveFromMove (moveFromAlgebraicMove "h1a8") `shouldBe` "h1a8"
 
-  describe "makeMove" $ do
-    it "Makes a move from a position and returns a new position" $ do
-      makeMove (getPosition "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1") 
-               (moveFromAlgebraicMove "e2e4") 
-                  `shouldBe` (getPosition "rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR b KQkq e3 0 1")
+  describe "fromSquarePart" $ do
+    it "Gets the Square for the from part of a compact move" $ do
+      fromSquarePart (moveFromAlgebraicMove "h1a8") `shouldBe` bitRefFromAlgebraicSquareRef "h1"
+
+  describe "toSquarePart" $ do
+    it "Gets the Square for the to part of a compact move" $ do
+      toSquarePart (moveFromAlgebraicMove "h1a8") `shouldBe` bitRefFromAlgebraicSquareRef "a8"
+
+--  describe "makeMove" $ do
+--    it "Makes a move from a position and returns a new position" $ do
+--      makeMove (getPosition "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1")
+--               (moveFromAlgebraicMove "e2e4")
+--                  `shouldBe` (getPosition "rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR b KQkq e3 0 1")
 
       
