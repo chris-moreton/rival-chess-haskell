@@ -7,6 +7,8 @@ The Kotlin conversion moved the code towards a functional style. I'm now rewriti
 I am a total noob with Haskell and am kinda making it up as I go along, so feel free to laugh at my code, or, even better, tell me what I'm
 doing wrong.
 
+This is a work in progress. Some working functions are shown below. 
+
 ### Get moves for a position
 
     describe "moves" $ do
