@@ -435,10 +435,30 @@ main = hspec $ do
     it "Gets the Square for the to part of a compact move" $ do
       toSquarePart (moveFromAlgebraicMove "h1a8") `shouldBe` bitRefFromAlgebraicSquareRef "a8"
 
---  describe "makeMove" $ do
---    it "Makes a move from a position and returns a new position" $ do
+  describe "movePieceWithinBitboard" $ do
+    it "Returns a bitboard with the one bit in 'from', if it exists, moved to 'to'" $ do
+      movePieceWithinBitboard (bitRefFromAlgebraicSquareRef "a8") (bitRefFromAlgebraicSquareRef "b8") 0b1000100000000000000000000000000000001000010000000000000000000000
+        `shouldBe` 0b0100100000000000000000000000000000001000010000000000000000000000
+      movePieceWithinBitboard (bitRefFromAlgebraicSquareRef "h1") (bitRefFromAlgebraicSquareRef "b8") 0b1000100000000000000000000000000000001000010000000000000000000001
+        `shouldBe` 0b1100100000000000000000000000000000001000010000000000000000000000
+      movePieceWithinBitboard (bitRefFromAlgebraicSquareRef "a1") (bitRefFromAlgebraicSquareRef "b8") 0b1000100000000000000000000000000000001000010000000000000010000001
+        `shouldBe` 0b1100100000000000000000000000000000001000010000000000000000000001
+      movePieceWithinBitboard (bitRefFromAlgebraicSquareRef "a8") (bitRefFromAlgebraicSquareRef "b8") 0b1000100000000000000000000000000000001000010000000000000000000000
+        `shouldBe` 0b0100100000000000000000000000000000001000010000000000000000000000
+      movePieceWithinBitboard (bitRefFromAlgebraicSquareRef "h1") (bitRefFromAlgebraicSquareRef "a8") 0b0000100000000000000000000000000000001000010000000000000000000001
+        `shouldBe` 0b1000100000000000000000000000000000001000010000000000000000000000
+      movePieceWithinBitboard (bitRefFromAlgebraicSquareRef "a1") (bitRefFromAlgebraicSquareRef "a8") 0b0000100000000000000000000000000000001000010000000000000010000001
+        `shouldBe` 0b1000100000000000000000000000000000001000010000000000000000000001
+      movePieceWithinBitboard (bitRefFromAlgebraicSquareRef "b8") (bitRefFromAlgebraicSquareRef "c8") 0b0000100000000000000000000000000000001000010000000000000010000001
+        `shouldBe` 0b0000100000000000000000000000000000001000010000000000000010000001
+
+  describe "makeMove" $ do
+    it "Makes a move from a position and returns a new position" $ do
+      makeMove (getPosition "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1")
+               (moveFromAlgebraicMove "e2e3")
+                  `shouldBe` (getPosition "rnbqkbnr/pppppppp/8/8/8/4P3/PPPP1PPP/RNBQKBNR b KQkq - 0 1")
 --      makeMove (getPosition "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1")
 --               (moveFromAlgebraicMove "e2e4")
---                  `shouldBe` (getPosition "rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR b KQkq e3 0 1")
+--                  `shouldBe` (getPosition "rnbqkbnr/pppppppp/8/8/8/8/PPPP1PPP/RNBQKBNR b KQkq e3 0 1")
 
       
