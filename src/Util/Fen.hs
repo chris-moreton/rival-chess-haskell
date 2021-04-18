@@ -13,6 +13,9 @@ import qualified Data.Text as T
 
 import Util.Utils
 
+startPosition :: String
+startPosition = "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1"
+
 fenPart :: String -> Int -> String
 fenPart fen index = splitOn " " fen !! index
   

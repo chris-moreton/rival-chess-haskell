@@ -21,14 +21,14 @@ data PieceBitboards = PieceBitboards {
   , blackQueenBitboard :: Bitboard
   , blackKingBitboard :: Bitboard
   , blackRookBitboard :: Bitboard
-}
+} deriving (Show,Eq)
 
 data CastlePrivileges = CastlePrivileges {
     whiteKingCastleAvailable  :: Bool
   , blackKingCastleAvailable  :: Bool
   , whiteQueenCastleAvailable :: Bool
   , blackQueenCastleAvailable :: Bool
-}
+} deriving (Show,Eq)
 
 data Position = Position {
     positionBitboards :: PieceBitboards
@@ -37,7 +37,7 @@ data Position = Position {
   , positionCastlePrivs :: CastlePrivileges
   , halfMoves :: Int
   , moveNumber :: Int
-}
+} deriving (Show,Eq)
 
 data Game = Game {
     gamePosition :: Position

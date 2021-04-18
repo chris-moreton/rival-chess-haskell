@@ -10,6 +10,7 @@ import Search.MoveGenerator
 import Types
 import Data.Bits
 import Data.Sort
+import Search.MakeMove
 
 main :: IO ()
 main = hspec $ do
@@ -420,7 +421,15 @@ main = hspec $ do
       isCheck position White `shouldBe` True
       isCheck position Black `shouldBe` False
 
-  describe "makeMove" $ do
+  describe "moveFromAlgebraicMove" $ do
     it "Makes a move from a position and returns a new position" $ do
       algebraicMoveFromMove (moveFromAlgebraicMove "a1h8") `shouldBe` "a1h8"
+      algebraicMoveFromMove (moveFromAlgebraicMove "h1a8") `shouldBe` "h1a8"
+
+  describe "makeMove" $ do
+    it "Makes a move from a position and returns a new position" $ do
+      makeMove (getPosition "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1") 
+               (moveFromAlgebraicMove "e2e4") 
+                  `shouldBe` (getPosition "rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR b KQkq e3 0 1")
+
       
