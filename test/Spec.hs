@@ -340,7 +340,7 @@ main = hspec $ do
       anySquaresInBitboardAttacked position Black ((.|.) (1 `shiftL` 3) (1 `shiftL` 2)) `shouldBe` True
       isBishopAttackingSquare 4 22 (allPiecesBitboard position) `shouldBe` True
       isBishopAttackingSquare 5 22 (allPiecesBitboard position) `shouldBe` False
-      isSquareAttackedBy position 4 Black `shouldBe` True
+      isSquareAttackedBy position (bitRefFromAlgebraicSquareRef "d1") Black `shouldBe` True
       isSquareAttackedBy position 58 White `shouldBe` True
       isSquareAttackedBy position 60 White `shouldBe` True
       let position = getPosition "n5k1/1P2P1n1/1n2q2p/P1pP4/5R2/5B2/1r2N2P/R3K1r1 w Q - 0 1"

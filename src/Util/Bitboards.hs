@@ -23,15 +23,24 @@ setBits [] = 0
 setBits [x] = shiftL 1 x
 setBits xs = (.|.) (shiftL 1 (head xs)) (setBits (tail xs))
 
-all64BitsSet = 18446744073709551615 :: Word
+all64BitsSet :: Word
+all64BitsSet = 18446744073709551615
 
+rank1Bits :: Bitboard
 rank1Bits = setBits [0,1,2,3,4,5,6,7]
+rank2Bits :: Bitboard
 rank2Bits = shiftL rank1Bits 8
+rank3Bits :: Bitboard
 rank3Bits = shiftL rank2Bits 8
+rank4Bits :: Bitboard
 rank4Bits = shiftL rank3Bits 8
+rank5Bits :: Bitboard
 rank5Bits = shiftL rank4Bits 8
+rank6Bits :: Bitboard
 rank6Bits = shiftL rank5Bits 8
+rank7Bits :: Bitboard
 rank7Bits = shiftL rank6Bits 8
+rank8Bits :: Bitboard
 rank8Bits = shiftL rank7Bits 8
 
 fileABits = everyEighthBitFrom a8Bit
