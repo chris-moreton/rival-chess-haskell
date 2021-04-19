@@ -452,11 +452,21 @@ main = hspec $ do
       movePieceWithinBitboard (bitRefFromAlgebraicSquareRef "b8") (bitRefFromAlgebraicSquareRef "c8") 0b0000100000000000000000000000000000001000010000000000000010000001
         `shouldBe` 0b0000100000000000000000000000000000001000010000000000000010000001
 
+  describe "removePieceFromBitboard" $ do
+    it "Returns a bitboard with the one bit slipped to zero for the given square" $ do
+      removePieceFromBitboard (bitRefFromAlgebraicSquareRef "a8") 0b1000100000000000000000000000000000001000010000000000000000000000
+        `shouldBe` 0b0000100000000000000000000000000000001000010000000000000000000000
+      removePieceFromBitboard (bitRefFromAlgebraicSquareRef "b8") 0b1100100000000000000000000000000000001000010000000000000000000000
+        `shouldBe` 0b1000100000000000000000000000000000001000010000000000000000000000
+        
   describe "makeMove" $ do
     it "Makes a move from a position and returns a new position" $ do
       makeMove (getPosition "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1")
                (moveFromAlgebraicMove "e2e3")
                   `shouldBe` (getPosition "rnbqkbnr/pppppppp/8/8/8/4P3/PPPP1PPP/RNBQKBNR b KQkq - 0 1")
+      makeMove (getPosition "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1")
+               (moveFromAlgebraicMove "e2e7")
+                  `shouldBe` (getPosition "rnbqkbnr/ppppPppp/8/8/8/8/PPPP1PPP/RNBQKBNR b KQkq - 0 1")
 --      makeMove (getPosition "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1")
 --               (moveFromAlgebraicMove "e2e4")
 --                  `shouldBe` (getPosition "rnbqkbnr/pppppppp/8/8/8/8/PPPP1PPP/RNBQKBNR b KQkq e3 0 1")

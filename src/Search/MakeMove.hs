@@ -12,6 +12,9 @@ movePieceWithinBitboard from to bb
   | (.&.) bb (1 `shiftL` from) /= 0 = (.|.) ((.&.) bb (complement (1 `shiftL` from))) (1 `shiftL` to)
   | otherwise = bb
 
+removePieceFromBitboard :: Square -> Bitboard -> Bitboard
+removePieceFromBitboard square = (.&.) (complement (1 `shiftL` square))
+
 makeMove :: Position -> Move -> Position
 makeMove position move = do
   let fromSquare = fromSquarePart move
@@ -24,18 +27,18 @@ makeSimpleMove position from to = do
   let bb = positionBitboards position
   Position {
        positionBitboards = PieceBitboards {
-            whitePawnBitboard = movePieceWithinBitboard from to (whitePawnBitboard bb)
-          , blackPawnBitboard = movePieceWithinBitboard from to (blackPawnBitboard bb)
-          , whiteKnightBitboard = movePieceWithinBitboard from to (whiteKnightBitboard bb)
-          , blackKnightBitboard = movePieceWithinBitboard from to (blackKnightBitboard bb)
-          , whiteBishopBitboard = movePieceWithinBitboard from to (whiteBishopBitboard bb)
-          , blackBishopBitboard = movePieceWithinBitboard from to (blackBishopBitboard bb)
-          , whiteRookBitboard = movePieceWithinBitboard from to (whiteRookBitboard bb)
-          , blackRookBitboard = movePieceWithinBitboard from to (blackRookBitboard bb)
-          , whiteQueenBitboard = movePieceWithinBitboard from to (whiteQueenBitboard bb)
-          , blackQueenBitboard = movePieceWithinBitboard from to (blackQueenBitboard bb)
-          , whiteKingBitboard = movePieceWithinBitboard from to (whiteKingBitboard bb)
-          , blackKingBitboard = movePieceWithinBitboard from to (blackKingBitboard bb)
+            whitePawnBitboard =  movePieceWithinBitboard from to (removePieceFromBitboard to (whitePawnBitboard bb))
+          , blackPawnBitboard = movePieceWithinBitboard from to (removePieceFromBitboard to (blackPawnBitboard bb))
+          , whiteKnightBitboard = movePieceWithinBitboard from to (removePieceFromBitboard to (whiteKnightBitboard bb))
+          , blackKnightBitboard = movePieceWithinBitboard from to (removePieceFromBitboard to (blackKnightBitboard bb))
+          , whiteBishopBitboard = movePieceWithinBitboard from to (removePieceFromBitboard to (whiteBishopBitboard bb))
+          , blackBishopBitboard = movePieceWithinBitboard from to (removePieceFromBitboard to (blackBishopBitboard bb))
+          , whiteRookBitboard = movePieceWithinBitboard from to (removePieceFromBitboard to (whiteRookBitboard bb))
+          , blackRookBitboard = movePieceWithinBitboard from to (removePieceFromBitboard to (blackRookBitboard bb))
+          , whiteQueenBitboard = movePieceWithinBitboard from to (removePieceFromBitboard to (whiteQueenBitboard bb))
+          , blackQueenBitboard = movePieceWithinBitboard from to (removePieceFromBitboard to (blackQueenBitboard bb))
+          , whiteKingBitboard = movePieceWithinBitboard from to (removePieceFromBitboard to (whiteKingBitboard bb))
+          , blackKingBitboard = movePieceWithinBitboard from to (removePieceFromBitboard to (blackKingBitboard bb))
        }
      , mover = if m == White then Black else White
      , enPassantSquare = -1
