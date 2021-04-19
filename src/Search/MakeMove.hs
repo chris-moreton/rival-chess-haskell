@@ -28,6 +28,16 @@ moveBlackRookWhenCastling from to kingBoard rookBoard
   | from == bitRefFromAlgebraicSquareRef "e8" && to == bitRefFromAlgebraicSquareRef "c8" = movePieceWithinBitboard (bitRefFromAlgebraicSquareRef "a8") (bitRefFromAlgebraicSquareRef "d8") rookBoard
   | otherwise = rookBoard
 
+enPassantCapturedPieceSquare :: Square -> Square
+enPassantCapturedPieceSquare enPassantSquare
+  | enPassantSquare < 24 = enPassantSquare + 8
+  | otherwise = enPassantSquare - 8
+
+removePawnWhenEnPassant :: Bitboard -> Square -> Square -> Bitboard
+removePawnWhenEnPassant bb to enPassantSquare
+  | enPassantSquare == to = removePieceFromBitboard (enPassantCapturedPieceSquare to) bb
+  | otherwise = bb
+
 makeMove :: Position -> Move -> Position
 makeMove position move = do
   let fromSquare = fromSquarePart move
@@ -44,8 +54,8 @@ makeSimpleMove position from to = do
   let isPawnMove = newWhitePawnBitboard /= whitePawnBitboard bb || newBlackPawnBitboard /= blackPawnBitboard bb
   Position {
        positionBitboards = PieceBitboards {
-            whitePawnBitboard =  newWhitePawnBitboard
-          , blackPawnBitboard = newBlackPawnBitboard
+            whitePawnBitboard = removePawnWhenEnPassant newWhitePawnBitboard to (enPassantSquare position)
+          , blackPawnBitboard = removePawnWhenEnPassant newBlackPawnBitboard to (enPassantSquare position)
           , whiteKnightBitboard = movePieceWithinBitboard from to (removePieceFromBitboard to (whiteKnightBitboard bb))
           , blackKnightBitboard = movePieceWithinBitboard from to (removePieceFromBitboard to (blackKnightBitboard bb))
           , whiteBishopBitboard = movePieceWithinBitboard from to (removePieceFromBitboard to (whiteBishopBitboard bb))

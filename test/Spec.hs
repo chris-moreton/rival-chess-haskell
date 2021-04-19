@@ -459,6 +459,11 @@ main = hspec $ do
       removePieceFromBitboard (bitRefFromAlgebraicSquareRef "b8") 0b1100100000000000000000000000000000001000010000000000000000000000
         `shouldBe` 0b1000100000000000000000000000000000001000010000000000000000000000
 
+  describe "enPassantCapturedPieceSquare" $ do
+    it "Returns the square the captured pawn was on before it was captured en passant" $ do
+      enPassantCapturedPieceSquare (bitRefFromAlgebraicSquareRef "a3") `shouldBe` (bitRefFromAlgebraicSquareRef "a4")
+      enPassantCapturedPieceSquare (bitRefFromAlgebraicSquareRef "a6") `shouldBe` (bitRefFromAlgebraicSquareRef "a5")
+
   describe "makeMove" $ do
     it "Makes a move from a position and returns a new position" $ do
       makeMove (getPosition "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1")
@@ -485,9 +490,9 @@ main = hspec $ do
       makeMove (getPosition "r3k2r/pppppppp/2n1b3/2bn1q2/8/4P3/PPPP1PPP/RNBQK2R b KQq - 0 1")
                (moveFromAlgebraicMove "h8g8")
                   `shouldBe` (getPosition "r3k1r1/pppppppp/2n1b3/2bn1q2/8/4P3/PPPP1PPP/RNBQK2R w KQq - 1 2")
-      makeMove (getPosition "2kr3r/pppppp1p/2n1b3/2bn1q2/4Pp2/8/PPPP1PPP/RNBQK2R b KQ - 15 1")
+      makeMove (getPosition "2kr3r/pppppp1p/2n1b3/2bn1q2/4Pp2/8/PPPP1PPP/RNBQK2R b KQ e3 15 1")
                (moveFromAlgebraicMove "f4e3")
-                  `shouldBe` (getPosition "2kr3r/pppppp1p/2n1b3/2bn1q2/8/4p3/PPPP1PPP/RNBQK2R b KQ - 0 1")
+                  `shouldBe` (getPosition "2kr3r/pppppp1p/2n1b3/2bn1q2/8/4p3/PPPP1PPP/RNBQK2R w KQ - 0 2")
 --      makeMove (getPosition "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1")
 --               (moveFromAlgebraicMove "e2e4")
 --                  `shouldBe` (getPosition "rnbqkbnr/pppppppp/8/8/8/8/PPPP1PPP/RNBQKBNR b KQkq e3 0 1")
