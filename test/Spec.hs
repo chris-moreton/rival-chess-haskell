@@ -458,7 +458,7 @@ main = hspec $ do
         `shouldBe` 0b0000100000000000000000000000000000001000010000000000000000000000
       removePieceFromBitboard (bitRefFromAlgebraicSquareRef "b8") 0b1100100000000000000000000000000000001000010000000000000000000000
         `shouldBe` 0b1000100000000000000000000000000000001000010000000000000000000000
-        
+
   describe "makeMove" $ do
     it "Makes a move from a position and returns a new position" $ do
       makeMove (getPosition "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1")
@@ -467,6 +467,24 @@ main = hspec $ do
       makeMove (getPosition "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1")
                (moveFromAlgebraicMove "e2e7")
                   `shouldBe` (getPosition "rnbqkbnr/ppppPppp/8/8/8/8/PPPP1PPP/RNBQKBNR b KQkq - 0 1")
+      makeMove (getPosition "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQK2R w KQkq - 0 1")
+               (moveFromAlgebraicMove "e1g1")
+                  `shouldBe` (getPosition "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQ1RK1 b kq - 0 1")
+      makeMove (getPosition "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQK2R w KQkq - 0 1")
+               (moveFromAlgebraicMove "h1g1")
+                  `shouldBe` (getPosition "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQK1R1 b kqQ - 0 1")
+      makeMove (getPosition "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQK2R w KQkq - 0 1")
+               (moveFromAlgebraicMove "e2e3")
+                  `shouldBe` (getPosition "rnbqkbnr/pppppppp/8/8/8/4P3/PPPP1PPP/RNBQK2R b KQkq - 0 1")
+      makeMove (getPosition "r3k2r/pppppppp/2n1b3/2bn1q2/8/4P3/PPPP1PPP/RNBQK2R b KQq - 0 1")
+               (moveFromAlgebraicMove "e8c8")
+                  `shouldBe` (getPosition "2kr3r/pppppppp/2n1b3/2bn1q2/8/4P3/PPPP1PPP/RNBQK2R w KQ - 0 2")
+      makeMove (getPosition "r3k2r/pppppppp/2n1b3/2bn1q2/8/4P3/PPPP1PPP/RNBQK2R b KQq - 0 1")
+               (moveFromAlgebraicMove "e8d8")
+                  `shouldBe` (getPosition "r2k3r/pppppppp/2n1b3/2bn1q2/8/4P3/PPPP1PPP/RNBQK2R w KQ - 0 2")
+      makeMove (getPosition "r3k2r/pppppppp/2n1b3/2bn1q2/8/4P3/PPPP1PPP/RNBQK2R b KQq - 0 1")
+               (moveFromAlgebraicMove "h8g8")
+                  `shouldBe` (getPosition "r3k1r1/pppppppp/2n1b3/2bn1q2/8/4P3/PPPP1PPP/RNBQK2R w KQq - 0 2")
 --      makeMove (getPosition "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1")
 --               (moveFromAlgebraicMove "e2e4")
 --                  `shouldBe` (getPosition "rnbqkbnr/pppppppp/8/8/8/8/PPPP1PPP/RNBQKBNR b KQkq e3 0 1")
