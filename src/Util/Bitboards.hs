@@ -1,7 +1,26 @@
 module Util.Bitboards where
 
 import Data.Bits
+import Util.Utils
 import Types
+
+bitboardListForColour :: Position -> Mover -> [Bitboard]
+bitboardListForColour position colour = do
+  let bitboards = positionBitboards position
+  if colour == White
+  then
+    [whitePawnBitboard bitboards,whiteKnightBitboard bitboards,whiteKingBitboard bitboards,whiteBishopBitboard bitboards,whiteQueenBitboard bitboards,whiteRookBitboard bitboards]
+  else
+    [blackPawnBitboard bitboards,blackKnightBitboard bitboards,blackKingBitboard bitboards,blackBishopBitboard bitboards,blackQueenBitboard bitboards,blackRookBitboard bitboards]
+
+enemyBitboard :: Position -> Bitboard
+enemyBitboard position = foldl (.|.) 0 (bitboardListForColour position (opponent position))
+
+allPiecesBitboard :: Position -> Bitboard
+allPiecesBitboard position = foldl (.|.) 0 (bitboardListForColour position White ++ bitboardListForColour position Black)
+
+emptySquaresBitboard :: Position -> Bitboard
+emptySquaresBitboard position = complement (allPiecesBitboard position)
 
 orWithURightShiftedSelf :: Bitboard -> Int -> Bitboard
 orWithURightShiftedSelf x y = (.|.) x (shiftR x y)

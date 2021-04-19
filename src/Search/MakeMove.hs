@@ -4,6 +4,7 @@ import Types
 import Util.Fen
 import Util.Utils
 import Data.Bits
+import Util.Bitboards
 
 movePieceWithinBitboard :: Square -> Square -> Bitboard -> Bitboard
 movePieceWithinBitboard from to bb
@@ -37,10 +38,14 @@ makeSimpleMove :: Position -> Square -> Square -> Position
 makeSimpleMove position from to = do
   let m = mover position
   let bb = positionBitboards position
+  let newWhitePawnBitboard = movePieceWithinBitboard from to (removePieceFromBitboard to (whitePawnBitboard bb))
+  let newBlackPawnBitboard = movePieceWithinBitboard from to (removePieceFromBitboard to (blackPawnBitboard bb))
+  let isCapture = (.&.) (bit to) (allPiecesBitboard position) /= 0 || to == enPassantSquare position
+  let isPawnMove = newWhitePawnBitboard /= whitePawnBitboard bb || newBlackPawnBitboard /= blackPawnBitboard bb
   Position {
        positionBitboards = PieceBitboards {
-            whitePawnBitboard =  movePieceWithinBitboard from to (removePieceFromBitboard to (whitePawnBitboard bb))
-          , blackPawnBitboard = movePieceWithinBitboard from to (removePieceFromBitboard to (blackPawnBitboard bb))
+            whitePawnBitboard =  newWhitePawnBitboard
+          , blackPawnBitboard = newBlackPawnBitboard
           , whiteKnightBitboard = movePieceWithinBitboard from to (removePieceFromBitboard to (whiteKnightBitboard bb))
           , blackKnightBitboard = movePieceWithinBitboard from to (removePieceFromBitboard to (blackKnightBitboard bb))
           , whiteBishopBitboard = movePieceWithinBitboard from to (removePieceFromBitboard to (whiteBishopBitboard bb))
@@ -60,7 +65,7 @@ makeSimpleMove position from to = do
           , blackKingCastleAvailable = blackKingCastleAvailable (positionCastlePrivs position) && notElem from (map bitRefFromAlgebraicSquareRef ["e8","h8"])
           , blackQueenCastleAvailable = blackQueenCastleAvailable (positionCastlePrivs position) && notElem from (map bitRefFromAlgebraicSquareRef ["a8","e8"])
        }
-     , halfMoves = halfMoves position
+     , halfMoves = if isCapture || isPawnMove then 0 else halfMoves position + 1
      , moveNumber = (+) (moveNumber position) (if m == Black then 1 else 0)
    }
 

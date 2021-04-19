@@ -17,3 +17,6 @@ fromSquarePart move = move `shiftR` 16
 
 toSquarePart :: Move -> Square
 toSquarePart move = (.&.) move 63
+
+opponent :: Position -> Mover
+opponent position = if mover position == White then Black else White

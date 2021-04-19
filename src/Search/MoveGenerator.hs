@@ -44,29 +44,9 @@ recurBitString bitboard square result = do
   let bitMask = shiftL 1 square
   recurBitString (xor bitboard bitMask) (square - 1) (result ++ if bitMask == (.&.) bitMask bitboard then "1" else "0")
         
-bitboardListForColour :: Position -> Mover -> [Bitboard]
-bitboardListForColour position colour = do
-  let bitboards = positionBitboards position
-  if colour == White
-  then
-    [whitePawnBitboard bitboards,whiteKnightBitboard bitboards,whiteKingBitboard bitboards,whiteBishopBitboard bitboards,whiteQueenBitboard bitboards,whiteRookBitboard bitboards]
-  else
-    [blackPawnBitboard bitboards,blackKnightBitboard bitboards,blackKingBitboard bitboards,blackBishopBitboard bitboards,blackQueenBitboard bitboards,blackRookBitboard bitboards]
-          
+
 allBitsExceptFriendlyPieces :: Position -> Bitboard
 allBitsExceptFriendlyPieces position = complement (foldl (.|.) 0 (bitboardListForColour position (mover position)))
-
-opponent :: Position -> Mover
-opponent position = if mover position == White then Black else White
-
-enemyBitboard :: Position -> Bitboard
-enemyBitboard position = foldl (.|.) 0 (bitboardListForColour position (opponent position))
-
-allPiecesBitboard :: Position -> Bitboard
-allPiecesBitboard position = foldl (.|.) 0 (bitboardListForColour position White ++ bitboardListForColour position Black)
-
-emptySquaresBitboard :: Position -> Bitboard
-emptySquaresBitboard position = complement (allPiecesBitboard position)
 
 movesFromToSquares :: Square -> [Square] -> [Move]
 movesFromToSquares fromSquare toSquares = recurMovesFromToSquares fromSquare toSquares []
