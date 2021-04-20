@@ -426,6 +426,7 @@ main = hspec $ do
     it "Makes a move from a position and returns a new position" $ do
       algebraicMoveFromMove (moveFromAlgebraicMove "a1h8") `shouldBe` "a1h8"
       algebraicMoveFromMove (moveFromAlgebraicMove "h1a8") `shouldBe` "h1a8"
+      algebraicMoveFromMove (moveFromAlgebraicMove "h7g8b") `shouldBe` "h7g8b"
 
   describe "fromSquarePart" $ do
     it "Gets the Square for the from part of a compact move" $ do
@@ -468,10 +469,26 @@ main = hspec $ do
     it "Removes the bit from the pawn bitboard if it has just moved to a promotion rank" $ do
       removePawnIfPromotion 0b1000000000000000000000000000000000000000000000000000000000000000 `shouldBe` 0b0000000000000000000000000000000000000000000000000000000000000000
 
+  describe "isPromotionSquare" $ do
+    it "Returns True if the given square is on the first or eigth ranks" $ do
+      isPromotionSquare (bitRefFromAlgebraicSquareRef "a8") `shouldBe` True
+      isPromotionSquare (bitRefFromAlgebraicSquareRef "b1") `shouldBe` True
+      isPromotionSquare (bitRefFromAlgebraicSquareRef "a3") `shouldBe` False
+
+  describe "promotionPieceFromMove" $ do
+    it "Returns the promotion piece from the move" $ do
+      promotionPieceFromMove (moveFromAlgebraicMove "g7h8r") `shouldBe` Rook
+      promotionPieceFromMove (moveFromAlgebraicMove "g7h8q") `shouldBe` Queen
+      promotionPieceFromMove (moveFromAlgebraicMove "g7h8n") `shouldBe` Knight
+      promotionPieceFromMove (moveFromAlgebraicMove "g7h8b") `shouldBe` Bishop
+      promotionPieceFromMove (moveFromAlgebraicMove "g6h7") `shouldBe` Pawn
+
   describe "createIfPromotion" $ do
     it "Adds the promotion piece location to the bitboard" $ do
       createIfPromotion True 0b0000000010000000000000000000000000000000000000000000000000000000 0b0000000000000000000000000000000000000000000000000000000000000000 (bitRefFromAlgebraicSquareRef "a7") (bitRefFromAlgebraicSquareRef "a8")
         `shouldBe` 0b1000000000000000000000000000000000000000000000000000000000000000
+      createIfPromotion True 0b0000000010000000000000000000000000000000000000000000000000000000 0b0000000000000000000000000000000000000000000000000000000000000000 (bitRefFromAlgebraicSquareRef "a7") (bitRefFromAlgebraicSquareRef "a6")
+        `shouldBe` 0b0000000000000000000000000000000000000000000000000000000000000000
       createIfPromotion False 0b0000000010000000000000000000000000000000000000000000000000000000 0b0000000000000000000000000000000000000000000000000000000000000000 (bitRefFromAlgebraicSquareRef "a7") (bitRefFromAlgebraicSquareRef "a8")
         `shouldBe` 0b0000000000000000000000000000000000000000000000000000000000000000
 
@@ -504,6 +521,12 @@ main = hspec $ do
       makeMove (getPosition "2kr3r/pppppp1p/2n1b3/2bn1q2/4Pp2/8/PPPP1PPP/RNBQK2R b KQ e3 15 1")
                (moveFromAlgebraicMove "f4e3")
                   `shouldBe` (getPosition "2kr3r/pppppp1p/2n1b3/2bn1q2/8/4p3/PPPP1PPP/RNBQK2R w KQ - 0 2")
+      makeMove (getPosition "2kr3r/ppppppPp/2n1b3/2bn1q2/8/4p3/PPPP1P1P/RNBQK2R w KQ - 12 1")
+               (moveFromAlgebraicMove "g7h8r")
+                  `shouldBe` (getPosition "2kr3R/pppppp1p/2n1b3/2bn1q2/8/4p3/PPPP1P1P/RNBQK2R b KQ - 0 1")
+      makeMove (getPosition "2kr3R/pppp1p1p/2n1b3/2bn1q2/8/4p3/PPPP1PpP/RNBQK2R b KQ - 0 1")
+               (moveFromAlgebraicMove "g2g1q")
+                  `shouldBe` (getPosition "2kr3R/pppp1p1p/2n1b3/2bn1q2/8/4p3/PPPP1P1P/RNBQK1qR w KQ - 0 2")
 --      makeMove (getPosition "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1")
 --               (moveFromAlgebraicMove "e2e4")
 --                  `shouldBe` (getPosition "rnbqkbnr/pppppppp/8/8/8/8/PPPP1PPP/RNBQKBNR b KQkq e3 0 1")

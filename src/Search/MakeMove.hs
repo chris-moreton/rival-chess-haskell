@@ -47,8 +47,8 @@ isPromotionSquare :: Square -> Bool
 isPromotionSquare sq = (bit sq .&. promotionSquares) /= 0
 
 createIfPromotion :: Bool -> Bitboard -> Bitboard -> Square -> Square -> Bitboard
-createIfPromotion isPromotionPiece enemyPawnBitboard pieceBitboard fromSquare toSquare
-  | isPromotionPiece && isPromotionSquare toSquare && bit fromSquare .&. enemyPawnBitboard /= 0 = pieceBitboard .|. bit toSquare
+createIfPromotion isPromotionPiece pawnBitboard pieceBitboard fromSquare toSquare
+  | isPromotionPiece && isPromotionSquare toSquare && bit fromSquare .&. pawnBitboard /= 0 = pieceBitboard .|. bit toSquare
   | otherwise = pieceBitboard
 
 makeMove :: Position -> Move -> Position
@@ -66,14 +66,14 @@ makeSimpleMove position from to promotionPiece = do
        positionBitboards = PieceBitboards {
             whitePawnBitboard = removePawnIfPromotion (removePawnWhenEnPassant newWhitePawnBitboard to (enPassantSquare position))
           , blackPawnBitboard = removePawnIfPromotion (removePawnWhenEnPassant newBlackPawnBitboard to (enPassantSquare position))
-          , whiteKnightBitboard = createIfPromotion (promotionPiece == Knight) (blackPawnBitboard bb) (movePieceWithinBitboard from to (removePieceFromBitboard to (whiteKnightBitboard bb))) from to
-          , blackKnightBitboard = createIfPromotion (promotionPiece == Knight) (whitePawnBitboard bb) (movePieceWithinBitboard from to (removePieceFromBitboard to (blackKnightBitboard bb))) from to
-          , whiteBishopBitboard = createIfPromotion (promotionPiece == Bishop) (blackPawnBitboard bb) (movePieceWithinBitboard from to (removePieceFromBitboard to (whiteBishopBitboard bb))) from to
-          , blackBishopBitboard = createIfPromotion (promotionPiece == Bishop) (whitePawnBitboard bb) (movePieceWithinBitboard from to (removePieceFromBitboard to (blackBishopBitboard bb))) from to
-          , whiteRookBitboard = createIfPromotion (promotionPiece == Rook) (blackPawnBitboard bb) (moveWhiteRookWhenCastling from to (whiteKingBitboard bb) (movePieceWithinBitboard from to (removePieceFromBitboard to (whiteRookBitboard bb)))) from to
-          , blackRookBitboard = createIfPromotion (promotionPiece == Rook) (whitePawnBitboard bb) (moveBlackRookWhenCastling from to (blackKingBitboard bb) (movePieceWithinBitboard from to (removePieceFromBitboard to (blackRookBitboard bb)))) from to
-          , whiteQueenBitboard = createIfPromotion (promotionPiece == Queen) (blackPawnBitboard bb) (movePieceWithinBitboard from to (removePieceFromBitboard to (whiteQueenBitboard bb))) from to
-          , blackQueenBitboard = createIfPromotion (promotionPiece == Queen) (whitePawnBitboard bb) (movePieceWithinBitboard from to (removePieceFromBitboard to (blackQueenBitboard bb))) from to
+          , whiteKnightBitboard = createIfPromotion (promotionPiece == Knight) (whitePawnBitboard bb) (movePieceWithinBitboard from to (removePieceFromBitboard to (whiteKnightBitboard bb))) from to
+          , blackKnightBitboard = createIfPromotion (promotionPiece == Knight) (blackPawnBitboard bb) (movePieceWithinBitboard from to (removePieceFromBitboard to (blackKnightBitboard bb))) from to
+          , whiteBishopBitboard = createIfPromotion (promotionPiece == Bishop) (whitePawnBitboard bb) (movePieceWithinBitboard from to (removePieceFromBitboard to (whiteBishopBitboard bb))) from to
+          , blackBishopBitboard = createIfPromotion (promotionPiece == Bishop) (blackPawnBitboard bb) (movePieceWithinBitboard from to (removePieceFromBitboard to (blackBishopBitboard bb))) from to
+          , whiteRookBitboard = createIfPromotion (promotionPiece == Rook) (whitePawnBitboard bb) (moveWhiteRookWhenCastling from to (whiteKingBitboard bb) (movePieceWithinBitboard from to (removePieceFromBitboard to (whiteRookBitboard bb)))) from to
+          , blackRookBitboard = createIfPromotion (promotionPiece == Rook) (blackPawnBitboard bb) (moveBlackRookWhenCastling from to (blackKingBitboard bb) (movePieceWithinBitboard from to (removePieceFromBitboard to (blackRookBitboard bb)))) from to
+          , whiteQueenBitboard = createIfPromotion (promotionPiece == Queen) (whitePawnBitboard bb) (movePieceWithinBitboard from to (removePieceFromBitboard to (whiteQueenBitboard bb))) from to
+          , blackQueenBitboard = createIfPromotion (promotionPiece == Queen) (blackPawnBitboard bb) (movePieceWithinBitboard from to (removePieceFromBitboard to (blackQueenBitboard bb))) from to
           , whiteKingBitboard = movePieceWithinBitboard from to (removePieceFromBitboard to (whiteKingBitboard bb))
           , blackKingBitboard = movePieceWithinBitboard from to (removePieceFromBitboard to (blackKingBitboard bb))
        }

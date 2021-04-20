@@ -40,10 +40,10 @@ This is a work in progress. Some working functions are shown below.
             let position = getPosition "n5k1/1P2P1n1/1n5p/P1pP4/5R2/1q3B2/4Nr1P/R3K2R w Q - 0 1"
             isCheck position White `shouldBe` False
 
-### Make a move (Work in progress)
+### Make a move
    
     describe "makeMove" $ do
         it "Makes a move from a position and returns a new position" $ do
-            makeMove (getPosition "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1")
-                        (moveFromAlgebraicMove "e2e4")
-                            `shouldBe` (getPosition "rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR b KQkq e3 0 1")
+          makeMove (getPosition "2kr3R/pppp1p1p/2n1b3/2bn1q2/8/4p3/PPPP1PpP/RNBQK2R b KQ - 0 1")
+                   (moveFromAlgebraicMove "g2g1q")
+                      `shouldBe` (getPosition "2kr3R/pppp1p1p/2n1b3/2bn1q2/8/4p3/PPPP1P1P/RNBQK1qR w KQ - 0 2")

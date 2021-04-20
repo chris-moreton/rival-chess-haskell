@@ -81,6 +81,14 @@ promotionPart move
     | (.&.) promotionFullMoveMask move == promotionKnightMoveMask = "n"
     | otherwise = ""
 
+promotionMask :: Char -> Int
+promotionMask pieceChar
+  | pieceChar == 'q' = promotionQueenMoveMask
+  | pieceChar == 'b' = promotionBishopMoveMask
+  | pieceChar == 'r' = promotionRookMoveMask
+  | pieceChar == 'n' = promotionKnightMoveMask
+  | otherwise = 0
+
 algebraicMoveFromMove :: Move -> String
 algebraicMoveFromMove move = do
   let fromSquare = shiftR move 16
@@ -88,7 +96,8 @@ algebraicMoveFromMove move = do
   algebraicSquareRefFromBitRef fromSquare ++ algebraicSquareRefFromBitRef toSquare ++ promotionPart move
 
 moveFromAlgebraicMove :: String -> Move
-moveFromAlgebraicMove moveString = fromSquareMask (bitRefFromAlgebraicSquareRef (substring moveString 0 2)) + bitRefFromAlgebraicSquareRef (substring moveString 2 4)
+moveFromAlgebraicMove moveString =
+  fromSquareMask (bitRefFromAlgebraicSquareRef (substring moveString 0 2)) + bitRefFromAlgebraicSquareRef (substring moveString 2 4) + promotionMask (last moveString)
 
 getMover :: String -> Mover
 getMover fen = if fenPart fen 1 == "w" then White else Black
