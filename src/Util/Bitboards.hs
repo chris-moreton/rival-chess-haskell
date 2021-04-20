@@ -1,3 +1,5 @@
+{-# LANGUAGE BinaryLiterals,NegativeLiterals #-}
+
 module Util.Bitboards where
 
 import Data.Bits
@@ -15,6 +17,9 @@ bitboardListForColour position colour = do
 
 enemyBitboard :: Position -> Bitboard
 enemyBitboard position = foldl (.|.) 0 (bitboardListForColour position (opponent position))
+
+promotionSquares :: Bitboard
+promotionSquares = 0b1111111100000000000000000000000000000000000000000000000011111111
 
 allPiecesBitboard :: Position -> Bitboard
 allPiecesBitboard position = foldl (.|.) 0 (bitboardListForColour position White ++ bitboardListForColour position Black)

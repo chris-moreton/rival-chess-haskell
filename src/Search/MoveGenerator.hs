@@ -43,7 +43,6 @@ recurBitString _ (-1) result = result
 recurBitString bitboard square result = do
   let bitMask = shiftL 1 square
   recurBitString (xor bitboard bitMask) (square - 1) (result ++ if bitMask == (.&.) bitMask bitboard then "1" else "0")
-        
 
 allBitsExceptFriendlyPieces :: Position -> Bitboard
 allBitsExceptFriendlyPieces position = complement (foldl (.|.) 0 (bitboardListForColour position (mover position)))

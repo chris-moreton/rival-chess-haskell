@@ -464,6 +464,17 @@ main = hspec $ do
       enPassantCapturedPieceSquare (bitRefFromAlgebraicSquareRef "a3") `shouldBe` (bitRefFromAlgebraicSquareRef "a4")
       enPassantCapturedPieceSquare (bitRefFromAlgebraicSquareRef "a6") `shouldBe` (bitRefFromAlgebraicSquareRef "a5")
 
+  describe "removePawnIfPromotion" $ do
+    it "Removes the bit from the pawn bitboard if it has just moved to a promotion rank" $ do
+      removePawnIfPromotion 0b1000000000000000000000000000000000000000000000000000000000000000 `shouldBe` 0b0000000000000000000000000000000000000000000000000000000000000000
+
+  describe "createIfPromotion" $ do
+    it "Adds the promotion piece location to the bitboard" $ do
+      createIfPromotion True 0b0000000010000000000000000000000000000000000000000000000000000000 0b0000000000000000000000000000000000000000000000000000000000000000 (bitRefFromAlgebraicSquareRef "a7") (bitRefFromAlgebraicSquareRef "a8")
+        `shouldBe` 0b1000000000000000000000000000000000000000000000000000000000000000
+      createIfPromotion False 0b0000000010000000000000000000000000000000000000000000000000000000 0b0000000000000000000000000000000000000000000000000000000000000000 (bitRefFromAlgebraicSquareRef "a7") (bitRefFromAlgebraicSquareRef "a8")
+        `shouldBe` 0b0000000000000000000000000000000000000000000000000000000000000000
+
   describe "makeMove" $ do
     it "Makes a move from a position and returns a new position" $ do
       makeMove (getPosition "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1")

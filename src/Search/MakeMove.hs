@@ -1,3 +1,5 @@
+{-# LANGUAGE BinaryLiterals,NegativeLiterals #-}
+
 module Search.MakeMove where
 
 import Types
@@ -8,11 +10,11 @@ import Util.Bitboards
 
 movePieceWithinBitboard :: Square -> Square -> Bitboard -> Bitboard
 movePieceWithinBitboard from to bb
-  | (.&.) bb (1 `shiftL` from) /= 0 = (.|.) ((.&.) bb (complement (1 `shiftL` from))) (1 `shiftL` to)
+  | (.&.) bb (bit from) /= 0 = (.|.) ((.&.) bb (complement (bit from))) (bit to)
   | otherwise = bb
 
 removePieceFromBitboard :: Square -> Bitboard -> Bitboard
-removePieceFromBitboard square = (.&.) (complement (1 `shiftL` square))
+removePieceFromBitboard square = (.&.) (complement (bit square))
 
 moveWhiteRookWhenCastling :: Square -> Square -> Bitboard -> Bitboard -> Bitboard
 moveWhiteRookWhenCastling from to kingBoard rookBoard
@@ -38,14 +40,22 @@ removePawnWhenEnPassant bb to enPassantSquare
   | enPassantSquare == to = removePieceFromBitboard (enPassantCapturedPieceSquare to) bb
   | otherwise = bb
 
-makeMove :: Position -> Move -> Position
-makeMove position move = do
-  let fromSquare = fromSquarePart move
-  let toSquare = toSquarePart move
-  makeSimpleMove position fromSquare toSquare
+removePawnIfPromotion :: Bitboard -> Bitboard
+removePawnIfPromotion bb = bb .&. 0b0000000011111111111111111111111111111111111111111111111100000000
 
-makeSimpleMove :: Position -> Square -> Square -> Position
-makeSimpleMove position from to = do
+isPromotionSquare :: Square -> Bool
+isPromotionSquare sq = (bit sq .&. promotionSquares) /= 0
+
+createIfPromotion :: Bool -> Bitboard -> Bitboard -> Square -> Square -> Bitboard
+createIfPromotion isPromotionPiece enemyPawnBitboard pieceBitboard fromSquare toSquare
+  | isPromotionPiece && isPromotionSquare toSquare && bit fromSquare .&. enemyPawnBitboard /= 0 = pieceBitboard .|. bit toSquare
+  | otherwise = pieceBitboard
+
+makeMove :: Position -> Move -> Position
+makeMove position move = makeSimpleMove position (fromSquarePart move) (toSquarePart move) (promotionPieceFromMove move)
+
+makeSimpleMove :: Position -> Square -> Square -> Piece -> Position
+makeSimpleMove position from to promotionPiece = do
   let m = mover position
   let bb = positionBitboards position
   let newWhitePawnBitboard = movePieceWithinBitboard from to (removePieceFromBitboard to (whitePawnBitboard bb))
@@ -54,16 +64,16 @@ makeSimpleMove position from to = do
   let isPawnMove = newWhitePawnBitboard /= whitePawnBitboard bb || newBlackPawnBitboard /= blackPawnBitboard bb
   Position {
        positionBitboards = PieceBitboards {
-            whitePawnBitboard = removePawnWhenEnPassant newWhitePawnBitboard to (enPassantSquare position)
-          , blackPawnBitboard = removePawnWhenEnPassant newBlackPawnBitboard to (enPassantSquare position)
-          , whiteKnightBitboard = movePieceWithinBitboard from to (removePieceFromBitboard to (whiteKnightBitboard bb))
-          , blackKnightBitboard = movePieceWithinBitboard from to (removePieceFromBitboard to (blackKnightBitboard bb))
-          , whiteBishopBitboard = movePieceWithinBitboard from to (removePieceFromBitboard to (whiteBishopBitboard bb))
-          , blackBishopBitboard = movePieceWithinBitboard from to (removePieceFromBitboard to (blackBishopBitboard bb))
-          , whiteRookBitboard = moveWhiteRookWhenCastling from to (whiteKingBitboard bb) (movePieceWithinBitboard from to (removePieceFromBitboard to (whiteRookBitboard bb)))
-          , blackRookBitboard = moveBlackRookWhenCastling from to (blackKingBitboard bb) (movePieceWithinBitboard from to (removePieceFromBitboard to (blackRookBitboard bb)))
-          , whiteQueenBitboard = movePieceWithinBitboard from to (removePieceFromBitboard to (whiteQueenBitboard bb))
-          , blackQueenBitboard = movePieceWithinBitboard from to (removePieceFromBitboard to (blackQueenBitboard bb))
+            whitePawnBitboard = removePawnIfPromotion (removePawnWhenEnPassant newWhitePawnBitboard to (enPassantSquare position))
+          , blackPawnBitboard = removePawnIfPromotion (removePawnWhenEnPassant newBlackPawnBitboard to (enPassantSquare position))
+          , whiteKnightBitboard = createIfPromotion (promotionPiece == Knight) (blackPawnBitboard bb) (movePieceWithinBitboard from to (removePieceFromBitboard to (whiteKnightBitboard bb))) from to
+          , blackKnightBitboard = createIfPromotion (promotionPiece == Knight) (whitePawnBitboard bb) (movePieceWithinBitboard from to (removePieceFromBitboard to (blackKnightBitboard bb))) from to
+          , whiteBishopBitboard = createIfPromotion (promotionPiece == Bishop) (blackPawnBitboard bb) (movePieceWithinBitboard from to (removePieceFromBitboard to (whiteBishopBitboard bb))) from to
+          , blackBishopBitboard = createIfPromotion (promotionPiece == Bishop) (whitePawnBitboard bb) (movePieceWithinBitboard from to (removePieceFromBitboard to (blackBishopBitboard bb))) from to
+          , whiteRookBitboard = createIfPromotion (promotionPiece == Rook) (blackPawnBitboard bb) (moveWhiteRookWhenCastling from to (whiteKingBitboard bb) (movePieceWithinBitboard from to (removePieceFromBitboard to (whiteRookBitboard bb)))) from to
+          , blackRookBitboard = createIfPromotion (promotionPiece == Rook) (whitePawnBitboard bb) (moveBlackRookWhenCastling from to (blackKingBitboard bb) (movePieceWithinBitboard from to (removePieceFromBitboard to (blackRookBitboard bb)))) from to
+          , whiteQueenBitboard = createIfPromotion (promotionPiece == Queen) (blackPawnBitboard bb) (movePieceWithinBitboard from to (removePieceFromBitboard to (whiteQueenBitboard bb))) from to
+          , blackQueenBitboard = createIfPromotion (promotionPiece == Queen) (whitePawnBitboard bb) (movePieceWithinBitboard from to (removePieceFromBitboard to (blackQueenBitboard bb))) from to
           , whiteKingBitboard = movePieceWithinBitboard from to (removePieceFromBitboard to (whiteKingBitboard bb))
           , blackKingBitboard = movePieceWithinBitboard from to (removePieceFromBitboard to (blackKingBitboard bb))
        }
