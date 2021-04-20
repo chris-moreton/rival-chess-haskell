@@ -179,13 +179,13 @@ generateCastleMoves position = do
   let castlePrivs = positionCastlePrivs position
   let allPieces = allPiecesBitboard position
   if mover position == White
-    then generateCastleMovesForMover position 3 4 Black (whiteKingCastleAvailable castlePrivs) (whiteQueenCastleAvailable castlePrivs) emptyCastleSquaresWhiteKing emptyCastleSquaresWhiteQueen allPieces
-    else generateCastleMovesForMover position 59 60 White (blackKingCastleAvailable castlePrivs) (blackQueenCastleAvailable castlePrivs) emptyCastleSquaresBlackKing emptyCastleSquaresBlackQueen allPieces
+    then generateCastleMovesForMover position 3 4 Black (whiteKingCastleAvailable castlePrivs) (whiteQueenCastleAvailable castlePrivs) emptyCastleSquaresWhiteKing emptyCastleSquaresWhiteQueen noCheckCastleSquaresWhiteKing noCheckCastleSquaresWhiteQueen allPieces
+    else generateCastleMovesForMover position 59 60 White (blackKingCastleAvailable castlePrivs) (blackQueenCastleAvailable castlePrivs) emptyCastleSquaresBlackKing emptyCastleSquaresBlackQueen noCheckCastleSquaresBlackKing noCheckCastleSquaresBlackQueen allPieces
 
-generateCastleMovesForMover :: Position -> Square -> Square -> Mover -> Bool -> Bool -> Bitboard -> Bitboard -> Bitboard -> [Move]
-generateCastleMovesForMover position kingStartSquare queenStartSquare opponent canKing canQueen kingSpaces queenSpaces allPieces =
-  ([(.|.) (fromSquareMask kingStartSquare) ((-) kingStartSquare 2) | canKing && (.&.) allPieces kingSpaces == 0 && not (anySquaresInBitboardAttacked position opponent ((.|.) (1 `shiftL` kingStartSquare) (1 `shiftL` kingStartSquare - 1)))]) ++
-   [(.|.) (fromSquareMask kingStartSquare) ((+) kingStartSquare 2) | canQueen && (.&.) allPieces queenSpaces == 0 && not (anySquaresInBitboardAttacked position opponent ((.|.) (1 `shiftL` kingStartSquare) (1 `shiftL` queenStartSquare)))]
+generateCastleMovesForMover :: Position -> Square -> Square -> Mover -> Bool -> Bool -> Bitboard -> Bitboard -> Bitboard -> Bitboard -> Bitboard -> [Move]
+generateCastleMovesForMover position kingStartSquare queenStartSquare opponent canKing canQueen kingSpaces queenSpaces noCheckKingSide noCheckQueenSide allPieces =
+  ([(.|.) (fromSquareMask kingStartSquare) ((-) kingStartSquare 2) | canKing && ((.&.) allPieces kingSpaces == 0) && not (anySquaresInBitboardAttacked position opponent noCheckKingSide)]) ++
+   [(.|.) (fromSquareMask kingStartSquare) ((+) kingStartSquare 2) | canQueen && (.&.) allPieces queenSpaces == 0 && not (anySquaresInBitboardAttacked position opponent noCheckQueenSide)]
 
 anySquaresInBitboardAttacked :: Position -> Mover -> Bitboard -> Bool
 anySquaresInBitboardAttacked position attacker bitboard = any (\x -> isSquareAttackedBy position x attacker) (bitRefList bitboard)

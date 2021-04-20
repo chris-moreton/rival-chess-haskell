@@ -285,3 +285,15 @@ emptyCastleSquaresBlackKing = (.|.) (1 `shiftL` 57) (1 `shiftL` 58)
 
 emptyCastleSquaresBlackQueen :: Bitboard
 emptyCastleSquaresBlackQueen = (.|.) (1 `shiftL` 62) ((.|.) (1 `shiftL` 61) (1 `shiftL` 60))
+
+noCheckCastleSquaresWhiteKing :: Bitboard
+noCheckCastleSquaresWhiteKing = (.|.) (1 `shiftL` 2) (1 `shiftL` 3)
+
+noCheckCastleSquaresWhiteQueen :: Bitboard
+noCheckCastleSquaresWhiteQueen = (.|.) (1 `shiftL` 3) (1 `shiftL` 4)
+
+noCheckCastleSquaresBlackKing :: Bitboard
+noCheckCastleSquaresBlackKing = (.|.) (1 `shiftL` 58) (1 `shiftL` 59)
+
+noCheckCastleSquaresBlackQueen :: Bitboard
+noCheckCastleSquaresBlackQueen = (.|.) (1 `shiftL` 59) (1 `shiftL` 60)

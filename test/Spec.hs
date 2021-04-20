@@ -16,6 +16,83 @@ import Search.MakeMove
 
 main :: IO ()
 main = hspec $ do
+
+  describe "Perft Test" $ do
+    it "Returns the total number of moves in a full move tree of a given depth with a given position as its head" $ do
+
+      let position = getPosition "r3k2r/p6p/8/B7/1pp1p3/3b4/P6P/R3K2R b kq - 0 1"
+
+      (bitRefFromAlgebraicSquareRef "f8") `shouldBe` 58
+      isSquareAttackedBy position (bitRefFromAlgebraicSquareRef "f8") White `shouldBe` False
+      bitRefList noCheckCastleSquaresBlackKing `shouldBe` [58,59]
+      bitRefList emptyCastleSquaresBlackKing `shouldBe` [57,58]
+      anySquaresInBitboardAttacked position White noCheckCastleSquaresBlackKing `shouldBe` False
+
+      sort (map algebraicMoveFromMove (generateCastleMoves position)) `shouldBe` ["e8g8"]
+      blackKingCastleAvailable (positionCastlePrivs position) `shouldBe` True
+
+      sort (map algebraicMoveFromMove (moves position))
+              `shouldBe` ["a7a6","a8b8","a8c8","a8d8","b4b3","c4c3","d3b1","d3c2","d3e2","d3f1","e4e3","e8d7","e8d8","e8e7","e8f7","e8f8","e8g8","h7h5","h7h6","h8f8","h8g8"]
+      let newPositions = map (makeMove position) (moves position)
+      length newPositions `shouldBe` 21
+      perft position 0 `shouldBe` 20
+
+      perft (getPosition "r3k2r/p6p/8/B7/1pp1p3/3b4/P6P/1R2K2R b Kkq - 0 1") 0 `shouldBe` 20
+      perft (getPosition "r3k2r/p6p/8/B7/1pp1p3/3b4/P6P/2R1K2R b Kkq - 0 1") 0 `shouldBe` 20
+      perft (getPosition "r3k2r/p6p/8/B7/1pp1p3/3b4/P6P/3RK2R b Kkq - 0 1") 0 `shouldBe` 20
+      perft (getPosition "r3k2r/p6p/8/B7/1pp1p3/3b4/P2K3P/R6R b kq - 0 1") 0 `shouldBe` 20
+      perft (getPosition "r3k2r/p6p/8/B7/1pp1p3/3b4/P6P/R2K3R b kq - 0 1") 0 `shouldBe` 20
+      perft (getPosition "r3k2r/p6p/8/B7/1pp1p3/3b4/P6P/2KR3R b kq - 0 1") 0 `shouldBe` 20
+      perft (getPosition "r3k2r/p6p/8/B7/1pp1p3/3b4/P6P/R3K1R1 b Qkq - 0 1") 0 `shouldBe` 19
+      perft (getPosition "r3k2r/p6p/8/B7/1pp1p3/3b4/P6P/R3KR2 b Qkq - 0 1") 0 `shouldBe` 17
+      perft (getPosition "r3k2r/p6p/8/B7/Ppp1p3/3b4/7P/R3K2R b KQkq a3 0 1") 0 `shouldBe` 21
+      perft (getPosition "r3k2r/p6p/8/B7/1pp1p3/P2b4/7P/R3K2R b KQkq - 0 1") 0 `shouldBe` 21
+      perft (getPosition "r3k2r/p6p/8/B7/1pp1p2P/3b4/P7/R3K2R b KQkq - 0 1") 0 `shouldBe` 20
+      perft (getPosition "r3k2r/p6p/8/B7/1pp1p3/3b3P/P7/R3K2R b KQkq - 0 1") 0 `shouldBe` 20
+      perft (getPosition "r3k2r/p6p/1B6/8/1pp1p3/3b4/P6P/R3K2R b KQkq - 0 1") 0 `shouldBe` 22
+      perft (getPosition "r3k2r/p1B4p/8/8/1pp1p3/3b4/P6P/R3K2R b KQkq - 0 1") 0 `shouldBe` 21
+      perft (getPosition "r2Bk2r/p6p/8/8/1pp1p3/3b4/P6P/R3K2R b KQkq - 0 1") 0 `shouldBe` 21
+      perft (getPosition "r3k2r/p6p/8/8/1Bp1p3/3b4/P6P/R3K2R b KQkq - 0 1") 0 `shouldBe` 19
+
+      perft (getPosition "r3k2r/p6p/8/B7/1pp1p3/3b4/P6P/R3K2R w KQkq -") 0 `shouldBe` 17
+      perft (getPosition "r3k2r/p6p/8/B7/1pp1p3/3b4/P6P/R3K2R w KQkq -") 1 `shouldBe` 341
+      perft (getPosition "r3k2r/p6p/8/B7/1pp1p3/3b4/P6P/R3K2R w KQkq -") 2 `shouldBe` 6666
+      perft (getPosition "r3k2r/p6p/8/B7/1pp1p3/3b4/P6P/R3K2R w KQkq -") 3 `shouldBe` 150072
+      perft (getPosition "r3k2r/p6p/8/B7/1pp1p3/3b4/P6P/R3K2R w KQkq -") 4 `shouldBe` 3186478
+      perft (getPosition "r3k2r/p6p/8/B7/1pp1p3/3b4/P6P/R3K2R w KQkq -") 5 `shouldBe` 77054993
+
+      perft (getPosition "8/p7/8/1P6/K1k3pP/6P1/8/8 b - h3 0 1") 0 `shouldBe` 8
+      perft (getPosition "8/p7/8/1P6/K1k3pP/6P1/8/8 b - h3 0 1") 1 `shouldBe` 41
+      perft (getPosition "8/p7/8/1P6/K1k3pP/6P1/8/8 b - h3 0 1") 2 `shouldBe` 325
+      perft (getPosition "8/p7/8/1P6/K1k3pP/6P1/8/8 b - h3 0 1") 3 `shouldBe` 2002
+      perft (getPosition "8/p7/8/1P6/K1k3pP/6P1/8/8 b - h3 0 1") 4 `shouldBe` 16763
+      perft (getPosition "8/p7/8/1P6/K1k3pP/6P1/8/8 b - h3 0 1") 5 `shouldBe` 118853
+      perft (getPosition "8/p7/8/1P6/K1k3pP/6P1/8/8 b - h3 0 1") 6 `shouldBe` 986637
+
+      perft (getPosition "8/p7/8/1P6/K1k3p1/6P1/7P/8 w - -") 0 `shouldBe` 5
+      perft (getPosition "8/p7/8/1P6/K1k3p1/6P1/7P/8 w - -") 1 `shouldBe` 39
+      perft (getPosition "8/p7/8/1P6/K1k3p1/6P1/7P/8 w - -") 2 `shouldBe` 237
+      perft (getPosition "8/p7/8/1P6/K1k3p1/6P1/7P/8 w - -") 3 `shouldBe` 2002
+      perft (getPosition "8/p7/8/1P6/K1k3p1/6P1/7P/8 w - -") 4 `shouldBe` 14062
+      perft (getPosition "8/p7/8/1P6/K1k3p1/6P1/7P/8 w - -") 5 `shouldBe` 120995
+      perft (getPosition "8/p7/8/1P6/K1k3p1/6P1/7P/8 w - -") 6 `shouldBe` 966152
+      perft (getPosition "8/p7/8/1P6/K1k3p1/6P1/7P/8 w - -") 7 `shouldBe` 8103790
+
+      perft (getPosition "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1") 0 `shouldBe` 20
+      perft (getPosition "rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR b KQkq - 0 1") 0 `shouldBe` 20
+      perft (getPosition "4k3/8/8/8/8/8/PPPPPPPP/RNBQKBNR w KQ - 0 1") 1 `shouldBe` 100
+      perft (getPosition "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1") 1 `shouldBe` 400
+      perft (getPosition "5k2/5p1p/p3B1p1/P5P1/3K1P1P/8/8/8 b - -") 0 `shouldBe` 9
+      perft (getPosition "5k2/5p1p/p3B1p1/P5P1/3K1P1P/8/8/8 b - -") 1 `shouldBe` 169
+      perft (getPosition "8/3K4/2p5/p2b2r1/5k2/8/8/1q6 b - - 1 67") 1 `shouldBe` 279
+      perft (getPosition "5k2/5p1p/p3B1p1/P5P1/3K1P1P/8/8/8 b - -") 3 `shouldBe` 20541
+      perft (getPosition "n1n5/PPPk4/8/8/8/8/4Kppp/5N1N b - - 0 1") 3 `shouldBe` 182838
+      perft (getPosition "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1") 4 `shouldBe` 4865609
+      perft (getPosition "rnbqkb1r/ppppp1pp/7n/4Pp2/8/8/PPPP1PPP/RNBQKBNR w KQkq f6 0 3") 4 `shouldBe` 11139762
+      perft (getPosition "8/7p/p5pb/4k3/P1pPn3/8/P5PP/1rB2RK1 b - d3 0 28") 5 `shouldBe` 38633283
+      perft (getPosition "8/2p5/3p4/KP5r/1R3p1k/8/4P1P1/8 w - -") 6 `shouldBe` 178633661
+      perft (getPosition "r3k2r/p1ppqpb1/bn2pnp1/3PN3/1p2P3/2N2Q1p/PPPBBPPP/R3K2R w KQkq -") 4 `shouldBe` 193690690
+
   describe "southFill" $ do
     it "South fills a bitboard" $ do
       southFill 4611936708517363882 `shouldBe` (4629952088967215103 :: Int)
@@ -270,47 +347,51 @@ main = hspec $ do
   describe "generateCastleMovesForMover" $ do
     it "Generates castle moves for a given mover" $ do
       let position = getPosition "n5k1/1P2P1n1/1n2q2p/P1pP4/5R2/5B2/1r2N2P/R3K1r1 w Q - 0 1"
-      sort (map algebraicMoveFromMove (generateCastleMovesForMover position 3 4 Black True True emptyCastleSquaresWhiteKing emptyCastleSquaresWhiteQueen (allPiecesBitboard position)))
+      sort (map algebraicMoveFromMove (generateCastleMovesForMover position 3 4 Black True True emptyCastleSquaresWhiteKing emptyCastleSquaresWhiteQueen noCheckCastleSquaresWhiteKing noCheckCastleSquaresWhiteQueen (allPiecesBitboard position)))
         `shouldBe` []
       let position = getPosition "n5k1/1P2P1n1/1n2q2p/P1pP4/5R2/5B2/1r2N2P/R3K2R w Q - 0 1"
-      sort (map algebraicMoveFromMove (generateCastleMovesForMover position 3 4 Black True True emptyCastleSquaresWhiteKing emptyCastleSquaresWhiteQueen (allPiecesBitboard position)))
+      sort (map algebraicMoveFromMove (generateCastleMovesForMover position 3 4 Black True True emptyCastleSquaresWhiteKing emptyCastleSquaresWhiteQueen noCheckCastleSquaresWhiteKing noCheckCastleSquaresWhiteQueen (allPiecesBitboard position)))
         `shouldBe` ["e1c1","e1g1"]
       let position = getPosition "n5k1/1P2P1n1/1n2q2p/P1pP4/5R2/5B2/3rN2P/R3K2R w Q - 0 1"
-      sort (map algebraicMoveFromMove (generateCastleMovesForMover position 3 4 Black True True emptyCastleSquaresWhiteKing emptyCastleSquaresWhiteQueen (allPiecesBitboard position)))
+      sort (map algebraicMoveFromMove (generateCastleMovesForMover position 3 4 Black True True emptyCastleSquaresWhiteKing emptyCastleSquaresWhiteQueen noCheckCastleSquaresWhiteKing noCheckCastleSquaresWhiteQueen (allPiecesBitboard position)))
         `shouldBe` ["e1g1"]
       let position = getPosition "n5k1/1P2P1n1/1n2q2p/P1pP4/5R2/5B2/4Nr1P/R3K2R w Q - 0 1"
-      sort (map algebraicMoveFromMove (generateCastleMovesForMover position 3 4 Black True True emptyCastleSquaresWhiteKing emptyCastleSquaresWhiteQueen (allPiecesBitboard position)))
+      sort (map algebraicMoveFromMove (generateCastleMovesForMover position 3 4 Black True True emptyCastleSquaresWhiteKing emptyCastleSquaresWhiteQueen noCheckCastleSquaresWhiteKing noCheckCastleSquaresWhiteQueen (allPiecesBitboard position)))
         `shouldBe` ["e1c1"]
       let position = getPosition "n5k1/1P2P1n1/1n5p/P1pP4/5R2/1q3B2/4Nr1P/R3K2R w Q - 0 1"
-      sort (map algebraicMoveFromMove (generateCastleMovesForMover position 3 4 Black True True emptyCastleSquaresWhiteKing emptyCastleSquaresWhiteQueen (allPiecesBitboard position)))
+      sort (map algebraicMoveFromMove (generateCastleMovesForMover position 3 4 Black True True emptyCastleSquaresWhiteKing emptyCastleSquaresWhiteQueen noCheckCastleSquaresWhiteKing noCheckCastleSquaresWhiteQueen (allPiecesBitboard position)))
         `shouldBe` []
-      sort (map algebraicMoveFromMove (generateCastleMovesForMover position 3 4 Black False True emptyCastleSquaresWhiteKing emptyCastleSquaresWhiteQueen (allPiecesBitboard position)))
+      sort (map algebraicMoveFromMove (generateCastleMovesForMover position 3 4 Black False True emptyCastleSquaresWhiteKing emptyCastleSquaresWhiteQueen noCheckCastleSquaresWhiteKing noCheckCastleSquaresWhiteQueen (allPiecesBitboard position)))
         `shouldBe` []
-      sort (map algebraicMoveFromMove (generateCastleMovesForMover position 3 4 Black True False emptyCastleSquaresWhiteKing emptyCastleSquaresWhiteQueen (allPiecesBitboard position)))
+      sort (map algebraicMoveFromMove (generateCastleMovesForMover position 3 4 Black True False emptyCastleSquaresWhiteKing emptyCastleSquaresWhiteQueen noCheckCastleSquaresWhiteKing noCheckCastleSquaresWhiteQueen (allPiecesBitboard position)))
         `shouldBe` []
-      sort (map algebraicMoveFromMove (generateCastleMovesForMover position 3 4 Black False False emptyCastleSquaresWhiteKing emptyCastleSquaresWhiteQueen (allPiecesBitboard position)))
+      sort (map algebraicMoveFromMove (generateCastleMovesForMover position 3 4 Black False False emptyCastleSquaresWhiteKing emptyCastleSquaresWhiteQueen noCheckCastleSquaresWhiteKing noCheckCastleSquaresWhiteQueen (allPiecesBitboard position)))
         `shouldBe` []
       let position = getPosition "r3k1R1/1P2P1n1/1n2q2p/P1pP4/5R2/5B2/1r2N2P/R3K1r1 b Q - 0 1"
-      sort (map algebraicMoveFromMove (generateCastleMovesForMover position 59 60 White True True emptyCastleSquaresBlackKing emptyCastleSquaresBlackQueen (allPiecesBitboard position))) `shouldBe` []
+      sort (map algebraicMoveFromMove (generateCastleMovesForMover position 59 60 White True True emptyCastleSquaresBlackKing emptyCastleSquaresBlackQueen noCheckCastleSquaresBlackKing noCheckCastleSquaresBlackQueen (allPiecesBitboard position))) `shouldBe` []
       let position = getPosition "r3k2r/1P2P1n1/1n2q2p/P1pP4/5R2/5B2/1r2N2P/R3K2R b Q - 0 1"
-      sort (map algebraicMoveFromMove (generateCastleMovesForMover position 59 60 White True True emptyCastleSquaresBlackKing emptyCastleSquaresBlackQueen (allPiecesBitboard position))) `shouldBe` []
+      sort (map algebraicMoveFromMove (generateCastleMovesForMover position 59 60 White True True emptyCastleSquaresBlackKing emptyCastleSquaresBlackQueen noCheckCastleSquaresBlackKing noCheckCastleSquaresBlackQueen (allPiecesBitboard position))) `shouldBe` []
       let position = getPosition "r3k2r/1P2PRn1/1n2q2p/P1pP4/8/5B2/1r2N2P/R3K2R b Q - 0 1"
-      sort (map algebraicMoveFromMove (generateCastleMovesForMover position 59 60 White True True emptyCastleSquaresBlackKing emptyCastleSquaresBlackQueen (allPiecesBitboard position)))
+      sort (map algebraicMoveFromMove (generateCastleMovesForMover position 59 60 White True True emptyCastleSquaresBlackKing emptyCastleSquaresBlackQueen noCheckCastleSquaresBlackKing noCheckCastleSquaresBlackQueen (allPiecesBitboard position)))
         `shouldBe` []
-      sort (map algebraicMoveFromMove (generateCastleMovesForMover position 59 60 White False True emptyCastleSquaresBlackKing emptyCastleSquaresBlackQueen (allPiecesBitboard position)))
+      sort (map algebraicMoveFromMove (generateCastleMovesForMover position 59 60 White False True emptyCastleSquaresBlackKing emptyCastleSquaresBlackQueen noCheckCastleSquaresBlackKing noCheckCastleSquaresBlackQueen (allPiecesBitboard position)))
         `shouldBe` []
-      sort (map algebraicMoveFromMove (generateCastleMovesForMover position 59 60 White True False emptyCastleSquaresBlackKing emptyCastleSquaresBlackQueen (allPiecesBitboard position)))
+      sort (map algebraicMoveFromMove (generateCastleMovesForMover position 59 60 White True False emptyCastleSquaresBlackKing emptyCastleSquaresBlackQueen noCheckCastleSquaresBlackKing noCheckCastleSquaresBlackQueen (allPiecesBitboard position)))
         `shouldBe` []
-      sort (map algebraicMoveFromMove (generateCastleMovesForMover position 59 60 White False False emptyCastleSquaresBlackKing emptyCastleSquaresBlackQueen (allPiecesBitboard position)))
+      sort (map algebraicMoveFromMove (generateCastleMovesForMover position 59 60 White False False emptyCastleSquaresBlackKing emptyCastleSquaresBlackQueen noCheckCastleSquaresBlackKing noCheckCastleSquaresBlackQueen (allPiecesBitboard position)))
         `shouldBe` []
       let position = getPosition "r3k2r/1P3Rn1/1n2q2p/P1pP2P1/8/5B2/1r2N2P/R3K2R b Q - 0 1"
-      sort (map algebraicMoveFromMove (generateCastleMovesForMover position 59 60 White True True emptyCastleSquaresBlackKing emptyCastleSquaresBlackQueen (allPiecesBitboard position)))
+      sort (map algebraicMoveFromMove (generateCastleMovesForMover position 59 60 White True True emptyCastleSquaresBlackKing emptyCastleSquaresBlackQueen noCheckCastleSquaresBlackKing noCheckCastleSquaresBlackQueen (allPiecesBitboard position)))
         `shouldBe` ["e8c8"]
 
   describe "moves" $ do
     it "Get all moves for a position" $ do
       sort (map algebraicMoveFromMove (moves (getPosition "5k2/5p1p/p3B1p1/P5P1/3K1P1P/8/8/8 b - -")))
         `shouldBe` ["f7e6","f7f5","f7f6","f8e7","f8e8","f8g7","f8g8","h7h5","h7h6"]
+      sort (map algebraicMoveFromMove (moves (getPosition "r3k2r/p6p/8/B7/1pp1p3/3b4/P6P/1R2K2R b Kkq - 0 1")))
+        `shouldBe` ["a7a6","a8b8","a8c8","a8d8","b4b3","c4c3","d3b1","d3c2","d3e2","d3f1","e4e3","e8d7","e8d8","e8e7","e8f7","e8f8","h7h5","h7h6","h8f8","h8g8"]
+      sort (map algebraicMoveFromMove (moves (getPosition "r3k2r/p6p/8/B7/1pp1p3/3b4/P4K1P/R6R b kq - 0 1")))
+        `shouldBe` ["a7a6","a8b8","a8c8","a8d8","b4b3","c4c3","d3b1","d3c2","d3e2","d3f1","e4e3","e8d7","e8d8","e8e7","e8f7","e8f8","h7h5","h7h6","h8f8","h8g8"]
       sort (map algebraicMoveFromMove (moves (getPosition "5k2/7p/p3B1p1/P4pP1/3K1P1P/8/8/8 w - f6 0 1")))
         `shouldBe` ["d4c3","d4c4","d4c5","d4d3","d4d5","d4e3","d4e4","d4e5","e6a2","e6b3","e6c4","e6c8","e6d5","e6d7","e6f5","e6f7","e6g8","g5f6","h4h5"]
       sort (map algebraicMoveFromMove (moves (getPosition "6k1/5p1p/p3B1p1/P5P1/3K1P1P/8/8/8 w - - 0 1")))
@@ -428,6 +509,8 @@ main = hspec $ do
       let position = getPosition "n5k1/1P2P1n1/1n5p/P1pP1R2/8/3q1B2/4N2P/R3Kr1R w Q - 0 1"
       isCheck position White `shouldBe` True
       isCheck position Black `shouldBe` False
+      isCheck (getPosition "r2k3r/p6p/8/B7/1p2p3/2pb4/P4K1P/R6R w - - 0 1") Black `shouldBe` True
+
 
   describe "moveFromAlgebraicMove" $ do
     it "Makes a move from a position and returns a new position" $ do
@@ -538,19 +621,3 @@ main = hspec $ do
                (moveFromAlgebraicMove "e2e4")
                   `shouldBe` (getPosition "rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR b KQkq e3 0 1")
 
-  describe "Perft Test" $ do
-    it "Returns the total number of moves in a full move tree of a given depth with a given position as its head" $ do
-      perft (getPosition "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1") 0 `shouldBe` 20
-      perft (getPosition "rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR b KQkq - 0 1") 0 `shouldBe` 20
-      perft (getPosition "4k3/8/8/8/8/8/PPPPPPPP/RNBQKBNR w KQ - 0 1") 1 `shouldBe` 100
-      perft (getPosition "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1") 1 `shouldBe` 400
-      perft (getPosition "5k2/5p1p/p3B1p1/P5P1/3K1P1P/8/8/8 b - -") 0 `shouldBe` 9
-      perft (getPosition "5k2/5p1p/p3B1p1/P5P1/3K1P1P/8/8/8 b - -") 1 `shouldBe` 169
-      perft (getPosition "5k2/5p1p/p3B1p1/P5P1/3K1P1P/8/8/8 b - -") 3 `shouldBe` 20541
-      perft (getPosition "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1") 4 `shouldBe` 4865609
-      perft (getPosition "8/3K4/2p5/p2b2r1/5k2/8/8/1q6 b - - 1 67") 1 `shouldBe` 279
-      perft (getPosition "n1n5/PPPk4/8/8/8/8/4Kppp/5N1N b - - 0 1") 3 `shouldBe` 182838
-      perft (getPosition "8/7p/p5pb/4k3/P1pPn3/8/P5PP/1rB2RK1 b - d3 0 28") 5 `shouldBe` 38633283
-      perft (getPosition "rnbqkb1r/ppppp1pp/7n/4Pp2/8/8/PPPP1PPP/RNBQKBNR w KQkq f6 0 3") 4 `shouldBe` 11139762
-      perft (getPosition "8/2p5/3p4/KP5r/1R3p1k/8/4P1P1/8 w - -") 6 `shouldBe` 178633661
-      perft (getPosition "r3k2r/p1ppqpb1/bn2pnp1/3PN3/1p2P3/2N2Q1p/PPPBBPPP/R3K2R w KQkq -") 4 `shouldBe` 193690690

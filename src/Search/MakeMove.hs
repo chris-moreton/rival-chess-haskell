@@ -82,10 +82,10 @@ makeSimpleMove position from to promotionPiece = do
                             then if to - from == 16 && bit from .&. whitePawnBitboard bb /= 0 then from + 8 else -1
                             else if from - to == 16 && bit from .&. blackPawnBitboard bb /= 0 then from - 8 else -1
      , positionCastlePrivs = CastlePrivileges {
-            whiteKingCastleAvailable = whiteKingCastleAvailable (positionCastlePrivs position) && notElem from (map bitRefFromAlgebraicSquareRef ["e1","h1"])
-          , whiteQueenCastleAvailable = whiteQueenCastleAvailable (positionCastlePrivs position) && notElem from (map bitRefFromAlgebraicSquareRef ["a1","e1"])
-          , blackKingCastleAvailable = blackKingCastleAvailable (positionCastlePrivs position) && notElem from (map bitRefFromAlgebraicSquareRef ["e8","h8"])
-          , blackQueenCastleAvailable = blackQueenCastleAvailable (positionCastlePrivs position) && notElem from (map bitRefFromAlgebraicSquareRef ["a8","e8"])
+            whiteKingCastleAvailable = whiteKingCastleAvailable (positionCastlePrivs position) && notElem from (map bitRefFromAlgebraicSquareRef ["e1","h1"]) && to /= bitRefFromAlgebraicSquareRef "h1"
+          , whiteQueenCastleAvailable = whiteQueenCastleAvailable (positionCastlePrivs position) && notElem from (map bitRefFromAlgebraicSquareRef ["a1","e1"]) && to /= bitRefFromAlgebraicSquareRef "a1"
+          , blackKingCastleAvailable = blackKingCastleAvailable (positionCastlePrivs position) && notElem from (map bitRefFromAlgebraicSquareRef ["e8","h8"]) && to /= bitRefFromAlgebraicSquareRef "h8"
+          , blackQueenCastleAvailable = blackQueenCastleAvailable (positionCastlePrivs position) && notElem from (map bitRefFromAlgebraicSquareRef ["a8","e8"]) && to /= bitRefFromAlgebraicSquareRef "a8"
        }
      , halfMoves = if isCapture || isPawnMove then 0 else halfMoves position + 1
      , moveNumber = (+) (moveNumber position) (if m == Black then 1 else 0)
