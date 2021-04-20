@@ -1,9 +1,5 @@
 # Haskell Chess Functions
 
-Rival Chess was first written in Pascal in 1988, then C++ in 1994. It was converted to Java in 2010, then to Kotlin in 2019.
-
-The Kotlin conversion moved the code towards a functional style. I'm now rewriting it in Haskell and being forced to do it properly.
-
 I am a total noob with Haskell and am kinda making it up as I go along, so feel free to laugh at my code, or, even better, tell me what I'm
 doing wrong.
 
@@ -56,3 +52,9 @@ when calculating a move from a given position.
           makeMove (getPosition "2kr3R/pppp1p1p/2n1b3/2bn1q2/8/4p3/PPPP1PpP/RNBQK2R b KQ - 0 1")
                    (moveFromAlgebraicMove "g2g1q")
                       `shouldBe` (getPosition "2kr3R/pppp1p1p/2n1b3/2bn1q2/8/4p3/PPPP1P1P/RNBQK1qR w KQ - 0 2")
+
+### Background
+
+Rival Chess was first written in Pascal in 1988, then C++ in 1994. It was converted to Java in 2010, then to Kotlin in 2019.
+
+The Kotlin conversion moved the code towards a functional style, having been inspired by Cardano. I'm now rewriting it in Haskell and being forced to do it properly.
