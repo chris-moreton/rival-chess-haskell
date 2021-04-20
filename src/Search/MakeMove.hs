@@ -78,7 +78,9 @@ makeSimpleMove position from to promotionPiece = do
           , blackKingBitboard = movePieceWithinBitboard from to (removePieceFromBitboard to (blackKingBitboard bb))
        }
      , mover = if m == White then Black else White
-     , enPassantSquare = -1
+     , enPassantSquare = if m == White
+                            then if to - from == 16 && bit from .&. whitePawnBitboard bb /= 0 then from + 8 else -1
+                            else if from - to == 16 && bit from .&. blackPawnBitboard bb /= 0 then from - 8 else -1
      , positionCastlePrivs = CastlePrivileges {
             whiteKingCastleAvailable = whiteKingCastleAvailable (positionCastlePrivs position) && notElem from (map bitRefFromAlgebraicSquareRef ["e1","h1"])
           , whiteQueenCastleAvailable = whiteQueenCastleAvailable (positionCastlePrivs position) && notElem from (map bitRefFromAlgebraicSquareRef ["a1","e1"])
