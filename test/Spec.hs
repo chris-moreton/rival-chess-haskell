@@ -7,6 +7,7 @@ import Util.Bitboards
 import Util.Fen
 import Util.Utils
 import Model.Game
+import Search.Perft
 import Search.MoveGenerator
 import Types
 import Data.Bits
@@ -308,6 +309,12 @@ main = hspec $ do
 
   describe "moves" $ do
     it "Get all moves for a position" $ do
+      sort (map algebraicMoveFromMove (moves (getPosition "5k2/5p1p/p3B1p1/P5P1/3K1P1P/8/8/8 b - -")))
+        `shouldBe` ["f7e6","f7f5","f7f6","f8e7","f8e8","f8g7","f8g8","h7h5","h7h6"]
+      sort (map algebraicMoveFromMove (moves (getPosition "5k2/7p/p3B1p1/P4pP1/3K1P1P/8/8/8 w - f6 0 1")))
+        `shouldBe` ["d4c3","d4c4","d4c5","d4d3","d4d5","d4e3","d4e4","d4e5","e6a2","e6b3","e6c4","e6c8","e6d5","e6d7","e6f5","e6f7","e6g8","g5f6","h4h5"]
+      sort (map algebraicMoveFromMove (moves (getPosition "6k1/5p1p/p3B1p1/P5P1/3K1P1P/8/8/8 w - - 0 1")))
+        `shouldBe` ["d4c3","d4c4","d4c5","d4d3","d4d5","d4e3","d4e4","d4e5","e6a2","e6b3","e6c4","e6c8","e6d5","e6d7","e6f5","e6f7","e6g4","e6h3","f4f5","h4h5"]
       sort (map algebraicMoveFromMove (moves (getPosition "n5k1/1P2P1n1/1n2q2p/P1pP4/5R2/3K1B2/1r2N2P/6r1 w - c6 0 1")))
         `shouldBe` [
               "a5a6","a5b6"
@@ -531,4 +538,19 @@ main = hspec $ do
                (moveFromAlgebraicMove "e2e4")
                   `shouldBe` (getPosition "rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR b KQkq e3 0 1")
 
-      
+  describe "Perft Test" $ do
+    it "Returns the total number of moves in a full move tree of a given depth with a given position as its head" $ do
+      perft (getPosition "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1") 0 `shouldBe` 20
+      perft (getPosition "rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR b KQkq - 0 1") 0 `shouldBe` 20
+      perft (getPosition "4k3/8/8/8/8/8/PPPPPPPP/RNBQKBNR w KQ - 0 1") 1 `shouldBe` 100
+      perft (getPosition "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1") 1 `shouldBe` 400
+      perft (getPosition "5k2/5p1p/p3B1p1/P5P1/3K1P1P/8/8/8 b - -") 0 `shouldBe` 9
+      perft (getPosition "5k2/5p1p/p3B1p1/P5P1/3K1P1P/8/8/8 b - -") 1 `shouldBe` 169
+      perft (getPosition "5k2/5p1p/p3B1p1/P5P1/3K1P1P/8/8/8 b - -") 3 `shouldBe` 20541
+      perft (getPosition "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1") 4 `shouldBe` 4865609
+      perft (getPosition "8/3K4/2p5/p2b2r1/5k2/8/8/1q6 b - - 1 67") 1 `shouldBe` 279
+      perft (getPosition "n1n5/PPPk4/8/8/8/8/4Kppp/5N1N b - - 0 1") 3 `shouldBe` 182838
+      perft (getPosition "8/7p/p5pb/4k3/P1pPn3/8/P5PP/1rB2RK1 b - d3 0 28") 5 `shouldBe` 38633283
+      perft (getPosition "rnbqkb1r/ppppp1pp/7n/4Pp2/8/8/PPPP1PPP/RNBQKBNR w KQkq f6 0 3") 4 `shouldBe` 11139762
+      perft (getPosition "8/2p5/3p4/KP5r/1R3p1k/8/4P1P1/8 w - -") 6 `shouldBe` 178633661
+      perft (getPosition "r3k2r/p1ppqpb1/bn2pnp1/3PN3/1p2P3/2N2Q1p/PPPBBPPP/R3K2R w KQkq -") 4 `shouldBe` 193690690

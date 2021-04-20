@@ -35,6 +35,7 @@ library
       Util.Utils
       Model.Game
       Search.MakeMove
+      Search.Perft
       Search.MoveGenerator
       Search.MoveConstants
       Types
