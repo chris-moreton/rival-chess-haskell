@@ -26,7 +26,7 @@ By default, we don't filter moves that put the mover in check. It is generally m
 when calculating a move from a given position.
 
     describe "moves" $ do
-        it "Get all moves for a position" $ do
+        it "Gets all moves for a position" $ do
             let position = getPosition "4k3/8/6N1/4K3/8/8/8/8 b - - 0 1"
             let noChecks = filter (\x -> not (isCheck (makeMove position x) (mover position))) (moves position)
             sort (map algebraicMoveFromMove noChecks) `shouldBe` ["e8d7","e8d8","e8f7","e8f8"]
