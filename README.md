@@ -7,9 +7,7 @@ The Kotlin conversion moved the code towards a functional style. I'm now rewriti
 I am a total noob with Haskell and am kinda making it up as I go along, so feel free to laugh at my code, or, even better, tell me what I'm
 doing wrong.
 
-This is a work in progress. Some working functions are shown below. 
-
-### Get moves for a position
+### Get moves for a position (does not filter checks)
 
     describe "moves" $ do
         it "Get all moves for a position" $ do
@@ -25,6 +23,17 @@ This is a work in progress. Some working functions are shown below.
                     , "f4a4","f4b4","f4c4","f4d4","f4e4","f4f5","f4f6","f4f7","f4f8","f4g4","f4h4"
                     , "h2h3","h2h4"
                 ]
+
+### Filter moves that leave the mover in check
+
+By default, we don't filter moves that put the mover in check. It is generally more efficient to discover this information during the search
+when calculating a move from a given position.
+
+    describe "moves" $ do
+        it "Get all moves for a position" $ do
+            let position = getPosition "4k3/8/6N1/4K3/8/8/8/8 b - - 0 1"
+            let noChecks = filter (\x -> not (isCheck (makeMove position x) (mover position))) (moves position)
+            sort (map algebraicMoveFromMove noChecks) `shouldBe` ["e8d7","e8d8","e8f7","e8f8"]
 
 ### Determine if a square is attacked by a given side
 
