@@ -41,7 +41,7 @@ bitString bitboard = recurBitString bitboard 63 ""
 recurBitString :: Bitboard -> Int -> String -> String
 recurBitString _ (-1) result = result
 recurBitString bitboard square result = do
-  let bitMask = shiftL 1 square
+  let bitMask = bit square
   recurBitString (xor bitboard bitMask) (square - 1) (result ++ if bitMask == (.&.) bitMask bitboard then "1" else "0")
 
 allBitsExceptFriendlyPieces :: Position -> Bitboard
@@ -160,13 +160,13 @@ enPassantCaptureRank mover = if mover == White then rank6Bits else rank3Bits
 pawnForwardAndCaptureMovesBitboard :: Square -> [Bitboard] -> Bitboard -> Position -> Bitboard
 pawnForwardAndCaptureMovesBitboard fromSquare capturePawnMoves nonCaptures position = do
   let eps = enPassantSquare position
-  let captures = if eps /= -1 && (.&.) (bit eps) (enPassantCaptureRank (mover position)) /= 0
+  let captures = if eps /= enPassantNotAvailable && (.&.) (bit eps) (enPassantCaptureRank (mover position)) /= 0
                   then pawnCapturesPlusEnPassantSquare capturePawnMoves fromSquare position
                   else pawnCaptures capturePawnMoves fromSquare (enemyBitboard position)
   (.|.) nonCaptures captures
 
 pawnCapturesPlusEnPassantSquare :: [Bitboard] -> Square -> Position -> Bitboard
-pawnCapturesPlusEnPassantSquare bs square position = pawnCaptures bs square (enemyBitboard position .|. (if eps == -1 then 0 else bit eps)) where eps = enPassantSquare position
+pawnCapturesPlusEnPassantSquare bs square position = pawnCaptures bs square (enemyBitboard position .|. (if eps == enPassantNotAvailable then 0 else bit eps)) where eps = enPassantSquare position
 
 pawnCaptures :: [Bitboard] -> Square -> Bitboard -> Bitboard
 pawnCaptures captureMask square = (.&.) (captureMask !! square)
@@ -261,5 +261,5 @@ moves position =
   generateRookMoves position ++
   generateKingMoves position ++
   generateCastleMoves position
-   
+
 

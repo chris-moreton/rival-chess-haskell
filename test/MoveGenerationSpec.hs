@@ -111,7 +111,7 @@ main = hspec $ do
       let fen = "6k1/6p1/1p2q2p/1p5P/1P3RP1/2PK1B2/1r2N3/8 w kQ - 5 56"
       let position = getPosition fen
       let castlePrivs = positionCastlePrivs position
-      enPassantSquare position `shouldBe` -1
+      enPassantSquare position `shouldBe` enPassantNotAvailable
       halfMoves position `shouldBe` 5
       mover position `shouldBe` White
       whiteKingCastleAvailable castlePrivs `shouldBe` False
@@ -224,7 +224,7 @@ main = hspec $ do
   describe "enPassantSquare position" $ do
     it "Identifies the enPassant square from a position" $ do
       enPassantSquare (getPosition "n5k1/4P1n1/4q2p/PpP1n3/3P1R2/3K1B2/1r2N2P/6r1 w - b6 0 1") `shouldBe` 46
-      enPassantSquare (getPosition "n5k1/4P1n1/4q2p/PpP1n3/3P1R2/3K1B2/1r2N2P/6r1 w - - 0 1") `shouldBe` -1
+      enPassantSquare (getPosition "n5k1/4P1n1/4q2p/PpP1n3/3P1R2/3K1B2/1r2N2P/6r1 w - - 0 1") `shouldBe` enPassantNotAvailable
 
   describe "pawnForwardAndCaptureMovesBitboard" $ do
     it "Returns a bitboard showing available landing squares (capture and non-capture) for a pawn on a given square" $ do

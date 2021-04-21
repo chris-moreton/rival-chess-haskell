@@ -125,7 +125,7 @@ enpassantFenPart fen = fenPart fen 3
 
 enPassantBitRef :: String -> Int
 enPassantBitRef enPassantFenPart =
-  if enPassantFenPart == "-" then -1 else bitRefFromAlgebraicSquareRef enPassantFenPart
+  if enPassantFenPart == "-" then enPassantNotAvailable else bitRefFromAlgebraicSquareRef enPassantFenPart
 
 getCastlePrivs :: String -> CastlePrivileges
 getCastlePrivs fen =

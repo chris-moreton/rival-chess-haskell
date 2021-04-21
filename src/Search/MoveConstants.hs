@@ -16,3 +16,6 @@ promotionKnightMoveMask = 256
 
 promotionFullMoveMask :: MoveMask
 promotionFullMoveMask = 448
+
+enPassantNotAvailable :: Int
+enPassantNotAvailable = -1

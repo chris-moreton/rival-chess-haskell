@@ -7,6 +7,7 @@ import Util.Fen
 import Util.Utils
 import Data.Bits
 import Util.Bitboards
+import Search.MoveConstants
 
 movePieceWithinBitboard :: Square -> Square -> Bitboard -> Bitboard
 movePieceWithinBitboard from to bb
@@ -35,10 +36,10 @@ enPassantCapturedPieceSquare enPassantSquare
   | enPassantSquare < 24 = enPassantSquare + 8
   | otherwise = enPassantSquare - 8
 
-removePawnWhenEnPassant :: Bitboard -> Square -> Square -> Bitboard
-removePawnWhenEnPassant bb to enPassantSquare
-  | enPassantSquare == to = removePieceFromBitboard (enPassantCapturedPieceSquare to) bb
-  | otherwise = bb
+removePawnWhenEnPassant :: Bitboard -> Bitboard -> Square -> Square -> Bitboard
+removePawnWhenEnPassant attackerBb defenderBb to enPassantSquare
+  | enPassantSquare == to && attackerBb .&. bit to /= 0 = removePieceFromBitboard (enPassantCapturedPieceSquare to) defenderBb
+  | otherwise = defenderBb
 
 removePawnIfPromotion :: Bitboard -> Bitboard
 removePawnIfPromotion bb = bb .&. 0b0000000011111111111111111111111111111111111111111111111100000000
@@ -64,8 +65,8 @@ makeSimpleMove position from to promotionPiece = do
   let isPawnMove = newWhitePawnBitboard /= whitePawnBitboard bb || newBlackPawnBitboard /= blackPawnBitboard bb
   Position {
        positionBitboards = PieceBitboards {
-            whitePawnBitboard = removePawnIfPromotion (removePawnWhenEnPassant newWhitePawnBitboard to (enPassantSquare position))
-          , blackPawnBitboard = removePawnIfPromotion (removePawnWhenEnPassant newBlackPawnBitboard to (enPassantSquare position))
+            whitePawnBitboard = removePawnIfPromotion (removePawnWhenEnPassant newBlackPawnBitboard newWhitePawnBitboard to (enPassantSquare position))
+          , blackPawnBitboard = removePawnIfPromotion (removePawnWhenEnPassant newWhitePawnBitboard newBlackPawnBitboard to (enPassantSquare position))
           , whiteKnightBitboard = createIfPromotion (promotionPiece == Knight) (whitePawnBitboard bb) (movePieceWithinBitboard from to (removePieceFromBitboard to (whiteKnightBitboard bb))) from to
           , blackKnightBitboard = createIfPromotion (promotionPiece == Knight) (blackPawnBitboard bb) (movePieceWithinBitboard from to (removePieceFromBitboard to (blackKnightBitboard bb))) from to
           , whiteBishopBitboard = createIfPromotion (promotionPiece == Bishop) (whitePawnBitboard bb) (movePieceWithinBitboard from to (removePieceFromBitboard to (whiteBishopBitboard bb))) from to
@@ -79,8 +80,8 @@ makeSimpleMove position from to promotionPiece = do
        }
      , mover = if m == White then Black else White
      , enPassantSquare = if m == White
-                            then if to - from == 16 && bit from .&. whitePawnBitboard bb /= 0 then from + 8 else -1
-                            else if from - to == 16 && bit from .&. blackPawnBitboard bb /= 0 then from - 8 else -1
+                            then if to - from == 16 && bit from .&. whitePawnBitboard bb /= 0 then from + 8 else enPassantNotAvailable
+                            else if from - to == 16 && bit from .&. blackPawnBitboard bb /= 0 then from - 8 else enPassantNotAvailable
      , positionCastlePrivs = CastlePrivileges {
             whiteKingCastleAvailable = whiteKingCastleAvailable (positionCastlePrivs position) && notElem from (map bitRefFromAlgebraicSquareRef ["e1","h1"]) && to /= bitRefFromAlgebraicSquareRef "h1"
           , whiteQueenCastleAvailable = whiteQueenCastleAvailable (positionCastlePrivs position) && notElem from (map bitRefFromAlgebraicSquareRef ["a1","e1"]) && to /= bitRefFromAlgebraicSquareRef "a1"
