@@ -10,7 +10,7 @@ import Search.MoveConstants
 substring :: String -> Int -> Int -> String
 substring text start end = take (end - start) (drop start text)
 
-fromSquareMask :: Square -> MoveMask
+fromSquareMask :: Square -> Move
 fromSquareMask sq = sq `shiftL` 16
 
 fromSquarePart :: Move -> Square

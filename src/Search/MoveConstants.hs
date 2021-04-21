@@ -1,20 +1,20 @@
 module Search.MoveConstants where
 
-import Types (MoveMask)
+import Types
 
-promotionQueenMoveMask :: MoveMask
+promotionQueenMoveMask :: Move
 promotionQueenMoveMask = 192
 
-promotionRookMoveMask :: MoveMask
+promotionRookMoveMask :: Move
 promotionRookMoveMask = 64
 
-promotionBishopMoveMask :: MoveMask
+promotionBishopMoveMask :: Move
 promotionBishopMoveMask = 128
 
-promotionKnightMoveMask :: MoveMask
+promotionKnightMoveMask :: Move
 promotionKnightMoveMask = 256
 
-promotionFullMoveMask :: MoveMask
+promotionFullMoveMask :: Move
 promotionFullMoveMask = 448
 
 enPassantNotAvailable :: Int

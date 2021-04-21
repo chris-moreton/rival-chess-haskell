@@ -1,9 +1,13 @@
 module Types where
 
+import Data.Array.IArray
+import qualified Data.DList as DList
+
 type Square = Int
 type Bitboard = Int
-type MoveMask = Int
 type Move = Int
+type BitboardArray = Array Int Bitboard
+type MoveList = DList.DList Move
 
 data Mover = White | Black deriving (Enum,Show,Eq)
 data Piece = Pawn | King | Queen | Bishop | Knight | Rook deriving (Enum,Show,Eq)

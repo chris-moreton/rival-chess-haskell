@@ -49,6 +49,7 @@ library
     , text
     , sort
     , array
+    , dlist
   default-language: Haskell2010
 
 executable rival-exe
@@ -78,5 +79,7 @@ test-suite rival-test
     , QuickCheck
     , rival
     , time
+    , array
     , sort
+    , dlist
   default-language: Haskell2010
