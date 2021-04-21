@@ -11,6 +11,7 @@ import Util.Utils
 import Search.MoveConstants
 import Data.Array.IArray
 import qualified Data.DList as DList
+import qualified Data.Vector.Unboxed as V
 
 bitboardForMover :: Position -> Piece -> Bitboard
 bitboardForMover position = bitboardForColour (positionBitboards position) (mover position)
@@ -89,16 +90,16 @@ recurGenerateSliderMoves [] _ _ result = result
 recurGenerateSliderMoves fromSquares position magicVars result = do
   let fromSquare = head fromSquares
 
-  let moveMagic = magicMoves magicVars!fromSquare
-  let numberMagic = magicNumber magicVars!fromSquare
-  let shiftMagic = magicNumberShifts magicVars!fromSquare
-  let maskMagic = occupancyMask magicVars!fromSquare
+  let moveMagic = magicMoves magicVars ! fromSquare
+  let numberMagic = magicNumber magicVars V.! fromSquare
+  let shiftMagic = magicNumberShifts magicVars V.! fromSquare
+  let maskMagic = occupancyMask magicVars V.! fromSquare
 
   let occupancy = (.&.) (allPiecesBitboard position) maskMagic
-  let rawIndex = fromIntegral(occupancy * numberMagic) :: Word
+  let rawIndex = fromIntegral (occupancy * numberMagic) :: Word
 
   let toSquaresMagicIndex = fromIntegral(shiftR rawIndex shiftMagic) :: Int
-  let toSquaresBitboard = (.&.) (moveMagic!toSquaresMagicIndex) (allBitsExceptFriendlyPieces position)
+  let toSquaresBitboard = (.&.) (moveMagic V.! toSquaresMagicIndex) (allBitsExceptFriendlyPieces position)
 
   let toSquares = bitRefList toSquaresBitboard
 
@@ -201,19 +202,18 @@ isCheck position colour = isSquareAttackedBy position (kingSquare position colou
 
 isBishopAttackingSquare :: Square -> Square -> Bitboard -> Bool
 isBishopAttackingSquare attackedSquare pieceSquare allPieceBitboard =
-  (.&.) ((magicMoves magicBishopVars ! pieceSquare) ! magicIndexForPiece Bishop pieceSquare allPieceBitboard) (1 `shiftL` attackedSquare) /= 0
+  (.&.) ((magicMoves magicBishopVars ! pieceSquare) V.! magicIndexForPiece Bishop pieceSquare allPieceBitboard) (1 `shiftL` attackedSquare) /= 0
 
 isRookAttackingSquare :: Square -> Square -> Bitboard -> Bool
 isRookAttackingSquare attackedSquare pieceSquare allPieceBitboard =
-  (.&.) ((magicMoves magicRookVars ! pieceSquare) ! magicIndexForPiece Rook pieceSquare allPieceBitboard) (1 `shiftL` attackedSquare) /= 0
+  (.&.) ((magicMoves magicRookVars ! pieceSquare) V.! magicIndexForPiece Rook pieceSquare allPieceBitboard) (1 `shiftL` attackedSquare) /= 0
 
 magicIndexForPiece :: Piece -> Square -> Bitboard -> Int
 magicIndexForPiece piece pieceSquare allPieceBitboard = do
     let magicVars = if piece == Rook then magicRookVars else magicBishopVars
-    let moveMagic = magicMoves magicVars!pieceSquare
-    let numberMagic = magicNumber magicVars!pieceSquare
-    let shiftMagic = magicNumberShifts magicVars!pieceSquare
-    let maskMagic = occupancyMask magicVars!pieceSquare
+    let numberMagic = magicNumber magicVars V.! pieceSquare
+    let shiftMagic = magicNumberShifts magicVars V.!pieceSquare
+    let maskMagic = occupancyMask magicVars V.! pieceSquare
     let occupancy = (.&.) allPieceBitboard maskMagic
     let rawIndex = fromIntegral(occupancy * numberMagic) :: Word
     fromIntegral(shiftR rawIndex shiftMagic) :: Int
