@@ -38,15 +38,6 @@ recurBitRefList bitboard result = do
   let square = countTrailingZeros bitboard
   recurBitRefList (xor bitboard (bit square)) (square : result)
 
-bitString :: Bitboard -> String
-bitString bitboard = recurBitString bitboard 63 ""
-  
-recurBitString :: Bitboard -> Int -> String -> String
-recurBitString _ (-1) result = result
-recurBitString bitboard square result = do
-  let bitMask = bit square
-  recurBitString (xor bitboard bitMask) (square - 1) (result ++ if bitMask == (.&.) bitMask bitboard then "1" else "0")
-
 allBitsExceptFriendlyPieces :: Position -> Bitboard
 allBitsExceptFriendlyPieces position = complement (foldl (.|.) 0 (bitboardListForColour position (mover position)))
 
@@ -258,11 +249,11 @@ isSquareAttackedBy position attackedSquare attacker = do
 
 moves :: Position -> [Move]
 moves position = DList.toList
-  (generatePawnMoves position `DList.append`
-  generateKnightMoves position `DList.append`
-  generateBishopMoves position `DList.append`
-  generateRookMoves position `DList.append`
-  generateKingMoves position `DList.append`
-  generateCastleMoves position)
+  ( generatePawnMoves position `DList.append`
+    generateKnightMoves position `DList.append`
+    generateBishopMoves position `DList.append`
+    generateRookMoves position `DList.append`
+    generateKingMoves position `DList.append`
+    generateCastleMoves position )
 
 

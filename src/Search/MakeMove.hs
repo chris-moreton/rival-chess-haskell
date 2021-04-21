@@ -19,16 +19,16 @@ removePieceFromBitboard square = (.&.) (complement (bit square))
 
 moveWhiteRookWhenCastling :: Square -> Square -> Bitboard -> Bitboard -> Bitboard
 moveWhiteRookWhenCastling from to kingBoard rookBoard
-  | (.&.) kingBoard (1 `shiftL` bitRefFromAlgebraicSquareRef "e1") == 0 = rookBoard
-  | from == bitRefFromAlgebraicSquareRef "e1" && to == bitRefFromAlgebraicSquareRef "g1" = movePieceWithinBitboard (bitRefFromAlgebraicSquareRef "h1") (bitRefFromAlgebraicSquareRef "f1") rookBoard
-  | from == bitRefFromAlgebraicSquareRef "e1" && to == bitRefFromAlgebraicSquareRef "c1" = movePieceWithinBitboard (bitRefFromAlgebraicSquareRef "a1") (bitRefFromAlgebraicSquareRef "d1") rookBoard
+  | (.&.) kingBoard (1 `shiftL` e1Bit) == 0 = rookBoard
+  | from == e1Bit && to == g1Bit = movePieceWithinBitboard h1Bit f1Bit rookBoard
+  | from == e1Bit && to == c1Bit = movePieceWithinBitboard a1Bit d1Bit rookBoard
   | otherwise = rookBoard
 
 moveBlackRookWhenCastling :: Square -> Square -> Bitboard -> Bitboard -> Bitboard
 moveBlackRookWhenCastling from to kingBoard rookBoard
-  | (.&.) kingBoard (1 `shiftL` bitRefFromAlgebraicSquareRef "e8") == 0 = rookBoard
-  | from == bitRefFromAlgebraicSquareRef "e8" && to == bitRefFromAlgebraicSquareRef "g8" = movePieceWithinBitboard (bitRefFromAlgebraicSquareRef "h8") (bitRefFromAlgebraicSquareRef "f8") rookBoard
-  | from == bitRefFromAlgebraicSquareRef "e8" && to == bitRefFromAlgebraicSquareRef "c8" = movePieceWithinBitboard (bitRefFromAlgebraicSquareRef "a8") (bitRefFromAlgebraicSquareRef "d8") rookBoard
+  | (.&.) kingBoard (1 `shiftL` e8Bit) == 0 = rookBoard
+  | from == e8Bit && to == g8Bit = movePieceWithinBitboard h8Bit f8Bit rookBoard
+  | from == e8Bit && to == c8Bit = movePieceWithinBitboard a8Bit d8Bit rookBoard
   | otherwise = rookBoard
 
 enPassantCapturedPieceSquare :: Square -> Square
@@ -83,10 +83,10 @@ makeSimpleMove position from to promotionPiece = do
                             then if to - from == 16 && bit from .&. whitePawnBitboard bb /= 0 then from + 8 else enPassantNotAvailable
                             else if from - to == 16 && bit from .&. blackPawnBitboard bb /= 0 then from - 8 else enPassantNotAvailable
      , positionCastlePrivs = CastlePrivileges {
-            whiteKingCastleAvailable = whiteKingCastleAvailable (positionCastlePrivs position) && notElem from (map bitRefFromAlgebraicSquareRef ["e1","h1"]) && to /= bitRefFromAlgebraicSquareRef "h1"
-          , whiteQueenCastleAvailable = whiteQueenCastleAvailable (positionCastlePrivs position) && notElem from (map bitRefFromAlgebraicSquareRef ["a1","e1"]) && to /= bitRefFromAlgebraicSquareRef "a1"
-          , blackKingCastleAvailable = blackKingCastleAvailable (positionCastlePrivs position) && notElem from (map bitRefFromAlgebraicSquareRef ["e8","h8"]) && to /= bitRefFromAlgebraicSquareRef "h8"
-          , blackQueenCastleAvailable = blackQueenCastleAvailable (positionCastlePrivs position) && notElem from (map bitRefFromAlgebraicSquareRef ["a8","e8"]) && to /= bitRefFromAlgebraicSquareRef "a8"
+            whiteKingCastleAvailable = whiteKingCastleAvailable (positionCastlePrivs position) && notElem from [e1Bit,h1Bit] && to /= h1Bit
+          , whiteQueenCastleAvailable = whiteQueenCastleAvailable (positionCastlePrivs position) && notElem from [a1Bit,e1Bit] && to /= a1Bit
+          , blackKingCastleAvailable = blackKingCastleAvailable (positionCastlePrivs position) && notElem from [e8Bit,h8Bit] && to /= h8Bit
+          , blackQueenCastleAvailable = blackQueenCastleAvailable (positionCastlePrivs position) && notElem from [a8Bit,e8Bit] && to /= a8Bit
        }
      , halfMoves = if isCapture || isPawnMove then 0 else halfMoves position + 1
      , moveNumber = (+) (moveNumber position) (if m == Black then 1 else 0)

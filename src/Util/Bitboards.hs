@@ -7,6 +7,15 @@ import Util.Utils
 import Types
 import Data.Array.IArray
 
+bitString :: Bitboard -> String
+bitString bitboard = recurBitString bitboard 63 ""
+
+recurBitString :: Bitboard -> Int -> String -> String
+recurBitString _ (-1) result = result
+recurBitString bitboard square result = do
+  let bitMask = bit square
+  recurBitString (xor bitboard bitMask) (square - 1) (result ++ if bitMask == (.&.) bitMask bitboard then "1" else "0")
+
 bitboardListForColour :: Position -> Mover -> [Bitboard]
 bitboardListForColour position colour = do
   let bitboards = positionBitboards position
@@ -23,7 +32,10 @@ promotionSquares :: Bitboard
 promotionSquares = 0b1111111100000000000000000000000000000000000000000000000011111111
 
 allPiecesBitboard :: Position -> Bitboard
-allPiecesBitboard position = foldl (.|.) 0 (bitboardListForColour position White ++ bitboardListForColour position Black)
+allPiecesBitboard position = foldl (.|.) 0 [
+      whitePawnBitboard bitboards,whiteKnightBitboard bitboards,whiteKingBitboard bitboards,whiteBishopBitboard bitboards,whiteQueenBitboard bitboards,whiteRookBitboard bitboards
+    , blackPawnBitboard bitboards,blackKnightBitboard bitboards,blackKingBitboard bitboards,blackBishopBitboard bitboards,blackQueenBitboard bitboards,blackRookBitboard bitboards]
+        where bitboards = positionBitboards position
 
 emptySquaresBitboard :: Position -> Bitboard
 emptySquaresBitboard position = complement (allPiecesBitboard position)
