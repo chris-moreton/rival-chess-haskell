@@ -1,0 +1,4 @@
+date
+cabal test
+date
+

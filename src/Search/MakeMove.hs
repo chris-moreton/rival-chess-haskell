@@ -1,4 +1,4 @@
-{-# LANGUAGE BinaryLiterals,NegativeLiterals #-}
+{-# LANGUAGE BinaryLiterals,NegativeLiterals,StrictData #-}
 
 module Search.MakeMove where
 

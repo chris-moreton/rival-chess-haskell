@@ -1,3 +1,5 @@
+{-# LANGUAGE StrictData #-}
+
 module Search.Perft where
 
 import Types

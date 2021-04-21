@@ -1,4 +1,4 @@
-{-# LANGUAGE BinaryLiterals,NegativeLiterals #-}
+{-# LANGUAGE BinaryLiterals,NegativeLiterals,StrictData #-}
 
 module Util.Bitboards where
 
