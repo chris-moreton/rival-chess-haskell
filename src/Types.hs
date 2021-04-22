@@ -2,11 +2,12 @@ module Types where
 
 import Data.Array.IArray
 import qualified Data.DList as DList
+import qualified Data.Vector.Storable as V
 
 type Square = Int
 type Bitboard = Int
 type Move = Int
-type BitboardArray = Array Int Bitboard
+type BitboardArray = V.Vector Bitboard
 type MoveList = DList.DList Move
 
 data Mover = White | Black deriving (Enum,Show,Eq)

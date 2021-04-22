@@ -85,4 +85,6 @@ test-suite rival-test
     , array
     , sort
     , dlist
+    , vector
+    , unboxing-vector    
   default-language: Haskell2010
