@@ -1,7 +1,7 @@
 {-# LANGUAGE StrictData #-}
 
 module Search.MoveGenerator where
-  
+
 import Types
 import Data.Word
 import Data.Bits
@@ -60,7 +60,7 @@ recurKnightMoves position fromSquares result =
               toSquares = bitRefList ((.&.) (knightMovesBitboards V.! fromSquare) (allBitsExceptFriendlyPieces position))
 
 generateKingMoves :: Position -> MoveList
-generateKingMoves position = 
+generateKingMoves position =
     movesFromToSquares kingSquare toSquares
         where kingSquare = countTrailingZeros (bitboardForMover position King)
               toSquares = bitRefList ((.&.) (kingMovesBitboards V.! kingSquare) (allBitsExceptFriendlyPieces position))
@@ -81,7 +81,7 @@ generateSliderMoves position piece = recurGenerateSliderMoves fromSquares positi
 
 recurGenerateSliderMoves :: [Square] -> Position -> MagicVars -> MoveList -> MoveList
 recurGenerateSliderMoves [] _ _ result = result
-recurGenerateSliderMoves fromSquares position magicVars result = 
+recurGenerateSliderMoves fromSquares position magicVars result =
   recurGenerateSliderMoves (tail fromSquares) position magicVars (result `DList.append` thisResult)
     where fromSquare = head fromSquares
           moveMagic = magicMoves magicVars ! fromSquare
@@ -221,20 +221,37 @@ bishopMovePiecesBitboard position mover = do
     then (.|.) (whiteBishopBitboard pb) (whiteQueenBitboard pb)
     else (.|.) (blackBishopBitboard pb) (blackQueenBitboard pb)
 
+isSquareAttackedByKnight :: Position -> Square -> Mover -> Bool
+isSquareAttackedByKnight position attackedSquare attacker = (.&.) knightBitboard (knightMovesBitboards V.! attackedSquare) /= 0
+    where knightBitboard = (if attacker == White then whiteKnightBitboard else blackKnightBitboard) pb
+          pb = positionBitboards position
+
+isSquareAttackedByKing :: Position -> Square -> Mover -> Bool
+isSquareAttackedByKing position attackedSquare attacker = (.&.) kingBitboard (kingMovesBitboards V.! attackedSquare) /= 0
+    where kingBitboard = (if attacker == White then whiteKingBitboard else blackKingBitboard) pb
+          pb = positionBitboards position
+
+isSquareAttackedByPawn :: Position -> Square -> Mover -> Bool
+isSquareAttackedByPawn position attackedSquare attacker = (.&.) pawnBitboard (pawnMovesCaptureOfColour defenderColour V.! attackedSquare) /= 0
+    where pawnBitboard = (if attacker == White then whitePawnBitboard else blackPawnBitboard) pb
+          pb = positionBitboards position
+          defenderColour = if attacker == White then Black else White
+
+isSquareAttackedByBishop :: Position -> Square -> Mover -> Bool
+isSquareAttackedByBishop position attackedSquare attacker = any (\x -> isBishopAttackingSquare attackedSquare x apb) (bitRefList (bishopMovePiecesBitboard position attacker))
+    where apb = allPiecesBitboard position
+
+isSquareAttackedByRook :: Position -> Square -> Mover -> Bool
+isSquareAttackedByRook position attackedSquare attacker = any (\x -> isRookAttackingSquare attackedSquare x apb) (bitRefList (rookMovePiecesBitboard position attacker))
+    where apb = allPiecesBitboard position
+
 isSquareAttackedBy :: Position -> Square -> Mover -> Bool
 isSquareAttackedBy position attackedSquare attacker = do
-  let pb = positionBitboards position
-  let apb = allPiecesBitboard position
-  let defenderColour = if attacker == White then Black else White
-  let knightBitboard = if attacker == White then whiteKnightBitboard pb else blackKnightBitboard pb
-  let kingBitboard = if attacker == White then whiteKingBitboard pb else blackKingBitboard pb
-  let pawnBitboard = if attacker == White then whitePawnBitboard pb else blackPawnBitboard pb
-  let pawnAttack = (.&.) pawnBitboard (pawnMovesCaptureOfColour defenderColour V.! attackedSquare) /= 0
-  let knightAttack = (.&.) knightBitboard (knightMovesBitboards V.! attackedSquare) /= 0
-  let kingAttack = (.&.) kingBitboard (kingMovesBitboards V.! attackedSquare) /= 0
-  let bishopAttack = any (\x -> isBishopAttackingSquare attackedSquare x apb) (bitRefList (bishopMovePiecesBitboard position attacker))
-  let rookAttack = any (\x -> isRookAttackingSquare attackedSquare x apb) (bitRefList (rookMovePiecesBitboard position attacker))
-  pawnAttack || knightAttack || kingAttack || bishopAttack || rookAttack
+  isSquareAttackedByPawn position attackedSquare attacker || 
+    isSquareAttackedByKnight position attackedSquare attacker || 
+    isSquareAttackedByKing position attackedSquare attacker || 
+    isSquareAttackedByRook position attackedSquare attacker || 
+    isSquareAttackedByBishop position attackedSquare attacker
 
 moves :: Position -> [Move]
 moves position = DList.toList

@@ -564,29 +564,21 @@ main = hspec $ do
 
   describe "Perft Test" $ do
    it "Returns the total number of moves in a full move tree of a given depth with a given position as its head" $ do
-
-    --  perft (getPosition "8/2p5/3p4/KP5r/1R3p1k/8/4P1P1/8 w - -") 5 `shouldBe` 11030083
-
-    --  perft (getPosition "8/8/8/KP6/5pPk/8/4P3/8 b - g3 0 1") 1 `shouldBe` 46
-    --  perft (getPosition "8/2p5/8/KP6/5pPk/8/4P3/8 b - g3 0 1") 1 `shouldBe` 57
-
-    --  perft (getPosition "8/2p5/3p4/KP6/5pPk/8/4P3/8 b - g3 0 1") 1 `shouldBe` 64
-
-    --  perft (getPosition "8/2p5/K2p4/1P5r/1R3p1k/8/4P1P1/8 b - - 0 1") 1 `shouldBe` 240
-    --  perft (getPosition "8/2p5/3p4/1P5r/KR3p1k/8/4P1P1/8 b - - 0 1") 1 `shouldBe` 224
-    --  perft (getPosition "8/2p5/3p4/KP5r/R4p1k/8/4P1P1/8 b - - 0 1") 1 `shouldBe` 202
-    --  perft (getPosition "8/2p5/3p4/KP5r/1R2Pp1k/8/6P1/8 b - e3 0 1") 1 `shouldBe` 177
-
-    --  perft (getPosition "8/2p5/3p4/KP5r/1R3pPk/8/4P3/8 b - g3 0 1") 2 `shouldBe` 3702
-    --  perft (getPosition "8/2p5/3p4/KP5r/1R3pPk/8/4P3/8 b - g3 0 1") 1 `shouldBe` 226
-
-    --  perft (getPosition "8/8/3p4/KPp4r/1R3p1k/4P3/6P1/8 w - c6 0 1") 1 `shouldBe` 190
-
-    --  perft (getPosition "8/2p5/3p4/KP5r/1R3p1k/8/4P1P1/8 w - -") 0 `shouldBe` 14
-    --  perft (getPosition "8/2p5/3p4/KP5r/1R3p1k/8/4P1P1/8 w - -") 1 `shouldBe` 191
-    --  perft (getPosition "8/2p5/3p4/KP5r/1R3p1k/8/4P1P1/8 w - -") 2 `shouldBe` 2812
-    --  perft (getPosition "8/2p5/3p4/KP5r/1R3p1k/8/4P1P1/8 w - -") 3 `shouldBe` 43238
-    --  perft (getPosition "8/2p5/3p4/KP5r/1R3p1k/8/4P1P1/8 w - -") 4 `shouldBe` 674624
+     perft (getPosition "8/8/8/KP6/5pPk/8/4P3/8 b - g3 0 1") 1 `shouldBe` 46
+     perft (getPosition "8/2p5/8/KP6/5pPk/8/4P3/8 b - g3 0 1") 1 `shouldBe` 57
+     perft (getPosition "8/2p5/3p4/KP6/5pPk/8/4P3/8 b - g3 0 1") 1 `shouldBe` 64
+     perft (getPosition "8/2p5/K2p4/1P5r/1R3p1k/8/4P1P1/8 b - - 0 1") 1 `shouldBe` 240
+     perft (getPosition "8/2p5/3p4/1P5r/KR3p1k/8/4P1P1/8 b - - 0 1") 1 `shouldBe` 224
+     perft (getPosition "8/2p5/3p4/KP5r/R4p1k/8/4P1P1/8 b - - 0 1") 1 `shouldBe` 202
+     perft (getPosition "8/2p5/3p4/KP5r/1R2Pp1k/8/6P1/8 b - e3 0 1") 1 `shouldBe` 177
+     perft (getPosition "8/2p5/3p4/KP5r/1R3pPk/8/4P3/8 b - g3 0 1") 2 `shouldBe` 3702
+     perft (getPosition "8/2p5/3p4/KP5r/1R3pPk/8/4P3/8 b - g3 0 1") 1 `shouldBe` 226
+     perft (getPosition "8/8/3p4/KPp4r/1R3p1k/4P3/6P1/8 w - c6 0 1") 1 `shouldBe` 190
+     perft (getPosition "8/2p5/3p4/KP5r/1R3p1k/8/4P1P1/8 w - -") 0 `shouldBe` 14
+     perft (getPosition "8/2p5/3p4/KP5r/1R3p1k/8/4P1P1/8 w - -") 1 `shouldBe` 191
+     perft (getPosition "8/2p5/3p4/KP5r/1R3p1k/8/4P1P1/8 w - -") 2 `shouldBe` 2812
+     perft (getPosition "8/2p5/3p4/KP5r/1R3p1k/8/4P1P1/8 w - -") 3 `shouldBe` 43238
+     perft (getPosition "8/2p5/3p4/KP5r/1R3p1k/8/4P1P1/8 w - -") 4 `shouldBe` 674624
     --  perft (getPosition "8/2p5/3p4/KP5r/1R3p1k/8/4P1P1/8 w - -") 6 `shouldBe` 178633661
     --  perft (getPosition "8/2p5/3p4/KP5r/1R3p1k/8/4P1P1/8 w - -") 7 `shouldBe` 3009794393
 
