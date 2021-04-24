@@ -1,4 +1,4 @@
-{-# LANGUAGE BinaryLiterals,NegativeLiterals,StrictData #-}
+{-# LANGUAGE BinaryLiterals,NegativeLiterals,StrictData,BangPatterns #-}
 
 module Search.MakeMove where
 
@@ -10,50 +10,50 @@ import Util.Bitboards
 import Search.MoveConstants
 
 movePieceWithinBitboard :: Square -> Square -> Bitboard -> Bitboard
-movePieceWithinBitboard from to bb
+movePieceWithinBitboard !from !to !bb
   | (.&.) bb (bit from) /= 0 = (.|.) ((.&.) bb (complement (bit from))) (bit to)
   | otherwise = bb
 
 removePieceFromBitboard :: Square -> Bitboard -> Bitboard
-removePieceFromBitboard square = (.&.) (complement (bit square))
+removePieceFromBitboard !square = (.&.) (complement (bit square))
 
 moveWhiteRookWhenCastling :: Square -> Square -> Bitboard -> Bitboard -> Bitboard
-moveWhiteRookWhenCastling from to kingBoard rookBoard
+moveWhiteRookWhenCastling !from !to !kingBoard !rookBoard
   | from == e1Bit && to == g1Bit && kingMoving = movePieceWithinBitboard h1Bit f1Bit rookBoard
   | from == e1Bit && to == c1Bit && kingMoving = movePieceWithinBitboard a1Bit d1Bit rookBoard
   | otherwise = rookBoard
   where kingMoving = (.&.) kingBoard (bit e1Bit) /= 0
 
 moveBlackRookWhenCastling :: Square -> Square -> Bitboard -> Bitboard -> Bitboard
-moveBlackRookWhenCastling from to kingBoard rookBoard
+moveBlackRookWhenCastling !from !to !kingBoard !rookBoard
   | (.&.) kingBoard (bit e8Bit) == 0 = rookBoard
   | from == e8Bit && to == g8Bit = movePieceWithinBitboard h8Bit f8Bit rookBoard
   | from == e8Bit && to == c8Bit = movePieceWithinBitboard a8Bit d8Bit rookBoard
   | otherwise = rookBoard
 
 enPassantCapturedPieceSquare :: Square -> Square
-enPassantCapturedPieceSquare enPassantSquare
+enPassantCapturedPieceSquare !enPassantSquare
   | enPassantSquare < 24 = enPassantSquare + 8
   | otherwise = enPassantSquare - 8
 
 removePawnWhenEnPassant :: Bitboard -> Bitboard -> Square -> Square -> Bitboard
-removePawnWhenEnPassant attackerBb defenderBb to enPassantSquare
+removePawnWhenEnPassant !attackerBb !defenderBb !to !enPassantSquare
   | enPassantSquare == to && attackerBb .&. bit to /= 0 = removePieceFromBitboard (enPassantCapturedPieceSquare to) defenderBb
   | otherwise = defenderBb
 
 removePawnIfPromotion :: Bitboard -> Bitboard
-removePawnIfPromotion bb = bb .&. 0b0000000011111111111111111111111111111111111111111111111100000000
+removePawnIfPromotion !bb = bb .&. 0b0000000011111111111111111111111111111111111111111111111100000000
 
 isPromotionSquare :: Square -> Bool
-isPromotionSquare sq = (bit sq .&. promotionSquares) /= 0
+isPromotionSquare !sq = (bit sq .&. promotionSquares) /= 0
 
 createIfPromotion :: Bool -> Bitboard -> Bitboard -> Square -> Square -> Bitboard
-createIfPromotion isPromotionPiece pawnBitboard pieceBitboard fromSquare toSquare
+createIfPromotion !isPromotionPiece !pawnBitboard !pieceBitboard !fromSquare !toSquare
   | isPromotionPiece && isPromotionSquare toSquare && bit fromSquare .&. pawnBitboard /= 0 = pieceBitboard .|. bit toSquare
   | otherwise = pieceBitboard
 
 makeMove :: Position -> Move -> Position
-makeMove position move =
+makeMove !position !move =
     Position {
         positionBitboards = PieceBitboards {
               whitePawnBitboard = removePawnIfPromotion (removePawnWhenEnPassant newBlackPawnBitboard newWhitePawnBitboard to (enPassantSquare position))
@@ -90,4 +90,6 @@ makeMove position move =
           newWhitePawnBitboard = movePieceWithinBitboard from to (removePieceFromBitboard to (whitePawnBitboard bb))
           newBlackPawnBitboard = movePieceWithinBitboard from to (removePieceFromBitboard to (blackPawnBitboard bb))
           isPawnMove = newWhitePawnBitboard /= whitePawnBitboard bb || newBlackPawnBitboard /= blackPawnBitboard bb
+
+
 
