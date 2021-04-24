@@ -1,4 +1,4 @@
-{-# LANGUAGE BinaryLiterals,NegativeLiterals,StrictData #-}
+{-# LANGUAGE BinaryLiterals,NegativeLiterals,StrictData,BangPatterns #-}
 
 module Util.Bitboards where
 
@@ -18,7 +18,7 @@ recurBitString bitboard square result = do
   recurBitString (xor bitboard bitMask) (square - 1) (result ++ if bitMask == (.&.) bitMask bitboard then "1" else "0")
 
 bitboardListForColour :: Position -> Mover -> [Bitboard]
-bitboardListForColour position colour = do
+bitboardListForColour !position !colour = do
   let bitboards = positionBitboards position
   if colour == White
   then
@@ -27,25 +27,25 @@ bitboardListForColour position colour = do
     [blackPawnBitboard bitboards,blackKnightBitboard bitboards,blackKingBitboard bitboards,blackBishopBitboard bitboards,blackQueenBitboard bitboards,blackRookBitboard bitboards]
 
 enemyBitboard :: Position -> Bitboard
-enemyBitboard position = foldl (.|.) 0 (bitboardListForColour position (opponent position))
+enemyBitboard !position = foldl (.|.) 0 (bitboardListForColour position (opponent position))
 
 promotionSquares :: Bitboard
 promotionSquares = 0b1111111100000000000000000000000000000000000000000000000011111111
 
 allPiecesBitboard :: Position -> Bitboard
-allPiecesBitboard position = foldl (.|.) 0 [
+allPiecesBitboard !position = foldl (.|.) 0 [
       whitePawnBitboard bitboards,whiteKnightBitboard bitboards,whiteKingBitboard bitboards,whiteBishopBitboard bitboards,whiteQueenBitboard bitboards,whiteRookBitboard bitboards
     , blackPawnBitboard bitboards,blackKnightBitboard bitboards,blackKingBitboard bitboards,blackBishopBitboard bitboards,blackQueenBitboard bitboards,blackRookBitboard bitboards]
         where bitboards = positionBitboards position
 
 emptySquaresBitboard :: Position -> Bitboard
-emptySquaresBitboard position = complement (allPiecesBitboard position)
+emptySquaresBitboard !position = complement (allPiecesBitboard position)
 
 orWithURightShiftedSelf :: Bitboard -> Int -> Bitboard
-orWithURightShiftedSelf x y = (.|.) x (shiftR x y)
+orWithURightShiftedSelf !x !y = (.|.) x (shiftR x y)
 
 orWithULeftShiftedSelf :: Bitboard -> Int -> Bitboard
-orWithULeftShiftedSelf x y = (.|.) x (shiftL x y)
+orWithULeftShiftedSelf !x !y = (.|.) x (shiftL x y)
 
 southFill :: Bitboard -> Bitboard
 southFill x = orWithURightShiftedSelf (orWithURightShiftedSelf (orWithURightShiftedSelf x 8) 16) 32

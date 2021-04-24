@@ -1,4 +1,4 @@
-{-# LANGUAGE StrictData #-}
+{-# LANGUAGE StrictData,BangPatterns #-}
 
 module Search.Perft where
 
@@ -7,7 +7,7 @@ import Search.MakeMove
 import Search.MoveGenerator
 
 perft :: Position -> Int -> Int
-perft position depth = do
+perft !position !depth = do
   let newPositions = map (makeMove position) (moves position)
   let notInCheckPositions = filter (\x -> not (isCheck x (mover position))) newPositions
   if depth == 0
