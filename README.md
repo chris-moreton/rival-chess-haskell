@@ -58,7 +58,7 @@ when calculating a move from a given position.
 
 ### Perft Test                      
 
-    Counts the total number of positions in a full-width, unpruned search tree from a given starting position and to a given depth. For example, for the starting position at depth 0, the result should be 20. At depth 1, the result should be 400.
+Counts the total number of positions in a full-width, unpruned search tree from a given starting position and to a given depth. For example, for the starting position at depth 0, the result should be 20. At depth 1, the result should be 400.
 
     perft :: Position -> Int -> Int
     perft position depth = do
