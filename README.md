@@ -56,6 +56,18 @@ when calculating a move from a given position.
                    (moveFromAlgebraicMove "g2g1q")
                       `shouldBe` (getPosition "2kr3R/pppp1p1p/2n1b3/2bn1q2/8/4p3/PPPP1P1P/RNBQK1qR w KQ - 0 2")
 
+### Perft Test                      
+
+    Counts the total number of positions in a full-width, unpruned search tree from a given starting position and to a given depth. For example, for the starting position at depth 0, the result should be 20. At depth 1, the result should be 400.
+
+    perft :: Position -> Int -> Int
+    perft position depth = do
+    let newPositions = map (makeMove position) (moves position)
+    let notInCheckPositions = filter (\x -> not (isCheck x (mover position))) newPositions
+    if depth == 0
+        then length notInCheckPositions
+        else sum (map (\x -> perft x (depth - 1)) notInCheckPositions)
+
 ### Background
 
 Rival Chess was first written in Pascal in 1988, then C++ in 1994. It was converted to Java in 2010, then to Kotlin in 2019.
