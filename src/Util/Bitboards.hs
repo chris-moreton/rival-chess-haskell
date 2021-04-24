@@ -53,7 +53,7 @@ southFill x = orWithURightShiftedSelf (orWithURightShiftedSelf (orWithURightShif
 northFill :: Bitboard -> Bitboard
 northFill x = orWithULeftShiftedSelf (orWithULeftShiftedSelf (orWithULeftShiftedSelf x 8) 16) 32
 
-everyEighthBitFrom :: Bitboard -> Bitboard
+everyEighthBitFrom :: Int -> Bitboard
 everyEighthBitFrom x = if x < 8 then shiftL 1 x else (.|.) (shiftL 1 x) (everyEighthBitFrom ((-) x 8))
 
 setBits :: [Int] -> Bitboard
@@ -99,14 +99,14 @@ g8H8Bits = setBits [g8Bit,h8Bit]
 a8B8Bits = setBits [a8Bit,b8Bit]
 b8C8Bits = setBits [b8Bit,c8Bit]
 
-a1Bit = 7 :: Bitboard
-b1Bit = 6 :: Bitboard
-c1Bit = 5 :: Bitboard
-d1Bit = 4 :: Bitboard
-e1Bit = 3 :: Bitboard
-f1Bit = 2 :: Bitboard
-g1Bit = 1 :: Bitboard
-h1Bit = 0 :: Bitboard
+a1Bit = 7 :: Int
+b1Bit = 6 :: Int
+c1Bit = 5 :: Int
+d1Bit = 4 :: Int
+e1Bit = 3 :: Int
+f1Bit = 2 :: Int
+g1Bit = 1 :: Int
+h1Bit = 0 :: Int
 
 a2Bit = (+) a1Bit 8
 b2Bit = (+) b1Bit 8

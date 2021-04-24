@@ -108,27 +108,24 @@ promotionMoves move = DList.fromList ([
   , (.|.) move promotionKnightMoveMask] :: [Move])
 
 generatePawnMovesFromToSquares :: Square -> [Square] -> MoveList
-generatePawnMovesFromToSquares fromSquare toSquares = do
-  let mask = fromSquareMask fromSquare
-  recurGeneratePawnMovesFromToSquares mask toSquares DList.empty
+generatePawnMovesFromToSquares fromSquare toSquares = recurGeneratePawnMovesFromToSquares mask toSquares DList.empty
+  where mask = fromSquareMask fromSquare
 
 recurGeneratePawnMovesFromToSquares :: Move -> [Square] -> MoveList -> MoveList
 recurGeneratePawnMovesFromToSquares _ [] result = result
-recurGeneratePawnMovesFromToSquares mask toSquares result = do
-  let thisToSquare = head toSquares
-  let baseMove = (.|.) mask thisToSquare
-  let newResult = if thisToSquare >= 56 || thisToSquare <= 7
+recurGeneratePawnMovesFromToSquares mask toSquares result = recurGeneratePawnMovesFromToSquares mask (tail toSquares) newResult
+  where thisToSquare = head toSquares
+        baseMove = (.|.) mask thisToSquare
+        newResult = if thisToSquare >= 56 || thisToSquare <= 7
                     then promotionMoves baseMove `DList.append` result
                     else DList.singleton baseMove `DList.append` result
-  recurGeneratePawnMovesFromToSquares mask (tail toSquares) newResult
-
+  
 generatePawnMoves :: Position -> MoveList
-generatePawnMoves position = do
-  let bitboard = bitboardForMover position Pawn
-  let forwardPawnMoves = if mover position == White then whitePawnMovesForward else blackPawnMovesForward
-  let capturePawnMoves = if mover position == White then whitePawnMovesCapture else blackPawnMovesCapture
-  recurGeneratePawnMoves (bitRefList bitboard) position forwardPawnMoves capturePawnMoves (emptySquaresBitboard position) bitboard DList.empty
-
+generatePawnMoves position = recurGeneratePawnMoves (bitRefList bitboard) position forwardPawnMoves capturePawnMoves (emptySquaresBitboard position) bitboard DList.empty
+  where bitboard = bitboardForMover position Pawn
+        forwardPawnMoves = if mover position == White then whitePawnMovesForward else blackPawnMovesForward
+        capturePawnMoves = if mover position == White then whitePawnMovesCapture else blackPawnMovesCapture
+  
 recurGeneratePawnMoves :: [Square] -> Position -> BitboardArray -> BitboardArray -> Bitboard -> Bitboard -> MoveList -> MoveList
 recurGeneratePawnMoves [] _ _ _ _ _ result = result
 recurGeneratePawnMoves fromSquares position forwardPawnMoves capturePawnMoves emptySquares moverPawns result =
@@ -144,12 +141,12 @@ enPassantCaptureRank :: Mover -> Bitboard
 enPassantCaptureRank mover = if mover == White then rank6Bits else rank3Bits
 
 pawnForwardAndCaptureMovesBitboard :: Square -> BitboardArray -> Bitboard -> Position -> Bitboard
-pawnForwardAndCaptureMovesBitboard fromSquare capturePawnMoves nonCaptures position = do
-  let eps = enPassantSquare position
-  let captures = if eps /= enPassantNotAvailable && (.&.) (bit eps) (enPassantCaptureRank (mover position)) /= 0
+pawnForwardAndCaptureMovesBitboard fromSquare capturePawnMoves nonCaptures position = (.|.) nonCaptures captures
+  where eps = enPassantSquare position
+        captures = if eps /= enPassantNotAvailable && (.&.) (bit eps) (enPassantCaptureRank (mover position)) /= 0
                   then pawnCapturesPlusEnPassantSquare capturePawnMoves fromSquare position
                   else pawnCaptures capturePawnMoves fromSquare (enemyBitboard position)
-  (.|.) nonCaptures captures
+  
 
 pawnCapturesPlusEnPassantSquare :: BitboardArray -> Square -> Position -> Bitboard
 pawnCapturesPlusEnPassantSquare bs square position = pawnCaptures bs square (enemyBitboard position .|. (if eps == enPassantNotAvailable then 0 else bit eps)) where eps = enPassantSquare position
@@ -161,13 +158,12 @@ potentialPawnJumpMoves :: Bitboard -> Position -> Bitboard
 potentialPawnJumpMoves bb position = if mover position == White then (.&.) (bb `shiftL` 8) rank4Bits else (.&.) (bb `shiftR` 8) rank5Bits
 
 generateCastleMoves :: Position -> MoveList
-generateCastleMoves position = do
-  let castlePrivs = positionCastlePrivs position
-  let allPieces = allPiecesBitboard position
-  if mover position == White
+generateCastleMoves position = if mover position == White
     then generateCastleMovesForMover position 3 4 Black (whiteKingCastleAvailable castlePrivs) (whiteQueenCastleAvailable castlePrivs) emptyCastleSquaresWhiteKing emptyCastleSquaresWhiteQueen noCheckCastleSquaresWhiteKing noCheckCastleSquaresWhiteQueen allPieces
     else generateCastleMovesForMover position 59 60 White (blackKingCastleAvailable castlePrivs) (blackQueenCastleAvailable castlePrivs) emptyCastleSquaresBlackKing emptyCastleSquaresBlackQueen noCheckCastleSquaresBlackKing noCheckCastleSquaresBlackQueen allPieces
-
+  where castlePrivs = positionCastlePrivs position
+        allPieces = allPiecesBitboard position
+  
 generateCastleMovesForMover :: Position -> Square -> Square -> Mover -> Bool -> Bool -> Bitboard -> Bitboard -> Bitboard -> Bitboard -> Bitboard -> MoveList
 generateCastleMovesForMover position kingStartSquare queenStartSquare opponent canKing canQueen kingSpaces queenSpaces noCheckKingSide noCheckQueenSide allPieces =
   DList.fromList ([(.|.) (fromSquareMask kingStartSquare) ((-) kingStartSquare 2) :: Move | canKing && ((.&.) allPieces kingSpaces == 0) && not (anySquaresInBitboardAttacked position opponent noCheckKingSide)]) `DList.append`
@@ -180,12 +176,11 @@ pawnMovesCaptureOfColour :: Mover -> BitboardArray
 pawnMovesCaptureOfColour mover = if mover == White then whitePawnMovesCapture else blackPawnMovesCapture
 
 kingSquare :: Position -> Mover -> Square
-kingSquare position colour = do
-  let bb = positionBitboards position
-  if colour == White
+kingSquare position colour = if colour == White
     then head (bitRefList (whiteKingBitboard bb))
     else head (bitRefList (blackKingBitboard bb))
-
+  where bb = positionBitboards position
+  
 isCheck :: Position -> Mover -> Bool
 isCheck position colour = isSquareAttackedBy position (kingSquare position colour) (if colour == White then Black else White)
 
@@ -198,29 +193,26 @@ isRookAttackingSquare attackedSquare pieceSquare allPieceBitboard =
   (.&.) ((magicMoves magicRookVars ! pieceSquare) V.! magicIndexForPiece Rook pieceSquare allPieceBitboard) (1 `shiftL` attackedSquare) /= 0
 
 magicIndexForPiece :: Piece -> Square -> Bitboard -> Int
-magicIndexForPiece piece pieceSquare allPieceBitboard = do
-    let magicVars = if piece == Rook then magicRookVars else magicBishopVars
-    let numberMagic = magicNumber magicVars V.! pieceSquare
-    let shiftMagic = magicNumberShifts magicVars V.!pieceSquare
-    let maskMagic = occupancyMask magicVars V.! pieceSquare
-    let occupancy = (.&.) allPieceBitboard maskMagic
-    let rawIndex = fromIntegral(occupancy * numberMagic) :: Word
-    fromIntegral (shiftR rawIndex shiftMagic) :: Int
-
+magicIndexForPiece piece pieceSquare allPieceBitboard = fromIntegral (shiftR rawIndex shiftMagic) :: Int
+    where magicVars = if piece == Rook then magicRookVars else magicBishopVars
+          numberMagic = magicNumber magicVars V.! pieceSquare
+          shiftMagic = magicNumberShifts magicVars V.!pieceSquare
+          maskMagic = occupancyMask magicVars V.! pieceSquare
+          occupancy = (.&.) allPieceBitboard maskMagic
+          rawIndex = fromIntegral(occupancy * numberMagic) :: Word
+    
 rookMovePiecesBitboard :: Position -> Mover -> Bitboard
-rookMovePiecesBitboard position mover = do
-  let pb = positionBitboards position
-  if mover == White
+rookMovePiecesBitboard position mover = if mover == White
     then (.|.) (whiteRookBitboard pb) (whiteQueenBitboard pb)
     else (.|.) (blackRookBitboard pb) (blackQueenBitboard pb)
-
+  where pb = positionBitboards position
+  
 bishopMovePiecesBitboard :: Position -> Mover -> Bitboard
-bishopMovePiecesBitboard position mover = do
-  let pb = positionBitboards position
-  if mover == White
+bishopMovePiecesBitboard position mover = if mover == White
     then (.|.) (whiteBishopBitboard pb) (whiteQueenBitboard pb)
     else (.|.) (blackBishopBitboard pb) (blackQueenBitboard pb)
-
+  where pb = positionBitboards position
+  
 isSquareAttackedByKnight :: Position -> Square -> Mover -> Bool
 isSquareAttackedByKnight position attackedSquare attacker = (.&.) knightBitboard (knightMovesBitboards V.! attackedSquare) /= 0
     where knightBitboard = (if attacker == White then whiteKnightBitboard else blackKnightBitboard) pb
@@ -261,5 +253,4 @@ moves position = DList.toList
     generateRookMoves position `DList.append`
     generateKingMoves position `DList.append`
     generateCastleMoves position )
-
 

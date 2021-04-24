@@ -26,11 +26,11 @@ main = hspec $ do
 
   describe "southFill" $ do
     it "South fills a bitboard" $ do
-      southFill 4611936708517363882 `shouldBe` (4629952088967215103 :: Int)
+      southFill 4611936708517363882 `shouldBe` 4629952088967215103
 
   describe "northFill" $ do
     it "North fills a bitboard" $ do
-      northFill 4611936708517363882 `shouldBe` (-1332566 :: Int)
+      northFill 4611936708517363882 `shouldBe` -1332566
  
   describe "rankBitboards" $ do
     it "Calculates rank8Bitboards - sanity check for values expressed as functions" $ do

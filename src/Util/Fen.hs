@@ -57,7 +57,7 @@ recurBitArrayToDecimal bits bitnum result = do
   recurBitArrayToDecimal (tail bits) (bitnum - 1) (result + thisResult)
 
 pieceBitboard :: [String] -> Char -> Bitboard
-pieceBitboard fenRanks pieceChar = bitArrayToDecimal (boardBits fenRanks pieceChar)
+pieceBitboard fenRanks pieceChar = fromIntegral(bitArrayToDecimal (boardBits fenRanks pieceChar)) :: Bitboard
 
 algebraicSquareRefFromBitRef :: Int -> String
 algebraicSquareRefFromBitRef bitRef = do

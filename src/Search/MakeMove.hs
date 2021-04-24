@@ -19,10 +19,10 @@ removePieceFromBitboard square = (.&.) (complement (bit square))
 
 moveWhiteRookWhenCastling :: Square -> Square -> Bitboard -> Bitboard -> Bitboard
 moveWhiteRookWhenCastling from to kingBoard rookBoard
-  | (.&.) kingBoard (bit e1Bit) == 0 = rookBoard
-  | from == e1Bit && to == g1Bit = movePieceWithinBitboard h1Bit f1Bit rookBoard
-  | from == e1Bit && to == c1Bit = movePieceWithinBitboard a1Bit d1Bit rookBoard
+  | from == e1Bit && to == g1Bit && kingMoving = movePieceWithinBitboard h1Bit f1Bit rookBoard
+  | from == e1Bit && to == c1Bit && kingMoving = movePieceWithinBitboard a1Bit d1Bit rookBoard
   | otherwise = rookBoard
+  where kingMoving = (.&.) kingBoard (bit e1Bit) /= 0
 
 moveBlackRookWhenCastling :: Square -> Square -> Bitboard -> Bitboard -> Bitboard
 moveBlackRookWhenCastling from to kingBoard rookBoard
@@ -53,16 +53,7 @@ createIfPromotion isPromotionPiece pawnBitboard pieceBitboard fromSquare toSquar
   | otherwise = pieceBitboard
 
 makeMove :: Position -> Move -> Position
-makeMove position move = do
-    let from = fromSquarePart move
-    let to = toSquarePart move
-    let promotionPiece = promotionPieceFromMove move
-    let m = mover position
-    let bb = positionBitboards position
-    let newWhitePawnBitboard = movePieceWithinBitboard from to (removePieceFromBitboard to (whitePawnBitboard bb))
-    let newBlackPawnBitboard = movePieceWithinBitboard from to (removePieceFromBitboard to (blackPawnBitboard bb))
-    let isCapture = (.&.) (bit to) (allPiecesBitboard position) /= 0 || to == enPassantSquare position
-    let isPawnMove = newWhitePawnBitboard /= whitePawnBitboard bb || newBlackPawnBitboard /= blackPawnBitboard bb
+makeMove position move =
     Position {
         positionBitboards = PieceBitboards {
               whitePawnBitboard = removePawnIfPromotion (removePawnWhenEnPassant newBlackPawnBitboard newWhitePawnBitboard to (enPassantSquare position))
@@ -88,7 +79,15 @@ makeMove position move = do
             , blackKingCastleAvailable = blackKingCastleAvailable (positionCastlePrivs position) && notElem from [e8Bit,h8Bit] && to /= h8Bit
             , blackQueenCastleAvailable = blackQueenCastleAvailable (positionCastlePrivs position) && notElem from [a8Bit,e8Bit] && to /= a8Bit
         }
-        , halfMoves = if isCapture || isPawnMove then 0 else halfMoves position + 1
+        , halfMoves = if ((.&.) (bit to) (allPiecesBitboard position) /= 0) || isPawnMove then 0 else halfMoves position + 1
         , moveNumber = (+) (moveNumber position) (if m == Black then 1 else 0)
     }
+    where from = fromSquarePart move
+          to = toSquarePart move
+          promotionPiece = promotionPieceFromMove move
+          m = mover position
+          bb = positionBitboards position
+          newWhitePawnBitboard = movePieceWithinBitboard from to (removePieceFromBitboard to (whitePawnBitboard bb))
+          newBlackPawnBitboard = movePieceWithinBitboard from to (removePieceFromBitboard to (blackPawnBitboard bb))
+          isPawnMove = newWhitePawnBitboard /= whitePawnBitboard bb || newBlackPawnBitboard /= blackPawnBitboard bb
 

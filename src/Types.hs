@@ -5,7 +5,7 @@ import qualified Data.DList as DList
 import qualified Data.Vector.Storable as V
 
 type Square = Int
-type Bitboard = Int
+type Bitboard = Word
 type Move = Int
 type BitboardArray = V.Vector Bitboard
 type MoveList = DList.DList Move
