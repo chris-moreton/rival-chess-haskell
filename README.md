@@ -4,7 +4,7 @@ I am a total noob with Haskell and am kinda making it up as I go along, so feel 
 doing wrong. In particular, given the problem domain, suggestions on how to improve performance would be very welcome.
 
 The move generator has been tested against many <a href="https://www.chessprogramming.org/Perft">Perft tests</a> and appears to be flawless. However, in my thirty or so years of writing chess
-programs, subtle bugs do crop up and are both infuriating and fascinating.
+programs, I have seen beautifully subtle bugs crop up which are both infuriating and fascinating.
 
 ### Get moves for a position (does not filter checks)
 
