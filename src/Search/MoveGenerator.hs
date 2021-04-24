@@ -147,7 +147,6 @@ pawnForwardAndCaptureMovesBitboard fromSquare capturePawnMoves nonCaptures posit
                   then pawnCapturesPlusEnPassantSquare capturePawnMoves fromSquare position
                   else pawnCaptures capturePawnMoves fromSquare (enemyBitboard position)
   
-
 pawnCapturesPlusEnPassantSquare :: BitboardArray -> Square -> Position -> Bitboard
 pawnCapturesPlusEnPassantSquare bs square position = pawnCaptures bs square (enemyBitboard position .|. (if eps == enPassantNotAvailable then 0 else bit eps)) where eps = enPassantSquare position
 
