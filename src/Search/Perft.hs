@@ -12,4 +12,4 @@ perft position depth =
         then length notInCheckPositions
         else sum (map (\x -> perft x (depth - 1)) notInCheckPositions)
     where newPositions = map (makeMove position) (moves position)
-            notInCheckPositions = filter (\x -> not (isCheck x (mover position))) newPositions
+          notInCheckPositions = filter (\x -> not (isCheck x (mover position))) newPositions
