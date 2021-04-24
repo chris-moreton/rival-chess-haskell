@@ -61,12 +61,12 @@ when calculating a move from a given position.
 Counts the total number of positions in a full-width, unpruned search tree from a given starting position and to a given depth. For example, for the starting position at depth 0, the result should be 20. At depth 1, the result should be 400.
 
     perft :: Position -> Int -> Int
-    perft position depth = do
-    let newPositions = map (makeMove position) (moves position)
-    let notInCheckPositions = filter (\x -> not (isCheck x (mover position))) newPositions
-    if depth == 0
-        then length notInCheckPositions
-        else sum (map (\x -> perft x (depth - 1)) notInCheckPositions)
+    perft position depth =
+        if depth == 0
+            then length notInCheckPositions
+            else sum (map (\x -> perft x (depth - 1)) notInCheckPositions)
+        where newPositions = map (makeMove position) (moves position)
+              notInCheckPositions = filter (\x -> not (isCheck x (mover position))) newPositions
 
 ### Background
 
