@@ -38,7 +38,7 @@ recurBitRefList 0 !result = result
 recurBitRefList !bitboard !result = recurBitRefList (xor bitboard (bit square)) (square : result) where square = countTrailingZeros bitboard
 
 allBitsExceptFriendlyPieces :: Position -> Bitboard
-allBitsExceptFriendlyPieces position = complement (foldl (.|.) 0 (bitboardListForColour position (mover position)))
+allBitsExceptFriendlyPieces !position = complement (foldl (.|.) 0 (bitboardListForColour position (mover position)))
 
 movesFromToSquares :: Square -> [Square] -> MoveList
 movesFromToSquares !fromSquare !toSquares = recurMovesFromToSquares fromSquare toSquares []
@@ -76,7 +76,7 @@ generateSliderMoves !position !piece = recurGenerateSliderMoves fromSquares posi
     where bitboards = positionBitboards position
           magicVars = if piece == Bishop then magicBishopVars else magicRookVars
           thisMover = mover position
-          bitboard = (.|.) (bitboardForColour bitboards thisMover piece) (bitboardForColour bitboards thisMover Queen)
+          bitboard = bitboardForColour bitboards thisMover piece .|. bitboardForColour bitboards thisMover Queen
           fromSquares = bitRefList bitboard
 
 recurGenerateSliderMoves :: [Square] -> Position -> MagicVars -> MoveList -> MoveList
@@ -119,13 +119,13 @@ recurGeneratePawnMovesFromToSquares !mask !toSquares !result = recurGeneratePawn
         newResult = if thisToSquare >= 56 || thisToSquare <= 7
                     then promotionMoves baseMove `DList.append` result
                     else DList.singleton baseMove `DList.append` result
-  
+
 generatePawnMoves :: Position -> MoveList
 generatePawnMoves !position = recurGeneratePawnMoves (bitRefList bitboard) position forwardPawnMoves capturePawnMoves (emptySquaresBitboard position) bitboard DList.empty
   where bitboard = bitboardForMover position Pawn
         forwardPawnMoves = if mover position == White then whitePawnMovesForward else blackPawnMovesForward
         capturePawnMoves = if mover position == White then whitePawnMovesCapture else blackPawnMovesCapture
-  
+
 recurGeneratePawnMoves :: [Square] -> Position -> BitboardArray -> BitboardArray -> Bitboard -> Bitboard -> MoveList -> MoveList
 recurGeneratePawnMoves [] _ _ _ _ _ !result = result
 recurGeneratePawnMoves !fromSquares !position !forwardPawnMoves !capturePawnMoves !emptySquares !moverPawns !result =
@@ -138,7 +138,8 @@ pawnForwardMovesBitboard :: Bitboard -> Position -> Bitboard
 pawnForwardMovesBitboard !pawnMoves !position = (.|.) pawnMoves ((.&.) (potentialPawnJumpMoves pawnMoves position) (emptySquaresBitboard position))
 
 enPassantCaptureRank :: Mover -> Bitboard
-enPassantCaptureRank !mover = if mover == White then rank6Bits else rank3Bits
+enPassantCaptureRank White = rank6Bits
+enPassantCaptureRank Black = rank3Bits
 
 pawnForwardAndCaptureMovesBitboard :: Square -> BitboardArray -> Bitboard -> Position -> Bitboard
 pawnForwardAndCaptureMovesBitboard !fromSquare !capturePawnMoves !nonCaptures !position = (.|.) nonCaptures captures
@@ -146,7 +147,7 @@ pawnForwardAndCaptureMovesBitboard !fromSquare !capturePawnMoves !nonCaptures !p
         captures = if eps /= enPassantNotAvailable && (.&.) (bit eps) (enPassantCaptureRank (mover position)) /= 0
                   then pawnCapturesPlusEnPassantSquare capturePawnMoves fromSquare position
                   else pawnCaptures capturePawnMoves fromSquare (enemyBitboard position)
-  
+
 pawnCapturesPlusEnPassantSquare :: BitboardArray -> Square -> Position -> Bitboard
 pawnCapturesPlusEnPassantSquare !bs !square !position = pawnCaptures bs square (enemyBitboard position .|. (if eps == enPassantNotAvailable then 0 else bit eps)) where eps = enPassantSquare position
 
@@ -162,10 +163,10 @@ generateCastleMoves !position = if mover position == White
     else generateCastleMovesForMover position 59 60 White (blackKingCastleAvailable castlePrivs) (blackQueenCastleAvailable castlePrivs) emptyCastleSquaresBlackKing emptyCastleSquaresBlackQueen noCheckCastleSquaresBlackKing noCheckCastleSquaresBlackQueen allPieces
   where castlePrivs = positionCastlePrivs position
         allPieces = allPiecesBitboard position
-  
+
 generateCastleMovesForMover :: Position -> Square -> Square -> Mover -> Bool -> Bool -> Bitboard -> Bitboard -> Bitboard -> Bitboard -> Bitboard -> MoveList
 generateCastleMovesForMover !position !kingStartSquare !queenStartSquare !opponent !canKing !canQueen !kingSpaces !queenSpaces !noCheckKingSide !noCheckQueenSide !allPieces =
-  DList.fromList ([(.|.) (fromSquareMask kingStartSquare) ((-) kingStartSquare 2) :: Move | canKing && ((.&.) allPieces kingSpaces == 0) && not (anySquaresInBitboardAttacked position opponent noCheckKingSide)]) `DList.append`
+  DList.fromList ([(.|.) (fromSquareMask kingStartSquare) ((-) kingStartSquare 2) :: Move | canKing && (.&.) allPieces kingSpaces == 0 && not (anySquaresInBitboardAttacked position opponent noCheckKingSide)]) `DList.append`
   DList.fromList ([(.|.) (fromSquareMask kingStartSquare) ((+) kingStartSquare 2) :: Move | canQueen && (.&.) allPieces queenSpaces == 0 && not (anySquaresInBitboardAttacked position opponent noCheckQueenSide)])
 
 anySquaresInBitboardAttacked :: Position -> Mover -> Bitboard -> Bool
@@ -179,7 +180,7 @@ kingSquare !position !colour = if colour == White
     then head (bitRefList (whiteKingBitboard bb))
     else head (bitRefList (blackKingBitboard bb))
   where bb = positionBitboards position
-  
+
 isCheck :: Position -> Mover -> Bool
 isCheck !position !colour = isSquareAttackedBy position (kingSquare position colour) (if colour == White then Black else White)
 
@@ -199,19 +200,19 @@ magicIndexForPiece !piece !pieceSquare !allPieceBitboard = fromIntegral (shiftR 
           maskMagic = occupancyMask magicVars V.! pieceSquare
           occupancy = (.&.) allPieceBitboard maskMagic
           rawIndex = fromIntegral(occupancy * numberMagic) :: Word
-    
+
 rookMovePiecesBitboard :: Position -> Mover -> Bitboard
 rookMovePiecesBitboard !position !mover = if mover == White
     then (.|.) (whiteRookBitboard pb) (whiteQueenBitboard pb)
     else (.|.) (blackRookBitboard pb) (blackQueenBitboard pb)
   where pb = positionBitboards position
-  
+
 bishopMovePiecesBitboard :: Position -> Mover -> Bitboard
 bishopMovePiecesBitboard !position !mover = if mover == White
     then (.|.) (whiteBishopBitboard pb) (whiteQueenBitboard pb)
     else (.|.) (blackBishopBitboard pb) (blackQueenBitboard pb)
   where pb = positionBitboards position
-  
+
 isSquareAttackedByKnight :: Position -> Square -> Mover -> Bool
 isSquareAttackedByKnight !position !attackedSquare !attacker = (.&.) knightBitboard (knightMovesBitboards V.! attackedSquare) /= 0
     where knightBitboard = (if attacker == White then whiteKnightBitboard else blackKnightBitboard) pb
@@ -237,12 +238,12 @@ isSquareAttackedByRook !position !attackedSquare !attacker = any (\x -> isRookAt
     where apb = allPiecesBitboard position
 
 isSquareAttackedBy :: Position -> Square -> Mover -> Bool
-isSquareAttackedBy !position !attackedSquare !attacker = do
-  isSquareAttackedByPawn position attackedSquare attacker || 
-    isSquareAttackedByKnight position attackedSquare attacker || 
-    isSquareAttackedByKing position attackedSquare attacker || 
-    isSquareAttackedByRook position attackedSquare attacker || 
-    isSquareAttackedByBishop position attackedSquare attacker
+isSquareAttackedBy !position !attackedSquare !attacker =
+  isSquareAttackedByPawn position attackedSquare attacker ||
+  isSquareAttackedByKnight position attackedSquare attacker ||
+  isSquareAttackedByKing position attackedSquare attacker ||
+  isSquareAttackedByRook position attackedSquare attacker ||
+  isSquareAttackedByBishop position attackedSquare attacker
 
 moves :: Position -> [Move]
 moves !position = DList.toList

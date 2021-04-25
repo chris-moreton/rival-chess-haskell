@@ -477,12 +477,6 @@ main = hspec $ do
     movePieceWithinBitboard (bitRefFromAlgebraicSquareRef "b8") (bitRefFromAlgebraicSquareRef "c8") 0b0000100000000000000000000000000000001000010000000000000010000001
       `shouldBe` 0b0000100000000000000000000000000000001000010000000000000010000001
 
-  describe "removePieceFromBitboard" $
-    it "Returns a bitboard with the one bit slipped to zero for the given square" $ do
-    removePieceFromBitboard (bitRefFromAlgebraicSquareRef "a8") 0b1000100000000000000000000000000000001000010000000000000000000000
-      `shouldBe` 0b0000100000000000000000000000000000001000010000000000000000000000
-    removePieceFromBitboard (bitRefFromAlgebraicSquareRef "b8") 0b1100100000000000000000000000000000001000010000000000000000000000
-      `shouldBe` 0b1000100000000000000000000000000000001000010000000000000000000000
 
   describe "enPassantCapturedPieceSquare" $
     it "Returns the square the captured pawn was on before it was captured en passant" $ do
@@ -495,9 +489,9 @@ main = hspec $ do
 
   describe "isPromotionSquare" $
     it "Returns True if the given square is on the first or eigth ranks" $ do
-    isPromotionSquare (bitRefFromAlgebraicSquareRef "a8") `shouldBe` True
-    isPromotionSquare (bitRefFromAlgebraicSquareRef "b1") `shouldBe` True
-    isPromotionSquare (bitRefFromAlgebraicSquareRef "a3") `shouldBe` False
+    testBit promotionSquares (bitRefFromAlgebraicSquareRef "a8") `shouldBe` True
+    testBit promotionSquares (bitRefFromAlgebraicSquareRef "b1") `shouldBe` True
+    testBit promotionSquares (bitRefFromAlgebraicSquareRef "a3") `shouldBe` False
 
   describe "promotionPieceFromMove" $
     it "Returns the promotion piece from the move" $ do
