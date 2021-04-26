@@ -91,19 +91,18 @@ main = hspec $ do
     it "Converts from FEN to board type (Test 1)" $ do
       let fen = "6k1/6p1/1p2q2p/1p5P/1P3RP1/2PK1B2/1r2N3/8 b q g3 5 56"
       let position = getPosition fen
-      let bitboards = positionBitboards position
-      whitePawnBitboard bitboards `shouldBe` 5404360704
-      whiteKnightBitboard bitboards `shouldBe` 2048
-      whiteKingBitboard bitboards `shouldBe` 1048576
-      whiteBishopBitboard bitboards `shouldBe` 262144
-      whiteQueenBitboard bitboards `shouldBe` 0
-      whiteRookBitboard bitboards `shouldBe` 67108864
-      blackPawnBitboard bitboards `shouldBe` 634693087133696
-      blackKnightBitboard bitboards `shouldBe` 0
-      blackKingBitboard bitboards `shouldBe` 144115188075855872
-      blackBishopBitboard bitboards `shouldBe` 0
-      blackQueenBitboard bitboards `shouldBe` 8796093022208
-      blackRookBitboard bitboards `shouldBe` 16384
+      whitePawnBitboard position `shouldBe` 5404360704
+      whiteKnightBitboard position `shouldBe` 2048
+      whiteKingBitboard position `shouldBe` 1048576
+      whiteBishopBitboard position `shouldBe` 262144
+      whiteQueenBitboard position `shouldBe` 0
+      whiteRookBitboard position `shouldBe` 67108864
+      blackPawnBitboard position `shouldBe` 634693087133696
+      blackKnightBitboard position `shouldBe` 0
+      blackKingBitboard position `shouldBe` 144115188075855872
+      blackBishopBitboard position `shouldBe` 0
+      blackQueenBitboard position `shouldBe` 8796093022208
+      blackRookBitboard position `shouldBe` 16384
       mover position `shouldBe` Black
       enPassantSquare position `shouldBe` 17
 
@@ -122,25 +121,23 @@ main = hspec $ do
   describe "getPieceBitboardForColour" $ do
     it "Gets piece bitboard for colour" $ do
       let position = getPosition "6k1/6p1/1p2q2p/1p5P/1P3RP1/2PK1B2/1r2N3/8 b kQKq g3 5 56"
-      let bitboards = positionBitboards position
-      bitboardForMover position Pawn `shouldBe` blackPawnBitboard bitboards
-      bitboardForMover position Pawn `shouldNotBe` whitePawnBitboard bitboards
-      bitboardForMover position Rook `shouldBe` blackRookBitboard bitboards
-      bitboardForMover position Rook `shouldNotBe` whiteRookBitboard bitboards
-      bitboardForMover position King `shouldBe` blackKingBitboard bitboards
-      bitboardForMover position King `shouldNotBe` whiteKingBitboard bitboards
-      bitboardForMover position Knight `shouldBe` blackKnightBitboard bitboards
-      bitboardForMover position Knight `shouldNotBe` whiteKnightBitboard bitboards
-      bitboardForMover position Queen `shouldBe` blackQueenBitboard bitboards
-      bitboardForMover position Queen `shouldNotBe` whiteQueenBitboard bitboards
-      bitboardForMover position Bishop `shouldBe` blackBishopBitboard bitboards
-      bitboardForMover position Bishop `shouldNotBe` whiteBishopBitboard bitboards
+      bitboardForMover position Pawn `shouldBe` blackPawnBitboard position
+      bitboardForMover position Pawn `shouldNotBe` whitePawnBitboard position
+      bitboardForMover position Rook `shouldBe` blackRookBitboard position
+      bitboardForMover position Rook `shouldNotBe` whiteRookBitboard position
+      bitboardForMover position King `shouldBe` blackKingBitboard position
+      bitboardForMover position King `shouldNotBe` whiteKingBitboard position
+      bitboardForMover position Knight `shouldBe` blackKnightBitboard position
+      bitboardForMover position Knight `shouldNotBe` whiteKnightBitboard position
+      bitboardForMover position Queen `shouldBe` blackQueenBitboard position
+      bitboardForMover position Queen `shouldNotBe` whiteQueenBitboard position
+      bitboardForMover position Bishop `shouldBe` blackBishopBitboard position
+      bitboardForMover position Bishop `shouldNotBe` whiteBishopBitboard position
 
   describe "bitRefList" $ do
     it "Gets a list of set bits in a bitboard" $ do
       let position = getPosition "n5k1/6n1/1n2q2p/1p5P/1P3RP1/2PK1B2/1r2N3/8 b kQKq g3 5 56"
-      let bitboards = positionBitboards position
-      bitRefList (blackKnightBitboard bitboards) `shouldBe` [46,49,63]
+      bitRefList (blackKnightBitboard position) `shouldBe` [46,49,63]
 
   describe "bitString" $ do
     it "Converts a bitboard to a string of 1s and 0s" $ do

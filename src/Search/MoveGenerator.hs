@@ -16,21 +16,21 @@ import qualified Data.DList as DList
 import qualified Data.Vector.Storable as V
 
 bitboardForMover :: Position -> Piece -> Bitboard
-bitboardForMover position = bitboardForColour (positionBitboards position) (mover position)
+bitboardForMover position = bitboardForColour position (mover position)
 
-bitboardForColour :: PieceBitboards -> Mover -> Piece -> Bitboard
-bitboardForColour pieceBitboards White King = whiteKingBitboard pieceBitboards
-bitboardForColour pieceBitboards White Queen = whiteQueenBitboard pieceBitboards
-bitboardForColour pieceBitboards White Rook = whiteRookBitboard pieceBitboards
-bitboardForColour pieceBitboards White Knight = whiteKnightBitboard pieceBitboards
-bitboardForColour pieceBitboards White Bishop = whiteBishopBitboard pieceBitboards
-bitboardForColour pieceBitboards White Pawn = whitePawnBitboard pieceBitboards
-bitboardForColour pieceBitboards Black King = blackKingBitboard pieceBitboards
-bitboardForColour pieceBitboards Black Queen = blackQueenBitboard pieceBitboards
-bitboardForColour pieceBitboards Black Rook = blackRookBitboard pieceBitboards
-bitboardForColour pieceBitboards Black Knight = blackKnightBitboard pieceBitboards
-bitboardForColour pieceBitboards Black Bishop = blackBishopBitboard pieceBitboards
-bitboardForColour pieceBitboards Black Pawn = blackPawnBitboard pieceBitboards
+bitboardForColour :: Position -> Mover -> Piece -> Bitboard
+bitboardForColour position White King = whiteKingBitboard position
+bitboardForColour position White Queen = whiteQueenBitboard position
+bitboardForColour position White Rook = whiteRookBitboard position
+bitboardForColour position White Knight = whiteKnightBitboard position
+bitboardForColour position White Bishop = whiteBishopBitboard position
+bitboardForColour position White Pawn = whitePawnBitboard position
+bitboardForColour position Black King = blackKingBitboard position
+bitboardForColour position Black Queen = blackQueenBitboard position
+bitboardForColour position Black Rook = blackRookBitboard position
+bitboardForColour position Black Knight = blackKnightBitboard position
+bitboardForColour position Black Bishop = blackBishopBitboard position
+bitboardForColour position Black Pawn = blackPawnBitboard position
 
 bitRefList :: Bitboard -> [Square]
 bitRefList !bitboard = recurBitRefList bitboard []
@@ -75,10 +75,9 @@ generateRookMoves !position = generateSliderMoves position Rook
 
 generateSliderMoves :: Position -> Piece -> MoveList
 generateSliderMoves !position !piece = recurGenerateSliderMoves fromSquares position magicVars DList.empty
-    where bitboards = positionBitboards position
-          magicVars = if piece == Bishop then magicBishopVars else magicRookVars
+    where magicVars = if piece == Bishop then magicBishopVars else magicRookVars
           thisMover = mover position
-          bitboard = bitboardForColour bitboards thisMover piece .|. bitboardForColour bitboards thisMover Queen
+          bitboard = bitboardForColour position thisMover piece .|. bitboardForColour position thisMover Queen
           fromSquares = bitRefList bitboard
 
 recurGenerateSliderMoves :: [Square] -> Position -> MagicVars -> MoveList -> MoveList
@@ -161,10 +160,9 @@ potentialPawnJumpMoves !bb !position = if mover position == White then (.&.) (bb
 
 generateCastleMoves :: Position -> MoveList
 generateCastleMoves !position = if mover position == White
-    then generateCastleMovesForMover position 3 4 Black (whiteKingCastleAvailable castlePrivs) (whiteQueenCastleAvailable castlePrivs) emptyCastleSquaresWhiteKing emptyCastleSquaresWhiteQueen noCheckCastleSquaresWhiteKing noCheckCastleSquaresWhiteQueen allPieces
-    else generateCastleMovesForMover position 59 60 White (blackKingCastleAvailable castlePrivs) (blackQueenCastleAvailable castlePrivs) emptyCastleSquaresBlackKing emptyCastleSquaresBlackQueen noCheckCastleSquaresBlackKing noCheckCastleSquaresBlackQueen allPieces
-  where castlePrivs = positionCastlePrivs position
-        allPieces = allPiecesBitboard position
+    then generateCastleMovesForMover position 3 4 Black (whiteKingCastleAvailable position) (whiteQueenCastleAvailable position) emptyCastleSquaresWhiteKing emptyCastleSquaresWhiteQueen noCheckCastleSquaresWhiteKing noCheckCastleSquaresWhiteQueen allPieces
+    else generateCastleMovesForMover position 59 60 White (blackKingCastleAvailable position) (blackQueenCastleAvailable position) emptyCastleSquaresBlackKing emptyCastleSquaresBlackQueen noCheckCastleSquaresBlackKing noCheckCastleSquaresBlackQueen allPieces
+  where allPieces = allPiecesBitboard position
 
 generateCastleMovesForMover :: Position -> Square -> Square -> Mover -> Bool -> Bool -> Bitboard -> Bitboard -> Bitboard -> Bitboard -> Bitboard -> MoveList
 generateCastleMovesForMover !position !kingStartSquare !queenStartSquare !opponent !canKing !canQueen !kingSpaces !queenSpaces !noCheckKingSide !noCheckQueenSide !allPieces =
@@ -179,9 +177,8 @@ pawnMovesCaptureOfColour !mover = if mover == White then whitePawnMovesCapture e
 
 kingSquare :: Position -> Mover -> Square
 kingSquare !position !colour = if colour == White
-    then head (bitRefList (whiteKingBitboard bb))
-    else head (bitRefList (blackKingBitboard bb))
-  where bb = positionBitboards position
+    then head (bitRefList (whiteKingBitboard position))
+    else head (bitRefList (blackKingBitboard position))
 
 isCheck :: Position -> Mover -> Bool
 isCheck !position !colour = isSquareAttackedBy position (kingSquare position colour) (if colour == White then Black else White)
@@ -197,30 +194,25 @@ magicIndexForPiece !piece !pieceSquare !allPieceBitboard = fromIntegral (shiftR 
 
 rookMovePiecesBitboard :: Position -> Mover -> Bitboard
 rookMovePiecesBitboard !position !mover = if mover == White
-    then (.|.) (whiteRookBitboard pb) (whiteQueenBitboard pb)
-    else (.|.) (blackRookBitboard pb) (blackQueenBitboard pb)
-  where pb = positionBitboards position
+    then (.|.) (whiteRookBitboard position) (whiteQueenBitboard position)
+    else (.|.) (blackRookBitboard position) (blackQueenBitboard position)
 
 bishopMovePiecesBitboard :: Position -> Mover -> Bitboard
 bishopMovePiecesBitboard !position !mover = if mover == White
-    then (.|.) (whiteBishopBitboard pb) (whiteQueenBitboard pb)
-    else (.|.) (blackBishopBitboard pb) (blackQueenBitboard pb)
-  where pb = positionBitboards position
+    then (.|.) (whiteBishopBitboard position) (whiteQueenBitboard position)
+    else (.|.) (blackBishopBitboard position) (blackQueenBitboard position)
 
 isSquareAttackedByKnight :: Position -> Square -> Mover -> Bool
 isSquareAttackedByKnight !position !attackedSquare !attacker = (.&.) knightBitboard (knightMovesBitboards V.! attackedSquare) /= 0
-    where knightBitboard = (if attacker == White then whiteKnightBitboard else blackKnightBitboard) pb
-          pb = positionBitboards position
+    where knightBitboard = (if attacker == White then whiteKnightBitboard else blackKnightBitboard) position
 
 isSquareAttackedByKing :: Position -> Square -> Mover -> Bool
 isSquareAttackedByKing !position !attackedSquare !attacker = (.&.) kingBitboard (kingMovesBitboards V.! attackedSquare) /= 0
-    where kingBitboard = (if attacker == White then whiteKingBitboard else blackKingBitboard) pb
-          pb = positionBitboards position
+    where kingBitboard = (if attacker == White then whiteKingBitboard else blackKingBitboard) position
 
 isSquareAttackedByPawn :: Position -> Square -> Mover -> Bool
 isSquareAttackedByPawn !position !attackedSquare !attacker = (.&.) pawnBitboard (pawnMovesCaptureOfColour defenderColour V.! attackedSquare) /= 0
-    where pawnBitboard = (if attacker == White then whitePawnBitboard else blackPawnBitboard) pb
-          pb = positionBitboards position
+    where pawnBitboard = (if attacker == White then whitePawnBitboard else blackPawnBitboard) position
           defenderColour = if attacker == White then Black else White
 
 isSquareAttackedByBishop :: Position -> Square -> Mover -> Bool

@@ -19,12 +19,11 @@ recurBitString bitboard square result = do
 
 bitboardListForColour :: Position -> Mover -> [Bitboard]
 bitboardListForColour !position !colour = do
-  let bitboards = positionBitboards position
   if colour == White
   then
-    [whitePawnBitboard bitboards,whiteKnightBitboard bitboards,whiteKingBitboard bitboards,whiteBishopBitboard bitboards,whiteQueenBitboard bitboards,whiteRookBitboard bitboards]
+    [whitePawnBitboard position,whiteKnightBitboard position,whiteKingBitboard position,whiteBishopBitboard position,whiteQueenBitboard position,whiteRookBitboard position]
   else
-    [blackPawnBitboard bitboards,blackKnightBitboard bitboards,blackKingBitboard bitboards,blackBishopBitboard bitboards,blackQueenBitboard bitboards,blackRookBitboard bitboards]
+    [blackPawnBitboard position,blackKnightBitboard position,blackKingBitboard position,blackBishopBitboard position,blackQueenBitboard position,blackRookBitboard position]
 
 enemyBitboard :: Position -> Bitboard
 enemyBitboard !position = foldl (.|.) 0 (bitboardListForColour position (opponent position))
@@ -34,9 +33,8 @@ promotionSquares = 0b11111111000000000000000000000000000000000000000000000000111
 
 allPiecesBitboard :: Position -> Bitboard
 allPiecesBitboard !position = foldl (.|.) 0 [
-      whitePawnBitboard bitboards,whiteKnightBitboard bitboards,whiteKingBitboard bitboards,whiteBishopBitboard bitboards,whiteQueenBitboard bitboards,whiteRookBitboard bitboards
-    , blackPawnBitboard bitboards,blackKnightBitboard bitboards,blackKingBitboard bitboards,blackBishopBitboard bitboards,blackQueenBitboard bitboards,blackRookBitboard bitboards]
-        where bitboards = positionBitboards position
+      whitePawnBitboard position,whiteKnightBitboard position,whiteKingBitboard position,whiteBishopBitboard position,whiteQueenBitboard position,whiteRookBitboard position
+    , blackPawnBitboard position,blackKnightBitboard position,blackKingBitboard position,blackBishopBitboard position,blackQueenBitboard position,blackRookBitboard position]
 
 emptySquaresBitboard :: Position -> Bitboard
 emptySquaresBitboard !position = complement (allPiecesBitboard position)

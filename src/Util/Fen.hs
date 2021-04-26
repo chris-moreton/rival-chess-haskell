@@ -102,24 +102,6 @@ moveFromAlgebraicMove moveString =
 getMover :: String -> Mover
 getMover fen = if fenPart fen 1 == "w" then White else Black
     
-pieceBitboards :: String -> PieceBitboards
-pieceBitboards fen = do
-  let fenRanks = getFenRanks (fenBoardPart fen)
-  PieceBitboards {
-      whitePawnBitboard = pieceBitboard fenRanks 'P'
-    , whiteKnightBitboard = pieceBitboard fenRanks 'N'
-    , whiteBishopBitboard = pieceBitboard fenRanks 'B'
-    , whiteQueenBitboard = pieceBitboard fenRanks 'Q'
-    , whiteKingBitboard = pieceBitboard fenRanks 'K'
-    , whiteRookBitboard = pieceBitboard fenRanks 'R'
-    , blackPawnBitboard = pieceBitboard fenRanks 'p'
-    , blackKnightBitboard = pieceBitboard fenRanks 'n'
-    , blackBishopBitboard = pieceBitboard fenRanks 'b'
-    , blackQueenBitboard = pieceBitboard fenRanks 'q'
-    , blackKingBitboard = pieceBitboard fenRanks 'k'
-    , blackRookBitboard = pieceBitboard fenRanks 'r'
-  }
-
 enpassantFenPart :: String -> String
 enpassantFenPart fen = fenPart fen 3
 
@@ -127,21 +109,28 @@ enPassantBitRef :: String -> Int
 enPassantBitRef enPassantFenPart =
   if enPassantFenPart == "-" then enPassantNotAvailable else bitRefFromAlgebraicSquareRef enPassantFenPart
 
-getCastlePrivs :: String -> CastlePrivileges
-getCastlePrivs fen =
-  CastlePrivileges {
-      whiteKingCastleAvailable = T.isInfixOf "K" castlePart
-    , whiteQueenCastleAvailable = T.isInfixOf "Q" castlePart
-    , blackKingCastleAvailable = T.isInfixOf "k" castlePart
-    , blackQueenCastleAvailable = T.isInfixOf "q" castlePart
-  } where castlePart = T.pack (fenPart fen 2)
-
 getPosition :: String -> Position
 getPosition fen = Position {
-    positionBitboards = pieceBitboards fen
-  , mover = getMover fen
-  , enPassantSquare = enPassantBitRef (enpassantFenPart fen)
-  , positionCastlePrivs = getCastlePrivs fen
-  , halfMoves = read (fenPart fen 4) :: Int
-  , moveNumber = read (fenPart fen 5) :: Int
-}
+          whitePawnBitboard = pieceBitboard fenRanks 'P'
+        , whiteKnightBitboard = pieceBitboard fenRanks 'N'
+        , whiteBishopBitboard = pieceBitboard fenRanks 'B'
+        , whiteQueenBitboard = pieceBitboard fenRanks 'Q'
+        , whiteKingBitboard = pieceBitboard fenRanks 'K'
+        , whiteRookBitboard = pieceBitboard fenRanks 'R'
+        , blackPawnBitboard = pieceBitboard fenRanks 'p'
+        , blackKnightBitboard = pieceBitboard fenRanks 'n'
+        , blackBishopBitboard = pieceBitboard fenRanks 'b'
+        , blackQueenBitboard = pieceBitboard fenRanks 'q'
+        , blackKingBitboard = pieceBitboard fenRanks 'k'
+        , blackRookBitboard = pieceBitboard fenRanks 'r'  
+        , whiteKingCastleAvailable = T.isInfixOf "K" castlePart
+        , whiteQueenCastleAvailable = T.isInfixOf "Q" castlePart
+        , blackKingCastleAvailable = T.isInfixOf "k" castlePart
+        , blackQueenCastleAvailable = T.isInfixOf "q" castlePart
+        , mover = getMover fen
+        , enPassantSquare = enPassantBitRef (enpassantFenPart fen)
+        , halfMoves = read (fenPart fen 4) :: Int
+        , moveNumber = read (fenPart fen 5) :: Int
+    } 
+    where castlePart = T.pack (fenPart fen 2)
+          fenRanks = getFenRanks (fenBoardPart fen)
