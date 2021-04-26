@@ -1,5 +1,7 @@
 {-# LANGUAGE StrictData,BangPatterns #-}
 
+{-# OPTIONS_GHC -Wno-overflowed-literals #-}
+
 module Search.MoveGenerator where
 
 import Types
@@ -184,14 +186,6 @@ kingSquare !position !colour = if colour == White
 isCheck :: Position -> Mover -> Bool
 isCheck !position !colour = isSquareAttackedBy position (kingSquare position colour) (if colour == White then Black else White)
 
-isBishopAttackingSquare :: Square -> Square -> Bitboard -> Bool
-isBishopAttackingSquare !attackedSquare !pieceSquare allPieceBitboard =
-  (.&.) ((magicMoves magicBishopVars ! pieceSquare) V.! magicIndexForPiece Bishop pieceSquare allPieceBitboard) (1 `shiftL` attackedSquare) /= 0
-
-isRookAttackingSquare :: Square -> Square -> Bitboard -> Bool
-isRookAttackingSquare !attackedSquare !pieceSquare !allPieceBitboard =
-  (.&.) ((magicMoves magicRookVars ! pieceSquare) V.! magicIndexForPiece Rook pieceSquare allPieceBitboard) (1 `shiftL` attackedSquare) /= 0
-
 magicIndexForPiece :: Piece -> Square -> Bitboard -> Int
 magicIndexForPiece !piece !pieceSquare !allPieceBitboard = fromIntegral (shiftR rawIndex shiftMagic) :: Int
     where magicVars = if piece == Rook then magicRookVars else magicBishopVars
@@ -237,6 +231,14 @@ isSquareAttackedByRook :: Position -> Square -> Mover -> Bool
 isSquareAttackedByRook !position !attackedSquare !attacker = any (\x -> isRookAttackingSquare attackedSquare x apb) (bitRefList (rookMovePiecesBitboard position attacker))
     where apb = allPiecesBitboard position
 
+isBishopAttackingSquare :: Square -> Square -> Bitboard -> Bool
+isBishopAttackingSquare !attackedSquare !pieceSquare allPieceBitboard =
+  (.&.) ((magicMoves magicBishopVars ! pieceSquare) V.! magicIndexForPiece Bishop pieceSquare allPieceBitboard) (bit attackedSquare) /= 0
+
+isRookAttackingSquare :: Square -> Square -> Bitboard -> Bool
+isRookAttackingSquare !attackedSquare !pieceSquare !allPieceBitboard =
+  (.&.) ((magicMoves magicRookVars ! pieceSquare) V.! magicIndexForPiece Rook pieceSquare allPieceBitboard) (bit attackedSquare) /= 0
+  
 isSquareAttackedBy :: Position -> Square -> Mover -> Bool
 isSquareAttackedBy !position !attackedSquare !attacker =
   isSquareAttackedByPawn position attackedSquare attacker ||

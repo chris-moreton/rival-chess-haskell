@@ -13,7 +13,7 @@ type MoveList = DList.DList Move
 data Mover = White | Black deriving (Enum,Show,Eq)
 data Piece = Pawn | King | Queen | Bishop | Knight | Rook deriving (Enum,Show,Eq)
 
-data PieceBitboards = PieceBitboards {
+data PieceBitboards = PieceBitboards !{
     whitePawnBitboard :: Bitboard
   , whiteKnightBitboard :: Bitboard
   , whiteBishopBitboard :: Bitboard
@@ -28,14 +28,14 @@ data PieceBitboards = PieceBitboards {
   , blackRookBitboard :: Bitboard
 } deriving (Show,Eq)
 
-data CastlePrivileges = CastlePrivileges {
+data CastlePrivileges = CastlePrivileges !{
     whiteKingCastleAvailable  :: Bool
   , blackKingCastleAvailable  :: Bool
   , whiteQueenCastleAvailable :: Bool
   , blackQueenCastleAvailable :: Bool
 } deriving (Show,Eq)
 
-data Position = Position {
+data Position = Position !{
     positionBitboards :: PieceBitboards
   , mover :: Mover
   , enPassantSquare :: Square
@@ -44,7 +44,7 @@ data Position = Position {
   , moveNumber :: Int
 } deriving (Show,Eq)
 
-data Game = Game {
+data Game = Game !{
     gamePosition :: Position
   , gameMoves :: [Move]
 }

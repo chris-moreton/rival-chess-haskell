@@ -1,5 +1,6 @@
 {-# LANGUAGE BinaryLiterals,NegativeLiterals,StrictData #-}
 
+
 import Test.Hspec
 import Control.Applicative
 import Test.QuickCheck

@@ -1,3 +1,5 @@
+{-# OPTIONS_GHC -Wno-overflowed-literals #-}
+
 module Util.MagicMovesBishop where
 
 import Types

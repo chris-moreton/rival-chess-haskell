@@ -74,7 +74,13 @@ test-suite rival-test
       Paths_rival
   hs-source-dirs:
       test
-  ghc-options: -threaded -rtsopts -with-rtsopts=-N
+  ghc-options:
+    -O2
+    -threaded
+    -rtsopts 
+    -with-rtsopts=-N
+    -fprof-auto
+    "-with-rtsopts=-N -p -s -h -i0.1"
   build-depends:
       base >=4.7 && <5
     , hspec
