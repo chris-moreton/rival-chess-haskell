@@ -1,12 +1,16 @@
 {-# LANGUAGE BinaryLiterals,NegativeLiterals,StrictData,BangPatterns #-}
 
+{-# OPTIONS_GHC -Wno-overflowed-literals #-}
+
 module Util.Bitboards where
 
 import Data.Bits
 import Util.Utils
 import Types
 import Data.Array.IArray
+import GHC.Compact
 import qualified Data.Vector.Storable as V
+import Util.MagicMovesBishop
 
 bitString :: Bitboard -> String
 bitString bitboard = recurBitString bitboard 63 ""
@@ -19,7 +23,7 @@ recurBitString bitboard square result = do
 
 bitboardListForColour :: Position -> Mover -> [Bitboard]
 bitboardListForColour !position !colour = do
-  let bitboards = positionBitboards position
+  let bitboards = position
   if colour == White
   then
     [whitePawnBitboard bitboards,whiteKnightBitboard bitboards,whiteKingBitboard bitboards,whiteBishopBitboard bitboards,whiteQueenBitboard bitboards,whiteRookBitboard bitboards]
@@ -36,7 +40,7 @@ allPiecesBitboard :: Position -> Bitboard
 allPiecesBitboard !position = foldl (.|.) 0 [
       whitePawnBitboard bitboards,whiteKnightBitboard bitboards,whiteKingBitboard bitboards,whiteBishopBitboard bitboards,whiteQueenBitboard bitboards,whiteRookBitboard bitboards
     , blackPawnBitboard bitboards,blackKnightBitboard bitboards,blackKingBitboard bitboards,blackBishopBitboard bitboards,blackQueenBitboard bitboards,blackRookBitboard bitboards]
-        where bitboards = positionBitboards position
+        where bitboards = position
 
 emptySquaresBitboard :: Position -> Bitboard
 emptySquaresBitboard !position = complement (allPiecesBitboard position)

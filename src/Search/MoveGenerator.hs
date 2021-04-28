@@ -16,9 +16,9 @@ import qualified Data.DList as DList
 import qualified Data.Vector.Storable as V
 
 bitboardForMover :: Position -> Piece -> Bitboard
-bitboardForMover position = bitboardForColour (positionBitboards position) (mover position)
+bitboardForMover position = bitboardForColour position (mover position)
 
-bitboardForColour :: PieceBitboards -> Mover -> Piece -> Bitboard
+bitboardForColour :: Position -> Mover -> Piece -> Bitboard
 bitboardForColour pieceBitboards White King = whiteKingBitboard pieceBitboards
 bitboardForColour pieceBitboards White Queen = whiteQueenBitboard pieceBitboards
 bitboardForColour pieceBitboards White Rook = whiteRookBitboard pieceBitboards
@@ -75,7 +75,7 @@ generateRookMoves !position = generateSliderMoves position Rook
 
 generateSliderMoves :: Position -> Piece -> MoveList
 generateSliderMoves !position !piece = recurGenerateSliderMoves fromSquares position magicVars DList.empty
-    where bitboards = positionBitboards position
+    where bitboards = position
           magicVars = if piece == Bishop then magicBishopVars else magicRookVars
           thisMover = mover position
           bitboard = bitboardForColour bitboards thisMover piece .|. bitboardForColour bitboards thisMover Queen
@@ -181,7 +181,7 @@ kingSquare :: Position -> Mover -> Square
 kingSquare !position !colour = if colour == White
     then head (bitRefList (whiteKingBitboard bb))
     else head (bitRefList (blackKingBitboard bb))
-  where bb = positionBitboards position
+  where bb = position
 
 isCheck :: Position -> Mover -> Bool
 isCheck !position !colour = isSquareAttackedBy position (kingSquare position colour) (if colour == White then Black else White)
@@ -199,28 +199,28 @@ rookMovePiecesBitboard :: Position -> Mover -> Bitboard
 rookMovePiecesBitboard !position !mover = if mover == White
     then (.|.) (whiteRookBitboard pb) (whiteQueenBitboard pb)
     else (.|.) (blackRookBitboard pb) (blackQueenBitboard pb)
-  where pb = positionBitboards position
+  where pb = position
 
 bishopMovePiecesBitboard :: Position -> Mover -> Bitboard
 bishopMovePiecesBitboard !position !mover = if mover == White
     then (.|.) (whiteBishopBitboard pb) (whiteQueenBitboard pb)
     else (.|.) (blackBishopBitboard pb) (blackQueenBitboard pb)
-  where pb = positionBitboards position
+  where pb = position
 
 isSquareAttackedByKnight :: Position -> Square -> Mover -> Bool
 isSquareAttackedByKnight !position !attackedSquare !attacker = (.&.) knightBitboard (knightMovesBitboards V.! attackedSquare) /= 0
     where knightBitboard = (if attacker == White then whiteKnightBitboard else blackKnightBitboard) pb
-          pb = positionBitboards position
+          pb = position
 
 isSquareAttackedByKing :: Position -> Square -> Mover -> Bool
 isSquareAttackedByKing !position !attackedSquare !attacker = (.&.) kingBitboard (kingMovesBitboards V.! attackedSquare) /= 0
     where kingBitboard = (if attacker == White then whiteKingBitboard else blackKingBitboard) pb
-          pb = positionBitboards position
+          pb = position
 
 isSquareAttackedByPawn :: Position -> Square -> Mover -> Bool
 isSquareAttackedByPawn !position !attackedSquare !attacker = (.&.) pawnBitboard (pawnMovesCaptureOfColour defenderColour V.! attackedSquare) /= 0
     where pawnBitboard = (if attacker == White then whitePawnBitboard else blackPawnBitboard) pb
-          pb = positionBitboards position
+          pb = position
           defenderColour = if attacker == White then Black else White
 
 isSquareAttackedByBishop :: Position -> Square -> Mover -> Bool

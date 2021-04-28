@@ -1,5 +1,6 @@
 {-# LANGUAGE BinaryLiterals,NegativeLiterals,StrictData #-}
 
+{-# OPTIONS_GHC -Wno-overflowed-literals #-}
 
 import Test.Hspec
 import Control.Applicative
@@ -11,7 +12,6 @@ import Data.Array.IArray
 import Util.Bitboards
 import Util.Fen
 import Util.Utils
-import Model.Game
 import Search.Perft
 import Search.MoveGenerator
 import Search.MoveConstants
@@ -101,7 +101,7 @@ main = hspec $ do
     it "Converts from FEN to board type (Test 1)" $ do
       let fen = "6k1/6p1/1p2q2p/1p5P/1P3RP1/2PK1B2/1r2N3/8 b q g3 5 56"
       let position = getPosition fen
-      let bitboards = positionBitboards position
+      let bitboards = position
       whitePawnBitboard bitboards `shouldBe` 5404360704
       whiteKnightBitboard bitboards `shouldBe` 2048
       whiteKingBitboard bitboards `shouldBe` 1048576
@@ -132,7 +132,7 @@ main = hspec $ do
   describe "getPieceBitboardForColour" $
     it "Gets piece bitboard for colour" $ do
     let position = getPosition "6k1/6p1/1p2q2p/1p5P/1P3RP1/2PK1B2/1r2N3/8 b kQKq g3 5 56"
-    let bitboards = positionBitboards position
+    let bitboards = position
     bitboardForMover position Pawn `shouldBe` blackPawnBitboard bitboards
     bitboardForMover position Pawn `shouldNotBe` whitePawnBitboard bitboards
     bitboardForMover position Rook `shouldBe` blackRookBitboard bitboards
@@ -149,7 +149,7 @@ main = hspec $ do
   describe "bitRefList" $
     it "Gets a list of set bits in a bitboard" $ do
     let position = getPosition "n5k1/6n1/1n2q2p/1p5P/1P3RP1/2PK1B2/1r2N3/8 b kQKq g3 5 56"
-    let bitboards = positionBitboards position
+    let bitboards = position
     sort (bitRefList (blackKnightBitboard bitboards)) `shouldBe` [46,49,63]
 
   describe "bitString" $

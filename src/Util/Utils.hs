@@ -6,6 +6,7 @@ import Data.List
 import Types
 import Data.Bits
 import Search.MoveConstants
+import GHC.Compact
 
 substring :: String -> Int -> Int -> String
 substring text start end = take (end - start) (drop start text)

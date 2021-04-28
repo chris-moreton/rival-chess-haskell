@@ -2,7 +2,6 @@
 
 module Util.Fen where
 
-import Model.Game
 import Types
 import Search.MoveConstants
 
@@ -102,24 +101,6 @@ moveFromAlgebraicMove moveString =
 getMover :: String -> Mover
 getMover fen = if fenPart fen 1 == "w" then White else Black
     
-pieceBitboards :: String -> PieceBitboards
-pieceBitboards fen = do
-  let fenRanks = getFenRanks (fenBoardPart fen)
-  PieceBitboards {
-      whitePawnBitboard = pieceBitboard fenRanks 'P'
-    , whiteKnightBitboard = pieceBitboard fenRanks 'N'
-    , whiteBishopBitboard = pieceBitboard fenRanks 'B'
-    , whiteQueenBitboard = pieceBitboard fenRanks 'Q'
-    , whiteKingBitboard = pieceBitboard fenRanks 'K'
-    , whiteRookBitboard = pieceBitboard fenRanks 'R'
-    , blackPawnBitboard = pieceBitboard fenRanks 'p'
-    , blackKnightBitboard = pieceBitboard fenRanks 'n'
-    , blackBishopBitboard = pieceBitboard fenRanks 'b'
-    , blackQueenBitboard = pieceBitboard fenRanks 'q'
-    , blackKingBitboard = pieceBitboard fenRanks 'k'
-    , blackRookBitboard = pieceBitboard fenRanks 'r'
-  }
-
 enpassantFenPart :: String -> String
 enpassantFenPart fen = fenPart fen 3
 
@@ -138,10 +119,21 @@ getCastlePrivs fen =
 
 getPosition :: String -> Position
 getPosition fen = Position {
-    positionBitboards = pieceBitboards fen
+    whitePawnBitboard = pieceBitboard fenRanks 'P'
+  , whiteKnightBitboard = pieceBitboard fenRanks 'N'
+  , whiteBishopBitboard = pieceBitboard fenRanks 'B'
+  , whiteQueenBitboard = pieceBitboard fenRanks 'Q'
+  , whiteKingBitboard = pieceBitboard fenRanks 'K'
+  , whiteRookBitboard = pieceBitboard fenRanks 'R'
+  , blackPawnBitboard = pieceBitboard fenRanks 'p'
+  , blackKnightBitboard = pieceBitboard fenRanks 'n'
+  , blackBishopBitboard = pieceBitboard fenRanks 'b'
+  , blackQueenBitboard = pieceBitboard fenRanks 'q'
+  , blackKingBitboard = pieceBitboard fenRanks 'k'
+  , blackRookBitboard = pieceBitboard fenRanks 'r'
   , mover = getMover fen
   , enPassantSquare = enPassantBitRef (enpassantFenPart fen)
   , positionCastlePrivs = getCastlePrivs fen
   , halfMoves = read (fenPart fen 4) :: Int
   , moveNumber = read (fenPart fen 5) :: Int
-}
+} where fenRanks = getFenRanks (fenBoardPart fen)
