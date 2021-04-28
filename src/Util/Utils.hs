@@ -22,6 +22,7 @@ toSquarePart move = (.&.) move 63
 
 promotionPieceFromMove :: Move -> Piece
 promotionPieceFromMove move
+    | promotionPart == 0 = Pawn
     | promotionPart == promotionQueenMoveMask = Queen
     | promotionPart == promotionRookMoveMask = Rook
     | promotionPart == promotionBishopMoveMask = Bishop

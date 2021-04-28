@@ -52,7 +52,7 @@ createIfPromotion !isPromotionPiece !pawnBitboard !pieceBitboard !fromSquare !to
 movePieceWithinBitboard :: Square -> Square -> Bitboard -> Bitboard
 movePieceWithinBitboard !from !to !bb
   | testBit bb from = (.|.) (clearBit bb from) (bit to)
-  | otherwise = clearBit bb to
+  | otherwise = if testBit bb to then clearBit bb to else bb
 
 makeMove :: Position -> Move -> Position
 makeMove !position !move =
