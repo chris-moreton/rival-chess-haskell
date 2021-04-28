@@ -32,6 +32,8 @@ data Position = Position {
   , blackKingBitboard :: Bitboard
   , blackRookBitboard :: Bitboard
   , allPiecesBitboard :: Bitboard
+  , whitePiecesBitboard :: Bitboard
+  , blackPiecesBitboard :: Bitboard
   , mover :: Mover
   , enPassantSquare :: Square
   , whiteKingCastleAvailable  :: Bool

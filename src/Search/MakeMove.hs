@@ -70,6 +70,8 @@ makeMove !position !move =
         , whiteKingBitboard = wk
         , blackKingBitboard = bk
         , allPiecesBitboard = wp .|. bp .|. wn .|. bn .|. wb .|. bb .|. wr .|. br .|. wq .|. bq .|. wk .|. bk
+        , whitePiecesBitboard = wp .|. wn .|. wr .|. wk .|. wq .|. wb
+        , blackPiecesBitboard = bp .|. bn .|. br .|. bk .|. bq .|. bb
         , mover = if m == White then Black else White
         , enPassantSquare = if m == White
                                 then if to - from == 16 && testBit (whitePawnBitboard position) from then from + 8 else enPassantNotAvailable

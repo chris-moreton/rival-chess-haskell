@@ -21,17 +21,10 @@ recurBitString bitboard square result = do
   let bitMask = bit square
   recurBitString (xor bitboard bitMask) (square - 1) (result ++ if bitMask == (.&.) bitMask bitboard then "1" else "0")
 
-bitboardListForColour :: Position -> Mover -> [Bitboard]
-bitboardListForColour !position !colour = do
-  let bitboards = position
-  if colour == White
-  then
-    [whitePawnBitboard bitboards,whiteKnightBitboard bitboards,whiteKingBitboard bitboards,whiteBishopBitboard bitboards,whiteQueenBitboard bitboards,whiteRookBitboard bitboards]
-  else
-    [blackPawnBitboard bitboards,blackKnightBitboard bitboards,blackKingBitboard bitboards,blackBishopBitboard bitboards,blackQueenBitboard bitboards,blackRookBitboard bitboards]
-
 enemyBitboard :: Position -> Bitboard
-enemyBitboard !position = foldl (.|.) 0 (bitboardListForColour position (opponent position))
+enemyBitboard !position 
+    | mover position == White = blackPiecesBitboard position
+    | otherwise = whitePiecesBitboard position
 
 promotionSquares :: Bitboard
 promotionSquares = 0b1111111100000000000000000000000000000000000000000000000011111111
