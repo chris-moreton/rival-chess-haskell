@@ -22,11 +22,12 @@ toSquarePart move = (.&.) move 63
 
 promotionPieceFromMove :: Move -> Piece
 promotionPieceFromMove move
-    | (.&.) promotionFullMoveMask move == promotionQueenMoveMask = Queen
-    | (.&.) promotionFullMoveMask move == promotionRookMoveMask = Rook
-    | (.&.) promotionFullMoveMask move == promotionBishopMoveMask = Bishop
-    | (.&.) promotionFullMoveMask move == promotionKnightMoveMask = Knight
+    | promotionPart == promotionQueenMoveMask = Queen
+    | promotionPart == promotionRookMoveMask = Rook
+    | promotionPart == promotionBishopMoveMask = Bishop
+    | promotionPart == promotionKnightMoveMask = Knight
     | otherwise = Pawn
+    where promotionPart = (.&.) promotionFullMoveMask move
 
 opponent :: Position -> Mover
 opponent position = if mover position == White then Black else White
