@@ -120,7 +120,7 @@ main = hspec $ do
     it "Converts from FEN to board type (Test 2)" $ do
       let fen = "6k1/6p1/1p2q2p/1p5P/1P3RP1/2PK1B2/1r2N3/8 w kQ - 5 56"
       let position = getPosition fen
-      let castlePrivs = positionCastlePrivs position
+      let castlePrivs = position
       enPassantSquare position `shouldBe` enPassantNotAvailable
       halfMoves position `shouldBe` 5
       mover position `shouldBe` White
@@ -690,7 +690,7 @@ main = hspec $ do
     anySquaresInBitboardAttacked position White noCheckCastleSquaresBlackKing `shouldBe` False
 
     sort (map algebraicMoveFromMove (DList.toList (generateCastleMoves position))) `shouldBe` ["e8g8"]
-    blackKingCastleAvailable (positionCastlePrivs position) `shouldBe` True
+    blackKingCastleAvailable position `shouldBe` True
 
     sort (map algebraicMoveFromMove (moves position))
             `shouldBe` ["a7a6","a8b8","a8c8","a8d8","b4b3","c4c3","d3b1","d3c2","d3e2","d3f1","e4e3","e8d7","e8d8","e8e7","e8f7","e8f8","e8g8","h7h5","h7h6","h8f8","h8g8"]

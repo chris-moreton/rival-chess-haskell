@@ -108,15 +108,6 @@ enPassantBitRef :: String -> Int
 enPassantBitRef enPassantFenPart =
   if enPassantFenPart == "-" then enPassantNotAvailable else bitRefFromAlgebraicSquareRef enPassantFenPart
 
-getCastlePrivs :: String -> CastlePrivileges
-getCastlePrivs fen =
-  CastlePrivileges {
-      whiteKingCastleAvailable = T.isInfixOf "K" castlePart
-    , whiteQueenCastleAvailable = T.isInfixOf "Q" castlePart
-    , blackKingCastleAvailable = T.isInfixOf "k" castlePart
-    , blackQueenCastleAvailable = T.isInfixOf "q" castlePart
-  } where castlePart = T.pack (fenPart fen 2)
-
 getPosition :: String -> Position
 getPosition fen = Position {
     whitePawnBitboard = pieceBitboard fenRanks 'P'
@@ -133,7 +124,10 @@ getPosition fen = Position {
   , blackRookBitboard = pieceBitboard fenRanks 'r'
   , mover = getMover fen
   , enPassantSquare = enPassantBitRef (enpassantFenPart fen)
-  , positionCastlePrivs = getCastlePrivs fen
-  , halfMoves = read (fenPart fen 4) :: Int
+  , whiteKingCastleAvailable = T.isInfixOf "K" castlePart
+  , whiteQueenCastleAvailable = T.isInfixOf "Q" castlePart
+  , blackKingCastleAvailable = T.isInfixOf "k" castlePart
+  , blackQueenCastleAvailable = T.isInfixOf "q" castlePart  , halfMoves = read (fenPart fen 4) :: Int
   , moveNumber = read (fenPart fen 5) :: Int
 } where fenRanks = getFenRanks (fenBoardPart fen)
+        castlePart = T.pack (fenPart fen 2)

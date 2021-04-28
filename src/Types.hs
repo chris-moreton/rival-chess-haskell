@@ -19,10 +19,7 @@ data Mover = White | Black deriving (Enum,Show,Eq)
 data Piece = Pawn | King | Queen | Bishop | Knight | Rook deriving (Enum,Show,Eq)
 
 data CastlePrivileges = CastlePrivileges {
-    whiteKingCastleAvailable  :: Bool
-  , blackKingCastleAvailable  :: Bool
-  , whiteQueenCastleAvailable :: Bool
-  , blackQueenCastleAvailable :: Bool
+
 } deriving (Generic,Show,Eq)
 
 data Position = Position {
@@ -40,7 +37,10 @@ data Position = Position {
   , blackRookBitboard :: Bitboard
   , mover :: Mover
   , enPassantSquare :: Square
-  , positionCastlePrivs :: CastlePrivileges
+  , whiteKingCastleAvailable  :: Bool
+  , blackKingCastleAvailable  :: Bool
+  , whiteQueenCastleAvailable :: Bool
+  , blackQueenCastleAvailable :: Bool
   , halfMoves :: Int
   , moveNumber :: Int
 } deriving (Generic,Show,Eq)

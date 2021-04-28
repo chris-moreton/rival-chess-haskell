@@ -73,12 +73,10 @@ makeMove !position !move =
         , enPassantSquare = if m == White
                                 then if to - from == 16 && testBit (whitePawnBitboard bb) from then from + 8 else enPassantNotAvailable
                                 else if from - to == 16 && testBit (blackPawnBitboard bb) from then from - 8 else enPassantNotAvailable
-        , positionCastlePrivs = if (from .|. to) .&. 0b1000100100000000000000000000000000000000000000000000000010001001 == 0 then positionCastlePrivs position else CastlePrivileges {
-              whiteKingCastleAvailable = whiteKingCastleAvailable (positionCastlePrivs position) && notElem from [e1Bit,h1Bit] && to /= h1Bit
-            , whiteQueenCastleAvailable = whiteQueenCastleAvailable (positionCastlePrivs position) && notElem from [a1Bit,e1Bit] && to /= a1Bit
-            , blackKingCastleAvailable = blackKingCastleAvailable (positionCastlePrivs position) && notElem from [e8Bit,h8Bit] && to /= h8Bit
-            , blackQueenCastleAvailable = blackQueenCastleAvailable (positionCastlePrivs position) && notElem from [a8Bit,e8Bit] && to /= a8Bit
-        }
+        , whiteKingCastleAvailable = whiteKingCastleAvailable position && notElem from [e1Bit,h1Bit] && to /= h1Bit
+        , whiteQueenCastleAvailable = whiteQueenCastleAvailable position && notElem from [a1Bit,e1Bit] && to /= a1Bit
+        , blackKingCastleAvailable = blackKingCastleAvailable position && notElem from [e8Bit,h8Bit] && to /= h8Bit
+        , blackQueenCastleAvailable = blackQueenCastleAvailable position && notElem from [a8Bit,e8Bit] && to /= a8Bit
         , halfMoves = if testBit (allPiecesBitboard position) to || isPawnMove then 0 else halfMoves position + 1
         , moveNumber = (+) (moveNumber position) (if m == Black then 1 else 0)
     }
