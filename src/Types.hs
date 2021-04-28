@@ -18,10 +18,6 @@ type MagicMoves = Array Int (V.Vector Bitboard)
 data Mover = White | Black deriving (Enum,Show,Eq)
 data Piece = Pawn | King | Queen | Bishop | Knight | Rook deriving (Enum,Show,Eq)
 
-data CastlePrivileges = CastlePrivileges {
-
-} deriving (Generic,Show,Eq)
-
 data Position = Position {
     whitePawnBitboard :: Bitboard
   , whiteKnightBitboard :: Bitboard
@@ -35,6 +31,7 @@ data Position = Position {
   , blackQueenBitboard :: Bitboard
   , blackKingBitboard :: Bitboard
   , blackRookBitboard :: Bitboard
+  , allPiecesBitboard :: Bitboard
   , mover :: Mover
   , enPassantSquare :: Square
   , whiteKingCastleAvailable  :: Bool

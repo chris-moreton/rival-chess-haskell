@@ -36,12 +36,6 @@ enemyBitboard !position = foldl (.|.) 0 (bitboardListForColour position (opponen
 promotionSquares :: Bitboard
 promotionSquares = 0b1111111100000000000000000000000000000000000000000000000011111111
 
-allPiecesBitboard :: Position -> Bitboard
-allPiecesBitboard !position = foldl (.|.) 0 [
-      whitePawnBitboard bitboards,whiteKnightBitboard bitboards,whiteKingBitboard bitboards,whiteBishopBitboard bitboards,whiteQueenBitboard bitboards,whiteRookBitboard bitboards
-    , blackPawnBitboard bitboards,blackKnightBitboard bitboards,blackKingBitboard bitboards,blackBishopBitboard bitboards,blackQueenBitboard bitboards,blackRookBitboard bitboards]
-        where bitboards = position
-
 emptySquaresBitboard :: Position -> Bitboard
 emptySquaresBitboard !position = complement (allPiecesBitboard position)
 
