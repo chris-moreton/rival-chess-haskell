@@ -12,6 +12,7 @@ import Util.Bitboards
 import Search.MoveConstants
 
 removePieceFromBitboard :: Square -> Bitboard -> Bitboard
+{-# INLINE removePieceFromBitboard #-}
 removePieceFromBitboard !square = (.&.) (complement (bit square))
 
 moveWhiteRookWhenCastling :: Square -> Square -> Bitboard -> Bitboard -> Bitboard
@@ -34,6 +35,7 @@ enPassantCapturedPieceSquare !enPassantSquare
   | otherwise = enPassantSquare - 8
 
 removePawnWhenEnPassant :: Bitboard -> Bitboard -> Square -> Square -> Bitboard
+{-# INLINE removePawnWhenEnPassant #-}
 removePawnWhenEnPassant !attackerBb !defenderBb !to !enPassantSquare
   | enPassantSquare == to && testBit attackerBb to = removePieceFromBitboard (enPassantCapturedPieceSquare to) defenderBb
   | otherwise = defenderBb
@@ -45,11 +47,13 @@ isPromotionSquare :: Square -> Bool
 isPromotionSquare !sq = (bit sq .&. promotionSquares) /= 0
 
 createIfPromotion :: Bool -> Bitboard -> Bitboard -> Square -> Square -> Bitboard
+{-# INLINE createIfPromotion #-}
 createIfPromotion !isPromotionPiece !pawnBitboard !pieceBitboard !fromSquare !toSquare
   | isPromotionPiece && isPromotionSquare toSquare && testBit pawnBitboard fromSquare = pieceBitboard .|. bit toSquare
   | otherwise = pieceBitboard
 
 movePieceWithinBitboard :: Square -> Square -> Bitboard -> Bitboard
+{-# INLINE movePieceWithinBitboard #-}
 movePieceWithinBitboard !from !to !bb
   | testBit bb from = (.|.) (clearBit bb from) (bit to)
   | otherwise = if testBit bb to then clearBit bb to else bb
