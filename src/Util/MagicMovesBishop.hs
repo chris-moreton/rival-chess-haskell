@@ -2,7 +2,7 @@
 
 module Util.MagicMovesBishop where
 
-import Types
+import Alias
 import Data.Array.IArray
 import qualified Data.Vector.Storable as V
 import GHC.Compact

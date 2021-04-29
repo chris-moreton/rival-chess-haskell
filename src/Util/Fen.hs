@@ -3,6 +3,7 @@
 module Util.Fen where
 
 import Types
+import Alias
 import Search.MoveConstants
 
 import Data.List.Split

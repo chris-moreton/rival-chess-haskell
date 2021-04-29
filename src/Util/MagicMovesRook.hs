@@ -2,7 +2,7 @@
 
 module Util.MagicMovesRook where
 
-import Types
+import Alias
 import Data.Array.IArray
 import qualified Data.Vector.Storable as V
 

@@ -7,6 +7,7 @@ module Util.Bitboards where
 import Data.Bits
 import Util.Utils
 import Types
+import Alias
 import Data.Array.IArray
 import GHC.Compact
 import qualified Data.Vector.Storable as V

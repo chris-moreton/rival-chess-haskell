@@ -4,6 +4,7 @@ module Util.Utils where
 
 import Data.List
 import Types
+import Alias
 import Data.Bits
 import Search.MoveConstants
 import GHC.Compact

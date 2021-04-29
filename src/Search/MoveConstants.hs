@@ -1,6 +1,6 @@
 module Search.MoveConstants where
 
-import Types
+import Alias
 
 promotionQueenMoveMask :: Move
 promotionQueenMoveMask = 192

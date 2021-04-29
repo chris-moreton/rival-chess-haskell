@@ -38,6 +38,7 @@ library
       Search.MoveGenerator
       Search.MoveConstants
       Types
+      Alias
   other-modules:
       Paths_rival
   hs-source-dirs:

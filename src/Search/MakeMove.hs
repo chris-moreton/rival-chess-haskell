@@ -5,6 +5,7 @@
 module Search.MakeMove where
 
 import Types
+import Alias
 import Util.Fen
 import Util.Utils
 import Data.Bits

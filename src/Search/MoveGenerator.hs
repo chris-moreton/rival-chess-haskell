@@ -5,6 +5,7 @@
 module Search.MoveGenerator where
 
 import Types
+import Alias
 import Data.Word
 import Data.Bits
 import Util.Bitboards

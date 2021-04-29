@@ -5,6 +5,7 @@ module Util.MagicBitboards where
 import Util.MagicMovesBishop
 import Util.MagicMovesRook
 import Types
+import Alias
 import qualified Data.Vector.Storable as V
 import qualified Data.Array as A
 
