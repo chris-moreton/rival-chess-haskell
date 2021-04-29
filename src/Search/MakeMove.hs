@@ -17,6 +17,7 @@ removePieceFromBitboard :: Square -> Bitboard -> Bitboard
 removePieceFromBitboard !square = (.&.) (complement (bit square))
 
 moveWhiteRookWhenCastling :: Square -> Square -> Bitboard -> Bitboard -> Bitboard
+{-# INLINE moveWhiteRookWhenCastling #-}
 moveWhiteRookWhenCastling !from !to !kingBoard !rookBoard
   | not (testBit kingBoard e1Bit) = rookBoard
   | from == e1Bit && to == g1Bit = movePieceWithinBitboard h1Bit f1Bit rookBoard
@@ -24,6 +25,7 @@ moveWhiteRookWhenCastling !from !to !kingBoard !rookBoard
   | otherwise = rookBoard
 
 moveBlackRookWhenCastling :: Square -> Square -> Bitboard -> Bitboard -> Bitboard
+{-# INLINE moveBlackRookWhenCastling #-}
 moveBlackRookWhenCastling !from !to !kingBoard !rookBoard
   | not (testBit kingBoard e8Bit) = rookBoard
   | from == e8Bit && to == g8Bit = movePieceWithinBitboard h8Bit f8Bit rookBoard
@@ -31,6 +33,7 @@ moveBlackRookWhenCastling !from !to !kingBoard !rookBoard
   | otherwise = rookBoard
 
 enPassantCapturedPieceSquare :: Square -> Square
+{-# INLINE enPassantCapturedPieceSquare #-}
 enPassantCapturedPieceSquare !enPassantSquare
   | enPassantSquare < 24 = enPassantSquare + 8
   | otherwise = enPassantSquare - 8
@@ -42,9 +45,11 @@ removePawnWhenEnPassant !attackerBb !defenderBb !to !enPassantSquare
   | otherwise = defenderBb
 
 removePawnIfPromotion :: Bitboard -> Bitboard
+{-# INLINE removePawnIfPromotion #-}
 removePawnIfPromotion !bb = bb .&. 0b0000000011111111111111111111111111111111111111111111111100000000
 
 isPromotionSquare :: Square -> Bool
+{-# INLINE isPromotionSquare #-}
 isPromotionSquare !sq = (bit sq .&. promotionSquares) /= 0
 
 createIfPromotion :: Bool -> Bitboard -> Bitboard -> Square -> Square -> Bitboard
@@ -61,7 +66,7 @@ movePieceWithinBitboard !from !to !bb
 
 makeMove :: Position -> Move -> Position
 makeMove !position !move =
-    Position {
+    position {
           whitePawnBitboard = wp
         , blackPawnBitboard = bp
         , whiteKnightBitboard = wn
@@ -74,17 +79,17 @@ makeMove !position !move =
         , blackQueenBitboard = bq
         , whiteKingBitboard = wk
         , blackKingBitboard = bk
-        , allPiecesBitboard = wp .|. bp .|. wn .|. bn .|. wb .|. bb .|. wr .|. br .|. wq .|. bq .|. wk .|. bk
-        , whitePiecesBitboard = wp .|. wn .|. wr .|. wk .|. wq .|. wb
-        , blackPiecesBitboard = bp .|. bn .|. br .|. bk .|. bq .|. bb
+        , allPiecesBitboard = wpb .|. bpb
+        , whitePiecesBitboard = wpb
+        , blackPiecesBitboard = bpb
         , mover = if m == White then Black else White
         , enPassantSquare = if m == White
                                 then if to - from == 16 && testBit (whitePawnBitboard position) from then from + 8 else enPassantNotAvailable
                                 else if from - to == 16 && testBit (blackPawnBitboard position) from then from - 8 else enPassantNotAvailable
-        , whiteKingCastleAvailable = whiteKingCastleAvailable position && notElem from [e1Bit,h1Bit] && to /= h1Bit
-        , whiteQueenCastleAvailable = whiteQueenCastleAvailable position && notElem from [a1Bit,e1Bit] && to /= a1Bit
-        , blackKingCastleAvailable = blackKingCastleAvailable position && notElem from [e8Bit,h8Bit] && to /= h8Bit
-        , blackQueenCastleAvailable = blackQueenCastleAvailable position && notElem from [a8Bit,e8Bit] && to /= a8Bit
+        , whiteKingCastleAvailable = whiteKingCastleAvailable position && from /= e1Bit && from /= h1Bit && to /= h1Bit
+        , whiteQueenCastleAvailable = whiteQueenCastleAvailable position && from /= e1Bit && from /= a1Bit && to /= a1Bit
+        , blackKingCastleAvailable = blackKingCastleAvailable position && from /= e8Bit && from /= h8Bit && to /= h8Bit
+        , blackQueenCastleAvailable = blackQueenCastleAvailable position && from /= e8Bit && from /= a8Bit && to /= a8Bit
         , halfMoves = if testBit (allPiecesBitboard position) to || isPawnMove then 0 else halfMoves position + 1
         , moveNumber = (+) (moveNumber position) (if m == Black then 1 else 0)
     }
@@ -107,6 +112,8 @@ makeMove !position !move =
           bq = createIfPromotion (promotionPiece == Queen) (blackPawnBitboard position) (movePieceWithinBitboard from to (blackQueenBitboard position)) from to
           wk = movePieceWithinBitboard from to (whiteKingBitboard position)
           bk = movePieceWithinBitboard from to (blackKingBitboard position)          
+          wpb = wp .|. wn .|. wr .|. wk .|. wq .|. wb
+          bpb = bp .|. bn .|. br .|. bk .|. bq .|. bb
 
 
 
