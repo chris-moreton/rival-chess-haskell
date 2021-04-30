@@ -18,11 +18,15 @@ magicNumberBishop = V.fromList [0x2910054208004104, 0x2100630a7020180, 0x5822022
 magicNumberShiftsRook = V.fromList [52, 53, 53, 53, 53, 53, 53, 52, 53, 54, 54, 54, 54, 54, 54, 53, 53, 54, 54, 54, 54, 54, 54, 53, 53, 54, 54, 54, 54, 54, 54, 53, 53, 54, 54, 54, 54, 54, 54, 53, 53, 54, 54, 54, 54, 54, 54, 53, 53, 54, 54, 54, 54, 54, 54, 53, 52, 53, 53, 53, 53, 53, 53, 52] :: V.Vector Int
 magicNumberShiftsBishop = V.fromList [58, 59, 59, 59, 59, 59, 59, 58, 59, 59, 59, 59, 59, 59, 59, 59, 59, 59, 57, 57, 57, 57, 59, 59, 59, 59, 57, 55, 55, 57, 59, 59, 59, 59, 57, 55, 55, 57, 59, 59, 59, 59, 57, 57, 57, 57, 59, 59, 59, 59, 59, 59, 59, 59, 59, 59, 58, 59, 59, 59, 59, 59, 59, 58] :: V.Vector Int
 
+magic :: MagicVars -> Square -> Int -> Bitboard
+magic magicVars fromSquare toSquaresMagicIndex = magicMoves magicVars V.! ((fromSquare * magicsPerSquare magicVars) + toSquaresMagicIndex)
+
 data MagicVars = MagicVars {
     occupancyMask :: V.Vector Bitboard
   , magicNumber :: V.Vector Bitboard
   , magicNumberShifts :: V.Vector Int
-  , magicMoves :: A.Array Int (V.Vector Bitboard)
+  , magicMoves :: MagicMoves
+  , magicsPerSquare :: Int
 }
 
 magicRookVars = MagicVars {
@@ -30,6 +34,7 @@ magicRookVars = MagicVars {
     , magicNumber = magicNumberRook
     , magicNumberShifts = magicNumberShiftsRook
     , magicMoves = magicMovesRook
+    , magicsPerSquare = 4096
   }
 
 magicBishopVars = MagicVars {
@@ -37,4 +42,5 @@ magicBishopVars = MagicVars {
     , magicNumber = magicNumberBishop
     , magicNumberShifts = magicNumberShiftsBishop
     , magicMoves = magicMovesBishop
+    , magicsPerSquare = 1024
   }

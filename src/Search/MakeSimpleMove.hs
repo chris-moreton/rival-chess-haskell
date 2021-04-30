@@ -83,8 +83,8 @@ makeSimpleWhiteQueenMove :: Position -> Move -> Position
 makeSimpleWhiteQueenMove !position !move =
     position {
           whiteQueenBitboard = movePieceWithinBitboard from to (whiteQueenBitboard position)  
-        , allPiecesBitboard = (allPiecesBitboard position) `xor`  switchBitboard
-        , whitePiecesBitboard = (whitePiecesBitboard position) `xor`  switchBitboard
+        , allPiecesBitboard = (allPiecesBitboard position) `xor` switchBitboard
+        , whitePiecesBitboard = (whitePiecesBitboard position) `xor` switchBitboard
         , mover = Black
         , enPassantSquare = enPassantNotAvailable
         , halfMoves = halfMoves position + 1
@@ -97,8 +97,8 @@ makeSimpleBlackKnightMove :: Position -> Move -> Position
 makeSimpleBlackKnightMove !position !move =
     position {
           blackKnightBitboard = movePieceWithinBitboard from to (blackKnightBitboard position)
-        , allPiecesBitboard = (allPiecesBitboard position) `xor`  switchBitboard
-        , blackPiecesBitboard = (blackPiecesBitboard position) `xor`  switchBitboard
+        , allPiecesBitboard = (allPiecesBitboard position) `xor` switchBitboard
+        , blackPiecesBitboard = (blackPiecesBitboard position) `xor` switchBitboard
         , mover = White
         , enPassantSquare = enPassantNotAvailable
         , halfMoves = halfMoves position + 1

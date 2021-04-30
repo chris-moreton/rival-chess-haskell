@@ -11,4 +11,4 @@ type Bitboard = Word
 type Move = Int
 type BitboardArray = V.Vector Bitboard
 type MoveList = DList.DList Move
-type MagicMoves = Array Int (V.Vector Bitboard)
+type MagicMoves = V.Vector Bitboard
