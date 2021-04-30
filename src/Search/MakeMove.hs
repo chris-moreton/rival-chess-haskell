@@ -13,7 +13,7 @@ import Util.Bitboards
 import Search.MoveConstants
 import Search.MakeSimpleMove
 import Search.MoveUtils
-import Search.MakeComplextMove
+import Search.MakeComplexMove
 
 makeMove :: Position -> Move -> Position
 makeMove !position !move = 
@@ -22,6 +22,7 @@ makeMove !position !move =
         else makeMoveMain position move
     where from = fromSquarePart move
           to = toSquarePart move
+
 
 
 

@@ -10,7 +10,7 @@ import Types
 import Alias
 import Data.Array.IArray
 import GHC.Compact
-import qualified Data.Vector.Storable as V
+import qualified Data.Vector.Unboxed as V
 import Util.MagicMovesBishop
 
 bitString :: Bitboard -> String

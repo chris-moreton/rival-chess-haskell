@@ -4,7 +4,7 @@ module Util.MagicMovesBishop where
 
 import Alias
 import Data.Array.IArray
-import qualified Data.Vector.Storable as V
+import qualified Data.Vector.Unboxed as V
 import GHC.Compact
 
 magicMovesBishop = listArray(0,64) [

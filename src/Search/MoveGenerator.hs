@@ -14,7 +14,7 @@ import Util.Utils
 import Search.MoveConstants
 import Data.Array.IArray
 import qualified Data.DList as DList
-import qualified Data.Vector.Storable as V
+import qualified Data.Vector.Unboxed as V
 
 bitboardForMover :: Position -> Piece -> Bitboard
 bitboardForMover position = bitboardForColour position (mover position)

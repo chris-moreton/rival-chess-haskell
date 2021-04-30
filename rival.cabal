@@ -37,7 +37,7 @@ library
       Search.Perft
       Search.MoveGenerator
       Search.MoveConstants
-      Search.MakeComplextMove
+      Search.MakeComplexMove
       Search.MakeSimpleMove
       Search.MoveUtils
       Types

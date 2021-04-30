@@ -16,14 +16,14 @@ import Search.Perft
 import Search.MoveGenerator
 import Search.MoveConstants
 import Search.MakeSimpleMove
-import Search.MakeComplextMove
+import Search.MakeComplexMove
 import Search.MoveUtils
 import Types
 import Data.Bits
 import Data.Sort
 import Search.MakeMove
 import qualified Data.DList as DList
-import qualified Data.Vector.Storable as V
+import qualified Data.Vector.Unboxed as V
 
 main :: IO ()
 main = hspec $ do

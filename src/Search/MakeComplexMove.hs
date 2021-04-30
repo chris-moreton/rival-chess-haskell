@@ -2,7 +2,7 @@
 
 {-# OPTIONS_GHC -Wno-overflowed-literals #-}
 
-module Search.MakeComplextMove where
+module Search.MakeComplexMove where
 
 import Types
 import Alias
