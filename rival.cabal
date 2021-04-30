@@ -37,6 +37,9 @@ library
       Search.Perft
       Search.MoveGenerator
       Search.MoveConstants
+      Search.MakeComplextMove
+      Search.MakeSimpleMove
+      Search.MoveUtils
       Types
       Alias
   other-modules:

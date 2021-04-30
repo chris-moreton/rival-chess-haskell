@@ -15,6 +15,9 @@ import Util.Utils
 import Search.Perft
 import Search.MoveGenerator
 import Search.MoveConstants
+import Search.MakeSimpleMove
+import Search.MakeComplextMove
+import Search.MoveUtils
 import Types
 import Data.Bits
 import Data.Sort
