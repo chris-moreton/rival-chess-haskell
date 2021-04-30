@@ -1,3 +1,5 @@
+{-# LANGUAGE StrictData,BangPatterns #-}
+
 {-# OPTIONS_GHC -Wno-overflowed-literals #-}
 
 module Util.MagicBitboards where

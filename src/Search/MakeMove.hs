@@ -62,10 +62,75 @@ movePieceWithinBitboard :: Square -> Square -> Bitboard -> Bitboard
 {-# INLINE movePieceWithinBitboard #-}
 movePieceWithinBitboard !from !to !bb
   | testBit bb from = (.|.) (clearBit bb from) (bit to)
-  | otherwise = if testBit bb to then clearBit bb to else bb
+  | otherwise = clearBit bb to
 
 makeMove :: Position -> Move -> Position
-makeMove !position !move =
+makeMove !position !move = 
+    if not (testBit (allPiecesBitboard position) to) 
+        then if testBit ((whiteBishopBitboard position) .|. (whiteKnightBitboard position) .|. (whiteQueenBitboard position) .|. (whiteRookBitboard position)) from
+               then makeSimpleWhiteMove position move
+               else if testBit ((blackBishopBitboard position) .|. (blackKnightBitboard position) .|. (blackQueenBitboard position) .|. (blackRookBitboard position)) from
+                      then makeSimpleBlackMove position move
+                      else makeMoveMain position move             
+        else makeMoveMain position move
+    where from = fromSquarePart move
+          to = toSquarePart move
+          promotionPiece = promotionPieceFromMove move
+          m = mover position
+
+makeSimpleWhiteMove :: Position -> Move -> Position
+makeSimpleWhiteMove !position !move =
+    position {
+          whiteKnightBitboard = wn
+        , whiteBishopBitboard = wb
+        , whiteRookBitboard = wr
+        , whiteQueenBitboard = wq
+        , allPiecesBitboard = wpb .|. (blackPiecesBitboard position)
+        , whitePiecesBitboard = wpb
+        , mover = Black
+        , enPassantSquare = enPassantNotAvailable
+        , whiteKingCastleAvailable = whiteKingCastleAvailable position && from /= h1Bit
+        , whiteQueenCastleAvailable = whiteQueenCastleAvailable position && from /= a1Bit
+        , halfMoves = halfMoves position + 1
+    }
+    where from = fromSquarePart move
+          to = toSquarePart move
+          wp = whitePawnBitboard position
+          wn = movePieceWithinBitboard from to (whiteKnightBitboard position)
+          wb = movePieceWithinBitboard from to (whiteBishopBitboard position)
+          wr = movePieceWithinBitboard from to (whiteRookBitboard position)
+          wq = movePieceWithinBitboard from to (whiteQueenBitboard position)
+          wk = whiteKingBitboard position
+          wpb = wp .|. wn .|. wr .|. wk .|. wq .|. wb
+
+makeSimpleBlackMove :: Position -> Move -> Position
+makeSimpleBlackMove !position !move =
+    position {
+          blackKnightBitboard = bn
+        , blackBishopBitboard = bb
+        , blackRookBitboard = br
+        , blackQueenBitboard = bq
+        , allPiecesBitboard = bpb .|. (whitePiecesBitboard position)
+        , blackPiecesBitboard = bpb
+        , mover = White
+        , enPassantSquare = enPassantNotAvailable
+        , blackKingCastleAvailable = blackKingCastleAvailable position && from /= h8Bit
+        , blackQueenCastleAvailable = blackQueenCastleAvailable position && from /= a8Bit
+        , halfMoves = halfMoves position + 1
+        , moveNumber = moveNumber position + 1
+    }
+    where from = fromSquarePart move
+          to = toSquarePart move
+          bp = blackPawnBitboard position
+          bn = movePieceWithinBitboard from to (blackKnightBitboard position)
+          bb = movePieceWithinBitboard from to (blackBishopBitboard position)
+          br = movePieceWithinBitboard from to (blackRookBitboard position)
+          bq = movePieceWithinBitboard from to (blackQueenBitboard position)
+          bk = blackKingBitboard position
+          bpb = bp .|. bn .|. br .|. bk .|. bq .|. bb          
+
+makeMoveMain :: Position -> Move -> Position
+makeMoveMain !position !move =
     position {
           whitePawnBitboard = wp
         , blackPawnBitboard = bp
@@ -83,9 +148,13 @@ makeMove !position !move =
         , whitePiecesBitboard = wpb
         , blackPiecesBitboard = bpb
         , mover = if m == White then Black else White
-        , enPassantSquare = if m == White
-                                then if to - from == 16 && testBit (whitePawnBitboard position) from then from + 8 else enPassantNotAvailable
-                                else if from - to == 16 && testBit (blackPawnBitboard position) from then from - 8 else enPassantNotAvailable
+        , enPassantSquare = if (abs (to - from)) == 16 
+                              then if (testBit (whitePawnBitboard position) from) 
+                                     then from + 8 
+                                     else if (testBit (blackPawnBitboard position) from) 
+                                            then from - 8 
+                                            else enPassantNotAvailable
+                              else enPassantNotAvailable
         , whiteKingCastleAvailable = whiteKingCastleAvailable position && from /= e1Bit && from /= h1Bit && to /= h1Bit
         , whiteQueenCastleAvailable = whiteQueenCastleAvailable position && from /= e1Bit && from /= a1Bit && to /= a1Bit
         , blackKingCastleAvailable = blackKingCastleAvailable position && from /= e8Bit && from /= h8Bit && to /= h8Bit
