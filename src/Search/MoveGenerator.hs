@@ -179,9 +179,8 @@ pawnMovesCaptureOfColour !mover = if mover == White then whitePawnMovesCapture e
 
 kingSquare :: Position -> Mover -> Square
 kingSquare !position !colour = if colour == White
-    then head (bitRefList (whiteKingBitboard bb))
-    else head (bitRefList (blackKingBitboard bb))
-  where bb = position
+    then head (bitRefList (whiteKingBitboard position))
+    else head (bitRefList (blackKingBitboard position))
 
 isCheck :: Position -> Mover -> Bool
 isCheck !position !colour = isSquareAttackedBy position (kingSquare position colour) (if colour == White then Black else White)
@@ -197,39 +196,32 @@ magicIndexForPiece !piece !pieceSquare !allPieceBitboard = fromIntegral (shiftR 
 
 rookMovePiecesBitboard :: Position -> Mover -> Bitboard
 rookMovePiecesBitboard !position !mover = if mover == White
-    then (.|.) (whiteRookBitboard pb) (whiteQueenBitboard pb)
-    else (.|.) (blackRookBitboard pb) (blackQueenBitboard pb)
-  where pb = position
+    then (.|.) (whiteRookBitboard position) (whiteQueenBitboard position)
+    else (.|.) (blackRookBitboard position) (blackQueenBitboard position)
 
 bishopMovePiecesBitboard :: Position -> Mover -> Bitboard
 bishopMovePiecesBitboard !position !mover = if mover == White
-    then (.|.) (whiteBishopBitboard pb) (whiteQueenBitboard pb)
-    else (.|.) (blackBishopBitboard pb) (blackQueenBitboard pb)
-  where pb = position
+    then (.|.) (whiteBishopBitboard position) (whiteQueenBitboard position)
+    else (.|.) (blackBishopBitboard position) (blackQueenBitboard position)
 
 isSquareAttackedByKnight :: Position -> Square -> Mover -> Bool
 isSquareAttackedByKnight !position !attackedSquare !attacker = (.&.) knightBitboard (knightMovesBitboards V.! attackedSquare) /= 0
-    where knightBitboard = (if attacker == White then whiteKnightBitboard else blackKnightBitboard) pb
-          pb = position
+    where knightBitboard = (if attacker == White then whiteKnightBitboard else blackKnightBitboard) position
 
 isSquareAttackedByKing :: Position -> Square -> Mover -> Bool
 isSquareAttackedByKing !position !attackedSquare !attacker = (.&.) kingBitboard (kingMovesBitboards V.! attackedSquare) /= 0
-    where kingBitboard = (if attacker == White then whiteKingBitboard else blackKingBitboard) pb
-          pb = position
+    where kingBitboard = (if attacker == White then whiteKingBitboard else blackKingBitboard) position
 
 isSquareAttackedByPawn :: Position -> Square -> Mover -> Bool
 isSquareAttackedByPawn !position !attackedSquare !attacker = (.&.) pawnBitboard (pawnMovesCaptureOfColour defenderColour V.! attackedSquare) /= 0
-    where pawnBitboard = (if attacker == White then whitePawnBitboard else blackPawnBitboard) pb
-          pb = position
+    where pawnBitboard = (if attacker == White then whitePawnBitboard else blackPawnBitboard) position
           defenderColour = if attacker == White then Black else White
 
 isSquareAttackedByBishop :: Position -> Square -> Mover -> Bool
-isSquareAttackedByBishop !position !attackedSquare !attacker = any (\x -> isBishopAttackingSquare attackedSquare x apb) (bitRefList (bishopMovePiecesBitboard position attacker))
-    where apb = allPiecesBitboard position
+isSquareAttackedByBishop !position !attackedSquare !attacker = any (\x -> isBishopAttackingSquare attackedSquare x (allPiecesBitboard position)) (bitRefList (bishopMovePiecesBitboard position attacker))
 
 isSquareAttackedByRook :: Position -> Square -> Mover -> Bool
-isSquareAttackedByRook !position !attackedSquare !attacker = any (\x -> isRookAttackingSquare attackedSquare x apb) (bitRefList (rookMovePiecesBitboard position attacker))
-    where apb = allPiecesBitboard position
+isSquareAttackedByRook !position !attackedSquare !attacker = any (\x -> isRookAttackingSquare attackedSquare x (allPiecesBitboard position)) (bitRefList (rookMovePiecesBitboard position attacker))
 
 isBishopAttackingSquare :: Square -> Square -> Bitboard -> Bool
 isBishopAttackingSquare !attackedSquare !pieceSquare allPieceBitboard = (.&.) (magic magicBishopVars pieceSquare (magicIndexForPiece Bishop pieceSquare allPieceBitboard)) (bit attackedSquare) /= 0
