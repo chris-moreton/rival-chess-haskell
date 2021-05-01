@@ -23,10 +23,10 @@ magic magicVars fromSquare toSquaresMagicIndex = magicMoves magicVars V.! ((from
 
 data MagicVars = MagicVars {
     occupancyMask :: V.Vector Bitboard
-  , magicNumber :: V.Vector Bitboard
-  , magicNumberShifts :: V.Vector Int
-  , magicMoves :: MagicMoves
-  , magicsPerSquare :: Int
+    , magicNumber :: V.Vector Bitboard
+    , magicNumberShifts :: V.Vector Int
+    , magicMoves :: MagicMoves
+    , magicsPerSquare :: Int
 }
 
 magicRookVars = MagicVars {

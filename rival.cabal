@@ -68,7 +68,7 @@ executable rival-exe
       Paths_rival
   hs-source-dirs:
       app
-  ghc-options: -threaded -rtsopts -with-rtsopts=-N -O2
+  ghc-options: -threaded -rtsopts -O2 -prof -fprof-auto "-with-rtsopts=-N -p -s -h -i0.1"
   build-depends:
       base >=4.7 && <5
     , rival
