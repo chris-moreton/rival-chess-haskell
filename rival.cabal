@@ -40,6 +40,10 @@ library
       Search.MakeComplexMove
       Search.MakeSimpleMove
       Search.MoveUtils
+      Util.MagicMovesRook1
+      Util.MagicMovesRook2
+      Util.MagicMovesRook3
+      Util.MagicMovesRook4
       Types
       Alias
   other-modules:
@@ -81,7 +85,7 @@ test-suite rival-test
   ghc-options:
     -O2
     -threaded
-    -rtsopts 
+    -rtsopts
     -with-rtsopts=-N
   build-depends:
       base >=4.7 && <5
