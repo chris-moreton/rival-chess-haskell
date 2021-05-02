@@ -23,7 +23,6 @@ import Data.Bits
 import Data.Sort
 import Search.MakeMove
 import qualified Data.DList as DList
-import qualified Data.Vector.Unboxed as V
 
 main :: IO ()
 main = hspec $ do
@@ -37,7 +36,7 @@ main = hspec $ do
     northFill 4611936708517363882 `shouldBe` -1332566
 
   describe "rankBitboards" $
-    it "Calculates rank8Bitboards - sanity check for values expressed as functions" $ do
+    it "Sanity checks for values expressed as functions" $ do
     rank8Bits `shouldBe` (-72057594037927936)
     fileABits `shouldBe` (-9187201950435737472)
     fileHBits `shouldBe` 72340172838076673
@@ -245,7 +244,7 @@ main = hspec $ do
     let emptySquares = emptySquaresBitboard position
     emptySquares `shouldBe` 0b0111110111110101101101101010111111111011111010111011011111111101
     let fromSquare = 51
-    let forwardMovesForSquare = whitePawnMovesForward V.! fromSquare
+    let forwardMovesForSquare = whitePawnMovesForward ! fromSquare
     forwardMovesForSquare `shouldBe` 0b0000100000000000000000000000000000000000000000000000000000000000
     let pfmb = pawnForwardMovesBitboard ((Data.Bits..&.) forwardMovesForSquare emptySquares) position
     pfmb `shouldBe` 0b0000100000000000000000000000000000000000000000000000000000000000
