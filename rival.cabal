@@ -37,8 +37,6 @@ library
       Search.Perft
       Search.MoveGenerator
       Search.MoveConstants
-      Search.MakeComplexMove
-      Search.MakeSimpleMove
       Search.MoveUtils
       Util.MagicMovesBishop1
       Util.MagicMovesRook1
