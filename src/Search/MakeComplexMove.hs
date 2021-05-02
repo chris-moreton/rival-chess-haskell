@@ -15,7 +15,7 @@ import Search.MoveUtils
 
 makeMoveMain :: Position -> Move -> Position
 makeMoveMain !position !move =
-    position {
+    Position {
           whitePawnBitboard = wp
         , blackPawnBitboard = bp
         , whiteKnightBitboard = wn
