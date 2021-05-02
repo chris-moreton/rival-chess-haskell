@@ -7,7 +7,7 @@ import Search.MakeMove
 import Search.MoveGenerator
 
 perft :: Position -> Int -> Int
-perft position depth =
+perft !position !depth =
     if depth == 0
         then length notInCheckPositions
         else sum (map (\x -> perft x (depth - 1)) notInCheckPositions)

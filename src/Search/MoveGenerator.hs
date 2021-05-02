@@ -16,21 +16,21 @@ import Data.Array.IArray
 import qualified Data.DList as DList
 
 bitboardForMover :: Position -> Piece -> Bitboard
-bitboardForMover position = bitboardForColour position (mover position)
+bitboardForMover !position = bitboardForColour position (mover position)
 
 bitboardForColour :: Position -> Mover -> Piece -> Bitboard
-bitboardForColour pieceBitboards White King = whiteKingBitboard pieceBitboards
-bitboardForColour pieceBitboards White Queen = whiteQueenBitboard pieceBitboards
-bitboardForColour pieceBitboards White Rook = whiteRookBitboard pieceBitboards
-bitboardForColour pieceBitboards White Knight = whiteKnightBitboard pieceBitboards
-bitboardForColour pieceBitboards White Bishop = whiteBishopBitboard pieceBitboards
-bitboardForColour pieceBitboards White Pawn = whitePawnBitboard pieceBitboards
-bitboardForColour pieceBitboards Black King = blackKingBitboard pieceBitboards
-bitboardForColour pieceBitboards Black Queen = blackQueenBitboard pieceBitboards
-bitboardForColour pieceBitboards Black Rook = blackRookBitboard pieceBitboards
-bitboardForColour pieceBitboards Black Knight = blackKnightBitboard pieceBitboards
-bitboardForColour pieceBitboards Black Bishop = blackBishopBitboard pieceBitboards
-bitboardForColour pieceBitboards Black Pawn = blackPawnBitboard pieceBitboards
+bitboardForColour !pieceBitboards White King = whiteKingBitboard pieceBitboards
+bitboardForColour !pieceBitboards White Queen = whiteQueenBitboard pieceBitboards
+bitboardForColour !pieceBitboards White Rook = whiteRookBitboard pieceBitboards
+bitboardForColour !pieceBitboards White Knight = whiteKnightBitboard pieceBitboards
+bitboardForColour !pieceBitboards White Bishop = whiteBishopBitboard pieceBitboards
+bitboardForColour !pieceBitboards White Pawn = whitePawnBitboard pieceBitboards
+bitboardForColour !pieceBitboards Black King = blackKingBitboard pieceBitboards
+bitboardForColour !pieceBitboards Black Queen = blackQueenBitboard pieceBitboards
+bitboardForColour !pieceBitboards Black Rook = blackRookBitboard pieceBitboards
+bitboardForColour !pieceBitboards Black Knight = blackKnightBitboard pieceBitboards
+bitboardForColour !pieceBitboards Black Bishop = blackBishopBitboard pieceBitboards
+bitboardForColour !pieceBitboards Black Pawn = blackPawnBitboard pieceBitboards
 
 bitRefList :: Bitboard -> [Square]
 bitRefList !bitboard = recurBitRefList bitboard []
@@ -221,7 +221,7 @@ isSquareAttackedByRook :: Position -> Square -> Mover -> Bool
 isSquareAttackedByRook !position !attackedSquare !attacker = any (\x -> isRookAttackingSquare attackedSquare x (allPiecesBitboard position)) (bitRefList (rookMovePiecesBitboard position attacker))
 
 isBishopAttackingSquare :: Square -> Square -> Bitboard -> Bool
-isBishopAttackingSquare !attackedSquare !pieceSquare allPieceBitboard = (.&.) (magic magicBishopVars pieceSquare (magicIndexForPiece Bishop pieceSquare allPieceBitboard)) (bit attackedSquare) /= 0
+isBishopAttackingSquare !attackedSquare !pieceSquare !allPieceBitboard = (.&.) (magic magicBishopVars pieceSquare (magicIndexForPiece Bishop pieceSquare allPieceBitboard)) (bit attackedSquare) /= 0
 
 isRookAttackingSquare :: Square -> Square -> Bitboard -> Bool
 isRookAttackingSquare !attackedSquare !pieceSquare !allPieceBitboard = (.&.) (magic magicRookVars pieceSquare (magicIndexForPiece Rook pieceSquare allPieceBitboard)) (bit attackedSquare) /= 0

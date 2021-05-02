@@ -20,20 +20,20 @@ data Position = Position {
   , whiteKingBitboard :: Bitboard
   , whiteRookBitboard :: Bitboard
   , blackPawnBitboard :: Bitboard
-  , blackKnightBitboard :: Bitboard
-  , blackBishopBitboard :: Bitboard
-  , blackQueenBitboard :: Bitboard
-  , blackKingBitboard :: Bitboard
-  , blackRookBitboard :: Bitboard
+  , blackKnightBitboard :: !Bitboard
+  , blackBishopBitboard :: !Bitboard
+  , blackQueenBitboard :: !Bitboard
+  , blackKingBitboard :: !Bitboard
+  , blackRookBitboard :: !Bitboard
   , allPiecesBitboard :: !Bitboard
   , whitePiecesBitboard :: !Bitboard
   , blackPiecesBitboard :: !Bitboard
-  , mover :: Mover
-  , enPassantSquare :: Square
-  , whiteKingCastleAvailable  :: Bool
-  , blackKingCastleAvailable  :: Bool
-  , whiteQueenCastleAvailable :: Bool
-  , blackQueenCastleAvailable :: Bool
+  , mover :: !Mover
+  , enPassantSquare :: !Square
+  , whiteKingCastleAvailable  :: !Bool
+  , blackKingCastleAvailable  :: !Bool
+  , whiteQueenCastleAvailable :: !Bool
+  , blackQueenCastleAvailable :: !Bool
   , halfMoves :: Int
   , moveNumber :: Int
 } deriving (Generic,Show,Eq)
