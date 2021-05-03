@@ -279,41 +279,41 @@ main = hspec $ do
   describe "generateCastleMovesForMover" $
     it "Generates castle moves for a given mover" $ do
     let position = getPosition "n5k1/1P2P1n1/1n2q2p/P1pP4/5R2/5B2/1r2N2P/R3K1r1 w Q - 0 1"
-    sort (map algebraicMoveFromMove (DList.toList (generateCastleMovesForMover position 3 4 Black True True emptyCastleSquaresWhiteKing emptyCastleSquaresWhiteQueen noCheckCastleSquaresWhiteKing noCheckCastleSquaresWhiteQueen (allPiecesBitboard position))))
+    sort (map algebraicMoveFromMove (DList.toList (generateCastleMoves position)))
       `shouldBe` []
-    let position = getPosition "n5k1/1P2P1n1/1n2q2p/P1pP4/5R2/5B2/1r2N2P/R3K2R w Q - 0 1"
-    sort (map algebraicMoveFromMove (DList.toList (generateCastleMovesForMover position 3 4 Black True True emptyCastleSquaresWhiteKing emptyCastleSquaresWhiteQueen noCheckCastleSquaresWhiteKing noCheckCastleSquaresWhiteQueen (allPiecesBitboard position))))
+    let position = getPosition "n5k1/1P2P1n1/1n2q2p/P1pP4/5R2/5B2/1r2N2P/R3K2R w KQ - 0 1"
+    sort (map algebraicMoveFromMove (DList.toList (generateCastleMoves position)))
       `shouldBe` ["e1c1","e1g1"]
-    let position = getPosition "n5k1/1P2P1n1/1n2q2p/P1pP4/5R2/5B2/3rN2P/R3K2R w Q - 0 1"
-    sort (map algebraicMoveFromMove (DList.toList (generateCastleMovesForMover position 3 4 Black True True emptyCastleSquaresWhiteKing emptyCastleSquaresWhiteQueen noCheckCastleSquaresWhiteKing noCheckCastleSquaresWhiteQueen (allPiecesBitboard position))))
+    let position = getPosition "n5k1/1P2P1n1/1n2q2p/P1pP4/5R2/5B2/3rN2P/R3K2R w KQ - 0 1"
+    sort (map algebraicMoveFromMove (DList.toList (generateCastleMoves position)))
       `shouldBe` ["e1g1"]
     let position = getPosition "n5k1/1P2P1n1/1n2q2p/P1pP4/5R2/5B2/4Nr1P/R3K2R w Q - 0 1"
-    sort (map algebraicMoveFromMove (DList.toList (generateCastleMovesForMover position 3 4 Black True True emptyCastleSquaresWhiteKing emptyCastleSquaresWhiteQueen noCheckCastleSquaresWhiteKing noCheckCastleSquaresWhiteQueen (allPiecesBitboard position))))
+    sort (map algebraicMoveFromMove (DList.toList (generateCastleMoves position)))
       `shouldBe` ["e1c1"]
     let position = getPosition "n5k1/1P2P1n1/1n5p/P1pP4/5R2/1q3B2/4Nr1P/R3K2R w Q - 0 1"
-    sort (map algebraicMoveFromMove (DList.toList (generateCastleMovesForMover position 3 4 Black True True emptyCastleSquaresWhiteKing emptyCastleSquaresWhiteQueen noCheckCastleSquaresWhiteKing noCheckCastleSquaresWhiteQueen (allPiecesBitboard position))))
+    sort (map algebraicMoveFromMove (DList.toList (generateCastleMoves position)))
       `shouldBe` []
-    sort (map algebraicMoveFromMove (DList.toList (generateCastleMovesForMover position 3 4 Black False True emptyCastleSquaresWhiteKing emptyCastleSquaresWhiteQueen noCheckCastleSquaresWhiteKing noCheckCastleSquaresWhiteQueen (allPiecesBitboard position))))
+    sort (map algebraicMoveFromMove (DList.toList (generateCastleMoves position)))
       `shouldBe` []
-    sort (map algebraicMoveFromMove (DList.toList (generateCastleMovesForMover position 3 4 Black True False emptyCastleSquaresWhiteKing emptyCastleSquaresWhiteQueen noCheckCastleSquaresWhiteKing noCheckCastleSquaresWhiteQueen (allPiecesBitboard position))))
+    sort (map algebraicMoveFromMove (DList.toList (generateCastleMoves position)))
       `shouldBe` []
-    sort (map algebraicMoveFromMove (DList.toList (generateCastleMovesForMover position 3 4 Black False False emptyCastleSquaresWhiteKing emptyCastleSquaresWhiteQueen noCheckCastleSquaresWhiteKing noCheckCastleSquaresWhiteQueen (allPiecesBitboard position))))
+    sort (map algebraicMoveFromMove (DList.toList (generateCastleMoves position)))
       `shouldBe` []
     let position = getPosition "r3k1R1/1P2P1n1/1n2q2p/P1pP4/5R2/5B2/1r2N2P/R3K1r1 b Q - 0 1"
-    sort (map algebraicMoveFromMove (DList.toList (generateCastleMovesForMover position 59 60 White True True emptyCastleSquaresBlackKing emptyCastleSquaresBlackQueen noCheckCastleSquaresBlackKing noCheckCastleSquaresBlackQueen (allPiecesBitboard position)))) `shouldBe` []
+    sort (map algebraicMoveFromMove (DList.toList (generateCastleMoves position))) `shouldBe` []
     let position = getPosition "r3k2r/1P2P1n1/1n2q2p/P1pP4/5R2/5B2/1r2N2P/R3K2R b Q - 0 1"
-    sort (map algebraicMoveFromMove (DList.toList (generateCastleMovesForMover position 59 60 White True True emptyCastleSquaresBlackKing emptyCastleSquaresBlackQueen noCheckCastleSquaresBlackKing noCheckCastleSquaresBlackQueen (allPiecesBitboard position)))) `shouldBe` []
+    sort (map algebraicMoveFromMove (DList.toList (generateCastleMoves position))) `shouldBe` []
     let position = getPosition "r3k2r/1P2PRn1/1n2q2p/P1pP4/8/5B2/1r2N2P/R3K2R b Q - 0 1"
-    sort (map algebraicMoveFromMove (DList.toList (generateCastleMovesForMover position 59 60 White True True emptyCastleSquaresBlackKing emptyCastleSquaresBlackQueen noCheckCastleSquaresBlackKing noCheckCastleSquaresBlackQueen (allPiecesBitboard position))))
+    sort (map algebraicMoveFromMove (DList.toList (generateCastleMoves position)))
       `shouldBe` []
-    sort (map algebraicMoveFromMove (DList.toList (generateCastleMovesForMover position 59 60 White False True emptyCastleSquaresBlackKing emptyCastleSquaresBlackQueen noCheckCastleSquaresBlackKing noCheckCastleSquaresBlackQueen (allPiecesBitboard position))))
+    sort (map algebraicMoveFromMove (DList.toList (generateCastleMoves position)))
       `shouldBe` []
-    sort (map algebraicMoveFromMove (DList.toList (generateCastleMovesForMover position 59 60 White True False emptyCastleSquaresBlackKing emptyCastleSquaresBlackQueen noCheckCastleSquaresBlackKing noCheckCastleSquaresBlackQueen (allPiecesBitboard position))))
+    sort (map algebraicMoveFromMove (DList.toList (generateCastleMoves position)))
       `shouldBe` []
-    sort (map algebraicMoveFromMove (DList.toList (generateCastleMovesForMover position 59 60 White False False emptyCastleSquaresBlackKing emptyCastleSquaresBlackQueen noCheckCastleSquaresBlackKing noCheckCastleSquaresBlackQueen (allPiecesBitboard position))))
+    sort (map algebraicMoveFromMove (DList.toList (generateCastleMoves position)))
       `shouldBe` []
-    let position = getPosition "r3k2r/1P3Rn1/1n2q2p/P1pP2P1/8/5B2/1r2N2P/R3K2R b Q - 0 1"
-    sort (map algebraicMoveFromMove (DList.toList (generateCastleMovesForMover position 59 60 White True True emptyCastleSquaresBlackKing emptyCastleSquaresBlackQueen noCheckCastleSquaresBlackKing noCheckCastleSquaresBlackQueen (allPiecesBitboard position))))
+    let position = getPosition "r3k2r/1P3Rn1/1n2q2p/P1pP2P1/8/5B2/1r2N2P/R3K2R b qQ - 0 1"
+    sort (map algebraicMoveFromMove (DList.toList (generateCastleMoves position)))
       `shouldBe` ["e8c8"]
 
   describe "moves" $

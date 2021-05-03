@@ -158,15 +158,12 @@ potentialPawnJumpMoves !bb !position = if mover position == White then (.&.) (bb
 
 generateCastleMoves :: Position -> MoveList
 generateCastleMoves !position = if mover position == White
-    then generateCastleMovesForMover position 3 4 Black (whiteKingCastleAvailable castlePrivs) (whiteQueenCastleAvailable castlePrivs) emptyCastleSquaresWhiteKing emptyCastleSquaresWhiteQueen noCheckCastleSquaresWhiteKing noCheckCastleSquaresWhiteQueen allPieces
-    else generateCastleMovesForMover position 59 60 White (blackKingCastleAvailable castlePrivs) (blackQueenCastleAvailable castlePrivs) emptyCastleSquaresBlackKing emptyCastleSquaresBlackQueen noCheckCastleSquaresBlackKing noCheckCastleSquaresBlackQueen allPieces
-  where castlePrivs = position
-        allPieces = allPiecesBitboard position
-
-generateCastleMovesForMover :: Position -> Square -> Square -> Mover -> Bool -> Bool -> Bitboard -> Bitboard -> Bitboard -> Bitboard -> Bitboard -> MoveList
-generateCastleMovesForMover !position !kingStartSquare !queenStartSquare !opponent !canKing !canQueen !kingSpaces !queenSpaces !noCheckKingSide !noCheckQueenSide !allPieces =
-  DList.fromList ([(.|.) (fromSquareMask kingStartSquare) ((-) kingStartSquare 2) :: Move | canKing && (.&.) allPieces kingSpaces == 0 && not (anySquaresInBitboardAttacked position opponent noCheckKingSide)]) `DList.append`
-  DList.fromList ([(.|.) (fromSquareMask kingStartSquare) ((+) kingStartSquare 2) :: Move | canQueen && (.&.) allPieces queenSpaces == 0 && not (anySquaresInBitboardAttacked position opponent noCheckQueenSide)])
+    then DList.fromList ([(.|.) (fromSquareMask 3) 1 :: Move | (whiteKingCastleAvailable castlePrivs) && (.&.) allPieces emptyCastleSquaresWhiteKing == 0 && not (anySquaresInBitboardAttacked position Black noCheckCastleSquaresWhiteKing)]) `DList.append`
+         DList.fromList ([(.|.) (fromSquareMask 3) 5 :: Move | (whiteQueenCastleAvailable castlePrivs) && (.&.) allPieces emptyCastleSquaresWhiteQueen == 0 && not (anySquaresInBitboardAttacked position Black noCheckCastleSquaresWhiteQueen)])
+    else DList.fromList ([(.|.) (fromSquareMask 59) 57 :: Move | (blackKingCastleAvailable castlePrivs) && (.&.) allPieces emptyCastleSquaresBlackKing == 0 && not (anySquaresInBitboardAttacked position White noCheckCastleSquaresBlackKing)]) `DList.append`
+         DList.fromList ([(.|.) (fromSquareMask 59) 61 :: Move | (blackQueenCastleAvailable castlePrivs) && (.&.) allPieces emptyCastleSquaresBlackQueen == 0 && not (anySquaresInBitboardAttacked position White noCheckCastleSquaresBlackQueen)])
+    where castlePrivs = position
+          allPieces = allPiecesBitboard position
 
 anySquaresInBitboardAttacked :: Position -> Mover -> Bitboard -> Bool
 anySquaresInBitboardAttacked position attacker bitboard = any (\x -> isSquareAttackedBy position x attacker) (bitRefList bitboard)
@@ -201,24 +198,24 @@ bishopMovePiecesBitboard !position !mover = if mover == White
     then (.|.) (whiteBishopBitboard position) (whiteQueenBitboard position)
     else (.|.) (blackBishopBitboard position) (blackQueenBitboard position)
 
-isSquareAttackedByKnight :: Position -> Square -> Mover -> Bool
-isSquareAttackedByKnight !position !attackedSquare !attacker = (.&.) knightBitboard (knightMovesBitboards ! attackedSquare) /= 0
+isSquareAttackedByAnyKnight :: Position -> Square -> Mover -> Bool
+isSquareAttackedByAnyKnight !position !attackedSquare !attacker = (.&.) knightBitboard (knightMovesBitboards ! attackedSquare) /= 0
     where knightBitboard = (if attacker == White then whiteKnightBitboard else blackKnightBitboard) position
 
 isSquareAttackedByKing :: Position -> Square -> Mover -> Bool
 isSquareAttackedByKing !position !attackedSquare !attacker = (.&.) kingBitboard (kingMovesBitboards ! attackedSquare) /= 0
     where kingBitboard = (if attacker == White then whiteKingBitboard else blackKingBitboard) position
 
-isSquareAttackedByPawn :: Position -> Square -> Mover -> Bool
-isSquareAttackedByPawn !position !attackedSquare !attacker = (.&.) pawnBitboard (pawnMovesCaptureOfColour defenderColour ! attackedSquare) /= 0
+isSquareAttackedByAnyPawn :: Position -> Square -> Mover -> Bool
+isSquareAttackedByAnyPawn !position !attackedSquare !attacker = (.&.) pawnBitboard (pawnMovesCaptureOfColour defenderColour ! attackedSquare) /= 0
     where pawnBitboard = (if attacker == White then whitePawnBitboard else blackPawnBitboard) position
           defenderColour = if attacker == White then Black else White
 
-isSquareAttackedByBishop :: Position -> Square -> Mover -> Bool
-isSquareAttackedByBishop !position !attackedSquare !attacker = any (\x -> isBishopAttackingSquare attackedSquare x (allPiecesBitboard position)) (bitRefList (bishopMovePiecesBitboard position attacker))
+isSquareAttackedByAnyBishop :: Position -> Square -> Mover -> Bool
+isSquareAttackedByAnyBishop !position !attackedSquare !attacker = any (\x -> isBishopAttackingSquare attackedSquare x (allPiecesBitboard position)) (bitRefList (bishopMovePiecesBitboard position attacker))
 
-isSquareAttackedByRook :: Position -> Square -> Mover -> Bool
-isSquareAttackedByRook !position !attackedSquare !attacker = any (\x -> isRookAttackingSquare attackedSquare x (allPiecesBitboard position)) (bitRefList (rookMovePiecesBitboard position attacker))
+isSquareAttackedByAnyRook :: Position -> Square -> Mover -> Bool
+isSquareAttackedByAnyRook !position !attackedSquare !attacker = any (\x -> isRookAttackingSquare attackedSquare x (allPiecesBitboard position)) (bitRefList (rookMovePiecesBitboard position attacker))
 
 isBishopAttackingSquare :: Square -> Square -> Bitboard -> Bool
 isBishopAttackingSquare !attackedSquare !pieceSquare !allPieceBitboard = (.&.) (magic magicBishopVars pieceSquare (magicIndexForPiece Bishop pieceSquare allPieceBitboard)) (bit attackedSquare) /= 0
@@ -228,11 +225,11 @@ isRookAttackingSquare !attackedSquare !pieceSquare !allPieceBitboard = (.&.) (ma
   
 isSquareAttackedBy :: Position -> Square -> Mover -> Bool
 isSquareAttackedBy !position !attackedSquare !attacker =
-  isSquareAttackedByPawn position attackedSquare attacker ||
-  isSquareAttackedByKnight position attackedSquare attacker ||
+  isSquareAttackedByAnyPawn position attackedSquare attacker ||
+  isSquareAttackedByAnyKnight position attackedSquare attacker ||
   isSquareAttackedByKing position attackedSquare attacker ||
-  isSquareAttackedByRook position attackedSquare attacker ||
-  isSquareAttackedByBishop position attackedSquare attacker
+  isSquareAttackedByAnyRook position attackedSquare attacker ||
+  isSquareAttackedByAnyBishop position attackedSquare attacker
 
 moves :: Position -> [Move]
 moves !position = DList.toList
