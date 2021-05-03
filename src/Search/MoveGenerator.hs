@@ -178,8 +178,8 @@ pawnMovesCaptureOfColour !mover = if mover == White then whitePawnMovesCapture e
 kingSquare :: Position -> Mover -> Square
 {-# INLINE kingSquare #-}
 kingSquare !position !colour = if colour == White
-    then head (bitRefList (whiteKingBitboard position))
-    else head (bitRefList (blackKingBitboard position))
+    then countTrailingZeros (whiteKingBitboard position)
+    else countTrailingZeros (blackKingBitboard position)
 
 isCheck :: Position -> Mover -> Bool
 {-# INLINE isCheck #-}

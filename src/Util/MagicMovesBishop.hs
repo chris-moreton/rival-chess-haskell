@@ -4,7 +4,7 @@ module Util.MagicMovesBishop where
 
 import Alias
 import Util.MagicMovesBishop1
-import Data.Array.Unboxed
+import qualified Data.Vector.Unboxed as V
 
 magicMovesBishop :: MagicMoves
-magicMovesBishop = listArray(0,65535) magicMovesBishop1
+magicMovesBishop = V.fromList magicMovesBishop1
