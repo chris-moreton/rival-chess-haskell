@@ -13,7 +13,6 @@ import Util.MagicBitboards
 import Util.Utils
 import Search.MoveConstants
 import Data.Array.IArray
-import qualified Data.DList as DList
 
 bitboardForMover :: Position -> Piece -> Bitboard
 bitboardForMover !position = bitboardForColour position (mover position)
@@ -46,16 +45,16 @@ movesFromToSquares :: Square -> [Square] -> MoveList
 movesFromToSquares !fromSquare !toSquares = recurMovesFromToSquares fromSquare toSquares []
 
 recurMovesFromToSquares :: Square -> [Square] -> [Move] -> MoveList
-recurMovesFromToSquares _ [] !result = DList.fromList result
+recurMovesFromToSquares _ [] !result = result
 recurMovesFromToSquares !fromSquare !toSquares !result = recurMovesFromToSquares fromSquare (tail toSquares) ((.|.) (shiftL fromSquare 16) (head toSquares) : result)
 
 generateKnightMoves :: Position -> MoveList
-generateKnightMoves !position = recurKnightMoves position (bitRefList (bitboardForMover position Knight)) DList.empty
+generateKnightMoves !position = recurKnightMoves position (bitRefList (bitboardForMover position Knight)) []
 
 recurKnightMoves :: Position -> [Square] -> MoveList -> MoveList
 recurKnightMoves _ [] !result = result
 recurKnightMoves !position !fromSquares !result =
-    recurKnightMoves position (tail fromSquares) (result `DList.append` movesFromToSquares fromSquare toSquares)
+    recurKnightMoves position (tail fromSquares) (result ++ movesFromToSquares fromSquare toSquares)
         where fromSquare = head fromSquares
               toSquares = bitRefList ((.&.) (knightMovesBitboards ! fromSquare) (allBitsExceptFriendlyPieces position))
 
@@ -72,7 +71,7 @@ generateRookMoves :: Position -> MoveList
 generateRookMoves !position = generateSliderMoves position Rook
 
 generateSliderMoves :: Position -> Piece -> MoveList
-generateSliderMoves !position !piece = recurGenerateSliderMoves fromSquares position magicVars DList.empty
+generateSliderMoves !position !piece = recurGenerateSliderMoves fromSquares position magicVars []
     where bitboards = position
           magicVars = if piece == Bishop then magicBishopVars else magicRookVars
           thisMover = mover position
@@ -82,7 +81,7 @@ generateSliderMoves !position !piece = recurGenerateSliderMoves fromSquares posi
 recurGenerateSliderMoves :: [Square] -> Position -> MagicVars -> MoveList -> MoveList
 recurGenerateSliderMoves [] _ _ !result = result
 recurGenerateSliderMoves !fromSquares !position !magicVars !result =
-  recurGenerateSliderMoves (tail fromSquares) position magicVars (result `DList.append` thisResult)
+  recurGenerateSliderMoves (tail fromSquares) position magicVars (result ++ thisResult)
     where fromSquare = head fromSquares
           numberMagic = magicNumber magicVars ! fromSquare
           shiftMagic = magicNumberShifts magicVars ! fromSquare
@@ -95,19 +94,19 @@ recurGenerateSliderMoves !fromSquares !position !magicVars !result =
           thisResult = recurGenerateSliderMovesWithToSquares fromSquare toSquares []
 
 recurGenerateSliderMovesWithToSquares :: Square -> [Square] -> [Move] -> MoveList
-recurGenerateSliderMovesWithToSquares !fromSquare [] !result = DList.fromList result
+recurGenerateSliderMovesWithToSquares !fromSquare [] !result = result
 recurGenerateSliderMovesWithToSquares !fromSquare !toSquares !result =
   recurGenerateSliderMovesWithToSquares fromSquare (tail toSquares) ((.|.) (fromSquareMask fromSquare) (head toSquares) : result)
 
 promotionMoves :: Move -> MoveList
-promotionMoves !move = DList.fromList ([
+promotionMoves !move = [
     (.|.) move promotionQueenMoveMask
   , (.|.) move promotionRookMoveMask
   , (.|.) move promotionBishopMoveMask
-  , (.|.) move promotionKnightMoveMask] :: [Move])
+  , (.|.) move promotionKnightMoveMask]
 
 generatePawnMovesFromToSquares :: Square -> [Square] -> MoveList
-generatePawnMovesFromToSquares !fromSquare !toSquares = recurGeneratePawnMovesFromToSquares mask toSquares DList.empty
+generatePawnMovesFromToSquares !fromSquare !toSquares = recurGeneratePawnMovesFromToSquares mask toSquares []
   where mask = fromSquareMask fromSquare
 
 recurGeneratePawnMovesFromToSquares :: Move -> [Square] -> MoveList -> MoveList
@@ -116,11 +115,11 @@ recurGeneratePawnMovesFromToSquares !mask !toSquares !result = recurGeneratePawn
   where thisToSquare = head toSquares
         baseMove = (.|.) mask thisToSquare
         newResult = if thisToSquare >= 56 || thisToSquare <= 7
-                    then promotionMoves baseMove `DList.append` result
-                    else DList.singleton baseMove `DList.append` result
+                    then promotionMoves baseMove ++ result
+                    else baseMove : result
 
 generatePawnMoves :: Position -> MoveList
-generatePawnMoves !position = recurGeneratePawnMoves (bitRefList bitboard) position forwardPawnMoves capturePawnMoves (emptySquaresBitboard position) bitboard DList.empty
+generatePawnMoves !position = recurGeneratePawnMoves (bitRefList bitboard) position forwardPawnMoves capturePawnMoves (emptySquaresBitboard position) bitboard []
   where bitboard = bitboardForMover position Pawn
         forwardPawnMoves = if mover position == White then whitePawnMovesForward else blackPawnMovesForward
         capturePawnMoves = if mover position == White then whitePawnMovesCapture else blackPawnMovesCapture
@@ -128,7 +127,7 @@ generatePawnMoves !position = recurGeneratePawnMoves (bitRefList bitboard) posit
 recurGeneratePawnMoves :: [Square] -> Position -> BitboardArray -> BitboardArray -> Bitboard -> Bitboard -> MoveList -> MoveList
 recurGeneratePawnMoves [] _ _ _ _ _ !result = result
 recurGeneratePawnMoves !fromSquares !position !forwardPawnMoves !capturePawnMoves !emptySquares !moverPawns !result =
-  recurGeneratePawnMoves (tail fromSquares) position forwardPawnMoves capturePawnMoves emptySquares moverPawns (result `DList.append` thisResult)
+  recurGeneratePawnMoves (tail fromSquares) position forwardPawnMoves capturePawnMoves emptySquares moverPawns (result ++ thisResult)
   where fromSquare = head fromSquares
         pawnForwardAndCaptureMoves = pawnForwardAndCaptureMovesBitboard fromSquare capturePawnMoves (pawnForwardMovesBitboard ((.&.) (forwardPawnMoves ! fromSquare) emptySquares) position) position
         thisResult = generatePawnMovesFromToSquares fromSquare (bitRefList pawnForwardAndCaptureMoves)
@@ -158,12 +157,11 @@ potentialPawnJumpMoves !bb !position = if mover position == White then (.&.) (bb
 
 generateCastleMoves :: Position -> MoveList
 generateCastleMoves !position = if mover position == White
-    then DList.fromList ([(.|.) (fromSquareMask 3) 1 :: Move | (whiteKingCastleAvailable castlePrivs) && (.&.) allPieces emptyCastleSquaresWhiteKing == 0 && not (anySquaresInBitboardAttacked position Black noCheckCastleSquaresWhiteKing)]) `DList.append`
-         DList.fromList ([(.|.) (fromSquareMask 3) 5 :: Move | (whiteQueenCastleAvailable castlePrivs) && (.&.) allPieces emptyCastleSquaresWhiteQueen == 0 && not (anySquaresInBitboardAttacked position Black noCheckCastleSquaresWhiteQueen)])
-    else DList.fromList ([(.|.) (fromSquareMask 59) 57 :: Move | (blackKingCastleAvailable castlePrivs) && (.&.) allPieces emptyCastleSquaresBlackKing == 0 && not (anySquaresInBitboardAttacked position White noCheckCastleSquaresBlackKing)]) `DList.append`
-         DList.fromList ([(.|.) (fromSquareMask 59) 61 :: Move | (blackQueenCastleAvailable castlePrivs) && (.&.) allPieces emptyCastleSquaresBlackQueen == 0 && not (anySquaresInBitboardAttacked position White noCheckCastleSquaresBlackQueen)])
-    where castlePrivs = position
-          allPieces = allPiecesBitboard position
+    then [(.|.) (fromSquareMask 3) 1 :: Move | (whiteKingCastleAvailable position) && (.&.) allPieces emptyCastleSquaresWhiteKing == 0 && not (anySquaresInBitboardAttacked position Black noCheckCastleSquaresWhiteKing)] ++
+         [(.|.) (fromSquareMask 3) 5 :: Move | (whiteQueenCastleAvailable position) && (.&.) allPieces emptyCastleSquaresWhiteQueen == 0 && not (anySquaresInBitboardAttacked position Black noCheckCastleSquaresWhiteQueen)]
+    else [(.|.) (fromSquareMask 59) 57 :: Move | (blackKingCastleAvailable position) && (.&.) allPieces emptyCastleSquaresBlackKing == 0 && not (anySquaresInBitboardAttacked position White noCheckCastleSquaresBlackKing)] ++
+         [(.|.) (fromSquareMask 59) 61 :: Move | (blackQueenCastleAvailable position) && (.&.) allPieces emptyCastleSquaresBlackQueen == 0 && not (anySquaresInBitboardAttacked position White noCheckCastleSquaresBlackQueen)]
+    where allPieces = allPiecesBitboard position
 
 anySquaresInBitboardAttacked :: Position -> Mover -> Bitboard -> Bool
 anySquaresInBitboardAttacked position attacker bitboard = any (\x -> isSquareAttackedBy position x attacker) (bitRefList bitboard)
@@ -232,11 +230,11 @@ isSquareAttackedBy !position !attackedSquare !attacker =
   isSquareAttackedByAnyBishop position attackedSquare attacker
 
 moves :: Position -> [Move]
-moves !position = DList.toList
-  ( generatePawnMoves position `DList.append`
-    generateKnightMoves position `DList.append`
-    generateBishopMoves position `DList.append`
-    generateRookMoves position `DList.append`
-    generateKingMoves position `DList.append`
-    generateCastleMoves position )
+moves !position = 
+    generatePawnMoves position ++
+    generateKnightMoves position ++
+    generateBishopMoves position ++
+    generateRookMoves position ++
+    generateKingMoves position ++
+    generateCastleMoves position 
 
