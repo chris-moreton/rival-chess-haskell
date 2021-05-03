@@ -32,7 +32,9 @@ bitboardForColour !pieceBitboards Black Bishop = blackBishopBitboard pieceBitboa
 bitboardForColour !pieceBitboards Black Pawn = blackPawnBitboard pieceBitboards
 
 bitRefList :: Bitboard -> [Square]
-bitRefList !bitboard = recurBitRefList bitboard []
+bitRefList !bitboard = if popCount bitboard == 1
+                         then [countTrailingZeros bitboard]
+                         else recurBitRefList bitboard []
 
 recurBitRefList :: Bitboard -> [Square] -> [Square]
 recurBitRefList 0 !result = result
