@@ -172,7 +172,7 @@ main = hspec $ do
 
   describe "movesFromToSquares" $
     it "Creates a list of moves from a fromSquare and a list of toSquares" $ do
-    sort ((movesFromToSquares 11 [22,33,44])) `shouldBe` [720918,720929,720940]
+    sort ((movesFromToSquaresBitboard 11 (bit 22 .|. (bit 33 .|. bit 44)))) `shouldBe` [720918,720929,720940]
 
   describe "generateKnightMoves" $
     it "Generates knight moves from a given FEN (ignoring checks)" $ do

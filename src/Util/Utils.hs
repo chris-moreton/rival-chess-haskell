@@ -33,3 +33,8 @@ promotionPieceFromMove move
 
 opponent :: Position -> Mover
 opponent position = if mover position == White then Black else White
+
+switchSide :: Mover -> Mover
+switchSide mover
+    | mover == White = Black
+    | otherwise = White

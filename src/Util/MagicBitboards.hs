@@ -18,7 +18,7 @@ magicNumberShiftsRook = listArray(0,63) [52, 53, 53, 53, 53, 53, 53, 52, 53, 54,
 magicNumberShiftsBishop = listArray(0,63) [58, 59, 59, 59, 59, 59, 59, 58, 59, 59, 59, 59, 59, 59, 59, 59, 59, 59, 57, 57, 57, 57, 59, 59, 59, 59, 57, 55, 55, 57, 59, 59, 59, 59, 57, 55, 55, 57, 59, 59, 59, 59, 57, 57, 57, 57, 59, 59, 59, 59, 59, 59, 59, 59, 59, 59, 58, 59, 59, 59, 59, 59, 59, 58] :: UArray Int Int
 
 magic :: MagicVars -> Square -> Int -> Bitboard
-magic magicVars fromSquare toSquaresMagicIndex = magicMoves magicVars ! ((fromSquare * magicsPerSquare magicVars) + toSquaresMagicIndex)
+magic !magicVars !fromSquare !toSquaresMagicIndex = magicMoves magicVars ! ((fromSquare * magicsPerSquare magicVars) + toSquaresMagicIndex)
 
 data MagicVars = MagicVars {
       occupancyMask :: BitboardArray
