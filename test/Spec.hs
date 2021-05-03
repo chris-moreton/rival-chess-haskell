@@ -204,9 +204,9 @@ main = hspec $ do
 
   describe "generatePawnMovesFromToSquares" $
     it "Creates a list of moves from a given From Square and a list of To Squares" $ do
-    sort (map algebraicMoveFromMove ((generatePawnMovesFromToSquares 54 [63,62,61])))
+    sort (map algebraicMoveFromMove ((generatePawnMovesFromToSquares 54 (bit 63 .|. (bit 62 .|. bit 61)))))
       `shouldBe` ["b7a8b","b7a8n","b7a8q","b7a8r","b7b8b","b7b8n","b7b8q","b7b8r","b7c8b","b7c8n","b7c8q","b7c8r"]
-    sort (map algebraicMoveFromMove ((generatePawnMovesFromToSquares 46 [55,54,53])))
+    sort (map algebraicMoveFromMove ((generatePawnMovesFromToSquares 46 (bit 55 .|. (bit 54 .|. bit 53)))))
       `shouldBe` ["b6a7","b6b7","b6c7"]
 
   describe "enemyBitboard" $

@@ -1,25 +1,25 @@
-	Mon May  3 20:37 2021 Time and Allocation Profiling Report  (Final)
+	Mon May  3 20:58 2021 Time and Allocation Profiling Report  (Final)
 
 	   rival-exe +RTS -N -p -s -h -i0.1 -RTS
 
-	total time  =        6.12 secs   (20877 ticks @ 1000 us, 12 processors)
-	total alloc = 13,564,445,696 bytes  (excludes profiling overheads)
+	total time  =        5.98 secs   (20378 ticks @ 1000 us, 12 processors)
+	total alloc = 13,283,808,792 bytes  (excludes profiling overheads)
 
 COST CENTRE                           MODULE               SRC                                            %time %alloc
 
-makeMove                              Search.MakeMove      src/Search/MakeMove.hs:(17,1)-(69,53)           48.4   40.1
-isSquareAttackedBy                    Search.MoveGenerator src/Search/MoveGenerator.hs:(244,1)-(249,62)    23.5    8.7
-perft                                 Search.Perft         src/Search/Perft.hs:(10,1)-(15,93)               9.9   15.5
-moves                                 Search.MoveGenerator src/Search/MoveGenerator.hs:(252,1)-(258,32)     3.0    9.3
-recurGeneratePawnMoves                Search.MoveGenerator src/Search/MoveGenerator.hs:(128,1)-(133,102)    2.4    3.8
-bitRefList                            Search.MoveGenerator src/Search/MoveGenerator.hs:35:1-116             2.1    4.2
-recurGenerateSliderMovesWithToSquares Search.MoveGenerator src/Search/MoveGenerator.hs:(97,1)-(99,129)      1.4    3.6
-recurBitRefList                       Search.MoveGenerator src/Search/MoveGenerator.hs:(38,1)-(39,140)      1.3    4.3
-recurGenerateSliderMoves              Search.MoveGenerator src/Search/MoveGenerator.hs:(82,1)-(94,84)       1.2    1.4
-magic                                 Util.MagicBitboards  src/Util/MagicBitboards.hs:21:1-139              1.1    1.5
-recurMovesFromToSquares               Search.MoveGenerator src/Search/MoveGenerator.hs:(48,1)-(49,165)      0.8    2.1
-generatePawnMoves                     Search.MoveGenerator src/Search/MoveGenerator.hs:(122,1)-(125,107)    0.6    1.5
-generateKnightMoves                   Search.MoveGenerator src/Search/MoveGenerator.hs:52:1-108             0.3    1.0
+makeMove                              Search.MakeMove      src/Search/MakeMove.hs:(17,1)-(69,53)           49.5   41.0
+isSquareAttackedBy                    Search.MoveGenerator src/Search/MoveGenerator.hs:(243,1)-(248,62)    23.5    8.9
+perft                                 Search.Perft         src/Search/Perft.hs:(10,1)-(15,93)               9.5   15.9
+moves                                 Search.MoveGenerator src/Search/MoveGenerator.hs:(251,1)-(257,32)     3.1    9.5
+recurGeneratePawnMoves                Search.MoveGenerator src/Search/MoveGenerator.hs:(127,1)-(132,102)    2.4    3.9
+bitRefList                            Search.MoveGenerator src/Search/MoveGenerator.hs:35:1-116             2.1    4.3
+recurGenerateSliderMovesWithToSquares Search.MoveGenerator src/Search/MoveGenerator.hs:(97,1)-(99,129)      1.5    3.7
+magic                                 Util.MagicBitboards  src/Util/MagicBitboards.hs:21:1-139              1.3    1.6
+recurGenerateSliderMoves              Search.MoveGenerator src/Search/MoveGenerator.hs:(82,1)-(94,84)       1.2    1.5
+recurBitRefList                       Search.MoveGenerator src/Search/MoveGenerator.hs:(38,1)-(39,140)      1.1    3.2
+generatePawnMoves                     Search.MoveGenerator src/Search/MoveGenerator.hs:(121,1)-(124,107)    0.7    1.5
+generateKnightMoves                   Search.MoveGenerator src/Search/MoveGenerator.hs:54:1-108             0.3    1.0
+recurMovesFromToSquaresBitboard       Search.MoveGenerator src/Search/MoveGenerator.hs:(48,1)-(51,47)       0.3    1.2
 
 
                                                                                                                                               individual      inherited
@@ -29,16 +29,16 @@ MAIN                                           MAIN                      <built-
  CAF                                           Main                      <entire-module>                                   333           0    0.0    0.0   100.0   99.9
   main                                         Main                      app/Main.hs:(10,1)-(15,21)                        334           1    0.0    0.0   100.0   99.9
    main.nodes                                  Main                      app/Main.hs:12:7-75                               336           1    0.0    0.0   100.0   99.9
-    perft                                      Search.Perft              src/Search/Perft.hs:(10,1)-(15,93)                477      720880    9.9   15.5   100.0   99.9
-     bitRefList                                Search.MoveGenerator      src/Search/MoveGenerator.hs:35:1-116              541    13600804    0.3    0.0     0.3    0.0
-     isSquareAttackedBy                        Search.MoveGenerator      src/Search/MoveGenerator.hs:(244,1)-(249,62)      543    13600804   23.5    8.7    26.2   13.8
-      bitRefList                               Search.MoveGenerator      src/Search/MoveGenerator.hs:35:1-116              552    24338519    1.3    3.7     1.5    3.7
+    perft                                      Search.Perft              src/Search/Perft.hs:(10,1)-(15,93)                477      720880    9.5   15.9   100.0   99.9
+     bitRefList                                Search.MoveGenerator      src/Search/MoveGenerator.hs:35:1-116              541    13600804    0.4    0.0     0.4    0.0
+     isSquareAttackedBy                        Search.MoveGenerator      src/Search/MoveGenerator.hs:(243,1)-(248,62)      543    13600804   23.5    8.9    26.2   14.1
+      bitRefList                               Search.MoveGenerator      src/Search/MoveGenerator.hs:35:1-116              552    24338519    1.3    3.7     1.6    3.7
        recurBitRefList                         Search.MoveGenerator      src/Search/MoveGenerator.hs:(38,1)-(39,140)       571    11925008    0.2    0.0     0.2    0.0
       whiteQueenBitboard                       Types                     src/Types.hs:18:5-22                              582    22944155    0.0    0.0     0.0    0.0
       switchSide                               Util.Utils                src/Util/Utils.hs:(38,1)-(40,23)                  545    13600804    0.0    0.0     0.0    0.0
       whitePawnBitboard                        Types                     src/Types.hs:15:5-21                              578    12849337    0.0    0.0     0.0    0.0
       allPiecesBitboard                        Types                     src/Types.hs:27:5-21                              553    12413511    0.0    0.0     0.0    0.0
-      magic                                    Util.MagicBitboards       src/Util/MagicBitboards.hs:21:1-139               566    12413511    1.1    1.5     1.1    1.5
+      magic                                    Util.MagicBitboards       src/Util/MagicBitboards.hs:21:1-139               566    12413511    1.2    1.5     1.2    1.5
        magicMoves                              Util.MagicBitboards       src/Util/MagicBitboards.hs:27:7-16                567    12413511    0.0    0.0     0.0    0.0
        magicsPerSquare                         Util.MagicBitboards       src/Util/MagicBitboards.hs:28:7-21                568    12413511    0.0    0.0     0.0    0.0
       magicNumber                              Util.MagicBitboards       src/Util/MagicBitboards.hs:25:7-17                564    12413511    0.0    0.0     0.0    0.0
@@ -54,7 +54,7 @@ MAIN                                           MAIN                      <built-
       blackKnightBitboard                      Types                     src/Types.hs:22:5-23                              546      716914    0.0    0.0     0.0    0.0
       blackRookBitboard                        Types                     src/Types.hs:26:5-21                              550      716914    0.0    0.0     0.0    0.0
       blackBishopBitboard                      Types                     src/Types.hs:23:5-23                              570      677450    0.0    0.0     0.0    0.0
-     makeMove                                  Search.MakeMove           src/Search/MakeMove.hs:(17,1)-(69,53)             509    13600804   48.4   40.1    48.8   40.1
+     makeMove                                  Search.MakeMove           src/Search/MakeMove.hs:(17,1)-(69,53)             509    13600804   49.5   41.0    49.8   41.0
       whitePawnBitboard                        Types                     src/Types.hs:15:5-21                              513    69457280    0.0    0.0     0.0    0.0
       blackPawnBitboard                        Types                     src/Types.hs:21:5-21                              512    69402134    0.0    0.0     0.0    0.0
       blackKingBitboard                        Types                     src/Types.hs:25:5-21                              524    27201608    0.0    0.0     0.0    0.0
@@ -79,43 +79,41 @@ MAIN                                           MAIN                      <built-
      mover                                     Types                     src/Types.hs:30:5-9                               540    13600804    0.0    0.0     0.0    0.0
      blackKingBitboard                         Types                     src/Types.hs:25:5-21                              577    12849337    0.0    0.0     0.0    0.0
      whiteKingBitboard                         Types                     src/Types.hs:19:5-21                              542      751467    0.0    0.0     0.0    0.0
-     moves                                     Search.MoveGenerator      src/Search/MoveGenerator.hs:(252,1)-(258,32)      478      720880    3.0    9.3    14.8   30.4
-      generateBishopMoves                      Search.MoveGenerator      src/Search/MoveGenerator.hs:68:1-66               595      720880    0.0    0.0     0.5    0.2
-       generateSliderMoves                     Search.MoveGenerator      src/Search/MoveGenerator.hs:(74,1)-(79,43)        596      720880    0.2    0.0     0.5    0.2
+     moves                                     Search.MoveGenerator      src/Search/MoveGenerator.hs:(251,1)-(257,32)      478      720880    3.1    9.5    14.1   29.0
+      generateBishopMoves                      Search.MoveGenerator      src/Search/MoveGenerator.hs:68:1-66               595      720880    0.0    0.0     0.6    0.2
+       generateSliderMoves                     Search.MoveGenerator      src/Search/MoveGenerator.hs:(74,1)-(79,43)        596      720880    0.3    0.0     0.6    0.2
         bitboardForColour                      Search.MoveGenerator      src/Search/MoveGenerator.hs:(21,1)-(32,79)        597     1441760    0.1    0.2     0.1    0.2
          blackBishopBitboard                   Types                     src/Types.hs:23:5-23                              599      677450    0.0    0.0     0.0    0.0
          blackQueenBitboard                    Types                     src/Types.hs:24:5-22                              600      677450    0.0    0.0     0.0    0.0
-         whiteBishopBitboard                   Types                     src/Types.hs:17:5-23                              642       43430    0.0    0.0     0.0    0.0
-         whiteQueenBitboard                    Types                     src/Types.hs:18:5-22                              643       43430    0.0    0.0     0.0    0.0
-        bitRefList                             Search.MoveGenerator      src/Search/MoveGenerator.hs:35:1-116              601      720880    0.0    0.0     0.0    0.0
+         whiteBishopBitboard                   Types                     src/Types.hs:17:5-23                              640       43430    0.0    0.0     0.0    0.0
+         whiteQueenBitboard                    Types                     src/Types.hs:18:5-22                              641       43430    0.0    0.0     0.0    0.0
+        bitRefList                             Search.MoveGenerator      src/Search/MoveGenerator.hs:35:1-116              601      720880    0.1    0.0     0.1    0.0
          recurBitRefList                       Search.MoveGenerator      src/Search/MoveGenerator.hs:(38,1)-(39,140)       602      720880    0.0    0.0     0.0    0.0
         mover                                  Types                     src/Types.hs:30:5-9                               598      720880    0.0    0.0     0.0    0.0
         recurGenerateSliderMoves               Search.MoveGenerator      src/Search/MoveGenerator.hs:(82,1)-(94,84)        603      720880    0.1    0.0     0.1    0.0
-      generateKingMoves                        Search.MoveGenerator      src/Search/MoveGenerator.hs:(62,1)-(65,117)       626      720880    0.5    0.1     1.9    3.5
+      generateKingMoves                        Search.MoveGenerator      src/Search/MoveGenerator.hs:(63,1)-(65,78)        626      720880    0.3    0.0     0.8    1.4
        allBitsExceptFriendlyPieces             Search.MoveGenerator      src/Search/MoveGenerator.hs:42:1-147              631      720880    0.1    0.1     0.1    0.1
         mover                                  Types                     src/Types.hs:30:5-9                               632      720880    0.0    0.0     0.0    0.0
         blackPiecesBitboard                    Types                     src/Types.hs:29:5-23                              633      677450    0.0    0.0     0.0    0.0
-        whitePiecesBitboard                    Types                     src/Types.hs:28:5-23                              648       43430    0.0    0.0     0.0    0.0
-       bitRefList                              Search.MoveGenerator      src/Search/MoveGenerator.hs:35:1-116              634      720880    0.0    0.0     0.3    1.1
-        recurBitRefList                        Search.MoveGenerator      src/Search/MoveGenerator.hs:(38,1)-(39,140)       635     4618576    0.3    1.1     0.3    1.1
+        whitePiecesBitboard                    Types                     src/Types.hs:28:5-23                              646       43430    0.0    0.0     0.0    0.0
        bitboardForMover                        Search.MoveGenerator      src/Search/MoveGenerator.hs:18:1-72               627      720880    0.1    0.0     0.2    0.1
         bitboardForColour                      Search.MoveGenerator      src/Search/MoveGenerator.hs:(21,1)-(32,79)        629      720880    0.1    0.1     0.1    0.1
          blackKingBitboard                     Types                     src/Types.hs:25:5-21                              630      677450    0.0    0.0     0.0    0.0
-         whiteKingBitboard                     Types                     src/Types.hs:19:5-21                              647       43430    0.0    0.0     0.0    0.0
+         whiteKingBitboard                     Types                     src/Types.hs:19:5-21                              645       43430    0.0    0.0     0.0    0.0
         mover                                  Types                     src/Types.hs:30:5-9                               628      720880    0.0    0.0     0.0    0.0
-       movesFromToSquares                      Search.MoveGenerator      src/Search/MoveGenerator.hs:45:1-91               636      720880    0.1    0.0     0.8    2.1
-        recurMovesFromToSquares                Search.MoveGenerator      src/Search/MoveGenerator.hs:(48,1)-(49,165)       637     4618576    0.8    2.1     0.8    2.1
-      generateKnightMoves                      Search.MoveGenerator      src/Search/MoveGenerator.hs:52:1-108              587      720880    0.3    1.0     0.5    1.1
-       bitRefList                              Search.MoveGenerator      src/Search/MoveGenerator.hs:35:1-116              592      720880    0.0    0.0     0.1    0.0
+       movesFromToSquaresBitboard              Search.MoveGenerator      src/Search/MoveGenerator.hs:45:1-119              634      720880    0.0    0.1     0.3    1.3
+        recurMovesFromToSquaresBitboard        Search.MoveGenerator      src/Search/MoveGenerator.hs:(48,1)-(51,47)        635     4618576    0.3    1.2     0.3    1.2
+      generateKnightMoves                      Search.MoveGenerator      src/Search/MoveGenerator.hs:54:1-108              587      720880    0.3    1.0     0.5    1.1
+       bitRefList                              Search.MoveGenerator      src/Search/MoveGenerator.hs:35:1-116              592      720880    0.1    0.0     0.1    0.0
         recurBitRefList                        Search.MoveGenerator      src/Search/MoveGenerator.hs:(38,1)-(39,140)       593      720880    0.0    0.0     0.0    0.0
        bitboardForMover                        Search.MoveGenerator      src/Search/MoveGenerator.hs:18:1-72               588      720880    0.1    0.0     0.1    0.1
         bitboardForColour                      Search.MoveGenerator      src/Search/MoveGenerator.hs:(21,1)-(32,79)        590      720880    0.0    0.1     0.0    0.1
          blackKnightBitboard                   Types                     src/Types.hs:22:5-23                              591      677450    0.0    0.0     0.0    0.0
-         whiteKnightBitboard                   Types                     src/Types.hs:16:5-23                              641       43430    0.0    0.0     0.0    0.0
+         whiteKnightBitboard                   Types                     src/Types.hs:16:5-23                              639       43430    0.0    0.0     0.0    0.0
         mover                                  Types                     src/Types.hs:30:5-9                               589      720880    0.0    0.0     0.0    0.0
-       recurKnightMoves                        Search.MoveGenerator      src/Search/MoveGenerator.hs:(55,1)-(59,119)       594      720880    0.0    0.0     0.0    0.0
-      generatePawnMoves                        Search.MoveGenerator      src/Search/MoveGenerator.hs:(122,1)-(125,107)     479      720880    0.6    1.5     5.2    8.9
-       recurGeneratePawnMoves                  Search.MoveGenerator      src/Search/MoveGenerator.hs:(128,1)-(133,102)     486     2795504    2.4    3.8     4.2    6.7
+       recurKnightMoves                        Search.MoveGenerator      src/Search/MoveGenerator.hs:(57,1)-(60,43)        594      720880    0.0    0.0     0.0    0.0
+      generatePawnMoves                        Search.MoveGenerator      src/Search/MoveGenerator.hs:(121,1)-(124,107)     479      720880    0.7    1.5     5.2    9.1
+       recurGeneratePawnMoves                  Search.MoveGenerator      src/Search/MoveGenerator.hs:(127,1)-(132,102)     486     2795504    2.4    3.9     4.1    6.8
         enPassantSquare                        Types                     src/Types.hs:31:5-19                              501     2236274    0.0    0.0     0.0    0.0
         bitRefList                             Search.MoveGenerator      src/Search/MoveGenerator.hs:35:1-116              505     2074624    0.2    0.3     0.3    0.9
          recurBitRefList                       Search.MoveGenerator      src/Search/MoveGenerator.hs:(38,1)-(39,140)       569     2756079    0.2    0.5     0.2    0.5
@@ -123,57 +121,57 @@ MAIN                                           MAIN                      <built-
          mover                                 Types                     src/Types.hs:30:5-9                               503     2074624    0.0    0.0     0.0    0.0
          whitePiecesBitboard                   Types                     src/Types.hs:28:5-23                              576     1948825    0.0    0.0     0.0    0.0
          blackPiecesBitboard                   Types                     src/Types.hs:29:5-23                              504      125799    0.0    0.0     0.0    0.0
-        generatePawnMovesFromToSquares         Search.MoveGenerator      src/Search/MoveGenerator.hs:(109,1)-(110,40)      506     2074624    0.3    0.6     0.9    1.5
-         recurGeneratePawnMovesFromToSquares   Search.MoveGenerator      src/Search/MoveGenerator.hs:(113,1)-(119,42)      507     5018851    0.6    0.9     0.6    0.9
-          promotionMoves                       Search.MoveGenerator      src/Search/MoveGenerator.hs:(102,1)-(106,39)      652        2152    0.0    0.0     0.0    0.0
+        generatePawnMovesFromToSquares         Search.MoveGenerator      src/Search/MoveGenerator.hs:109:1-132             506     2074624    0.3    0.6     0.9    1.5
+         recurGeneratePawnMovesFromToSquares   Search.MoveGenerator      src/Search/MoveGenerator.hs:(112,1)-(118,42)      507     5018851    0.5    0.9     0.5    0.9
+          promotionMoves                       Search.MoveGenerator      src/Search/MoveGenerator.hs:(102,1)-(106,39)      650        2152    0.0    0.0     0.0    0.0
          fromSquareMask                        Util.Utils                src/Util/Utils.hs:16:1-34                         508     2001567    0.0    0.0     0.0    0.0
-        pawnForwardMovesBitboard               Search.MoveGenerator      src/Search/MoveGenerator.hs:136:1-147             492     2074624    0.2    0.0     0.3    0.2
+        pawnForwardMovesBitboard               Search.MoveGenerator      src/Search/MoveGenerator.hs:135:1-147             492     2074624    0.2    0.0     0.3    0.2
          emptySquaresBitboard                  Util.Bitboards            src/Util/Bitboards.hs:33:1-72                     499     2074624    0.1    0.2     0.1    0.2
           allPiecesBitboard                    Types                     src/Types.hs:27:5-21                              500     2074624    0.0    0.0     0.0    0.0
          mover                                 Types                     src/Types.hs:30:5-9                               493     2074624    0.0    0.0     0.0    0.0
-        enPassantCaptureRank                   Search.MoveGenerator      src/Search/MoveGenerator.hs:(139,1)-(140,38)      584      161650    0.0    0.0     0.0    0.0
+        enPassantCaptureRank                   Search.MoveGenerator      src/Search/MoveGenerator.hs:(138,1)-(139,38)      584      161650    0.0    0.0     0.0    0.0
         mover                                  Types                     src/Types.hs:30:5-9                               585      161650    0.0    0.0     0.0    0.0
        mover                                   Types                     src/Types.hs:30:5-9                               487     1441760    0.0    0.0     0.0    0.0
-       bitRefList                              Search.MoveGenerator      src/Search/MoveGenerator.hs:35:1-116              484      720880    0.0    0.0     0.2    0.6
-        recurBitRefList                        Search.MoveGenerator      src/Search/MoveGenerator.hs:(38,1)-(39,140)       485     2794614    0.1    0.6     0.1    0.6
+       bitRefList                              Search.MoveGenerator      src/Search/MoveGenerator.hs:35:1-116              484      720880    0.1    0.0     0.2    0.6
+        recurBitRefList                        Search.MoveGenerator      src/Search/MoveGenerator.hs:(38,1)-(39,140)       485     2794614    0.2    0.6     0.2    0.6
        bitboardForMover                        Search.MoveGenerator      src/Search/MoveGenerator.hs:18:1-72               480      720880    0.1    0.0     0.1    0.0
-        bitboardForColour                      Search.MoveGenerator      src/Search/MoveGenerator.hs:(21,1)-(32,79)        482      720880    0.0    0.0     0.0    0.0
+        bitboardForColour                      Search.MoveGenerator      src/Search/MoveGenerator.hs:(21,1)-(32,79)        482      720880    0.1    0.0     0.1    0.0
          blackPawnBitboard                     Types                     src/Types.hs:21:5-21                              572      677450    0.0    0.0     0.0    0.0
          whitePawnBitboard                     Types                     src/Types.hs:15:5-21                              483       43430    0.0    0.0     0.0    0.0
         mover                                  Types                     src/Types.hs:30:5-9                               481      720880    0.0    0.0     0.0    0.0
        emptySquaresBitboard                    Util.Bitboards            src/Util/Bitboards.hs:33:1-72                     490      720880    0.0    0.1     0.0    0.1
         allPiecesBitboard                      Types                     src/Types.hs:27:5-21                              491      720880    0.0    0.0     0.0    0.0
-      generateRookMoves                        Search.MoveGenerator      src/Search/MoveGenerator.hs:71:1-63               604      720880    0.1    0.0     3.7    7.5
-       generateSliderMoves                     Search.MoveGenerator      src/Search/MoveGenerator.hs:(74,1)-(79,43)        605      720880    0.3    0.0     3.7    7.5
-        bitboardForColour                      Search.MoveGenerator      src/Search/MoveGenerator.hs:(21,1)-(32,79)        606     1441760    0.1    0.2     0.1    0.2
+      generateRookMoves                        Search.MoveGenerator      src/Search/MoveGenerator.hs:71:1-63               604      720880    0.0    0.0     3.9    7.7
+       generateSliderMoves                     Search.MoveGenerator      src/Search/MoveGenerator.hs:(74,1)-(79,43)        605      720880    0.2    0.0     3.8    7.7
+        bitboardForColour                      Search.MoveGenerator      src/Search/MoveGenerator.hs:(21,1)-(32,79)        606     1441760    0.2    0.2     0.2    0.2
          blackQueenBitboard                    Types                     src/Types.hs:24:5-22                              609      677450    0.0    0.0     0.0    0.0
          blackRookBitboard                     Types                     src/Types.hs:26:5-21                              608      677450    0.0    0.0     0.0    0.0
-         whiteQueenBitboard                    Types                     src/Types.hs:18:5-22                              645       43430    0.0    0.0     0.0    0.0
-         whiteRookBitboard                     Types                     src/Types.hs:20:5-21                              644       43430    0.0    0.0     0.0    0.0
-        recurGenerateSliderMoves               Search.MoveGenerator      src/Search/MoveGenerator.hs:(82,1)-(94,84)        611     1429808    1.1    1.4     3.2    7.2
-         recurGenerateSliderMovesWithToSquares Search.MoveGenerator      src/Search/MoveGenerator.hs:(97,1)-(99,129)       624     7461353    1.4    3.6     1.4    3.6
+         whiteQueenBitboard                    Types                     src/Types.hs:18:5-22                              643       43430    0.0    0.0     0.0    0.0
+         whiteRookBitboard                     Types                     src/Types.hs:20:5-21                              642       43430    0.0    0.0     0.0    0.0
+        recurGenerateSliderMoves               Search.MoveGenerator      src/Search/MoveGenerator.hs:(82,1)-(94,84)        611     1429808    1.2    1.5     3.4    7.3
+         recurGenerateSliderMovesWithToSquares Search.MoveGenerator      src/Search/MoveGenerator.hs:(97,1)-(99,129)       624     7461353    1.5    3.7     1.5    3.7
           fromSquareMask                       Util.Utils                src/Util/Utils.hs:16:1-34                         625     6752425    0.0    0.0     0.0    0.0
          allBitsExceptFriendlyPieces           Search.MoveGenerator      src/Search/MoveGenerator.hs:42:1-147              619      708928    0.1    0.1     0.1    0.1
           mover                                Types                     src/Types.hs:30:5-9                               620      708928    0.0    0.0     0.0    0.0
           blackPiecesBitboard                  Types                     src/Types.hs:29:5-23                              621      665841    0.0    0.0     0.0    0.0
-          whitePiecesBitboard                  Types                     src/Types.hs:28:5-23                              646       43087    0.0    0.0     0.0    0.0
+          whitePiecesBitboard                  Types                     src/Types.hs:28:5-23                              644       43087    0.0    0.0     0.0    0.0
          allPiecesBitboard                     Types                     src/Types.hs:27:5-21                              612      708928    0.0    0.0     0.0    0.0
          bitRefList                            Search.MoveGenerator      src/Search/MoveGenerator.hs:35:1-116              622      708928    0.0    0.0     0.5    2.0
-          recurBitRefList                      Search.MoveGenerator      src/Search/MoveGenerator.hs:(38,1)-(39,140)       623     7461353    0.5    2.0     0.5    2.0
-         magic                                 Util.MagicBitboards       src/Util/MagicBitboards.hs:21:1-139               616      708928    0.0    0.1     0.0    0.1
+          recurBitRefList                      Search.MoveGenerator      src/Search/MoveGenerator.hs:(38,1)-(39,140)       623     7461353    0.4    2.0     0.4    2.0
+         magic                                 Util.MagicBitboards       src/Util/MagicBitboards.hs:21:1-139               616      708928    0.1    0.1     0.1    0.1
           magicMoves                           Util.MagicBitboards       src/Util/MagicBitboards.hs:27:7-16                617      708928    0.0    0.0     0.0    0.0
           magicsPerSquare                      Util.MagicBitboards       src/Util/MagicBitboards.hs:28:7-21                618      708928    0.0    0.0     0.0    0.0
          magicNumber                           Util.MagicBitboards       src/Util/MagicBitboards.hs:25:7-17                614      708928    0.0    0.0     0.0    0.0
          magicNumberShifts                     Util.MagicBitboards       src/Util/MagicBitboards.hs:26:7-23                615      708928    0.0    0.0     0.0    0.0
          occupancyMask                         Util.MagicBitboards       src/Util/MagicBitboards.hs:24:7-19                613      708928    0.0    0.0     0.0    0.0
         bitRefList                             Search.MoveGenerator      src/Search/MoveGenerator.hs:35:1-116              610      720880    0.1    0.2     0.1    0.2
-         recurBitRefList                       Search.MoveGenerator      src/Search/MoveGenerator.hs:(38,1)-(39,140)       651       11952    0.0    0.0     0.0    0.0
+         recurBitRefList                       Search.MoveGenerator      src/Search/MoveGenerator.hs:(38,1)-(39,140)       649       11952    0.0    0.0     0.0    0.0
         mover                                  Types                     src/Types.hs:30:5-9                               607      720880    0.0    0.0     0.0    0.0
-      mover                                    Types                     src/Types.hs:30:5-9                               638      720880    0.0    0.0     0.0    0.0
-      blackKingCastleAvailable                 Types                     src/Types.hs:33:5-28                              639      677450    0.0    0.0     0.0    0.0
-      blackQueenCastleAvailable                Types                     src/Types.hs:35:5-29                              640      677450    0.0    0.0     0.0    0.0
-      whiteKingCastleAvailable                 Types                     src/Types.hs:32:5-28                              649       43430    0.0    0.0     0.0    0.0
-      whiteQueenCastleAvailable                Types                     src/Types.hs:34:5-29                              650       43430    0.0    0.0     0.0    0.0
+      mover                                    Types                     src/Types.hs:30:5-9                               636      720880    0.0    0.0     0.0    0.0
+      blackKingCastleAvailable                 Types                     src/Types.hs:33:5-28                              637      677450    0.0    0.0     0.0    0.0
+      blackQueenCastleAvailable                Types                     src/Types.hs:35:5-29                              638      677450    0.0    0.0     0.0    0.0
+      whiteKingCastleAvailable                 Types                     src/Types.hs:32:5-28                              647       43430    0.0    0.0     0.0    0.0
+      whiteQueenCastleAvailable                Types                     src/Types.hs:34:5-29                              648       43430    0.0    0.0     0.0    0.0
     getPosition                                Util.Fen                  src/Util/Fen.hs:(113,1)-(149,39)                  337           1    0.0    0.0     0.0    0.0
      pieceBitboard                             Util.Fen                  src/Util/Fen.hs:60:1-109                          338          12    0.0    0.0     0.0    0.0
       bitArrayToDecimal                        Util.Fen                  src/Util/Fen.hs:51:1-57                           339          12    0.0    0.0     0.0    0.0
@@ -298,7 +296,7 @@ MAIN                                           MAIN                      <built-
   e8Bit                                        Util.Bitboards            src/Util/Bitboards.hs:160:1-19                    526           1    0.0    0.0     0.0    0.0
   kingMovesBitboards                           Util.Bitboards            src/Util/Bitboards.hs:(185,1)-(194,163)           549           1    0.0    0.0     0.0    0.0
   knightMovesBitboards                         Util.Bitboards            src/Util/Bitboards.hs:(175,1)-(183,150)           547           1    0.0    0.0     0.0    0.0
-  promotionSquares                             Util.Bitboards            src/Util/Bitboards.hs:30:1-85                     654           1    0.0    0.0     0.0    0.0
+  promotionSquares                             Util.Bitboards            src/Util/Bitboards.hs:30:1-85                     652           1    0.0    0.0     0.0    0.0
   rank1Bits                                    Util.Bitboards            src/Util/Bitboards.hs:59:1-37                     497           1    0.0    0.0     0.0    0.0
    setBits                                     Util.Bitboards            src/Util/Bitboards.hs:(51,1)-(53,59)              498           8    0.0    0.0     0.0    0.0
   rank2Bits                                    Util.Bitboards            src/Util/Bitboards.hs:61:1-30                     496           1    0.0    0.0     0.0    0.0
@@ -339,11 +337,11 @@ MAIN                                           MAIN                      <built-
   getPosition                                  Util.Fen                  src/Util/Fen.hs:(113,1)-(149,39)                  402           0    0.0    0.0     0.0    0.0
  CAF                                           Search.MoveConstants      <entire-module>                                   314           0    0.0    0.0     0.0    0.0
   enPassantNotAvailable                        Search.MoveConstants      src/Search/MoveConstants.hs:21:1-26               431           1    0.0    0.0     0.0    0.0
-  promotionBishopMoveMask                      Search.MoveConstants      src/Search/MoveConstants.hs:12:1-29               656           1    0.0    0.0     0.0    0.0
+  promotionBishopMoveMask                      Search.MoveConstants      src/Search/MoveConstants.hs:12:1-29               654           1    0.0    0.0     0.0    0.0
   promotionFullMoveMask                        Search.MoveConstants      src/Search/MoveConstants.hs:18:1-27               516           1    0.0    0.0     0.0    0.0
-  promotionKnightMoveMask                      Search.MoveConstants      src/Search/MoveConstants.hs:15:1-29               657           1    0.0    0.0     0.0    0.0
-  promotionQueenMoveMask                       Search.MoveConstants      src/Search/MoveConstants.hs:6:1-28                653           1    0.0    0.0     0.0    0.0
-  promotionRookMoveMask                        Search.MoveConstants      src/Search/MoveConstants.hs:9:1-26                655           1    0.0    0.0     0.0    0.0
+  promotionKnightMoveMask                      Search.MoveConstants      src/Search/MoveConstants.hs:15:1-29               655           1    0.0    0.0     0.0    0.0
+  promotionQueenMoveMask                       Search.MoveConstants      src/Search/MoveConstants.hs:6:1-28                651           1    0.0    0.0     0.0    0.0
+  promotionRookMoveMask                        Search.MoveConstants      src/Search/MoveConstants.hs:9:1-26                653           1    0.0    0.0     0.0    0.0
  CAF                                           Util.MagicMovesRook1      <entire-module>                                   312           0    0.0    0.0     0.0    0.0
   magicMovesRook1                              Util.MagicMovesRook1      src/Util/MagicMovesRook1.hs:(7,1)-(28,18893)      559           1    0.0    0.0     0.0    0.0
  CAF                                           Util.MagicMovesRook2      <entire-module>                                   311           0    0.0    0.0     0.0    0.0

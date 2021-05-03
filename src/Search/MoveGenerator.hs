@@ -90,13 +90,13 @@ recurGenerateSliderMoves !fromSquares !position !magicVars !result =
           rawIndex = fromIntegral (occupancy * numberMagic) :: Word
           toSquaresMagicIndex = fromIntegral(shiftR rawIndex shiftMagic) :: Int
           toSquaresBitboard = (.&.) (magic magicVars fromSquare toSquaresMagicIndex) (allBitsExceptFriendlyPieces position)
-          toSquares = bitRefList toSquaresBitboard
-          thisResult = recurGenerateSliderMovesWithToSquares fromSquare toSquares []
+          thisResult = recurGenerateSliderMovesWithToSquares (fromSquareMask fromSquare) toSquaresBitboard []
 
-recurGenerateSliderMovesWithToSquares :: Square -> [Square] -> [Move] -> MoveList
-recurGenerateSliderMovesWithToSquares !fromSquare [] !result = result
+recurGenerateSliderMovesWithToSquares :: Square -> Bitboard -> MoveList -> MoveList
+recurGenerateSliderMovesWithToSquares !fromSquare 0 !result = result
 recurGenerateSliderMovesWithToSquares !fromSquare !toSquares !result =
-  recurGenerateSliderMovesWithToSquares fromSquare (tail toSquares) ((.|.) (fromSquareMask fromSquare) (head toSquares) : result)
+    recurGenerateSliderMovesWithToSquares fromSquare (xor toSquares (bit square)) ((.|.) fromSquare square : result)
+    where square = countTrailingZeros toSquares
 
 promotionMoves :: Move -> MoveList
 promotionMoves !move = [
@@ -105,31 +105,31 @@ promotionMoves !move = [
   , (.|.) move promotionBishopMoveMask
   , (.|.) move promotionKnightMoveMask]
 
-generatePawnMovesFromToSquares :: Square -> [Square] -> MoveList
+generatePawnMovesFromToSquares :: Square -> Bitboard -> MoveList
 generatePawnMovesFromToSquares !fromSquare !toSquares = recurGeneratePawnMovesFromToSquares (fromSquareMask fromSquare) toSquares []
 
-recurGeneratePawnMovesFromToSquares :: Move -> [Square] -> MoveList -> MoveList
-recurGeneratePawnMovesFromToSquares _ [] !result = result
-recurGeneratePawnMovesFromToSquares !mask !toSquares !result = recurGeneratePawnMovesFromToSquares mask (tail toSquares) newResult
-  where thisToSquare = head toSquares
+recurGeneratePawnMovesFromToSquares :: Move -> Bitboard -> MoveList -> MoveList
+recurGeneratePawnMovesFromToSquares _ 0 !result = result
+recurGeneratePawnMovesFromToSquares !mask !toSquares !result = recurGeneratePawnMovesFromToSquares mask (xor toSquares (bit thisToSquare)) newResult
+  where thisToSquare = countTrailingZeros toSquares
         baseMove = (.|.) mask thisToSquare
         newResult = if thisToSquare >= 56 || thisToSquare <= 7
                     then promotionMoves baseMove ++ result
                     else baseMove : result
 
 generatePawnMoves :: Position -> MoveList
-generatePawnMoves !position = recurGeneratePawnMoves (bitRefList bitboard) position forwardPawnMoves capturePawnMoves (emptySquaresBitboard position) bitboard []
+generatePawnMoves !position = recurGeneratePawnMoves bitboard position forwardPawnMoves capturePawnMoves (emptySquaresBitboard position) bitboard []
   where bitboard = bitboardForMover position Pawn
         forwardPawnMoves = if mover position == White then whitePawnMovesForward else blackPawnMovesForward
         capturePawnMoves = if mover position == White then whitePawnMovesCapture else blackPawnMovesCapture
 
-recurGeneratePawnMoves :: [Square] -> Position -> BitboardArray -> BitboardArray -> Bitboard -> Bitboard -> MoveList -> MoveList
-recurGeneratePawnMoves [] _ _ _ _ _ !result = result
+recurGeneratePawnMoves :: Bitboard -> Position -> BitboardArray -> BitboardArray -> Bitboard -> Bitboard -> MoveList -> MoveList
+recurGeneratePawnMoves 0 _ _ _ _ _ !result = result
 recurGeneratePawnMoves !fromSquares !position !forwardPawnMoves !capturePawnMoves !emptySquares !moverPawns !result =
-  recurGeneratePawnMoves (tail fromSquares) position forwardPawnMoves capturePawnMoves emptySquares moverPawns (result ++ thisResult)
-  where fromSquare = head fromSquares
+  recurGeneratePawnMoves (xor fromSquares (bit fromSquare)) position forwardPawnMoves capturePawnMoves emptySquares moverPawns (result ++ thisResult)
+  where fromSquare = countTrailingZeros fromSquares
         pawnForwardAndCaptureMoves = pawnForwardAndCaptureMovesBitboard fromSquare capturePawnMoves (pawnForwardMovesBitboard ((.&.) (forwardPawnMoves ! fromSquare) emptySquares) position) position
-        thisResult = generatePawnMovesFromToSquares fromSquare (bitRefList pawnForwardAndCaptureMoves)
+        thisResult = generatePawnMovesFromToSquares fromSquare pawnForwardAndCaptureMoves
 
 pawnForwardMovesBitboard :: Bitboard -> Position -> Bitboard
 pawnForwardMovesBitboard !pawnMoves !position = (.|.) pawnMoves ((.&.) (potentialPawnJumpMoves pawnMoves position) (emptySquaresBitboard position))
