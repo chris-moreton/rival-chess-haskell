@@ -35,12 +35,13 @@ bitboardForColour !pieceBitboards Black Pawn = blackPawnBitboard pieceBitboards
 
 bitRefList :: Bitboard -> [Square]
 {-# INLINE bitRefList #-}
-bitRefList !bitboard = if popCount bitboard == 1 then [countTrailingZeros bitboard] else recurBitRefList bitboard []
+bitRefList !bitboard = recurBitRefList bitboard (popCount bitboard) []
 
-recurBitRefList :: Bitboard -> [Square] -> [Square]
+recurBitRefList :: Bitboard -> Int -> [Square] -> [Square]
 {-# INLINE recurBitRefList #-}
-recurBitRefList 0 !result = result
-recurBitRefList !bitboard !result = recurBitRefList (xor bitboard (bit square)) (square : result) where square = countTrailingZeros bitboard
+recurBitRefList _ 0 !result = result
+recurBitRefList bitboard 1 !result = (countTrailingZeros bitboard) : result
+recurBitRefList !bitboard !popcount !result = recurBitRefList (xor bitboard (bit square)) (popcount - 1) (square : result) where square = countTrailingZeros bitboard
 
 allBitsExceptFriendlyPieces :: Position -> Bitboard
 {-# INLINE allBitsExceptFriendlyPieces #-}
@@ -257,13 +258,13 @@ isSquareAttackedByAnyPawn :: Position -> Square -> Mover -> Bool
 isSquareAttackedByAnyPawn !position !attackedSquare !attacker = (.&.) pawnBitboard (pawnMovesCaptureOfColour (switchSide attacker) attackedSquare) /= 0
     where pawnBitboard = (if attacker == White then whitePawnBitboard else blackPawnBitboard) position
 
-isSquareAttackedByAnyBishop :: Position -> Square -> Mover -> Bool
+isSquareAttackedByAnyBishop :: Bitboard -> Bitboard -> Square -> Bool
 {-# INLINE isSquareAttackedByAnyBishop #-}
-isSquareAttackedByAnyBishop !position !attackedSquare !attacker = any (\x -> isBishopAttackingSquare attackedSquare x (allPiecesBitboard position)) (bitRefList (bishopMovePiecesBitboard position attacker))
+isSquareAttackedByAnyBishop !allPieces !attackingBishops !attackedSquare = any (\x -> isBishopAttackingSquare attackedSquare x allPieces) (bitRefList attackingBishops)
 
-isSquareAttackedByAnyRook :: Position -> Square -> Mover -> Bool
+isSquareAttackedByAnyRook :: Bitboard -> Bitboard -> Square -> Bool
 {-# INLINE isSquareAttackedByAnyRook #-}
-isSquareAttackedByAnyRook !position !attackedSquare !attacker = any (\x -> isRookAttackingSquare attackedSquare x (allPiecesBitboard position)) (bitRefList (rookMovePiecesBitboard position attacker))
+isSquareAttackedByAnyRook !allPieces !attackingRooks !attackedSquare = any (\x -> isRookAttackingSquare attackedSquare x allPieces) (bitRefList attackingRooks)
 
 isBishopAttackingSquare :: Square -> Square -> Bitboard -> Bool
 {-# INLINE isBishopAttackingSquare #-}
@@ -277,9 +278,10 @@ isSquareAttackedBy :: Position -> Square -> Mover -> Bool
 isSquareAttackedBy !position !attackedSquare !attacker =
   isSquareAttackedByAnyPawn position attackedSquare attacker ||
   isSquareAttackedByAnyKnight position attackedSquare attacker ||
-  isSquareAttackedByAnyRook position attackedSquare attacker ||
-  isSquareAttackedByAnyBishop position attackedSquare attacker ||
+  isSquareAttackedByAnyRook allPieces (rookMovePiecesBitboard position attacker) attackedSquare ||
+  isSquareAttackedByAnyBishop allPieces (bishopMovePiecesBitboard position attacker) attackedSquare ||
   isSquareAttackedByKing position attackedSquare attacker
+  where allPieces = allPiecesBitboard position
 
 moves :: Position -> [Move]
 moves !position = 
