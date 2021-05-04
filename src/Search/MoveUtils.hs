@@ -50,7 +50,7 @@ removePawnIfPromotion !bb = bb .&. 0b0000000011111111111111111111111111111111111
 
 isPromotionSquare :: Square -> Bool
 {-# INLINE isPromotionSquare #-}
-isPromotionSquare !sq = (bit sq .&. promotionSquares) /= 0
+isPromotionSquare !sq = testBit promotionSquares sq
 
 createIfPromotion :: Bool -> Bitboard -> Bitboard -> Square -> Square -> Bitboard
 {-# INLINE createIfPromotion #-}
