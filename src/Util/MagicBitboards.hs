@@ -9,7 +9,31 @@ import Util.MagicMovesRook
 import Types
 import Alias
 import Data.Array.Unboxed
-import qualified Data.Vector.Storable as V
+import qualified Data.Vector.Unboxed as V
+
+magic :: MagicVars -> Square -> Int -> Bitboard
+magic !magicVars !fromSquare !toSquaresMagicIndex = magicMoves magicVars fromSquare V.! toSquaresMagicIndex
+
+data MagicVars = MagicVars {
+      occupancyMask :: Int -> Bitboard
+    , magicNumber :: Int -> Bitboard
+    , magicNumberShifts :: Int -> Int
+    , magicMoves :: Int -> V.Vector Bitboard
+}
+
+magicRookVars = MagicVars {
+      occupancyMask = occupancyMaskRook
+    , magicNumber = magicNumberRook
+    , magicNumberShifts = magicNumberShiftsRook
+    , magicMoves = magicMovesRook
+  }
+
+magicBishopVars = MagicVars {
+      occupancyMask = occupancyMaskBishop
+    , magicNumber = magicNumberBishop
+    , magicNumberShifts = magicNumberShiftsBishop
+    , magicMoves = magicMovesBishop
+  }
 
 occupancyMaskRook :: Int -> Bitboard
 occupancyMaskRook 0 = 0x101010101017e
@@ -408,29 +432,3 @@ magicNumberShiftsBishop 61 = 59
 magicNumberShiftsBishop 62 = 59
 magicNumberShiftsBishop 63 = 58
 
-magic :: MagicVars -> Square -> Int -> Bitboard
-magic !magicVars !fromSquare !toSquaresMagicIndex = magicMoves magicVars V.! ((fromSquare * magicsPerSquare magicVars) + toSquaresMagicIndex)
-
-data MagicVars = MagicVars {
-      occupancyMask :: Int -> Bitboard
-    , magicNumber :: Int -> Bitboard
-    , magicNumberShifts :: Int -> Int
-    , magicMoves :: !MagicMoves
-    , magicsPerSquare :: Int
-}
-
-magicRookVars = MagicVars {
-      occupancyMask = occupancyMaskRook
-    , magicNumber = magicNumberRook
-    , magicNumberShifts = magicNumberShiftsRook
-    , magicMoves = magicMovesRook
-    , magicsPerSquare = 4096
-  }
-
-magicBishopVars = MagicVars {
-      occupancyMask = occupancyMaskBishop
-    , magicNumber = magicNumberBishop
-    , magicNumberShifts = magicNumberShiftsBishop
-    , magicMoves = magicMovesBishop
-    , magicsPerSquare = 1024
-  }

@@ -38,11 +38,6 @@ library
       Search.MoveGenerator
       Search.MoveConstants
       Search.MoveUtils
-      Util.MagicMovesBishop1
-      Util.MagicMovesRook1
-      Util.MagicMovesRook2
-      Util.MagicMovesRook3
-      Util.MagicMovesRook4
       Types
       Alias
   other-modules:
