@@ -103,7 +103,6 @@ occupancyMaskRook 62 = 0x3e40404040404000
 occupancyMaskRook 63 = 0x7e80808080808000
 
 occupancyMaskBishop :: Int -> Bitboard
-
 occupancyMaskBishop 0 = 0x40201008040200
 occupancyMaskBishop 1 = 0x402010080400
 occupancyMaskBishop 2 = 0x4020100a00
