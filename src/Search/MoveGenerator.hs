@@ -118,17 +118,25 @@ recurGeneratePawnMovesFromToSquares !mask !toSquares !result = recurGeneratePawn
                     else baseMove : result
 
 generatePawnMoves :: Position -> MoveList
-generatePawnMoves !position = recurGeneratePawnMoves bitboard position forwardPawnMoves capturePawnMoves (emptySquaresBitboard position) bitboard []
-  where bitboard = bitboardForMover position Pawn
-        forwardPawnMoves = if mover position == White then whitePawnMovesForward else blackPawnMovesForward
-        capturePawnMoves = if mover position == White then whitePawnMovesCapture else blackPawnMovesCapture
+generatePawnMoves !position 
+    | mover position == White = recurGenerateWhitePawnMoves bitboard position (emptySquaresBitboard position) bitboard []
+    | otherwise = recurGenerateBlackPawnMoves bitboard position (emptySquaresBitboard position) bitboard []
+    where bitboard = bitboardForMover position Pawn
 
-recurGeneratePawnMoves :: Bitboard -> Position -> (Int -> Bitboard) -> (Int -> Bitboard) -> Bitboard -> Bitboard -> MoveList -> MoveList
-recurGeneratePawnMoves 0 _ _ _ _ _ !result = result
-recurGeneratePawnMoves !fromSquares !position forwardPawnMoves capturePawnMoves !emptySquares !moverPawns !result =
-  recurGeneratePawnMoves (xor fromSquares (bit fromSquare)) position forwardPawnMoves capturePawnMoves emptySquares moverPawns (result ++ thisResult)
+recurGenerateWhitePawnMoves :: Bitboard -> Position -> Bitboard -> Bitboard -> MoveList -> MoveList
+recurGenerateWhitePawnMoves 0 _ _ _ !result = result
+recurGenerateWhitePawnMoves !fromSquares !position !emptySquares !moverPawns !result =
+  recurGenerateWhitePawnMoves (xor fromSquares (bit fromSquare)) position emptySquares moverPawns (result ++ thisResult)
   where fromSquare = countTrailingZeros fromSquares
-        pawnForwardAndCaptureMoves = pawnForwardAndCaptureMovesBitboard fromSquare capturePawnMoves (pawnForwardMovesBitboard ((.&.) (forwardPawnMoves fromSquare) emptySquares) position) position
+        pawnForwardAndCaptureMoves = pawnForwardAndCaptureMovesBitboard fromSquare whitePawnMovesCapture (pawnForwardMovesBitboard ((.&.) (whitePawnMovesForward fromSquare) emptySquares) position) position
+        thisResult = generatePawnMovesFromToSquares fromSquare pawnForwardAndCaptureMoves
+
+recurGenerateBlackPawnMoves :: Bitboard -> Position -> Bitboard -> Bitboard -> MoveList -> MoveList
+recurGenerateBlackPawnMoves 0 _ _ _ !result = result
+recurGenerateBlackPawnMoves !fromSquares !position !emptySquares !moverPawns !result =
+  recurGenerateBlackPawnMoves (xor fromSquares (bit fromSquare)) position emptySquares moverPawns (result ++ thisResult)
+  where fromSquare = countTrailingZeros fromSquares
+        pawnForwardAndCaptureMoves = pawnForwardAndCaptureMovesBitboard fromSquare blackPawnMovesCapture (pawnForwardMovesBitboard ((.&.) (blackPawnMovesForward fromSquare) emptySquares) position) position
         thisResult = generatePawnMovesFromToSquares fromSquare pawnForwardAndCaptureMoves
 
 pawnForwardMovesBitboard :: Bitboard -> Position -> Bitboard
