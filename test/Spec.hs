@@ -241,7 +241,7 @@ main = hspec $ do
     let emptySquares = emptySquaresBitboard position
     emptySquares `shouldBe` 0b0111110111110101101101101010111111111011111010111011011111111101
     let fromSquare = 51
-    let forwardMovesForSquare = whitePawnMovesForward ! fromSquare
+    let forwardMovesForSquare = whitePawnMovesForward fromSquare
     forwardMovesForSquare `shouldBe` 0b0000100000000000000000000000000000000000000000000000000000000000
     let pfmb = pawnForwardMovesBitboard ((Data.Bits..&.) forwardMovesForSquare emptySquares) position
     pfmb `shouldBe` 0b0000100000000000000000000000000000000000000000000000000000000000
