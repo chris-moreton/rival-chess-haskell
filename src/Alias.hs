@@ -4,7 +4,7 @@ import Data.Array.IArray
 import Data.Array.Unboxed
 import GHC.Generics
 import GHC.Compact
-import qualified Data.Vector.Unboxed as V
+import qualified Data.Vector.Storable as V
 
 type Square = Int
 type Bitboard = Word
