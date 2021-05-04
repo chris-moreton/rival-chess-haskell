@@ -185,13 +185,21 @@ isCheck :: Position -> Mover -> Bool
 {-# INLINE isCheck #-}
 isCheck !position !colour = isSquareAttackedBy position (kingSquare position colour) (if colour == White then Black else White)
 
-magicIndexForPiece :: Piece -> Square -> Bitboard -> Int
-{-# INLINE magicIndexForPiece #-}
-magicIndexForPiece !piece !pieceSquare !allPieceBitboard = fromIntegral (shiftR rawIndex shiftMagic) :: Int
-    where magicVars = if piece == Rook then magicRookVars else magicBishopVars
-          numberMagic = magicNumber magicVars pieceSquare
-          shiftMagic = magicNumberShifts magicVars pieceSquare
-          maskMagic = occupancyMask magicVars pieceSquare
+magicIndexForRook :: Square -> Bitboard -> Int
+{-# INLINE magicIndexForRook #-}
+magicIndexForRook !pieceSquare !allPieceBitboard = fromIntegral (shiftR rawIndex shiftMagic) :: Int
+    where numberMagic = magicNumber magicRookVars pieceSquare
+          shiftMagic = magicNumberShifts magicRookVars pieceSquare
+          maskMagic = occupancyMask magicRookVars pieceSquare
+          occupancy = (.&.) allPieceBitboard maskMagic
+          rawIndex = fromIntegral(occupancy * numberMagic) :: Word
+
+magicIndexForBishop :: Square -> Bitboard -> Int
+{-# INLINE magicIndexForBishop #-}
+magicIndexForBishop !pieceSquare !allPieceBitboard = fromIntegral (shiftR rawIndex shiftMagic) :: Int
+    where numberMagic = magicNumber magicBishopVars pieceSquare
+          shiftMagic = magicNumberShifts magicBishopVars pieceSquare
+          maskMagic = occupancyMask magicBishopVars pieceSquare
           occupancy = (.&.) allPieceBitboard maskMagic
           rawIndex = fromIntegral(occupancy * numberMagic) :: Word
 
@@ -233,11 +241,11 @@ isSquareAttackedByAnyRook !position !attackedSquare !attacker = any (\x -> isRoo
 
 isBishopAttackingSquare :: Square -> Square -> Bitboard -> Bool
 {-# INLINE isBishopAttackingSquare #-}
-isBishopAttackingSquare !attackedSquare !pieceSquare !allPieceBitboard = (.&.) (magic magicBishopVars pieceSquare (magicIndexForPiece Bishop pieceSquare allPieceBitboard)) (bit attackedSquare) /= 0
+isBishopAttackingSquare !attackedSquare !pieceSquare !allPieceBitboard = (.&.) (magic magicBishopVars pieceSquare (magicIndexForBishop pieceSquare allPieceBitboard)) (bit attackedSquare) /= 0
 
 isRookAttackingSquare :: Square -> Square -> Bitboard -> Bool
 {-# INLINE isRookAttackingSquare #-}
-isRookAttackingSquare !attackedSquare !pieceSquare !allPieceBitboard = (.&.) (magic magicRookVars pieceSquare (magicIndexForPiece Rook pieceSquare allPieceBitboard)) (bit attackedSquare) /= 0
+isRookAttackingSquare !attackedSquare !pieceSquare !allPieceBitboard = (.&.) (magic magicRookVars pieceSquare (magicIndexForRook pieceSquare allPieceBitboard)) (bit attackedSquare) /= 0
   
 isSquareAttackedBy :: Position -> Square -> Mover -> Bool
 isSquareAttackedBy !position !attackedSquare !attacker =
