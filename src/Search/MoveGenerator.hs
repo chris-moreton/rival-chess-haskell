@@ -84,8 +84,8 @@ recurGenerateSliderMoves !fromSquares !position !magicVars !result =
   recurGenerateSliderMoves (tail fromSquares) position magicVars (result ++ thisResult)
     where fromSquare = head fromSquares
           numberMagic = magicNumber magicVars fromSquare
-          shiftMagic = magicNumberShifts magicVars ! fromSquare
-          maskMagic = (occupancyMask magicVars) fromSquare
+          shiftMagic = magicNumberShifts magicVars fromSquare
+          maskMagic = occupancyMask magicVars fromSquare
           occupancy = (.&.) (allPiecesBitboard position) maskMagic
           rawIndex = fromIntegral (occupancy * numberMagic) :: Word
           toSquaresMagicIndex = fromIntegral(shiftR rawIndex shiftMagic) :: Int
@@ -190,7 +190,7 @@ magicIndexForPiece :: Piece -> Square -> Bitboard -> Int
 magicIndexForPiece !piece !pieceSquare !allPieceBitboard = fromIntegral (shiftR rawIndex shiftMagic) :: Int
     where magicVars = if piece == Rook then magicRookVars else magicBishopVars
           numberMagic = magicNumber magicVars pieceSquare
-          shiftMagic = magicNumberShifts magicVars ! pieceSquare
+          shiftMagic = magicNumberShifts magicVars pieceSquare
           maskMagic = occupancyMask magicVars pieceSquare
           occupancy = (.&.) allPieceBitboard maskMagic
           rawIndex = fromIntegral(occupancy * numberMagic) :: Word
