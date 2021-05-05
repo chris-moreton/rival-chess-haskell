@@ -16,24 +16,40 @@ import Search.MakeComplexMove
 
 makeSimpleMove :: Position -> Move -> Square -> Position
 makeSimpleMove !position !move !from
-    | testBit (whitePiecesBitboard position) from = makeSimpleWhiteMove position move from
+    | mover position == White = makeSimpleWhiteMove position move from
     | otherwise = makeSimpleBlackMove position move from
 
 makeSimpleWhiteMove :: Position -> Move -> Square -> Position
 makeSimpleWhiteMove !position !move !from
+    | testBit (whitePawnBitboard position) from = makeSimpleWhitePawnMove position move
     | testBit (whiteKnightBitboard position) from = makeSimpleWhiteKnightMove position move
     | testBit (whiteBishopBitboard position) from = makeSimpleWhiteBishopMove position move
     | testBit (whiteRookBitboard position) from = makeSimpleWhiteRookMove position move
     | testBit (whiteQueenBitboard position) from = makeSimpleWhiteQueenMove position move
-    | otherwise = makeMoveMain position move   
+    | otherwise = makeSimpleWhiteKingMove position move
 
 makeSimpleBlackMove :: Position -> Move -> Square -> Position
 makeSimpleBlackMove !position !move !from
+    | testBit (blackPawnBitboard position) from = makeSimpleBlackPawnMove position move
     | testBit (blackKnightBitboard position) from = makeSimpleBlackKnightMove position move
     | testBit (blackBishopBitboard position) from = makeSimpleBlackBishopMove position move
     | testBit (blackRookBitboard position) from = makeSimpleBlackRookMove position move
     | testBit (blackQueenBitboard position) from = makeSimpleBlackQueenMove position move
-    | otherwise = makeMoveMain position move   
+    | otherwise = makeSimpleBlackKingMove position move
+
+makeSimpleWhitePawnMove :: Position -> Move -> Position
+makeSimpleWhitePawnMove !position !move =
+    position {
+          whitePawnBitboard = movePieceWithinBitboard from to (whitePawnBitboard position)
+        , allPiecesBitboard = (allPiecesBitboard position) `xor` switchBitboard
+        , whitePiecesBitboard = (whitePiecesBitboard position) `xor` switchBitboard
+        , mover = Black
+        , enPassantSquare = enPassantNotAvailable
+        , halfMoves = 0
+    }
+    where from = fromSquarePart move
+          to = toSquarePart move
+          switchBitboard = bit from .|. bit to
 
 makeSimpleWhiteKnightMove :: Position -> Move -> Position
 makeSimpleWhiteKnightMove !position !move =
@@ -88,6 +104,35 @@ makeSimpleWhiteQueenMove !position !move =
         , mover = Black
         , enPassantSquare = enPassantNotAvailable
         , halfMoves = halfMoves position + 1
+    }
+    where from = fromSquarePart move
+          to = toSquarePart move
+          switchBitboard = bit from .|. bit to
+
+makeSimpleWhiteKingMove :: Position -> Move -> Position
+makeSimpleWhiteKingMove !position !move =
+    position {
+          whiteKingBitboard = movePieceWithinBitboard from to (whiteKingBitboard position)  
+        , allPiecesBitboard = (allPiecesBitboard position) `xor` switchBitboard
+        , whitePiecesBitboard = (whitePiecesBitboard position) `xor` switchBitboard
+        , mover = Black
+        , enPassantSquare = enPassantNotAvailable
+        , halfMoves = halfMoves position + 1
+    }
+    where from = fromSquarePart move
+          to = toSquarePart move
+          switchBitboard = bit from .|. bit to      
+
+makeSimpleBlackPawnMove :: Position -> Move -> Position
+makeSimpleBlackPawnMove !position !move =
+    position {
+          blackPawnBitboard = movePieceWithinBitboard from to (blackPawnBitboard position)
+        , allPiecesBitboard = (allPiecesBitboard position) `xor` switchBitboard
+        , blackPiecesBitboard = (blackPiecesBitboard position) `xor` switchBitboard
+        , mover = White
+        , enPassantSquare = enPassantNotAvailable
+        , halfMoves = 0
+        , moveNumber = moveNumber position + 1
     }
     where from = fromSquarePart move
           to = toSquarePart move
@@ -154,3 +199,19 @@ makeSimpleBlackQueenMove !position !move =
     where from = fromSquarePart move
           to = toSquarePart move
           switchBitboard = bit from .|. bit to
+
+makeSimpleBlackKingMove :: Position -> Move -> Position
+makeSimpleBlackKingMove !position !move =
+    position {
+          blackKingBitboard = movePieceWithinBitboard from to (blackKingBitboard position)  
+        , allPiecesBitboard = (allPiecesBitboard position) `xor` switchBitboard
+        , blackPiecesBitboard = (blackPiecesBitboard position) `xor` switchBitboard
+        , mover = White
+        , enPassantSquare = enPassantNotAvailable
+        , halfMoves = halfMoves position + 1
+        , moveNumber = moveNumber position + 1
+    }
+    where from = fromSquarePart move
+          to = toSquarePart move
+          switchBitboard = bit from .|. bit to
+

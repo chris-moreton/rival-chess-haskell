@@ -130,8 +130,8 @@ recurGeneratePawnMovesFromToSquares !mask !toSquares !result = recurGeneratePawn
   where thisToSquare = countTrailingZeros toSquares
         baseMove = (.|.) mask thisToSquare
         newResult = if thisToSquare >= 56 || thisToSquare <= 7
-                    then promotionMoves baseMove ++ result
-                    else baseMove : result
+                        then promotionMoves baseMove ++ result
+                        else baseMove : result
 
 generatePawnMoves :: Position -> MoveList
 {-# INLINE generatePawnMoves #-}
