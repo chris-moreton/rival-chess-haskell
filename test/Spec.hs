@@ -553,6 +553,7 @@ main = hspec $ do
     it "Returns the total number of moves in a full move tree of a given depth with a given position as its head" $ do
     start <- round `fmap` getPOSIXTime
     perft (getPosition "8/2p5/3p4/KP5r/1R3p1k/8/4P1P1/8 w - -") 5 `shouldBe` 11030083
+    perft (getPosition "8/7p/p5pb/4k3/P1pPn3/8/P5PP/1rB2RK1 b - d3 0 28") 5 `shouldBe` 38633283
     end <- round `fmap` getPOSIXTime
     (end - start) `shouldBe` 0
 

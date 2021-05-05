@@ -34,6 +34,8 @@ library
       Util.Fen
       Util.Utils
       Search.MakeMove
+      Search.MakeSimpleMove
+      Search.MakeComplexMove
       Search.Perft
       Search.MoveGenerator
       Search.MoveConstants
