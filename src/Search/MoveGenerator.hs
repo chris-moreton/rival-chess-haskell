@@ -13,6 +13,7 @@ import Util.MagicBitboards
 import Util.Utils
 import Search.MoveConstants
 import Data.Array.IArray
+import Control.Parallel
 
 bitboardForMover :: Position -> Piece -> Bitboard
 {-# INLINE bitboardForMover #-}
@@ -171,8 +172,8 @@ pawnForwardAndCaptureMovesBitboard :: Square -> (Int -> Bitboard) -> Bitboard ->
 pawnForwardAndCaptureMovesBitboard !fromSquare !capturePawnMoves !nonCaptures !position = (.|.) nonCaptures captures
   where eps = enPassantSquare position
         captures = if eps /= enPassantNotAvailable && (.&.) (bit eps) (enPassantCaptureRank (mover position)) /= 0
-                  then pawnCapturesPlusEnPassantSquare capturePawnMoves fromSquare position
-                  else pawnCaptures capturePawnMoves fromSquare (enemyBitboard position)
+                        then pawnCapturesPlusEnPassantSquare capturePawnMoves fromSquare position
+                        else pawnCaptures capturePawnMoves fromSquare (enemyBitboard position)
 
 pawnCapturesPlusEnPassantSquare :: (Int -> Bitboard) -> Square -> Position -> Bitboard
 {-# INLINE pawnCapturesPlusEnPassantSquare #-}
@@ -290,10 +291,6 @@ isSquareAttackedBy !position !attackedSquare !attacker =
 moves :: Position -> [Move]
 {-# INLINE moves #-}
 moves !position = 
-    generatePawnMoves position ++
-    generateKnightMoves position ++
-    generateBishopMoves position ++
-    generateRookMoves position ++
-    generateKingMoves position ++
-    generateCastleMoves position 
-
+    par moves1 (moves1 ++ moves2)
+    where moves1 = generatePawnMoves position ++ generateBishopMoves position ++ generateKingMoves position
+          moves2 = generateKnightMoves position ++ generateRookMoves position ++ generateCastleMoves position

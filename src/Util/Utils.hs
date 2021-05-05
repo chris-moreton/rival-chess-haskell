@@ -8,6 +8,7 @@ import Alias
 import Data.Bits
 import Search.MoveConstants
 import GHC.Compact
+import Control.Parallel
 
 substring :: String -> Int -> Int -> String
 substring text start end = take (end - start) (drop start text)
