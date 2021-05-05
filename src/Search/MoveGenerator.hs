@@ -243,20 +243,17 @@ bishopMovePiecesBitboard !position !mover = if mover == White
     then (.|.) (whiteBishopBitboard position) (whiteQueenBitboard position)
     else (.|.) (blackBishopBitboard position) (blackQueenBitboard position)
 
-isSquareAttackedByAnyKnight :: Position -> Square -> Mover -> Bool
+isSquareAttackedByAnyKnight :: Bitboard -> Square -> Mover -> Bool
 {-# INLINE isSquareAttackedByAnyKnight #-}
-isSquareAttackedByAnyKnight !position !attackedSquare !attacker = (.&.) knightBitboard (knightMovesBitboards attackedSquare) /= 0
-    where knightBitboard = (if attacker == White then whiteKnightBitboard else blackKnightBitboard) position
+isSquareAttackedByAnyKnight !knightBitboard !attackedSquare !attacker = (.&.) knightBitboard (knightMovesBitboards attackedSquare) /= 0
 
-isSquareAttackedByKing :: Position -> Square -> Mover -> Bool
+isSquareAttackedByKing :: Bitboard -> Square -> Mover -> Bool
 {-# INLINE isSquareAttackedByKing #-}
-isSquareAttackedByKing !position !attackedSquare !attacker = (.&.) kingBitboard (kingMovesBitboards attackedSquare) /= 0
-    where kingBitboard = (if attacker == White then whiteKingBitboard else blackKingBitboard) position
+isSquareAttackedByKing !king !attackedSquare !attacker = (.&.) king (kingMovesBitboards attackedSquare) /= 0
 
-isSquareAttackedByAnyPawn :: Position -> Square -> Mover -> Bool
+isSquareAttackedByAnyPawn :: Bitboard -> Bitboard -> Square -> Mover -> Bool
 {-# INLINE isSquareAttackedByAnyPawn #-}
-isSquareAttackedByAnyPawn !position !attackedSquare !attacker = (.&.) pawnBitboard (pawnMovesCaptureOfColour (switchSide attacker) attackedSquare) /= 0
-    where pawnBitboard = (if attacker == White then whitePawnBitboard else blackPawnBitboard) position
+isSquareAttackedByAnyPawn !pawns !pawnAttacks !attackedSquare !attacker = (.&.) pawns pawnAttacks /= 0
 
 isSquareAttackedByAnyBishop :: Bitboard -> Bitboard -> Square -> Bool
 {-# INLINE isSquareAttackedByAnyBishop #-}
@@ -275,15 +272,23 @@ isRookAttackingSquare :: Square -> Square -> Bitboard -> Bool
 isRookAttackingSquare !attackedSquare !pieceSquare !allPieceBitboard = testBit (magic magicRookVars pieceSquare (magicIndexForRook pieceSquare allPieceBitboard)) attackedSquare
   
 isSquareAttackedBy :: Position -> Square -> Mover -> Bool
+{-# INLINE isSquareAttackedBy #-}
 isSquareAttackedBy !position !attackedSquare !attacker =
-  isSquareAttackedByAnyPawn position attackedSquare attacker ||
-  isSquareAttackedByAnyKnight position attackedSquare attacker ||
-  isSquareAttackedByAnyRook allPieces (rookMovePiecesBitboard position attacker) attackedSquare ||
-  isSquareAttackedByAnyBishop allPieces (bishopMovePiecesBitboard position attacker) attackedSquare ||
-  isSquareAttackedByKing position attackedSquare attacker
+  (pawns /= 0 && isSquareAttackedByAnyPawn pawns pawnAttacks attackedSquare attacker) ||
+  (knights /= 0 && isSquareAttackedByAnyKnight knights attackedSquare attacker) ||
+  (rooks /= 0 && isSquareAttackedByAnyRook allPieces rooks attackedSquare) ||
+  (bishops /= 0 && isSquareAttackedByAnyBishop allPieces bishops attackedSquare) ||
+  isSquareAttackedByKing king attackedSquare attacker
   where allPieces = allPiecesBitboard position
+        rooks = (rookMovePiecesBitboard position attacker)
+        bishops = (bishopMovePiecesBitboard position attacker)
+        knights = (if attacker == White then whiteKnightBitboard else blackKnightBitboard) position
+        pawnAttacks = (pawnMovesCaptureOfColour (switchSide attacker) attackedSquare)
+        pawns = (if attacker == White then whitePawnBitboard else blackPawnBitboard) position
+        king = (if attacker == White then whiteKingBitboard else blackKingBitboard) position
 
 moves :: Position -> [Move]
+{-# INLINE moves #-}
 moves !position = 
     generatePawnMoves position ++
     generateKnightMoves position ++

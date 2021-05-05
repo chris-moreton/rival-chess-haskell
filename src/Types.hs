@@ -12,13 +12,13 @@ data Mover = White | Black deriving (Enum,Show,Eq)
 data Piece = Pawn | King | Queen | Bishop | Knight | Rook deriving (Enum,Show,Eq)
 
 data Position = Position {
-    whitePawnBitboard :: Bitboard
-  , whiteKnightBitboard :: Bitboard
-  , whiteBishopBitboard :: Bitboard
-  , whiteQueenBitboard :: Bitboard
-  , whiteKingBitboard :: Bitboard
-  , whiteRookBitboard :: Bitboard
-  , blackPawnBitboard :: Bitboard
+    whitePawnBitboard :: !Bitboard
+  , whiteKnightBitboard :: !Bitboard
+  , whiteBishopBitboard :: !Bitboard
+  , whiteQueenBitboard :: !Bitboard
+  , whiteKingBitboard :: !Bitboard
+  , whiteRookBitboard :: !Bitboard
+  , blackPawnBitboard :: !Bitboard
   , blackKnightBitboard :: !Bitboard
   , blackBishopBitboard :: !Bitboard
   , blackQueenBitboard :: !Bitboard
