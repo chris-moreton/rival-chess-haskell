@@ -259,11 +259,11 @@ isSquareAttackedByAnyPawn !pawns !pawnAttacks !attackedSquare !attacker = (.&.) 
 
 isSquareAttackedByAnyBishop :: Bitboard -> Bitboard -> Square -> Bool
 {-# INLINE isSquareAttackedByAnyBishop #-}
-isSquareAttackedByAnyBishop !allPieces !attackingBishops !attackedSquare = any (\x -> isBishopAttackingSquare attackedSquare x allPieces) (bitRefList attackingBishops)
+isSquareAttackedByAnyBishop !allPieces !attackingBishops !attackedSquare = any (\x -> isBishopAttackingSquare attackedSquare x allPieces) bitRefs where !bitRefs = bitRefList attackingBishops
 
 isSquareAttackedByAnyRook :: Bitboard -> Bitboard -> Square -> Bool
 {-# INLINE isSquareAttackedByAnyRook #-}
-isSquareAttackedByAnyRook !allPieces !attackingRooks !attackedSquare = any (\x -> isRookAttackingSquare attackedSquare x allPieces) bitRefs where !bitRefs = (bitRefList attackingRooks)
+isSquareAttackedByAnyRook !allPieces !attackingRooks !attackedSquare = any (\x -> isRookAttackingSquare attackedSquare x allPieces) bitRefs where !bitRefs = bitRefList attackingRooks
 
 isBishopAttackingSquare :: Square -> Square -> Bitboard -> Bool
 {-# INLINE isBishopAttackingSquare #-}
