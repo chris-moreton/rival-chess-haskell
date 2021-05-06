@@ -14,6 +14,7 @@ import Util.Utils
 import Search.MoveConstants
 import Data.Array.IArray
 import Control.Parallel
+import Control.Monad.Par
 
 bitboardForMover :: Position -> Piece -> Bitboard
 {-# INLINE bitboardForMover #-}
@@ -262,7 +263,7 @@ isSquareAttackedByAnyBishop !allPieces !attackingBishops !attackedSquare = any (
 
 isSquareAttackedByAnyRook :: Bitboard -> Bitboard -> Square -> Bool
 {-# INLINE isSquareAttackedByAnyRook #-}
-isSquareAttackedByAnyRook !allPieces !attackingRooks !attackedSquare = any (\x -> isRookAttackingSquare attackedSquare x allPieces) (bitRefList attackingRooks)
+isSquareAttackedByAnyRook !allPieces !attackingRooks !attackedSquare = any (\x -> isRookAttackingSquare attackedSquare x allPieces) bitRefs where !bitRefs = (bitRefList attackingRooks)
 
 isBishopAttackingSquare :: Square -> Square -> Bitboard -> Bool
 {-# INLINE isBishopAttackingSquare #-}
@@ -275,22 +276,35 @@ isRookAttackingSquare !attackedSquare !pieceSquare !allPieceBitboard = testBit (
 isSquareAttackedBy :: Position -> Square -> Mover -> Bool
 {-# INLINE isSquareAttackedBy #-}
 isSquareAttackedBy !position !attackedSquare !attacker =
-  (pawns /= 0 && isSquareAttackedByAnyPawn pawns pawnAttacks attackedSquare attacker) ||
-  (knights /= 0 && isSquareAttackedByAnyKnight knights attackedSquare attacker) ||
-  (rooks /= 0 && isSquareAttackedByAnyRook allPieces rooks attackedSquare) ||
-  (bishops /= 0 && isSquareAttackedByAnyBishop allPieces bishops attackedSquare) ||
-  isSquareAttackedByKing king attackedSquare attacker
+  attackedByRook || attackedByBishop || attackedByKing || attackedByPawn || attackedByKnight
   where allPieces = allPiecesBitboard position
-        rooks = (rookMovePiecesBitboard position attacker)
-        bishops = (bishopMovePiecesBitboard position attacker)
+        rooks = rookMovePiecesBitboard position attacker
+        bishops = bishopMovePiecesBitboard position attacker
         knights = (if attacker == White then whiteKnightBitboard else blackKnightBitboard) position
-        pawnAttacks = (pawnMovesCaptureOfColour (switchSide attacker) attackedSquare)
+        pawnAttacks = pawnMovesCaptureOfColour (switchSide attacker) attackedSquare
         pawns = (if attacker == White then whitePawnBitboard else blackPawnBitboard) position
         king = (if attacker == White then whiteKingBitboard else blackKingBitboard) position
+        attackedByPawn = (pawns /= 0 && isSquareAttackedByAnyPawn pawns pawnAttacks attackedSquare attacker)
+        attackedByKnight = (knights /= 0 && isSquareAttackedByAnyKnight knights attackedSquare attacker)
+        attackedByRook = (rooks /= 0 && isSquareAttackedByAnyRook allPieces rooks attackedSquare)
+        attackedByBishop = (bishops /= 0 && isSquareAttackedByAnyBishop allPieces bishops attackedSquare)
+        attackedByKing = isSquareAttackedByKing king attackedSquare attacker
 
-moves :: Position -> [Move]
+moves :: Position -> MoveList
 {-# INLINE moves #-}
-moves !position = 
+moves !position =
     par moves1 (moves1 ++ moves2)
     where moves1 = generatePawnMoves position ++ generateBishopMoves position ++ generateKingMoves position
           moves2 = generateKnightMoves position ++ generateRookMoves position ++ generateCastleMoves position
+
+movesPar :: Position -> MoveList
+{-# INLINE movesPar #-}
+movesPar !position = runPar $ do
+    pawnAndKnightx <- spawnP (generatePawnMoves position ++ generateKnightMoves position)
+    bishopAndKingx <- spawnP (generateBishopMoves position ++ generateKingMoves position)
+    rookAndCastlex <- spawnP (generateRookMoves position ++ generateCastleMoves position)
+    pawnAndKnight <- (get pawnAndKnightx)
+    bishopAndKing <- (get bishopAndKingx)
+    rookAndCastle <- (get rookAndCastlex)
+    return (pawnAndKnight ++ bishopAndKing ++ rookAndCastle)
+

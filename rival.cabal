@@ -57,6 +57,7 @@ library
     , ghc-compact
     , unboxing-vector
     , parallel
+    , monad-par
   default-language: Haskell2010
 
 executable rival-exe
