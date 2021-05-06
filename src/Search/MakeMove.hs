@@ -36,6 +36,7 @@ isSimpleMove :: Position -> Move -> Square -> Square -> Bool
 isSimpleMove position move from to = not (isSimpleCapture position to) && not (isPotentialComplexPawnMove position from to) && not (isPotentialFirstKingMove position from)
 
 makeMove :: Position -> Move -> Position
+{-# INLINE makeMove #-}
 makeMove !position !move = 
     if isSimpleMove position move from to
         then makeSimpleMove position move from

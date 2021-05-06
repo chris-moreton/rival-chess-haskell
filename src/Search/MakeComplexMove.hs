@@ -14,6 +14,7 @@ import Search.MoveConstants
 import Search.MoveUtils
 
 makeMoveMain :: Position -> Move -> Position
+{-# INLINE makeMoveMain #-}
 makeMoveMain !position !move =
     Position {
           whitePawnBitboard = wp
