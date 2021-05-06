@@ -14,32 +14,32 @@ import Search.MoveConstants
 import Search.MoveUtils
 import Search.MakeComplexMove
 
-makeSimpleMove :: Position -> Move -> Square -> Position
+makeSimpleMove :: Position -> Move -> Square -> Piece -> Position
 {-# INLINE makeSimpleMove #-}
-makeSimpleMove !position !move !from
-    | mover position == White = makeSimpleWhiteMove position from to switchBitboard
-    | otherwise = makeSimpleBlackMove position from to switchBitboard
+makeSimpleMove !position !move !from !piece
+    | mover position == White = makeSimpleWhiteMove position from to switchBitboard piece
+    | otherwise = makeSimpleBlackMove position from to switchBitboard piece
     where to = toSquarePart move
           switchBitboard = bit from .|. bit to
 
-makeSimpleWhiteMove :: Position -> Square -> Square -> Bitboard -> Position
+makeSimpleWhiteMove :: Position -> Square -> Square -> Bitboard -> Piece -> Position
 {-# INLINE makeSimpleWhiteMove #-}
-makeSimpleWhiteMove !position !from !to !switchBitboard
-    | testBit (whitePawnBitboard position) from = makeSimpleWhitePawnMove position from to switchBitboard
-    | testBit (whiteKnightBitboard position) from = makeSimpleWhiteKnightMove position from to switchBitboard
-    | testBit (whiteBishopBitboard position) from = makeSimpleWhiteBishopMove position from to switchBitboard
-    | testBit (whiteRookBitboard position) from = makeSimpleWhiteRookMove position from to switchBitboard
-    | testBit (whiteQueenBitboard position) from = makeSimpleWhiteQueenMove position from to switchBitboard
+makeSimpleWhiteMove !position !from !to !switchBitboard !piece
+    | piece == Pawn = makeSimpleWhitePawnMove position from to switchBitboard
+    | piece == Knight = makeSimpleWhiteKnightMove position from to switchBitboard
+    | piece == Bishop = makeSimpleWhiteBishopMove position from to switchBitboard
+    | piece == Rook = makeSimpleWhiteRookMove position from to switchBitboard
+    | piece == Queen = makeSimpleWhiteQueenMove position from to switchBitboard
     | otherwise = makeSimpleWhiteKingMove position from to switchBitboard
 
-makeSimpleBlackMove :: Position -> Square -> Square -> Bitboard -> Position
+makeSimpleBlackMove :: Position -> Square -> Square -> Bitboard -> Piece -> Position
 {-# INLINE makeSimpleBlackMove #-}
-makeSimpleBlackMove !position !from !to !switchBitboard
-    | testBit (blackPawnBitboard position) from = makeSimpleBlackPawnMove position from to switchBitboard
-    | testBit (blackKnightBitboard position) from = makeSimpleBlackKnightMove position from to switchBitboard
-    | testBit (blackBishopBitboard position) from = makeSimpleBlackBishopMove position from to switchBitboard
-    | testBit (blackRookBitboard position) from = makeSimpleBlackRookMove position from to switchBitboard
-    | testBit (blackQueenBitboard position) from = makeSimpleBlackQueenMove position from to switchBitboard
+makeSimpleBlackMove !position !from !to !switchBitboard !piece
+    | piece == Pawn = makeSimpleBlackPawnMove position from to switchBitboard
+    | piece == Knight = makeSimpleBlackKnightMove position from to switchBitboard
+    | piece == Bishop = makeSimpleBlackBishopMove position from to switchBitboard
+    | piece == Rook = makeSimpleBlackRookMove position from to switchBitboard
+    | piece == Queen = makeSimpleBlackQueenMove position from to switchBitboard
     | otherwise = makeSimpleBlackKingMove position from to switchBitboard
 
 makeSimpleWhitePawnMove :: Position -> Square -> Square -> Bitboard -> Position
