@@ -92,7 +92,7 @@ generateSliderMoves !position !piece = recurGenerateSliderMoves fromSquares posi
           magicVars = if piece == Bishop then magicBishopVars else magicRookVars
           thisMover = mover position
           bitboard = bitboardForColour bitboards thisMover piece .|. bitboardForColour bitboards thisMover Queen
-          fromSquares = bitRefList bitboard
+          !fromSquares = bitRefList bitboard
 
 recurGenerateSliderMoves :: [Square] -> Position -> MagicVars -> MoveList -> MoveList
 {-# INLINE recurGenerateSliderMoves #-}
@@ -148,7 +148,7 @@ recurGenerateWhitePawnMoves !fromSquares !position !emptySquares !moverPawns !re
   recurGenerateWhitePawnMoves (xor fromSquares (bit fromSquare)) position emptySquares moverPawns (result ++ thisResult)
   where fromSquare = countTrailingZeros fromSquares
         pawnForwardAndCaptureMoves = pawnForwardAndCaptureMovesBitboard fromSquare whitePawnMovesCapture (pawnForwardMovesBitboard ((.&.) (whitePawnMovesForward fromSquare) emptySquares) position) position
-        thisResult = generatePawnMovesFromToSquares fromSquare pawnForwardAndCaptureMoves
+        !thisResult = generatePawnMovesFromToSquares fromSquare pawnForwardAndCaptureMoves
 
 recurGenerateBlackPawnMoves :: Bitboard -> Position -> Bitboard -> Bitboard -> MoveList -> MoveList
 {-# INLINE recurGenerateBlackPawnMoves #-}
@@ -157,7 +157,7 @@ recurGenerateBlackPawnMoves !fromSquares !position !emptySquares !moverPawns !re
   recurGenerateBlackPawnMoves (xor fromSquares (bit fromSquare)) position emptySquares moverPawns (result ++ thisResult)
   where fromSquare = countTrailingZeros fromSquares
         pawnForwardAndCaptureMoves = pawnForwardAndCaptureMovesBitboard fromSquare blackPawnMovesCapture (pawnForwardMovesBitboard ((.&.) (blackPawnMovesForward fromSquare) emptySquares) position) position
-        thisResult = generatePawnMovesFromToSquares fromSquare pawnForwardAndCaptureMoves
+        !thisResult = generatePawnMovesFromToSquares fromSquare pawnForwardAndCaptureMoves
 
 pawnForwardMovesBitboard :: Bitboard -> Position -> Bitboard
 {-# INLINE pawnForwardMovesBitboard #-}
@@ -172,7 +172,7 @@ pawnForwardAndCaptureMovesBitboard :: Square -> (Int -> Bitboard) -> Bitboard ->
 {-# INLINE pawnForwardAndCaptureMovesBitboard #-}
 pawnForwardAndCaptureMovesBitboard !fromSquare !capturePawnMoves !nonCaptures !position = (.|.) nonCaptures captures
   where eps = enPassantSquare position
-        captures = if eps /= enPassantNotAvailable && (.&.) (bit eps) (enPassantCaptureRank (mover position)) /= 0
+        !captures = if eps /= enPassantNotAvailable && (.&.) (bit eps) (enPassantCaptureRank (mover position)) /= 0
                         then pawnCapturesPlusEnPassantSquare capturePawnMoves fromSquare position
                         else pawnCaptures capturePawnMoves fromSquare (enemyBitboard position)
 
@@ -199,7 +199,7 @@ generateCastleMoves !position = if mover position == White
 
 anySquaresInBitboardAttacked :: Position -> Mover -> Bitboard -> Bool
 {-# INLINE anySquaresInBitboardAttacked #-}
-anySquaresInBitboardAttacked position attacker bitboard = any (\x -> isSquareAttackedBy position x attacker) (bitRefList bitboard)
+anySquaresInBitboardAttacked position attacker bitboard = any (\x -> isSquareAttackedBy position x attacker) bitRefs where !bitRefs = bitRefList bitboard
 
 pawnMovesCaptureOfColour :: Mover -> Int -> Bitboard
 {-# INLINE pawnMovesCaptureOfColour #-}

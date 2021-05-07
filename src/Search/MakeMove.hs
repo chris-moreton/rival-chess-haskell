@@ -17,19 +17,19 @@ import Search.MakeComplexMove
 
 isPotentialFirstKingMove :: Position -> Square -> Bool
 {-# INLINE isPotentialFirstKingMove #-}
-isPotentialFirstKingMove position from = from == e1Bit || from == e8Bit
+isPotentialFirstKingMove !position from = from == e1Bit || from == e8Bit
 
-isPotentialComplexPawnMove :: Position -> Square -> Square -> Bool
-{-# INLINE isPotentialComplexPawnMove #-}
-isPotentialComplexPawnMove position from to = (abs (from - to) /= 8 || to >= 56 || to <= 7)
+isComplexPawnMove :: Position -> Square -> Square -> Bool
+{-# INLINE isComplexPawnMove #-}
+isComplexPawnMove !position from to = (abs (from - to) /= 8 || to >= 56 || to <= 7)
 
 isSimpleCapture :: Position -> Square -> Bool
 {-# INLINE isSimpleCapture #-}
-isSimpleCapture position to = testBit (allPiecesBitboard position) to
+isSimpleCapture !position to = testBit (allPiecesBitboard position) to
 
 isSimpleMove :: Position -> Move -> Square -> Square -> Piece -> Bool
 {-# INLINE isSimpleMove #-}
-isSimpleMove position move from to piece = not (isSimpleCapture position to) && not (piece == Pawn && isPotentialComplexPawnMove position from to) && not (piece == King && isPotentialFirstKingMove position from)
+isSimpleMove !position move from to piece = not (isSimpleCapture position to) && not (piece == Pawn && isComplexPawnMove position from to) && not (piece == King && isPotentialFirstKingMove position from)
 
 movingPiece :: Position -> Square -> Piece
 {-# INLINE movingPiece #-}

@@ -19,8 +19,8 @@ makeSimpleMove :: Position -> Move -> Square -> Piece -> Position
 makeSimpleMove !position !move !from !piece
     | mover position == White = makeSimpleWhiteMove position from to switchBitboard piece
     | otherwise = makeSimpleBlackMove position from to switchBitboard piece
-    where to = toSquarePart move
-          switchBitboard = bit from .|. bit to
+    where !to = toSquarePart move
+          !switchBitboard = bit from .|. bit to
 
 makeSimpleWhiteMove :: Position -> Square -> Square -> Bitboard -> Piece -> Position
 {-# INLINE makeSimpleWhiteMove #-}

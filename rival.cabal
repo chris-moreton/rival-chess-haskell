@@ -58,6 +58,7 @@ library
     , unboxing-vector
     , parallel
     , monad-par
+    , bits-extra
   default-language: Haskell2010
 
 executable rival-exe
