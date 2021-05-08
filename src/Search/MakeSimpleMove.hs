@@ -50,7 +50,7 @@ makeSimpleWhitePawnMove !position !from !to !switchBitboard =
         , allPiecesBitboard = (allPiecesBitboard position) `xor` switchBitboard
         , whitePiecesBitboard = (whitePiecesBitboard position) `xor` switchBitboard
         , mover = Black
-        , enPassantSquare = enPassantNotAvailable
+        , enPassantSquare = if to - from == 16 then from + 8 else enPassantNotAvailable
         , halfMoves = 0
     }
 
@@ -124,7 +124,7 @@ makeSimpleBlackPawnMove !position !from !to !switchBitboard =
         , allPiecesBitboard = (allPiecesBitboard position) `xor` switchBitboard
         , blackPiecesBitboard = (blackPiecesBitboard position) `xor` switchBitboard
         , mover = White
-        , enPassantSquare = enPassantNotAvailable
+        , enPassantSquare = if from - to == 16 then from - 8 else enPassantNotAvailable
         , halfMoves = 0
         , moveNumber = moveNumber position + 1
     }

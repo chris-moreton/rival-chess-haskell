@@ -21,7 +21,7 @@ isPotentialFirstKingMove !position from = from == e1Bit || from == e8Bit
 
 isComplexPawnMove :: Position -> Square -> Square -> Bool
 {-# INLINE isComplexPawnMove #-}
-isComplexPawnMove !position from to = (abs (from - to) /= 8 || to >= 56 || to <= 7)
+isComplexPawnMove !position from to = not (abs (from - to) `mod` 8 == 0) || testBit promotionSquares to
 
 isSimpleCapture :: Position -> Square -> Bool
 {-# INLINE isSimpleCapture #-}

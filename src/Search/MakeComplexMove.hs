@@ -33,13 +33,7 @@ makeMoveMain !position !move =
         , whitePiecesBitboard = wpb
         , blackPiecesBitboard = bpb
         , mover = if m == White then Black else White
-        , enPassantSquare = if (abs (to - from)) == 16 
-                              then if m == White && (testBit (whitePawnBitboard position) from) 
-                                     then from + 8 
-                                     else if m == Black && (testBit (blackPawnBitboard position) from) 
-                                            then from - 8 
-                                            else enPassantNotAvailable
-                              else enPassantNotAvailable
+        , enPassantSquare = enPassantNotAvailable
         , whiteKingCastleAvailable = whiteKingCastleAvailable position && from /= e1Bit && from /= h1Bit && to /= h1Bit
         , whiteQueenCastleAvailable = whiteQueenCastleAvailable position && from /= e1Bit && from /= a1Bit && to /= a1Bit
         , blackKingCastleAvailable = blackKingCastleAvailable position && from /= e8Bit && from /= h8Bit && to /= h8Bit
