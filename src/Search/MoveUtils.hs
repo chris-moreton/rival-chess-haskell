@@ -32,9 +32,22 @@ moveBlackRookWhenCastling !from !to !kingBoard !rookBoard
 
 enPassantCapturedPieceSquare :: Square -> Square
 {-# INLINE enPassantCapturedPieceSquare #-}
-enPassantCapturedPieceSquare !enPassantSquare
-  | enPassantSquare < 24 = enPassantSquare + 8
-  | otherwise = enPassantSquare - 8
+enPassantCapturedPieceSquare 16 = 24
+enPassantCapturedPieceSquare 17 = 25
+enPassantCapturedPieceSquare 18 = 26
+enPassantCapturedPieceSquare 19 = 27
+enPassantCapturedPieceSquare 20 = 28
+enPassantCapturedPieceSquare 21 = 29
+enPassantCapturedPieceSquare 22 = 30
+enPassantCapturedPieceSquare 23 = 31
+enPassantCapturedPieceSquare 40 = 32
+enPassantCapturedPieceSquare 41 = 33
+enPassantCapturedPieceSquare 42 = 34
+enPassantCapturedPieceSquare 43 = 35
+enPassantCapturedPieceSquare 44 = 36
+enPassantCapturedPieceSquare 45 = 37
+enPassantCapturedPieceSquare 46 = 38
+enPassantCapturedPieceSquare 47 = 39
 
 removePawnWhenEnPassant :: Bitboard -> Bitboard -> Square -> Square -> Bitboard
 {-# INLINE removePawnWhenEnPassant #-}
