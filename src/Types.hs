@@ -12,23 +12,23 @@ data Mover = White | Black deriving (Enum,Show,Eq)
 data Piece = Pawn | King | Queen | Bishop | Knight | Rook deriving (Enum,Show,Eq)
 
 data Position = Position {
-    whitePawnBitboard :: !Bitboard
-  , whiteKnightBitboard :: !Bitboard
-  , whiteBishopBitboard :: !Bitboard
-  , whiteQueenBitboard :: !Bitboard
-  , whiteKingBitboard :: !Bitboard
-  , whiteRookBitboard :: !Bitboard
-  , blackPawnBitboard :: !Bitboard
-  , blackKnightBitboard :: !Bitboard
-  , blackBishopBitboard :: !Bitboard
-  , blackQueenBitboard :: !Bitboard
-  , blackKingBitboard :: !Bitboard
-  , blackRookBitboard :: !Bitboard
-  , allPiecesBitboard :: !Bitboard
-  , whitePiecesBitboard :: !Bitboard
-  , blackPiecesBitboard :: !Bitboard
+    whitePawnBitboard :: {-# UNPACK #-} !Bitboard
+  , whiteKnightBitboard :: {-# UNPACK #-} !Bitboard
+  , whiteBishopBitboard :: {-# UNPACK #-} !Bitboard
+  , whiteQueenBitboard :: {-# UNPACK #-} !Bitboard
+  , whiteKingBitboard :: {-# UNPACK #-} !Bitboard
+  , whiteRookBitboard :: {-# UNPACK #-} !Bitboard
+  , blackPawnBitboard :: {-# UNPACK #-} !Bitboard
+  , blackKnightBitboard :: {-# UNPACK #-} !Bitboard
+  , blackBishopBitboard :: {-# UNPACK #-} !Bitboard
+  , blackQueenBitboard :: {-# UNPACK #-} !Bitboard
+  , blackKingBitboard :: {-# UNPACK #-} !Bitboard
+  , blackRookBitboard :: {-# UNPACK #-} !Bitboard
+  , allPiecesBitboard :: {-# UNPACK #-} !Bitboard
+  , whitePiecesBitboard :: {-# UNPACK #-} !Bitboard
+  , blackPiecesBitboard :: {-# UNPACK #-} !Bitboard
   , mover :: !Mover
-  , enPassantSquare :: !Square
+  , enPassantSquare :: {-# UNPACK #-} !Square
   , whiteKingCastleAvailable  :: !Bool
   , blackKingCastleAvailable  :: !Bool
   , whiteQueenCastleAvailable :: !Bool
