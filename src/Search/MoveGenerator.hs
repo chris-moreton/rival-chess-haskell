@@ -294,17 +294,6 @@ moves :: Position -> MoveList
 {-# INLINE moves #-}
 moves !position =
     par moves1 (moves1 ++ moves2)
-    where moves1 = generatePawnMoves position ++ generateBishopMoves position ++ generateKingMoves position
-          moves2 = generateKnightMoves position ++ generateRookMoves position ++ generateCastleMoves position
-
-movesPar :: Position -> MoveList
-{-# INLINE movesPar #-}
-movesPar !position = runPar $ do
-    pawnAndKnightx <- spawnP (generatePawnMoves position ++ generateKnightMoves position)
-    bishopAndKingx <- spawnP (generateBishopMoves position ++ generateKingMoves position)
-    rookAndCastlex <- spawnP (generateRookMoves position ++ generateCastleMoves position)
-    pawnAndKnight <- (get pawnAndKnightx)
-    bishopAndKing <- (get bishopAndKingx)
-    rookAndCastle <- (get rookAndCastlex)
-    return (pawnAndKnight ++ bishopAndKing ++ rookAndCastle)
+    where moves1 = generatePawnMoves position ++ generateBishopMoves position ++ generateCastleMoves position
+          moves2 = generateKnightMoves position ++ generateRookMoves position ++ generateKingMoves position
 
