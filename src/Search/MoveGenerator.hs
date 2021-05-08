@@ -69,17 +69,17 @@ recurKnightMoves :: Position -> [Square] -> MoveList -> MoveList
 recurKnightMoves _ [] !result = result
 recurKnightMoves !position !fromSquares !result =
     recurKnightMoves position (tail fromSquares) (result ++ movesFromToSquaresBitboard fromSquare ((.&.) (knightMovesBitboards fromSquare) (allBitsExceptFriendlyPieces position)))
-        where fromSquare = head fromSquares
+        where !fromSquare = head fromSquares
 
 generateKingMoves :: Position -> MoveList
 {-# INLINE generateKingMoves #-}
 generateKingMoves !position =
     movesFromToSquaresBitboard kingSquare ((.&.) (kingMovesBitboards kingSquare) (allBitsExceptFriendlyPieces position))
-        where kingSquare = countTrailingZeros (bitboardForMover position King)
+        where !kingSquare = countTrailingZeros (bitboardForMover position King)
 
 generateBishopMoves :: Position -> MoveList
 {-# INLINE generateBishopMoves #-}
-generateBishopMoves position = generateSliderMoves position Bishop
+generateBishopMoves !position = generateSliderMoves position Bishop
 
 generateRookMoves :: Position -> MoveList
 {-# INLINE generateRookMoves #-}

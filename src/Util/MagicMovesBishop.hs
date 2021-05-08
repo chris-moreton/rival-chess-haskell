@@ -1,6 +1,6 @@
 module Util.MagicMovesBishop where
 
-{-# OPTIONS_GHC -Wno-overflowed-literals #-}
+{-# OPTIONS_GHC fromIntegral(-Wno-overflowed-literals #-}
 
 import Types
 import Alias
@@ -18439,7 +18439,7 @@ magicMovesBishop 17 1020 = 0
 magicMovesBishop 17 1021 = 0
 magicMovesBishop 17 1022 = 0
 magicMovesBishop 17 1023 = 0
-magicMovesBishop 18 0 = -9205322380790986223
+magicMovesBishop 18 0 = fromIntegral(-9205322380790986223) :: Bitboard
 magicMovesBishop 18 1 = 35253259340304
 magicMovesBishop 18 2 = 68887251473
 magicMovesBishop 18 3 = 35257554307585
@@ -27655,7 +27655,7 @@ magicMovesBishop 26 1020 = 0
 magicMovesBishop 26 1021 = 0
 magicMovesBishop 26 1022 = 0
 magicMovesBishop 26 1023 = 0
-magicMovesBishop 27 0 = -9205038694072573375
+magicMovesBishop 27 0 = fromIntegral(-9205038694072573375) :: Bitboard
 magicMovesBishop 27 1 = 37469296009216
 magicMovesBishop 27 2 = fromIntegral(-9205038694072573888) :: Bitboard
 magicMovesBishop 27 3 = 318944272712192
@@ -36871,7 +36871,7 @@ magicMovesBishop 35 1020 = 0
 magicMovesBishop 35 1021 = 0
 magicMovesBishop 35 1022 = 0
 magicMovesBishop 35 1023 = 0
-magicMovesBishop 36 0 = -9060072569221905919
+magicMovesBishop 36 0 = fromIntegral(-9060072569221905919) :: Bitboard
 magicMovesBishop 36 1 = fromIntegral(-9204187757297761791) :: Bitboard
 magicMovesBishop 36 2 = fromIntegral(-9060072569226395648) :: Bitboard
 magicMovesBishop 36 3 = fromIntegral(-9204187757302251520) :: Bitboard
@@ -46087,7 +46087,7 @@ magicMovesBishop 44 1020 = 0
 magicMovesBishop 44 1021 = 0
 magicMovesBishop 44 1022 = 0
 magicMovesBishop 44 1023 = 0
-magicMovesBishop 45 0 = -8624392940535152127
+magicMovesBishop 45 0 = fromIntegral(-8624392940535152127) :: Bitboard
 magicMovesBishop 45 1 = 598979096319361024
 magicMovesBishop 45 2 = fromIntegral(-9200853695120539648) :: Bitboard
 magicMovesBishop 45 3 = 22518341734236160
