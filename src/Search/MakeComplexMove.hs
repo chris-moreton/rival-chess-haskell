@@ -34,9 +34,9 @@ makeMoveMain !position !move =
         , blackPiecesBitboard = bpb
         , mover = if m == White then Black else White
         , enPassantSquare = if (abs (to - from)) == 16 
-                              then if (testBit (whitePawnBitboard position) from) 
+                              then if m == White && (testBit (whitePawnBitboard position) from) 
                                      then from + 8 
-                                     else if (testBit (blackPawnBitboard position) from) 
+                                     else if m == Black && (testBit (blackPawnBitboard position) from) 
                                             then from - 8 
                                             else enPassantNotAvailable
                               else enPassantNotAvailable
