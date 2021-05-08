@@ -13,13 +13,13 @@ import qualified Data.Vector.Unboxed as V
 
 magic :: MagicVars -> Square -> Int -> Bitboard
 {-# INLINE magic #-}
-magic !magicVars !fromSquare !toSquaresMagicIndex = magicMoves magicVars fromSquare V.! toSquaresMagicIndex
+magic !magicVars !fromSquare !toSquaresMagicIndex = magicMoves magicVars fromSquare toSquaresMagicIndex
 
 data MagicVars = MagicVars {
       occupancyMask :: Int -> Bitboard
     , magicNumber :: Int -> Bitboard
     , magicNumberShifts :: Int -> Int
-    , magicMoves :: Int -> V.Vector Bitboard
+    , magicMoves :: Int -> Int -> Bitboard
 }
 
 magicRookVars = MagicVars {

@@ -42,7 +42,7 @@ bitRefList !bitboard = recurBitRefList bitboard (popCount bitboard) []
 recurBitRefList :: Bitboard -> Int -> [Square] -> [Square]
 {-# INLINE recurBitRefList #-}
 recurBitRefList _ 0 !result = result
-recurBitRefList bitboard 1 !result = (countTrailingZeros bitboard) : result
+recurBitRefList !bitboard 1 !result = (countTrailingZeros bitboard) : result
 recurBitRefList !bitboard !popcount !result = recurBitRefList (xor bitboard (bit square)) (popcount - 1) (square : result) where square = countTrailingZeros bitboard
 
 allBitsExceptFriendlyPieces :: Position -> Bitboard
@@ -88,10 +88,10 @@ generateRookMoves !position = generateSliderMoves position Rook
 generateSliderMoves :: Position -> Piece -> MoveList
 {-# INLINE generateSliderMoves #-}
 generateSliderMoves !position !piece = recurGenerateSliderMoves fromSquares position magicVars []
-    where bitboards = position
-          magicVars = if piece == Bishop then magicBishopVars else magicRookVars
-          thisMover = mover position
-          bitboard = bitboardForColour bitboards thisMover piece .|. bitboardForColour bitboards thisMover Queen
+    where !bitboards = position
+          !magicVars = if piece == Bishop then magicBishopVars else magicRookVars
+          !thisMover = mover position
+          !bitboard = bitboardForColour bitboards thisMover piece .|. bitboardForColour bitboards thisMover Queen
           !fromSquares = bitRefList bitboard
 
 recurGenerateSliderMoves :: [Square] -> Position -> MagicVars -> MoveList -> MoveList
@@ -99,22 +99,22 @@ recurGenerateSliderMoves :: [Square] -> Position -> MagicVars -> MoveList -> Mov
 recurGenerateSliderMoves [] _ _ !result = result
 recurGenerateSliderMoves !fromSquares !position !magicVars !result =
   recurGenerateSliderMoves (tail fromSquares) position magicVars (result ++ thisResult)
-    where fromSquare = head fromSquares
-          numberMagic = magicNumber magicVars fromSquare
-          shiftMagic = magicNumberShifts magicVars fromSquare
-          maskMagic = occupancyMask magicVars fromSquare
-          occupancy = (.&.) (allPiecesBitboard position) maskMagic
-          rawIndex = fromIntegral (occupancy * numberMagic) :: Word
-          toSquaresMagicIndex = fromIntegral(shiftR rawIndex shiftMagic) :: Int
-          toSquaresBitboard = (.&.) (magic magicVars fromSquare toSquaresMagicIndex) (allBitsExceptFriendlyPieces position)
-          thisResult = recurGenerateSliderMovesWithToSquares (fromSquareMask fromSquare) toSquaresBitboard []
+    where !fromSquare = head fromSquares
+          !numberMagic = magicNumber magicVars fromSquare
+          !shiftMagic = magicNumberShifts magicVars fromSquare
+          !maskMagic = occupancyMask magicVars fromSquare
+          !occupancy = (.&.) (allPiecesBitboard position) maskMagic
+          !rawIndex = fromIntegral (occupancy * numberMagic) :: Word
+          !toSquaresMagicIndex = fromIntegral(shiftR rawIndex shiftMagic) :: Int
+          !toSquaresBitboard = (.&.) (magic magicVars fromSquare toSquaresMagicIndex) (allBitsExceptFriendlyPieces position)
+          !thisResult = recurGenerateSliderMovesWithToSquares (fromSquareMask fromSquare) toSquaresBitboard []
 
 recurGenerateSliderMovesWithToSquares :: Square -> Bitboard -> MoveList -> MoveList
 {-# INLINE recurGenerateSliderMovesWithToSquares #-}
 recurGenerateSliderMovesWithToSquares !fromSquare 0 !result = result
 recurGenerateSliderMovesWithToSquares !fromSquare !toSquares !result =
     recurGenerateSliderMovesWithToSquares fromSquare (xor toSquares (bit square)) ((.|.) fromSquare square : result)
-    where square = countTrailingZeros toSquares
+    where !square = countTrailingZeros toSquares
 
 promotionMoves :: Move -> MoveList
 {-# INLINE promotionMoves #-}
@@ -128,9 +128,9 @@ recurGeneratePawnMovesFromToSquares :: Move -> Bitboard -> MoveList -> MoveList
 {-# INLINE recurGeneratePawnMovesFromToSquares #-}
 recurGeneratePawnMovesFromToSquares _ !0 !result = result
 recurGeneratePawnMovesFromToSquares !mask !toSquares !result = recurGeneratePawnMovesFromToSquares mask (xor toSquares (bit thisToSquare)) newResult
-  where thisToSquare = countTrailingZeros toSquares
-        baseMove = (.|.) mask thisToSquare
-        newResult = if thisToSquare >= 56 || thisToSquare <= 7
+  where !thisToSquare = countTrailingZeros toSquares
+        !baseMove = (.|.) mask thisToSquare
+        !newResult = if thisToSquare >= 56 || thisToSquare <= 7
                         then promotionMoves baseMove ++ result
                         else baseMove : result
 
@@ -146,8 +146,8 @@ recurGenerateWhitePawnMoves :: Bitboard -> Position -> Bitboard -> Bitboard -> M
 recurGenerateWhitePawnMoves 0 _ _ _ !result = result
 recurGenerateWhitePawnMoves !fromSquares !position !emptySquares !moverPawns !result =
   recurGenerateWhitePawnMoves (xor fromSquares (bit fromSquare)) position emptySquares moverPawns (result ++ thisResult)
-  where fromSquare = countTrailingZeros fromSquares
-        pawnForwardAndCaptureMoves = pawnForwardAndCaptureMovesBitboard fromSquare whitePawnMovesCapture (pawnForwardMovesBitboard ((.&.) (whitePawnMovesForward fromSquare) emptySquares) position) position
+  where !fromSquare = countTrailingZeros fromSquares
+        !pawnForwardAndCaptureMoves = pawnForwardAndCaptureMovesBitboard fromSquare whitePawnMovesCapture (pawnForwardMovesBitboard ((.&.) (whitePawnMovesForward fromSquare) emptySquares) position) position
         !thisResult = generatePawnMovesFromToSquares fromSquare pawnForwardAndCaptureMoves
 
 recurGenerateBlackPawnMoves :: Bitboard -> Position -> Bitboard -> Bitboard -> MoveList -> MoveList
@@ -155,8 +155,8 @@ recurGenerateBlackPawnMoves :: Bitboard -> Position -> Bitboard -> Bitboard -> M
 recurGenerateBlackPawnMoves 0 _ _ _ !result = result
 recurGenerateBlackPawnMoves !fromSquares !position !emptySquares !moverPawns !result =
   recurGenerateBlackPawnMoves (xor fromSquares (bit fromSquare)) position emptySquares moverPawns (result ++ thisResult)
-  where fromSquare = countTrailingZeros fromSquares
-        pawnForwardAndCaptureMoves = pawnForwardAndCaptureMovesBitboard fromSquare blackPawnMovesCapture (pawnForwardMovesBitboard ((.&.) (blackPawnMovesForward fromSquare) emptySquares) position) position
+  where !fromSquare = countTrailingZeros fromSquares
+        !pawnForwardAndCaptureMoves = pawnForwardAndCaptureMovesBitboard fromSquare blackPawnMovesCapture (pawnForwardMovesBitboard ((.&.) (blackPawnMovesForward fromSquare) emptySquares) position) position
         !thisResult = generatePawnMovesFromToSquares fromSquare pawnForwardAndCaptureMoves
 
 pawnForwardMovesBitboard :: Bitboard -> Position -> Bitboard
@@ -218,20 +218,20 @@ isCheck !position !colour = isSquareAttackedBy position (kingSquare position col
 magicIndexForRook :: Square -> Bitboard -> Int
 {-# INLINE magicIndexForRook #-}
 magicIndexForRook !pieceSquare !allPieceBitboard = fromIntegral (shiftR rawIndex shiftMagic) :: Int
-    where numberMagic = magicNumber magicRookVars pieceSquare
-          shiftMagic = magicNumberShifts magicRookVars pieceSquare
-          maskMagic = occupancyMask magicRookVars pieceSquare
-          occupancy = (.&.) allPieceBitboard maskMagic
-          rawIndex = fromIntegral(occupancy * numberMagic) :: Word
+    where !numberMagic = magicNumber magicRookVars pieceSquare
+          !shiftMagic = magicNumberShifts magicRookVars pieceSquare
+          !maskMagic = occupancyMask magicRookVars pieceSquare
+          !occupancy = (.&.) allPieceBitboard maskMagic
+          !rawIndex = fromIntegral(occupancy * numberMagic) :: Word
 
 magicIndexForBishop :: Square -> Bitboard -> Int
 {-# INLINE magicIndexForBishop #-}
 magicIndexForBishop !pieceSquare !allPieceBitboard = fromIntegral (shiftR rawIndex shiftMagic) :: Int
-    where numberMagic = magicNumber magicBishopVars pieceSquare
-          shiftMagic = magicNumberShifts magicBishopVars pieceSquare
-          maskMagic = occupancyMask magicBishopVars pieceSquare
-          occupancy = (.&.) allPieceBitboard maskMagic
-          rawIndex = fromIntegral(occupancy * numberMagic) :: Word
+    where !numberMagic = magicNumber magicBishopVars pieceSquare
+          !shiftMagic = magicNumberShifts magicBishopVars pieceSquare
+          !maskMagic = occupancyMask magicBishopVars pieceSquare
+          !occupancy = (.&.) allPieceBitboard maskMagic
+          !rawIndex = fromIntegral(occupancy * numberMagic) :: Word
 
 rookMovePiecesBitboard :: Position -> Mover -> Bitboard
 {-# INLINE rookMovePiecesBitboard #-}
@@ -277,13 +277,13 @@ isSquareAttackedBy :: Position -> Square -> Mover -> Bool
 {-# INLINE isSquareAttackedBy #-}
 isSquareAttackedBy !position !attackedSquare !attacker =
   attackedByRook || attackedByBishop || attackedByKing || attackedByPawn || attackedByKnight
-  where allPieces = allPiecesBitboard position
-        rooks = rookMovePiecesBitboard position attacker
-        bishops = bishopMovePiecesBitboard position attacker
-        knights = (if attacker == White then whiteKnightBitboard else blackKnightBitboard) position
-        pawnAttacks = pawnMovesCaptureOfColour (switchSide attacker) attackedSquare
-        pawns = (if attacker == White then whitePawnBitboard else blackPawnBitboard) position
-        king = (if attacker == White then whiteKingBitboard else blackKingBitboard) position
+  where !allPieces = allPiecesBitboard position
+        !rooks = rookMovePiecesBitboard position attacker
+        !bishops = bishopMovePiecesBitboard position attacker
+        !knights = (if attacker == White then whiteKnightBitboard else blackKnightBitboard) position
+        !pawnAttacks = pawnMovesCaptureOfColour (switchSide attacker) attackedSquare
+        !pawns = (if attacker == White then whitePawnBitboard else blackPawnBitboard) position
+        !king = (if attacker == White then whiteKingBitboard else blackKingBitboard) position
         attackedByPawn = (pawns /= 0 && isSquareAttackedByAnyPawn pawns pawnAttacks attackedSquare attacker)
         attackedByKnight = (knights /= 0 && isSquareAttackedByAnyKnight knights attackedSquare attacker)
         attackedByRook = (rooks /= 0 && isSquareAttackedByAnyRook allPieces rooks attackedSquare)
@@ -294,6 +294,6 @@ moves :: Position -> MoveList
 {-# INLINE moves #-}
 moves !position =
     par moves1 (moves1 ++ moves2)
-    where moves1 = generatePawnMoves position ++ generateBishopMoves position ++ generateCastleMoves position
-          moves2 = generateKnightMoves position ++ generateRookMoves position ++ generateKingMoves position
+    where moves1 = generatePawnMoves position ++ generateKingMoves position ++ generateKnightMoves position
+          moves2 = generateRookMoves position ++ generateBishopMoves position ++ generateCastleMoves position
 

@@ -1,6 +1,6 @@
 module Alias where
     
-import qualified Data.Vector.Storable as V
+import qualified Data.Vector.Unboxed as V
 import Data.Word
 
 type Square = Int
