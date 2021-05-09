@@ -12,7 +12,6 @@ import Util.Bitboards
 import Util.MagicBitboards
 import Util.Utils
 import Search.MoveConstants
-import Data.Array.IArray
 import Control.Parallel
 import Control.Monad.Par
 
@@ -58,7 +57,7 @@ recurMovesFromToSquaresBitboard :: Square -> Bitboard -> MoveList -> MoveList
 recurMovesFromToSquaresBitboard _ 0 !result = result
 recurMovesFromToSquaresBitboard !fromSquare !toSquares !result = 
     recurMovesFromToSquaresBitboard fromSquare (xor toSquares (bit square)) ((.|.) fromSquare square : result)
-    where square = countTrailingZeros toSquares
+    where !square = countTrailingZeros toSquares
 
 generateKnightMoves :: Position -> MoveList
 {-# INLINE generateKnightMoves #-}
@@ -171,7 +170,7 @@ enPassantCaptureRank Black = rank3Bits
 pawnForwardAndCaptureMovesBitboard :: Square -> (Int -> Bitboard) -> Bitboard -> Position -> Bitboard
 {-# INLINE pawnForwardAndCaptureMovesBitboard #-}
 pawnForwardAndCaptureMovesBitboard !fromSquare !capturePawnMoves !nonCaptures !position = (.|.) nonCaptures captures
-  where eps = enPassantSquare position
+  where !eps = enPassantSquare position
         !captures = if eps /= enPassantNotAvailable && (.&.) (bit eps) (enPassantCaptureRank (mover position)) /= 0
                         then pawnCapturesPlusEnPassantSquare capturePawnMoves fromSquare position
                         else pawnCaptures capturePawnMoves fromSquare (enemyBitboard position)
@@ -195,11 +194,11 @@ generateCastleMoves !position = if mover position == White
          [(.|.) (fromSquareMask 3) 5 :: Move | (whiteQueenCastleAvailable position) && (.&.) allPieces emptyCastleSquaresWhiteQueen == 0 && not (anySquaresInBitboardAttacked position Black noCheckCastleSquaresWhiteQueen)]
     else [(.|.) (fromSquareMask 59) 57 :: Move | (blackKingCastleAvailable position) && (.&.) allPieces emptyCastleSquaresBlackKing == 0 && not (anySquaresInBitboardAttacked position White noCheckCastleSquaresBlackKing)] ++
          [(.|.) (fromSquareMask 59) 61 :: Move | (blackQueenCastleAvailable position) && (.&.) allPieces emptyCastleSquaresBlackQueen == 0 && not (anySquaresInBitboardAttacked position White noCheckCastleSquaresBlackQueen)]
-    where allPieces = allPiecesBitboard position
+    where !allPieces = allPiecesBitboard position
 
 anySquaresInBitboardAttacked :: Position -> Mover -> Bitboard -> Bool
 {-# INLINE anySquaresInBitboardAttacked #-}
-anySquaresInBitboardAttacked position attacker bitboard = any (\x -> isSquareAttackedBy position x attacker) bitRefs where !bitRefs = bitRefList bitboard
+anySquaresInBitboardAttacked !position !attacker bitboard = any (\x -> isSquareAttackedBy position x attacker) bitRefs where !bitRefs = bitRefList bitboard
 
 pawnMovesCaptureOfColour :: Mover -> Int -> Bitboard
 {-# INLINE pawnMovesCaptureOfColour #-}

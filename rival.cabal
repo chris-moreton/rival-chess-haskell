@@ -85,6 +85,7 @@ test-suite rival-test
     -O1
     -threaded
     -rtsopts
+    -fllvm
     -with-rtsopts=-N
   build-depends:
       base >=4.7 && <5

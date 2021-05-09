@@ -47,9 +47,9 @@ makeMove !position !move =
     if isSimpleMove position move from to piece
         then makeSimpleMove position move from piece
         else makeMoveMain position move
-    where from = fromSquarePart move
-          to = toSquarePart move
-          piece = movingPiece position from
+    where !from = fromSquarePart move
+          !to = toSquarePart move
+          !piece = movingPiece position from
 
 
 

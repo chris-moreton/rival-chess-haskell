@@ -4,6 +4,11 @@ $lines = file("MagicMovesRook.hs");
 
 $count = 0;
 foreach ($lines as $line) {
+    for ($i=0; $i<64; $i++) {
+        $sl = $i << 16;
+        print "fromSquareMask $i = $sl" . PHP_EOL;
+    }
+    exit;
 	if (strpos($line, "V.fromList") !== false) {
         $leftBracket = strpos($line, "[");
         $rightBracket = strpos($line, "]");

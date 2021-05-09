@@ -8,9 +8,6 @@ import Data.Bits
 import Util.Utils
 import Types
 import Alias
-import Data.Array.IArray
-import GHC.Compact
-import Util.MagicMovesBishop
 
 bitString :: Bitboard -> String
 bitString bitboard = recurBitString bitboard 63 ""
