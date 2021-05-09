@@ -248,6 +248,6 @@ isSquareAttackedBy !position !attackedSquare !attacker =
 moves :: Position -> MoveList
 moves !position =
     par moves1 (moves1 ++ moves2)
-    where moves1 = generatePawnMoves position ++ generateKingMoves position ++ generateKnightMoves position
-          moves2 = generateRookMoves position ++ generateBishopMoves position ++ generateCastleMoves position
+    where moves1 = generatePawnMoves position ++ generateCastleMoves position ++ generateKnightMoves position
+          moves2 = generateRookMoves position ++ generateBishopMoves position ++ generateKingMoves position 
 

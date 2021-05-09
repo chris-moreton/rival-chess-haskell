@@ -13,25 +13,21 @@ import Util.Bitboards
 import Search.MoveConstants
 
 removePieceFromBitboard :: Square -> Bitboard -> Bitboard
-{-# INLINE removePieceFromBitboard #-}
 removePieceFromBitboard !square = (.&.) (complement (bit square))
 
 moveWhiteRookWhenCastling :: Square -> Square -> Bitboard -> Bitboard -> Bitboard
-{-# INLINE moveWhiteRookWhenCastling #-}
 moveWhiteRookWhenCastling !from !to !kingBoard !rookBoard
   | from == e1Bit && to == g1Bit && (testBit kingBoard e1Bit) = movePieceWithinBitboard h1Bit f1Bit rookBoard
   | from == e1Bit && to == c1Bit && (testBit kingBoard e1Bit) = movePieceWithinBitboard a1Bit d1Bit rookBoard
   | otherwise = rookBoard
 
 moveBlackRookWhenCastling :: Square -> Square -> Bitboard -> Bitboard -> Bitboard
-{-# INLINE moveBlackRookWhenCastling #-}
 moveBlackRookWhenCastling !from !to !kingBoard !rookBoard
   | from == e8Bit && to == g8Bit && (testBit kingBoard e8Bit) = movePieceWithinBitboard h8Bit f8Bit rookBoard
   | from == e8Bit && to == c8Bit && (testBit kingBoard e8Bit) = movePieceWithinBitboard a8Bit d8Bit rookBoard
   | otherwise = rookBoard
 
 enPassantCapturedPieceSquare :: Square -> Square
-{-# INLINE enPassantCapturedPieceSquare #-}
 enPassantCapturedPieceSquare 16 = 24
 enPassantCapturedPieceSquare 17 = 25
 enPassantCapturedPieceSquare 18 = 26
