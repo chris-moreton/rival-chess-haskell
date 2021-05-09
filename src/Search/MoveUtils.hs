@@ -50,27 +50,22 @@ enPassantCapturedPieceSquare 46 = 38
 enPassantCapturedPieceSquare 47 = 39
 
 removePawnWhenEnPassant :: Bitboard -> Bitboard -> Square -> Square -> Bitboard
-{-# INLINE removePawnWhenEnPassant #-}
 removePawnWhenEnPassant !attackerBb !defenderBb !to !enPassantSquare
   | enPassantSquare == to && testBit attackerBb to = removePieceFromBitboard (enPassantCapturedPieceSquare to) defenderBb
   | otherwise = defenderBb
 
 removePawnIfPromotion :: Bitboard -> Bitboard
-{-# INLINE removePawnIfPromotion #-}
 removePawnIfPromotion !bb = bb .&. 0b0000000011111111111111111111111111111111111111111111111100000000
 
 isPromotionSquare :: Square -> Bool
-{-# INLINE isPromotionSquare #-}
 isPromotionSquare !sq = testBit promotionSquares sq
 
 createIfPromotion :: Bool -> Bitboard -> Bitboard -> Square -> Square -> Bitboard
-{-# INLINE createIfPromotion #-}
 createIfPromotion !isPromotionPiece !pawnBitboard !pieceBitboard !fromSquare !toSquare
   | isPromotionPiece && isPromotionSquare toSquare && testBit pawnBitboard fromSquare = pieceBitboard .|. bit toSquare
   | otherwise = pieceBitboard
 
 movePieceWithinBitboard :: Square -> Square -> Bitboard -> Bitboard
-{-# INLINE movePieceWithinBitboard #-}
 movePieceWithinBitboard !from !to !bb
   | testBit bb from = (.|.) (clearBit bb from) (bit to)
   | otherwise = clearBit bb to
