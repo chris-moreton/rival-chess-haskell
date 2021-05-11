@@ -16,24 +16,33 @@ import Search.MoveUtils
 import Search.MakeComplexMove
 
 isPotentialFirstKingMove :: Position -> Square -> Bool
-isPotentialFirstKingMove !position from = from == e1Bit || from == e8Bit
+isPotentialFirstKingMove !position !from = from == e1Bit || from == e8Bit
 
 isComplexPawnMove :: Position -> Square -> Square -> Bool
-isComplexPawnMove !position from to = not (abs (from - to) `mod` 8 == 0) || testBit promotionSquares to
+isComplexPawnMove !position !from !to = not (abs (from - to) `mod` 8 == 0) || testBit promotionSquares to
 
 isSimpleCapture :: Position -> Square -> Bool
-isSimpleCapture !position to = testBit (allPiecesBitboard position) to
+isSimpleCapture !position !to = testBit (allPiecesBitboard position) to
 
 isSimpleMove :: Position -> Move -> Square -> Square -> Piece -> Bool
-isSimpleMove !position move from to piece = not (isSimpleCapture position to) && not (piece == Pawn && isComplexPawnMove position from to) && not (piece == King && isPotentialFirstKingMove position from)
+isSimpleMove !position !move !from !to !piece = not (isSimpleCapture position to) && not (piece == Pawn && isComplexPawnMove position from to) && not (piece == King && isPotentialFirstKingMove position from)
 
-movingPiece :: Position -> Square -> Piece
-movingPiece position from
-    | testBit (whitePawnBitboard position .|. blackPawnBitboard position) from = Pawn
-    | testBit (whiteKnightBitboard position .|. blackKnightBitboard position) from = Knight
-    | testBit (whiteBishopBitboard position .|. blackBishopBitboard position) from = Bishop
-    | testBit (whiteRookBitboard position .|. blackRookBitboard position) from = Rook
-    | testBit (whiteQueenBitboard position .|. blackQueenBitboard position) from = Queen
+movingWhitePiece :: Position -> Square -> Piece
+movingWhitePiece position from
+    | testBit (whitePawnBitboard position) from = Pawn
+    | testBit (whiteKnightBitboard position) from = Knight
+    | testBit (whiteBishopBitboard position) from = Bishop
+    | testBit (whiteRookBitboard position) from = Rook
+    | testBit (whiteQueenBitboard position) from = Queen
+    | otherwise = King
+
+movingBlackPiece :: Position -> Square -> Piece
+movingBlackPiece position from
+    | testBit (blackPawnBitboard position) from = Pawn
+    | testBit (blackKnightBitboard position) from = Knight
+    | testBit (blackBishopBitboard position) from = Bishop
+    | testBit (blackRookBitboard position) from = Rook
+    | testBit (blackQueenBitboard position) from = Queen
     | otherwise = King
 
 makeMove :: Position -> Move -> Position
@@ -43,7 +52,7 @@ makeMove !position !move =
         else makeMoveMain position move
     where !from = fromSquarePart move
           !to = toSquarePart move
-          !piece = movingPiece position from
+          !piece = if (mover position == White) then movingWhitePiece position from else movingBlackPiece position from
 
 
 

@@ -40,8 +40,8 @@ recurBitRefList _ 0 !result = result
 recurBitRefList !bitboard 1 !result = (countTrailingZeros bitboard) : result
 recurBitRefList !bitboard !popcount !result = recurBitRefList (xor bitboard (bit square)) (popcount - 1) (square : result) where square = countTrailingZeros bitboard
 
-allBitsExceptFriendlyPieces :: Position -> Bitboard
-allBitsExceptFriendlyPieces !position = complement (if mover position == White then whitePiecesBitboard position else blackPiecesBitboard position)
+-- allBitsExceptFriendlyPieces :: Position -> Bitboard
+-- allBitsExceptFriendlyPieces !position = complement (if mover position == White then whitePiecesBitboard position else blackPiecesBitboard position)
 
 movesFromToSquaresBitboard :: Square -> Bitboard -> MoveList
 movesFromToSquaresBitboard !fromSquare !toSquares = recurMovesFromToSquaresBitboard (shiftL fromSquare 16) toSquares []

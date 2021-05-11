@@ -27,6 +27,7 @@ data Position = Position {
   , allPiecesBitboard :: {-# UNPACK #-} !Bitboard
   , whitePiecesBitboard :: {-# UNPACK #-} !Bitboard
   , blackPiecesBitboard :: {-# UNPACK #-} !Bitboard
+  , allBitsExceptFriendlyPieces :: {-# UNPACK #-} !Bitboard
   , mover :: !Mover
   , enPassantSquare :: {-# UNPACK #-} !Square
   , whiteKingCastleAvailable  :: !Bool

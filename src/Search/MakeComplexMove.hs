@@ -32,6 +32,7 @@ makeMoveMain !position !move =
         , allPiecesBitboard = wpb .|. bpb
         , whitePiecesBitboard = wpb
         , blackPiecesBitboard = bpb
+        , allBitsExceptFriendlyPieces = complement (if m == White then bpb else wpb)
         , mover = if m == White then Black else White
         , enPassantSquare = enPassantNotAvailable
         , whiteKingCastleAvailable = whiteKingCastleAvailable position && from /= e1Bit && from /= h1Bit && to /= h1Bit
