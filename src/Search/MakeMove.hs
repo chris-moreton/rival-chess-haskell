@@ -28,7 +28,7 @@ isSimpleMove :: Position -> Move -> Square -> Square -> Piece -> Bool
 isSimpleMove !position !move !from !to !piece = not (isSimpleCapture position to) && not (piece == Pawn && isComplexPawnMove position from to) && not (piece == King && isPotentialFirstKingMove position from)
 
 movingWhitePiece :: Position -> Square -> Piece
-movingWhitePiece position from
+movingWhitePiece !position !from
     | testBit (whitePawnBitboard position) from = Pawn
     | testBit (whiteKnightBitboard position) from = Knight
     | testBit (whiteBishopBitboard position) from = Bishop
@@ -37,7 +37,7 @@ movingWhitePiece position from
     | otherwise = King
 
 movingBlackPiece :: Position -> Square -> Piece
-movingBlackPiece position from
+movingBlackPiece !position !from
     | testBit (blackPawnBitboard position) from = Pawn
     | testBit (blackKnightBitboard position) from = Knight
     | testBit (blackBishopBitboard position) from = Bishop
