@@ -37,7 +37,7 @@ bitRefList !bitboard = recurBitRefList bitboard (popCount bitboard) []
 
 recurBitRefList :: Bitboard -> Int -> [Square] -> [Square]
 recurBitRefList _ 0 !result = result
-recurBitRefList !bitboard 1 !result = (countTrailingZeros bitboard) : result
+recurBitRefList !bitboard 1 !result = countTrailingZeros bitboard : result
 recurBitRefList !bitboard !popcount !result = recurBitRefList (xor bitboard (bit square)) (popcount - 1) (square : result) where square = countTrailingZeros bitboard
 
 allBitsExceptFriendlyPieces :: Position -> Bitboard
@@ -82,10 +82,9 @@ generateSliderMoves !position !piece = recurGenerateSliderMoves fromSquares posi
 
 recurGenerateSliderMoves :: [Square] -> Position -> MagicVars -> MoveList -> MoveList
 recurGenerateSliderMoves [] _ _ !result = result
-recurGenerateSliderMoves !fromSquares !position !magicVars !result =
-  recurGenerateSliderMoves (tail fromSquares) position magicVars (result ++ thisResult)
-    where !fromSquare = head fromSquares
-          !numberMagic = magicNumber magicVars fromSquare
+recurGenerateSliderMoves (fromSquare:fromSquares) !position !magicVars !result =
+  recurGenerateSliderMoves fromSquares position magicVars (result ++ thisResult)
+    where !numberMagic = magicNumber magicVars fromSquare
           !shiftMagic = magicNumberShifts magicVars fromSquare
           !maskMagic = occupancyMask magicVars fromSquare
           !occupancy = (.&.) (allPiecesBitboard position) maskMagic
@@ -158,7 +157,8 @@ pawnCaptures :: (Int -> Bitboard) -> Square -> Bitboard -> Bitboard
 pawnCaptures !captureMask !square = (.&.) (captureMask square)
 
 potentialPawnJumpMoves :: Bitboard -> Position -> Bitboard
-potentialPawnJumpMoves !bb !position = if mover position == White then (.&.) (bb `shiftL` 8) rank4Bits else (.&.) (bb `shiftR` 8) rank5Bits
+potentialPawnJumpMoves !bb Position{mover=White} = (.&.) (bb `shiftL` 8) rank4Bits
+potentialPawnJumpMoves !bb Position{mover=Black} = (.&.) (bb `shiftR` 8) rank5Bits
 
 generateCastleMoves :: Position -> MoveList
 generateCastleMoves !position = if mover position == White
@@ -176,12 +176,11 @@ pawnMovesCaptureOfColour White = whitePawnMovesCapture
 pawnMovesCaptureOfColour Black = blackPawnMovesCapture
 
 kingSquare :: Position -> Mover -> Square
-kingSquare !position !colour = if colour == White
-    then countTrailingZeros (whiteKingBitboard position)
-    else countTrailingZeros (blackKingBitboard position)
+kingSquare !position White = countTrailingZeros (whiteKingBitboard position)
+kingSquare !position Black = countTrailingZeros (blackKingBitboard position)
 
 isCheck :: Position -> Mover -> Bool
-isCheck !position !colour = isSquareAttackedBy position (kingSquare position colour) (if colour == White then Black else White)
+isCheck !position !colour = isSquareAttackedBy position (kingSquare position colour) (switchSide colour)
 
 magicIndexForRook :: Square -> Bitboard -> Int
 magicIndexForRook !pieceSquare !allPieceBitboard = fromIntegral (shiftR rawIndex shiftMagic) :: Int
