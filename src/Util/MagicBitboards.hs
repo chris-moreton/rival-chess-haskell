@@ -21,6 +21,7 @@ data MagicVars = MagicVars {
     , magicMoves :: Int -> Int -> Bitboard
 }
 
+magicRookVars :: MagicVars
 magicRookVars = MagicVars {
       occupancyMask = occupancyMaskRook
     , magicNumber = magicNumberRook
@@ -28,6 +29,7 @@ magicRookVars = MagicVars {
     , magicMoves = magicMovesRook
   }
 
+magicBishopVars :: MagicVars
 magicBishopVars = MagicVars {
       occupancyMask = occupancyMaskBishop
     , magicNumber = magicNumberBishop

@@ -1,7 +1,5 @@
 module Util.MagicMovesBishop where
 
-{-# OPTIONS_GHC fromIntegral(-Wno-overflowed-literals #-}
-
 import Types
 import Alias
 import qualified Data.Vector.Unboxed as V

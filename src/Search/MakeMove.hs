@@ -19,10 +19,10 @@ isPotentialFirstKingMove :: Position -> Square -> Bool
 isPotentialFirstKingMove !position from = from == e1Bit || from == e8Bit
 
 isComplexPawnMove :: Position -> Square -> Square -> Bool
-isComplexPawnMove !position from to = not (abs (from - to) `mod` 8 == 0) || testBit promotionSquares to
+isComplexPawnMove !position from to = (abs (from - to) `mod` 8) /= 0 || testBit promotionSquares to
 
 isSimpleCapture :: Position -> Square -> Bool
-isSimpleCapture !position to = testBit (allPiecesBitboard position) to
+isSimpleCapture !position = testBit (allPiecesBitboard position)
 
 isSimpleMove :: Position -> Move -> Square -> Square -> Piece -> Bool
 isSimpleMove !position move from to piece = not (isSimpleCapture position to) && not (piece == Pawn && isComplexPawnMove position from to) && not (piece == King && isPotentialFirstKingMove position from)
@@ -37,7 +37,7 @@ movingPiece position from
     | otherwise = King
 
 makeMove :: Position -> Move -> Position
-makeMove !position !move = 
+makeMove !position !move =
     if isSimpleMove position move from to piece
         then makeSimpleMove position move from piece
         else makeMoveMain position move
