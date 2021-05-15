@@ -58,12 +58,6 @@ generateKingMoves !position =
     movesFromToSquaresBitboard kingSquare ((.&.) (kingMovesBitboards kingSquare) (allBitsExceptFriendlyPieces position))
         where !kingSquare = countTrailingZeros (bitboardForMover position King)
 
-generateBishopMoves :: Position -> MoveList
-generateBishopMoves !position = generateSliderMoves position Bishop
-
-generateRookMoves :: Position -> MoveList
-generateRookMoves !position = generateSliderMoves position Rook
-
 generateSliderMoves :: Position -> Piece -> MoveList
 generateSliderMoves !position !piece = recurGenerateSliderMoves bitboard position magicVars []
     where !magicVars = if piece == Bishop then magicBishopVars else magicRookVars
@@ -114,7 +108,7 @@ generatePawnMoves !position
 recurGenerateWhitePawnMoves :: Bitboard -> Position -> Bitboard -> Bitboard -> MoveList -> MoveList
 recurGenerateWhitePawnMoves 0 _ _ _ !result = result
 recurGenerateWhitePawnMoves !fromSquares !position !emptySquares !moverPawns !result =
-  recurGenerateWhitePawnMoves (xor fromSquares (bit fromSquare)) position emptySquares moverPawns (result ++ thisResult)
+  recurGenerateWhitePawnMoves (clearBit fromSquares fromSquare) position emptySquares moverPawns (result ++ thisResult)
   where !fromSquare = countTrailingZeros fromSquares
         !pawnForwardAndCaptureMoves = pawnForwardAndCaptureMovesBitboard fromSquare whitePawnMovesCapture (pawnForwardMovesBitboard ((.&.) (whitePawnMovesForward fromSquare) emptySquares) position) position
         !thisResult = generatePawnMovesFromToSquares fromSquare pawnForwardAndCaptureMoves
@@ -247,5 +241,5 @@ moves :: Position -> MoveList
 moves !position =
     par moves1 (moves1 ++ moves2)
     where moves1 = generatePawnMoves position ++ generateCastleMoves position ++ generateKnightMoves position
-          moves2 = generateRookMoves position ++ generateBishopMoves position ++ generateKingMoves position 
+          moves2 = generateSliderMoves position Rook ++ generateSliderMoves position Bishop ++ generateKingMoves position 
 
