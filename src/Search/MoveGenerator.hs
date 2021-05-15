@@ -32,6 +32,12 @@ bitboardForColour !pieceBitboards Black Knight = blackKnightBitboard pieceBitboa
 bitboardForColour !pieceBitboards Black Bishop = blackBishopBitboard pieceBitboards
 bitboardForColour !pieceBitboards Black Pawn = blackPawnBitboard pieceBitboards
 
+sliderBitboardForColour :: Position -> Mover -> Piece -> Bitboard
+sliderBitboardForColour !pieceBitboards White Rook = whiteRookBitboard pieceBitboards .|. whiteQueenBitboard pieceBitboards
+sliderBitboardForColour !pieceBitboards White Bishop = whiteBishopBitboard pieceBitboards .|. whiteQueenBitboard pieceBitboards
+sliderBitboardForColour !pieceBitboards Black Rook = blackRookBitboard pieceBitboards .|. blackQueenBitboard pieceBitboards
+sliderBitboardForColour !pieceBitboards Black Bishop = blackBishopBitboard pieceBitboards .|. blackQueenBitboard pieceBitboards
+
 allBitsExceptFriendlyPieces :: Position -> Bitboard
 allBitsExceptFriendlyPieces !position = complement (if mover position == White then whitePiecesBitboard position else blackPiecesBitboard position)
 
@@ -62,7 +68,7 @@ generateSliderMoves :: Position -> Piece -> MoveList
 generateSliderMoves !position !piece = recurGenerateSliderMoves bitboard position magicVars []
     where !magicVars = if piece == Bishop then magicBishopVars else magicRookVars
           !thisMover = mover position
-          !bitboard = bitboardForColour position thisMover piece .|. bitboardForColour position thisMover Queen
+          !bitboard = sliderBitboardForColour position thisMover piece
 
 recurGenerateSliderMoves :: Bitboard -> Position -> MagicVars -> MoveList -> MoveList
 recurGenerateSliderMoves 0 _ _ !result = result
