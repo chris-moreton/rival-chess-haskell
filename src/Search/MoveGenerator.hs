@@ -151,7 +151,8 @@ kingSquare !position White = countTrailingZeros (whiteKingBitboard position)
 kingSquare !position Black = countTrailingZeros (blackKingBitboard position)
 
 isCheck :: Position -> Mover -> Bool
-isCheck !position !colour = isSquareAttackedBy position (kingSquare position colour) (switchSide colour)
+isCheck !position White = isSquareAttackedBy position (kingSquare position White) Black
+isCheck !position Black = isSquareAttackedBy position (kingSquare position Black) White
 
 magicIndexForRook :: Square -> Bitboard -> Int
 magicIndexForRook !pieceSquare !allPieceBitboard = fromIntegral (shiftR rawIndex shiftMagic) :: Int
