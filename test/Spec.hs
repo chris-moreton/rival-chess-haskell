@@ -145,12 +145,6 @@ main = hspec $ do
     bitboardForMover position Bishop `shouldBe` blackBishopBitboard bitboards
     bitboardForMover position Bishop `shouldNotBe` whiteBishopBitboard bitboards
 
-  describe "bitRefList" $
-    it "Gets a list of set bits in a bitboard" $ do
-    let position = getPosition "n5k1/6n1/1n2q2p/1p5P/1P3RP1/2PK1B2/1r2N3/8 b kQKq g3 5 56"
-    let bitboards = position
-    sort (bitRefList (blackKnightBitboard bitboards)) `shouldBe` [46,49,63]
-
   describe "bitString" $
     it "Converts a bitboard to a string of 1s and 0s" $ do
     bitString 15 `shouldBe` "0000000000000000000000000000000000000000000000000000000000001111"
@@ -683,8 +677,6 @@ main = hspec $ do
 
     (bitRefFromAlgebraicSquareRef "f8") `shouldBe` 58
     isSquareAttackedBy position (bitRefFromAlgebraicSquareRef "f8") White `shouldBe` False
-    sort (bitRefList noCheckCastleSquaresBlackKing) `shouldBe` [58,59]
-    sort (bitRefList emptyCastleSquaresBlackKing) `shouldBe` [57,58]
     anySquaresInBitboardAttacked position White noCheckCastleSquaresBlackKing `shouldBe` False
 
     sort (map algebraicMoveFromMove ((generateCastleMoves position))) `shouldBe` ["e8g8"]
