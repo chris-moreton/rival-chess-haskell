@@ -32,6 +32,14 @@ bitboardForColour !pieceBitboards Black Knight = blackKnightBitboard pieceBitboa
 bitboardForColour !pieceBitboards Black Bishop = blackBishopBitboard pieceBitboards
 bitboardForColour !pieceBitboards Black Pawn = blackPawnBitboard pieceBitboards
 
+bitRefList :: Bitboard -> [Square]
+bitRefList !bitboard = recurBitRefList bitboard (popCount bitboard) []
+
+recurBitRefList :: Bitboard -> Int -> [Square] -> [Square]
+recurBitRefList _ 0 !result = result
+recurBitRefList !bitboard 1 !result = countTrailingZeros bitboard : result
+recurBitRefList !bitboard !popcount !result = recurBitRefList (xor bitboard (bit square)) (popcount - 1) (square : result) where square = countTrailingZeros bitboard
+
 allBitsExceptFriendlyPieces :: Position -> Bitboard
 allBitsExceptFriendlyPieces !position = complement (if mover position == White then whitePiecesBitboard position else blackPiecesBitboard position)
 
