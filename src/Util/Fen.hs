@@ -2,23 +2,29 @@
 
 module Util.Fen where
 
-import Types
-import Alias
+import Types ( Mover(..), Position(..) )
+import Alias ( Move, Bitboard )
 import Search.MoveConstants
+    ( enPassantNotAvailable,
+      promotionBishopMoveMask,
+      promotionFullMoveMask,
+      promotionKnightMoveMask,
+      promotionQueenMoveMask,
+      promotionRookMoveMask )
 
-import Data.List.Split
-import Data.Char
-import Data.Bits
+import Data.List.Split ( splitOn )
+import Data.Char ( ord, chr )
+import Data.Bits ( Bits((.|.), shiftL, shiftR, (.&.)) )
 import qualified Data.Text as T
 
-import Util.Utils
+import Util.Utils ( fromSquareMask, substring )
 
 startPosition :: String
 startPosition = "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1"
 
 fenPart :: String -> Int -> String
 fenPart fen index = splitOn " " fen !! index
-  
+
 fenBoardPart :: String -> String
 fenBoardPart fen = head (splitOn " " fen)
 
@@ -35,7 +41,10 @@ recurRankBits :: String -> Char -> [Int] -> [Int]
 recurRankBits [] _ result = result
 recurRankBits fenRankChars pieceChar result = do
   let c = head fenRankChars
-  let thisResult = if isFileNumber c then take (ord c - 48) (repeat 0) else (if pieceChar == c then [1] else [0])
+  let thisResult
+        | isFileNumber c = replicate (ord c - 48) 0
+        | pieceChar == c = [1]
+        | otherwise = [0]
   recurRankBits (tail fenRankChars) pieceChar (result ++ thisResult)
 
 boardBits :: [String] -> Char -> [Int]
@@ -101,7 +110,7 @@ moveFromAlgebraicMove moveString =
 
 getMover :: String -> Mover
 getMover fen = if fenPart fen 1 == "w" then White else Black
-    
+
 enpassantFenPart :: String -> String
 enpassantFenPart fen = fenPart fen 3
 
@@ -123,7 +132,7 @@ getPosition fen = Position {
   , blackQueenBitboard = bq
   , whiteKingBitboard = wk
   , blackKingBitboard = bk
-  , allPiecesBitboard = wp .|. bp .|. wn .|. bn .|. wb .|. bb .|. wr .|. br .|. wq .|. bq .|. wk .|. bk    
+  , allPiecesBitboard = wp .|. bp .|. wn .|. bn .|. wb .|. bb .|. wr .|. br .|. wq .|. bq .|. wk .|. bk
   , whitePiecesBitboard = wp .|. wn .|. wr .|. wk .|. wq .|. wb
   , blackPiecesBitboard = bp .|. bn .|. br .|. bk .|. bq .|. bb
   , mover = getMover fen

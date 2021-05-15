@@ -5,14 +5,24 @@
 module Search.MakeSimpleMove where
 
 import Types
-import Alias
-import Util.Fen
-import Util.Utils
-import Data.Bits
-import Util.Bitboards
-import Search.MoveConstants
-import Search.MoveUtils
-import Search.MakeComplexMove
+    ( Mover(White, Black),
+      Piece(Queen, Pawn, Knight, Bishop, Rook),
+      Position(whitePawnBitboard, whiteKnightBitboard,
+               whiteBishopBitboard, whiteRookBitboard, whiteKingCastleAvailable,
+               whiteQueenCastleAvailable, whiteQueenBitboard, whiteKingBitboard,
+               whitePiecesBitboard, blackPawnBitboard, blackKnightBitboard,
+               blackBishopBitboard, blackRookBitboard, blackKingCastleAvailable,
+               blackQueenCastleAvailable, blackQueenBitboard, blackKingBitboard,
+               allPiecesBitboard, blackPiecesBitboard, mover, enPassantSquare,
+               halfMoves, moveNumber) )
+import Alias ( Move, Bitboard, Square )
+import Util.Fen ()
+import Util.Utils ( toSquarePart )
+import Data.Bits ( Bits(xor, bit, (.|.)) )
+import Util.Bitboards ( a1Bit, a8Bit, h1Bit, h8Bit )
+import Search.MoveConstants ( enPassantNotAvailable )
+import Search.MoveUtils ( movePieceWithinBitboard )
+import Search.MakeComplexMove ()
 
 makeSimpleMove :: Position -> Move -> Square -> Piece -> Position
 {-# INLINE makeSimpleMove #-}

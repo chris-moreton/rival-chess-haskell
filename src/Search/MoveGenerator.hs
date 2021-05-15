@@ -57,9 +57,8 @@ generateKnightMoves !position = recurKnightMoves position (bitRefList (bitboardF
 
 recurKnightMoves :: Position -> [Square] -> MoveList -> MoveList
 recurKnightMoves _ [] !result = result
-recurKnightMoves !position !fromSquares !result =
-    recurKnightMoves position (tail fromSquares) (result ++ movesFromToSquaresBitboard fromSquare ((.&.) (knightMovesBitboards fromSquare) (allBitsExceptFriendlyPieces position)))
-        where !fromSquare = head fromSquares
+recurKnightMoves !position (fromSquare:fromSquares) !result =
+    recurKnightMoves position fromSquares (result ++ movesFromToSquaresBitboard fromSquare ((.&.) (knightMovesBitboards fromSquare) (allBitsExceptFriendlyPieces position)))
 
 generateKingMoves :: Position -> MoveList
 generateKingMoves !position =
@@ -73,17 +72,15 @@ generateRookMoves :: Position -> MoveList
 generateRookMoves !position = generateSliderMoves position Rook
 
 generateSliderMoves :: Position -> Piece -> MoveList
-generateSliderMoves !position !piece = recurGenerateSliderMoves fromSquares position magicVars []
-    where !bitboards = position
-          !magicVars = if piece == Bishop then magicBishopVars else magicRookVars
+generateSliderMoves !position !piece = recurGenerateSliderMoves bitboard position magicVars []
+    where !magicVars = if piece == Bishop then magicBishopVars else magicRookVars
           !thisMover = mover position
-          !bitboard = bitboardForColour bitboards thisMover piece .|. bitboardForColour bitboards thisMover Queen
-          !fromSquares = bitRefList bitboard
+          !bitboard = bitboardForColour position thisMover piece .|. bitboardForColour position thisMover Queen
 
-recurGenerateSliderMoves :: [Square] -> Position -> MagicVars -> MoveList -> MoveList
-recurGenerateSliderMoves [] _ _ !result = result
-recurGenerateSliderMoves (fromSquare:fromSquares) !position !magicVars !result =
-  recurGenerateSliderMoves fromSquares position magicVars (result ++ thisResult)
+recurGenerateSliderMoves :: Bitboard -> Position -> MagicVars -> MoveList -> MoveList
+recurGenerateSliderMoves 0 _ _ !result = result
+recurGenerateSliderMoves fromSquares !position !magicVars !result =
+  recurGenerateSliderMoves (xor fromSquares (bit fromSquare)) position magicVars (result ++ thisResult)
     where !numberMagic = magicNumber magicVars fromSquare
           !shiftMagic = magicNumberShifts magicVars fromSquare
           !maskMagic = occupancyMask magicVars fromSquare
@@ -91,6 +88,7 @@ recurGenerateSliderMoves (fromSquare:fromSquares) !position !magicVars !result =
           !rawIndex = fromIntegral (occupancy * numberMagic) :: Word
           !toSquaresMagicIndex = fromIntegral(shiftR rawIndex shiftMagic) :: Int
           !toSquaresBitboard = (.&.) (magic magicVars fromSquare toSquaresMagicIndex) (allBitsExceptFriendlyPieces position)
+          !fromSquare = countTrailingZeros fromSquares
           !thisResult = recurGenerateSliderMovesWithToSquares (fromSquareMask fromSquare) toSquaresBitboard []
 
 recurGenerateSliderMovesWithToSquares :: Square -> Bitboard -> MoveList -> MoveList
