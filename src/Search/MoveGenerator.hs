@@ -15,29 +15,6 @@ import Search.MoveConstants
 import Control.Parallel
 import Control.Monad.Par
 
-bitboardForMover :: Position -> Piece -> Bitboard
-bitboardForMover !position = bitboardForColour position (mover position)
-
-bitboardForColour :: Position -> Mover -> Piece -> Bitboard
-bitboardForColour !pieceBitboards White King = whiteKingBitboard pieceBitboards
-bitboardForColour !pieceBitboards White Queen = whiteQueenBitboard pieceBitboards
-bitboardForColour !pieceBitboards White Rook = whiteRookBitboard pieceBitboards
-bitboardForColour !pieceBitboards White Knight = whiteKnightBitboard pieceBitboards
-bitboardForColour !pieceBitboards White Bishop = whiteBishopBitboard pieceBitboards
-bitboardForColour !pieceBitboards White Pawn = whitePawnBitboard pieceBitboards
-bitboardForColour !pieceBitboards Black King = blackKingBitboard pieceBitboards
-bitboardForColour !pieceBitboards Black Queen = blackQueenBitboard pieceBitboards
-bitboardForColour !pieceBitboards Black Rook = blackRookBitboard pieceBitboards
-bitboardForColour !pieceBitboards Black Knight = blackKnightBitboard pieceBitboards
-bitboardForColour !pieceBitboards Black Bishop = blackBishopBitboard pieceBitboards
-bitboardForColour !pieceBitboards Black Pawn = blackPawnBitboard pieceBitboards
-
-sliderBitboardForColour :: Position -> Mover -> Piece -> Bitboard
-sliderBitboardForColour !pieceBitboards White Rook = whiteRookBitboard pieceBitboards .|. whiteQueenBitboard pieceBitboards
-sliderBitboardForColour !pieceBitboards White Bishop = whiteBishopBitboard pieceBitboards .|. whiteQueenBitboard pieceBitboards
-sliderBitboardForColour !pieceBitboards Black Rook = blackRookBitboard pieceBitboards .|. blackQueenBitboard pieceBitboards
-sliderBitboardForColour !pieceBitboards Black Bishop = blackBishopBitboard pieceBitboards .|. blackQueenBitboard pieceBitboards
-
 allBitsExceptFriendlyPieces :: Position -> Bitboard
 allBitsExceptFriendlyPieces !position = complement (if mover position == White then whitePiecesBitboard position else blackPiecesBitboard position)
 
