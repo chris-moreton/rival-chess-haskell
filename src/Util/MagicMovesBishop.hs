@@ -4,6 +4,7 @@ import Types
 import Alias
 import qualified Data.Vector.Unboxed as V
 
+{-# INLINE magicMovesBishop #-}
 magicMovesBishop :: Int -> Int -> Bitboard
 magicMovesBishop 0 0 = fromIntegral(-9205322385119247872) :: Bitboard
 magicMovesBishop 0 1 = 512

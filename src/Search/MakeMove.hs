@@ -40,7 +40,7 @@ makeMove :: Position -> Move -> Position
 makeMove !position !move =
     if isSimpleMove position move from to piece
         then makeSimpleMove position move from piece
-        else makeMoveMain position move
+        else makeComplexMove position move
     where !from = fromSquarePart move
           !to = toSquarePart move
           !piece = movingPiece position from
