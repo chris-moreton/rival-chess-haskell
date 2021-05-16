@@ -14,14 +14,12 @@ import Search.MoveConstants
 import Search.MoveUtils
 
 makeComplexMove :: Position -> Move -> Position
-{-# INLINE makeComplexMove #-}
 makeComplexMove !position !move
     | pp == Pawn = makeMoveWithoutPromotion position move
     | otherwise = makeMoveWithPromotion position move pp
     where pp = promotionPieceFromMove move
     
 makeMoveWithPromotion :: Position -> Move -> Piece -> Position
-{-# INLINE makeMoveWithPromotion #-}
 makeMoveWithPromotion !position !move !promotionPiece =
     Position {
           whitePawnBitboard = wp
@@ -71,7 +69,6 @@ makeMoveWithPromotion !position !move !promotionPiece =
           !bpb = bp .|. bn .|. br .|. bk .|. bq .|. bb
 
 makeMoveWithoutPromotion :: Position -> Move -> Position
-{-# INLINE makeMoveWithoutPromotion #-}
 makeMoveWithoutPromotion !position !move =
     Position {
           whitePawnBitboard = wp

@@ -19,7 +19,6 @@ import Control.Monad.Par
 allBitsExceptFriendlyPieces :: Position -> Bitboard
 allBitsExceptFriendlyPieces !position = complement (if mover position == White then whitePiecesBitboard position else blackPiecesBitboard position)
 
-{-# INLINABLE movesFromToSquaresBitboard #-}
 movesFromToSquaresBitboard :: Square -> Bitboard -> MoveList
 movesFromToSquaresBitboard !fromSquare !toSquares = recurMovesFromToSquaresBitboard (shiftL fromSquare 16) toSquares []
 
@@ -29,7 +28,6 @@ recurMovesFromToSquaresBitboard !fromSquare !toSquares !result =
     recurMovesFromToSquaresBitboard fromSquare (clearBit toSquares square) ((.|.) fromSquare square : result)
     where !square = countTrailingZeros toSquares
 
-{-# INLINABLE generateKnightMoves #-}
 generateKnightMoves :: Position -> MoveList
 generateKnightMoves !position = recurKnightMoves position (bitboardForMover position Knight) []
 
@@ -39,20 +37,17 @@ recurKnightMoves !position fromSquares !result =
     recurKnightMoves position (clearBit fromSquares fromSquare) (result ++ movesFromToSquaresBitboard fromSquare ((.&.) (knightMovesBitboards fromSquare) (allBitsExceptFriendlyPieces position)))
     where !fromSquare = countTrailingZeros fromSquares
 
-{-# INLINABLE generateKingMoves #-}
 generateKingMoves :: Position -> MoveList
 generateKingMoves !position =
     movesFromToSquaresBitboard kingSquare ((.&.) (kingMovesBitboards kingSquare) (allBitsExceptFriendlyPieces position))
-        where !kingSquare = countTrailingZeros (bitboardForMover position King)
+    where !kingSquare = countTrailingZeros (bitboardForMover position King)
 
-{-# INLINABLE generateSliderMoves #-}
 generateSliderMoves :: Position -> Piece -> MoveList
 generateSliderMoves !position !piece = recurGenerateSliderMoves bitboard position magicVars []
     where !magicVars = if piece == Bishop then magicBishopVars else magicRookVars
           !thisMover = mover position
           !bitboard = sliderBitboardForColour position thisMover piece
 
-{-# INLINABLE recurGenerateSliderMoves #-}
 recurGenerateSliderMoves :: Bitboard -> Position -> MagicVars -> MoveList -> MoveList
 recurGenerateSliderMoves 0 _ _ !result = result
 recurGenerateSliderMoves fromSquares !position !magicVars !result =
@@ -67,7 +62,6 @@ recurGenerateSliderMoves fromSquares !position !magicVars !result =
           !fromSquare = countTrailingZeros fromSquares
           !thisResult = recurGenerateSliderMovesWithToSquares (fromSquareMask fromSquare) toSquaresBitboard []
 
-{-# INLINABLE recurGenerateSliderMovesWithToSquares #-}
 recurGenerateSliderMovesWithToSquares :: Square -> Bitboard -> MoveList -> MoveList
 recurGenerateSliderMovesWithToSquares !fromSquare 0 !result = result
 recurGenerateSliderMovesWithToSquares !fromSquare !toSquares !result =
@@ -78,11 +72,9 @@ recurGenerateSliderMovesWithToSquares !fromSquare !toSquares !result =
 promotionMoves :: Move -> MoveList
 promotionMoves !move = [(.|.) move promotionQueenMoveMask, (.|.) move promotionRookMoveMask, (.|.) move promotionBishopMoveMask, (.|.) move promotionKnightMoveMask]
 
-{-# INLINABLE generatePawnMovesFromToSquares #-}
 generatePawnMovesFromToSquares :: Square -> Bitboard -> MoveList
 generatePawnMovesFromToSquares !fromSquare !toSquares = recurGeneratePawnMovesFromToSquares (fromSquareMask fromSquare) toSquares []
 
-{-# INLINABLE recurGeneratePawnMovesFromToSquares #-}
 recurGeneratePawnMovesFromToSquares :: Move -> Bitboard -> MoveList -> MoveList
 recurGeneratePawnMovesFromToSquares _ 0 !result = result
 recurGeneratePawnMovesFromToSquares !mask !toSquares !result = recurGeneratePawnMovesFromToSquares mask (xor toSquares (bit thisToSquare)) newResult
@@ -92,14 +84,12 @@ recurGeneratePawnMovesFromToSquares !mask !toSquares !result = recurGeneratePawn
                         then promotionMoves baseMove ++ result
                         else baseMove : result
 
-{-# INLINABLE generatePawnMoves #-}
 generatePawnMoves :: Position -> MoveList
 generatePawnMoves !position 
     | mover position == White = recurGenerateWhitePawnMoves bitboard position (emptySquaresBitboard position) bitboard []
     | otherwise = recurGenerateBlackPawnMoves bitboard position (emptySquaresBitboard position) bitboard []
     where bitboard = bitboardForMover position Pawn
 
-{-# INLINABLE recurGenerateWhitePawnMoves #-}
 recurGenerateWhitePawnMoves :: Bitboard -> Position -> Bitboard -> Bitboard -> MoveList -> MoveList
 recurGenerateWhitePawnMoves 0 _ _ _ !result = result
 recurGenerateWhitePawnMoves !fromSquares !position !emptySquares !moverPawns !result =
@@ -108,7 +98,6 @@ recurGenerateWhitePawnMoves !fromSquares !position !emptySquares !moverPawns !re
         !pawnForwardAndCaptureMoves = pawnForwardAndCaptureMovesBitboard fromSquare whitePawnMovesCapture (pawnForwardMovesBitboard ((.&.) (whitePawnMovesForward fromSquare) emptySquares) position) position
         !thisResult = generatePawnMovesFromToSquares fromSquare pawnForwardAndCaptureMoves
 
-{-# INLINABLE recurGenerateBlackPawnMoves #-}
 recurGenerateBlackPawnMoves :: Bitboard -> Position -> Bitboard -> Bitboard -> MoveList -> MoveList
 recurGenerateBlackPawnMoves 0 _ _ _ !result = result
 recurGenerateBlackPawnMoves !fromSquares !position !emptySquares !moverPawns !result =
@@ -121,7 +110,7 @@ recurGenerateBlackPawnMoves !fromSquares !position !emptySquares !moverPawns !re
 pawnForwardMovesBitboard :: Bitboard -> Position -> Bitboard
 pawnForwardMovesBitboard !pawnMoves !position = (.|.) pawnMoves ((.&.) (potentialPawnJumpMoves pawnMoves position) (emptySquaresBitboard position))
 
-{-# INLINABLE enPassantCaptureRank #-}
+{-# INLINE enPassantCaptureRank #-}
 enPassantCaptureRank :: Mover -> Bitboard
 enPassantCaptureRank White = rank6Bits
 enPassantCaptureRank Black = rank3Bits
@@ -134,20 +123,17 @@ pawnForwardAndCaptureMovesBitboard !fromSquare !capturePawnMoves !nonCaptures !p
                         then pawnCapturesPlusEnPassantSquare capturePawnMoves fromSquare position
                         else pawnCaptures capturePawnMoves fromSquare (enemyBitboard position)
 
-{-# INLINABLE pawnCapturesPlusEnPassantSquare #-}
+
 pawnCapturesPlusEnPassantSquare :: (Int -> Bitboard) -> Square -> Position -> Bitboard
 pawnCapturesPlusEnPassantSquare !bs !square !position = pawnCaptures bs square (enemyBitboard position .|. (if eps == enPassantNotAvailable then 0 else bit eps)) where eps = enPassantSquare position
 
-{-# INLINE pawnCaptures #-}
 pawnCaptures :: (Int -> Bitboard) -> Square -> Bitboard -> Bitboard
 pawnCaptures !captureMask !square = (.&.) (captureMask square)
 
-{-# INLINE potentialPawnJumpMoves #-}
 potentialPawnJumpMoves :: Bitboard -> Position -> Bitboard
 potentialPawnJumpMoves !bb Position{mover=White} = (.&.) (bb `shiftL` 8) rank4Bits
 potentialPawnJumpMoves !bb Position{mover=Black} = (.&.) (bb `shiftR` 8) rank5Bits
 
-{-# INLINE generateCastleMoves #-}
 generateCastleMoves :: Position -> MoveList
 generateCastleMoves !position = if mover position == White
     then [(.|.) (fromSquareMask 3) 1 :: Move | whiteKingCastleAvailable position && (.&.) allPieces emptyCastleSquaresWhiteKing == 0 && not (anySquaresInBitboardAttacked position Black noCheckCastleSquaresWhiteKing)] ++
@@ -162,7 +148,6 @@ anySquaresInBitboardAttacked !position !attacker bitboard =
     isSquareAttackedBy position square attacker || anySquaresInBitboardAttacked position attacker (clearBit bitboard square)
         where square = countTrailingZeros bitboard
 
-{-# INLINE pawnMovesCaptureOfColour #-}
 pawnMovesCaptureOfColour :: Mover -> Int -> Bitboard
 pawnMovesCaptureOfColour White = whitePawnMovesCapture 
 pawnMovesCaptureOfColour Black = blackPawnMovesCapture
@@ -172,12 +157,10 @@ kingSquare :: Position -> Mover -> Square
 kingSquare !position White = countTrailingZeros (whiteKingBitboard position)
 kingSquare !position Black = countTrailingZeros (blackKingBitboard position)
 
-{-# INLINE isCheck #-}
 isCheck :: Position -> Mover -> Bool
 isCheck !position White = isSquareAttackedBy position (kingSquare position White) Black
 isCheck !position Black = isSquareAttackedBy position (kingSquare position Black) White
 
-{-# INLINE magicIndexForRook #-}
 magicIndexForRook :: Square -> Bitboard -> Int
 magicIndexForRook !pieceSquare !allPieceBitboard = fromIntegral (shiftR rawIndex shiftMagic) :: Int
     where !numberMagic = magicNumber magicRookVars pieceSquare
@@ -186,7 +169,6 @@ magicIndexForRook !pieceSquare !allPieceBitboard = fromIntegral (shiftR rawIndex
           !occupancy = (.&.) allPieceBitboard maskMagic
           !rawIndex = fromIntegral(occupancy * numberMagic) :: Word
 
-{-# INLINE magicIndexForBishop #-}
 magicIndexForBishop :: Square -> Bitboard -> Int
 magicIndexForBishop !pieceSquare !allPieceBitboard = fromIntegral (shiftR rawIndex shiftMagic) :: Int
     where !numberMagic = magicNumber magicBishopVars pieceSquare
@@ -217,14 +199,12 @@ isSquareAttackedByKing !king !attackedSquare !attacker = (.&.) king (kingMovesBi
 isSquareAttackedByAnyPawn :: Bitboard -> Bitboard -> Square -> Mover -> Bool
 isSquareAttackedByAnyPawn !pawns !pawnAttacks !attackedSquare !attacker = (.&.) pawns pawnAttacks /= 0
 
-{-# INLINE isSquareAttackedByAnyBishop #-}
 isSquareAttackedByAnyBishop :: Bitboard -> Bitboard -> Square -> Bool
 isSquareAttackedByAnyBishop _ 0 _ = False
 isSquareAttackedByAnyBishop !allPieces !attackingBishops !attackedSquare =
     isBishopAttackingSquare attackedSquare bishopSquare allPieces || isSquareAttackedByAnyBishop allPieces (clearBit attackingBishops bishopSquare) attackedSquare
         where bishopSquare = countTrailingZeros attackingBishops
 
-{-# INLINE isSquareAttackedByAnyRook #-}
 isSquareAttackedByAnyRook :: Bitboard -> Bitboard -> Square -> Bool
 isSquareAttackedByAnyRook _ 0 _ = False
 isSquareAttackedByAnyRook !allPieces !attackingRooks !attackedSquare =
@@ -239,7 +219,6 @@ isBishopAttackingSquare !attackedSquare !pieceSquare !allPieceBitboard = testBit
 isRookAttackingSquare :: Square -> Square -> Bitboard -> Bool
 isRookAttackingSquare !attackedSquare !pieceSquare !allPieceBitboard = testBit (magic magicRookVars pieceSquare (magicIndexForRook pieceSquare allPieceBitboard)) attackedSquare
 
-{-# INLINE isSquareAttackedBy #-}
 isSquareAttackedBy :: Position -> Square -> Mover -> Bool
 isSquareAttackedBy !position !attackedSquare !attacker =
   attackedByRook || attackedByBishop || attackedByKing || attackedByPawn || attackedByKnight
@@ -256,7 +235,6 @@ isSquareAttackedBy !position !attackedSquare !attacker =
         attackedByBishop = bishops /= 0 && isSquareAttackedByAnyBishop allPieces bishops attackedSquare
         attackedByKing = isSquareAttackedByKing king attackedSquare attacker
 
-{-# INLINE moves #-}
 moves :: Position -> MoveList
 moves !position = generatePawnMoves position ++ generateCastleMoves position ++ generateKnightMoves position ++ generateSliderMoves position Rook ++ generateSliderMoves position Bishop ++ generateKingMoves position
 
