@@ -24,7 +24,7 @@ movesFromToSquaresBitboard !fromSquare !toSquares = recurMovesFromToSquaresBitbo
 recurMovesFromToSquaresBitboard :: Square -> Bitboard -> MoveList -> MoveList
 recurMovesFromToSquaresBitboard _ 0 !result = result
 recurMovesFromToSquaresBitboard !fromSquare !toSquares !result = 
-    recurMovesFromToSquaresBitboard fromSquare (xor toSquares (bit square)) ((.|.) fromSquare square : result)
+    recurMovesFromToSquaresBitboard fromSquare (clearBit toSquares square) ((.|.) fromSquare square : result)
     where !square = countTrailingZeros toSquares
 
 generateKnightMoves :: Position -> MoveList
@@ -33,7 +33,7 @@ generateKnightMoves !position = recurKnightMoves position (bitboardForMover posi
 recurKnightMoves :: Position -> Bitboard -> MoveList -> MoveList
 recurKnightMoves _ 0 !result = result
 recurKnightMoves !position fromSquares !result =
-    recurKnightMoves position (xor fromSquares (bit fromSquare)) (result ++ movesFromToSquaresBitboard fromSquare ((.&.) (knightMovesBitboards fromSquare) (allBitsExceptFriendlyPieces position)))
+    recurKnightMoves position (clearBit fromSquares fromSquare) (result ++ movesFromToSquaresBitboard fromSquare ((.&.) (knightMovesBitboards fromSquare) (allBitsExceptFriendlyPieces position)))
     where !fromSquare = countTrailingZeros fromSquares
 
 generateKingMoves :: Position -> MoveList
@@ -50,7 +50,7 @@ generateSliderMoves !position !piece = recurGenerateSliderMoves bitboard positio
 recurGenerateSliderMoves :: Bitboard -> Position -> MagicVars -> MoveList -> MoveList
 recurGenerateSliderMoves 0 _ _ !result = result
 recurGenerateSliderMoves fromSquares !position !magicVars !result =
-  recurGenerateSliderMoves (xor fromSquares (bit fromSquare)) position magicVars (result ++ thisResult)
+  recurGenerateSliderMoves (clearBit fromSquares fromSquare) position magicVars (result ++ thisResult)
     where !numberMagic = magicNumber magicVars fromSquare
           !shiftMagic = magicNumberShifts magicVars fromSquare
           !maskMagic = occupancyMask magicVars fromSquare
@@ -99,7 +99,7 @@ recurGenerateWhitePawnMoves !fromSquares !position !emptySquares !moverPawns !re
 recurGenerateBlackPawnMoves :: Bitboard -> Position -> Bitboard -> Bitboard -> MoveList -> MoveList
 recurGenerateBlackPawnMoves 0 _ _ _ !result = result
 recurGenerateBlackPawnMoves !fromSquares !position !emptySquares !moverPawns !result =
-  recurGenerateBlackPawnMoves (xor fromSquares (bit fromSquare)) position emptySquares moverPawns (result ++ thisResult)
+  recurGenerateBlackPawnMoves (clearBit fromSquares fromSquare) position emptySquares moverPawns (result ++ thisResult)
   where !fromSquare = countTrailingZeros fromSquares
         !pawnForwardAndCaptureMoves = pawnForwardAndCaptureMovesBitboard fromSquare blackPawnMovesCapture (pawnForwardMovesBitboard ((.&.) (blackPawnMovesForward fromSquare) emptySquares) position) position
         !thisResult = generatePawnMovesFromToSquares fromSquare pawnForwardAndCaptureMoves
@@ -222,8 +222,5 @@ isSquareAttackedBy !position !attackedSquare !attacker =
         attackedByKing = isSquareAttackedByKing king attackedSquare attacker
 
 moves :: Position -> MoveList
-moves !position =
-    par moves1 (moves1 ++ moves2)
-    where moves1 = generatePawnMoves position ++ generateCastleMoves position ++ generateKnightMoves position
-          moves2 = generateSliderMoves position Rook ++ generateSliderMoves position Bishop ++ generateKingMoves position 
+moves !position = generatePawnMoves position ++ generateCastleMoves position ++ generateKnightMoves position ++ generateSliderMoves position Rook ++ generateSliderMoves position Bishop ++ generateKingMoves position
 
