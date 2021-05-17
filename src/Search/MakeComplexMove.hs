@@ -16,10 +16,51 @@ import Search.MoveUtils
 makeComplexMove :: Position -> Move -> Position
 {-# INLINE makeComplexMove #-}
 makeComplexMove !position !move
-    | pp == Pawn = makeMoveWithoutPromotion position move
-    | otherwise = makeMoveWithPromotion position move pp
-    where pp = promotionPieceFromMove move
-    
+    | pp /= Pawn = makeMoveWithPromotion position move pp
+    | from == e1Bit && (whiteKingCastleAvailable position || whiteQueenCastleAvailable position) = makeWhiteCastleMove position to
+    | from == e8Bit && (blackKingCastleAvailable position || blackQueenCastleAvailable position) = makeBlackCastleMove position to
+    | otherwise = makeSimpleComplexMove position move
+    where !pp = promotionPieceFromMove move
+          !from = fromSquarePart move
+          !to = toSquarePart move
+
+makeWhiteCastleMove :: Position -> Square -> Position
+{-# INLINE makeWhiteCastleMove #-}
+makeWhiteCastleMove !position !to =
+    position {
+          whiteRookBitboard = wr
+        , whiteKingBitboard = wk
+        , allPiecesBitboard = wpb .|. blackPiecesBitboard position
+        , whitePiecesBitboard = wpb
+        , mover = Black
+        , enPassantSquare = enPassantNotAvailable
+        , whiteKingCastleAvailable = False
+        , whiteQueenCastleAvailable = False
+        , halfMoves = halfMoves position + 1
+    }
+    where !wr = moveWhiteRookWhenCastling e1Bit to (whiteKingBitboard position) (movePieceWithinBitboard e1Bit to (whiteRookBitboard position))
+          !wk = movePieceWithinBitboard e1Bit to (whiteKingBitboard position)
+          !wpb = wr .|. wk .|. (whiteQueenBitboard position) .|. (whiteKnightBitboard position) .|. (whiteBishopBitboard position) .|. (whitePawnBitboard position)
+          
+makeBlackCastleMove :: Position -> Square -> Position
+{-# INLINE makeBlackCastleMove #-}
+makeBlackCastleMove !position !to =
+    position {
+          blackRookBitboard = br
+        , blackKingBitboard = bk
+        , allPiecesBitboard = bpb .|. whitePiecesBitboard position
+        , blackPiecesBitboard = bpb
+        , mover = White
+        , enPassantSquare = enPassantNotAvailable
+        , blackKingCastleAvailable = False
+        , blackQueenCastleAvailable = False
+        , halfMoves = (halfMoves position) + 1
+        , moveNumber = (moveNumber position) + 1
+    }
+    where !br = moveBlackRookWhenCastling e8Bit to (blackKingBitboard position) (movePieceWithinBitboard e8Bit to (blackRookBitboard position))
+          !bk = movePieceWithinBitboard e8Bit to (blackKingBitboard position)          
+          !bpb = br .|. bk .|. (blackQueenBitboard position) .|. (blackKnightBitboard position) .|. (blackBishopBitboard position) .|. (blackPawnBitboard position)
+
 makeMoveWithPromotion :: Position -> Move -> Piece -> Position
 {-# INLINE makeMoveWithPromotion #-}
 makeMoveWithPromotion !position !move !promotionPiece =
@@ -45,7 +86,7 @@ makeMoveWithPromotion !position !move !promotionPiece =
         , whiteQueenCastleAvailable = whiteQueenCastleAvailable position && to /= a1Bit
         , blackKingCastleAvailable = blackKingCastleAvailable position && to /= h8Bit
         , blackQueenCastleAvailable = blackQueenCastleAvailable position && to /= a8Bit
-        , halfMoves = halfMoves + 1
+        , halfMoves = 0
         , moveNumber = if m == Black then currentMoveNumber + 1 else currentMoveNumber
     }
     where !from = fromSquarePart move
@@ -69,9 +110,9 @@ makeMoveWithPromotion !position !move !promotionPiece =
           !wpb = wp .|. wn .|. wr .|. wk .|. wq .|. wb
           !bpb = bp .|. bn .|. br .|. bk .|. bq .|. bb
 
-makeMoveWithoutPromotion :: Position -> Move -> Position
-{-# INLINE makeMoveWithoutPromotion #-}
-makeMoveWithoutPromotion !position !move =
+makeSimpleComplexMove :: Position -> Move -> Position
+{-# INLINE makeSimpleComplexMove #-}
+makeSimpleComplexMove !position !move =
     Position {
           whitePawnBitboard = wp
         , blackPawnBitboard = bp
