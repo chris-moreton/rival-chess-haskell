@@ -19,13 +19,15 @@ recurBitString bitboard square result = do
   recurBitString (xor bitboard bitMask) (square - 1) (result ++ if bitMask == (.&.) bitMask bitboard then "1" else "0")
 
 enemyBitboard :: Position -> Bitboard
-enemyBitboard !position 
+{-# INLINE enemyBitboard #-}
+enemyBitboard !position
     | mover position == White = blackPiecesBitboard position
     | otherwise = whitePiecesBitboard position
 
 promotionSquares :: Bitboard
 promotionSquares = 0b1111111100000000000000000000000000000000000000000000000011111111
 
+{-# INLINE emptySquaresBitboard #-}
 emptySquaresBitboard :: Position -> Bitboard
 emptySquaresBitboard !position = complement (allPiecesBitboard position)
 
