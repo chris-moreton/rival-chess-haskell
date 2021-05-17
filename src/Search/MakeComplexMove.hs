@@ -38,7 +38,7 @@ makeWhiteCastleMove !position !to =
         , whiteQueenCastleAvailable = False
         , halfMoves = halfMoves position + 1
     }
-    where !wr = moveWhiteRookWhenCastling e1Bit to (whiteKingBitboard position) (movePieceWithinBitboard e1Bit to (whiteRookBitboard position))
+    where !wr = if to == c1Bit then movePieceWithinBitboard a1Bit d1Bit (whiteRookBitboard position) else movePieceWithinBitboard h1Bit f1Bit (whiteRookBitboard position) 
           !wk = movePieceWithinBitboard e1Bit to (whiteKingBitboard position)
           !wpb = wr .|. wk .|. (whiteQueenBitboard position) .|. (whiteKnightBitboard position) .|. (whiteBishopBitboard position) .|. (whitePawnBitboard position)
           
@@ -57,7 +57,7 @@ makeBlackCastleMove !position !to =
         , halfMoves = (halfMoves position) + 1
         , moveNumber = (moveNumber position) + 1
     }
-    where !br = moveBlackRookWhenCastling e8Bit to (blackKingBitboard position) (movePieceWithinBitboard e8Bit to (blackRookBitboard position))
+    where !br = if to == c8Bit then movePieceWithinBitboard a8Bit d8Bit (blackRookBitboard position) else movePieceWithinBitboard h8Bit f8Bit (blackRookBitboard position) 
           !bk = movePieceWithinBitboard e8Bit to (blackKingBitboard position)          
           !bpb = br .|. bk .|. (blackQueenBitboard position) .|. (blackKnightBitboard position) .|. (blackBishopBitboard position) .|. (blackPawnBitboard position)
 
@@ -101,8 +101,8 @@ makeMoveWithPromotion !position !move !promotionPiece =
           !bn = createIfPromotion (promotionPiece == Knight) (blackPawnBitboard position) (movePieceWithinBitboard from to (blackKnightBitboard position)) from to
           !wb = createIfPromotion (promotionPiece == Bishop) (whitePawnBitboard position) (movePieceWithinBitboard from to (whiteBishopBitboard position)) from to
           !bb = createIfPromotion (promotionPiece == Bishop) (blackPawnBitboard position) (movePieceWithinBitboard from to (blackBishopBitboard position)) from to
-          !wr = createIfPromotion (promotionPiece == Rook) (whitePawnBitboard position) (moveWhiteRookWhenCastling from to (whiteKingBitboard position) (movePieceWithinBitboard from to (whiteRookBitboard position))) from to
-          !br = createIfPromotion (promotionPiece == Rook) (blackPawnBitboard position) (moveBlackRookWhenCastling from to (blackKingBitboard position) (movePieceWithinBitboard from to (blackRookBitboard position))) from to
+          !wr = createIfPromotion (promotionPiece == Rook) (whitePawnBitboard position) (movePieceWithinBitboard from to (whiteRookBitboard position)) from to
+          !br = createIfPromotion (promotionPiece == Rook) (blackPawnBitboard position) (movePieceWithinBitboard from to (blackRookBitboard position)) from to
           !wq = createIfPromotion (promotionPiece == Queen) (whitePawnBitboard position) (movePieceWithinBitboard from to (whiteQueenBitboard position)) from to
           !bq = createIfPromotion (promotionPiece == Queen) (blackPawnBitboard position) (movePieceWithinBitboard from to (blackQueenBitboard position)) from to
           !wk = movePieceWithinBitboard from to (whiteKingBitboard position)
