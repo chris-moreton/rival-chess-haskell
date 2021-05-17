@@ -2,7 +2,7 @@
 
 {-# OPTIONS_GHC -Wno-overflowed-literals #-}
 
-module Search.MakeMove where
+module Search.MakeMove (makeMove) where
 
 import Types
 import Alias
@@ -15,18 +15,23 @@ import Search.MakeSimpleMove
 import Search.MoveUtils
 import Search.MakeComplexMove
 
+{-# INLINE isPotentialFirstKingMove #-}
 isPotentialFirstKingMove :: Position -> Square -> Bool
 isPotentialFirstKingMove !position from = from == e1Bit || from == e8Bit
 
+{-# INLINE isComplexPawnMove #-}
 isComplexPawnMove :: Position -> Square -> Square -> Bool
 isComplexPawnMove !position from to = (abs (from - to) `mod` 8) /= 0 || testBit promotionSquares to
 
+{-# INLINE isSimpleCapture #-}
 isSimpleCapture :: Position -> Square -> Bool
 isSimpleCapture !position = testBit (allPiecesBitboard position)
 
+{-# INLINE isSimpleMove #-}
 isSimpleMove :: Position -> Move -> Square -> Square -> Piece -> Bool
 isSimpleMove !position move from to piece = not (isSimpleCapture position to) && not (piece == Pawn && isComplexPawnMove position from to) && not (piece == King && isPotentialFirstKingMove position from)
 
+{-# INLINE movingPiece #-}
 movingPiece :: Position -> Square -> Piece
 movingPiece position from
     | testBit (whitePawnBitboard position .|. blackPawnBitboard position) from = Pawn
