@@ -217,24 +217,29 @@ isSquareAttackedByKing !king !attackedSquare !attacker = (.&.) king (kingMovesBi
 isSquareAttackedByAnyPawn :: Bitboard -> Bitboard -> Square -> Mover -> Bool
 isSquareAttackedByAnyPawn !pawns !pawnAttacks !attackedSquare !attacker = (.&.) pawns pawnAttacks /= 0
 
+{-# INLINE isSquareAttackedByAnyBishop #-}
 isSquareAttackedByAnyBishop :: Bitboard -> Bitboard -> Square -> Bool
 isSquareAttackedByAnyBishop _ 0 _ = False
 isSquareAttackedByAnyBishop !allPieces !attackingBishops !attackedSquare =
     isBishopAttackingSquare attackedSquare bishopSquare allPieces || isSquareAttackedByAnyBishop allPieces (clearBit attackingBishops bishopSquare) attackedSquare
         where bishopSquare = countTrailingZeros attackingBishops
 
+{-# INLINE isSquareAttackedByAnyRook #-}
 isSquareAttackedByAnyRook :: Bitboard -> Bitboard -> Square -> Bool
 isSquareAttackedByAnyRook _ 0 _ = False
 isSquareAttackedByAnyRook !allPieces !attackingRooks !attackedSquare =
     isRookAttackingSquare attackedSquare rookSquare allPieces || isSquareAttackedByAnyRook allPieces (clearBit attackingRooks rookSquare) attackedSquare
         where rookSquare = countTrailingZeros attackingRooks
 
+{-# INLINE isBishopAttackingSquare #-}
 isBishopAttackingSquare :: Square -> Square -> Bitboard -> Bool
 isBishopAttackingSquare !attackedSquare !pieceSquare !allPieceBitboard = testBit (magic magicBishopVars pieceSquare (magicIndexForBishop pieceSquare allPieceBitboard)) attackedSquare
 
+{-# INLINE isRookAttackingSquare #-}
 isRookAttackingSquare :: Square -> Square -> Bitboard -> Bool
 isRookAttackingSquare !attackedSquare !pieceSquare !allPieceBitboard = testBit (magic magicRookVars pieceSquare (magicIndexForRook pieceSquare allPieceBitboard)) attackedSquare
-  
+
+{-# INLINE isSquareAttackedBy #-}
 isSquareAttackedBy :: Position -> Square -> Mover -> Bool
 isSquareAttackedBy !position !attackedSquare !attacker =
   attackedByRook || attackedByBishop || attackedByKing || attackedByPawn || attackedByKnight
@@ -251,6 +256,7 @@ isSquareAttackedBy !position !attackedSquare !attacker =
         attackedByBishop = bishops /= 0 && isSquareAttackedByAnyBishop allPieces bishops attackedSquare
         attackedByKing = isSquareAttackedByKing king attackedSquare attacker
 
+{-# INLINE moves #-}
 moves :: Position -> MoveList
 moves !position = generatePawnMoves position ++ generateCastleMoves position ++ generateKnightMoves position ++ generateSliderMoves position Rook ++ generateSliderMoves position Bishop ++ generateKingMoves position
 
