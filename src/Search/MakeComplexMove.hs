@@ -19,7 +19,7 @@ makeComplexMove !position !move
     | pp /= Pawn = makeMoveWithPromotion position move pp
     | from == e1Bit && (to == g1Bit || to == c1Bit) && (whiteKingCastleAvailable position || whiteQueenCastleAvailable position) = makeWhiteCastleMove position to
     | from == e8Bit && (to == g8Bit || to == c8Bit) && (blackKingCastleAvailable position || blackQueenCastleAvailable position) = makeBlackCastleMove position to
-    | otherwise = makeSimpleComplexMove position move
+    | otherwise = makeSimpleComplexMove position from to
     where !pp = promotionPieceFromMove move
           !from = fromSquarePart move
           !to = toSquarePart move
@@ -110,9 +110,9 @@ makeMoveWithPromotion !position !move !promotionPiece =
           !wpb = wp .|. wn .|. wr .|. wk .|. wq .|. wb
           !bpb = bp .|. bn .|. br .|. bk .|. bq .|. bb
 
-makeSimpleComplexMove :: Position -> Move -> Position
+makeSimpleComplexMove :: Position -> Square -> Square -> Position
 {-# INLINE makeSimpleComplexMove #-}
-makeSimpleComplexMove !position !move =
+makeSimpleComplexMove !position !from !to =
     Position {
           whitePawnBitboard = wp
         , blackPawnBitboard = bp
@@ -138,10 +138,7 @@ makeSimpleComplexMove !position !move =
         , halfMoves = if testBit (allPiecesBitboard position) to || isPawnMove then 0 else halfMoves position + 1
         , moveNumber = if m == Black then currentMoveNumber + 1 else currentMoveNumber
     }
-    where !from = fromSquarePart move
-          !to = toSquarePart move
-          !promotionPiece = promotionPieceFromMove move
-          currentMoveNumber = moveNumber position
+    where currentMoveNumber = moveNumber position
           !m = mover position
           !newWhitePawnBitboard = movePieceWithinBitboard from to (whitePawnBitboard position)
           !newBlackPawnBitboard = movePieceWithinBitboard from to (blackPawnBitboard position)

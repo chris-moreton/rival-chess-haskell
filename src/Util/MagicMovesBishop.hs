@@ -1,8 +1,6 @@
 module Util.MagicMovesBishop where
 
-import Types
 import Alias
-import qualified Data.Vector.Unboxed as V
 
 magicMovesBishop :: Int -> Int -> Bitboard
 magicMovesBishop 0 0 = fromIntegral(-9205322385119247872) :: Bitboard

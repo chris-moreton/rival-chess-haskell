@@ -6,10 +6,7 @@ module Util.MagicBitboards where
 
 import Util.MagicMovesBishop
 import Util.MagicMovesRook
-import Types
 import Alias
-import Data.Array.Unboxed
-import qualified Data.Vector.Unboxed as V
 
 {-# INLINE magic #-}
 magic :: MagicVars -> Square -> Int -> Bitboard

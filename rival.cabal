@@ -31,6 +31,10 @@ library
       Util.MagicBitboards
       Util.MagicMovesBishop
       Util.MagicMovesRook
+      Util.MagicMovesRook1
+      Util.MagicMovesRook2
+      Util.MagicMovesRook3
+      Util.MagicMovesRook4
       Util.Fen
       Util.Utils
       Search.MakeMove

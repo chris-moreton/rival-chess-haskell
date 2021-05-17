@@ -2,7 +2,7 @@
 
 {-# OPTIONS_GHC -Wno-overflowed-literals #-}
 
-module Search.MakeSimpleMove where
+module Search.MakeSimpleMove (makeSimpleMove) where
 
 import Types
     ( Mover(White, Black),
