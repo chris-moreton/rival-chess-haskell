@@ -1,4 +1,4 @@
-{-# LANGUAGE DeriveGeneric,BangPatterns #-}
+{-# LANGUAGE DeriveGeneric,BangPatterns,DeriveAnyClass #-}
 
 module Types where
 
@@ -8,8 +8,9 @@ import GHC.Generics
 import GHC.Compact
 import Data.Bits
 import Alias
+import Control.DeepSeq
 
-data Mover = White | Black deriving (Enum,Show,Eq)
+data Mover = White | Black deriving (Enum,Show,Eq,NFData,Generic)
 data Piece = Pawn | King | Queen | Bishop | Knight | Rook deriving (Enum,Show,Eq)
 
 data Position = Position {
@@ -36,7 +37,7 @@ data Position = Position {
   , blackQueenCastleAvailable :: !Bool
   , halfMoves :: Int
   , moveNumber :: Int
-} deriving (Generic,Show,Eq)
+} deriving (Generic,Show,Eq,NFData)
 
 bitboardForMover :: Position -> Piece -> Bitboard
 bitboardForMover !position = bitboardForColour position (mover position)

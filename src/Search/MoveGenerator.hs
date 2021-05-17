@@ -191,8 +191,8 @@ magicIndexForBishop !pieceSquare !allPieceBitboard = fromIntegral (shiftR rawInd
 
 {-# INLINE rookMovePiecesBitboard #-}
 rookMovePiecesBitboard :: Position -> Mover -> Bitboard
-rookMovePiecesBitboard !position White =  (.|.) (whiteRookBitboard position) (whiteQueenBitboard position)
-rookMovePiecesBitboard !position Black =  (.|.) (blackRookBitboard position) (blackQueenBitboard position)
+rookMovePiecesBitboard !position White = (.|.) (whiteRookBitboard position) (whiteQueenBitboard position)
+rookMovePiecesBitboard !position Black = (.|.) (blackRookBitboard position) (blackQueenBitboard position)
 
 {-# INLINE bishopMovePiecesBitboard #-}
 bishopMovePiecesBitboard :: Position -> Mover -> Bitboard
@@ -200,16 +200,18 @@ bishopMovePiecesBitboard !position White = (.|.) (whiteBishopBitboard position) 
 bishopMovePiecesBitboard !position Black = (.|.) (blackBishopBitboard position) (blackQueenBitboard position)
 
 {-# INLINE isSquareAttackedByAnyKnight #-}
-isSquareAttackedByAnyKnight :: Bitboard -> Square -> Mover -> Bool
-isSquareAttackedByAnyKnight !knightBitboard !attackedSquare !attacker = (.&.) knightBitboard (knightMovesBitboards attackedSquare) /= 0
+isSquareAttackedByAnyKnight :: Bitboard -> Square -> Bool
+isSquareAttackedByAnyKnight 0 _ = False
+isSquareAttackedByAnyKnight !knightBitboard !attackedSquare = (.&.) knightBitboard (knightMovesBitboards attackedSquare) /= 0
 
 {-# INLINE isSquareAttackedByKing #-}
-isSquareAttackedByKing :: Bitboard -> Square -> Mover -> Bool
-isSquareAttackedByKing !king !attackedSquare !attacker = (.&.) king (kingMovesBitboards attackedSquare) /= 0
+isSquareAttackedByKing :: Bitboard -> Square -> Bool
+isSquareAttackedByKing !king !attackedSquare = (.&.) king (kingMovesBitboards attackedSquare) /= 0
 
 {-# INLINE isSquareAttackedByAnyPawn #-}
-isSquareAttackedByAnyPawn :: Bitboard -> Bitboard -> Square -> Mover -> Bool
-isSquareAttackedByAnyPawn !pawns !pawnAttacks !attackedSquare !attacker = (.&.) pawns pawnAttacks /= 0
+isSquareAttackedByAnyPawn :: Bitboard -> Bitboard -> Square -> Bool
+isSquareAttackedByAnyPawn 0 _ _ = False
+isSquareAttackedByAnyPawn !pawns !pawnAttacks !attackedSquare = (.&.) pawns pawnAttacks /= 0
 
 {-# INLINE isSquareAttackedByAnyBishop #-}
 isSquareAttackedByAnyBishop :: Bitboard -> Bitboard -> Square -> Bool
@@ -235,20 +237,22 @@ isRookAttackingSquare !attackedSquare !pieceSquare !allPieceBitboard = testBit (
 
 {-# INLINE isSquareAttackedBy #-}
 isSquareAttackedBy :: Position -> Square -> Mover -> Bool
-isSquareAttackedBy !position !attackedSquare !attacker =
+isSquareAttackedBy !position !attackedSquare White =
   attackedByRook || attackedByBishop || attackedByKing || attackedByPawn || attackedByKnight
   where !allPieces = allPiecesBitboard position
-        !rooks = rookMovePiecesBitboard position attacker
-        !bishops = bishopMovePiecesBitboard position attacker
-        !knights = (if attacker == White then whiteKnightBitboard else blackKnightBitboard) position
-        !pawnAttacks = pawnMovesCaptureOfColour (switchSide attacker) attackedSquare
-        !pawns = (if attacker == White then whitePawnBitboard else blackPawnBitboard) position
-        !king = (if attacker == White then whiteKingBitboard else blackKingBitboard) position
-        attackedByPawn = pawns /= 0 && isSquareAttackedByAnyPawn pawns pawnAttacks attackedSquare attacker
-        attackedByKnight = knights /= 0 && isSquareAttackedByAnyKnight knights attackedSquare attacker
-        attackedByRook = rooks /= 0 && isSquareAttackedByAnyRook allPieces rooks attackedSquare
-        attackedByBishop = bishops /= 0 && isSquareAttackedByAnyBishop allPieces bishops attackedSquare
-        attackedByKing = isSquareAttackedByKing king attackedSquare attacker
+        attackedByPawn = isSquareAttackedByAnyPawn (whitePawnBitboard position) (pawnMovesCaptureOfColour Black attackedSquare) attackedSquare
+        attackedByKnight = isSquareAttackedByAnyKnight (whiteKnightBitboard position) attackedSquare
+        attackedByRook = isSquareAttackedByAnyRook allPieces (rookMovePiecesBitboard position White) attackedSquare
+        attackedByBishop = isSquareAttackedByAnyBishop allPieces (bishopMovePiecesBitboard position White) attackedSquare
+        attackedByKing = isSquareAttackedByKing (whiteKingBitboard position) attackedSquare
+isSquareAttackedBy !position !attackedSquare Black =
+  attackedByRook || attackedByBishop || attackedByKing || attackedByPawn || attackedByKnight
+  where !allPieces = allPiecesBitboard position
+        attackedByPawn = isSquareAttackedByAnyPawn (blackPawnBitboard position) (pawnMovesCaptureOfColour White attackedSquare) attackedSquare
+        attackedByKnight = isSquareAttackedByAnyKnight (blackKnightBitboard position) attackedSquare
+        attackedByRook = isSquareAttackedByAnyRook allPieces (rookMovePiecesBitboard position Black) attackedSquare
+        attackedByBishop = isSquareAttackedByAnyBishop allPieces (bishopMovePiecesBitboard position Black) attackedSquare
+        attackedByKing = isSquareAttackedByKing (blackKingBitboard position) attackedSquare
 
 {-# INLINE moves #-}
 moves :: Position -> MoveList

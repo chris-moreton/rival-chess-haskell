@@ -63,6 +63,7 @@ library
     , parallel
     , monad-par
     , bits-extra
+    , deepseq
   default-language: Haskell2010
 
 executable rival-exe
