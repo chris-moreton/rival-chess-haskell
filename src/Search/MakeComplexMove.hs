@@ -17,8 +17,8 @@ makeComplexMove :: Position -> Move -> Position
 {-# INLINE makeComplexMove #-}
 makeComplexMove !position !move
     | pp /= Pawn = makeMoveWithPromotion position move pp
---    | from == e1Bit && (whiteKingCastleAvailable position || whiteQueenCastleAvailable position) = makeWhiteCastleMove position to
---    | from == e8Bit && (blackKingCastleAvailable position || blackQueenCastleAvailable position) = makeBlackCastleMove position to
+    | from == e1Bit && (to == g1Bit || to == c1Bit) && (whiteKingCastleAvailable position || whiteQueenCastleAvailable position) = makeWhiteCastleMove position to
+    | from == e8Bit && (to == g8Bit || to == c8Bit) && (blackKingCastleAvailable position || blackQueenCastleAvailable position) = makeBlackCastleMove position to
     | otherwise = makeSimpleComplexMove position move
     where !pp = promotionPieceFromMove move
           !from = fromSquarePart move
