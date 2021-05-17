@@ -11,6 +11,7 @@ import Alias
 import Data.Array.Unboxed
 import qualified Data.Vector.Unboxed as V
 
+{-# INLINE magic #-}
 magic :: MagicVars -> Square -> Int -> Bitboard
 magic !magicVars !fromSquare !toSquaresMagicIndex = magicMoves magicVars fromSquare toSquaresMagicIndex
 
