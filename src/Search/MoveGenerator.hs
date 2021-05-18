@@ -21,7 +21,7 @@ allBitsExceptFriendlyPieces !position = complement (if mover position == White t
 
 {-# INLINE movesFromToSquaresBitboard #-}
 movesFromToSquaresBitboard :: Square -> Bitboard -> MoveList
-movesFromToSquaresBitboard !fromSquare !toSquares = recurMovesFromToSquaresBitboard (shiftL fromSquare 16) toSquares []
+movesFromToSquaresBitboard !fromSquare !toSquares = recurMovesFromToSquaresBitboard (fromSquareMask fromSquare) toSquares []
 
 recurMovesFromToSquaresBitboard :: Square -> Bitboard -> MoveList -> MoveList
 recurMovesFromToSquaresBitboard _ 0 !result = result
@@ -30,6 +30,7 @@ recurMovesFromToSquaresBitboard !fromSquare !toSquares !result =
     where !square = countTrailingZeros toSquares
 
 {-# INLINE generateKnightMoves #-}
+{-# SCC generateKnightMoves #-}
 generateKnightMoves :: Position -> MoveList
 generateKnightMoves !position = recurKnightMoves position (bitboardForMover position Knight) []
 

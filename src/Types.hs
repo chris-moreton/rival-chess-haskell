@@ -39,9 +39,11 @@ data Position = Position {
   , moveNumber :: Int
 } deriving (Generic,Show,Eq,NFData)
 
+{-# INLINE bitboardForMover #-}
 bitboardForMover :: Position -> Piece -> Bitboard
 bitboardForMover !position = bitboardForColour position (mover position)
 
+{-# INLINE bitboardForColour #-}
 bitboardForColour :: Position -> Mover -> Piece -> Bitboard
 bitboardForColour !pieceBitboards White King = whiteKingBitboard pieceBitboards
 bitboardForColour !pieceBitboards White Queen = whiteQueenBitboard pieceBitboards
@@ -56,6 +58,7 @@ bitboardForColour !pieceBitboards Black Knight = blackKnightBitboard pieceBitboa
 bitboardForColour !pieceBitboards Black Bishop = blackBishopBitboard pieceBitboards
 bitboardForColour !pieceBitboards Black Pawn = blackPawnBitboard pieceBitboards
 
+{-# INLINE sliderBitboardForColour #-}
 sliderBitboardForColour :: Position -> Mover -> Piece -> Bitboard
 sliderBitboardForColour !pieceBitboards White Rook = whiteRookBitboard pieceBitboards .|. whiteQueenBitboard pieceBitboards
 sliderBitboardForColour !pieceBitboards White Bishop = whiteBishopBitboard pieceBitboards .|. whiteQueenBitboard pieceBitboards
