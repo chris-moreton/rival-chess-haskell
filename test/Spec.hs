@@ -572,16 +572,16 @@ main = hspec $ do
      perft (getPosition "r3k2r/p1ppqpb1/bn2pnp1/3PN3/1p2P3/2N2Q1p/PPPBBPPP/R3K2R w KQkq -") 1 `shouldBe` 2039
      perft (getPosition "r3k2r/p1ppqpb1/bn2pnp1/3PN3/1p2P3/2N2Q1p/PPPBBPPP/R3K2R w KQkq -") 2 `shouldBe` 97862
 
-     --perft (getPosition "r3k2r/p1ppqpb1/bn2pnp1/3PN3/1p2P3/2N2Q1p/PPPBBPPP/R3K2R w KQkq -") 3 `shouldBe` 4085603
-     --perft (getPosition "8/2p5/3p4/KP5r/1R3p1k/8/4P1P1/8 w - -") 6 `shouldBe` 178633661
+     perft (getPosition "r3k2r/p1ppqpb1/bn2pnp1/3PN3/1p2P3/2N2Q1p/PPPBBPPP/R3K2R w KQkq -") 3 `shouldBe` 4085603
+     perft (getPosition "8/2p5/3p4/KP5r/1R3p1k/8/4P1P1/8 w - -") 6 `shouldBe` 178633661
      --perft (getPosition "8/2p5/3p4/KP5r/1R3p1k/8/4P1P1/8 w - -") 7 `shouldBe` 3009794393
      --perft (getPosition "r3k2r/p1ppqpb1/bn2pnp1/3PN3/1p2P3/2N2Q1p/PPPBBPPP/R3K2R w KQkq -") 4 `shouldBe` 193690690
      --perft (getPosition "r3k2r/p1ppqpb1/bn2pnp1/3PN3/1p2P3/2N2Q1p/PPPBBPPP/R3K2R w KQkq -") 5 `shouldBe` 8031647685
-     --perft (getPosition "rnbqkb1r/ppppp1pp/7n/4Pp2/8/8/PPPP1PPP/RNBQKBNR w KQkq f6 0 3") 4 `shouldBe` 11139762
-     --perft (getPosition "8/7p/p5pb/4k3/P1pPn3/8/P5PP/1rB2RK1 b - d3 0 28") 5 `shouldBe` 38633283
+     perft (getPosition "rnbqkb1r/ppppp1pp/7n/4Pp2/8/8/PPPP1PPP/RNBQKBNR w KQkq f6 0 3") 4 `shouldBe` 11139762
+     perft (getPosition "8/7p/p5pb/4k3/P1pPn3/8/P5PP/1rB2RK1 b - d3 0 28") 5 `shouldBe` 38633283
      --perft (getPosition "8/2p5/3p4/KP5r/1R3p1k/8/4P1P1/8 w - -") 6 `shouldBe` 178633661
-     --perft (getPosition "r3k2r/p6p/8/B7/1pp1p3/3b4/P6P/2KR3R b kq - 0 1") 4 `shouldBe` 4238116
-     --perft (getPosition "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1") 4 `shouldBe` 4865609
+     perft (getPosition "r3k2r/p6p/8/B7/1pp1p3/3b4/P6P/2KR3R b kq - 0 1") 4 `shouldBe` 4238116
+     perft (getPosition "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1") 4 `shouldBe` 4865609
 
      perft (getPosition "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1") 0 `shouldBe` 20
      perft (getPosition "rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR b KQkq - 0 1") 0 `shouldBe` 20
