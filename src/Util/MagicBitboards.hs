@@ -7,16 +7,18 @@ module Util.MagicBitboards where
 import Util.MagicMovesBishop
 import Util.MagicMovesRook
 import Alias
+import qualified Data.Vector.Storable as V
+import qualified Data.Array.IArray as A
 
 {-# INLINE magic #-}
 magic :: MagicVars -> Square -> Int -> Bitboard
-magic !magicVars !fromSquare !toSquaresMagicIndex = magicMoves magicVars fromSquare toSquaresMagicIndex
+magic !magicVars !fromSquare !toSquaresMagicIndex = magicMoves magicVars A.! fromSquare V.! toSquaresMagicIndex
 
 data MagicVars = MagicVars {
       occupancyMask :: Int -> Bitboard
     , magicNumber :: Int -> Bitboard
     , magicNumberShifts :: Int -> Int
-    , magicMoves :: Int -> Int -> Bitboard
+    , magicMoves :: A.Array Int (V.Vector Bitboard)
 }
 
 magicRookVars :: MagicVars
