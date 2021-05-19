@@ -1,5 +1,12 @@
 # Haskell Chess Functions
 
+This repo provides a number of useful functions for playing with chess positions. However, they all come together to perform two main tasks...
+
+1) generating chess moves from a given position
+2) making a move from a given position to return a new position
+
+In addition to the functions, which can be used on their own, the Main.hs app is gradually becoming a full-fledged UCI chess engine.
+
 ### Get moves for a position (does not filter checks)
 
     describe "moves" $ do
