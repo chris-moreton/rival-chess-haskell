@@ -31,17 +31,22 @@ commandCycle uciState = do
   command <- getLine
   uciState' <- run uciState (splitOn " " command)
   let e = errorMessage uciState'
+  let o = output uciState'
   if quit uciState'
       then do
           putStrLn "Bye"
           exitSuccess
       else do
           if e == ""
-             then printf "%s\n" (output uciState')
-             else putStrLn e
-          commandCycle uciState'
+             then if o == "" 
+                    then commandCycle uciState' 
+                    else do
+                        printf "%s\n" (output uciState')
+                        commandCycle uciState'
+             else do
+                putStrLn e
+                commandCycle uciState'
           
-
 run :: UCIState -> [String] -> IO UCIState
 run uciState ("uci":xs) = do
     putStrLn "id name Rival Haskell"
@@ -68,7 +73,6 @@ runPosition uciState ("fen":xs) = do
     let fen = head parts
     let error = verifyFen fen
     let moveList = if length parts > 1 then splitOn " " (parts !! 1) else []
-    print moveList
     if error == ""
         then do
             if not (null moveList)
