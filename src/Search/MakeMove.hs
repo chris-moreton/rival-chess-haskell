@@ -5,7 +5,12 @@
 module Search.MakeMove (makeMove) where
 
 import Types
-import Alias
+    ( Position(allPiecesBitboard, whitePawnBitboard, blackPawnBitboard,
+               whiteKnightBitboard, blackKnightBitboard, whiteBishopBitboard,
+               blackBishopBitboard, whiteRookBitboard, blackRookBitboard,
+               whiteQueenBitboard, blackQueenBitboard),
+      Piece(..) )
+import Alias ( Move, Square )
 import Util.Fen
 import Util.Utils
 import Data.Bits

@@ -156,3 +156,11 @@ getPosition fen = Position {
         bq = pieceBitboard fenRanks 'q'
         bk = pieceBitboard fenRanks 'k'
         br = pieceBitboard fenRanks 'r'
+
+verifyFen :: String -> String
+verifyFen s = do
+    let parts = splitOn " " s
+    let len = length parts
+    if len /= 6
+        then "Invalid FEN: Expected 6 parts, found " ++ show len
+        else ""

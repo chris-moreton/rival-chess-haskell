@@ -3,58 +3,62 @@
 module Main where
 
 import Data.List.Split ( splitOn )
-import System.Exit
+import System.Exit ( exitSuccess )
 import Util.Fen
+    ( startPosition,
+      algebraicMoveFromMove,
+      moveFromAlgebraicMove,
+      getPosition,
+      verifyFen )
 import Types
-import Search.MakeMove
-import Alias
+import Search.MakeMove ( makeMove )
+import Alias ()
+import Search.Search
+import Text.Printf
 
 data UCIState = UCIState {
       position :: Position
     , quit :: Bool
     , errorMessage :: String
+    , output :: String
 }
 
 main :: IO ()
-main = do
-  let uciState = UCIState {position = getPosition startPosition, quit=False, errorMessage=""}
-  putStrLn "Hello"
+main = commandCycle UCIState {position = getPosition startPosition, quit=False, errorMessage="", output=""}
+
+commandCycle :: UCIState -> IO ()
+commandCycle uciState = do
   command <- getLine
   uciState' <- run uciState (splitOn " " command)
   let e = errorMessage uciState'
-  if (quit uciState') 
+  if quit uciState'
       then do
           putStrLn "Bye"
           exitSuccess
       else do
-          if (e == "") 
-             then print ("EnPassant Square is " ++ (show (enPassantSquare (position uciState'))))
+          if e == ""
+             then printf "%s\n" (output uciState')
              else putStrLn e
-          main   
-
+          commandCycle uciState'
+          
 
 run :: UCIState -> [String] -> IO UCIState
-run uciState ("uci":xs) = do 
+run uciState ("uci":xs) = do
     putStrLn "id name Rival Haskell"
     putStrLn "id author Chris Moreton"
     return uciState
 
+run uciState ("go":xs) = runGo uciState xs
 run uciState ("position":xs) = runPosition uciState xs
-
-run uciState ("quit":_) = do 
-    return uciState{quit=True}
+run uciState ("quit":_) = return uciState{quit=True}
 
 run uciState (x:xs) = do
     putStrLn x
     return uciState
 
-verifyFen :: String -> String
-verifyFen s = do
-    let parts = splitOn " " s
-    let len = length parts
-    if (len /= 6)
-        then "Invalid FEN: Expected 6 parts, found " ++ (show len)
-        else ""
+runGo :: UCIState -> [String] -> IO UCIState
+runGo uciState ("infinite":_) = do 
+    return uciState{output=algebraicMoveFromMove (search (position uciState))}
 
 runPosition :: UCIState -> [String] -> IO UCIState
 runPosition uciState ("startpos":xs) = runPosition uciState (["fen",startPosition] ++ xs)
@@ -63,16 +67,18 @@ runPosition uciState ("fen":xs) = do
     let parts = splitOn " moves " $ stringArrayToWords xs
     let fen = head parts
     let error = verifyFen fen
+    let moveList = if length parts > 1 then splitOn " " (parts !! 1) else []
+    print moveList
     if error == ""
         then do
-            let moves = splitOn " " (head (tail parts))
-            return uciState{position=makeMoves (getPosition fen) moves, errorMessage=""}
-        else do
+            if not (null moveList)
+                then return uciState{position=makeMoves (getPosition fen) moveList, errorMessage=""}
+                else return uciState{position=getPosition fen}
+        else
             return uciState{errorMessage=error}
 
 makeMoves :: Position -> [String] -> Position
-makeMoves position [] = position
-makeMoves position (move:moves) = makeMoves (makeMove position (moveFromAlgebraicMove move)) moves
+makeMoves = foldl (\ position move -> makeMove position (moveFromAlgebraicMove move))
 
 stringArrayToWords :: [String] -> String
-stringArrayToWords (x:xs) = x ++ foldr (++) "" (map (\x -> " " ++ x) xs)
+stringArrayToWords (x:xs) = x ++ concatMap (" " ++) xs

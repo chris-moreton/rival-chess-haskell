@@ -40,6 +40,7 @@ library
       Search.MoveGenerator
       Search.MoveConstants
       Search.MoveUtils
+      Search.Search
       Types
       Alias
   other-modules:
