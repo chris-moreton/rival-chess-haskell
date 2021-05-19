@@ -51,13 +51,7 @@ library
     , split
     , text
     , sort
-    , array
-    , dlist
-    , vector
-    , ghc-compact
-    , unboxing-vector
     , parallel
-    , monad-par
     , bits-extra
     , deepseq
   default-language: Haskell2010
@@ -68,11 +62,17 @@ executable rival-exe
       Paths_rival
   hs-source-dirs:
       app
-  ghc-options: -threaded -rtsopts -O2 -fllvm -prof -fprof-auto "-with-rtsopts=-N -p -s -h -i0.1"
+  ghc-options: -threaded -rtsopts -O2 "-with-rtsopts=-N -s -h -i0.1"
   build-depends:
       base >=4.7 && <5
     , rival
     , time
+    , split
+    , text
+    , sort
+    , parallel
+    , bits-extra
+    , deepseq    
   default-language: Haskell2010
 
 test-suite rival-test
@@ -86,7 +86,6 @@ test-suite rival-test
     -O2
     -threaded
     -rtsopts
-    -fllvm
     -with-rtsopts=-N
   build-depends:
       base >=4.7 && <5
@@ -95,9 +94,5 @@ test-suite rival-test
     , QuickCheck
     , rival
     , time
-    , array
     , sort
-    , dlist
-    , vector
-    , unboxing-vector    
   default-language: Haskell2010

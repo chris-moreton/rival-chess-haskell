@@ -13,7 +13,6 @@ import Util.MagicBitboards
 import Util.Utils
 import Search.MoveConstants
 import Control.Parallel
-import Control.Monad.Par
 
 {-# INLINE allBitsExceptFriendlyPieces #-}
 allBitsExceptFriendlyPieces :: Position -> Bitboard

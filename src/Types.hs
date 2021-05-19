@@ -2,10 +2,7 @@
 
 module Types where
 
-import Data.Array.IArray
-import Data.Array.Unboxed
 import GHC.Generics
-import GHC.Compact
 import Data.Bits
 import Alias
 import Control.DeepSeq

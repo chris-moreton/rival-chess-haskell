@@ -8,7 +8,6 @@ import Test.QuickCheck
 import Control.Exception (evaluate)
 import Data.Time
 import Data.Time.Clock.POSIX
-import Data.Array.IArray
 import Util.Bitboards
 import Util.Fen
 import Util.Utils
