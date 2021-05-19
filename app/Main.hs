@@ -48,7 +48,8 @@ runPosition uciState ("startpos":_) = do
 
 runPosition uciState ("fen":xs) = do
     if length xs /= 6
-        then return uciState{errorMessage="Invalid FEN"}
+        then return uciState{errorMessage="Invalid FEN: " ++ stringArrayToWords xs}
         else return uciState
 
-
+stringArrayToWords :: [String] -> String
+stringArrayToWords (x:xs) = x ++ foldr (++) "" (map (\x -> " " ++ x) xs)
