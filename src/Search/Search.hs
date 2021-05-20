@@ -19,9 +19,9 @@ search position endTime = do
 evaluate :: Position -> Int 
 evaluate position = do
     let m = mover position
-    popCount (bitboardForColour position m Pawn) * 100 +
+    (-1) * (popCount (bitboardForColour position m Pawn) * 100 +
         popCount (bitboardForColour position m Bishop) * 350 +
         popCount (bitboardForColour position m Knight) * 350 +
         popCount (bitboardForColour position m Rook) * 500 +
-        popCount (bitboardForColour position m Queen) * 900
+        popCount (bitboardForColour position m Queen) * 900)
     
