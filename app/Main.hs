@@ -15,8 +15,8 @@ import Search.MakeMove ( makeMove )
 import Alias ()
 import Search.Search ( search )
 import Text.Printf ( printf )
-import Util.Utils
-import System.IO
+import Util.Utils ( timeMillis )
+import System.IO ( stdout, hFlush )
 
 data UCIState = UCIState {
       position :: Position
