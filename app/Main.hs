@@ -1,3 +1,4 @@
+{-# LANGUAGE TupleSections #-}
 
 module Main where
 

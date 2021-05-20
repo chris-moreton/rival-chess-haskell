@@ -2,7 +2,7 @@
 
 {-# OPTIONS_GHC -Wno-overflowed-literals #-}
 
-module Search.MakeMove (makeMove) where
+module Search.MakeMove (makeMove,makeAlgebraicMoves) where
 
 import Types
     ( Position(allPiecesBitboard, whitePawnBitboard, blackPawnBitboard,
@@ -45,6 +45,9 @@ movingPiece position from
     | testBit (whiteRookBitboard position .|. blackRookBitboard position) from = Rook
     | testBit (whiteQueenBitboard position .|. blackQueenBitboard position) from = Queen
     | otherwise = King
+
+makeAlgebraicMoves :: Position -> [String] -> Position
+makeAlgebraicMoves = foldl (\ position move -> makeMove position (moveFromAlgebraicMove move))    
 
 makeMove :: Position -> Move -> Position
 makeMove !position !move =

@@ -438,6 +438,11 @@ main = hspec $ do
     isCheck position Black `shouldBe` False
     isCheck (getPosition "r2k3r/p6p/8/B7/1p2p3/2pb4/P4K1P/R6R w - - 0 1") Black `shouldBe` True
 
+  describe "makeAlgebraicMoves" $
+    it "Makes a move from a position and returns a new position" $ do
+    let expected = getPosition "rnbqkbnr/ppppppp1/8/8/2PPPP1P/8/PP6/RNBQKqNR w KQkq - 0 7"
+    let position = makeAlgebraicMoves (getPosition "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1") ["h2h4","h7h6","g2g4","h6h5","f2f4","h5g4","e2e4","g4g3","d2d4","g3g2","c2c4","g2f1q"]
+    position `shouldBe` expected
 
   describe "moveFromAlgebraicMove" $
     it "Makes a move from a position and returns a new position" $ do
