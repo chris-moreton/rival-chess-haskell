@@ -24,7 +24,15 @@ data UCIState = UCIState {
 }
 
 main :: IO ()
-main = commandCycle UCIState {position = getPosition startPosition, quit=False, errorMessage="", output=""}
+main = do
+    showId
+    commandCycle UCIState {position = getPosition startPosition, quit=False, errorMessage="", output=""}
+
+showId :: IO ()
+showId = do
+    putStrLn "id name Rival Haskell"
+    putStrLn "id author Chris Moreton"
+    putStrLn "uciok"
 
 commandCycle :: UCIState -> IO ()
 commandCycle uciState = do
@@ -49,16 +57,19 @@ commandCycle uciState = do
           
 run :: UCIState -> [String] -> IO UCIState
 run uciState ("uci":xs) = do
-    putStrLn "id name Rival Haskell"
-    putStrLn "id author Chris Moreton"
+    showId
     return uciState
 
 run uciState ("go":xs) = runGo uciState xs
+run uciState ("isready":xs) = do
+    putStrLn "readyok"
+    return uciState
+
 run uciState ("position":xs) = runPosition uciState xs
 run uciState ("quit":_) = return uciState{quit=True}
 
 run uciState (x:xs) = do
-    putStrLn x
+    putStrLn "uciok"
     return uciState
 
 runGo :: UCIState -> [String] -> IO UCIState
