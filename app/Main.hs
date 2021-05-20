@@ -50,11 +50,11 @@ commandCycle uciState = do
              then if o == "" 
                     then commandCycle uciState' 
                     else do
-                        printf "%s\n" (output uciState')
-                        commandCycle uciState'
+                        putStrLn (output uciState')
+                        commandCycle uciState'{errorMessage="",output=""}
              else do
                 putStrLn e
-                commandCycle uciState'
+                commandCycle uciState'{errorMessage="",output=""}
           
 run :: UCIState -> [String] -> IO UCIState
 run uciState ("uci":xs) = do
@@ -72,7 +72,6 @@ run uciState ("position":xs) = runPosition uciState xs
 run uciState ("quit":_) = return uciState{quit=True}
 
 run uciState (x:xs) = do
-    putStrLn "uciok"
     return uciState
 
 runGo :: UCIState -> [String] -> IO UCIState
@@ -83,7 +82,7 @@ runGo uciState ("movetime":xs) = do
     t <- timeMillis
     let endTime = t + read moveTime
     move <- search (position uciState) endTime
-    return uciState{output=algebraicMoveFromMove move}
+    return uciState{output="bestmove " ++ (algebraicMoveFromMove move)}
 
 runPosition :: UCIState -> [String] -> IO UCIState
 runPosition uciState ("startpos":xs) = runPosition uciState (["fen",startPosition] ++ xs)

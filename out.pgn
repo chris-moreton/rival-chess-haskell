@@ -195,3 +195,116 @@
 
 {No result} *
 
+[Event "?"]
+[Site "?"]
+[Date "2021.05.20"]
+[Round "1"]
+[White "Rival Haskell"]
+[Black "Rival Haskell"]
+[Result "0-1"]
+[BlackTimeControl "1/move"]
+[GameDuration "00:00:17"]
+[GameEndTime "2021-05-20T19:49:28.848 BST"]
+[GameStartTime "2021-05-20T19:49:11.022 BST"]
+[PlyCount "0"]
+[Termination "stalled connection"]
+[WhiteTimeControl "1/move"]
+
+{White's connection stalls} 0-1
+
+[Event "?"]
+[Site "?"]
+[Date "2021.05.20"]
+[Round "1"]
+[White "UciEngine"]
+[Black "UciEngine"]
+[Result "*"]
+[BlackTimeControl "1/move"]
+[Termination "unterminated"]
+[WhiteTimeControl "1/move"]
+ *
+
+[Event "?"]
+[Site "?"]
+[Date "2021.05.20"]
+[Round "1"]
+[White "UciEngine"]
+[Black "UciEngine"]
+[Result "*"]
+[BlackTimeControl "1/move"]
+[Termination "unterminated"]
+[WhiteTimeControl "1/move"]
+ *
+
+[Event "?"]
+[Site "?"]
+[Date "2021.05.20"]
+[Round "1"]
+[White "Rival Haskell"]
+[Black "Rival Haskell"]
+[Result "*"]
+[BlackTimeControl "1/move"]
+[GameDuration "00:00:07"]
+[GameEndTime "2021-05-20T19:51:21.771 BST"]
+[GameStartTime "2021-05-20T19:51:13.918 BST"]
+[PlyCount "0"]
+[Termination "unterminated"]
+[WhiteTimeControl "1/move"]
+
+{No result} *
+
+[Event "?"]
+[Site "?"]
+[Date "2021.05.20"]
+[Round "1"]
+[White "Rival Haskell"]
+[Black "Rival Haskell"]
+[Result "*"]
+[BlackTimeControl "1/move"]
+[GameDuration "00:00:07"]
+[GameEndTime "2021-05-20T19:53:07.438 BST"]
+[GameStartTime "2021-05-20T19:52:59.726 BST"]
+[PlyCount "0"]
+[Termination "unterminated"]
+[WhiteTimeControl "1/move"]
+
+{No result} *
+
+[Event "?"]
+[Site "?"]
+[Date "2021.05.20"]
+[Round "1"]
+[White "Rival Haskell"]
+[Black "Rival Haskell"]
+[Result "*"]
+[BlackTimeControl "1/move"]
+[GameDuration "00:00:09"]
+[GameEndTime "2021-05-20T19:54:13.230 BST"]
+[GameStartTime "2021-05-20T19:54:04.106 BST"]
+[PlyCount "0"]
+[Termination "unterminated"]
+[WhiteTimeControl "1/move"]
+
+{No result} *
+
+[Event "?"]
+[Site "?"]
+[Date "2021.05.20"]
+[Round "1"]
+[White "Rival Haskell"]
+[Black "Rival Haskell"]
+[Result "0-1"]
+[BlackTimeControl "1/move"]
+[ECO "A00"]
+[GameDuration "00:00:13"]
+[GameEndTime "2021-05-20T19:56:51.975 BST"]
+[GameStartTime "2021-05-20T19:56:38.962 BST"]
+[Opening "Anti-Borg (Desprez) Opening"]
+[PlyCount "12"]
+[Termination "illegal move"]
+[WhiteTimeControl "1/move"]
+
+1. h4 {1.0s} h6 {1.0s} 2. g4 {1.0s} h5 {1.0s} 3. f4 {1.0s} hxg4 {1.0s}
+4. e4 {1.0s} g3 {1.0s} 5. d4 {1.0s} g2 {1.0s} 6. c4 {1.0s}
+gxf1=Q+ {1.0s, White makes an illegal move: b2b4} 0-1
+
