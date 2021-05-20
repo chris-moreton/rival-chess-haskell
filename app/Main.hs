@@ -15,6 +15,7 @@ import Alias ()
 import Search.Search ( search )
 import Text.Printf ( printf )
 import Util.Utils
+import System.IO
 
 data UCIState = UCIState {
       position :: Position
@@ -25,7 +26,6 @@ data UCIState = UCIState {
 
 main :: IO ()
 main = do
-    showId
     commandCycle UCIState {position = getPosition startPosition, quit=False, errorMessage="", output=""}
 
 showId :: IO ()
@@ -36,6 +36,7 @@ showId = do
 
 commandCycle :: UCIState -> IO ()
 commandCycle uciState = do
+  hFlush stdout
   command <- getLine
   uciState' <- run uciState (splitOn " " command)
   let e = errorMessage uciState'
@@ -61,11 +62,13 @@ run uciState ("uci":xs) = do
     return uciState
 
 run uciState ("go":xs) = runGo uciState xs
+
 run uciState ("isready":xs) = do
     putStrLn "readyok"
     return uciState
 
 run uciState ("position":xs) = runPosition uciState xs
+
 run uciState ("quit":_) = return uciState{quit=True}
 
 run uciState (x:xs) = do
