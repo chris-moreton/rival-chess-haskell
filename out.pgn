@@ -383,3 +383,114 @@ Qe8+ 53. Ka5 Qf8 54. Ka6 Qe8 55. Ka7 Qf8 56. Ka8 Qe8 57. Kb8 Qf8 58. Ka8 Qe8
 1. h4 h6 2. g4 h5 3. f4 hxg4 4. e4 g3 5. d4 g2 6. c4 gxf1=Q+ 7. Kd2 g6 8. b4 g5
 9. a4 {No result} *
 
+[Event "?"]
+[Site "?"]
+[Date "2021.05.20"]
+[Round "1"]
+[White "Rival Haskell"]
+[Black "Rival Haskell"]
+[Result "*"]
+[BlackTimeControl "0.1/move"]
+[ECO "A00"]
+[GameDuration "00:00:11"]
+[GameEndTime "2021-05-20T21:20:37.660 BST"]
+[GameStartTime "2021-05-20T21:20:26.414 BST"]
+[Opening "Anti-Borg (Desprez) Opening"]
+[PlyCount "111"]
+[Termination "unterminated"]
+[WhiteTimeControl "0.1/move"]
+
+1. h4 h6 2. g4 h5 3. f4 hxg4 4. e4 g3 5. d4 g2 6. c4 gxf1=Q+ 7. Kd2 g6 8. b4 g5
+9. a4 gxf4 10. h5 f3 11. e5 f2 12. d5 fxg1=Q 13. c5 f6 14. b5 fxe5 15. a5 e4
+16. h6 e3+ 17. Kc3 e2 18. d6 exd1=Q 19. c6 exd6 20. b6 d5 21. a6 d4+ 22. Kb2 d3
+23. h7 d2 24. cxb7 dxc1=Q+ 25. Ka2 d6 26. bxa7 d5 27. hxg8=Q d4 28. bxa8=Q d3
+29. axb8=Q d2 30. a7 c6 31. Na3 c5 32. Nb5 c4 33. Nc7+ Qxc7 34. Rxh8 c3 35. Rb1
+c2 36. Rb7 Qxg8+ 37. Rb3 Qff7 38. Rxg8 Qe1 39. Rxf8+ Qxf8 40. Rb7 d1=Q 41. Rxc7
+Qee7 42. Rxc8+ Qdd8 43. Rxd8+ Qxd8 44. Qc8 Qa1+ 45. Kb3 c1=Q 46. Qcb8 Qcc8
+47. Qxc8 Qxa7 48. Qcb8 Qxa8 49. Qxa8 Qg8+ 50. Qd5 Qf8 51. Qxd8+ Kxd8 52. Ka4
+Qe8+ 53. Ka5 Qf8 54. Ka6 Qe8 55. Ka7 Qf8 56. Ka8 {No result} *
+
+[Event "?"]
+[Site "?"]
+[Date "2021.05.20"]
+[Round "1"]
+[White "Rival Haskell"]
+[Black "Rival Haskell"]
+[Result "*"]
+[BlackTimeControl "0.1/move"]
+[ECO "A00"]
+[GameDuration "00:00:08"]
+[GameEndTime "2021-05-20T21:23:04.112 BST"]
+[GameStartTime "2021-05-20T21:22:55.422 BST"]
+[Opening "Anti-Borg (Desprez) Opening"]
+[PlyCount "85"]
+[Termination "unterminated"]
+[WhiteTimeControl "0.1/move"]
+
+1. h4 h6 2. g4 h5 3. f4 hxg4 4. e4 g3 5. d4 g2 6. c4 gxf1=Q+ 7. Kd2 g6 8. b4 g5
+9. a4 gxf4 10. h5 f3 11. e5 f2 12. d5 fxg1=Q 13. c5 f6 14. b5 fxe5 15. a5 e4
+16. h6 e3+ 17. Kc3 e2 18. d6 exd1=Q 19. c6 exd6 20. b6 d5 21. a6 d4+ 22. Kb2 d3
+23. h7 d2 24. cxb7 dxc1=Q+ 25. Ka2 d6 26. bxa7 d5 27. hxg8=Q d4 28. bxa8=Q d3
+29. axb8=Q d2 30. a7 c6 31. Na3 c5 32. Nb5 c4 33. Nc7+ Qxc7 34. Rxh8 c3 35. Rb1
+c2 36. Rb7 Qxg8+ 37. Rb3 Qff7 38. Rxg8 Qe1 39. Rxf8+ Qxf8 40. Rb7 d1=Q 41. Rxc7
+Qee7 42. Rxc8+ Qdd8 43. Rxd8+ {No result} *
+
+[Event "?"]
+[Site "?"]
+[Date "2021.05.20"]
+[Round "1"]
+[White "Rival Haskell"]
+[Black "Rival Haskell"]
+[Result "0-1"]
+[BlackTimeControl "0.1/move"]
+[GameDuration "00:00:00"]
+[GameEndTime "2021-05-20T21:28:09.567 BST"]
+[GameStartTime "2021-05-20T21:28:09.466 BST"]
+[PlyCount "0"]
+[Termination "illegal move"]
+[WhiteTimeControl "0.1/move"]
+
+{White makes an illegal move: h1d1} 0-1
+
+[Event "?"]
+[Site "?"]
+[Date "2021.05.20"]
+[Round "1"]
+[White "Rival Haskell"]
+[Black "Rival Haskell"]
+[Result "1/2-1/2"]
+[BlackTimeControl "0.1/move"]
+[ECO "A00"]
+[GameDuration "00:00:04"]
+[GameEndTime "2021-05-20T21:29:44.727 BST"]
+[GameStartTime "2021-05-20T21:29:40.546 BST"]
+[Opening "Anti-Borg (Desprez) Opening"]
+[PlyCount "41"]
+[WhiteTimeControl "0.1/move"]
+
+1. h4 h6 2. g4 h5 3. f4 g6 4. e4 g5 5. d4 f6 6. c4 f5 7. b4 e6 8. a4 e5 9. d5 d6
+10. c5 c6 11. b5 b6 12. a5 a6 13. Nf3 Ne7 14. Na3 Ng8 15. Nd4 Ne7 16. Nc4 Ng8
+17. Ne6 Ne7 18. Na3 Ng8 19. Nc4 Ne7 20. Na3 Ng8
+21. Nc4 {Draw by 3-fold repetition} 1/2-1/2
+
+[Event "?"]
+[Site "?"]
+[Date "2021.05.20"]
+[Round "1"]
+[White "Rival Haskell"]
+[Black "Rival Haskell"]
+[Result "*"]
+[BlackTimeControl "0.1/move"]
+[ECO "A00"]
+[GameDuration "00:00:03"]
+[GameEndTime "2021-05-20T21:31:02.284 BST"]
+[GameStartTime "2021-05-20T21:30:59.074 BST"]
+[Opening "Anti-Borg (Desprez) Opening"]
+[PlyCount "31"]
+[Termination "unterminated"]
+[WhiteTimeControl "0.1/move"]
+
+1. h4 h6 2. g4 h5 3. gxh5 Rxh5 4. f4 Rxh4 5. Rxh4 g6 6. e4 g5 7. fxg5 f6 8. gxf6
+exf6 9. d4 f5 10. exf5 Qxh4+ 11. Kd2 Qxd4+ 12. Bd3 Qxd3+ 13. cxd3 d6 14. b4 Bxf5
+15. a4 Bxd3 16. Kxd3 {No result} *
+
