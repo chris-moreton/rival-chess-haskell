@@ -1,4 +1,3 @@
-{-# LANGUAGE BlockArguments #-}
 
 module Main where
 
@@ -10,11 +9,12 @@ import Util.Fen
       moveFromAlgebraicMove,
       getPosition,
       verifyFen )
-import Types
+import Types ( Position )
 import Search.MakeMove ( makeMove )
 import Alias ()
-import Search.Search
-import Text.Printf
+import Search.Search ( search )
+import Text.Printf ( printf )
+import Util.Utils
 
 data UCIState = UCIState {
       position :: Position
@@ -62,8 +62,14 @@ run uciState (x:xs) = do
     return uciState
 
 runGo :: UCIState -> [String] -> IO UCIState
-runGo uciState ("infinite":_) = do 
-    return uciState{output=algebraicMoveFromMove (search (position uciState))}
+runGo uciState ("infinite":_) = runGo uciState ["movetime","10000000"]
+
+runGo uciState ("movetime":xs) = do 
+    let moveTime = head xs
+    t <- timeMillis
+    let endTime = t + read moveTime
+    move <- search (position uciState) endTime
+    return uciState{output=algebraicMoveFromMove move}
 
 runPosition :: UCIState -> [String] -> IO UCIState
 runPosition uciState ("startpos":xs) = runPosition uciState (["fen",startPosition] ++ xs)
@@ -76,13 +82,13 @@ runPosition uciState ("fen":xs) = do
     if error == ""
         then do
             if not (null moveList)
-                then return uciState{position=makeMoves (getPosition fen) moveList, errorMessage=""}
+                then return uciState{position=makeAlgebraicMoves (getPosition fen) moveList, errorMessage=""}
                 else return uciState{position=getPosition fen}
         else
             return uciState{errorMessage=error}
 
-makeMoves :: Position -> [String] -> Position
-makeMoves = foldl (\ position move -> makeMove position (moveFromAlgebraicMove move))
+makeAlgebraicMoves :: Position -> [String] -> Position
+makeAlgebraicMoves = foldl (\ position move -> makeMove position (moveFromAlgebraicMove move))
 
 stringArrayToWords :: [String] -> String
 stringArrayToWords (x:xs) = x ++ concatMap (" " ++) xs

@@ -51,6 +51,7 @@ library
       base >=4.7 && <5
     , split
     , text
+    , time
     , sort
     , parallel
     , bits-extra
@@ -71,6 +72,7 @@ executable rival-exe
     , split
     , text
     , sort
+    , time
     , parallel
     , bits-extra
     , deepseq    

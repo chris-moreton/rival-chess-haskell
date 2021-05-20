@@ -2,12 +2,19 @@
 
 module Util.Utils where
 
-import Data.List
 import Types
-import Alias
-import Data.Bits
+    ( Mover(..),
+      Piece(Pawn, Queen, Rook, Bishop, Knight),
+      Position(mover) )
+import Alias ( Square, Move )
+import Data.Bits ( Bits((.&.), shiftL, shiftR) )
 import Search.MoveConstants
-import Control.Parallel
+    ( promotionBishopMoveMask,
+      promotionFullMoveMask,
+      promotionKnightMoveMask,
+      promotionQueenMoveMask,
+      promotionRookMoveMask )
+import Data.Time.Clock.POSIX ( getPOSIXTime )
 
 substring :: String -> Int -> Int -> String
 substring text start end = take (end - start) (drop start text)
@@ -43,3 +50,6 @@ opponent position = if mover position == White then Black else White
 switchSide :: Mover -> Mover
 switchSide White = Black
 switchSide Black = White
+
+timeMillis :: IO Int 
+timeMillis = round . (1000 *) <$> getPOSIXTime
