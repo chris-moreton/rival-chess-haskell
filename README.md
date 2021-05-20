@@ -5,7 +5,7 @@ This repo provides a number of useful functions for playing with chess positions
 1) generating chess moves from a given position
 2) making a move from a given position to return a new position
 
-In addition to the functions, which can be used on their own, the Main.hs app is gradually becoming a full-fledged UCI chess engine.
+In addition to the functions, which can be used on their own, the Main.hs app is gradually becoming a full-fledged UCI chess engine. It will play a legal game of chess on a UCI interface such as CuteChess or Arena, but it just selects any old move on its turn.
 
 ### Get moves for a position (does not filter checks)
 
