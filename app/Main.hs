@@ -81,8 +81,15 @@ runGo uciState ("infinite":_) = runGo uciState ["movetime","10000000"]
 runGo uciState ("movetime":xs) = do
     let moveTime = head xs
     t <- timeMillis
-    let endTime = t + read moveTime
-    move <- searchZero (position uciState) endTime
+    let endTime = t + 10000
+    move <- searchZero (position uciState) 2 endTime
+    return uciState{output="bestmove " ++ algebraicMoveFromMove (fst move)}
+
+runGo uciState ("depth":xs) = do
+    let depth = read (head xs)
+    t <- timeMillis
+    let endTime = t + 1000000
+    move <- searchZero (position uciState) depth endTime
     return uciState{output="bestmove " ++ algebraicMoveFromMove (fst move)}
 
 runPosition :: UCIState -> [String] -> IO UCIState
