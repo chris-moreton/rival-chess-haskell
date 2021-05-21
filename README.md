@@ -108,6 +108,6 @@ Counts the total number of positions in a full-width, unpruned search tree from 
 
 ### Background
 
-Rival Chess was first written in Pascal in 1988, then C++ in 1994. It was converted to Java in 2010, then to Kotlin in 2019.
+Rival Chess was first written in Pascal in 1988, then C++ in 1994. It was converted to Java in 2008, then to Kotlin in 2019.
 
-The Kotlin conversion moved the code towards a functional style, having been inspired by Cardano. I'm now rewriting it in Haskell and being forced to do it properly.
+The Kotlin conversion moved the code towards a functional style, having been inspired by Cardano. I'm now rewriting it in Haskell and being forced to do it properly. I am a terrible programmer.
