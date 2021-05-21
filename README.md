@@ -5,7 +5,35 @@ This repo provides a number of useful functions for playing with chess positions
 1) generating chess moves from a given position
 2) making a move from a given position to return a new position
 
-In addition to the functions, which can be used on their own, the Main.hs app is gradually becoming a full-fledged UCI chess engine. It will play a legal game of chess on a UCI interface such as CuteChess or Arena, but it just selects any old move on its turn.
+In addition to the functions, which can be used on their own, the Main.hs app is gradually becoming a full-fledged UCI chess engine. It will play a legal game of chess on a UCI interface. Currently it only implements a basic negamax search with no pruning and no extensions, but it understands checkmates, stalemates and the various draw situations, so it will play a passable game of beginner chess at depth 3.
+
+Example of UCI usage:
+
+    position startpos       
+    go depth 3
+    bestmove h2h4
+
+    position startpos moves e2e4 d7d5
+    go depth 3
+    bestmove e4e5
+    
+    position fen 2q1q1q1/8/1K6/8/7p/6kP/8/8 w - - 22 72      
+    go depth 3
+    bestmove b6a5
+    
+    position fen 2q1q1q1/8/1K6/8/7p/6kP/8/8 w - - 22 72 moves b6a5
+    go depth 3 
+    bestmove g8f8
+    
+    position fen 2q1q1q1/8/1K6/8/7p/6kP/8/8 w - - 22 72 moves b6a5 g8f8
+    go depth 3
+    bestmove a5b6
+    
+    position fen 2q1q1q1/8/1K6/8/7p/6kP/8/8 w - - 22 72 moves b6a5 g8f8 a5b6
+    go depth 3
+    bestmove f8c5
+
+    quit
 
 ### Get moves for a position (does not filter checks)
 
