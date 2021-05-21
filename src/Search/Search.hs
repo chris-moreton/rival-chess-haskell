@@ -43,7 +43,7 @@ search position moveZero depth endTime = do
         let newPositions = map (\move -> (makeMove position move,move)) (moves position)
         let notInCheckPositions = filter (\(p,m) -> not (isCheck p (mover position))) newPositions
         if null notInCheckPositions
-            then return (moveZero,9999)
+            then return (moveZero,(-9000)-depth)
             else do
                 evaluatedMoves <- mapM (\(p,m) -> search p moveZero (depth-1) endTime) notInCheckPositions
                 let negatedMoves = map (\(m,i) -> (m,-i)) evaluatedMoves
