@@ -13,7 +13,7 @@ import Util.Fen
 import Types ( Position )
 import Search.MakeMove ( makeMove )
 import Alias ()
-import Search.Search ( search )
+import Search.Search ( searchZero )
 import Text.Printf ( printf )
 import Util.Utils ( timeMillis )
 import System.IO ( stdout, hFlush )
@@ -48,15 +48,15 @@ commandCycle uciState = do
           exitSuccess
       else do
           if e == ""
-             then if o == "" 
-                    then commandCycle uciState' 
+             then if o == ""
+                    then commandCycle uciState'
                     else do
                         putStrLn (output uciState')
                         commandCycle uciState'{errorMessage="",output=""}
              else do
                 putStrLn e
                 commandCycle uciState'{errorMessage="",output=""}
-          
+
 run :: UCIState -> [String] -> IO UCIState
 run uciState ("uci":xs) = do
     showId
@@ -78,12 +78,12 @@ run uciState (x:xs) = do
 runGo :: UCIState -> [String] -> IO UCIState
 runGo uciState ("infinite":_) = runGo uciState ["movetime","10000000"]
 
-runGo uciState ("movetime":xs) = do 
+runGo uciState ("movetime":xs) = do
     let moveTime = head xs
     t <- timeMillis
     let endTime = t + read moveTime
-    move <- search (position uciState) endTime
-    return uciState{output="bestmove " ++ (algebraicMoveFromMove move)}
+    move <- searchZero (position uciState) endTime
+    return uciState{output="bestmove " ++ algebraicMoveFromMove (fst move)}
 
 runPosition :: UCIState -> [String] -> IO UCIState
 runPosition uciState ("startpos":xs) = runPosition uciState (["fen",startPosition] ++ xs)
