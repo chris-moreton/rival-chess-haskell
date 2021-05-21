@@ -9,12 +9,22 @@ import Search.MakeMove ( makeMove )
 import Data.Bits ( Bits(popCount) )
 import Control.Monad
 
+------------------------------------------------------
+-- example of how the IDE simplified my newbie Haskell
+------------------------------------------------------
+-- (any (\oldPos -> p == oldPos) positions)
+-- any (\oldPos -> p == oldPos) positions
+-- any (p ==) positions
+-- elem p positions
+-- p `elem` positions
+------------------------------------------------------
+
 searchZero :: [Position] -> Int -> Int -> IO (Move,Int)
 searchZero positions depth endTime = do
     let position = head positions
     let newPositions = map (\move -> (makeMove position move,move)) (moves position)
     let notInCheckPositions = filter (\(p,m) -> not (isCheck p (mover position))) newPositions
-    evaluatedMoves <- mapM (\(p,m) -> search p m depth endTime) notInCheckPositions
+    evaluatedMoves <- mapM (\(p,m) -> if p `elem` positions then return (m,1) else search p m depth endTime) notInCheckPositions
     let negatedMoves = map (\(m,i) -> (m,-i)) evaluatedMoves
     let highestRatedMove = foldr1 (\(m,s) (m',s') -> if s >= s' then (m,s) else (m',s')) negatedMoves
     return highestRatedMove
@@ -22,7 +32,7 @@ searchZero positions depth endTime = do
 search :: Position -> Move -> Int -> Int -> IO (Move,Int)
 search position moveZero 0 endTime = return (moveZero,evaluate position)
 search position moveZero depth endTime = do
-    t <- timeMillis 
+    t <- timeMillis
     if t > endTime then return (moveZero,-9999) else do
         let newPositions = map (\move -> (makeMove position move,move)) (moves position)
         let notInCheckPositions = filter (\(p,m) -> not (isCheck p (mover position))) newPositions
@@ -34,7 +44,7 @@ search position moveZero depth endTime = do
                 let highestRatedMove = foldr1 (\(m,s) (m',s') -> if s >= s' then (m,s) else (m',s')) negatedMoves
                 return highestRatedMove
 
-material :: Position -> Mover -> Int 
+material :: Position -> Mover -> Int
 material position m = popCount (bitboardForColour position m Pawn) * 100 +
                       popCount (bitboardForColour position m Bishop) * 350 +
                       popCount (bitboardForColour position m Knight) * 350 +
@@ -43,7 +53,7 @@ material position m = popCount (bitboardForColour position m Pawn) * 100 +
 
 evaluate :: Position -> Int
 evaluate position = do
-    let whiteScore = material position White - material position Black 
+    let whiteScore = material position White - material position Black
     if mover position == White then whiteScore else -whiteScore
 
 

@@ -1,0 +1,41 @@
+[Event "?"]
+[Site "?"]
+[Date "2021.05.21"]
+[Round "1"]
+[White "Rival Haskell Build 1"]
+[Black "Rival Haskell Build 2"]
+[Result "1/2-1/2"]
+[BlackTimeControl "0.01/move"]
+[ECO "B90"]
+[GameDuration "00:00:03"]
+[GameEndTime "2021-05-21T20:54:15.945 BST"]
+[GameStartTime "2021-05-21T20:54:12.424 BST"]
+[Opening "Sicilian"]
+[PlyCount "262"]
+[Variation "Najdorf, Byrne (English) attack"]
+[WhiteTimeControl "0.01/move"]
+
+1. e4 {book} c5 {book} 2. Nf3 {book} d6 {book} 3. d4 {book} cxd4 {book}
+4. Nxd4 {book} Nf6 {book} 5. Nc3 {book} a6 {book} 6. Be3 {book} Ng4 {book}
+7. Bc1 {book} h6 8. Qxg4 Bxg4 9. Bxa6 Rxa6 10. Bxh6 gxh6 11. h4 Qb6 12. g3 Qxb2
+13. f4 Qxc3+ 14. Kf2 Qxd4+ 15. Kg2 Qxe4+ 16. Kf2 Qd4+ 17. Kg2 Qd5+ 18. Kf2 Qf3+
+19. Ke1 Qxh1+ 20. Kd2 Qxa1 21. c4 Qxa2+ 22. Kc3 h5 23. f5 Bxf5 24. g4 hxg4
+25. h5 Rxh5 26. c5 Qa5+ 27. Kc4 dxc5 28. Kd5 g3 29. Ke5 g2 30. Kd5 g1=Q 31. Ke5
+c4+ 32. Kf4 c3 33. Kf3 c2 34. Kf4 c1=Q+ 35. Kf3 f6 36. Ke2 e6 37. Kf3 e5 38. Ke2
+b6 39. Kf3 e4+ 40. Ke2 e3 41. Kf3 b5 42. Kf4 e2+ 43. Kf3 Qg4+ 44. Kf2 Qc8
+45. Ke3 b4 46. Kd2 b3+ 47. Ke3 b2 48. Kf2 b1=Q 49. Ke3 Nd7 50. Kf2 Nb6 51. Ke3
+Na8 52. Kf2 Nc7 53. Ke3 Ne6 54. Kf2 Nd8 55. Ke3 Nb7 56. Kf2 Nd6 57. Ke3 Nf7
+58. Kf2 Nh8 59. Ke3 Ng6 60. Kf2 Ne7 61. Ke3 Ng8 62. Kf2 Nh6 63. Ke3 Qbb8 64. Kf2
+Ng8 65. Ke3 Ne7 66. Kf2 Nc6 67. Ke3 Nd8 68. Kf2 Nb7 69. Ke3 Nd6 70. Kf2 Nf7
+71. Ke3 Nh8 72. Kf2 Ng6 73. Ke3 Ne5 74. Kf2 Nd7 75. Ke3 Nb6 76. Kf2 Na8 77. Ke3
+Nc7 78. Kf2 Ne6 79. Ke3 Ng7 80. Kf2 Qgc4 81. Ke3 e1=Q+ 82. Kf3 Ne6 83. Kg2 Nd8
+84. Kf3 Nb7 85. Kg2 Nd6 86. Kf3 Nf7 87. Kg2 Nh8 88. Kf3 Ng6 89. Kg2 Ne7 90. Kf3
+Ng8 91. Kg2 Nh6 92. Kf3 Ng4 93. Kg2 Ne3+ 94. Kf3 Nd5 95. Kg2 Nc7 96. Kf3 Na8
+97. Kg2 Nb6 98. Kf3 Nd7 99. Kg2 Nc5 100. Kf3 Na4 101. Kg2 Nc3 102. Kf3 Nb5
+103. Kg2 Na7 104. Kf3 Nc6 105. Kg2 Nb4 106. Kf3 Nd3 107. Kg2 Nf4+ 108. Kf3 Nh3
+109. Kg2 Nf2 110. Kf3 Ne4 111. Kg2 Ng3 112. Kf3 Ne2 113. Ke3 Nf4+ 114. Kf3 Qe7
+115. Kg3 Ne6+ 116. Kf3 Nd8 117. Kf2 Nb7 118. Kf3 Nd6 119. Kg3 Nb7+ 120. Kf3 Nc5
+121. Kf2 Nd7 122. Kf3 Nb6 123. Kf2 Na8 124. Kf3 Nc7 125. Kg3 Na8+ 126. Kf3 Qc4c7
+127. Kf2 Nb6 128. Kf3 Nd7 129. Kf2 Nc5 130. Kf3 Nb7 131. Kf2
+Nd8 {Draw by fifty moves rule} 1/2-1/2
+
