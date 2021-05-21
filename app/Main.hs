@@ -82,7 +82,7 @@ runGo uciState ("movetime":xs) = do
     let moveTime = head xs
     t <- timeMillis
     let endTime = t + 10000
-    move <- searchZero (position uciState) 2 endTime
+    move <- searchZero (position uciState) 3 endTime
     return uciState{output="bestmove " ++ algebraicMoveFromMove (fst move)}
 
 runGo uciState ("depth":xs) = do

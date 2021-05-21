@@ -19,12 +19,18 @@ import Control.Monad
 -- p `elem` positions
 ------------------------------------------------------
 
+canLeadToDrawByRepetition :: Position -> [Position] -> Bool
+canLeadToDrawByRepetition p ps
+    | p `elem` ps = True
+    | or ([makeMove p m `elem` ps | m <- moves p]) = True
+    | otherwise = False
+
 searchZero :: [Position] -> Int -> Int -> IO (Move,Int)
 searchZero positions depth endTime = do
     let position = head positions
     let newPositions = map (\move -> (makeMove position move,move)) (moves position)
     let notInCheckPositions = filter (\(p,m) -> not (isCheck p (mover position))) newPositions
-    evaluatedMoves <- mapM (\(p,m) -> if p `elem` positions then return (m,1) else search p m depth endTime) notInCheckPositions
+    evaluatedMoves <- mapM (\(p,m) -> if canLeadToDrawByRepetition p positions then return (m,1) else search p m depth endTime) notInCheckPositions
     let negatedMoves = map (\(m,i) -> (m,-i)) evaluatedMoves
     let highestRatedMove = foldr1 (\(m,s) (m',s') -> if s >= s' then (m,s) else (m',s')) negatedMoves
     return highestRatedMove
