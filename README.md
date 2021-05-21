@@ -1,11 +1,20 @@
 # Haskell Chess Functions
 
-This repo provides a number of useful functions for playing with chess positions. However, they all come together to perform two main tasks...
+This repo provides a number of useful functions for playing with chess positions. You will find functions for:
 
-1) generating chess moves from a given position
-2) making a move from a given position to return a new position
+1) Generating chess moves from a given position
+2) Making a move from a given position to return a new position
+3) Determining if a given colour is in check
+4) Determining if a given square is attacked by a given colour
+5) Converting FENs and algebraic moves to internal representations for further processing
 
-In addition to the functions, which can be used on their own, the Main.hs app is gradually becoming a full-fledged UCI chess engine. It will play a legal game of chess on a UCI interface. Currently it only implements a basic negamax search with no pruning and no extensions. It understands only material values, checkmates, stalemates and the various draw situations, so it will play a passable game of beginner chess at depth 3.
+The move generation and move making routines are, as far as can be reasonably determined by perft testing (counting the total number of positions in a full game tree from a given position to a given depth and checking them against known correct values), 100% correct.
+
+Positions are represented as a collection of bitboards and move generation is performed using bitboard manipulation, including magic bitboards. I generated the magic numbers by brute force for Rival Chess in its Java incarnation 15 or so years ago. Both the bishop and rook tables can be made smaller if I get around to searching for some better numbers, or converting someone else's numbers to work with my board numbering (bit 63 = A8, bit 0 = H1).
+
+In addition to the functions, which can be used on their own, the Main.hs app is gradually becoming a full-fledged UCI chess engine. It will play a legal game of chess on a UCI interface. Currently it only implements a basic negamax search with no pruning and no extensions. It understands only material values, checkmates, stalemates and the various draw situations, so it will play a passable game of beginner chess at depth 3, but when there is nothing doing, it will just shuffle pieces about.
+
+However, by the time you read this, you probably won't be reading this, because it will have been updated to play a better game.
 
 Example of UCI usage:
 
