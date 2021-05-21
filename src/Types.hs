@@ -34,7 +34,27 @@ data Position = Position {
   , blackQueenCastleAvailable :: !Bool
   , halfMoves :: Int
   , moveNumber :: Int
-} deriving (Generic,Show,Eq,NFData)
+} deriving (Generic,Show,NFData)
+
+instance Eq Position where
+    a == b = whitePawnBitboard a == whitePawnBitboard b &&
+      whiteKnightBitboard a == whiteKnightBitboard b &&
+      whiteBishopBitboard a == whiteBishopBitboard b &&
+      whiteQueenBitboard a == whiteQueenBitboard b &&
+      whiteKingBitboard a == whiteKingBitboard b &&
+      whiteRookBitboard a == whiteRookBitboard b &&
+      blackPawnBitboard a == blackPawnBitboard b &&
+      blackKnightBitboard a == blackKnightBitboard b &&
+      blackBishopBitboard a == blackBishopBitboard b &&
+      blackQueenBitboard a == blackQueenBitboard b &&
+      blackKingBitboard a == blackKingBitboard b &&
+      blackPiecesBitboard a == blackPiecesBitboard b &&
+      enPassantSquare a == enPassantSquare b &&
+      whiteKingCastleAvailable a == whiteKingCastleAvailable b &&
+      whiteQueenCastleAvailable a == whiteQueenCastleAvailable b &&
+      blackKingCastleAvailable a == blackKingCastleAvailable b &&
+      blackQueenCastleAvailable a == blackQueenCastleAvailable b &&
+      mover a == mover b
 
 {-# INLINE bitboardForMover #-}
 bitboardForMover :: Position -> Piece -> Bitboard
