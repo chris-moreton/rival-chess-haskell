@@ -16,6 +16,15 @@ In addition to the functions, which can be used on their own, the Main.hs app is
 
 However, by the time you read this, you probably won't be reading this, because it will have been updated to play a better game.
 
+Next steps:
+
+- Iterative deepening, most importantly so that timed moves can be used.
+- Alpha-beta pruning in the negamax algorithm, so that searches greater than depth 3 can realistically be used.
+- An evaluation function, so that it doesn't play h2h4 as its opening move.
+- Extensions, quiescence, etc...
+
+This isn't my first rodeo, so it should only take a couple of weeks.
+
 Example of UCI usage:
 
     position startpos       
