@@ -9,8 +9,9 @@ import Search.MakeMove ( makeMove )
 import Data.Bits ( Bits(popCount) )
 import Control.Monad
 
-searchZero :: Position -> Int -> Int -> IO (Move,Int)
-searchZero position depth endTime = do
+searchZero :: [Position] -> Int -> Int -> IO (Move,Int)
+searchZero positions depth endTime = do
+    let position = head positions
     let newPositions = map (\move -> (makeMove position move,move)) (moves position)
     let notInCheckPositions = filter (\(p,m) -> not (isCheck p (mover position))) newPositions
     evaluatedMoves <- mapM (\(p,m) -> search p m depth endTime) notInCheckPositions

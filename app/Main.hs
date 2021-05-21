@@ -19,7 +19,7 @@ import Util.Utils ( timeMillis )
 import System.IO ( stdout, hFlush )
 
 data UCIState = UCIState {
-      position :: Position
+      position :: [Position]
     , quit :: Bool
     , errorMessage :: String
     , output :: String
@@ -27,7 +27,7 @@ data UCIState = UCIState {
 
 main :: IO ()
 main = do
-    commandCycle UCIState {position = getPosition startPosition, quit=False, errorMessage="", output=""}
+    commandCycle UCIState {position = [getPosition startPosition], quit=False, errorMessage="", output=""}
 
 showId :: IO ()
 showId = do
@@ -103,15 +103,15 @@ runPosition uciState ("fen":xs) = do
     if error == ""
         then do
             if not (null moveList)
-                then return (updatePosition uciState{position=getPosition fen} moveList)
-                else return uciState{position=getPosition fen}
+                then return (updatePosition uciState{position=[getPosition fen]} moveList)
+                else return uciState{position=[getPosition fen]}
         else
             return uciState{errorMessage=error}
 
 updatePosition :: UCIState -> [String] -> UCIState
 updatePosition uciState [] = uciState
 updatePosition uciState moveList =
-    updatePosition uciState{position=makeMove (position uciState) (moveFromAlgebraicMove(head moveList)), errorMessage=""} (tail moveList)
+    updatePosition uciState{position=makeMove (head (position uciState)) (moveFromAlgebraicMove(head moveList)) : position uciState, errorMessage=""} (tail moveList)
 
 stringArrayToWords :: [String] -> String
 stringArrayToWords (x:xs) = x ++ concatMap (" " ++) xs
