@@ -31,7 +31,7 @@ main = do
 
 showId :: IO ()
 showId = do
-    putStrLn "id name Rival Haskell Build -"
+    putStrLn "id name Rival Haskell Build 2"
     putStrLn "id author Chris Moreton"
     putStrLn "uciok"
 
@@ -103,13 +103,15 @@ runPosition uciState ("fen":xs) = do
     if error == ""
         then do
             if not (null moveList)
-                then return uciState{position=makeAlgebraicMoves (getPosition fen) moveList, errorMessage=""}
+                then return (updatePosition uciState{position=getPosition fen} moveList)
                 else return uciState{position=getPosition fen}
         else
             return uciState{errorMessage=error}
 
-makeAlgebraicMoves :: Position -> [String] -> Position
-makeAlgebraicMoves = foldl (\ position move -> makeMove position (moveFromAlgebraicMove move))
+updatePosition :: UCIState -> [String] -> UCIState
+updatePosition uciState [] = uciState
+updatePosition uciState moveList =
+    updatePosition uciState{position=makeMove (position uciState) (moveFromAlgebraicMove(head moveList)), errorMessage=""} (tail moveList)
 
 stringArrayToWords :: [String] -> String
 stringArrayToWords (x:xs) = x ++ concatMap (" " ++) xs
