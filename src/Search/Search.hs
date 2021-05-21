@@ -38,12 +38,13 @@ searchZero positions depth endTime = do
 search :: Position -> Move -> Int -> Int -> IO (Move,Int)
 search position moveZero 0 endTime = return (moveZero,evaluate position)
 search position moveZero depth endTime = do
+    if halfMoves position == 50 then return (moveZero, 0)
     t <- timeMillis
     if t > endTime then return (moveZero,-9999) else do
         let newPositions = map (\move -> (makeMove position move,move)) (moves position)
         let notInCheckPositions = filter (\(p,m) -> not (isCheck p (mover position))) newPositions
         if null notInCheckPositions
-            then return (moveZero,(-9000)-depth)
+            then return (moveZero, if isCheck position (mover position) then (-9000)-depth else 0)
             else do
                 evaluatedMoves <- mapM (\(p,m) -> search p moveZero (depth-1) endTime) notInCheckPositions
                 let negatedMoves = map (\(m,i) -> (m,-i)) evaluatedMoves
