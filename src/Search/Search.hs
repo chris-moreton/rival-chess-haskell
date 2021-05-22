@@ -44,14 +44,20 @@ search position moveZero depth low high endTime = do
                 let notInCheckPositions = filter (\(p,m) -> not (isCheck p (mover position))) (newPositions position)
                 if null notInCheckPositions
                     then return (moveZero, if isCheck position (mover position) then (-9000)-depth else 0)
-                    else highestRatedMove notInCheckPositions moveZero low high depth endTime
+                    else highestRatedMove notInCheckPositions moveZero low high depth endTime (snd (head notInCheckPositions),low)
 
-highestRatedMove :: [(Position,Move)] -> Move -> Int -> Int -> Int -> Int -> IO (Move,Int)
-highestRatedMove notInCheckPositions moveZero low high depth endTime = do
-    evaluatedMoves <- mapM (\(p,m) -> search p moveZero (depth-1) (-high) (-low) endTime) notInCheckPositions
-    let negatedMoves = map (\(m,i) -> (m,-i)) evaluatedMoves
-    let highestRatedMove = foldr1 (\(m,s) (m',s') -> if s >= s' then (m,s) else (m',s')) negatedMoves
-    return highestRatedMove
+highestRatedMove :: [(Position,Move)] -> Move -> Int -> Int -> Int -> Int -> (Move,Int) -> IO (Move,Int)
+highestRatedMove [] _ _ _ _ _ best = return best
+highestRatedMove notInCheckPositions moveZero low high depth endTime best = do
+    let thisP = head notInCheckPositions
+    (m,s) <- search (fst thisP) moveZero (depth-1) (-high) (-low) endTime
+    let negatedScore = -s
+    if negatedScore >= high
+        then return (m,negatedScore)
+        else do
+            if negatedScore > low
+                then highestRatedMove (tail notInCheckPositions) moveZero negatedScore high depth endTime (m,negatedScore)
+                else highestRatedMove (tail notInCheckPositions) moveZero low high depth endTime best
 
 newPositions :: Position -> [(Position,Move)]
 newPositions position = map (\move -> (makeMove position move,move)) (moves position)
