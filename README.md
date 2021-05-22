@@ -27,6 +27,8 @@ This isn't my first rodeo, so it should only take a couple of weeks.
 
 Example of UCI usage:
 
+From start position
+
     position startpos       
     go depth 3
     bestmove h2h4
@@ -34,19 +36,17 @@ Example of UCI usage:
     position startpos moves e2e4 d7d5
     go depth 3
     bestmove e4e5
+
+From FEN - this one is a mate in three
+
+    position fen r5rk/5p1p/5R2/4B3/8/8/7P/7K w K - 0 1
+    go depth 1
+    bestmove f6f7
+    go depth 5
+    bestmove f6a6
     
-    position fen 2q1q1q1/8/1K6/8/7p/6kP/8/8 w - - 22 72      
-    go depth 3
-    bestmove b6a5
-    
-    position fen 2q1q1q1/8/1K6/8/7p/6kP/8/8 w - - 22 72 moves b6a5
-    go depth 3 
-    bestmove g8f8
-    
-    position fen 2q1q1q1/8/1K6/8/7p/6kP/8/8 w - - 22 72 moves b6a5 g8f8
-    go depth 3
-    bestmove a5b6
-    
+You can also add moves to a FEN
+
     position fen 2q1q1q1/8/1K6/8/7p/6kP/8/8 w - - 22 72 moves b6a5 g8f8 a5b6
     go depth 3
     bestmove f8c5
