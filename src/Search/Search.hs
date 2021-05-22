@@ -23,6 +23,17 @@ canLeadToDrawByRepetition p ps
     | or ([makeMove p m `elem` ps | m <- moves p]) = True
     | otherwise = False
 
+startSearch :: [Position] -> Int -> Int -> IO (Move,Int)
+startSearch positions maxDepth endTime = iterativeDeepening positions 1 maxDepth endTime (head (moves (head positions)),0)
+
+iterativeDeepening :: [Position] -> Int -> Int -> Int -> (Move,Int) -> IO (Move,Int)
+iterativeDeepening positions depth maxDepth endTime result = do
+    result <- searchZero positions depth endTime
+    t <- timeMillis
+    if t > endTime || depth == maxDepth
+        then return result
+        else iterativeDeepening positions (depth+1) maxDepth endTime result
+
 searchZero :: [Position] -> Int -> Int -> IO (Move,Int)
 searchZero positions depth endTime = do
     let position = head positions

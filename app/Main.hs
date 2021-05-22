@@ -13,7 +13,7 @@ import Util.Fen
 import Types ( Position )
 import Search.MakeMove ( makeMove )
 import Alias ()
-import Search.Search ( searchZero )
+import Search.Search ( startSearch )
 import Text.Printf ( printf )
 import Util.Utils ( timeMillis )
 import System.IO ( stdout, hFlush )
@@ -81,15 +81,15 @@ runGo uciState ("infinite":_) = runGo uciState ["movetime","10000000"]
 runGo uciState ("movetime":xs) = do
     let moveTime = head xs
     t <- timeMillis
-    let endTime = t + 10000
-    move <- searchZero (position uciState) 3 endTime
+    let endTime = t + (read moveTime)
+    move <- startSearch (position uciState) 50 endTime
     return uciState{output="bestmove " ++ algebraicMoveFromMove (fst move)}
 
 runGo uciState ("depth":xs) = do
     let depth = read (head xs)
     t <- timeMillis
     let endTime = t + 1000000
-    move <- searchZero (position uciState) depth endTime
+    move <- startSearch (position uciState) depth endTime
     return uciState{output="bestmove " ++ algebraicMoveFromMove (fst move)}
 
 runPosition :: UCIState -> [String] -> IO UCIState
