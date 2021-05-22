@@ -28,47 +28,47 @@ startSearch positions maxDepth endTime = iterativeDeepening positions 1 maxDepth
 
 iterativeDeepening :: [Position] -> Int -> Int -> Int -> (Move,Int) -> IO (Move,Int)
 iterativeDeepening positions depth maxDepth endTime result = do
-    result <- searchZero positions depth endTime
+    result <- searchZero positions depth endTime result
     t <- timeMillis
     if t > endTime || depth == maxDepth
         then return result
         else iterativeDeepening positions (depth+1) maxDepth endTime result
 
-searchZero :: [Position] -> Int -> Int -> IO (Move,Int)
-searchZero positions depth endTime = do
+searchZero :: [Position] -> Int -> Int -> (Move,Int) -> IO (Move,Int)
+searchZero positions depth endTime rootBest = do
     let position = head positions
     let newPositions = map (\move -> (makeMove position move,move)) (moves position)
     let notInCheckPositions = filter (\(p,m) -> not (isCheck p (mover position))) newPositions
-    evaluatedMoves <- mapM (\(p,m) -> if canLeadToDrawByRepetition p positions then return (m,1) else search p m depth (-100000) 100000 endTime) notInCheckPositions
+    evaluatedMoves <- mapM (\(p,m) -> if canLeadToDrawByRepetition p positions then return (m,1) else search p m depth (-100000) 100000 endTime rootBest) notInCheckPositions
     let negatedMoves = map (\(m,i) -> (m,-i)) evaluatedMoves
     let highestRatedMove = foldr1 (\(m,s) (m',s') -> if s >= s' then (m,s) else (m',s')) negatedMoves
     return highestRatedMove
 
-search :: Position -> Move -> Int -> Int -> Int -> Int -> IO (Move,Int)
-search position moveZero 0 _ _ endTime = return (moveZero,evaluate position)
-search position moveZero depth low high endTime = do
+search :: Position -> Move -> Int -> Int -> Int -> Int -> (Move,Int) -> IO (Move,Int)
+search position moveZero 0 _ _ endTime _ = return (moveZero,evaluate position)
+search position moveZero depth low high endTime rootBest = do
     if halfMoves position == 50 
         then return (moveZero, 0) 
         else do
             t <- timeMillis
-            if t > endTime then return (moveZero,-9999) else do
+            if t > endTime then return rootBest else do
                 let notInCheckPositions = filter (\(p,m) -> not (isCheck p (mover position))) (newPositions position)
                 if null notInCheckPositions
                     then return (moveZero, if isCheck position (mover position) then (-9000)-depth else 0)
-                    else highestRatedMove notInCheckPositions moveZero low high depth endTime (snd (head notInCheckPositions),low)
+                    else highestRatedMove notInCheckPositions moveZero low high depth endTime (snd (head notInCheckPositions),low) rootBest
 
-highestRatedMove :: [(Position,Move)] -> Move -> Int -> Int -> Int -> Int -> (Move,Int) -> IO (Move,Int)
-highestRatedMove [] _ _ _ _ _ best = return best
-highestRatedMove notInCheckPositions moveZero low high depth endTime best = do
+highestRatedMove :: [(Position,Move)] -> Move -> Int -> Int -> Int -> Int -> (Move,Int) -> (Move,Int) -> IO (Move,Int)
+highestRatedMove [] _ _ _ _ _ best _ = return best
+highestRatedMove notInCheckPositions moveZero low high depth endTime best rootBest = do
     let thisP = head notInCheckPositions
-    (m,s) <- search (fst thisP) moveZero (depth-1) (-high) (-low) endTime
+    (m,s) <- search (fst thisP) moveZero (depth-1) (-high) (-low) endTime rootBest
     let negatedScore = -s
     if negatedScore >= high
         then return (m,negatedScore)
         else do
             if negatedScore > low
-                then highestRatedMove (tail notInCheckPositions) moveZero negatedScore high depth endTime (m,negatedScore)
-                else highestRatedMove (tail notInCheckPositions) moveZero low high depth endTime best
+                then highestRatedMove (tail notInCheckPositions) moveZero negatedScore high depth endTime (m,negatedScore) rootBest
+                else highestRatedMove (tail notInCheckPositions) moveZero low high depth endTime best rootBest
 
 newPositions :: Position -> [(Position,Move)]
 newPositions position = map (\move -> (makeMove position move,move)) (moves position)
