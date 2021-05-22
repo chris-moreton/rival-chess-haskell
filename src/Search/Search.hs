@@ -44,11 +44,14 @@ search position moveZero depth low high endTime = do
                 let notInCheckPositions = filter (\(p,m) -> not (isCheck p (mover position))) (newPositions position)
                 if null notInCheckPositions
                     then return (moveZero, if isCheck position (mover position) then (-9000)-depth else 0)
-                    else do
-                        evaluatedMoves <- mapM (\(p,m) -> search p moveZero (depth-1) (-high) (-low) endTime) notInCheckPositions
-                        let negatedMoves = map (\(m,i) -> (m,-i)) evaluatedMoves
-                        let highestRatedMove = foldr1 (\(m,s) (m',s') -> if s >= s' then (m,s) else (m',s')) negatedMoves
-                        return highestRatedMove
+                    else highestRatedMove notInCheckPositions moveZero low high depth endTime
+
+highestRatedMove :: [(Position,Move)] -> Move -> Int -> Int -> Int -> Int -> IO (Move,Int)
+highestRatedMove notInCheckPositions moveZero low high depth endTime = do
+    evaluatedMoves <- mapM (\(p,m) -> search p moveZero (depth-1) (-high) (-low) endTime) notInCheckPositions
+    let negatedMoves = map (\(m,i) -> (m,-i)) evaluatedMoves
+    let highestRatedMove = foldr1 (\(m,s) (m',s') -> if s >= s' then (m,s) else (m',s')) negatedMoves
+    return highestRatedMove
 
 newPositions :: Position -> [(Position,Move)]
 newPositions position = map (\move -> (makeMove position move,move)) (moves position)
@@ -64,5 +67,3 @@ evaluate :: Position -> Int
 evaluate position = do
     let whiteScore = material position White - material position Black
     if mover position == White then whiteScore else -whiteScore
-
-
