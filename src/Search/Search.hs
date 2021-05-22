@@ -74,11 +74,11 @@ newPositions position = map (\move -> (makeMove position move,move)) (moves posi
 
 isCapture :: Position -> Move -> Bool
 isCapture position move
-    | m == White = testBit (blackPiecesBitboard position) t || testBit e t
-    | otherwise = testBit (whitePiecesBitboard position) t || testBit e t
+    | m == White = testBit (blackPiecesBitboard position) t || e == t
+    | otherwise = testBit (whitePiecesBitboard position) t || e == t
     where m = mover position
           t = toSquarePart move
-          e = bit (enPassantSquare position) :: Bitboard
+          e = enPassantSquare position
 
 quiescePositions :: Position -> [(Position,Move)]
 quiescePositions position = do
@@ -95,19 +95,26 @@ material position m = popCount (bitboardForColour position m Pawn) * 100 +
 
 evaluate :: Position -> Int
 evaluate position = do
-    let whiteScore = material position White - material position Black
+    let whiteScore = (material position White) - (material position Black)
     if mover position == White then whiteScore else -whiteScore
 
 quiesce :: Position -> Int
 quiesce position = quiesceRecur position 0
 
 quiesceRecur :: Position -> Int -> Int
-quiesceRecur position 15 = evaluate position
+quiesceRecur position 2 = evaluate position
 quiesceRecur position depth = do
     let eval = evaluate position
-    let notInCheckPositions = filter (\(p,m) -> not (isCheck p (mover position))) (newPositions position)
-    let evaluatedMoves = map (\(p,m) -> quiesceRecur p (depth+1)) notInCheckPositions
-    let negatedMoves = map (\i -> -i) evaluatedMoves
-    let highestRatedMove = foldr1 (\s s' -> if s >= s' then s else s') negatedMoves
-    if highestRatedMove > eval then highestRatedMove else eval
+    let qp = quiescePositions position
+    if not (null qp)
+        then do
+            let notInCheckPositions = filter (\(p,m) -> not (isCheck p (mover position))) qp
+            if not (null notInCheckPositions)
+                then do
+                    let evaluatedMoves = map (\(p,m) -> quiesceRecur p (depth+1)) notInCheckPositions
+                    let negatedMoves = map (\i -> -i) evaluatedMoves
+                    let highestRatedMove = foldr1 (\s s' -> if s >= s' then s else s') negatedMoves
+                    if highestRatedMove > eval then highestRatedMove else eval
+                else eval
+        else eval
 
