@@ -41,8 +41,7 @@ search position moveZero depth low high endTime = do
         else do
             t <- timeMillis
             if t > endTime then return (moveZero,-9999) else do
-                let newPositions = map (\move -> (makeMove position move,move)) (moves position)
-                let notInCheckPositions = filter (\(p,m) -> not (isCheck p (mover position))) newPositions
+                let notInCheckPositions = filter (\(p,m) -> not (isCheck p (mover position))) (newPositions position)
                 if null notInCheckPositions
                     then return (moveZero, if isCheck position (mover position) then (-9000)-depth else 0)
                     else do
@@ -50,6 +49,9 @@ search position moveZero depth low high endTime = do
                         let negatedMoves = map (\(m,i) -> (m,-i)) evaluatedMoves
                         let highestRatedMove = foldr1 (\(m,s) (m',s') -> if s >= s' then (m,s) else (m',s')) negatedMoves
                         return highestRatedMove
+
+newPositions :: Position -> [(Position,Move)]
+newPositions position = map (\move -> (makeMove position move,move)) (moves position)
 
 material :: Position -> Mover -> Int
 material position m = popCount (bitboardForColour position m Pawn) * 100 +
