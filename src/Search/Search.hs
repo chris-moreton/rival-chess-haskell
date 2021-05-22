@@ -12,10 +12,8 @@ import Control.Monad
 ------------------------------------------------------
 -- example of how the IDE simplified my newbie Haskell
 ------------------------------------------------------
--- (any (\oldPos -> p == oldPos) positions)
 -- any (\oldPos -> p == oldPos) positions
 -- any (p ==) positions
--- elem p positions
 -- p `elem` positions
 ------------------------------------------------------
 
