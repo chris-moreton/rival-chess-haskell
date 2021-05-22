@@ -1,12 +1,12 @@
 module Search.Search where
 
-import Types ( Position (Position, whitePiecesBitboard, enPassantSquare), mover, halfMoves, bitboardForColour, Piece (Pawn, Bishop, Knight, Rook, Queen), Mover (White,Black) )
-import Alias ( Move )
+import Types ( Position (Position, whitePiecesBitboard, blackPiecesBitboard, enPassantSquare), mover, halfMoves, bitboardForColour, Piece (Pawn, Bishop, Knight, Rook, Queen), Mover (White,Black) )
+import Alias ( Move, Bitboard )
 import Search.MoveGenerator (moves,isCheck)
-import Util.Utils ( timeMillis )
+import Util.Utils ( timeMillis, toSquarePart )
 import Text.Printf
 import Search.MakeMove ( makeMove )
-import Data.Bits ( Bits(popCount) )
+import Data.Bits ( Bits(popCount), Bits(testBit), Bits(bit) )
 import Control.Monad
 
 ------------------------------------------------------
@@ -46,8 +46,8 @@ searchZero positions depth endTime rootBest = do
 search :: Position -> Move -> Int -> Int -> Int -> Int -> (Move,Int) -> IO (Move,Int)
 search position moveZero 0 _ _ endTime _ = return (moveZero,quiesce position)
 search position moveZero depth low high endTime rootBest = do
-    if halfMoves position == 50 
-        then return (moveZero, 0) 
+    if halfMoves position == 50
+        then return (moveZero, 0)
         else do
             t <- timeMillis
             if t > endTime then return rootBest else do
@@ -72,17 +72,19 @@ highestRatedMove notInCheckPositions moveZero low high depth endTime best rootBe
 newPositions :: Position -> [(Position,Move)]
 newPositions position = map (\move -> (makeMove position move,move)) (moves position)
 
-isCapture :: Position -> Move -> Bool 
+isCapture :: Position -> Move -> Bool
 isCapture position move
     | m == White = testBit (blackPiecesBitboard position) t || testBit e t
     | otherwise = testBit (whitePiecesBitboard position) t || testBit e t
-    where m = mover Position 
+    where m = mover position
           t = toSquarePart move
-          e = bit (enPassantSquare position)
+          e = bit (enPassantSquare position) :: Bitboard
 
 quiescePositions :: Position -> [(Position,Move)]
-quiescePositions position = 
-    filter (\(p,m) -> isCapture position m (map (\move -> (makeMove position move,move)) (moves position)))
+quiescePositions position = do
+    let m = moves position
+    let captures = filter (isCapture position) m
+    map (\m -> (makeMove position m,m)) captures
 
 material :: Position -> Mover -> Int
 material position m = popCount (bitboardForColour position m Pawn) * 100 +
@@ -97,9 +99,15 @@ evaluate position = do
     if mover position == White then whiteScore else -whiteScore
 
 quiesce :: Position -> Int
-quiesce position = quiesceZero position 0
+quiesce position = quiesceRecur position 0
 
-quiesceZero :: Position -> Int -> Int
-quiesceZero position depth = do
+quiesceRecur :: Position -> Int -> Int
+quiesceRecur position 15 = evaluate position
+quiesceRecur position depth = do
     let eval = evaluate position
+    let notInCheckPositions = filter (\(p,m) -> not (isCheck p (mover position))) (newPositions position)
+    let evaluatedMoves = map (\(p,m) -> quiesceRecur p (depth+1)) notInCheckPositions
+    let negatedMoves = map (\i -> -i) evaluatedMoves
+    let highestRatedMove = foldr1 (\s s' -> if s >= s' then s else s') negatedMoves
+    if highestRatedMove > eval then highestRatedMove else eval
 
