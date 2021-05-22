@@ -22,6 +22,7 @@ Next steps:
 - Alpha-beta pruning in the negamax algorithm, so that searches greater than depth 3 can realistically be used.
 - An evaluation function, so that it doesn't play h2h4 as its opening move.
 - Extensions, quiescence, etc...
+- Hash tables - not sure how I'm going to do this in Haskell, will leave it until last.
 
 This isn't my first rodeo, so it should only take a couple of weeks.
 
