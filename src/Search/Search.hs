@@ -44,7 +44,7 @@ searchZero positions depth endTime rootBest = do
     return highestRatedMove
 
 search :: Position -> Move -> Int -> Int -> Int -> Int -> (Move,Int) -> IO (Move,Int)
-search position moveZero 0 _ _ endTime _ = return (moveZero,quiesce position)
+search position moveZero 0 low high endTime _ = return (moveZero,quiesce position low high)
 search position moveZero depth low high endTime rootBest = do
     if halfMoves position == 50
         then return (moveZero, 0)
@@ -98,24 +98,32 @@ evaluate position = do
     let whiteScore = (material position White) - (material position Black)
     if mover position == White then whiteScore else -whiteScore
 
-quiesce :: Position -> Int
-quiesce position = quiesceRecur position 0
+quiesce :: Position -> Int -> Int -> Int
+quiesce position low high = quiesceRecur position low high 0
 
-quiesceRecur :: Position -> Int -> Int
-quiesceRecur position 20 = evaluate position
-quiesceRecur position depth = do
+quiesceRecur :: Position -> Int -> Int -> Int -> Int
+quiesceRecur position _ _ 20 = evaluate position
+quiesceRecur position low high depth = do
     let eval = evaluate position
+    let newLow = max eval low
     let qp = quiescePositions position
     let l = length qp
     if not (null qp) && l <= 5
         then do
             let notInCheckPositions = filter (\(p,m) -> not (isCheck p (mover position))) qp
             if not (null notInCheckPositions)
-                then do
-                    let evaluatedMoves = map (\(p,m) -> quiesceRecur p (depth+1)) notInCheckPositions
-                    let negatedMoves = map (\i -> -i) evaluatedMoves
-                    let highestRatedMove = foldr1 (\s s' -> if s >= s' then s else s') negatedMoves
-                    if highestRatedMove > eval then highestRatedMove else eval
-                else eval
+                then if isCheck position (mover position) then (-9000)-depth else 0
+                else highestQuiesceMove notInCheckPositions newLow high depth newLow
         else eval
 
+highestQuiesceMove :: [(Position,Move)] -> Int -> Int -> Int -> Int -> Int
+highestQuiesceMove [] _ _ _ best = best
+highestQuiesceMove notInCheckPositions low high depth best = do
+    let thisP = head notInCheckPositions
+    let negatedScore = -(quiesceRecur (fst thisP) (-high) (-low) (depth-1))
+    if negatedScore >= high
+        then negatedScore
+        else do
+            if negatedScore > low
+                then highestQuiesceMove (tail notInCheckPositions) negatedScore high depth negatedScore
+                else highestQuiesceMove (tail notInCheckPositions) low high depth best
