@@ -38,19 +38,19 @@ searchZero :: [Position] -> Int -> Int -> (Move,Int) -> IO (Move,Int)
 searchZero positions depth endTime rootBest = do
     let position = head positions
     let notInCheckPositions = filter (\(p,m) -> not (isCheck p (mover position))) (newPositions position)
-    highestRatedMoveZero notInCheckPositions positions (-100000) 100000 depth endTime (snd (head notInCheckPositions),-100000)
+    highestRatedMoveZero notInCheckPositions positions (-100000) 100000 depth endTime (snd (head notInCheckPositions),-100000) rootBest
 
-highestRatedMoveZero :: [(Position,Move)] -> [Position] -> Int -> Int -> Int -> Int -> (Move,Int) -> IO (Move,Int)
-highestRatedMoveZero [] _ _ _ _ _ best = return best
-highestRatedMoveZero (thisP:ps) positions low high depth endTime best = do
-    searchResult <- uncurry search thisP depth low high endTime best
+highestRatedMoveZero :: [(Position,Move)] -> [Position] -> Int -> Int -> Int -> Int -> (Move,Int) -> (Move,Int) -> IO (Move,Int)
+highestRatedMoveZero [] _ _ _ _ _ best _ = return best
+highestRatedMoveZero (thisP:ps) positions low high depth endTime best rootBest = do
+    searchResult <- uncurry search thisP depth low high endTime rootBest
     let (m,s) = if canLeadToDrawByRepetition (fst thisP) positions
         then (snd thisP,1)
         else searchResult
     let negatedScore = -s
     if negatedScore > low
-        then highestRatedMoveZero ps positions negatedScore high depth endTime (m,negatedScore)
-        else highestRatedMoveZero ps positions low high depth endTime best
+        then highestRatedMoveZero ps positions negatedScore high depth endTime (m,negatedScore) rootBest
+        else highestRatedMoveZero ps positions low high depth endTime best rootBest
 
 search :: Position -> Move -> Int -> Int -> Int -> Int -> (Move,Int) -> IO (Move,Int)
 search position moveZero 0 low high endTime _ = return (moveZero,quiesce position low high)
