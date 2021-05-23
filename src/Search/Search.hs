@@ -38,10 +38,20 @@ searchZero :: [Position] -> Int -> Int -> (Move,Int) -> IO (Move,Int)
 searchZero positions depth endTime rootBest = do
     let position = head positions
     let notInCheckPositions = filter (\(p,m) -> not (isCheck p (mover position))) (newPositions position)
-    evaluatedMoves <- mapM (\(p,m) -> if canLeadToDrawByRepetition p positions then return (m,1) else search p m depth (-100000) 100000 endTime rootBest) notInCheckPositions
-    let negatedMoves = map (\(m,i) -> (m,-i)) evaluatedMoves
-    let highestRatedMove = foldr1 (\(m,s) (m',s') -> if s >= s' then (m,s) else (m',s')) negatedMoves
-    return highestRatedMove
+    highestRatedMoveZero notInCheckPositions positions (-100000) 100000 depth endTime (snd (head notInCheckPositions),-100000)
+
+highestRatedMoveZero :: [(Position,Move)] -> [Position] -> Int -> Int -> Int -> Int -> (Move,Int) -> IO (Move,Int)
+highestRatedMoveZero [] _ _ _ _ _ best = return best
+highestRatedMoveZero notInCheckPositions positions low high depth endTime best = do
+    let thisP = head notInCheckPositions
+    searchResult <- search (fst thisP) (snd thisP) depth (-high) (-low) endTime best
+    let (m,s) = if canLeadToDrawByRepetition (fst thisP) positions 
+        then (snd thisP,1) 
+        else searchResult
+    let negatedScore = -s
+    if negatedScore > low
+        then highestRatedMoveZero (tail notInCheckPositions) positions negatedScore high depth endTime (m,negatedScore)
+        else highestRatedMoveZero (tail notInCheckPositions) positions low high depth endTime best
 
 search :: Position -> Move -> Int -> Int -> Int -> Int -> (Move,Int) -> IO (Move,Int)
 search position moveZero 0 low high endTime _ = return (moveZero,quiesce position low high)
@@ -102,7 +112,7 @@ quiesce :: Position -> Int -> Int -> Int
 quiesce position low high = quiesceRecur position low high 0
 
 quiesceRecur :: Position -> Int -> Int -> Int -> Int
-quiesceRecur position _ _ 20 = evaluate position
+quiesceRecur position _ _ 10 = evaluate position
 quiesceRecur position low high depth = do
     let eval = evaluate position
     let newLow = max eval low
