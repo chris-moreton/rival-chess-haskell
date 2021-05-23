@@ -42,16 +42,15 @@ searchZero positions depth endTime rootBest = do
 
 highestRatedMoveZero :: [(Position,Move)] -> [Position] -> Int -> Int -> Int -> Int -> (Move,Int) -> IO (Move,Int)
 highestRatedMoveZero [] _ _ _ _ _ best = return best
-highestRatedMoveZero notInCheckPositions positions low high depth endTime best = do
-    let thisP = head notInCheckPositions
-    searchResult <- search (fst thisP) (snd thisP) depth (-high) (-low) endTime best
-    let (m,s) = if canLeadToDrawByRepetition (fst thisP) positions 
-        then (snd thisP,1) 
+highestRatedMoveZero (thisP:ps) positions low high depth endTime best = do
+    searchResult <- uncurry search thisP depth low high endTime best
+    let (m,s) = if canLeadToDrawByRepetition (fst thisP) positions
+        then (snd thisP,1)
         else searchResult
     let negatedScore = -s
     if negatedScore > low
-        then highestRatedMoveZero (tail notInCheckPositions) positions negatedScore high depth endTime (m,negatedScore)
-        else highestRatedMoveZero (tail notInCheckPositions) positions low high depth endTime best
+        then highestRatedMoveZero ps positions negatedScore high depth endTime (m,negatedScore)
+        else highestRatedMoveZero ps positions low high depth endTime best
 
 search :: Position -> Move -> Int -> Int -> Int -> Int -> (Move,Int) -> IO (Move,Int)
 search position moveZero 0 low high endTime _ = return (moveZero,quiesce position low high)
