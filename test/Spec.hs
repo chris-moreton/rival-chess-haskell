@@ -566,6 +566,13 @@ main = hspec $ do
                      (getPosition "rnbqkbnr/p1p2ppp/8/1BPpp3/4PP2/8/PP1P2PP/RNBQK1NR b KQkq - 0 1",moveFromAlgebraicMove "f1b5")
                      ]
 
+  describe "quiesce" $
+    it "evaluates a position using a quiescence search" $ do
+        let position = getPosition "rnbqkbnr/ppp3pp/5p2/3PB1N1/2P4P/8/PP1P1PP1/RNBQK2R w KQkq - 0 1"
+        quiesce position `shouldBe` 200
+        let position = getPosition "rnbqkbnr/ppp3pp/5p2/3PB1N1/2P4P/8/PP1P1PP1/RNBQK2R b KQkq - 0 1"
+        quiesce position `shouldBe` 150
+
   -- describe "Perft Test" $
   --  it "Returns the total number of moves in a full move tree of a given depth with a given position as its head" $ do
   --    perft (getPosition "8/p7/8/1P6/K1k3pP/6P1/8/8 b - h3 0 1") 0 `shouldBe` 8

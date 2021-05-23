@@ -102,7 +102,7 @@ quiesce :: Position -> Int
 quiesce position = quiesceRecur position 0
 
 quiesceRecur :: Position -> Int -> Int
-quiesceRecur position 2 = evaluate position
+quiesceRecur position 30 = evaluate position
 quiesceRecur position depth = do
     let eval = evaluate position
     let qp = quiescePositions position
