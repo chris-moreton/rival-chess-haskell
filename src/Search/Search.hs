@@ -102,11 +102,12 @@ quiesce :: Position -> Int
 quiesce position = quiesceRecur position 0
 
 quiesceRecur :: Position -> Int -> Int
-quiesceRecur position 30 = evaluate position
+quiesceRecur position 20 = evaluate position
 quiesceRecur position depth = do
     let eval = evaluate position
     let qp = quiescePositions position
-    if not (null qp)
+    let l = length qp
+    if l > 1 && l <= 5
         then do
             let notInCheckPositions = filter (\(p,m) -> not (isCheck p (mover position))) qp
             if not (null notInCheckPositions)

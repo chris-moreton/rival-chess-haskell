@@ -565,6 +565,8 @@ main = hspec $ do
                      (getPosition "rnbqkbnr/p1p2ppp/3P4/1p2p3/4PP2/8/PP1P2PP/RNBQKBNR b KQkq - 0 1",moveFromAlgebraicMove "c5d6"),
                      (getPosition "rnbqkbnr/p1p2ppp/8/1BPpp3/4PP2/8/PP1P2PP/RNBQK1NR b KQkq - 0 1",moveFromAlgebraicMove "f1b5")
                      ]
+      quiescePositions (getPosition "rnbqkbn1/ppp4r/5p2/3P4/2P4P/8/PP1P1PP1/RNBQK2R w KQq - 0 1") `shouldBe` []
+
 
   describe "quiesce" $
     it "evaluates a position using a quiescence search" $ do
