@@ -107,7 +107,7 @@ quiesceRecur position depth = do
     let eval = evaluate position
     let qp = quiescePositions position
     let l = length qp
-    if l > 1 && l <= 5
+    if not (null qp) && l <= 5
         then do
             let notInCheckPositions = filter (\(p,m) -> not (isCheck p (mover position))) qp
             if not (null notInCheckPositions)
