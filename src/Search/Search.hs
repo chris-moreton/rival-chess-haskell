@@ -108,19 +108,19 @@ quiesceRecur position low high depth = do
     let newLow = max eval low
     let qp = quiescePositions position
     let l = length qp
-    if not (null qp) && l <= 5
+    if not (null qp)
         then do
             let notInCheckPositions = filter (\(p,m) -> not (isCheck p (mover position))) qp
-            if not (null notInCheckPositions)
+            if null notInCheckPositions
                 then if isCheck position (mover position) then (-9000)-depth else 0
                 else highestQuiesceMove notInCheckPositions newLow high depth newLow
-        else eval
+        else newLow
 
 highestQuiesceMove :: [(Position,Move)] -> Int -> Int -> Int -> Int -> Int
 highestQuiesceMove [] _ _ _ best = best
 highestQuiesceMove notInCheckPositions low high depth best = do
     let thisP = head notInCheckPositions
-    let negatedScore = -(quiesceRecur (fst thisP) (-high) (-low) (depth-1))
+    let negatedScore = -(quiesceRecur (fst thisP) (-high) (-low) (depth+1))
     if negatedScore >= high
         then negatedScore
         else do

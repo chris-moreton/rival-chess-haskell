@@ -570,10 +570,11 @@ main = hspec $ do
 
   describe "quiesce" $
     it "evaluates a position using a quiescence search" $ do
-        let position = getPosition "rnbqkbnr/ppp3pp/5p2/3PB1N1/2P4P/8/PP1P1PP1/RNBQK2R w KQkq - 0 1"
-        quiesce position -100000 100000 `shouldBe` 200
         let position = getPosition "rnbqkbnr/ppp3pp/5p2/3PB1N1/2P4P/8/PP1P1PP1/RNBQK2R b KQkq - 0 1"
         quiesce position -100000 100000 `shouldBe` 150
+        let position = getPosition "rnbqkbnr/ppp3pp/5p2/3PB1N1/2P4P/8/PP1P1PP1/RNBQK2R w KQkq - 0 1"
+        quiesce position -100000 100000 `shouldBe` 200
+
 
   -- describe "Perft Test" $
   --  it "Returns the total number of moves in a full move tree of a given depth with a given position as its head" $ do
