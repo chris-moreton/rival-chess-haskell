@@ -32,7 +32,6 @@ startSearch (p:ps) maxDepth endTime = do
 
 iterativeDeepening :: [Position] -> Int -> Int -> Int -> (Move,Int) -> IO (Move,Int)
 iterativeDeepening positions depth maxDepth endTime result = do
-    --putStrLn $ "Current best is " ++ algebraicMoveFromMove (fst result)
     result <- searchZero positions depth endTime result
     t <- timeMillis
     if t > endTime || depth == maxDepth
@@ -54,17 +53,16 @@ highestRatedMoveZero notInCheckPositions positions low high depth endTime best r
     -- let highestRatedMove = foldr1 (\(m,s) (m',s') -> if s >= s' then (m,s) else (m',s')) negatedMoves
     -- return highestRatedMove
 
-   --putStrLn $ "Highest Rated Move is " ++ algebraicMoveFromMove (fst best)
    let thisP = head notInCheckPositions
+
    let ps = tail notInCheckPositions
    searchResult <- uncurry search thisP depth (-high) (-low) endTime rootBest
    let (m,s) = if canLeadToDrawByRepetition (fst thisP) positions
        then (snd thisP,1)
        else searchResult
    let negatedScore = -s
-   --putStrLn $ "Score " ++ show negatedScore ++ " for " ++ algebraicMoveFromMove m
-   if negatedScore > low
-       then highestRatedMoveZero ps positions negatedScore high depth endTime (m,negatedScore) rootBest
+   if negatedScore >= low
+       then highestRatedMoveZero ps positions negatedScore high depth endTime (snd thisP,negatedScore) rootBest
        else highestRatedMoveZero ps positions low high depth endTime best rootBest
 
 search :: Position -> Move -> Int -> Int -> Int -> Int -> (Move,Int) -> IO (Move,Int)
