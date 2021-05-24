@@ -56,7 +56,7 @@ highestRatedMoveZero notInCheckPositions positions low high depth endTime best r
        then (snd thisP,1)
        else searchResult
    let negatedScore = -s
-   if negatedScore >= low
+   if negatedScore > low
        then highestRatedMoveZero ps positions negatedScore high depth endTime (m,negatedScore) rootBest
        else highestRatedMoveZero ps positions low high depth endTime best rootBest
 

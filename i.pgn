@@ -1,0 +1,28 @@
+[Event "?"]
+[Site "?"]
+[Date "2021.05.24"]
+[Round "62"]
+[White "Rival Haskell Build 28"]
+[Black "Rival Haskell Build 22"]
+[Result "0-1"]
+[BlackTimeControl "1/move"]
+[ECO "B92"]
+[GameDuration "00:00:16"]
+[GameEndTime "2021-05-24T20:47:01.746 BST"]
+[GameStartTime "2021-05-24T20:46:45.255 BST"]
+[Opening "Sicilian"]
+[PlyCount "48"]
+[Termination "illegal move"]
+[Variation "Najdorf, Opovcensky Variation"]
+[WhiteTimeControl "1/move"]
+
+1. e4 {book} c5 {book} 2. Nf3 {book} d6 {book} 3. d4 {book} cxd4 {book}
+4. Nxd4 {book} Nf6 {book} 5. Nc3 {book} a6 {book} 6. Be2 {book} e5 {book}
+7. Nb3 {book} Be7 {book} 8. O-O {book} O-O {book} 9. a4 {book} Be6 {book}
+10. Bf3 {book} Nc6 {book} 11. Nd5 {book} Bxd5 {book} 12. exd5 {book} Na5 {book}
+13. Nd2 {book} Rc8 {book} 14. b3 {book} Qc7 {book} 15. Ra2 {book} b6 {book}
+16. Re1 {book} Ra8 {book} 17. g3 {book} b5 {1.0s} 18. Kh1 {1.0s} bxa4 {1.0s}
+19. h4 {1.2s} axb3 {1.1s} 20. c4 {1.0s} bxa2 {1.0s} 21. g4 {1.0s} a1=Q {1.0s}
+22. h5 {1.0s} e4 {1.0s} 23. Kg1 {1.0s} e3 {1.0s} 24. g5 {1.1s}
+exf2+ {1.0s, White makes an illegal move: d2f1} 0-1
+
