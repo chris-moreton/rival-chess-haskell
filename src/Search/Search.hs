@@ -1,12 +1,12 @@
 module Search.Search where
 
-import Types ( Position (Position), mover, halfMoves, bitboardForColour, Piece (Pawn, Bishop, Knight, Rook, Queen), Mover (White,Black) )
-import Alias ( Move )
+import Types ( Position (Position, whitePiecesBitboard, blackPiecesBitboard, enPassantSquare), mover, halfMoves, bitboardForColour, Piece (Pawn, Bishop, Knight, Rook, Queen), Mover (White,Black) )
+import Alias ( Move, Bitboard )
 import Search.MoveGenerator (moves,isCheck)
-import Util.Utils ( timeMillis )
+import Util.Utils ( timeMillis, toSquarePart )
 import Text.Printf
 import Search.MakeMove ( makeMove )
-import Data.Bits ( Bits(popCount) )
+import Data.Bits ( Bits(popCount), Bits(testBit), Bits(bit) )
 import Control.Monad
 
 ------------------------------------------------------
@@ -59,7 +59,7 @@ highestRatedMoveZero notInCheckPositions positions low high depth endTime best r
 --        else highestRatedMoveZero ps positions low high depth endTime best rootBest
 
 search :: Position -> Move -> Int -> Int -> Int -> Int -> (Move,Int) -> IO (Move,Int)
-search position moveZero 0 _ _ endTime _ = return (moveZero,quiesce position low high)
+search position moveZero 0 low high endTime _ = return (moveZero,quiesce position low high)
 search position moveZero depth low high endTime rootBest = do
     if halfMoves position == 50 
         then return (moveZero, 0) 

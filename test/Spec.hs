@@ -19,6 +19,7 @@ import Types
 import Data.Bits
 import Data.Sort
 import Search.MakeMove
+import Search.Search
 
 main :: IO ()
 main = hspec $ do
@@ -527,145 +528,172 @@ main = hspec $ do
                 `shouldBe` (getPosition "rnbqkbnr/pppppppp/8/8/8/4P3/PPPP1PPP/RNBQK2R b KQkq - 0 1")
     makeMove (getPosition "r3k2r/pppppppp/2n1b3/2bn1q2/8/4P3/PPPP1PPP/RNBQK2R b KQq - 0 1")
              (moveFromAlgebraicMove "e8c8")
-                `shouldBe` (getPosition "2kr3r/pppppppp/2n1b3/2bn1q2/8/4P3/PPPP1PPP/RNBQK2R w KQ - 1 2")
+                `shouldBe` getPosition "2kr3r/pppppppp/2n1b3/2bn1q2/8/4P3/PPPP1PPP/RNBQK2R w KQ - 1 2"
     makeMove (getPosition "r3k2r/pppppppp/2n1b3/2bn1q2/8/4P3/PPPP1PPP/RNBQK2R b KQq - 0 1")
              (moveFromAlgebraicMove "e8d8")
-                `shouldBe` (getPosition "r2k3r/pppppppp/2n1b3/2bn1q2/8/4P3/PPPP1PPP/RNBQK2R w KQ - 1 2")
+                `shouldBe` getPosition "r2k3r/pppppppp/2n1b3/2bn1q2/8/4P3/PPPP1PPP/RNBQK2R w KQ - 1 2"
     makeMove (getPosition "r3k2r/pppppppp/2n1b3/2bn1q2/8/4P3/PPPP1PPP/RNBQK2R b KQq - 0 1")
              (moveFromAlgebraicMove "h8g8")
-                `shouldBe` (getPosition "r3k1r1/pppppppp/2n1b3/2bn1q2/8/4P3/PPPP1PPP/RNBQK2R w KQq - 1 2")
+                `shouldBe` getPosition "r3k1r1/pppppppp/2n1b3/2bn1q2/8/4P3/PPPP1PPP/RNBQK2R w KQq - 1 2"
     makeMove (getPosition "2kr3r/pppppp1p/2n1b3/2bn1q2/4Pp2/8/PPPP1PPP/RNBQK2R b KQ e3 15 1")
              (moveFromAlgebraicMove "f4e3")
-                `shouldBe` (getPosition "2kr3r/pppppp1p/2n1b3/2bn1q2/8/4p3/PPPP1PPP/RNBQK2R w KQ - 0 2")
+                `shouldBe` getPosition "2kr3r/pppppp1p/2n1b3/2bn1q2/8/4p3/PPPP1PPP/RNBQK2R w KQ - 0 2"
     makeMove (getPosition "2kr3r/ppppppPp/2n1b3/2bn1q2/8/4p3/PPPP1P1P/RNBQK2R w KQ - 12 1")
              (moveFromAlgebraicMove "g7h8r")
-                `shouldBe` (getPosition "2kr3R/pppppp1p/2n1b3/2bn1q2/8/4p3/PPPP1P1P/RNBQK2R b KQ - 0 1")
+                `shouldBe` getPosition "2kr3R/pppppp1p/2n1b3/2bn1q2/8/4p3/PPPP1P1P/RNBQK2R b KQ - 0 1"
     makeMove (getPosition "2kr3R/pppp1p1p/2n1b3/2bn1q2/8/4p3/PPPP1PpP/RNBQK2R b KQ - 0 1")
              (moveFromAlgebraicMove "g2g1q")
-                `shouldBe` (getPosition "2kr3R/pppp1p1p/2n1b3/2bn1q2/8/4p3/PPPP1P1P/RNBQK1qR w KQ - 0 2")
+                `shouldBe` getPosition "2kr3R/pppp1p1p/2n1b3/2bn1q2/8/4p3/PPPP1P1P/RNBQK1qR w KQ - 0 2"
     makeMove (getPosition "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1")
              (moveFromAlgebraicMove "e2e4")
-                `shouldBe` (getPosition "rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR b KQkq e3 0 1")
+                `shouldBe` getPosition "rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR b KQkq e3 0 1"
 
-  describe "Perft Test" $
-   it "Returns the total number of moves in a full move tree of a given depth with a given position as its head" $ do
-     perft (getPosition "8/p7/8/1P6/K1k3pP/6P1/8/8 b - h3 0 1") 0 `shouldBe` 8
-     perft (getPosition "5k2/5p1p/p3B1p1/P5P1/3K1P1P/8/8/8 b - -") 0 `shouldBe` 9
-     perft (getPosition "8/2p5/3p4/KP5r/1R3p1k/8/4P1P1/8 w - -") 0 `shouldBe` 14
-     perft (getPosition "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1") 0 `shouldBe` 20
-     perft (getPosition "rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR b KQkq - 0 1") 0 `shouldBe` 20
-     perft (getPosition "r3k2r/p6p/8/B7/1pp1p3/3b4/P6P/R3K2R w KQkq -") 0 `shouldBe` 17
-     perft (getPosition "r3k2r/p6p/8/B7/1pp1p3/3b4/P6P/R3KR2 b Qkq - 0 1") 0 `shouldBe` 17
-     perft (getPosition "r3k2r/p6p/8/8/1Bp1p3/3b4/P6P/R3K2R b KQkq - 0 1") 0 `shouldBe` 19     
-     perft (getPosition "r3k2r/p6p/8/B7/1pp1p3/3b4/P6P/R3K1R1 b Qkq - 0 1") 0 `shouldBe` 19
-     perft (getPosition "r3k2r/p6p/8/B7/1pp1p3/3b4/P6P/1R2K2R b Kkq - 0 1") 0 `shouldBe` 20
-     perft (getPosition "r3k2r/p6p/8/B7/1pp1p3/3b4/P6P/2R1K2R b Kkq - 0 1") 0 `shouldBe` 20
-     perft (getPosition "r3k2r/p6p/8/B7/1pp1p3/3b4/P6P/3RK2R b Kkq - 0 1") 0 `shouldBe` 20
-     perft (getPosition "r3k2r/p6p/8/B7/1pp1p3/3b4/P4K1P/R6R b kq - 0 1") 0 `shouldBe` 20
-     perft (getPosition "r3k2r/p6p/8/B7/1pp1p2P/3b4/P7/R3K2R b KQkq - 0 1") 0 `shouldBe` 20
-     perft (getPosition "r3k2r/p6p/8/B7/1pp1p3/3b3P/P7/R3K2R b KQkq - 0 1") 0 `shouldBe` 20
-     perft (getPosition "r3k2r/p6p/8/B7/1pp1p3/3b4/P2K3P/R6R b kq - 0 1") 0 `shouldBe` 20
-     perft (getPosition "r3k2r/p6p/8/B7/1pp1p3/3b4/P6P/R2K3R b kq - 0 1") 0 `shouldBe` 20
-     perft (getPosition "r3k2r/p6p/8/B7/1pp1p3/3b4/P6P/2KR3R b kq - 0 1") 0 `shouldBe` 20
-     perft (getPosition "r3k2r/p6p/8/B7/Ppp1p3/3b4/7P/R3K2R b KQkq a3 0 1") 0 `shouldBe` 21
-     perft (getPosition "r3k2r/p6p/8/B7/1pp1p3/P2b4/7P/R3K2R b KQkq - 0 1") 0 `shouldBe` 21
-     perft (getPosition "r3k2r/p1B4p/8/8/1pp1p3/3b4/P6P/R3K2R b KQkq - 0 1") 0 `shouldBe` 21
-     perft (getPosition "r2Bk2r/p6p/8/8/1pp1p3/3b4/P6P/R3K2R b KQkq - 0 1") 0 `shouldBe` 21
-     perft (getPosition "r3k2r/p6p/1B6/8/1pp1p3/3b4/P6P/R3K2R b KQkq - 0 1") 0 `shouldBe` 22
-     perft (getPosition "8/p7/8/1P6/K1k3pP/6P1/8/8 b - h3 0 1") 1 `shouldBe` 41
-     perft (getPosition "8/8/8/KP6/5pPk/8/4P3/8 b - g3 0 1") 1 `shouldBe` 46
-     perft (getPosition "r3k2r/p1ppqpb1/bn2pnp1/3PN3/1p2P3/2N2Q1p/PPPBBPPP/R3K2R w KQkq -") 0 `shouldBe` 48
-     perft (getPosition "8/2p5/8/KP6/5pPk/8/4P3/8 b - g3 0 1") 1 `shouldBe` 57
-     perft (getPosition "8/2p5/3p4/KP6/5pPk/8/4P3/8 b - g3 0 1") 1 `shouldBe` 64
-     perft (getPosition "4k3/8/8/8/8/8/PPPPPPPP/RNBQKBNR w KQ - 0 1") 1 `shouldBe` 100
-     perft (getPosition "5k2/5p1p/p3B1p1/P5P1/3K1P1P/8/8/8 b - -") 1 `shouldBe` 169
-     perft (getPosition "8/2p5/3p4/KP5r/1R2Pp1k/8/6P1/8 b - e3 0 1") 1 `shouldBe` 177
-     perft (getPosition "8/8/3p4/KPp4r/1R3p1k/4P3/6P1/8 w - c6 0 1") 1 `shouldBe` 190
-     perft (getPosition "8/2p5/3p4/KP5r/1R3p1k/8/4P1P1/8 w - -") 1 `shouldBe` 191
-     perft (getPosition "8/2p5/3p4/KP5r/R4p1k/8/4P1P1/8 b - - 0 1") 1 `shouldBe` 202
-     perft (getPosition "8/2p5/3p4/1P5r/KR3p1k/8/4P1P1/8 b - - 0 1") 1 `shouldBe` 224
-     perft (getPosition "8/2p5/3p4/KP5r/1R3pPk/8/4P3/8 b - g3 0 1") 1 `shouldBe` 226
-     perft (getPosition "8/2p5/K2p4/1P5r/1R3p1k/8/4P1P1/8 b - - 0 1") 1 `shouldBe` 240
-     perft (getPosition "8/3K4/2p5/p2b2r1/5k2/8/8/1q6 b - - 1 67") 1 `shouldBe` 279
-     perft (getPosition "r3k2r/p6p/8/B7/1pp1p3/3b4/P6P/R2K3R b kq - 0 1") 1 `shouldBe` 300
-     perft (getPosition "r3k2r/p6p/8/B7/1pp1p3/3b4/P6P/1R2K2R b Kkq - 0 1") 1 `shouldBe` 377
-     perft (getPosition "r3k2r/p6p/8/B7/1pp1p3/3b4/P6P/3RK2R b Kkq - 0 1") 1 `shouldBe` 365
-     perft (getPosition "r3k2r/p6p/8/B7/1pp1p3/3b3P/P7/R3K2R b KQkq - 0 1") 1 `shouldBe` 339
-     perft (getPosition "r3k2r/p6p/8/B7/Ppp1p3/3b4/7P/R3K2R b KQkq a3 0 1") 1 `shouldBe` 357
-     perft (getPosition "r3k2r/p6p/8/B7/1pp1p2P/3b4/P7/R3K2R b KQkq - 0 1") 1 `shouldBe` 358
-     perft (getPosition "r3k2r/p6p/8/B7/1pp1p3/P2b4/7P/R3K2R b KQkq - 0 1") 1 `shouldBe` 376
-     perft (getPosition "r3k2r/p6p/8/B7/1pp1p3/3b4/P6P/2R1K2R b Kkq - 0 1") 1 `shouldBe` 380
-     perft (getPosition "r3k2r/p6p/8/B7/1pp1p3/3b4/P6P/2KR3R b kq - 0 1") 1 `shouldBe` 385
-     perft (getPosition "r3k2r/p6p/8/B7/1pp1p3/3b4/P6P/R3KR2 b Qkq - 0 1") 1 `shouldBe` 395
-     perft (getPosition "r3k2r/p6p/8/8/1Bp1p3/3b4/P6P/R3K2R b KQkq - 0 1") 1 `shouldBe` 395
-     perft (getPosition "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1") 1 `shouldBe` 400
-     perft (getPosition "r2Bk2r/p6p/8/8/1pp1p3/3b4/P6P/R3K2R b KQkq - 0 1") 1 `shouldBe` 403
-     perft (getPosition "r3k2r/p6p/8/B7/1pp1p3/3b4/P4K1P/R6R b kq - 0 1") 1 `shouldBe` 437
-     perft (getPosition "r3k2r/p6p/8/B7/1pp1p3/3b4/P2K3P/R6R b kq - 0 1") 1 `shouldBe` 437
-     perft (getPosition "r3k2r/p1B4p/8/8/1pp1p3/3b4/P6P/R3K2R b KQkq - 0 1") 1 `shouldBe` 438
-     perft (getPosition "r3k2r/p6p/8/B7/1pp1p3/3b4/P6P/R3K1R1 b Qkq - 0 1") 1 `shouldBe` 454
-     perft (getPosition "r3k2r/p6p/1B6/8/1pp1p3/3b4/P6P/R3K2R b KQkq - 0 1") 1 `shouldBe` 470
-     perft (getPosition "r3k2r/p1ppqpb1/bn2pnp1/3PN3/1p2P3/2N2Q1p/PPPBBPPP/R3K2R w KQkq -") 1 `shouldBe` 2039
-     perft (getPosition "8/2p5/3p4/KP5r/1R3pPk/8/4P3/8 b - g3 0 1") 2 `shouldBe` 3702
-     perft (getPosition "8/2p5/3p4/KP5r/1R3p1k/8/4P1P1/8 w - -") 2 `shouldBe` 2812
-     perft (getPosition "8/2p5/3p4/KP5r/1R3p1k/8/4P1P1/8 w - -") 3 `shouldBe` 43238
-     perft (getPosition "r3k2r/p1ppqpb1/bn2pnp1/3PN3/1p2P3/2N2Q1p/PPPBBPPP/R3K2R w KQkq -") 2 `shouldBe` 97862
-     perft (getPosition "8/2p5/3p4/KP5r/1R3p1k/8/4P1P1/8 w - -") 4 `shouldBe` 674624
+  describe "isCapture" $
+    it "returns if a move is a capture" $ do
+      let position = getPosition "rnbqkbnr/p1p2ppp/8/1pPpp3/4PP2/8/PP1P2PP/RNBQKBNR w KQkq d6 0 1"
+      isCapture position (moveFromAlgebraicMove "f4e5") `shouldBe` True
+      isCapture position (moveFromAlgebraicMove "c5d6") `shouldBe` True
+      isCapture position (moveFromAlgebraicMove "c5c6") `shouldBe` False
 
-     perft (getPosition "r3k2r/p1ppqpb1/bn2pnp1/3PN3/1p2P3/2N2Q1p/PPPBBPPP/R3K2R w KQkq -") 3 `shouldBe` 4085603
-     perft (getPosition "r3k2r/p6p/8/B7/1pp1p3/3b4/P6P/2KR3R b kq - 0 1") 4 `shouldBe` 4238116
-     perft (getPosition "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1") 4 `shouldBe` 4865609
-     perft (getPosition "8/2p5/3p4/KP5r/1R3p1k/8/4P1P1/8 w - -") 5 `shouldBe` 11030083
-     perft (getPosition "rnbqkb1r/ppppp1pp/7n/4Pp2/8/8/PPPP1PPP/RNBQKBNR w KQkq f6 0 3") 4 `shouldBe` 11139762
-     perft (getPosition "8/7p/p5pb/4k3/P1pPn3/8/P5PP/1rB2RK1 b - d3 0 28") 5 `shouldBe` 38633283
-     perft (getPosition "8/2p5/3p4/KP5r/1R3p1k/8/4P1P1/8 w - -") 6 `shouldBe` 178633661
+  describe "quiescePositions" $
+    it "returns a list of positions and the move that caused them where the move is a capture" $ do
+      let position = getPosition "rnbqkbnr/p1p2ppp/8/1pPpp3/4PP2/8/PP1P2PP/RNBQKBNR w KQkq d6 0 1"
+      let qp = quiescePositions position
+      length qp `shouldBe` 4
+      qp `shouldBe` [(getPosition "rnbqkbnr/p1p2ppp/8/1pPpP3/4P3/8/PP1P2PP/RNBQKBNR b KQkq - 0 1",moveFromAlgebraicMove "f4e5"),
+                     (getPosition "rnbqkbnr/p1p2ppp/8/1pPPp3/5P2/8/PP1P2PP/RNBQKBNR b KQkq - 0 1",moveFromAlgebraicMove "e4d5"),
+                     (getPosition "rnbqkbnr/p1p2ppp/3P4/1p2p3/4PP2/8/PP1P2PP/RNBQKBNR b KQkq - 0 1",moveFromAlgebraicMove "c5d6"),
+                     (getPosition "rnbqkbnr/p1p2ppp/8/1BPpp3/4PP2/8/PP1P2PP/RNBQK1NR b KQkq - 0 1",moveFromAlgebraicMove "f1b5")
+                     ]
+      quiescePositions (getPosition "rnbqkbn1/ppp4r/5p2/3P4/2P4P/8/PP1P1PP1/RNBQK2R w KQq - 0 1") `shouldBe` []
 
-     --perft (getPosition "8/2p5/3p4/KP5r/1R3p1k/8/4P1P1/8 w - -") 7 `shouldBe` 3009794393
-     --perft (getPosition "r3k2r/p1ppqpb1/bn2pnp1/3PN3/1p2P3/2N2Q1p/PPPBBPPP/R3K2R w KQkq -") 4 `shouldBe` 193690690
-     --perft (getPosition "r3k2r/p1ppqpb1/bn2pnp1/3PN3/1p2P3/2N2Q1p/PPPBBPPP/R3K2R w KQkq -") 5 `shouldBe` 8031647685     
-     --perft (getPosition "8/2p5/3p4/KP5r/1R3p1k/8/4P1P1/8 w - -") 6 `shouldBe` 178633661
+  describe "quiesce" $
+    it "evaluates a position using a quiescence search" $ do
+        let position = getPosition "rnbqkbnr/ppp3pp/5p2/3PB1N1/2P4P/8/PP1P1PP1/RNBQK2R b KQkq - 0 1"
+        quiesce position -100000 100000 `shouldBe` 150
+        let position = getPosition "rnbqkbnr/ppp3pp/5p2/3PB1N1/2P4P/8/PP1P1PP1/RNBQK2R w KQkq - 0 1"
+        quiesce position -100000 100000 `shouldBe` 200
 
-     perft (getPosition "5k2/5p1p/p3B1p1/P5P1/3K1P1P/8/8/8 b - -") 3 `shouldBe` 20541
-     perft (getPosition "n1n5/PPPk4/8/8/8/8/4Kppp/5N1N b - - 0 1") 3 `shouldBe` 182838
 
-     perft (getPosition "r3k2r/p6p/8/B7/1pp1p3/3b4/P6P/1R2K2R b Kkq - 0 1") 3 `shouldBe` 175927
-     perft (getPosition "r3k2r/p6p/8/B7/1pp1p3/3b4/P6P/2R1K2R b Kkq - 0 1") 3 `shouldBe` 178248
-     perft (getPosition "r3k2r/p6p/8/B7/1pp1p3/3b4/P6P/3RK2R b Kkq - 0 1") 3 `shouldBe` 168357
-     perft (getPosition "r3k2r/p6p/8/B7/1pp1p3/3b4/P4K1P/R6R b kq - 0 1") 3 `shouldBe` 221267
-     perft (getPosition "r3k2r/p6p/8/B7/1pp1p3/3b4/P2K3P/R6R b kq - 0 1") 3 `shouldBe` 213344
-     perft (getPosition "r3k2r/p6p/8/B7/1pp1p3/3b4/P6P/R2K3R b kq - 0 1") 3 `shouldBe` 120873
-     perft (getPosition "r3k2r/p6p/8/B7/1pp1p3/3b4/P6P/2KR3R b kq - 0 1") 3 `shouldBe` 184127
-     perft (getPosition "r3k2r/p6p/8/B7/1pp1p3/3b4/P6P/R3K1R1 b Qkq - 0 1") 3 `shouldBe` 240619
-     perft (getPosition "r3k2r/p6p/8/B7/1pp1p3/3b4/P6P/R3KR2 b Qkq - 0 1") 3 `shouldBe` 189825
-     perft (getPosition "r3k2r/p6p/8/B7/Ppp1p3/3b4/7P/R3K2R b KQkq a3 0 1") 3 `shouldBe` 154828
-     perft (getPosition "r3k2r/p6p/8/B7/1pp1p3/P2b4/7P/R3K2R b KQkq - 0 1") 3 `shouldBe` 173400
-     perft (getPosition "r3k2r/p6p/8/B7/1pp1p2P/3b4/P7/R3K2R b KQkq - 0 1") 3 `shouldBe` 165129
-     perft (getPosition "r3k2r/p6p/8/B7/1pp1p3/3b3P/P7/R3K2R b KQkq - 0 1") 3 `shouldBe` 151137
-     perft (getPosition "r3k2r/p6p/1B6/8/1pp1p3/3b4/P6P/R3K2R b KQkq - 0 1") 3 `shouldBe` 249845
-     perft (getPosition "r3k2r/p1B4p/8/8/1pp1p3/3b4/P6P/R3K2R b KQkq - 0 1") 3 `shouldBe` 227059
-     perft (getPosition "r2Bk2r/p6p/8/8/1pp1p3/3b4/P6P/R3K2R b KQkq - 0 1") 3 `shouldBe` 185525
-     perft (getPosition "r3k2r/p6p/8/8/1Bp1p3/3b4/P6P/R3K2R b KQkq - 0 1") 3 `shouldBe` 186968
+  -- describe "Perft Test" $
+  --  it "Returns the total number of moves in a full move tree of a given depth with a given position as its head" $ do
+  --    perft (getPosition "8/p7/8/1P6/K1k3pP/6P1/8/8 b - h3 0 1") 0 `shouldBe` 8
+  --    perft (getPosition "5k2/5p1p/p3B1p1/P5P1/3K1P1P/8/8/8 b - -") 0 `shouldBe` 9
+  --    perft (getPosition "8/2p5/3p4/KP5r/1R3p1k/8/4P1P1/8 w - -") 0 `shouldBe` 14
+  --    perft (getPosition "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1") 0 `shouldBe` 20
+  --    perft (getPosition "rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR b KQkq - 0 1") 0 `shouldBe` 20
+  --    perft (getPosition "r3k2r/p6p/8/B7/1pp1p3/3b4/P6P/R3K2R w KQkq -") 0 `shouldBe` 17
+  --    perft (getPosition "r3k2r/p6p/8/B7/1pp1p3/3b4/P6P/R3KR2 b Qkq - 0 1") 0 `shouldBe` 17
+  --    perft (getPosition "r3k2r/p6p/8/8/1Bp1p3/3b4/P6P/R3K2R b KQkq - 0 1") 0 `shouldBe` 19
+  --    perft (getPosition "r3k2r/p6p/8/B7/1pp1p3/3b4/P6P/R3K1R1 b Qkq - 0 1") 0 `shouldBe` 19
+  --    perft (getPosition "r3k2r/p6p/8/B7/1pp1p3/3b4/P6P/1R2K2R b Kkq - 0 1") 0 `shouldBe` 20
+  --    perft (getPosition "r3k2r/p6p/8/B7/1pp1p3/3b4/P6P/2R1K2R b Kkq - 0 1") 0 `shouldBe` 20
+  --    perft (getPosition "r3k2r/p6p/8/B7/1pp1p3/3b4/P6P/3RK2R b Kkq - 0 1") 0 `shouldBe` 20
+  --    perft (getPosition "r3k2r/p6p/8/B7/1pp1p3/3b4/P4K1P/R6R b kq - 0 1") 0 `shouldBe` 20
+  --    perft (getPosition "r3k2r/p6p/8/B7/1pp1p2P/3b4/P7/R3K2R b KQkq - 0 1") 0 `shouldBe` 20
+  --    perft (getPosition "r3k2r/p6p/8/B7/1pp1p3/3b3P/P7/R3K2R b KQkq - 0 1") 0 `shouldBe` 20
+  --    perft (getPosition "r3k2r/p6p/8/B7/1pp1p3/3b4/P2K3P/R6R b kq - 0 1") 0 `shouldBe` 20
+  --    perft (getPosition "r3k2r/p6p/8/B7/1pp1p3/3b4/P6P/R2K3R b kq - 0 1") 0 `shouldBe` 20
+  --    perft (getPosition "r3k2r/p6p/8/B7/1pp1p3/3b4/P6P/2KR3R b kq - 0 1") 0 `shouldBe` 20
+  --    perft (getPosition "r3k2r/p6p/8/B7/Ppp1p3/3b4/7P/R3K2R b KQkq a3 0 1") 0 `shouldBe` 21
+  --    perft (getPosition "r3k2r/p6p/8/B7/1pp1p3/P2b4/7P/R3K2R b KQkq - 0 1") 0 `shouldBe` 21
+  --    perft (getPosition "r3k2r/p1B4p/8/8/1pp1p3/3b4/P6P/R3K2R b KQkq - 0 1") 0 `shouldBe` 21
+  --    perft (getPosition "r2Bk2r/p6p/8/8/1pp1p3/3b4/P6P/R3K2R b KQkq - 0 1") 0 `shouldBe` 21
+  --    perft (getPosition "r3k2r/p6p/1B6/8/1pp1p3/3b4/P6P/R3K2R b KQkq - 0 1") 0 `shouldBe` 22
+  --    perft (getPosition "8/p7/8/1P6/K1k3pP/6P1/8/8 b - h3 0 1") 1 `shouldBe` 41
+  --    perft (getPosition "8/8/8/KP6/5pPk/8/4P3/8 b - g3 0 1") 1 `shouldBe` 46
+  --    perft (getPosition "r3k2r/p1ppqpb1/bn2pnp1/3PN3/1p2P3/2N2Q1p/PPPBBPPP/R3K2R w KQkq -") 0 `shouldBe` 48
+  --    perft (getPosition "8/2p5/8/KP6/5pPk/8/4P3/8 b - g3 0 1") 1 `shouldBe` 57
+  --    perft (getPosition "8/2p5/3p4/KP6/5pPk/8/4P3/8 b - g3 0 1") 1 `shouldBe` 64
+  --    perft (getPosition "4k3/8/8/8/8/8/PPPPPPPP/RNBQKBNR w KQ - 0 1") 1 `shouldBe` 100
+  --    perft (getPosition "5k2/5p1p/p3B1p1/P5P1/3K1P1P/8/8/8 b - -") 1 `shouldBe` 169
+  --    perft (getPosition "8/2p5/3p4/KP5r/1R2Pp1k/8/6P1/8 b - e3 0 1") 1 `shouldBe` 177
+  --    perft (getPosition "8/8/3p4/KPp4r/1R3p1k/4P3/6P1/8 w - c6 0 1") 1 `shouldBe` 190
+  --    perft (getPosition "8/2p5/3p4/KP5r/1R3p1k/8/4P1P1/8 w - -") 1 `shouldBe` 191
+  --    perft (getPosition "8/2p5/3p4/KP5r/R4p1k/8/4P1P1/8 b - - 0 1") 1 `shouldBe` 202
+  --    perft (getPosition "8/2p5/3p4/1P5r/KR3p1k/8/4P1P1/8 b - - 0 1") 1 `shouldBe` 224
+  --    perft (getPosition "8/2p5/3p4/KP5r/1R3pPk/8/4P3/8 b - g3 0 1") 1 `shouldBe` 226
+  --    perft (getPosition "8/2p5/K2p4/1P5r/1R3p1k/8/4P1P1/8 b - - 0 1") 1 `shouldBe` 240
+  --    perft (getPosition "8/3K4/2p5/p2b2r1/5k2/8/8/1q6 b - - 1 67") 1 `shouldBe` 279
+  --    perft (getPosition "r3k2r/p6p/8/B7/1pp1p3/3b4/P6P/R2K3R b kq - 0 1") 1 `shouldBe` 300
+  --    perft (getPosition "r3k2r/p6p/8/B7/1pp1p3/3b4/P6P/1R2K2R b Kkq - 0 1") 1 `shouldBe` 377
+  --    perft (getPosition "r3k2r/p6p/8/B7/1pp1p3/3b4/P6P/3RK2R b Kkq - 0 1") 1 `shouldBe` 365
+  --    perft (getPosition "r3k2r/p6p/8/B7/1pp1p3/3b3P/P7/R3K2R b KQkq - 0 1") 1 `shouldBe` 339
+  --    perft (getPosition "r3k2r/p6p/8/B7/Ppp1p3/3b4/7P/R3K2R b KQkq a3 0 1") 1 `shouldBe` 357
+  --    perft (getPosition "r3k2r/p6p/8/B7/1pp1p2P/3b4/P7/R3K2R b KQkq - 0 1") 1 `shouldBe` 358
+  --    perft (getPosition "r3k2r/p6p/8/B7/1pp1p3/P2b4/7P/R3K2R b KQkq - 0 1") 1 `shouldBe` 376
+  --    perft (getPosition "r3k2r/p6p/8/B7/1pp1p3/3b4/P6P/2R1K2R b Kkq - 0 1") 1 `shouldBe` 380
+  --    perft (getPosition "r3k2r/p6p/8/B7/1pp1p3/3b4/P6P/2KR3R b kq - 0 1") 1 `shouldBe` 385
+  --    perft (getPosition "r3k2r/p6p/8/B7/1pp1p3/3b4/P6P/R3KR2 b Qkq - 0 1") 1 `shouldBe` 395
+  --    perft (getPosition "r3k2r/p6p/8/8/1Bp1p3/3b4/P6P/R3K2R b KQkq - 0 1") 1 `shouldBe` 395
+  --    perft (getPosition "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1") 1 `shouldBe` 400
+  --    perft (getPosition "r2Bk2r/p6p/8/8/1pp1p3/3b4/P6P/R3K2R b KQkq - 0 1") 1 `shouldBe` 403
+  --    perft (getPosition "r3k2r/p6p/8/B7/1pp1p3/3b4/P4K1P/R6R b kq - 0 1") 1 `shouldBe` 437
+  --    perft (getPosition "r3k2r/p6p/8/B7/1pp1p3/3b4/P2K3P/R6R b kq - 0 1") 1 `shouldBe` 437
+  --    perft (getPosition "r3k2r/p1B4p/8/8/1pp1p3/3b4/P6P/R3K2R b KQkq - 0 1") 1 `shouldBe` 438
+  --    perft (getPosition "r3k2r/p6p/8/B7/1pp1p3/3b4/P6P/R3K1R1 b Qkq - 0 1") 1 `shouldBe` 454
+  --    perft (getPosition "r3k2r/p6p/1B6/8/1pp1p3/3b4/P6P/R3K2R b KQkq - 0 1") 1 `shouldBe` 470
+  --    perft (getPosition "r3k2r/p1ppqpb1/bn2pnp1/3PN3/1p2P3/2N2Q1p/PPPBBPPP/R3K2R w KQkq -") 1 `shouldBe` 2039
+  --    perft (getPosition "8/2p5/3p4/KP5r/1R3pPk/8/4P3/8 b - g3 0 1") 2 `shouldBe` 3702
+  --    perft (getPosition "8/2p5/3p4/KP5r/1R3p1k/8/4P1P1/8 w - -") 2 `shouldBe` 2812
+  --    perft (getPosition "8/2p5/3p4/KP5r/1R3p1k/8/4P1P1/8 w - -") 3 `shouldBe` 43238
+  --    perft (getPosition "r3k2r/p1ppqpb1/bn2pnp1/3PN3/1p2P3/2N2Q1p/PPPBBPPP/R3K2R w KQkq -") 2 `shouldBe` 97862
+  --    perft (getPosition "8/2p5/3p4/KP5r/1R3p1k/8/4P1P1/8 w - -") 4 `shouldBe` 674624
 
-     perft (getPosition "r3k2r/p6p/8/B7/1pp1p3/3b4/P6P/R3K2R w KQkq -") 1 `shouldBe` 341
-     perft (getPosition "r3k2r/p6p/8/B7/1pp1p3/3b4/P6P/R3K2R w KQkq -") 2 `shouldBe` 6666
-     perft (getPosition "r3k2r/p6p/8/B7/1pp1p3/3b4/P6P/R3K2R w KQkq -") 3 `shouldBe` 150072
-     perft (getPosition "r3k2r/p6p/8/B7/1pp1p3/3b4/P6P/R3K2R w KQkq -") 4 `shouldBe` 3186478
-     perft (getPosition "r3k2r/p6p/8/B7/1pp1p3/3b4/P6P/R3K2R w KQkq -") 5 `shouldBe` 77054993
+  --    perft (getPosition "r3k2r/p1ppqpb1/bn2pnp1/3PN3/1p2P3/2N2Q1p/PPPBBPPP/R3K2R w KQkq -") 3 `shouldBe` 4085603
+  --    perft (getPosition "r3k2r/p6p/8/B7/1pp1p3/3b4/P6P/2KR3R b kq - 0 1") 4 `shouldBe` 4238116
+  --    perft (getPosition "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1") 4 `shouldBe` 4865609
+  --    perft (getPosition "8/2p5/3p4/KP5r/1R3p1k/8/4P1P1/8 w - -") 5 `shouldBe` 11030083
+  --    perft (getPosition "rnbqkb1r/ppppp1pp/7n/4Pp2/8/8/PPPP1PPP/RNBQKBNR w KQkq f6 0 3") 4 `shouldBe` 11139762
+  --    perft (getPosition "8/7p/p5pb/4k3/P1pPn3/8/P5PP/1rB2RK1 b - d3 0 28") 5 `shouldBe` 38633283
+  --    perft (getPosition "8/2p5/3p4/KP5r/1R3p1k/8/4P1P1/8 w - -") 6 `shouldBe` 178633661
 
-     perft (getPosition "8/p7/8/1P6/K1k3pP/6P1/8/8 b - h3 0 1") 2 `shouldBe` 325
-     perft (getPosition "8/p7/8/1P6/K1k3pP/6P1/8/8 b - h3 0 1") 3 `shouldBe` 2002
-     perft (getPosition "8/p7/8/1P6/K1k3pP/6P1/8/8 b - h3 0 1") 4 `shouldBe` 16763
-     perft (getPosition "8/p7/8/1P6/K1k3pP/6P1/8/8 b - h3 0 1") 5 `shouldBe` 118853
-     perft (getPosition "8/p7/8/1P6/K1k3pP/6P1/8/8 b - h3 0 1") 6 `shouldBe` 986637
+  --    --perft (getPosition "8/2p5/3p4/KP5r/1R3p1k/8/4P1P1/8 w - -") 7 `shouldBe` 3009794393
+  --    --perft (getPosition "r3k2r/p1ppqpb1/bn2pnp1/3PN3/1p2P3/2N2Q1p/PPPBBPPP/R3K2R w KQkq -") 4 `shouldBe` 193690690
+  --    --perft (getPosition "r3k2r/p1ppqpb1/bn2pnp1/3PN3/1p2P3/2N2Q1p/PPPBBPPP/R3K2R w KQkq -") 5 `shouldBe` 8031647685
+  --    --perft (getPosition "8/2p5/3p4/KP5r/1R3p1k/8/4P1P1/8 w - -") 6 `shouldBe` 178633661
 
-     perft (getPosition "8/p7/8/1P6/K1k3p1/6P1/7P/8 w - -") 0 `shouldBe` 5
-     perft (getPosition "8/p7/8/1P6/K1k3p1/6P1/7P/8 w - -") 1 `shouldBe` 39
-     perft (getPosition "8/p7/8/1P6/K1k3p1/6P1/7P/8 w - -") 2 `shouldBe` 237
-     perft (getPosition "8/p7/8/1P6/K1k3p1/6P1/7P/8 w - -") 3 `shouldBe` 2002
-     perft (getPosition "8/p7/8/1P6/K1k3p1/6P1/7P/8 w - -") 4 `shouldBe` 14062
-     perft (getPosition "8/p7/8/1P6/K1k3p1/6P1/7P/8 w - -") 5 `shouldBe` 120995
-     perft (getPosition "8/p7/8/1P6/K1k3p1/6P1/7P/8 w - -") 6 `shouldBe` 966152
-     perft (getPosition "8/p7/8/1P6/K1k3p1/6P1/7P/8 w - -") 7 `shouldBe` 8103790
+  --    perft (getPosition "5k2/5p1p/p3B1p1/P5P1/3K1P1P/8/8/8 b - -") 3 `shouldBe` 20541
+  --    perft (getPosition "n1n5/PPPk4/8/8/8/8/4Kppp/5N1N b - - 0 1") 3 `shouldBe` 182838
+
+  --    perft (getPosition "r3k2r/p6p/8/B7/1pp1p3/3b4/P6P/1R2K2R b Kkq - 0 1") 3 `shouldBe` 175927
+  --    perft (getPosition "r3k2r/p6p/8/B7/1pp1p3/3b4/P6P/2R1K2R b Kkq - 0 1") 3 `shouldBe` 178248
+  --    perft (getPosition "r3k2r/p6p/8/B7/1pp1p3/3b4/P6P/3RK2R b Kkq - 0 1") 3 `shouldBe` 168357
+  --    perft (getPosition "r3k2r/p6p/8/B7/1pp1p3/3b4/P4K1P/R6R b kq - 0 1") 3 `shouldBe` 221267
+  --    perft (getPosition "r3k2r/p6p/8/B7/1pp1p3/3b4/P2K3P/R6R b kq - 0 1") 3 `shouldBe` 213344
+  --    perft (getPosition "r3k2r/p6p/8/B7/1pp1p3/3b4/P6P/R2K3R b kq - 0 1") 3 `shouldBe` 120873
+  --    perft (getPosition "r3k2r/p6p/8/B7/1pp1p3/3b4/P6P/2KR3R b kq - 0 1") 3 `shouldBe` 184127
+  --    perft (getPosition "r3k2r/p6p/8/B7/1pp1p3/3b4/P6P/R3K1R1 b Qkq - 0 1") 3 `shouldBe` 240619
+  --    perft (getPosition "r3k2r/p6p/8/B7/1pp1p3/3b4/P6P/R3KR2 b Qkq - 0 1") 3 `shouldBe` 189825
+  --    perft (getPosition "r3k2r/p6p/8/B7/Ppp1p3/3b4/7P/R3K2R b KQkq a3 0 1") 3 `shouldBe` 154828
+  --    perft (getPosition "r3k2r/p6p/8/B7/1pp1p3/P2b4/7P/R3K2R b KQkq - 0 1") 3 `shouldBe` 173400
+  --    perft (getPosition "r3k2r/p6p/8/B7/1pp1p2P/3b4/P7/R3K2R b KQkq - 0 1") 3 `shouldBe` 165129
+  --    perft (getPosition "r3k2r/p6p/8/B7/1pp1p3/3b3P/P7/R3K2R b KQkq - 0 1") 3 `shouldBe` 151137
+  --    perft (getPosition "r3k2r/p6p/1B6/8/1pp1p3/3b4/P6P/R3K2R b KQkq - 0 1") 3 `shouldBe` 249845
+  --    perft (getPosition "r3k2r/p1B4p/8/8/1pp1p3/3b4/P6P/R3K2R b KQkq - 0 1") 3 `shouldBe` 227059
+  --    perft (getPosition "r2Bk2r/p6p/8/8/1pp1p3/3b4/P6P/R3K2R b KQkq - 0 1") 3 `shouldBe` 185525
+  --    perft (getPosition "r3k2r/p6p/8/8/1Bp1p3/3b4/P6P/R3K2R b KQkq - 0 1") 3 `shouldBe` 186968
+
+  --    perft (getPosition "r3k2r/p6p/8/B7/1pp1p3/3b4/P6P/R3K2R w KQkq -") 1 `shouldBe` 341
+  --    perft (getPosition "r3k2r/p6p/8/B7/1pp1p3/3b4/P6P/R3K2R w KQkq -") 2 `shouldBe` 6666
+  --    perft (getPosition "r3k2r/p6p/8/B7/1pp1p3/3b4/P6P/R3K2R w KQkq -") 3 `shouldBe` 150072
+  --    perft (getPosition "r3k2r/p6p/8/B7/1pp1p3/3b4/P6P/R3K2R w KQkq -") 4 `shouldBe` 3186478
+  --    perft (getPosition "r3k2r/p6p/8/B7/1pp1p3/3b4/P6P/R3K2R w KQkq -") 5 `shouldBe` 77054993
+
+  --    perft (getPosition "8/p7/8/1P6/K1k3pP/6P1/8/8 b - h3 0 1") 2 `shouldBe` 325
+  --    perft (getPosition "8/p7/8/1P6/K1k3pP/6P1/8/8 b - h3 0 1") 3 `shouldBe` 2002
+  --    perft (getPosition "8/p7/8/1P6/K1k3pP/6P1/8/8 b - h3 0 1") 4 `shouldBe` 16763
+  --    perft (getPosition "8/p7/8/1P6/K1k3pP/6P1/8/8 b - h3 0 1") 5 `shouldBe` 118853
+  --    perft (getPosition "8/p7/8/1P6/K1k3pP/6P1/8/8 b - h3 0 1") 6 `shouldBe` 986637
+
+  --    perft (getPosition "8/p7/8/1P6/K1k3p1/6P1/7P/8 w - -") 0 `shouldBe` 5
+  --    perft (getPosition "8/p7/8/1P6/K1k3p1/6P1/7P/8 w - -") 1 `shouldBe` 39
+  --    perft (getPosition "8/p7/8/1P6/K1k3p1/6P1/7P/8 w - -") 2 `shouldBe` 237
+  --    perft (getPosition "8/p7/8/1P6/K1k3p1/6P1/7P/8 w - -") 3 `shouldBe` 2002
+  --    perft (getPosition "8/p7/8/1P6/K1k3p1/6P1/7P/8 w - -") 4 `shouldBe` 14062
+  --    perft (getPosition "8/p7/8/1P6/K1k3p1/6P1/7P/8 w - -") 5 `shouldBe` 120995
+  --    perft (getPosition "8/p7/8/1P6/K1k3p1/6P1/7P/8 w - -") 6 `shouldBe` 966152
+  --    perft (getPosition "8/p7/8/1P6/K1k3p1/6P1/7P/8 w - -") 7 `shouldBe` 8103790
 
   describe "Miscellaneous" $
     it "Runs various tests that have been used during the debugging process" $ do
