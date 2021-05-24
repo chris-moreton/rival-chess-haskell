@@ -48,7 +48,7 @@ searchZero positions depth endTime rootBest = do
     hrm' <- highestRatedMoveZero' notInCheckPositions positions (-100000) 100000 depth endTime (snd (head notInCheckPositions),-100000) rootBest
     if snd hrm /= snd hrm'
         then do
-            die (algebraicMoveFromMove (snd hrm))
+            die (algebraicMoveFromMove (snd hrm) ++ algebraicMoveFromMove (snd hrm'))
         else return hrm
 
 highestRatedMoveZero :: [(Position,Move)] -> [Position] -> Int -> Int -> Int -> Int -> (Move,Int) -> (Move,Int) -> IO (Move,Int)

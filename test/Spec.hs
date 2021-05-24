@@ -715,13 +715,13 @@ main = hspec $ do
 
   describe "highestRatedMoveZero" $
     it "Should return the highest-rated move" $ do
-      let position = getPosition "r2Bk2r/p6p/8/8/1pp1p3/3b4/P6P/R3K2R b KQkq - 0 1"
+      let position = getPosition "rnb2rk1/2q1ppbp/2p3p1/1pPpN3/p2PnP1P/P1N1P3/1P2B1P1/R1BQ1RK1 w - - 0 13"
       t <- timeMillis
-      let endTime = t + 10000
+      let endTime = t + 1000
       let newPositions = map (\move -> (makeMove position move,move)) (moves position)
       let notInCheckPositions = filter (\(p,m) -> not (isCheck p (mover position))) newPositions
       let firstMove = (snd (head notInCheckPositions),-100000)
-      hrm <- highestRatedMoveZero notInCheckPositions [] (-100000) 100000 3 endTime firstMove firstMove
-      hrm' <- highestRatedMoveZero' notInCheckPositions [] (-100000) 100000 3 endTime firstMove firstMove
+      hrm <- highestRatedMoveZero notInCheckPositions [] (-100000) 100000 50 endTime firstMove firstMove
+      hrm' <- highestRatedMoveZero' notInCheckPositions [] (-100000) 100000 50 endTime firstMove firstMove
       hrm `shouldBe` hrm'
-      Data.Bifunctor.first algebraicMoveFromMove hrm `shouldBe` ("a8d8",650)
+      Data.Bifunctor.first algebraicMoveFromMove hrm `shouldBe` ("g2g4",100000)
