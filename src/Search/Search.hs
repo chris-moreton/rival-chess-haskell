@@ -9,6 +9,7 @@ import Util.Fen ( algebraicMoveFromMove )
 import Search.MakeMove ( makeMove )
 import Data.Bits ( Bits(popCount), Bits(testBit), Bits(bit) )
 import Control.Monad
+import System.Exit
 
 ------------------------------------------------------
 -- example of how the IDE simplified my newbie Haskell
@@ -43,11 +44,16 @@ searchZero positions depth endTime rootBest = do
     let position = head positions
     let newPositions = map (\move -> (makeMove position move,move)) (moves position)
     let notInCheckPositions = filter (\(p,m) -> not (isCheck p (mover position))) newPositions
-    highestRatedMoveZero notInCheckPositions positions (-100000) 100000 depth endTime (snd (head notInCheckPositions),-100000) rootBest
+    hrm <- highestRatedMoveZero notInCheckPositions positions (-100000) 100000 depth endTime (snd (head notInCheckPositions),-100000) rootBest
+    hrm' <- highestRatedMoveZero' notInCheckPositions positions (-100000) 100000 depth endTime (snd (head notInCheckPositions),-100000) rootBest
+    if snd hrm /= snd hrm'
+        then do
+            die (algebraicMoveFromMove (snd hrm))
+        else return hrm
 
 highestRatedMoveZero :: [(Position,Move)] -> [Position] -> Int -> Int -> Int -> Int -> (Move,Int) -> (Move,Int) -> IO (Move,Int)
 highestRatedMoveZero [] _ _ _ _ _ best _ = return best
-highestRatedMoveZero (thisP:ps) positions low high depth endTime best rootBest = do
+highestRatedMoveZero (thisP:ps) positions low high depth endTime _ rootBest = do
     evaluatedMoves <- mapM (\(p,m) -> if canLeadToDrawByRepetition p positions then return (m,1) else search p m depth (-100000) 100000 endTime rootBest) (thisP:ps)
     let negatedMoves = map (\(m,i) -> (m,-i)) evaluatedMoves
     let highestRatedMove = foldr1 (\(m,s) (m',s') -> if s >= s' then (m,s) else (m',s')) negatedMoves
