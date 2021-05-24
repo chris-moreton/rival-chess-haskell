@@ -55,11 +55,9 @@ highestRatedMoveZero notInCheckPositions positions low high depth endTime best r
    let thisP = head notInCheckPositions
    let ps = tail notInCheckPositions 
    searchResult <- uncurry search thisP depth (-high) (-low) endTime rootBest
-   let (m,s) = if canLeadToDrawByRepetition (fst thisP) positions
-       then (snd thisP,1)
-       else searchResult
+   let (m,s) = searchResult
    let negatedScore = -s
-   if negatedScore > low
+   if negatedScore >= low
        then highestRatedMoveZero ps positions negatedScore high depth endTime (m,negatedScore) rootBest
        else highestRatedMoveZero ps positions low high depth endTime best rootBest
 
