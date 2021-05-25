@@ -712,3 +712,8 @@ main = hspec $ do
     length newPositions `shouldBe` 21
     perft position 0 `shouldBe` 20
 
+  describe "bestMoveFirst" $
+    it "returns a list of moves and their resulting positions, with the specified move at the head of the list" $ do
+    let position = getPosition "r3k2r/p6p/8/B7/1pp1p3/3b4/P6P/R3K2R b kq - 0 1"
+    let moves = bestMoveFirst position (moveFromAlgebraicMove "e8f8",200)
+    snd (head moves) `shouldBe` moveFromAlgebraicMove "e8f8"
