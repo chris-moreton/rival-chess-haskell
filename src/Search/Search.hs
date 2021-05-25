@@ -18,10 +18,10 @@ canLeadToDrawByRepetition p ps
     | otherwise = False
 
 startSearch :: [Position] -> Int -> Int -> IO (Move,Int)
-startSearch (p:ps) maxDepth endTime = do
-    let newPositions = map (\move -> (makeMove p move,move)) (moves p)
-    let notInCheckPositions = filter (\(p,m) -> not (isCheck p (mover p))) newPositions
-    iterativeDeepening (p:ps) 1 maxDepth endTime (snd (head notInCheckPositions),-100000)
+startSearch (position:positions) maxDepth endTime = do
+    let newPositions = map (\move -> (makeMove position move,move)) (moves position)
+    let notInCheckPositions = filter (\(p,m) -> not (isCheck p (mover position))) newPositions
+    iterativeDeepening (position:positions) 1 maxDepth endTime (snd (head notInCheckPositions),-100000)
 
 iterativeDeepening :: [Position] -> Int -> Int -> Int -> (Move,Int) -> IO (Move,Int)
 iterativeDeepening positions depth maxDepth endTime rootBest = do
