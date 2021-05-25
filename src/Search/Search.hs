@@ -11,14 +11,6 @@ import Data.Bits ( Bits(popCount), Bits(testBit), Bits(bit) )
 import Control.Monad
 import System.Exit
 
-------------------------------------------------------
--- example of how the IDE simplified my newbie Haskell
-------------------------------------------------------
--- any (\oldPos -> p == oldPos) positions
--- any (p ==) positions
--- p `elem` positions
-------------------------------------------------------
-
 canLeadToDrawByRepetition :: Position -> [Position] -> Bool
 canLeadToDrawByRepetition p ps
     | p `elem` ps = True
