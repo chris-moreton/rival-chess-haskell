@@ -31,7 +31,7 @@ main = do
 
 showId :: IO ()
 showId = do
-    putStrLn "id name Rival Haskell Build 49"
+    putStrLn "id name Rival Haskell Build 50"
     putStrLn "id author Chris Moreton"
     putStrLn "uciok"
 
@@ -82,7 +82,7 @@ runGo uciState ("movetime":xs) = do
     let moveTime = head xs
     t <- timeMillis
     let endTime = t + read moveTime
-    move <- startSearch (position uciState) 3 endTime
+    move <- startSearch (position uciState) 50 endTime
     return uciState{output="bestmove " ++ algebraicMoveFromMove (fst move)}
 
 runGo uciState ("depth":xs) = do
