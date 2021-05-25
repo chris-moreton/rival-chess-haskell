@@ -38,8 +38,8 @@ searchZero positions depth endTime rootBest = do
     let newPositionsWithoutBest = map (\move -> (makeMove position move,move)) movesWithoutBest
     let bestPosition = (makeMove position (fst rootBest),fst rootBest)
     let notInCheckPositions = filter (\(p,m) -> not (isCheck p (mover position))) newPositionsWithoutBest
-    let positionsWithBestFirst = bestPosition : newPositionsWithoutBest
-    highestRatedMoveZero notInCheckPositions positions (-100000) 100000 depth endTime (snd (head notInCheckPositions),-100000) rootBest
+    let positionsWithBestFirst = bestPosition : notInCheckPositions
+    highestRatedMoveZero positionsWithBestFirst positions (-100000) 100000 depth endTime (snd (head notInCheckPositions),-100000) rootBest
 
 highestRatedMoveZero :: [(Position,Move)] -> [Position] -> Int -> Int -> Int -> Int -> (Move,Int) -> (Move,Int) -> IO (Move,Int)
 highestRatedMoveZero [] _ _ _ _ _ best _ = return best
