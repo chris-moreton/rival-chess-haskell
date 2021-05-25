@@ -34,8 +34,11 @@ iterativeDeepening positions depth maxDepth endTime rootBest = do
 searchZero :: [Position] -> Int -> Int -> (Move,Int) -> IO (Move,Int)
 searchZero positions depth endTime rootBest = do
     let position = head positions
-    let newPositions = map (\move -> (makeMove position move,move)) (moves position)
-    let notInCheckPositions = filter (\(p,m) -> not (isCheck p (mover position))) newPositions
+    let movesWithoutBest = filter (\m -> m /= snd rootBest) (moves position)
+    let newPositionsWithoutBest = map (\move -> (makeMove position move,move)) movesWithoutBest
+    let bestPosition = (makeMove position (fst rootBest),fst rootBest)
+    let notInCheckPositions = filter (\(p,m) -> not (isCheck p (mover position))) newPositionsWithoutBest
+    let positionsWithBestFirst = bestPosition : newPositionsWithoutBest
     highestRatedMoveZero notInCheckPositions positions (-100000) 100000 depth endTime (snd (head notInCheckPositions),-100000) rootBest
 
 highestRatedMoveZero :: [(Position,Move)] -> [Position] -> Int -> Int -> Int -> Int -> (Move,Int) -> (Move,Int) -> IO (Move,Int)
@@ -43,7 +46,7 @@ highestRatedMoveZero [] _ _ _ _ _ best _ = return best
 highestRatedMoveZero (thisP:ps) positions low high depth endTime best rootBest = do
    t <- timeMillis
    if t > endTime
-       then return rootBest
+       then return best
        else do
             searchResult <- uncurry search thisP depth (-high) (-low) endTime rootBest
             let (m,s) = if canLeadToDrawByRepetition (fst thisP) positions
