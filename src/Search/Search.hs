@@ -9,6 +9,7 @@ import Util.Fen ( algebraicMoveFromMove )
 import Search.MakeMove ( makeMove )
 import Data.Bits ( Bits(popCount), Bits(testBit), Bits(bit) )
 import Control.Monad
+import System.Exit
 
 ------------------------------------------------------
 -- example of how the IDE simplified my newbie Haskell
@@ -31,8 +32,8 @@ startSearch (p:ps) maxDepth endTime = do
     iterativeDeepening (p:ps) 1 maxDepth endTime (snd (head notInCheckPositions),-100000)
 
 iterativeDeepening :: [Position] -> Int -> Int -> Int -> (Move,Int) -> IO (Move,Int)
-iterativeDeepening positions depth maxDepth endTime result = do
-    result <- searchZero positions depth endTime result
+iterativeDeepening positions depth maxDepth endTime rootBest = do
+    result <- searchZero positions depth endTime rootBest
     t <- timeMillis
     if t > endTime || depth == maxDepth
         then return result
@@ -48,22 +49,18 @@ searchZero positions depth endTime rootBest = do
 highestRatedMoveZero :: [(Position,Move)] -> [Position] -> Int -> Int -> Int -> Int -> (Move,Int) -> (Move,Int) -> IO (Move,Int)
 highestRatedMoveZero [] _ _ _ _ _ best _ = return best
 highestRatedMoveZero (thisP:ps) positions low high depth endTime best rootBest = do
-    evaluatedMoves <- mapM (\(p,m) -> if canLeadToDrawByRepetition p positions then return (m,1) else search p m depth (-100000) 100000 endTime rootBest) (thisP:ps)
-    let negatedMoves = map (\(m,i) -> (m,-i)) evaluatedMoves
-    let highestRatedMove = foldr1 (\(m,s) (m',s') -> if s >= s' then (m,s) else (m',s')) negatedMoves
-    return highestRatedMove
-
-highestRatedMoveZero' :: [(Position,Move)] -> [Position] -> Int -> Int -> Int -> Int -> (Move,Int) -> (Move,Int) -> IO (Move,Int)
-highestRatedMoveZero' [] _ _ _ _ _ best _ = return best
-highestRatedMoveZero' (thisP:ps) positions low high depth endTime best rootBest = do    
-   searchResult <- uncurry search thisP depth (-high) (-low) endTime rootBest
-   let (m,s) = if canLeadToDrawByRepetition (fst thisP) positions
-       then (snd thisP,1)
-       else searchResult
-   let negatedScore = -s
-   if negatedScore > low
-       then highestRatedMoveZero' ps positions negatedScore high depth endTime (snd thisP,negatedScore) rootBest
-       else highestRatedMoveZero' ps positions low high depth endTime best rootBest
+   t <- timeMillis
+   if t > endTime
+       then return rootBest
+       else do
+            searchResult <- uncurry search thisP depth (-high) (-low) endTime rootBest
+            let (m,s) = if canLeadToDrawByRepetition (fst thisP) positions
+                then (snd thisP,1)
+                else searchResult
+            let negatedScore = -s
+            if negatedScore > low
+                then highestRatedMoveZero ps positions negatedScore high depth endTime (snd thisP,negatedScore) rootBest
+                else highestRatedMoveZero ps positions low high depth endTime best rootBest
 
 search :: Position -> Move -> Int -> Int -> Int -> Int -> (Move,Int) -> IO (Move,Int)
 search position moveZero 0 low high endTime _ = return (moveZero,quiesce position low high)
