@@ -7,7 +7,7 @@ import Util.Utils ( timeMillis, toSquarePart )
 import Text.Printf
 import Util.Fen ( algebraicMoveFromMove )
 import Search.MakeMove ( makeMove )
-import Data.Bits ( Bits(popCount), Bits(testBit), Bits(bit), (.|.) )
+import Data.Bits ( Bits(popCount), Bits(testBit), Bits(bit), (.|.), clearBit )
 import Control.Monad
 import System.Exit
 import Data.Sort ( sortBy )
@@ -33,13 +33,13 @@ iterativeDeepening positions depth maxDepth endTime rootBest = do
         then return result
         else iterativeDeepening positions (depth+1) maxDepth endTime result
 
-captureFlag :: Bitboard 
+captureFlag :: Bitboard
 captureFlag = bit 16
 
 sortMoves :: Position -> MoveList -> MoveList
 sortMoves position moves = do
     let scoredMoves = map (\m -> if isCapture position m then m .|. captureFlag else m) moves
-    sortBy (flip compare) scoredMoves
+    map (`clearBit` captureFlag) (sortBy (flip compare) scoredMoves)
 
 bestMoveFirst :: Position -> (Move,Int) -> [(Position,Move)]
 bestMoveFirst position best = do
@@ -48,7 +48,7 @@ bestMoveFirst position best = do
     let bestPosition = (makeMove position (fst best),fst best)
     let notInCheckPositions = filter (\(p,m) -> not (isCheck p (mover position))) newPositionsWithoutBest
     bestPosition : notInCheckPositions
-    
+
 searchZero :: [Position] -> Int -> Int -> (Move,Int) -> IO (Move,Int)
 searchZero positions depth endTime rootBest = do
     let position = head positions
