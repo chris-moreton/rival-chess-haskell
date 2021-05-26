@@ -39,7 +39,7 @@ captureFlag = bit 16
 sortMoves :: Position -> MoveList -> MoveList
 sortMoves position moves = do
     let scoredMoves = map (\m -> if isCapture position m then m .|. captureFlag else m) moves
-    map (`clearBit` captureFlag) (sortBy (flip compare) scoredMoves)
+    map (`clearBit` 16) (sortBy (flip compare) scoredMoves)
 
 bestMoveFirst :: Position -> (Move,Int) -> [(Position,Move)]
 bestMoveFirst position best = do
