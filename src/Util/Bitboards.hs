@@ -5,9 +5,13 @@
 module Util.Bitboards where
 
 import Data.Bits
-import Util.Utils
+    ( Bits(shiftL, bit, xor, shiftR, (.&.), complement, (.|.)) )
+import Util.Utils ()
 import Types
-import Alias
+    ( Mover(White),
+      Position(mover, blackPiecesBitboard, whitePiecesBitboard,
+               allPiecesBitboard) )
+import Alias ( Bitboard )
 
 bitString :: Bitboard -> String
 bitString bitboard = recurBitString bitboard 63 ""

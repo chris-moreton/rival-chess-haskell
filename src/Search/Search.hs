@@ -1,15 +1,16 @@
 module Search.Search where
 
 import Types ( Position (Position, whitePiecesBitboard, blackPiecesBitboard, enPassantSquare), mover, halfMoves, bitboardForColour, Piece (Pawn, Bishop, Knight, Rook, Queen), Mover (White,Black) )
-import Alias ( Move, Bitboard )
+import Alias ( Move, Bitboard, MoveList )
 import Search.MoveGenerator (moves,isCheck)
 import Util.Utils ( timeMillis, toSquarePart )
 import Text.Printf
 import Util.Fen ( algebraicMoveFromMove )
 import Search.MakeMove ( makeMove )
-import Data.Bits ( Bits(popCount), Bits(testBit), Bits(bit) )
+import Data.Bits ( Bits(popCount), Bits(testBit), Bits(bit), (.|.) )
 import Control.Monad
 import System.Exit
+import Data.Sort ( sortBy )
 
 canLeadToDrawByRepetition :: Position -> [Position] -> Bool
 canLeadToDrawByRepetition p ps
@@ -19,7 +20,8 @@ canLeadToDrawByRepetition p ps
 
 startSearch :: [Position] -> Int -> Int -> IO (Move,Int)
 startSearch (position:positions) maxDepth endTime = do
-    let newPositions = map (\move -> (makeMove position move,move)) (moves position)
+    let theseMoves = sortMoves position (moves position)
+    let newPositions = map (\move -> (makeMove position move,move)) theseMoves
     let notInCheckPositions = filter (\(p,m) -> not (isCheck p (mover position))) newPositions
     iterativeDeepening (position:positions) 1 maxDepth endTime (snd (head notInCheckPositions),-100000)
 
@@ -31,9 +33,17 @@ iterativeDeepening positions depth maxDepth endTime rootBest = do
         then return result
         else iterativeDeepening positions (depth+1) maxDepth endTime result
 
+captureFlag :: Bitboard 
+captureFlag = bit 16
+
+sortMoves :: Position -> MoveList -> MoveList
+sortMoves position moves = do
+    let scoredMoves = map (\m -> if isCapture position m then m .|. captureFlag else m) moves
+    sortBy (flip compare) scoredMoves
+
 bestMoveFirst :: Position -> (Move,Int) -> [(Position,Move)]
 bestMoveFirst position best = do
-    let movesWithoutBest = filter (\m -> m /= snd best) (moves position)
+    let movesWithoutBest = sortMoves position (filter (\m -> m /= snd best) (moves position))
     let newPositionsWithoutBest = map (\move -> (makeMove position move,move)) movesWithoutBest
     let bestPosition = (makeMove position (fst best),fst best)
     let notInCheckPositions = filter (\(p,m) -> not (isCheck p (mover position))) newPositionsWithoutBest
