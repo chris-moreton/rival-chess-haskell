@@ -34,12 +34,12 @@ iterativeDeepening positions depth maxDepth endTime rootBest = do
         else iterativeDeepening positions (depth+1) maxDepth endTime result
 
 captureFlag :: Bitboard
-captureFlag = 0
+captureFlag = 32
 
 sortMoves :: Position -> MoveList -> MoveList
 sortMoves position moves = do
     let scoredMoves = map (\m -> if isCapture position m then m .|. captureFlag else m) moves
-    map (`clearBit` 16) (sortBy (flip compare) scoredMoves)
+    map (`clearBit` 32) (sortBy (flip compare) scoredMoves)
 
 bestMoveFirst :: Position -> (Move,Int) -> [(Position,Move)]
 bestMoveFirst position best = do
