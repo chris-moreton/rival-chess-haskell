@@ -34,7 +34,7 @@ iterativeDeepening positions depth maxDepth endTime rootBest = do
         else iterativeDeepening positions (depth+1) maxDepth endTime result
 
 captureFlag :: Bitboard
-captureFlag = 32
+captureFlag = bit 32
 
 sortMoves :: Position -> MoveList -> MoveList
 sortMoves position moves = do
