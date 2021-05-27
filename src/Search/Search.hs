@@ -1,3 +1,5 @@
+{-# LANGUAGE BinaryLiterals #-}
+
 module Search.Search where
 
 import Types ( Position (Position, whitePiecesBitboard, blackPiecesBitboard, enPassantSquare), mover, halfMoves, bitboardForColour, Piece (Pawn, Bishop, Knight, Rook, Queen), Mover (White,Black) )
@@ -7,7 +9,7 @@ import Util.Utils ( timeMillis, toSquarePart )
 import Text.Printf
 import Util.Fen ( algebraicMoveFromMove )
 import Search.MakeMove ( makeMove )
-import Data.Bits ( Bits(popCount), Bits(testBit), Bits(bit), (.|.), clearBit )
+import Data.Bits ( Bits(popCount), Bits(testBit), Bits(bit), (.|.), (.&.), clearBit, shiftL )
 import Control.Monad
 import System.Exit
 import Data.Sort ( sortBy )
@@ -33,13 +35,24 @@ iterativeDeepening positions depth maxDepth endTime rootBest = do
         then return result
         else iterativeDeepening positions (depth+1) maxDepth endTime result
 
-captureFlag :: Bitboard
-captureFlag = bit 32
+captureScore :: Position -> Move -> Int
+captureScore position move
+    | isCapture position move = 100
+    | otherwise = 0
+
+centreScore :: Position -> Move -> Int
+centreScore position move
+    | 0b0000000000000000001111000011110000111100001111000000000000000000 .&. toSquareMask /= 0 = 10
+    | otherwise = 0
+    where toSquareMask = bit (toSquarePart move) :: Bitboard
+
+scoreMove :: Position -> Move -> Int
+scoreMove position move = captureScore position move + centreScore position move
 
 sortMoves :: Position -> MoveList -> MoveList
 sortMoves position moves = do
-    let scoredMoves = map (\m -> if isCapture position m then m .|. captureFlag else m) moves
-    map (`clearBit` 32) (sortBy (flip compare) scoredMoves)
+    let scoredMoves = map (\m -> m + (scoreMove position m `shiftL` 32)) moves
+    map (0b0000000000000000000000000000000011111111111111111111111111111111 .&.) (sortBy (flip compare) scoredMoves)
 
 bestMoveFirst :: Position -> (Move,Int) -> [(Position,Move)]
 bestMoveFirst position best = do
