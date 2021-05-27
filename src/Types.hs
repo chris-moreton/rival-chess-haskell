@@ -2,10 +2,10 @@
 
 module Types where
 
-import GHC.Generics
-import Data.Bits
-import Alias
-import Control.DeepSeq
+import GHC.Generics ( Generic )
+import Data.Bits ( Bits((.|.)) )
+import Alias ( Bitboard, Square )
+import Control.DeepSeq ( NFData )
 
 data Mover = White | Black deriving (Enum,Show,Eq,NFData,Generic)
 data Piece = Pawn | King | Queen | Bishop | Knight | Rook deriving (Enum,Show,Eq)
