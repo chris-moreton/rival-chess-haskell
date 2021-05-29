@@ -2,7 +2,7 @@
 
 module Search.Search where
 
-import Types ( Position (Position, whitePiecesBitboard, blackPiecesBitboard, enPassantSquare), mover, halfMoves, bitboardForColour, Piece (Pawn, Bishop, Knight, Rook, Queen), Mover (White,Black) )
+import Types ( Position (..), mover, halfMoves, bitboardForColour, Piece (..), Mover (White,Black) )
 import Alias ( Move, Bitboard, MoveList )
 import Search.MoveGenerator (moves,isCheck)
 import Util.Utils ( timeMillis, toSquarePart )
@@ -37,7 +37,7 @@ iterativeDeepening positions depth maxDepth endTime rootBest = do
 
 captureScore :: Position -> Move -> Int
 captureScore position move
-    | isCapture position move = 100
+    | isCapture position move = pieceValue (capturePiece position move)
     | otherwise = 0
 
 centreScore :: Position -> Move -> Int
@@ -113,12 +113,20 @@ highestRatedMove notInCheckPositions moveZero low high depth endTime best rootBe
 newPositions :: Position -> [(Position,Move)]
 newPositions position = map (\move -> (makeMove position move,move)) (moves position)
 
+pieceValue :: Piece -> Int
+pieceValue Pawn = 100
+pieceValue Knight = 350
+pieceValue Bishop = 350
+pieceValue Rook = 500
+pieceValue Queen = 900
+pieceValue King = 3000
+
 material :: Position -> Mover -> Int
-material position m = popCount (bitboardForColour position m Pawn) * 100 +
-                      popCount (bitboardForColour position m Bishop) * 350 +
-                      popCount (bitboardForColour position m Knight) * 350 +
-                      popCount (bitboardForColour position m Rook) * 500 +
-                      popCount (bitboardForColour position m Queen) * 900
+material position m = popCount (bitboardForColour position m Pawn) * pieceValue Pawn +
+                      popCount (bitboardForColour position m Bishop) * pieceValue Bishop +
+                      popCount (bitboardForColour position m Knight) * pieceValue Knight +
+                      popCount (bitboardForColour position m Rook) * pieceValue Rook +
+                      popCount (bitboardForColour position m Queen) * pieceValue Queen
 
 evaluate :: Position -> Int
 evaluate position = do
@@ -132,6 +140,22 @@ isCapture position move
     where m = mover position
           t = toSquarePart move
           e = enPassantSquare position
+
+capturePiece :: Position -> Move -> Piece
+capturePiece position move
+    | e == t = Pawn
+    | testBit (whitePawnBitboard position) t = Pawn
+    | testBit (blackPawnBitboard position) t = Pawn
+    | testBit (whiteKnightBitboard position) t = Knight
+    | testBit (blackKnightBitboard position) t = Knight
+    | testBit (whiteBishopBitboard position) t = Bishop
+    | testBit (blackBishopBitboard position) t = Bishop
+    | testBit (whiteRookBitboard position) t = Rook
+    | testBit (blackRookBitboard position) t = Rook
+    | testBit (whiteQueenBitboard position) t = Queen
+    | testBit (blackQueenBitboard position) t = Queen
+    where t = toSquarePart move
+          e = enPassantSquare position          
 
 quiescePositions :: Position -> [(Position,Move)]
 quiescePositions position = do
