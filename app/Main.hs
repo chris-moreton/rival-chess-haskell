@@ -13,11 +13,12 @@ import Util.Fen
 import Types ( Position )
 import Search.MakeMove ( makeMove )
 import Alias ()
-import Search.Search ( startSearch, Counter(..), makeCounter, showCounter, decCounter )
+import Search.Search ( startSearch )
 import Text.Printf ( printf )
 import Util.Utils ( timeMillis )
 import System.IO ( stdout, hFlush )
-import Data.IORef
+import Data.IORef ()
+import State.State ( Counter, makeCounter, showCounter )
 
 data HashEntry = HashEntry { score :: Int, lock :: Int }
                              

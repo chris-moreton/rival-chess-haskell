@@ -41,6 +41,7 @@ library
       Search.MoveConstants
       Search.MoveUtils
       Search.Search
+      State.State
       Types
       Alias
   other-modules:
