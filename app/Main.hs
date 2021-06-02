@@ -17,17 +17,23 @@ import Search.Search ( startSearch )
 import Text.Printf ( printf )
 import Util.Utils ( timeMillis )
 import System.IO ( stdout, hFlush )
+import Data.IORef ()
+import State.State ( Counter, makeCounter, showCounter )
 
+data HashEntry = HashEntry { score :: Int, lock :: Int }
+                             
 data UCIState = UCIState {
       position :: [Position]
     , quit :: Bool
     , errorMessage :: String
     , output :: String
+    , counter :: Counter
 }
 
 main :: IO ()
 main = do
-    commandCycle UCIState {position = [getPosition startPosition], quit=False, errorMessage="", output=""}
+    c <- makeCounter 0
+    commandCycle UCIState {position = [getPosition startPosition], quit=False, errorMessage="", output="", counter=c}
 
 showId :: IO ()
 showId = do
@@ -42,10 +48,13 @@ commandCycle uciState = do
   uciState' <- run uciState (splitOn " " command)
   let e = errorMessage uciState'
   let o = output uciState'
+  putStrLn "Nodes"
+  let c = counter uciState
+  showCounter c
   if quit uciState'
       then do
           putStrLn "Bye"
-          exitSuccess
+          return ()
       else do
           if e == ""
              then if o == ""
@@ -82,14 +91,14 @@ runGo uciState ("movetime":xs) = do
     let moveTime = head xs
     t <- timeMillis
     let endTime = t + read moveTime
-    move <- startSearch (position uciState) 50 endTime
+    move <- startSearch (position uciState) 50 endTime (counter uciState)
     return uciState{output="bestmove " ++ algebraicMoveFromMove (fst move)}
 
 runGo uciState ("depth":xs) = do
     let depth = read (head xs)
     t <- timeMillis
     let endTime = t + 1000000
-    move <- startSearch (position uciState) depth endTime
+    move <- startSearch (position uciState) depth endTime (counter uciState)
     return uciState{output="bestmove " ++ algebraicMoveFromMove (fst move)}
 
 runPosition :: UCIState -> [String] -> IO UCIState
