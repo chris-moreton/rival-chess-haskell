@@ -96,8 +96,8 @@ highestRatedMoveZero (thisP:ps) positions low high depth endTime best rootBest c
 
 search :: Position -> Move -> Int -> Int -> Int -> Int -> (Move,Int) -> Counter -> IO (Move,Int)
 search position moveZero 0 low high endTime _ c = do
-    incCounter 1 c
-    return (moveZero,quiesce position low high)
+    q <- quiesce position low high c
+    return (moveZero,q)
 search position moveZero depth low high endTime rootBest c = do
     incCounter 1 c
     if halfMoves position == 50
@@ -168,7 +168,7 @@ capturePiece position move
     | testBit (whiteQueenBitboard position) t = Queen
     | testBit (blackQueenBitboard position) t = Queen
     where t = toSquarePart move
-          e = enPassantSquare position          
+          e = enPassantSquare position
 
 quiescePositions :: Position -> [(Position,Move)]
 quiescePositions position = do
@@ -176,12 +176,15 @@ quiescePositions position = do
     let captures = filter (isCapture position) m
     map (\m -> (makeMove position m,m)) captures
 
-quiesce :: Position -> Int -> Int -> Int
+quiesce :: Position -> Int -> Int -> Counter -> IO Int
 quiesce position low high = quiesceRecur position low high 0
 
-quiesceRecur :: Position -> Int -> Int -> Int -> Int
-quiesceRecur position _ _ 10 = evaluate position
-quiesceRecur position low high depth = do
+quiesceRecur :: Position -> Int -> Int -> Int -> Counter -> IO Int
+quiesceRecur position _ _ 10 c = do
+    incCounter 1 c
+    return (evaluate position)
+quiesceRecur position low high depth c = do
+    incCounter 1 c
     let eval = evaluate position
     let newLow = max eval low
     let qp = quiescePositions position
@@ -190,18 +193,19 @@ quiesceRecur position low high depth = do
         then do
             let notInCheckPositions = filter (\(p,m) -> not (isCheck p (mover position))) qp
             if null notInCheckPositions
-                then if isCheck position (mover position) then (-9000)-depth else 0
-                else highestQuiesceMove notInCheckPositions newLow high depth newLow
-        else newLow
+                then return (if isCheck position (mover position) then (-9000)-depth else 0)
+                else highestQuiesceMove notInCheckPositions newLow high depth newLow c
+        else return newLow
 
-highestQuiesceMove :: [(Position,Move)] -> Int -> Int -> Int -> Int -> Int
-highestQuiesceMove [] _ _ _ best = best
-highestQuiesceMove notInCheckPositions low high depth best = do
+highestQuiesceMove :: [(Position,Move)] -> Int -> Int -> Int -> Int -> Counter -> IO Int
+highestQuiesceMove [] _ _ _ best c = return best
+highestQuiesceMove notInCheckPositions low high depth best c = do
     let thisP = head notInCheckPositions
-    let negatedScore = -(quiesceRecur (fst thisP) (-high) (-low) (depth+1))
+    score <- quiesceRecur (fst thisP) (-high) (-low) (depth+1) c
+    let negatedScore = -score
     if negatedScore >= high
-        then negatedScore
+        then return negatedScore
         else do
             if negatedScore > low
-                then highestQuiesceMove (tail notInCheckPositions) negatedScore high depth negatedScore
-                else highestQuiesceMove (tail notInCheckPositions) low high depth best
+                then highestQuiesceMove (tail notInCheckPositions) negatedScore high depth negatedScore c
+                else highestQuiesceMove (tail notInCheckPositions) low high depth best c
