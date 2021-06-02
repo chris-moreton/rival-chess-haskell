@@ -52,7 +52,8 @@ captureScore position move
 
 centreScore :: Position -> Move -> Int
 centreScore position move
-    | 0b0000000000000000001111000011110000111100001111000000000000000000 .&. toSquareMask /= 0 = 10
+    | 0b0000000000000000001111000011110000111100001111000000000000000000 .&. toSquareMask /= 0 = 25
+    | 0b0000000001111110010000100100001001000010010000100111111000000000 .&. toSquareMask /= 0 = 10
     | otherwise = 0
     where toSquareMask = bit (toSquarePart move) :: Bitboard
 
