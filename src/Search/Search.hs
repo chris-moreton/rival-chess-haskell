@@ -13,7 +13,7 @@ import Data.Bits ( Bits(popCount), Bits(testBit), Bits(bit), (.|.), (.&.), clear
 import Control.Monad ()
 import System.Exit ()
 import Data.Sort ( sortBy )
-import State.State
+import State.State ( Counter, incCounter )
 
 hashPosition :: Position -> Int
 hashPosition p =
