@@ -42,6 +42,7 @@ library
       Search.MoveUtils
       Search.Search
       State.State
+      Search.Evaluate
       Types
       Alias
   other-modules:

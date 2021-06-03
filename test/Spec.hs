@@ -2,26 +2,99 @@
 
 {-# OPTIONS_GHC -Wno-overflowed-literals #-}
 
-import Test.Hspec
-import Control.Applicative
-import Test.QuickCheck
+import Test.Hspec ( hspec, describe, it, shouldBe, shouldNotBe )
+import Control.Applicative ()
+import Test.QuickCheck ()
 import Control.Exception (evaluate)
-import Data.Time
-import Data.Time.Clock.POSIX
+import Data.Time ()
+import Data.Time.Clock.POSIX ()
 import Util.Bitboards
+    ( a1B1Bits,
+      a6Bit,
+      a7Bit,
+      a8B8Bits,
+      a8Bit,
+      b1C1Bits,
+      b8C8Bits,
+      bitString,
+      darkSquaresBits,
+      emptyCastleSquaresWhiteQueen,
+      emptySquaresBitboard,
+      enemyBitboard,
+      f1G1Bits,
+      f8G8Bits,
+      fileABits,
+      fileHBits,
+      g1H1Bits,
+      g8H8Bits,
+      lightSquaresBits,
+      low32Bits,
+      middleFiles8Bit,
+      noCheckCastleSquaresBlackKing,
+      nonMidFiles8Bit,
+      northFill,
+      promotionSquares,
+      rank8Bits,
+      southFill,
+      whitePawnMovesCapture,
+      whitePawnMovesForward )
 import Util.Fen
+    ( algebraicMoveFromMove,
+      algebraicSquareRefFromBitRef,
+      bitRefFromAlgebraicSquareRef,
+      boardBits,
+      fenBoardPart,
+      getFenRanks,
+      getPosition,
+      moveFromAlgebraicMove,
+      pieceBitboard,
+      rankBits )
 import Util.Utils
-import Search.Perft
+    ( fromSquarePart, promotionPieceFromMove, toSquarePart )
+import Search.Perft ( perft )
 import Search.MoveGenerator
-import Search.MoveConstants
+    ( allBitsExceptFriendlyPieces,
+      anySquaresInBitboardAttacked,
+      generateCastleMoves,
+      generateKingMoves,
+      generateKnightMoves,
+      generatePawnMoves,
+      generatePawnMovesFromToSquares,
+      generateSliderMoves,
+      isBishopAttackingSquare,
+      isCheck,
+      isSquareAttackedBy,
+      moves,
+      movesFromToSquaresBitboard,
+      pawnCaptures,
+      pawnForwardAndCaptureMovesBitboard,
+      pawnForwardMovesBitboard,
+      potentialPawnJumpMoves )
+import Search.MoveConstants ( enPassantNotAvailable )
 import Search.MoveUtils
+    ( createIfPromotion,
+      enPassantCapturedPieceSquare,
+      movePieceWithinBitboard,
+      removePawnIfPromotion )
 import Types
-import Data.Bits
-import Data.Sort
-import Search.MakeMove
-import Search.Search
-import State.State
-import Data.Bifunctor
+    ( bitboardForMover,
+      Mover(White, Black),
+      Piece(Pawn, King, Rook, Queen, Knight, Bishop),
+      Position(halfMoves, whiteKingCastleAvailable,
+               whiteQueenCastleAvailable, blackQueenCastleAvailable,
+               blackPawnBitboard, whitePawnBitboard, blackRookBitboard,
+               whiteRookBitboard, blackKingBitboard, whiteKingBitboard,
+               blackKnightBitboard, whiteKnightBitboard, blackQueenBitboard,
+               whiteQueenBitboard, blackBishopBitboard, whiteBishopBitboard,
+               enPassantSquare, mover, allPiecesBitboard,
+               blackKingCastleAvailable) )
+import Data.Bits ( Bits(testBit, bit, (.&.), (.|.), shiftL) )
+import Data.Sort ( sort )
+import Search.MakeMove ( makeAlgebraicMoves, makeMove )
+import Search.Search ( bestMoveFirst, quiescePositions, quiesce )
+import State.State ( makeCounter )
+import Data.Bifunctor ()
+import Search.Evaluate ( isCapture )
 
 main :: IO ()
 main = hspec $ do
