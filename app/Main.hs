@@ -18,22 +18,21 @@ import Text.Printf ( printf )
 import Util.Utils ( timeMillis )
 import System.IO ( stdout, hFlush )
 import Data.IORef ()
-import State.State ( Counter, makeCounter, showCounter )
-                       
+import State.State ( Counter, showCounter, SearchState(..), makeHashTable, HashEntry(..), HashTable(..) )
+import qualified Data.Vector.Storable as V
+                  
 data UCIState = UCIState {
       position :: [Position]
     , quit :: Bool
     , errorMessage :: String
     , output :: String
-    , counter :: Counter
-    , hashTable :: HashTable 4096 HashEntry
+    , searchState :: SearchState 
 }
 
 main :: IO ()
 main = do
-    c <- makeCounter 0
-    h <- makeHashTable (HashTable 4096 HashEntry)
-    commandCycle UCIState {position = [getPosition startPosition], quit=False, errorMessage="", output="", counter=c, hashTable=h}
+    ss <- makeHashTable 0 HashTable { he = HashEntry 0 1 }
+    commandCycle UCIState {position = [getPosition startPosition], quit=False, errorMessage="", output="", searchState = ss}
 
 showId :: IO ()
 showId = do
@@ -49,8 +48,8 @@ commandCycle uciState = do
   let e = errorMessage uciState'
   let o = output uciState'
   putStrLn "Nodes"
-  let c = counter uciState
-  showCounter c
+  let ss = searchState uciState
+  showCounter ss
   if quit uciState'
       then do
           putStrLn "Bye"
@@ -91,14 +90,14 @@ runGo uciState ("movetime":xs) = do
     let moveTime = head xs
     t <- timeMillis
     let endTime = t + read moveTime
-    move <- startSearch (position uciState) 50 endTime (counter uciState)
+    move <- startSearch (position uciState) 50 endTime (searchState uciState)
     return uciState{output="bestmove " ++ algebraicMoveFromMove (fst move)}
 
 runGo uciState ("depth":xs) = do
     let depth = read (head xs)
     t <- timeMillis
     let endTime = t + 1000000
-    move <- startSearch (position uciState) depth endTime (counter uciState)
+    move <- startSearch (position uciState) depth endTime (searchState uciState)
     return uciState{output="bestmove " ++ algebraicMoveFromMove (fst move)}
 
 runPosition :: UCIState -> [String] -> IO UCIState

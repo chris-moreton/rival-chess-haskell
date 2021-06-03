@@ -3,31 +3,29 @@
 module State.State where
 
 import qualified Data.Vector.Storable as V
-import GHC.TypeNats ( Nat )
 import Data.IORef ( modifyIORef, newIORef, readIORef, IORef )
 
 newtype Counter = Counter { x :: IORef Int }
 
 data HashEntry = HashEntry { score :: Int, lock :: Int }
 
-newtype HashTable (n :: Nat) a = UnsafeMkVec { getVector :: IORef (V.Vector a) }
-newtype SearchState = SearchState { h :: IORef (HashTable 4096 HashEntry) }
+data HashTable = HashTable {
+    he :: HashEntry
+}
 
-makeCounter :: Int -> IO Counter
-makeCounter i = do iref <- newIORef i
-                   return (Counter iref)
+data SearchState = SearchState {
+          counter   :: IORef Int
+        , hashTable :: IORef HashTable
+    }
 
-incCounter :: Int -> Counter -> IO ()
-incCounter i (Counter c) = do modifyIORef c (+ i)
+incCounter :: Int -> SearchState -> IO ()
+incCounter i (SearchState c _) = do modifyIORef c (+ i)
 
-decCounter :: Int -> Counter -> IO ()
-decCounter i (Counter c) = do modifyIORef c (i -)
+showCounter :: SearchState -> IO ()
+showCounter (SearchState c _) = do { c' <- readIORef c; print c' }
 
-showCounter :: Counter -> IO ()
-showCounter (Counter c) = do c' <- readIORef c
-                             print c'
-
-makeHashTable :: HashTable 4096 HashEntry -> IO SearchState
-makeHashTable i = do
+makeHashTable :: Int -> HashTable -> IO SearchState
+makeHashTable c i = do
     iref <- newIORef i
-    return (SearchState iref)
+    cref <- newIORef c
+    return (SearchState cref iref)

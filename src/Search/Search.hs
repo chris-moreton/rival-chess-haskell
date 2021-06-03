@@ -13,7 +13,7 @@ import Data.Bits ( Bits(popCount), Bits(testBit), Bits(bit), (.|.), (.&.), clear
 import Control.Monad ()
 import System.Exit ()
 import Data.Sort ( sortBy )
-import State.State ( Counter, incCounter )
+import State.State ( SearchState, incCounter )
 import Search.Evaluate ( scoreMove, evaluate, isCapture )
 
 hashPosition :: Position -> Int
@@ -31,14 +31,14 @@ canLeadToDrawByRepetition p ps
     | or ([makeMove p m `elem` ps | m <- moves p]) = True
     | otherwise = False
 
-startSearch :: [Position] -> Int -> Int -> Counter -> IO (Move,Int)
+startSearch :: [Position] -> Int -> Int -> SearchState -> IO (Move,Int)
 startSearch (position:positions) maxDepth endTime c = do
     let theseMoves = sortMoves position (moves position)
     let newPositions = map (\move -> (makeMove position move,move)) theseMoves
     let notInCheckPositions = filter (\(p,m) -> not (isCheck p (mover position))) newPositions
     iterativeDeepening (position:positions) 1 maxDepth endTime (snd (head notInCheckPositions),-100000) c
 
-iterativeDeepening :: [Position] -> Int -> Int -> Int -> (Move,Int) -> Counter -> IO (Move,Int)
+iterativeDeepening :: [Position] -> Int -> Int -> Int -> (Move,Int) -> SearchState -> IO (Move,Int)
 iterativeDeepening positions depth maxDepth endTime rootBest c = do
     result <- searchZero positions depth endTime rootBest c
     t <- timeMillis
@@ -59,13 +59,13 @@ bestMoveFirst position best = do
     let notInCheckPositions = filter (\(p,m) -> not (isCheck p (mover position))) newPositionsWithoutBest
     bestPosition : notInCheckPositions
 
-searchZero :: [Position] -> Int -> Int -> (Move,Int) -> Counter -> IO (Move,Int)
+searchZero :: [Position] -> Int -> Int -> (Move,Int) -> SearchState -> IO (Move,Int)
 searchZero positions depth endTime rootBest c = do
     let position = head positions
     let positionsWithBestFirst = bestMoveFirst position rootBest
     highestRatedMoveZero (bestMoveFirst position rootBest) positions (-100000) 100000 depth endTime (snd (head positionsWithBestFirst),-100000) rootBest c
 
-highestRatedMoveZero :: [(Position,Move)] -> [Position] -> Int -> Int -> Int -> Int -> (Move,Int) -> (Move,Int) -> Counter -> IO (Move,Int)
+highestRatedMoveZero :: [(Position,Move)] -> [Position] -> Int -> Int -> Int -> Int -> (Move,Int) -> (Move,Int) -> SearchState -> IO (Move,Int)
 highestRatedMoveZero [] _ _ _ _ _ best _ _ = return best
 highestRatedMoveZero (thisP:ps) positions low high depth endTime best rootBest c = do
    t <- timeMillis
@@ -81,7 +81,7 @@ highestRatedMoveZero (thisP:ps) positions low high depth endTime best rootBest c
                 then highestRatedMoveZero ps positions negatedScore high depth endTime (snd thisP,negatedScore) rootBest c
                 else highestRatedMoveZero ps positions low high depth endTime best rootBest c
 
-search :: Position -> Move -> Int -> Int -> Int -> Int -> (Move,Int) -> Counter -> IO (Move,Int)
+search :: Position -> Move -> Int -> Int -> Int -> Int -> (Move,Int) -> SearchState -> IO (Move,Int)
 search position moveZero 0 low high endTime _ c = do
     q <- quiesce position low high c
     return (moveZero,q)
@@ -97,7 +97,7 @@ search position moveZero depth low high endTime rootBest c = do
                     then return (moveZero, if isCheck position (mover position) then (-9000)-depth else 0)
                     else highestRatedMove notInCheckPositions moveZero low high depth endTime (snd (head notInCheckPositions),low) rootBest c
 
-highestRatedMove :: [(Position,Move)] -> Move -> Int -> Int -> Int -> Int -> (Move,Int) -> (Move,Int) -> Counter -> IO (Move,Int)
+highestRatedMove :: [(Position,Move)] -> Move -> Int -> Int -> Int -> Int -> (Move,Int) -> (Move,Int) -> SearchState -> IO (Move,Int)
 highestRatedMove [] _ _ _ _ _ best _ _ = return best
 highestRatedMove notInCheckPositions moveZero low high depth endTime best rootBest c = do
     let thisP = head notInCheckPositions
@@ -119,10 +119,10 @@ quiescePositions position = do
     let captures = filter (isCapture position) m
     map (\m -> (makeMove position m,m)) captures
 
-quiesce :: Position -> Int -> Int -> Counter -> IO Int
+quiesce :: Position -> Int -> Int -> SearchState -> IO Int
 quiesce position low high = quiesceRecur position low high 0
 
-quiesceRecur :: Position -> Int -> Int -> Int -> Counter -> IO Int
+quiesceRecur :: Position -> Int -> Int -> Int -> SearchState -> IO Int
 quiesceRecur position _ _ 10 c = do
     incCounter 1 c
     return (evaluate position)
@@ -140,7 +140,7 @@ quiesceRecur position low high depth c = do
                 else highestQuiesceMove notInCheckPositions newLow high depth newLow c
         else return newLow
 
-highestQuiesceMove :: [(Position,Move)] -> Int -> Int -> Int -> Int -> Counter -> IO Int
+highestQuiesceMove :: [(Position,Move)] -> Int -> Int -> Int -> Int -> SearchState -> IO Int
 highestQuiesceMove [] _ _ _ best c = return best
 highestQuiesceMove notInCheckPositions low high depth best c = do
     let thisP = head notInCheckPositions

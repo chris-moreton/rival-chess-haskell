@@ -92,9 +92,10 @@ import Data.Bits ( Bits(testBit, bit, (.&.), (.|.), shiftL) )
 import Data.Sort ( sort )
 import Search.MakeMove ( makeAlgebraicMoves, makeMove )
 import Search.Search ( bestMoveFirst, quiescePositions, quiesce )
-import State.State ( makeCounter )
+import State.State
 import Data.Bifunctor ()
 import Search.Evaluate ( isCapture )
+import qualified Data.Vector.Storable as V
 
 main :: IO ()
 main = hspec $ do
@@ -644,7 +645,7 @@ main = hspec $ do
 
   describe "quiesce" $
     it "evaluates a position using a quiescence search" $ do
-        c <- makeCounter 0
+        c <- makeHashTable 0 HashTable { he = HashEntry 0 1 }
         let position = getPosition "rnbqkbnr/ppp3pp/5p2/3PB1N1/2P4P/8/PP1P1PP1/RNBQK2R b KQkq - 0 1"
         q <- quiesce position -100000 100000 c
         q `shouldBe` 150
