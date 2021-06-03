@@ -1,4 +1,4 @@
-{-# LANGUAGE DeriveGeneric,BangPatterns,DeriveAnyClass #-}
+{-# LANGUAGE DeriveGeneric,BangPatterns,DeriveAnyClass,KindSignatures #-}
 
 module Types where
 
@@ -6,7 +6,7 @@ import GHC.Generics ( Generic )
 import Data.Bits ( Bits((.|.)) )
 import Alias ( Bitboard, Square )
 import Control.DeepSeq ( NFData )
-
+    
 data Mover = White | Black deriving (Enum,Show,Eq,NFData,Generic)
 data Piece = Pawn | King | Queen | Bishop | Knight | Rook deriving (Enum,Show,Eq)
 

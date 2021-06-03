@@ -19,21 +19,21 @@ import Util.Utils ( timeMillis )
 import System.IO ( stdout, hFlush )
 import Data.IORef ()
 import State.State ( Counter, makeCounter, showCounter )
-
-data HashEntry = HashEntry { score :: Int, lock :: Int }
-                             
+                       
 data UCIState = UCIState {
       position :: [Position]
     , quit :: Bool
     , errorMessage :: String
     , output :: String
     , counter :: Counter
+    , hashTable :: HashTable 4096 HashEntry
 }
 
 main :: IO ()
 main = do
     c <- makeCounter 0
-    commandCycle UCIState {position = [getPosition startPosition], quit=False, errorMessage="", output="", counter=c}
+    h <- makeHashTable (HashTable 4096 HashEntry)
+    commandCycle UCIState {position = [getPosition startPosition], quit=False, errorMessage="", output="", counter=c, hashTable=h}
 
 showId :: IO ()
 showId = do

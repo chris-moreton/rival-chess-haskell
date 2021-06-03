@@ -15,11 +15,13 @@ import Alias ( Bitboard, Move )
 import Util.Utils ( toSquarePart )
 import Data.Bits ( Bits(popCount), Bits(testBit), Bits(bit), (.|.), (.&.), clearBit, shiftL )
 
+{-# INLINE captureScore #-}
 captureScore :: Position -> Move -> Int
 captureScore position move
     | isCapture position move = pieceValue (capturePiece position move)
     | otherwise = 0
 
+{-# INLINE centreScore #-}
 centreScore :: Position -> Move -> Int
 centreScore position move
     | 0b0000000000000000001111000011110000111100001111000000000000000000 .&. toSquareMask /= 0 = 25
@@ -27,9 +29,11 @@ centreScore position move
     | otherwise = 0
     where toSquareMask = bit (toSquarePart move) :: Bitboard
 
+{-# INLINE scoreMove #-}
 scoreMove :: Position -> Move -> Int
 scoreMove position move = captureScore position move + centreScore position move
 
+{-# INLINE pieceValue #-}
 pieceValue :: Piece -> Int
 pieceValue Pawn = 100
 pieceValue Knight = 350
