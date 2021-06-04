@@ -2,7 +2,7 @@
 
 module State.State where
 
-import qualified Data.Vector.Storable as V
+import qualified Data.Vector.Unboxed as V
 import Data.IORef ( modifyIORef, newIORef, readIORef, IORef )
 
 newtype Counter = Counter { x :: IORef Int }
@@ -10,7 +10,7 @@ newtype Counter = Counter { x :: IORef Int }
 data HashEntry = HashEntry { score :: Int, lock :: Int }
 
 data HashTable = HashTable {
-    he :: HashEntry
+    he :: [HashEntry]
 }
 
 data SearchState = SearchState {
