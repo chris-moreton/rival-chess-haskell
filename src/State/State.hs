@@ -2,15 +2,13 @@
 
 module State.State where
 
-import qualified Data.Vector.Unboxed as V
 import Data.IORef ( modifyIORef, newIORef, readIORef, IORef )
+import qualified Data.Vector as V
 
-newtype Counter = Counter { x :: IORef Int }
+data HashEntry = HashEntry { score :: Int, lock :: Int } deriving (Show, Eq)
 
-data HashEntry = HashEntry { score :: Int, lock :: Int }
-
-data HashTable = HashTable {
-    he :: [HashEntry]
+newtype HashTable = HashTable {
+    he :: V.Vector HashEntry
 }
 
 data SearchState = SearchState {

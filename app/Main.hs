@@ -18,8 +18,8 @@ import Text.Printf ( printf )
 import Util.Utils ( timeMillis )
 import System.IO ( stdout, hFlush )
 import Data.IORef ()
-import State.State ( Counter, showCounter, SearchState(..), makeHashTable, HashEntry(..), HashTable(..) )
-import qualified Data.Vector.Unboxed as V
+import State.State ( showCounter, SearchState(..), makeHashTable, HashEntry(..), HashTable(..) )
+import qualified Data.Vector as V
 
 data UCIState = UCIState {
       position :: [Position]
@@ -28,11 +28,10 @@ data UCIState = UCIState {
     , output :: String
     , searchState :: SearchState
 }
-
 main :: IO ()
 main = do
     let l1 = replicate 4096 HashEntry { score=0, lock=0 }
-    let ht = HashTable { he = l1 }
+    let ht = HashTable { he = V.fromList l1 }
     ss <- makeHashTable 0 ht
     commandCycle UCIState {position = [getPosition startPosition], quit=False, errorMessage="", output="", searchState = ss}
 
