@@ -1,7 +1,12 @@
 module Search.Zobrist where
 
 import Types
-import Data.Vector as V
+    ( Mover(Black, White),
+      Piece(King, Pawn, Knight, Bishop, Rook, Queen),
+      Position(mover, enPassantSquare) )
+import Data.Vector as V ( Vector, fromList, (!) )
+import Search.Evaluate ( pieceOnSquare )
+import Data.Bits (xor)
 
 startZobristValue :: Int
 startZobristValue = 1427869295504964227
@@ -33,7 +38,28 @@ whiteMoveZobristValue :: Int
 whiteMoveZobristValue = 6612194290785701391
 blackMoverZobristValue :: Int
 blackMoverZobristValue = 7796428774704130372
+enPassantZobristValue :: Int
+enPassantZobristValue = 6687912736785776762
 
+zobrist :: Position -> Int
+zobrist p = if enPassantSquare p == 0 then z else xor z enPassantZobristValue
+    where z = zobristRecur p 0 startZobristValue `xor`
+              (if mover p == White then whiteMoveZobristValue else blackMoverZobristValue)
 
-zobrist :: Position -> Int 
-zobrist p = 1
+zobristRecur :: Position -> Int -> Int -> Int
+zobristRecur _ 64 result = result
+zobristRecur p square result
+    | piece == (White,Pawn) = zobristRecur p (square + 1) (xor result (whitePawnZobristSquares V.! square))
+    | piece == (White,Knight) = zobristRecur p (square + 1) (xor result (whiteKnightZobristSquares V.! square))
+    | piece == (White,Bishop) = zobristRecur p (square + 1) (xor result (whiteBishopZobristSquares V.! square))
+    | piece == (White,Rook) = zobristRecur p (square + 1) (xor result (whiteRookZobristSquares V.! square))
+    | piece == (White,Queen) = zobristRecur p (square + 1) (xor result (whiteQueenZobristSquares V.! square))
+    | piece == (White,King) = zobristRecur p (square + 1) (xor result (whiteKingZobristSquares V.! square))
+    | piece == (Black,Pawn) = zobristRecur p (square + 1) (xor result (blackPawnZobristSquares V.! square))
+    | piece == (Black,Knight) = zobristRecur p (square + 1) (xor result (blackKnightZobristSquares V.! square))
+    | piece == (Black,Bishop) = zobristRecur p (square + 1) (xor result (blackBishopZobristSquares V.! square))
+    | piece == (Black,Rook) = zobristRecur p (square + 1) (xor result (blackRookZobristSquares V.! square))
+    | piece == (Black,Queen) = zobristRecur p (square + 1) (xor result (blackQueenZobristSquares V.! square))
+    | piece == (Black,King) = zobristRecur p (square + 1) (xor result (blackKingZobristSquares V.! square))
+    where piece = pieceOnSquare p square
+ 

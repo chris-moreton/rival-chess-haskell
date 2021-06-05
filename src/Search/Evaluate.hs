@@ -10,7 +10,7 @@ import Types
                enPassantSquare, whitePawnBitboard, blackPawnBitboard,
                whiteKnightBitboard, blackKnightBitboard, whiteBishopBitboard,
                blackBishopBitboard, whiteRookBitboard, blackRookBitboard,
-               whiteQueenBitboard, blackQueenBitboard) )
+               whiteQueenBitboard, blackQueenBitboard, whiteKingBitboard, blackKingBitboard) )
 import Alias ( Bitboard, Move )
 import Util.Utils ( toSquarePart )
 import Data.Bits ( Bits(popCount), Bits(testBit), Bits(bit), (.|.), (.&.), clearBit, shiftL )
@@ -75,15 +75,23 @@ isCapture position move
 capturePiece :: Position -> Move -> Piece
 capturePiece position move
     | e == t = Pawn
-    | testBit (whitePawnBitboard position) t = Pawn
-    | testBit (blackPawnBitboard position) t = Pawn
-    | testBit (whiteKnightBitboard position) t = Knight
-    | testBit (blackKnightBitboard position) t = Knight
-    | testBit (whiteBishopBitboard position) t = Bishop
-    | testBit (blackBishopBitboard position) t = Bishop
-    | testBit (whiteRookBitboard position) t = Rook
-    | testBit (blackRookBitboard position) t = Rook
-    | testBit (whiteQueenBitboard position) t = Queen
-    | testBit (blackQueenBitboard position) t = Queen
+    | otherwise = snd (pieceOnSquare position t)
     where t = toSquarePart move
-          e = enPassantSquare position          
+          e = enPassantSquare position
+
+{-# INLINE pieceOnSquare #-}
+pieceOnSquare :: Position -> Int -> (Mover,Piece)
+pieceOnSquare position square
+    | testBit (whitePawnBitboard position) square = (White,Pawn)
+    | testBit (blackPawnBitboard position) square = (White,Pawn)
+    | testBit (whiteKnightBitboard position) square = (White,Knight)
+    | testBit (blackKnightBitboard position) square = (White,Knight)
+    | testBit (whiteBishopBitboard position) square = (White,Bishop)
+    | testBit (blackBishopBitboard position) square = (White,Bishop)
+    | testBit (whiteRookBitboard position) square = (White,Rook)
+    | testBit (blackRookBitboard position) square = (White,Rook)
+    | testBit (whiteQueenBitboard position) square = (White,Queen)
+    | testBit (blackQueenBitboard position) square = (White,Queen)
+    | testBit (whiteKingBitboard position) square = (White,King)
+    | testBit (blackKingBitboard position) square = (White,King)
+           
