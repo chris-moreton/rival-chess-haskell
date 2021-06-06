@@ -7,6 +7,7 @@ import Control.Applicative ()
 import Test.QuickCheck ()
 import Control.Exception (evaluate)
 import Data.Time ()
+import Search.Zobrist
 import Data.Time.Clock.POSIX ()
 import Util.Bitboards
     ( a1B1Bits,
@@ -88,14 +89,15 @@ import Types
                whiteQueenBitboard, blackBishopBitboard, whiteBishopBitboard,
                enPassantSquare, mover, allPiecesBitboard,
                blackKingCastleAvailable) )
-import Data.Bits ( Bits(testBit, bit, (.&.), (.|.), shiftL) )
+import Data.Bits ( Bits(testBit, bit, (.&.), (.|.), shiftL), xor )
 import Data.Sort ( sort )
 import Search.MakeMove ( makeAlgebraicMoves, makeMove )
 import Search.Search ( bestMoveFirst, quiescePositions, quiesce )
-import State.State
+import qualified State.State as S
 import Data.Bifunctor ()
 import Search.Evaluate ( isCapture )
 import qualified Data.Vector.Storable as V
+import qualified Data.Vector as Vec
 
 main :: IO ()
 main = hspec $ do
@@ -645,7 +647,8 @@ main = hspec $ do
 
   describe "quiesce" $
     it "evaluates a position using a quiescence search" $ do
-        c <- makeHashTable 0 HashTable { he = HashEntry 0 1 }
+        let l1 = replicate 4096 S.HashEntry { S.score=0, S.lock=0 }
+        c <- S.makeHashTable 0 S.HashTable { S.he = Vec.fromList l1 }
         let position = getPosition "rnbqkbnr/ppp3pp/5p2/3PB1N1/2P4P/8/PP1P1PP1/RNBQK2R b KQkq - 0 1"
         q <- quiesce position -100000 100000 c
         q `shouldBe` 150
@@ -795,3 +798,18 @@ main = hspec $ do
     let position = getPosition "r3k2r/p6p/8/B7/1pp1p3/3b4/P6P/R3K2R b kq - 0 1"
     let moves = bestMoveFirst position (moveFromAlgebraicMove "e8f8",200)
     snd (head moves) `shouldBe` moveFromAlgebraicMove "e8f8"
+
+  describe "zobrist" $
+    it "calculates the zobrist hash of a position" $ do
+    let p1 = getPosition "r3k2r/p6p/8/B7/1pp1p3/3b4/P6P/R3K2R b kq - 0 1"
+    let h1 = zobrist p1
+    let h2 = zobrist (getPosition "4k2r/p6p/8/B7/1pp1p3/3b4/P6P/R3K2R b kq - 0 1")
+    h2 `shouldNotBe` h1
+    h2 `shouldBe` xor h1 (blackRookZobristSquares Vec.! 63)
+    let h3 = zobrist (getPosition "4k3/p6p/8/B7/1pp1p3/3b4/P6P/R3K2R b kq - 0 1")
+    h3 `shouldNotBe` h2
+    h3 `shouldBe` xor h2 (blackRookZobristSquares Vec.! 56)
+    let h4 = zobrist (getPosition "4k3/7p/8/B7/1pp1p3/3b4/P6P/R3K2R b kq - 0 1")
+    h4 `shouldNotBe` h3
+    h4 `shouldBe` xor h3 (blackPawnZobristSquares Vec.! 55)
+

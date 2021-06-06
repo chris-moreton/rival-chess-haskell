@@ -43,23 +43,23 @@ enPassantZobristValue = 6687912736785776762
 
 zobrist :: Position -> Int
 zobrist p = if enPassantSquare p == 0 then z else xor z enPassantZobristValue
-    where z = zobristRecur p 0 startZobristValue `xor`
-              (if mover p == White then whiteMoveZobristValue else blackMoverZobristValue)
+    where z = zobristRecur p 0 startZobristValue `xor` (if mover p == White then whiteMoveZobristValue else blackMoverZobristValue)
 
 zobristRecur :: Position -> Int -> Int -> Int
 zobristRecur _ 64 result = result
 zobristRecur p square result
-    | piece == (White,Pawn) = zobristRecur p (square + 1) (xor result (whitePawnZobristSquares V.! square))
-    | piece == (White,Knight) = zobristRecur p (square + 1) (xor result (whiteKnightZobristSquares V.! square))
-    | piece == (White,Bishop) = zobristRecur p (square + 1) (xor result (whiteBishopZobristSquares V.! square))
-    | piece == (White,Rook) = zobristRecur p (square + 1) (xor result (whiteRookZobristSquares V.! square))
-    | piece == (White,Queen) = zobristRecur p (square + 1) (xor result (whiteQueenZobristSquares V.! square))
-    | piece == (White,King) = zobristRecur p (square + 1) (xor result (whiteKingZobristSquares V.! square))
-    | piece == (Black,Pawn) = zobristRecur p (square + 1) (xor result (blackPawnZobristSquares V.! square))
-    | piece == (Black,Knight) = zobristRecur p (square + 1) (xor result (blackKnightZobristSquares V.! square))
-    | piece == (Black,Bishop) = zobristRecur p (square + 1) (xor result (blackBishopZobristSquares V.! square))
-    | piece == (Black,Rook) = zobristRecur p (square + 1) (xor result (blackRookZobristSquares V.! square))
-    | piece == (Black,Queen) = zobristRecur p (square + 1) (xor result (blackQueenZobristSquares V.! square))
-    | piece == (Black,King) = zobristRecur p (square + 1) (xor result (blackKingZobristSquares V.! square))
+    | piece == Just (White,Pawn) = zobristRecur p (square + 1) (xor result (whitePawnZobristSquares V.! square))
+    | piece == Just (White,Knight) = zobristRecur p (square + 1) (xor result (whiteKnightZobristSquares V.! square))
+    | piece == Just (White,Bishop) = zobristRecur p (square + 1) (xor result (whiteBishopZobristSquares V.! square))
+    | piece == Just (White,Rook) = zobristRecur p (square + 1) (xor result (whiteRookZobristSquares V.! square))
+    | piece == Just (White,Queen) = zobristRecur p (square + 1) (xor result (whiteQueenZobristSquares V.! square))
+    | piece == Just (White,King) = zobristRecur p (square + 1) (xor result (whiteKingZobristSquares V.! square))
+    | piece == Just (Black,Pawn) = zobristRecur p (square + 1) (xor result (blackPawnZobristSquares V.! square))
+    | piece == Just (Black,Knight) = zobristRecur p (square + 1) (xor result (blackKnightZobristSquares V.! square))
+    | piece == Just (Black,Bishop) = zobristRecur p (square + 1) (xor result (blackBishopZobristSquares V.! square))
+    | piece == Just (Black,Rook) = zobristRecur p (square + 1) (xor result (blackRookZobristSquares V.! square))
+    | piece == Just (Black,Queen) = zobristRecur p (square + 1) (xor result (blackQueenZobristSquares V.! square))
+    | piece == Just (Black,King) = zobristRecur p (square + 1) (xor result (blackKingZobristSquares V.! square))
+    | otherwise = zobristRecur p (square + 1) result
     where piece = pieceOnSquare p square
  

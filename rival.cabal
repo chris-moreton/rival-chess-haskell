@@ -41,6 +41,7 @@ library
       Search.MoveConstants
       Search.MoveUtils
       Search.Search
+      Search.Zobrist
       State.State
       Search.Evaluate
       Types

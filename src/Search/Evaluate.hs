@@ -50,7 +50,7 @@ material position m
     where mw = materialWhite position
 
 {-# INLINE materialWhite #-}
-materialWhite :: Position -> Int 
+materialWhite :: Position -> Int
 materialWhite position =
     (popCount (whitePawnBitboard position) - popCount (blackPawnBitboard position)) * pieceValue Pawn +
     (popCount (whiteKnightBitboard position) - popCount (blackKnightBitboard position)) * pieceValue Knight +
@@ -75,23 +75,38 @@ isCapture position move
 capturePiece :: Position -> Move -> Piece
 capturePiece position move
     | e == t = Pawn
-    | otherwise = snd (pieceOnSquare position t)
+    | otherwise = pieceOnSquareFast position t
     where t = toSquarePart move
           e = enPassantSquare position
 
-{-# INLINE pieceOnSquare #-}
-pieceOnSquare :: Position -> Int -> (Mover,Piece)
+{-# INLINE pieceOnSquareFast #-}
+pieceOnSquareFast :: Position -> Int -> Piece
+pieceOnSquareFast position square
+    | testBit (whitePawnBitboard position) square = Pawn
+    | testBit (blackPawnBitboard position) square = Pawn
+    | testBit (whiteKnightBitboard position) square = Knight
+    | testBit (blackKnightBitboard position) square = Knight
+    | testBit (whiteBishopBitboard position) square = Bishop
+    | testBit (blackBishopBitboard position) square = Bishop
+    | testBit (whiteRookBitboard position) square = Rook
+    | testBit (blackRookBitboard position) square = Rook
+    | testBit (whiteQueenBitboard position) square = Queen
+    | testBit (blackQueenBitboard position) square = Queen
+    | testBit (whiteKingBitboard position) square = King
+    | testBit (blackKingBitboard position) square = King
+
+pieceOnSquare :: Position -> Int -> Maybe (Mover,Piece)
 pieceOnSquare position square
-    | testBit (whitePawnBitboard position) square = (White,Pawn)
-    | testBit (blackPawnBitboard position) square = (White,Pawn)
-    | testBit (whiteKnightBitboard position) square = (White,Knight)
-    | testBit (blackKnightBitboard position) square = (White,Knight)
-    | testBit (whiteBishopBitboard position) square = (White,Bishop)
-    | testBit (blackBishopBitboard position) square = (White,Bishop)
-    | testBit (whiteRookBitboard position) square = (White,Rook)
-    | testBit (blackRookBitboard position) square = (White,Rook)
-    | testBit (whiteQueenBitboard position) square = (White,Queen)
-    | testBit (blackQueenBitboard position) square = (White,Queen)
-    | testBit (whiteKingBitboard position) square = (White,King)
-    | testBit (blackKingBitboard position) square = (White,King)
-           
+    | testBit (whitePawnBitboard position) square = Just (White,Pawn)
+    | testBit (blackPawnBitboard position) square = Just (Black,Pawn)
+    | testBit (whiteKnightBitboard position) square = Just (White,Knight)
+    | testBit (blackKnightBitboard position) square = Just (Black,Knight)
+    | testBit (whiteBishopBitboard position) square = Just (White,Bishop)
+    | testBit (blackBishopBitboard position) square = Just (Black,Bishop)
+    | testBit (whiteRookBitboard position) square = Just (White,Rook)
+    | testBit (blackRookBitboard position) square = Just (Black,Rook)
+    | testBit (whiteQueenBitboard position) square = Just (White,Queen)
+    | testBit (blackQueenBitboard position) square = Just (Black,Queen)
+    | testBit (whiteKingBitboard position) square = Just (White,King)
+    | testBit (blackKingBitboard position) square = Just (Black,King)
+    | otherwise = Nothing      
