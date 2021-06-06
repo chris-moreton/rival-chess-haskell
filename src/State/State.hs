@@ -3,12 +3,16 @@
 module State.State where
 
 import Data.IORef ( modifyIORef, newIORef, readIORef, IORef )
-import qualified Data.Vector as V
+import qualified Data.Vector.Mutable as VM
 
-data HashEntry = HashEntry { score :: Int, lock :: Int } deriving (Show, Eq)
+data HashFlag = Lower | Upper | Exact | None deriving (Show, Eq)
+data HashEntry = HashEntry { score :: Int, depth:: Int, flag :: HashFlag, lock :: Int } deriving (Show, Eq)
+
+emptyHashEntry :: HashEntry
+emptyHashEntry = HashEntry 0 0 None 0
 
 newtype HashTable = HashTable {
-    he :: V.Vector HashEntry
+    he :: VM.MVector HashEntry 4096
 }
 
 data SearchState = SearchState {

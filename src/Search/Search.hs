@@ -13,8 +13,9 @@ import Data.Bits ( Bits(popCount), Bits(testBit), Bits(bit), (.|.), (.&.), clear
 import Control.Monad ()
 import System.Exit ()
 import Data.Sort ( sortBy )
-import State.State ( SearchState, incCounter )
+import State.State ( SearchState, incCounter, hashTable )
 import Search.Evaluate ( scoreMove, evaluate, isCapture )
+import Search.Hash
 
 hashPosition :: Position -> Int
 hashPosition p =
@@ -99,16 +100,17 @@ search position moveZero depth low high endTime rootBest c = do
 
 highestRatedMove :: [(Position,Move)] -> Move -> Int -> Int -> Int -> Int -> (Move,Int) -> (Move,Int) -> SearchState -> IO (Move,Int)
 highestRatedMove [] _ _ _ _ _ best _ _ = return best
-highestRatedMove notInCheckPositions moveZero low high depth endTime best rootBest c = do
+highestRatedMove notInCheckPositions moveZero low high depth endTime best rootBest ss = do
     let thisP = head notInCheckPositions
-    (m,s) <- search (fst thisP) moveZero (depth-1) (-high) (-low) endTime rootBest c
+    hentry <- hashEntry (fst thisP) ss
+    (m,s) <- search (fst thisP) moveZero (depth-1) (-high) (-low) endTime rootBest ss
     let negatedScore = -s
     if negatedScore >= high
         then return (m,negatedScore)
         else do
             if negatedScore > low
-                then highestRatedMove (tail notInCheckPositions) moveZero negatedScore high depth endTime (m,negatedScore) rootBest c
-                else highestRatedMove (tail notInCheckPositions) moveZero low high depth endTime best rootBest c
+                then highestRatedMove (tail notInCheckPositions) moveZero negatedScore high depth endTime (m,negatedScore) rootBest ss
+                else highestRatedMove (tail notInCheckPositions) moveZero low high depth endTime best rootBest ss
 
 newPositions :: Position -> [(Position,Move)]
 newPositions position = map (\move -> (makeMove position move,move)) (moves position)

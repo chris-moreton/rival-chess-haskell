@@ -96,8 +96,8 @@ import Search.Search ( bestMoveFirst, quiescePositions, quiesce )
 import qualified State.State as S
 import Data.Bifunctor ()
 import Search.Evaluate ( isCapture )
-import qualified Data.Vector.Storable as V
-import qualified Data.Vector as Vec
+import qualified Data.Vector as V
+import qualified Data.Vector.Mutable as VM
 
 main :: IO ()
 main = hspec $ do
@@ -648,7 +648,7 @@ main = hspec $ do
   describe "quiesce" $
     it "evaluates a position using a quiescence search" $ do
         let l1 = replicate 4096 S.HashEntry { S.score=0, S.lock=0 }
-        c <- S.makeHashTable 0 S.HashTable { S.he = Vec.fromList l1 }
+        c <- S.makeHashTable 0 S.HashTable { S.he = VM.new 4096 S.HashEntry }
         let position = getPosition "rnbqkbnr/ppp3pp/5p2/3PB1N1/2P4P/8/PP1P1PP1/RNBQK2R b KQkq - 0 1"
         q <- quiesce position -100000 100000 c
         q `shouldBe` 150
@@ -729,11 +729,6 @@ main = hspec $ do
      perft (getPosition "8/7p/p5pb/4k3/P1pPn3/8/P5PP/1rB2RK1 b - d3 0 28") 5 `shouldBe` 38633283
      perft (getPosition "8/2p5/3p4/KP5r/1R3p1k/8/4P1P1/8 w - -") 6 `shouldBe` 178633661
 
-     --perft (getPosition "8/2p5/3p4/KP5r/1R3p1k/8/4P1P1/8 w - -") 7 `shouldBe` 3009794393
-     --perft (getPosition "r3k2r/p1ppqpb1/bn2pnp1/3PN3/1p2P3/2N2Q1p/PPPBBPPP/R3K2R w KQkq -") 4 `shouldBe` 193690690
-     --perft (getPosition "r3k2r/p1ppqpb1/bn2pnp1/3PN3/1p2P3/2N2Q1p/PPPBBPPP/R3K2R w KQkq -") 5 `shouldBe` 8031647685
-     --perft (getPosition "8/2p5/3p4/KP5r/1R3p1k/8/4P1P1/8 w - -") 6 `shouldBe` 178633661
-
      perft (getPosition "5k2/5p1p/p3B1p1/P5P1/3K1P1P/8/8/8 b - -") 3 `shouldBe` 20541
      perft (getPosition "n1n5/PPPk4/8/8/8/8/4Kppp/5N1N b - - 0 1") 3 `shouldBe` 182838
 
@@ -805,11 +800,11 @@ main = hspec $ do
     let h1 = zobrist p1
     let h2 = zobrist (getPosition "4k2r/p6p/8/B7/1pp1p3/3b4/P6P/R3K2R b kq - 0 1")
     h2 `shouldNotBe` h1
-    h2 `shouldBe` xor h1 (blackRookZobristSquares Vec.! 63)
+    h2 `shouldBe` xor h1 (blackRookZobristSquares V.! 63)
     let h3 = zobrist (getPosition "4k3/p6p/8/B7/1pp1p3/3b4/P6P/R3K2R b kq - 0 1")
     h3 `shouldNotBe` h2
-    h3 `shouldBe` xor h2 (blackRookZobristSquares Vec.! 56)
+    h3 `shouldBe` xor h2 (blackRookZobristSquares V.! 56)
     let h4 = zobrist (getPosition "4k3/7p/8/B7/1pp1p3/3b4/P6P/R3K2R b kq - 0 1")
     h4 `shouldNotBe` h3
-    h4 `shouldBe` xor h3 (blackPawnZobristSquares Vec.! 55)
+    h4 `shouldBe` xor h3 (blackPawnZobristSquares V.! 55)
 
