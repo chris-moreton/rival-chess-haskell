@@ -3,12 +3,13 @@
 module State.State where
 
 import Data.IORef ( modifyIORef, newIORef, readIORef, IORef )
-import qualified Data.Vector as V
+import qualified Data.Vector.Mutable as VM
+import GHC.Prim ( RealWorld )
 
 data HashEntry = HashEntry { score :: Int, lock :: Int } deriving (Show, Eq)
 
 newtype HashTable = HashTable {
-    he :: V.Vector HashEntry
+    he :: VM.MVector RealWorld HashEntry
 }
 
 data SearchState = SearchState {

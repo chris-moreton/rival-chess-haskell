@@ -60,6 +60,7 @@ library
     , bits-extra
     , deepseq
     , vector
+    , ghc-prim
   default-language: Haskell2010
 
 executable rival-exe
@@ -81,6 +82,7 @@ executable rival-exe
     , bits-extra
     , deepseq
     , vector
+    , ghc-prim    
   default-language: Haskell2010
 
 test-suite rival-test
@@ -104,4 +106,5 @@ test-suite rival-test
     , time
     , sort
     , vector
+    , ghc-prim    
   default-language: Haskell2010

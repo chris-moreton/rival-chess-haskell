@@ -19,7 +19,7 @@ import Util.Utils ( timeMillis )
 import System.IO ( stdout, hFlush )
 import Data.IORef ()
 import State.State ( showCounter, SearchState(..), makeHashTable, HashEntry(..), HashTable(..) )
-import qualified Data.Vector as V
+import qualified Data.Vector.Mutable as VM
 
 data UCIState = UCIState {
       position :: [Position]
@@ -30,8 +30,8 @@ data UCIState = UCIState {
 }
 main :: IO ()
 main = do
-    let l1 = replicate 4096 HashEntry { score=0, lock=0 }
-    let ht = HashTable { he = V.fromList l1 }
+    hes <- VM.replicate 4096 HashEntry { score=0, lock=0 }
+    let ht = HashTable { he = hes }
     ss <- makeHashTable 0 ht
     commandCycle UCIState {position = [getPosition startPosition], quit=False, errorMessage="", output="", searchState = ss}
 
