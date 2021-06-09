@@ -13,17 +13,11 @@ import Data.Bits ( Bits(popCount), Bits(testBit), Bits(bit), (.|.), (.&.), clear
 import Control.Monad ()
 import System.Exit ()
 import Data.Sort ( sortBy )
-import State.State ( SearchState, incCounter )
+import State.State ( SearchState, incCounter, depth, move, score, HashEntry (..), he, hashTable, HashTable )
+import qualified Data.Vector.Mutable as VM ( write )
 import Search.Evaluate ( scoreMove, evaluate, isCapture )
-
-hashPosition :: Position -> Int
-hashPosition p =
-    (if mover p == White then 1238799 else 12389876) + (2 * enPassantSquare p) + (3 * whitePawnBitboard  p) +
-    (4 * blackPawnBitboard p) + (5 * whiteKnightBitboard  p) + (6 * blackKnightBitboard p) +
-    (7 * whiteBishopBitboard p) + (8 * blackBishopBitboard p) +
-    (11 * whiteRookBitboard p) + (12 * blackRookBitboard p) +
-    (13 * whiteQueenBitboard p) + (14 * blackQueenBitboard p) +
-    (15 * whiteKingBitboard p) + (16 * blackKingBitboard p)
+import Search.Zobrist
+import Data.IORef
 
 canLeadToDrawByRepetition :: Position -> [Position] -> Bool
 canLeadToDrawByRepetition p ps
@@ -59,11 +53,18 @@ bestMoveFirst position best = do
     let notInCheckPositions = filter (\(p,m) -> not (isCheck p (mover position))) newPositionsWithoutBest
     bestPosition : notInCheckPositions
 
+updateHashTable :: Int -> Int -> Move -> Int -> HashTable -> HashTable
+updateHashTable i d m s h = VM.write h i HashEntry { move = m, score = s, depth = d }
+
 searchZero :: [Position] -> Int -> Int -> (Move,Int) -> SearchState -> IO (Move,Int)
-searchZero positions depth endTime rootBest c = do
+searchZero positions depth endTime rootBest ss = do
     let position = head positions
     let positionsWithBestFirst = bestMoveFirst position rootBest
-    highestRatedMoveZero (bestMoveFirst position rootBest) positions (-100000) 100000 depth endTime (snd (head positionsWithBestFirst),-100000) rootBest c
+    hrm <- highestRatedMoveZero (bestMoveFirst position rootBest) positions (-100000) 100000 depth endTime (snd (head positionsWithBestFirst),-100000) rootBest ss
+    let hashIndex = mod (zobrist position) 4096
+    let v = he (hashTable ss)
+    modifyIORef (hashTable ss) (uncurry (updateHashTable depth hashIndex) hrm)
+    return hrm
 
 highestRatedMoveZero :: [(Position,Move)] -> [Position] -> Int -> Int -> Int -> Int -> (Move,Int) -> (Move,Int) -> SearchState -> IO (Move,Int)
 highestRatedMoveZero [] _ _ _ _ _ best _ _ = return best

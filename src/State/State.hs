@@ -5,8 +5,9 @@ module State.State where
 import Data.IORef ( modifyIORef, newIORef, readIORef, IORef )
 import qualified Data.Vector.Mutable as VM
 import GHC.Prim ( RealWorld )
+import Alias ( Move )
 
-data HashEntry = HashEntry { score :: Int, lock :: Int } deriving (Show, Eq)
+data HashEntry = HashEntry { score :: Int, lock :: Int, move :: Move, depth :: Int } deriving (Show, Eq)
 
 newtype HashTable = HashTable {
     he :: VM.MVector RealWorld HashEntry
