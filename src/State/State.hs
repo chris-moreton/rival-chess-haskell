@@ -5,14 +5,14 @@ import qualified Data.HashTable.IO as H
 import Types
 
 data Counter = Counter { 
-     h :: IORef HashTable
+     h :: HashTable
    , x :: IORef Int 
 }
 
 makeCounter :: HashTable -> Int -> IO Counter
 makeCounter h i = do 
     iref <- newIORef i
-    href <- newIORef h
+    href <- H.new
     return (Counter href iref)
 
 incCounter :: Int -> Counter -> IO ()
@@ -25,3 +25,7 @@ showCounter :: Counter -> IO ()
 showCounter (Counter _ c) = do 
     c' <- readIORef c
     print c'
+
+updateHashTable :: Int -> HashEntry -> Counter -> IO ()
+updateHashTable i he (Counter h _) = do H.insert h i he
+
