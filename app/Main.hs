@@ -32,7 +32,7 @@ data UCIState = UCIState {
 
 main :: IO ()
 main = do
-    c <- makeCounter 0
+    c <- makeCounter 0 0
     commandCycle UCIState {position = [getPosition startPosition], quit=False, errorMessage="", output="", counter=c}
 
 showId :: IO ()

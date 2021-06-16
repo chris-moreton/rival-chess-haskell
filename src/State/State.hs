@@ -2,18 +2,24 @@ module State.State where
 
 import Data.IORef ( modifyIORef, newIORef, readIORef, IORef )
 
-newtype Counter = Counter { x :: IORef Int }
+data Counter = Counter { 
+     h :: IORef Int
+   , x :: IORef Int 
+}
 
-makeCounter :: Int -> IO Counter
-makeCounter i = do iref <- newIORef i
-                   return (Counter iref)
+makeCounter :: Int -> Int -> IO Counter
+makeCounter i j = do 
+    iref <- newIORef i
+    jref <- newIORef j
+    return (Counter iref jref)
 
 incCounter :: Int -> Counter -> IO ()
-incCounter i (Counter c) = do modifyIORef c (+ i)
+incCounter i (Counter _ c) = do modifyIORef c (+ i)
 
 decCounter :: Int -> Counter -> IO ()
-decCounter i (Counter c) = do modifyIORef c (i -)
+decCounter i (Counter _ c) = do modifyIORef c (i -)
 
 showCounter :: Counter -> IO ()
-showCounter (Counter c) = do c' <- readIORef c
-                             print c'
+showCounter (Counter _ c) = do 
+    c' <- readIORef c
+    print c'
