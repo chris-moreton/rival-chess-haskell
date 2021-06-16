@@ -13,6 +13,7 @@ import Data.Bits ( Bits(popCount), Bits(testBit), Bits(bit), (.|.), (.&.), clear
 import Control.Monad ()
 import System.Exit ()
 import Data.Sort ( sortBy )
+import Data.Maybe ( isJust, fromJust )
 import State.State
 import qualified Data.HashTable.IO as H
 
@@ -96,6 +97,12 @@ highestRatedMoveZero (thisP:ps) positions low high depth endTime best rootBest c
                 then highestRatedMoveZero ps positions negatedScore high depth endTime (snd thisP,negatedScore) rootBest c
                 else highestRatedMoveZero ps positions low high depth endTime best rootBest c
 
+goodHashEntry :: Int -> Maybe HashEntry -> Bool
+goodHashEntry depth he = do
+    case he of
+        Just x -> height x >= depth
+        _ -> False
+
 search :: Position -> Move -> Int -> Int -> Int -> Int -> (Move,Int) -> Counter -> IO (Move,Int)
 search position moveZero 0 low high endTime _ c = do
     q <- quiesce position low high c
@@ -103,10 +110,9 @@ search position moveZero 0 low high endTime _ c = do
 search position moveZero depth low high endTime rootBest c = do
     let hpos = hashPosition position
     hentry <- H.lookup (h c) hpos
-    case hentry of
-        Just x -> do
-            return (move x, score x)
-        Nothing -> do
+    if goodHashEntry depth hentry
+        then return (move (fromJust hentry), score (fromJust hentry))
+        else do
             incCounter 1 c
             if halfMoves position == 50
                 then return (moveZero, 0)
@@ -119,7 +125,7 @@ search position moveZero depth low high endTime rootBest c = do
                             else do
                                 hrm <- highestRatedMove notInCheckPositions moveZero low high depth endTime (snd (head notInCheckPositions),low) rootBest c
                                 if snd hrm > low && snd hrm < high then do
-                                    updateHashTable hpos HashEntry { score=snd hrm, move=fst hrm, height=depth } c 
+                                    updateHashTable hpos HashEntry { score=snd hrm, move=fst hrm, height=depth } c
                                     return hrm
                                 else do return hrm
 
