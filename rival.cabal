@@ -57,6 +57,7 @@ library
     , parallel
     , bits-extra
     , deepseq
+    , hashtables
   default-language: Haskell2010
 
 executable rival-exe
@@ -76,7 +77,8 @@ executable rival-exe
     , time
     , parallel
     , bits-extra
-    , deepseq    
+    , deepseq 
+    , hashtables
   default-language: Haskell2010
 
 test-suite rival-test
@@ -99,4 +101,5 @@ test-suite rival-test
     , rival
     , time
     , sort
+    , hashtable
   default-language: Haskell2010

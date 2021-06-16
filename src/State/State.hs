@@ -1,17 +1,19 @@
 module State.State where
 
 import Data.IORef ( modifyIORef, newIORef, readIORef, IORef )
+import qualified Data.HashTable.IO as H
+import Types
 
 data Counter = Counter { 
-     h :: IORef Int
+     h :: IORef HashTable
    , x :: IORef Int 
 }
 
-makeCounter :: Int -> Int -> IO Counter
-makeCounter i j = do 
+makeCounter :: HashTable -> Int -> IO Counter
+makeCounter h i = do 
     iref <- newIORef i
-    jref <- newIORef j
-    return (Counter iref jref)
+    href <- newIORef h
+    return (Counter href iref)
 
 incCounter :: Int -> Counter -> IO ()
 incCounter i (Counter _ c) = do modifyIORef c (+ i)

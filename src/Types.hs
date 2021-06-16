@@ -6,9 +6,13 @@ import GHC.Generics ( Generic )
 import Data.Bits ( Bits((.|.)) )
 import Alias ( Bitboard, Square )
 import Control.DeepSeq ( NFData )
+import qualified Data.HashTable.IO as H
 
 data Mover = White | Black deriving (Enum,Show,Eq,NFData,Generic)
 data Piece = Pawn | King | Queen | Bishop | Knight | Rook deriving (Enum,Show,Eq)
+data HashEntry = HashEntry { score :: Int, lock :: Int }
+
+type HashTable = H.BasicHashTable Int HashEntry
 
 data Position = Position {
     whitePawnBitboard :: {-# UNPACK #-} !Bitboard

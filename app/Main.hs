@@ -19,9 +19,8 @@ import Util.Utils ( timeMillis )
 import System.IO ( stdout, hFlush )
 import Data.IORef ()
 import State.State ( Counter, makeCounter, showCounter )
-
-data HashEntry = HashEntry { score :: Int, lock :: Int }
-                             
+import qualified Data.HashTable.IO as H
+                     
 data UCIState = UCIState {
       position :: [Position]
     , quit :: Bool
@@ -32,7 +31,8 @@ data UCIState = UCIState {
 
 main :: IO ()
 main = do
-    c <- makeCounter 0 0
+    h <- H.new
+    c <- makeCounter h 0
     commandCycle UCIState {position = [getPosition startPosition], quit=False, errorMessage="", output="", counter=c}
 
 showId :: IO ()
