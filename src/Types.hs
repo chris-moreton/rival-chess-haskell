@@ -4,13 +4,13 @@ module Types where
 
 import GHC.Generics ( Generic )
 import Data.Bits ( Bits((.|.)) )
-import Alias ( Bitboard, Square )
+import Alias ( Bitboard, Square, Move )
 import Control.DeepSeq ( NFData )
 import qualified Data.HashTable.IO as H
 
 data Mover = White | Black deriving (Enum,Show,Eq,NFData,Generic)
 data Piece = Pawn | King | Queen | Bishop | Knight | Rook deriving (Enum,Show,Eq)
-data HashEntry = HashEntry { score :: Int, lock :: Int }
+data HashEntry = HashEntry { score :: Int, move :: Move, height :: Int }
 
 type HashTable = H.BasicHashTable Int HashEntry
 

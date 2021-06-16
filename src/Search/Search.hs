@@ -2,7 +2,7 @@
 
 module Search.Search where
 
-import Types ( Position (..), mover, halfMoves, bitboardForColour, Piece (..), Mover (White,Black) )
+import Types
 import Alias ( Move, Bitboard, MoveList )
 import Search.MoveGenerator (moves,isCheck)
 import Util.Utils ( timeMillis, toSquarePart )
@@ -14,6 +14,7 @@ import Control.Monad ()
 import System.Exit ()
 import Data.Sort ( sortBy )
 import State.State
+import qualified Data.HashTable.IO as H
 
 hashPosition :: Position -> Int
 hashPosition p =
@@ -100,16 +101,27 @@ search position moveZero 0 low high endTime _ c = do
     q <- quiesce position low high c
     return (moveZero,q)
 search position moveZero depth low high endTime rootBest c = do
-    incCounter 1 c
-    if halfMoves position == 50
-        then return (moveZero, 0)
-        else do
-            t <- timeMillis
-            if t > endTime then return rootBest else do
-                let notInCheckPositions = filter (\(p,m) -> not (isCheck p (mover position))) (newPositions position)
-                if null notInCheckPositions
-                    then return (moveZero, if isCheck position (mover position) then (-9000)-depth else 0)
-                    else highestRatedMove notInCheckPositions moveZero low high depth endTime (snd (head notInCheckPositions),low) rootBest c
+    let hpos = hashPosition position
+    hentry <- H.lookup (h c) hpos
+    case hentry of
+        Just x -> do
+            return (move x, score x)
+        Nothing -> do
+            incCounter 1 c
+            if halfMoves position == 50
+                then return (moveZero, 0)
+                else do
+                    t <- timeMillis
+                    if t > endTime then return rootBest else do
+                        let notInCheckPositions = filter (\(p,m) -> not (isCheck p (mover position))) (newPositions position)
+                        if null notInCheckPositions
+                            then return (moveZero, if isCheck position (mover position) then (-9000)-depth else 0)
+                            else do
+                                hrm <- highestRatedMove notInCheckPositions moveZero low high depth endTime (snd (head notInCheckPositions),low) rootBest c
+                                if snd hrm > low && snd hrm < high then do
+                                    updateHashTable hpos HashEntry { score=snd hrm, move=fst hrm, height=depth } c 
+                                    return hrm
+                                else do return hrm
 
 highestRatedMove :: [(Position,Move)] -> Move -> Int -> Int -> Int -> Int -> (Move,Int) -> (Move,Int) -> Counter -> IO (Move,Int)
 highestRatedMove [] _ _ _ _ _ best _ _ = return best

@@ -2,7 +2,7 @@ module State.State where
 
 import Data.IORef ( modifyIORef, newIORef, readIORef, IORef )
 import qualified Data.HashTable.IO as H
-import Types
+import Types ( HashTable, HashEntry )
 
 data Counter = Counter { 
      h :: HashTable
