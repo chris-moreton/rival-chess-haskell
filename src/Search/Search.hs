@@ -16,15 +16,7 @@ import Data.Sort ( sortBy )
 import Data.Maybe ( isJust, fromJust )
 import State.State
 import qualified Data.HashTable.IO as H
-
-hashPosition :: Position -> Int
-hashPosition p =
-    (if mover p == White then 1238799 else 12389876) + (2 * enPassantSquare p) + (3 * whitePawnBitboard  p) +
-    (4 * blackPawnBitboard p) + (5 * whiteKnightBitboard  p) + (6 * blackKnightBitboard p) +
-    (7 * whiteBishopBitboard p) + (8 * blackBishopBitboard p) +
-    (11 * whiteRookBitboard p) + (12 * blackRookBitboard p) +
-    (13 * whiteQueenBitboard p) + (14 * blackQueenBitboard p) +
-    (15 * whiteKingBitboard p) + (16 * blackKingBitboard p)
+import Util.Zobrist
 
 canLeadToDrawByRepetition :: Position -> [Position] -> Bool
 canLeadToDrawByRepetition p ps
@@ -108,7 +100,7 @@ search position moveZero 0 low high endTime _ c = do
     q <- quiesce position low high c
     return (moveZero,q)
 search position moveZero depth low high endTime rootBest c = do
-    let hpos = hashPosition position
+    let hpos = hashIndex position
     hentry <- H.lookup (h c) hpos
     if goodHashEntry depth hentry
         then return (move (fromJust hentry), score (fromJust hentry))
