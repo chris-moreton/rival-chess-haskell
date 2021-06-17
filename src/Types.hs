@@ -12,7 +12,7 @@ data Mover = White | Black deriving (Enum,Show,Eq,NFData,Generic)
 data Piece = Pawn | King | Queen | Bishop | Knight | Rook deriving (Enum,Show,Eq)
 data HashEntry = HashEntry { score :: Int, move :: Move, height :: Int }
 
-type HashTable = H.BasicHashTable Int HashEntry
+type HashTable = H.LinearHashTable Int HashEntry
 
 data Position = Position {
     whitePawnBitboard :: {-# UNPACK #-} !Bitboard
