@@ -16,15 +16,8 @@ import Data.Sort ( sortBy )
 import Data.Maybe ( isJust, fromJust )
 import State.State
 import qualified Data.HashTable.IO as H
-
-hashPosition :: Position -> Int
-hashPosition p =
-    (if mover p == White then 1238799 else 12389876) + (2 * enPassantSquare p) + (3 * whitePawnBitboard  p) +
-    (4 * blackPawnBitboard p) + (5 * whiteKnightBitboard  p) + (6 * blackKnightBitboard p) +
-    (7 * whiteBishopBitboard p) + (8 * blackBishopBitboard p) +
-    (11 * whiteRookBitboard p) + (12 * blackRookBitboard p) +
-    (13 * whiteQueenBitboard p) + (14 * blackQueenBitboard p) +
-    (15 * whiteKingBitboard p) + (16 * blackKingBitboard p)
+import Util.Zobrist
+import Search.Evaluate
 
 canLeadToDrawByRepetition :: Position -> [Position] -> Bool
 canLeadToDrawByRepetition p ps
@@ -46,21 +39,6 @@ iterativeDeepening positions depth maxDepth endTime rootBest c = do
     if t > endTime || depth == maxDepth
         then return result
         else iterativeDeepening positions (depth+1) maxDepth endTime result c
-
-captureScore :: Position -> Move -> Int
-captureScore position move
-    | isCapture position move = pieceValue (capturePiece position move)
-    | otherwise = 0
-
-centreScore :: Position -> Move -> Int
-centreScore position move
-    | 0b0000000000000000001111000011110000111100001111000000000000000000 .&. toSquareMask /= 0 = 25
-    | 0b0000000001111110010000100100001001000010010000100111111000000000 .&. toSquareMask /= 0 = 10
-    | otherwise = 0
-    where toSquareMask = bit (toSquarePart move) :: Bitboard
-
-scoreMove :: Position -> Move -> Int
-scoreMove position move = captureScore position move + centreScore position move
 
 sortMoves :: Position -> MoveList -> MoveList
 sortMoves position moves = do
@@ -108,7 +86,7 @@ search position moveZero 0 low high endTime _ c = do
     q <- quiesce position low high c
     return (moveZero,q)
 search position moveZero depth low high endTime rootBest c = do
-    let hpos = hashPosition position
+    let hpos = hashIndex position
     hentry <- H.lookup (h c) hpos
     if goodHashEntry depth hentry
         then return (move (fromJust hentry), score (fromJust hentry))
@@ -144,50 +122,6 @@ highestRatedMove notInCheckPositions moveZero low high depth endTime best rootBe
 
 newPositions :: Position -> [(Position,Move)]
 newPositions position = map (\move -> (makeMove position move,move)) (moves position)
-
-pieceValue :: Piece -> Int
-pieceValue Pawn = 100
-pieceValue Knight = 350
-pieceValue Bishop = 350
-pieceValue Rook = 500
-pieceValue Queen = 900
-pieceValue King = 3000
-
-material :: Position -> Mover -> Int
-material position m = popCount (bitboardForColour position m Pawn) * pieceValue Pawn +
-                      popCount (bitboardForColour position m Bishop) * pieceValue Bishop +
-                      popCount (bitboardForColour position m Knight) * pieceValue Knight +
-                      popCount (bitboardForColour position m Rook) * pieceValue Rook +
-                      popCount (bitboardForColour position m Queen) * pieceValue Queen
-
-evaluate :: Position -> Int
-evaluate position = do
-    let whiteScore = material position White - material position Black
-    if mover position == White then whiteScore else -whiteScore
-
-isCapture :: Position -> Move -> Bool
-isCapture position move
-    | m == White = testBit (blackPiecesBitboard position) t || e == t
-    | otherwise = testBit (whitePiecesBitboard position) t || e == t
-    where m = mover position
-          t = toSquarePart move
-          e = enPassantSquare position
-
-capturePiece :: Position -> Move -> Piece
-capturePiece position move
-    | e == t = Pawn
-    | testBit (whitePawnBitboard position) t = Pawn
-    | testBit (blackPawnBitboard position) t = Pawn
-    | testBit (whiteKnightBitboard position) t = Knight
-    | testBit (blackKnightBitboard position) t = Knight
-    | testBit (whiteBishopBitboard position) t = Bishop
-    | testBit (blackBishopBitboard position) t = Bishop
-    | testBit (whiteRookBitboard position) t = Rook
-    | testBit (blackRookBitboard position) t = Rook
-    | testBit (whiteQueenBitboard position) t = Queen
-    | testBit (blackQueenBitboard position) t = Queen
-    where t = toSquarePart move
-          e = enPassantSquare position
 
 quiescePositions :: Position -> [(Position,Move)]
 quiescePositions position = do

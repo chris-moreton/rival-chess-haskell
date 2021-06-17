@@ -33,6 +33,7 @@ library
       Util.MagicMovesRook
       Util.Fen
       Util.Utils
+      Util.Zobrist
       Search.MakeMove
       Search.MakeSimpleMove
       Search.MakeComplexMove
@@ -41,6 +42,7 @@ library
       Search.MoveConstants
       Search.MoveUtils
       Search.Search
+      Search.Evaluate
       State.State
       Types
       Alias
@@ -58,6 +60,7 @@ library
     , bits-extra
     , deepseq
     , hashtables
+    , vector
   default-language: Haskell2010
 
 executable rival-exe
@@ -79,6 +82,7 @@ executable rival-exe
     , bits-extra
     , deepseq 
     , hashtables
+    , vector
   default-language: Haskell2010
 
 test-suite rival-test
@@ -101,5 +105,6 @@ test-suite rival-test
     , rival
     , time
     , sort
-    , hashtable
+    , hashtables
+    , vector
   default-language: Haskell2010
