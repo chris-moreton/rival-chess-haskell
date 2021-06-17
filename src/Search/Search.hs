@@ -86,11 +86,11 @@ search position moveZero 0 low high endTime _ c = do
     q <- quiesce position low high c
     return (moveZero,q)
 search position moveZero depth low high endTime rootBest c = do
-    let hpos = hashIndex position
-    hentry <- H.lookup (h c) hpos
-    if goodHashEntry depth hentry
-        then return (move (fromJust hentry), score (fromJust hentry))
-        else do
+    --let hpos = hashIndex position
+    --hentry <- H.lookup (h c) hpos
+    --if goodHashEntry depth hentry
+     --   then return (move (fromJust hentry), score (fromJust hentry))
+     --   else do
             incCounter 1 c
             if halfMoves position == 50
                 then return (moveZero, 0)
@@ -102,10 +102,10 @@ search position moveZero depth low high endTime rootBest c = do
                             then return (moveZero, if isCheck position (mover position) then (-9000)-depth else 0)
                             else do
                                 hrm <- highestRatedMove notInCheckPositions moveZero low high depth endTime (snd (head notInCheckPositions),low) rootBest c
-                                if snd hrm > low && snd hrm < high then do
-                                    updateHashTable hpos HashEntry { score=snd hrm, move=fst hrm, height=depth } c
-                                    return hrm
-                                else do return hrm
+                                --if snd hrm > low && snd hrm < high then do
+                                --    updateHashTable hpos HashEntry { score=snd hrm, move=fst hrm, height=depth } c
+                                return hrm
+                                --else do return hrm
 
 highestRatedMove :: [(Position,Move)] -> Move -> Int -> Int -> Int -> Int -> (Move,Int) -> (Move,Int) -> Counter -> IO (Move,Int)
 highestRatedMove [] _ _ _ _ _ best _ _ = return best
