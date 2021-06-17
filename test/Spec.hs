@@ -22,6 +22,10 @@ import Search.MakeMove
 import Search.Search
 import State.State
 import Data.Bifunctor
+import Data.Vector as V ( (!) )
+import Util.Zobrist
+import Search.Evaluate
+import qualified Data.HashTable.IO as H
 
 main :: IO ()
 main = hspec $ do
@@ -571,7 +575,8 @@ main = hspec $ do
 
   describe "quiesce" $
     it "evaluates a position using a quiescence search" $ do
-        c <- makeCounter 0
+        h <- H.new
+        c <- makeCounter h 0
         let position = getPosition "rnbqkbnr/ppp3pp/5p2/3PB1N1/2P4P/8/PP1P1PP1/RNBQK2R b KQkq - 0 1"
         q <- quiesce position -100000 100000 c
         q `shouldBe` 150

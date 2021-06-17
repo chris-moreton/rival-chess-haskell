@@ -42,6 +42,7 @@ library
       Search.MoveConstants
       Search.MoveUtils
       Search.Search
+      Search.Evaluate
       State.State
       Types
       Alias
