@@ -18864,3 +18864,3773 @@ Kd6 {1.1s} 58. Rxa4 {1.3s} Kc6 {1.2s} 59. Rxc4+ {1.1s} Kd6 {1.1s}
 63. Rc6+ {1.1s} Kd5 {1.3s} 64. Rf6 {1.2s} Ke5 {1.1s} 65. Rf3 {1.2s} Kd5 {1.1s}
 66. Rf5+ {1.2s} Kc6 {1.3s} 67. Rf6+ {1.1s, No result} *
 
+[Event "?"]
+[Site "?"]
+[Date "2021.06.17"]
+[Round "1"]
+[White "Rival Haskell Build 65"]
+[Black "Rival Haskell Build 90"]
+[Result "1-0"]
+[BlackTimeControl "1/move"]
+[ECO "B90"]
+[GameDuration "00:01:45"]
+[GameEndTime "2021-06-17T22:46:35.924 BST"]
+[GameStartTime "2021-06-17T22:44:50.165 BST"]
+[Opening "Sicilian"]
+[PlyCount "121"]
+[Variation "Najdorf, Byrne (English) attack"]
+[WhiteTimeControl "1/move"]
+
+1. e4 {book} c5 {book} 2. Nf3 {book} d6 {book} 3. d4 {book} cxd4 {book}
+4. Nxd4 {book} Nf6 {book} 5. Nc3 {book} a6 {book} 6. Be3 {book} Ng4 {book}
+7. Bc1 {book} Nc6 {1.2s} 8. Be2 {book} Nf6 {book} 9. Be3 {book} e6 {book}
+10. g4 {book} d5 {book} 11. exd5 {book} Nxd5 {book} 12. Nxd5 {book} Qxd5 {book}
+13. O-O {book} Nxd4 {1.1s} 14. Bxd4 {1.1s} f6 {1.1s} 15. Bc3 {1.1s} Qxd1 {1.1s}
+16. Bxd1 {1.1s} Bd6 {1.0s} 17. Bd4 {1.1s} Bc5 {1.0s} 18. Bxc5 {1.1s} e5 {1.1s}
+19. Bd6 {1.0s} Be6 {1.1s} 20. c3 {1.1s} Bc4 {1.1s} 21. Re1 {1.0s} Be6 {1.0s}
+22. f4 {1.1s} exf4 {1.1s} 23. Rxe6+ {1.1s} Kd7 {1.0s} 24. Bb3 {1.0s} f3 {1.0s}
+25. Bc5 {1.1s} Kc8 {1.1s} 26. Re3 {1.1s} Kd7 {1.1s} 27. Rxf3 {1.0s} Kc6 {1.1s}
+28. Bd4 {1.1s} Kd7 {1.0s} 29. Be3 {1.1s} Kc6 {1.1s} 30. Be6 {1.1s} Kd6 {1.0s}
+31. Bf5 {1.1s} Kc6 {1.1s} 32. Be4+ {1.1s} Kd6 {1.1s} 33. Bxb7 {1.1s} Rad8 {1.0s}
+34. Bxa6 {1.2s} Kc6 {1.1s} 35. Bc4 {1.1s} Kd6 {1.1s} 36. Bd3 {1.0s} Kc6 {1.0s}
+37. Bf5 {1.1s} Kd6 {1.1s} 38. Bxh7 {1.1s} Rxh7 {1.1s} 39. Rf4 {1.1s} Ke6 {1.1s}
+40. Rc4 {1.2s} Kd6 {1.0s} 41. Rd1+ {1.1s} Ke6 {1.2s} 42. Rc6+ {1.1s} Ke7 {1.1s}
+43. Rxd8 {1.0s} Rxh2 {1.1s} 44. Kxh2 {1.1s} Kxd8 {1.0s} 45. Rd6+ {1.2s}
+Ke7 {1.1s} 46. Rd5 {1.1s} Ke6 {1.1s} 47. Rc5 {1.1s} Ke7 {1.1s} 48. Rc7+ {1.0s}
+Ke6 {1.1s} 49. Rxg7 {1.1s} Kd6 {1.1s} 50. Bd4 {1.1s} Ke6 {1.1s} 51. c4 {1.3s}
+Kd6 {1.1s} 52. Bc3 {1.1s} Ke6 {1.0s} 53. b4 {1.1s} f5 {1.1s} 54. Rg6+ {1.1s}
+Ke7 {1.2s} 55. gxf5 {1.2s} Kd7 {1.1s} 56. f6 {1.2s} Ke6 {1.1s} 57. Rg7 {1.2s}
+Kd6 {1.1s} 58. Re7 {1.1s} Kc6 {1.0s} 59. f7 {1.1s} Kb6 {1.2s} 60. f8=Q {1.3s}
+Kc6 {1.0s} 61. Qf6# {1.3s, White mates} 1-0
+
+[Event "?"]
+[Site "?"]
+[Date "2021.06.17"]
+[Round "2"]
+[White "Rival Haskell Build 90"]
+[Black "Rival Haskell Build 65"]
+[Result "0-1"]
+[BlackTimeControl "1/move"]
+[ECO "C65"]
+[GameDuration "00:00:36"]
+[GameEndTime "2021-06-17T22:47:12.324 BST"]
+[GameStartTime "2021-06-17T22:46:35.925 BST"]
+[Opening "Ruy Lopez"]
+[PlyCount "58"]
+[Variation "Berlin defense"]
+[WhiteTimeControl "1/move"]
+
+1. e4 {book} e5 {book} 2. Nf3 {book} Nc6 {book} 3. Bb5 {book} Nf6 {book}
+4. d3 {book} Bc5 {book} 5. c3 {book} O-O {book} 6. O-O {book} d6 {book}
+7. h3 {book} Ne7 {book} 8. d4 {book} Bb6 {book} 9. Re1 {book} d5 {book}
+10. Nxe5 {book} Nxe4 {book} 11. Nd2 {book} Nd6 {book} 12. Bf1 {book} c6 {book}
+13. b3 {book} Be6 {1.2s} 14. Nd3 {1.0s} Nef5 {1.1s} 15. Nc5 {1.1s} Bxc5 {1.1s}
+16. dxc5 {1.1s} Nb5 {1.1s} 17. Bxb5 {1.1s} cxb5 {1.0s} 18. Nf3 {1.1s} Qf6 {1.1s}
+19. Ne5 {1.2s} b6 {1.1s} 20. cxb6 {1.1s} axb6 {1.3s} 21. f4 {1.1s} Nd6 {1.2s}
+22. Be3 {1.2s} Ne4 {1.1s} 23. Qxd5 {1.2s} Bxd5 {1.1s} 24. Nd7 {1.1s} Qxc3 {1.0s}
+25. Nxf8 {1.0s} Kxf8 {1.1s} 26. Bxb6 {1.1s} Bxb3 {1.0s} 27. axb3 {1.1s}
+Rxa1 {1.0s} 28. Bd4 {1.1s} Rxe1+ {1.0s} 29. Kh2 {1.0s} Qg3# {1.0s, Black mates}
+0-1
+
+[Event "?"]
+[Site "?"]
+[Date "2021.06.17"]
+[Round "3"]
+[White "Rival Haskell Build 65"]
+[Black "Rival Haskell Build 90"]
+[Result "0-1"]
+[BlackTimeControl "1/move"]
+[ECO "E15"]
+[GameDuration "00:01:51"]
+[GameEndTime "2021-06-17T22:49:03.423 BST"]
+[GameStartTime "2021-06-17T22:47:12.325 BST"]
+[Opening "Queen's Indian"]
+[PlyCount "162"]
+[Variation "Nimzovich Variation (exaggerated Fianchetto)"]
+[WhiteTimeControl "1/move"]
+
+1. d4 {book} Nf6 {book} 2. c4 {book} e6 {book} 3. Nf3 {book} b6 {book}
+4. g3 {book} Ba6 {book} 5. b3 {book} Bb4+ {book} 6. Bd2 {book} Be7 {book}
+7. Bg2 {book} c6 {book} 8. Bc3 {book} d5 {book} 9. Ne5 {book} Nfd7 {book}
+10. Nxd7 {book} Nxd7 {book} 11. Nd2 {book} O-O {book} 12. O-O {book} Rc8 {book}
+13. e4 {book} c5 {book} 14. exd5 {book} exd5 {book} 15. dxc5 {book} dxc4 {book}
+16. c6 {book} cxb3 {book} 17. Re1 {book} b2 {book} 18. Bxb2 {book} Nc5 {book}
+19. Nc4 {book} Bxc4 {book} 20. Qg4 {book} Bg5 {book} 21. Qxc4 {book} Nd3 {book}
+22. Be5 {book} Nxe1 {book} 23. Rxe1 {book} Bf6 {book} 24. Bxf6 {book}
+Qxf6 {book} 25. c7 {book} Qd6 {book} 26. Rc1 {book} b5 {book} 27. Qc2 {book}
+g6 {book} 28. Bb7 {book} b4 {book} 29. h4 {book} h5 {book} 30. Kf1 {book}
+a5 {book} 31. Bxc8 {1.1s} Rxc8 {1.0s} 32. Kg1 {1.1s} Qe6 {1.0s} 33. Qc4 {1.1s}
+Qxc4 {1.1s} 34. Rxc4 {1.1s} f6 {1.1s} 35. Rc6 {1.2s} Kf7 {1.1s} 36. Rc5 {1.1s}
+f5 {1.1s} 37. Rxa5 {1.1s} Rxc7 {1.1s} 38. Kg2 {1.1s} Rb7 {1.1s} 39. Rc5 {1.1s}
+Ke6 {1.0s} 40. Rc6+ {1.1s} Kf7 {1.1s} 41. Rd6 {1.1s} Rb5 {1.0s} 42. Rd4 {1.1s}
+Ke6 {1.1s} 43. Rc4 {1.1s} Kd6 {1.1s} 44. f4 {1.1s} Ke6 {1.1s} 45. Rc6+ {1.1s}
+Kf7 {1.2s} 46. Rd6 {1.1s} Rc5 {1.1s} 47. Rd4 {1.1s} Rc2+ {1.1s} 48. Kh3 {1.0s}
+Rxa2 {1.1s} 49. Rxb4 {1.1s} Ke6 {1.1s} 50. Rc4 {1.1s} Kd6 {1.1s} 51. Rd4+ {1.1s}
+Kc6 {1.1s} 52. Rd3 {1.0s} Kc5 {1.1s} 53. Rc3+ {1.0s} Kd6 {1.2s} 54. Rc4 {1.1s}
+Ke6 {1.1s} 55. Rc6+ {1.1s} Kf7 {1.1s} 56. Rd6 {1.1s} Kg7 {1.0s} 57. Re6 {1.1s}
+Rb2 {1.0s} 58. Rc6 {1.1s} Kf7 {1.1s} 59. Rd6 {1.0s} Rb7 {1.1s} 60. Rd5 {1.1s}
+Kf6 {1.2s} 61. Rc5 {1.0s} Rd7 {1.0s} 62. Rc6+ {1.2s} Kf7 {1.1s} 63. Rc4 {1.1s}
+Rd6 {1.0s} 64. Rc5 {1.1s} Kf6 {1.0s} 65. Re5 {1.1s} Rc6 {1.1s} 66. Rd5 {1.0s}
+Re6 {1.1s} 67. Rd4 {1.1s} Re7 {1.1s} 68. Rd6+ {1.1s} Kf7 {1.0s} 69. Rd5 {1.2s}
+Re6 {1.0s} 70. Rc5 {1.1s} Kf6 {1.1s} 71. Rc4 {1.1s} Rd6 {1.1s} 72. Rc3 {1.1s}
+Rd5 {1.1s} 73. Rc6+ {1.1s} Kf7 {1.1s} 74. Rd6 {1.1s} Rxd6 {1.1s} 75. Kg2 {1.1s}
+Ke6 {1.1s} 76. Kh3 {1.2s} Rd2 {1.1s} 77. g4 {1.1s} fxg4+ {1.0s} 78. Kg3 {1.1s}
+Kf6 {1.0s} 79. f5 {1.1s} g5 {1.2s} 80. hxg5+ {1.1s} Kxg5 {1.0s} 81. f6 {1.1s}
+h4# {1.1s, Black mates} 0-1
+
+[Event "?"]
+[Site "?"]
+[Date "2021.06.17"]
+[Round "4"]
+[White "Rival Haskell Build 90"]
+[Black "Rival Haskell Build 65"]
+[Result "1-0"]
+[BlackTimeControl "1/move"]
+[ECO "C88"]
+[GameDuration "00:01:13"]
+[GameEndTime "2021-06-17T22:50:16.591 BST"]
+[GameStartTime "2021-06-17T22:49:03.423 BST"]
+[Opening "Ruy Lopez"]
+[PlyCount "93"]
+[Variation "Closed, anti-Marshall 8.a4"]
+[WhiteTimeControl "1/move"]
+
+1. e4 {book} e5 {book} 2. Nf3 {book} Nc6 {book} 3. Bb5 {book} a6 {book}
+4. Ba4 {book} Nf6 {book} 5. O-O {book} Be7 {book} 6. Re1 {book} b5 {book}
+7. Bb3 {book} O-O {book} 8. a4 {book} b4 {book} 9. d4 {book} d6 {book}
+10. dxe5 {book} dxe5 {book} 11. Nbd2 {book} Bc5 {book} 12. Qe2 {book} Qe7 {book}
+13. a5 {book} Be6 {1.0s} 14. Bxe6 {1.1s} Qxe6 {1.3s} 15. c4 {1.0s} bxc3 {1.1s}
+16. bxc3 {1.1s} Qd6 {1.1s} 17. c4 {1.1s} Nd4 {1.0s} 18. Nxd4 {1.0s} Qxd4 {1.0s}
+19. Nb3 {1.0s} Qd6 {1.1s} 20. Nxc5 {1.0s} Qxc5 {1.0s} 21. Ba3 {1.0s} Qc6 {1.0s}
+22. Bxf8 {1.2s} Rxf8 {1.1s} 23. Qd3 {1.0s} Qd6 {1.1s} 24. Qxd6 {1.1s}
+cxd6 {1.2s} 25. f3 {1.1s} g6 {1.1s} 26. Re3 {1.1s} Kg7 {1.1s} 27. Rc3 {1.0s}
+Kg8 {1.1s} 28. c5 {1.1s} dxc5 {1.1s} 29. Rxc5 {1.0s} Rd8 {1.1s} 30. Rxe5 {1.1s}
+Rd6 {1.1s} 31. Rc5 {1.1s} Rd8 {1.1s} 32. Rc6 {1.0s} Rd6 {1.0s} 33. Rxd6 {1.1s}
+Kg7 {1.0s} 34. Rxa6 {1.0s} Nd7 {1.1s} 35. Rc6 {1.0s} Nf6 {1.0s} 36. Rd6 {1.0s}
+Nd7 {1.2s} 37. Rxd7 {1.1s} Kf6 {1.2s} 38. a6 {1.1s} g5 {1.3s} 39. a7 {1.1s}
+Ke6 {1.1s} 40. a8=Q {1.0s} Kxd7 {1.0s} 41. Ra7+ {1.1s} Ke6 {1.1s} 42. h4 {1.1s}
+gxh4 {1.1s} 43. Qd5+ {1.0s} Kf6 {1.1s} 44. g4 {1.1s} hxg3 {1.0s} 45. f4 {1.0s}
+Kg7 {1.1s} 46. Qe5+ {1.0s} Kg8 {1.1s} 47. Ra8# {1.0s, White mates} 1-0
+
+[Event "?"]
+[Site "?"]
+[Date "2021.06.17"]
+[Round "5"]
+[White "Rival Haskell Build 65"]
+[Black "Rival Haskell Build 90"]
+[Result "1-0"]
+[BlackTimeControl "1/move"]
+[ECO "E10"]
+[GameDuration "00:00:59"]
+[GameEndTime "2021-06-17T22:51:15.917 BST"]
+[GameStartTime "2021-06-17T22:50:16.592 BST"]
+[Opening "Queen's pawn game"]
+[PlyCount "115"]
+[WhiteTimeControl "1/move"]
+
+1. d4 {book} Nf6 {book} 2. c4 {book} e6 {book} 3. Nf3 {book} d5 {book}
+4. Nc3 {book} Be7 {book} 5. Bf4 {book} O-O {book} 6. e3 {book} Nbd7 {book}
+7. c5 {book} c6 {book} 8. h3 {book} b6 {book} 9. b4 {book} a5 {book}
+10. a3 {book} h6 {book} 11. Bd3 {book} Ba6 {book} 12. O-O {book} Qc8 {book}
+13. Na4 {book} Bxd3 {book} 14. Qxd3 {book} b5 {book} 15. Nc3 {book} Qb7 {book}
+16. Nd2 {book} Bd8 {book} 17. Nb3 {book} a4 {book} 18. Nd2 {book} Bc7 {book}
+19. Bxc7 {book} Qxc7 {book} 20. f4 {book} Kh8 {book} 21. Rae1 {book} Rad8 {book}
+22. g4 {book} Ng8 {book} 23. Nf3 {book} Ne7 {book} 24. Re2 {book} f6 {book}
+25. e4 {book} Ng6 {book} 26. exd5 {book} Nxf4 {book} 27. d6 {book} Qxd6 {book}
+28. cxd6 {book} Nxd3 {book} 29. Nh4 {book} Rfe8 {book} 30. Rd2 {book} g5 {book}
+31. Ng2 {1.1s} Nf4 {1.3s} 32. Nxf4 {1.1s} gxf4 {1.0s} 33. Rxf4 {1.0s} e5 {1.1s}
+34. dxe5 {1.1s} Rxe5 {1.0s} 35. Re4 {1.1s} Rxe4 {1.1s} 36. Nxe4 {1.1s}
+Kg7 {1.1s} 37. Nc5 {1.1s} Nxc5 {1.0s} 38. bxc5 {1.1s} f5 {1.0s} 39. gxf5 {1.1s}
+Kf6 {1.1s} 40. Rd3 {1.1s} Rd7 {1.0s} 41. Rc3 {1.1s} Kxf5 {1.1s} 42. Rd3 {1.1s}
+Ke4 {1.1s} 43. Rd2 {1.2s} Ke3 {1.1s} 44. Rc2 {1.1s} Kd4 {1.0s} 45. Kh2 {1.1s}
+Kd5 {1.1s} 46. Rc3 {1.1s} Ke4 {1.1s} 47. Kg3 {1.1s} Kd4 {1.0s} 48. Rc2 {1.1s}
+Kd5 {1.1s} 49. Kf4 {1.2s} Rb7 {1.0s} 50. Kf5 {1.0s} Rf7+ {1.0s} 51. Kg6 {1.0s}
+Rf5 {1.0s} 52. Kxf5 {1.1s} Kd4 {1.1s} 53. d7 {1.0s} Kd3 {1.1s} 54. Rc1 {1.1s}
+Kd4 {1.1s} 55. d8=Q+ {1.0s} Ke3 {1.0s} 56. Rc2 {1.1s} h5 {1.0s} 57. Qg5+ {1.1s}
+Kd3 {1.1s} 58. Qd2# {1.1s, White mates} 1-0
+
+[Event "?"]
+[Site "?"]
+[Date "2021.06.17"]
+[Round "6"]
+[White "Rival Haskell Build 90"]
+[Black "Rival Haskell Build 65"]
+[Result "1/2-1/2"]
+[BlackTimeControl "1/move"]
+[ECO "E32"]
+[GameDuration "00:05:50"]
+[GameEndTime "2021-06-17T22:57:06.085 BST"]
+[GameStartTime "2021-06-17T22:51:15.918 BST"]
+[Opening "Nimzo-Indian"]
+[PlyCount "363"]
+[Variation "Classical Variation"]
+[WhiteTimeControl "1/move"]
+
+1. d4 {book} Nf6 {book} 2. c4 {book} e6 {book} 3. Nc3 {book} Bb4 {book}
+4. Qc2 {book} O-O {book} 5. a3 {book} Bxc3+ {book} 6. Qxc3 {book} d5 {book}
+7. Bg5 {book} dxc4 {book} 8. Qxc4 {book} b6 {book} 9. Rd1 {book} Ba6 {book}
+10. Qa4 {book} h6 {book} 11. Bh4 {book} Qe7 {book} 12. Nf3 {book} Rd8 {book}
+13. e3 {book} Bxf1 {book} 14. Rxf1 {book} c5 {book} 15. dxc5 {book} Rxd1+ {book}
+16. Qxd1 {book} g5 {book} 17. Bg3 {book} Qxc5 {book} 18. Qd8+ {book} Kg7 {book}
+19. Be5 {book} Qc1+ {book} 20. Ke2 {book} Qc4+ {book} 21. Ke1 {book} Qc1+ {1.1s}
+22. Qd1 {1.0s} Qxd1+ {1.1s} 23. Kxd1 {1.0s} Nc6 {1.1s} 24. Bxf6+ {1.1s}
+Kxf6 {1.2s} 25. e4 {1.1s} Ne5 {1.1s} 26. Nxe5 {1.1s} Kxe5 {1.0s} 27. Re1 {1.0s}
+f6 {1.0s} 28. f3 {1.0s} Kd6 {1.1s} 29. Re3 {1.2s} Kc6 {1.0s} 30. Rc3+ {1.0s}
+Kb7 {1.1s} 31. Rc4 {1.0s} e5 {1.1s} 32. Rc3 {1.0s} b5 {1.1s} 33. Rd3 {1.0s}
+Kc6 {1.0s} 34. Rd5 {1.1s} Rb8 {1.1s} 35. Rd2 {1.1s} Rb7 {1.1s} 36. Rd3 {1.0s}
+Rc7 {1.1s} 37. Rd5 {1.0s} Rd7 {1.1s} 38. Rxd7 {1.0s} Kxd7 {1.1s} 39. b4 {1.1s}
+Kc6 {1.1s} 40. g4 {1.1s} Kd6 {1.0s} 41. Kc2 {1.0s} Kc6 {1.1s} 42. Kc3 {1.1s}
+Kb7 {1.1s} 43. Kd3 {1.1s} Kc7 {1.0s} 44. Ke3 {1.1s} Kc6 {1.1s} 45. Kd2 {1.1s}
+Kd7 {1.1s} 46. Kc3 {1.0s} Ke6 {1.1s} 47. Kd3 {1.0s} Ke7 {1.2s} 48. Ke3 {1.1s}
+Kd6 {1.1s} 49. Ke2 {1.0s} Kd7 {1.3s} 50. Kd2 {1.0s} a6 {1.1s} 51. Kc3 {1.0s}
+Kc6 {1.1s} 52. Kd3 {1.1s} Kd6 {1.1s} 53. Ke3 {1.1s} Ke6 {1.1s} 54. Ke2 {1.1s}
+Kd7 {1.3s} 55. Kd2 {1.1s} Kc7 {1.1s} 56. Ke3 {1.1s} Kd6 {1.1s} 57. Kd3 {1.0s}
+Kc6 {1.1s} 58. Kc3 {1.0s} Kb7 {1.1s} 59. Kb3 {1.1s} Kc7 {1.1s} 60. Kb2 {1.1s}
+Kd6 {1.1s} 61. Kc2 {1.1s} Ke6 {1.0s} 62. Kc3 {1.0s} Ke7 {1.2s} 63. Kb3 {1.1s}
+Kf7 {1.1s} 64. Kb2 {1.0s} Kg7 {1.1s} 65. Kc3 {1.1s} Kg6 {1.1s} 66. Kd3 {1.1s}
+Kf7 {1.1s} 67. Kd2 {1.0s} Ke7 {1.1s} 68. Kc3 {1.1s} Ke6 {1.1s} 69. Kc2 {1.0s}
+Kd6 {1.2s} 70. Kb2 {1.0s} Kc7 {1.1s} 71. Kb3 {1.1s} Kb7 {1.2s} 72. Kc2 {1.0s}
+Kb6 {1.1s} 73. Kb1 {1.1s} Kc6 {1.1s} 74. h3 {1.0s} Kd6 {1.1s} 75. Kb2 {1.1s}
+Ke6 {1.1s} 76. Kc3 {1.0s} Kd7 {1.1s} 77. Kd3 {1.0s} Kc6 {1.1s} 78. Ke3 {1.2s}
+Kd6 {1.1s} 79. Kd2 {1.0s} Kc7 {1.1s} 80. Kc2 {1.1s} Kb7 {1.1s} 81. Kc3 {1.0s}
+Kc6 {1.1s} 82. Kd3 {1.1s} Kd7 {1.3s} 83. Kc2 {1.2s} Kc7 {1.2s} 84. Kb3 {1.0s}
+Kc6 {1.1s} 85. Kb2 {1.1s} Kd6 {1.1s} 86. Ka2 {1.1s} Ke6 {1.1s} 87. Kb3 {1.1s}
+Ke7 {1.2s} 88. Kc2 {1.0s} Kf7 {1.2s} 89. Kc3 {1.1s} Kg7 {1.0s} 90. Kd3 {1.0s}
+Kg6 {1.2s} 91. Ke3 {1.0s} Kf7 {1.1s} 92. Kd2 {1.0s} Ke8 {1.3s} 93. Ke2 {1.0s}
+Ke7 {1.2s} 94. Kf2 {1.1s} Kd6 {1.1s} 95. Ke3 {1.1s} Ke6 {1.0s} 96. Kd2 {1.0s}
+Kd6 {1.1s} 97. Kc1 {1.1s} Kc6 {1.1s} 98. Kd1 {1.0s} Kb7 {1.1s} 99. Ke2 {1.0s}
+Kc7 {1.1s} 100. Ke1 {1.0s} Kd7 {1.1s} 101. Kd1 {1.0s} Kc6 {1.2s} 102. Kc1 {1.0s}
+Kb7 {1.1s} 103. Kb2 {1.0s} Kb6 {1.1s} 104. Ka2 {1.1s} a5 {1.2s}
+105. bxa5+ {1.1s} Kxa5 {1.1s} 106. Kb3 {1.0s} Kb6 {1.0s} 107. Kc3 {1.1s}
+Kc6 {1.1s} 108. Kd3 {1.0s} Kd6 {1.1s} 109. Ke3 {1.0s} Ke6 {1.2s} 110. Kd2 {1.1s}
+Kd7 {1.2s} 111. Kc2 {1.1s} Kd6 {1.1s} 112. Kd3 {1.1s} Kc6 {1.1s} 113. Kc3 {1.1s}
+Kc5 {1.1s} 114. Kd3 {1.0s} b4 {1.0s} 115. a4 {1.0s} b3 {1.1s} 116. Kc3 {1.1s}
+b2 {1.2s} 117. Kxb2 {1.0s} Kb4 {1.1s} 118. Kc2 {1.1s} Kxa4 {1.2s}
+119. Kc3 {1.1s} Kb5 {1.1s} 120. Kd3 {1.1s} Kc6 {1.4s} 121. Kc4 {1.1s} Kd6 {1.1s}
+122. Kc3 {1.0s} Ke6 {1.1s} 123. Kd3 {1.2s} Kd7 {1.2s} 124. Ke3 {1.0s} Kc6 {1.1s}
+125. Kd2 {1.0s} Kc5 {1.2s} 126. Kc2 {1.0s} Kc4 {1.3s} 127. Kd2 {1.1s} Kd4 {1.2s}
+128. Ke2 {1.1s} Kc5 {1.1s} 129. Kf2 {1.0s} Kc6 {1.1s} 130. Ke3 {1.0s} Kd6 {1.1s}
+131. f4 {1.0s} exf4+ {1.1s} 132. Kd4 {1.0s} Ke6 {1.1s} 133. Kc4 {1.1s}
+Ke5 {1.1s} 134. Kd3 {1.0s} f3 {1.1s} 135. Ke3 {1.0s} f2 {1.1s} 136. Kxf2 {1.1s}
+Kxe4 {1.1s} 137. Kg3 {1.1s} f5 {1.1s} 138. gxf5 {1.0s} Kxf5 {1.1s}
+139. Kf3 {1.0s} Kg6 {1.1s} 140. Kg3 {1.0s} Kh5 {1.1s} 141. Kf3 {1.0s} Kh4 {1.1s}
+142. Kg2 {1.1s} g4 {1.0s} 143. hxg4 {1.0s} Kxg4 {1.1s} 144. Kf2 {1.1s}
+Kf5 {1.1s} 145. Kg2 {1.1s} Ke6 {1.1s} 146. Kf2 {1.0s} Kf6 {1.1s} 147. Kg2 {1.0s}
+Ke5 {1.1s} 148. Kf2 {1.0s} Ke6 {1.2s} 149. Kg2 {1.1s} Kf6 {1.1s} 150. Kf2 {1.1s}
+Ke5 {1.1s} 151. Kg2 {1.0s} Kf5 {1.1s} 152. Kf2 {1.0s} Ke4 {1.1s} 153. Kg2 {1.0s}
+Kf4 {1.1s} 154. Kf2 {1.0s} Kg5 {1.2s} 155. Kg2 {1.0s} Kg6 {1.2s} 156. Kf2 {1.0s}
+Kf7 {1.2s} 157. Kg2 {1.0s} Ke7 {1.1s} 158. Kf2 {1.0s} Ke8 {1.0s} 159. Kg2 {1.0s}
+Kf7 {1.1s} 160. Kf2 {1.1s} Ke7 {1.1s} 161. Kg2 {1.1s} Ke8 {1.1s} 162. Kf2 {1.0s}
+Kf8 {1.1s} 163. Kg2 {1.0s} Kg7 {1.1s} 164. Kf2 {1.0s} Kg6 {1.1s} 165. Kg2 {1.0s}
+Kg5 {1.1s} 166. Kf2 {1.0s} Kf4 {1.1s} 167. Kg2 {1.0s} h5 {1.1s} 168. Kf2 {1.0s}
+Kf5 {1.1s} 169. Kg2 {1.0s} Kf6 {1.1s} 170. Kf2 {1.0s} Kg6 {1.0s} 171. Kg2 {1.1s}
+Kf5 {1.1s} 172. Kf2 {1.1s} Kf6 {1.1s} 173. Kg2 {1.0s} Kg6 {1.0s} 174. Kf2 {1.0s}
+Kh6 {1.1s} 175. Kg2 {1.0s} Kg7 {1.1s} 176. Kf2 {1.1s} Kf7 {1.3s} 177. Kg2 {1.0s}
+Ke6 {1.1s} 178. Kf2 {1.1s} Ke5 {1.2s} 179. Kg2 {1.1s} Ke4 {1.1s} 180. Kh3 {1.0s}
+Kd5 {1.1s} 181. Kh4 {1.0s} Kc6 {1.1s}
+182. Kxh5 {1.0s, Draw by insufficient mating material} 1/2-1/2
+
+[Event "?"]
+[Site "?"]
+[Date "2021.06.17"]
+[Round "7"]
+[White "Rival Haskell Build 65"]
+[Black "Rival Haskell Build 90"]
+[Result "1-0"]
+[BlackTimeControl "1/move"]
+[ECO "C84"]
+[GameDuration "00:00:28"]
+[GameEndTime "2021-06-17T22:57:34.881 BST"]
+[GameStartTime "2021-06-17T22:57:06.087 BST"]
+[Opening "Ruy Lopez"]
+[PlyCount "87"]
+[Variation "Closed defense"]
+[WhiteTimeControl "1/move"]
+
+1. e4 {book} e5 {book} 2. Nf3 {book} Nc6 {book} 3. Bb5 {book} a6 {book}
+4. Ba4 {book} Nf6 {book} 5. O-O {book} Be7 {book} 6. d3 {book} b5 {book}
+7. Bb3 {book} d6 {book} 8. a4 {book} Bd7 {book} 9. c3 {book} O-O {book}
+10. Bc2 {book} b4 {book} 11. Re1 {book} Re8 {book} 12. Nbd2 {book} Bf8 {book}
+13. a5 {book} g6 {book} 14. Bb3 {book} Be6 {book} 15. Ba4 {book} Bd7 {book}
+16. Nf1 {book} h6 {book} 17. Ng3 {book} bxc3 {book} 18. bxc3 {book} Bg7 {book}
+19. h3 {book} d5 {book} 20. exd5 {book} Nxd5 {book} 21. Ne4 {book} Nb8 {book}
+22. Bb3 {book} Be6 {book} 23. Bd2 {book} Nd7 {book} 24. Ba4 {book} f5 {book}
+25. Ng3 {book} c5 {book} 26. Bb3 {book} Qc7 {book} 27. h4 {book} N5f6 {book}
+28. Bxe6+ {book} Rxe6 {book} 29. h5 {book} f4 {book} 30. Ne4 {book} Nxh5 {book}
+31. c4 {1.1s} Qc6 {1.0s} 32. Nc3 {1.1s} Bf6 {1.1s} 33. Ne4 {1.0s} Kf7 {1.0s}
+34. Nc3 {1.1s} Qd6 {1.1s} 35. Ne4 {1.1s} Qxd3 {1.0s} 36. Nxf6 {1.1s} Kxf6 {1.0s}
+37. Be3 {1.1s} Qxc4 {1.0s} 38. Qxd7 {1.1s} fxe3 {1.0s} 39. fxe3 {1.1s}
+Qd4 {1.0s} 40. Qxe6+ {1.1s} Kg7 {1.0s} 41. exd4 {1.1s} exd4 {1.0s}
+42. Ne5 {1.1s} Nf6 {1.1s} 43. Qf7+ {1.1s} Kh8 {1.1s}
+44. Nxg6# {1.1s, White mates} 1-0
+
+[Event "?"]
+[Site "?"]
+[Date "2021.06.17"]
+[Round "8"]
+[White "Rival Haskell Build 90"]
+[Black "Rival Haskell Build 65"]
+[Result "0-1"]
+[BlackTimeControl "1/move"]
+[ECO "C89"]
+[GameDuration "00:01:27"]
+[GameEndTime "2021-06-17T22:59:02.665 BST"]
+[GameStartTime "2021-06-17T22:57:34.882 BST"]
+[Opening "Ruy Lopez"]
+[PlyCount "142"]
+[Variation "Marshall counter-attack, 11...c6"]
+[WhiteTimeControl "1/move"]
+
+1. e4 {book} e5 {book} 2. Nf3 {book} Nc6 {book} 3. Bb5 {book} a6 {book}
+4. Ba4 {book} Nf6 {book} 5. O-O {book} Be7 {book} 6. Re1 {book} b5 {book}
+7. Bb3 {book} O-O {book} 8. c3 {book} d5 {book} 9. exd5 {book} Nxd5 {book}
+10. Nxe5 {book} Nxe5 {book} 11. Rxe5 {book} c6 {book} 12. d3 {book} Bd6 {book}
+13. Re1 {book} Bf5 {book} 14. Qf3 {book} Qh4 {book} 15. g3 {book} Qh3 {book}
+16. Be3 {book} Bxd3 {book} 17. Nd2 {book} Qf5 {book} 18. Bd4 {book} Rfe8 {book}
+19. a4 {book} h6 {book} 20. Kg2 {book} Qxf3+ {book} 21. Nxf3 {book} Rac8 {book}
+22. axb5 {book} axb5 {book} 23. Kg1 {book} Bf5 {book} 24. Ra6 {book}
+Rxe1+ {book} 25. Nxe1 {book} Be6 {book} 26. Nd3 {book} Bf8 {book} 27. Bc5 {book}
+Bf5 {book} 28. Bxf8 {book} Bxd3 {book} 29. Bc5 {book} Re8 {book} 30. Kg2 {book}
+Re2 {book} 31. Bxd5 {1.1s} cxd5 {1.1s} 32. Ra8+ {1.0s} Kh7 {1.1s} 33. b4 {1.1s}
+f6 {1.1s} 34. Bd6 {1.1s} f5 {1.1s} 35. Bc5 {1.0s} Bc4 {1.0s} 36. Kf3 {1.0s}
+Re6 {1.1s} 37. Rb8 {1.0s} Bd3 {1.0s} 38. Bd4 {1.0s} Be4+ {1.0s} 39. Ke3 {1.0s}
+Bc2+ {1.1s} 40. Kd2 {1.1s} Ba4 {1.0s} 41. Bc5 {1.0s} Rc6 {1.1s} 42. Be3 {1.0s}
+Rd6 {1.1s} 43. f4 {1.0s} Rc6 {1.1s} 44. Bc5 {1.0s} Re6 {1.1s} 45. Bd4 {1.0s}
+g5 {1.1s} 46. Be5 {1.2s} Rc6 {1.1s} 47. c4 {1.1s} Rxc4 {1.0s} 48. Bc3 {1.0s}
+gxf4 {1.1s} 49. g4 {1.1s} Rxc3 {1.1s} 50. Kxc3 {1.0s} fxg4 {1.1s} 51. Kd4 {1.1s}
+f3 {1.1s} 52. Kc5 {1.0s} Kg7 {1.1s} 53. Kd4 {1.1s} Kf6 {1.0s} 54. Rxb5 {1.0s}
+Bxb5 {1.1s} 55. Ke3 {1.0s} Ke5 {1.1s} 56. h3 {1.1s} gxh3 {1.1s} 57. Kxf3 {1.1s}
+Kd4 {1.1s} 58. Kg3 {1.0s} Bd7 {1.1s} 59. Kf3 {1.0s} Kc4 {1.1s} 60. Kg3 {1.2s}
+Kxb4 {1.2s} 61. Kh2 {1.1s} Ba4 {1.1s} 62. Kg3 {1.0s} d4 {1.0s} 63. Kxh3 {1.0s}
+d3 {1.0s} 64. Kg4 {1.0s} Be8 {1.1s} 65. Kh3 {1.0s} d2 {1.1s} 66. Kg4 {1.0s}
+d1=Q+ {1.1s} 67. Kf5 {1.0s} Qd5+ {1.1s} 68. Kg4 {1.0s} Bc6 {1.1s} 69. Kg3 {1.0s}
+Qf3+ {1.1s} 70. Kh4 {1.0s} Qg2 {1.2s} 71. Kh5 {1.1s} Qg5# {1.1s, Black mates}
+0-1
+
+[Event "?"]
+[Site "?"]
+[Date "2021.06.17"]
+[Round "9"]
+[White "Rival Haskell Build 65"]
+[Black "Rival Haskell Build 90"]
+[Result "0-1"]
+[BlackTimeControl "1/move"]
+[ECO "B33"]
+[GameDuration "00:00:12"]
+[GameEndTime "2021-06-17T22:59:15.470 BST"]
+[GameStartTime "2021-06-17T22:59:02.666 BST"]
+[Opening "Sicilian"]
+[PlyCount "72"]
+[Variation "Sveshnikov Variation"]
+[WhiteTimeControl "1/move"]
+
+1. e4 {book} c5 {book} 2. Nf3 {book} Nc6 {book} 3. d4 {book} cxd4 {book}
+4. Nxd4 {book} Nf6 {book} 5. Nc3 {book} e5 {book} 6. Ndb5 {book} d6 {book}
+7. Bg5 {book} a6 {book} 8. Na3 {book} b5 {book} 9. Bxf6 {book} gxf6 {book}
+10. Nd5 {book} f5 {book} 11. c3 {book} Bg7 {book} 12. exf5 {book} Bxf5 {book}
+13. Nc2 {book} O-O {book} 14. Nce3 {book} Be6 {book} 15. Bd3 {book} f5 {book}
+16. O-O {book} Ra7 {book} 17. a4 {book} Ne7 {book} 18. Nxe7+ {book} Rxe7 {book}
+19. axb5 {book} axb5 {book} 20. Bc2 {book} d5 {book} 21. Bb3 {book} f4 {book}
+22. Nxd5 {book} Rd7 {book} 23. Nb4 {book} Rxd1 {book} 24. Bxe6+ {book}
+Kh8 {book} 25. Raxd1 {book} Qe7 {book} 26. Bd5 {book} e4 {book} 27. Rfe1 {book}
+e3 {book} 28. Bf3 {book} Be5 {book} 29. Nc6 {book} Qf6 {book} 30. Nxe5 {book}
+Qxe5 {book} 31. fxe3 {1.1s} Qe6 {1.0s} 32. exf4 {1.1s} Qa2 {1.0s} 33. f5 {1.1s}
+Qxb2 {1.0s} 34. Rd3 {1.0s} b4 {1.0s} 35. cxb4 {1.0s} Qxb4 {1.1s} 36. Rd5 {1.1s}
+Qxe1# {1.1s, Black mates} 0-1
+
+[Event "?"]
+[Site "?"]
+[Date "2021.06.17"]
+[Round "10"]
+[White "Rival Haskell Build 90"]
+[Black "Rival Haskell Build 65"]
+[Result "1-0"]
+[BlackTimeControl "1/move"]
+[ECO "C65"]
+[GameDuration "00:01:48"]
+[GameEndTime "2021-06-17T23:01:04.453 BST"]
+[GameStartTime "2021-06-17T22:59:15.471 BST"]
+[Opening "Ruy Lopez"]
+[PlyCount "159"]
+[Variation "Berlin defense"]
+[WhiteTimeControl "1/move"]
+
+1. e4 {book} e5 {book} 2. Nf3 {book} Nc6 {book} 3. Bb5 {book} Nf6 {book}
+4. d3 {book} Bc5 {book} 5. c3 {book} O-O {book} 6. O-O {book} d6 {book}
+7. h3 {book} Ne7 {book} 8. d4 {book} Bb6 {book} 9. Re1 {book} Ng6 {book}
+10. Bd3 {book} Re8 {book} 11. Qc2 {book} c6 {book} 12. Be3 {book} d5 {book}
+13. dxe5 {book} Nxe5 {book} 14. Nxe5 {book} Rxe5 {book} 15. Bxb6 {book}
+axb6 {book} 16. f4 {book} Rh5 {book} 17. e5 {book} Nd7 {book} 18. Qe2 {book}
+Rh4 {book} 19. e6 {book} Nc5 {book} 20. exf7+ {book} Kxf7 {book} 21. Nd2 {book}
+Nxd3 {book} 22. Qxd3 {book} Rxf4 {book} 23. Qxh7 {book} Bf5 {book}
+24. Qh5+ {book} Bg6 {book} 25. Qe5 {book} Rf6 {book} 26. Nf3 {book} Kg8 {book}
+27. Ng5 {book} Qd7 {book} 28. a3 {book} Raf8 {book} 29. Rad1 {book} Qf5 {book}
+30. Qe3 {book} Qf2+ {book} 31. Qxf2 {1.1s} Rxf2 {1.0s} 32. Re6 {1.0s}
+R8f6 {1.0s} 33. Rxf6 {1.1s} Rxf6 {1.1s} 34. Nf3 {1.1s} Rd6 {1.0s} 35. c4 {1.0s}
+Bf5 {1.1s} 36. cxd5 {1.1s} cxd5 {1.1s} 37. Ne5 {1.1s} d4 {1.1s} 38. Nc4 {1.0s}
+Rc6 {1.1s} 39. Rxd4 {1.0s} Rf6 {1.1s} 40. Rd6 {1.0s} b5 {1.1s} 41. Rxf6 {1.0s}
+gxf6 {1.0s} 42. Nd6 {1.0s} Be6 {1.1s} 43. Nxb7 {1.2s} Bd5 {1.2s} 44. Nd6 {1.1s}
+Be6 {1.1s} 45. Nxb5 {1.0s} Bd5 {1.1s} 46. Nd6 {1.0s} Be6 {1.3s} 47. Ne4 {1.0s}
+Bd5 {1.2s} 48. Nxf6+ {1.1s} Kf7 {1.1s} 49. Nxd5 {1.1s} Ke6 {1.1s}
+50. Nf4+ {1.1s} Kf7 {1.1s} 51. Nd3 {1.3s} Ke6 {1.4s} 52. Nc5+ {1.0s} Kf7 {1.1s}
+53. Ne4 {1.1s} Ke6 {1.1s} 54. Nc3 {1.1s} Kf7 {1.2s} 55. Nb5 {1.1s} Ke6 {1.1s}
+56. Nd4+ {1.1s} Kf7 {1.1s} 57. Nc6 {1.0s} Ke6 {1.1s} 58. Nb4 {1.0s} Kf7 {1.1s}
+59. Nc2 {1.2s} Ke6 {1.3s} 60. Ne3 {1.1s} Kf7 {1.1s} 61. Nf5 {1.0s} Ke6 {1.1s}
+62. Ng3 {1.0s} Kf7 {1.1s} 63. Ne2 {1.1s} Ke6 {1.1s} 64. b3 {1.0s} Kd6 {1.0s}
+65. Nd4 {1.0s} Kc5 {1.1s} 66. Ne6+ {1.0s} Kd6 {1.3s} 67. Nf4 {1.2s} Kc5 {1.1s}
+68. g4 {1.1s} Kd4 {1.2s} 69. Ne2+ {1.1s} Ke4 {1.2s} 70. Nc3+ {1.0s} Kd4 {1.1s}
+71. Nb5+ {1.0s} Ke4 {1.1s} 72. Kf2 {1.0s} Kd3 {1.1s} 73. g5 {1.1s} Kc2 {1.1s}
+74. g6 {1.1s} Kxb3 {1.1s} 75. g7 {1.2s} Kb2 {1.1s} 76. g8=Q {1.1s} Kb1 {1.2s}
+77. Qb3+ {1.1s} Ka1 {1.1s} 78. Qb4 {1.0s} Ka2 {1.2s} 79. Nc3+ {1.1s} Ka1 {1.1s}
+80. Qb1# {1.0s, White mates} 1-0
+
+[Event "?"]
+[Site "?"]
+[Date "2021.06.17"]
+[Round "11"]
+[White "Rival Haskell Build 65"]
+[Black "Rival Haskell Build 90"]
+[Result "1-0"]
+[BlackTimeControl "1/move"]
+[ECO "C67"]
+[GameDuration "00:02:21"]
+[GameEndTime "2021-06-17T23:03:26.290 BST"]
+[GameStartTime "2021-06-17T23:01:04.454 BST"]
+[Opening "Ruy Lopez"]
+[PlyCount "189"]
+[Variation "Berlin defense, Open Variation"]
+[WhiteTimeControl "1/move"]
+
+1. e4 {book} e5 {book} 2. Nf3 {book} Nc6 {book} 3. Bb5 {book} Nf6 {book}
+4. O-O {book} Nxe4 {book} 5. Re1 {book} Nd6 {book} 6. Nxe5 {book} Be7 {book}
+7. Bf1 {book} Nxe5 {book} 8. Rxe5 {book} O-O {book} 9. Nc3 {book} Ne8 {book}
+10. Nd5 {book} Bd6 {book} 11. Re1 {book} c6 {book} 12. Ne3 {book} Be7 {book}
+13. c4 {book} Nc7 {book} 14. d4 {book} d5 {book} 15. cxd5 {book} Bb4 {book}
+16. Bd2 {book} Bxd2 {book} 17. Qxd2 {book} Nxd5 {book} 18. Nxd5 {book}
+Qxd5 {book} 19. Re5 {book} Qd6 {book} 20. Bc4 {book} Bd7 {book} 21. Rae1 {book}
+b5 {book} 22. Bb3 {book} a5 {book} 23. a4 {book} bxa4 {book} 24. Bxa4 {book}
+Be6 {book} 25. Rxa5 {book} Rxa5 {book} 26. Qxa5 {book} Qxd4 {book}
+27. Bxc6 {book} Qxb2 {book} 28. Bd5 {book} Bxd5 {book} 29. Qxd5 {book}
+Qf6 {book} 30. g3 {book} g6 {book} 31. Qc5 {1.4s} Qf5 {1.0s} 32. Qxf5 {1.1s}
+gxf5 {1.1s} 33. Re5 {1.1s} f6 {1.0s} 34. Rxf5 {1.0s} Rf7 {1.0s} 35. Rc5 {1.1s}
+Rf8 {1.0s} 36. Rc6 {1.2s} Rf7 {1.1s} 37. Rd6 {1.2s} Rf8 {1.0s} 38. Re6 {1.1s}
+Rf7 {1.2s} 39. Rc6 {1.1s} Rf8 {1.2s} 40. Rd6 {1.1s} Rf7 {1.1s} 41. Re6 {1.1s}
+Rf8 {1.1s} 42. Re4 {1.1s} Rf7 {1.1s} 43. Rc4 {1.1s} Rf8 {1.0s} 44. Rc5 {1.1s}
+Rf7 {1.1s} 45. Rd5 {1.1s} Rf8 {1.1s} 46. Rd4 {1.1s} Rf7 {1.0s} 47. Re4 {1.1s}
+Rf8 {1.1s} 48. Rc4 {1.1s} Rf7 {1.1s} 49. Rd4 {1.4s} Rf8 {1.1s} 50. Rd5 {1.1s}
+Rf7 {1.0s} 51. Rf5 {1.1s} Rf8 {1.0s} 52. Rf4 {1.2s} Rf7 {1.1s} 53. Rf3 {1.1s}
+Rf8 {1.0s} 54. Rc3 {1.1s} Rf7 {1.0s} 55. Rd3 {1.3s} Rf8 {1.2s} 56. Re3 {1.1s}
+Rf7 {1.1s} 57. Rc3 {1.1s} Rf8 {1.0s} 58. Rd3 {1.3s} Rf7 {1.1s} 59. f4 {1.1s}
+f5 {1.0s} 60. Rd6 {1.1s} Kg7 {1.1s} 61. Rc6 {1.1s} Kg8 {1.0s} 62. Re6 {1.1s}
+Kg7 {1.1s} 63. Rd6 {1.1s} Kg8 {1.0s} 64. Rc6 {1.1s} Kg7 {1.1s} 65. Re6 {1.1s}
+Kg8 {1.0s} 66. Re5 {1.1s} Kg7 {1.0s} 67. Rc5 {1.1s} Kg8 {1.0s} 68. Rd5 {1.3s}
+Kg7 {1.1s} 69. g4 {1.1s} Rc7 {1.0s} 70. Rxf5 {1.1s} Rc6 {1.1s} 71. Rd5 {1.1s}
+Rc7 {1.1s} 72. Rd6 {1.1s} Rc6 {1.0s} 73. Rxc6 {1.1s} Kf7 {1.0s} 74. Rd6 {1.1s}
+Kg7 {1.2s} 75. Re6 {1.2s} Kf7 {1.0s} 76. Rc6 {1.1s} Kg7 {1.0s} 77. Rd6 {1.1s}
+Kf7 {1.0s} 78. Rd5 {1.1s} Kg7 {1.1s} 79. Rc5 {1.1s} Kf7 {1.1s} 80. Re5 {1.2s}
+Kg7 {1.1s} 81. Rd5 {1.2s} Kf7 {1.0s} 82. Rc5 {1.2s} Kg7 {1.0s} 83. Re5 {1.1s}
+Kf7 {1.1s} 84. Rf5+ {1.1s} Kg7 {1.4s} 85. Rb5 {1.1s} Kf7 {1.1s} 86. f5 {1.1s}
+Kf6 {1.1s} 87. Rb7 {1.2s} Kg5 {1.0s} 88. Rxh7 {1.1s} Kf4 {1.0s} 89. f6 {1.2s}
+Kxg4 {1.0s} 90. f7 {1.1s} Kf3 {1.0s} 91. f8=Q+ {1.1s} Ke3 {1.0s} 92. Qd6 {1.1s}
+Kf3 {1.0s} 93. Qe5 {1.1s} Kg4 {1.1s} 94. Rh3 {1.1s} Kxh3 {1.0s}
+95. Qg3# {1.1s, White mates} 1-0
+
+[Event "?"]
+[Site "?"]
+[Date "2021.06.17"]
+[Round "12"]
+[White "Rival Haskell Build 90"]
+[Black "Rival Haskell Build 65"]
+[Result "1-0"]
+[BlackTimeControl "1/move"]
+[ECO "E10"]
+[GameDuration "00:00:47"]
+[GameEndTime "2021-06-17T23:04:14.215 BST"]
+[GameStartTime "2021-06-17T23:03:26.290 BST"]
+[Opening "Queen's pawn game"]
+[PlyCount "75"]
+[WhiteTimeControl "1/move"]
+
+1. d4 {book} Nf6 {book} 2. c4 {book} e6 {book} 3. Nf3 {book} d5 {book}
+4. Nc3 {book} Be7 {book} 5. Bf4 {book} O-O {book} 6. e3 {book} Nbd7 {book}
+7. c5 {book} Nh5 {book} 8. Bd3 {book} Nxf4 {book} 9. exf4 {book} b6 {book}
+10. b4 {book} a5 {book} 11. a3 {book} c6 {book} 12. O-O {book} Qc7 {book}
+13. g3 {book} Ba6 {book} 14. Kg2 {book} Bxd3 {book} 15. Qxd3 {book} Ra7 {book}
+16. h4 {book} bxc5 {1.2s} 17. bxc5 {1.2s} Nf6 {1.1s} 18. f5 {1.0s} exf5 {1.1s}
+19. Qxf5 {1.2s} Rb7 {1.2s} 20. Qe5 {1.1s} Qxe5 {1.1s} 21. Nxe5 {1.0s} Rc7 {1.1s}
+22. Nd3 {1.1s} Ne4 {1.1s} 23. Nxe4 {1.1s} dxe4 {1.1s} 24. Ne5 {1.1s} Bxh4 {1.0s}
+25. gxh4 {1.0s} f6 {1.1s} 26. Nc4 {1.0s} Rd8 {1.2s} 27. Nxa5 {1.0s} Rxd4 {1.1s}
+28. Nb3 {1.0s} Rd5 {1.1s} 29. f4 {1.0s} Rd6 {1.1s} 30. cxd6 {1.1s} Rb7 {1.1s}
+31. Nc1 {1.0s} Rc7 {1.1s} 32. dxc7 {1.1s} Kf7 {1.1s} 33. c8=Q {1.1s} g6 {1.1s}
+34. Qxc6 {1.1s} f5 {1.1s} 35. Qd6 {1.1s} Kg7 {1.0s} 36. Rb1 {1.0s} Kf7 {1.1s}
+37. Qd7+ {1.0s} Kg8 {1.1s} 38. Rb8# {1.1s, White mates} 1-0
+
+[Event "?"]
+[Site "?"]
+[Date "2021.06.17"]
+[Round "13"]
+[White "Rival Haskell Build 65"]
+[Black "Rival Haskell Build 90"]
+[Result "1-0"]
+[BlackTimeControl "1/move"]
+[ECO "E10"]
+[GameDuration "00:00:38"]
+[GameEndTime "2021-06-17T23:04:52.559 BST"]
+[GameStartTime "2021-06-17T23:04:14.216 BST"]
+[Opening "Queen's pawn game"]
+[PlyCount "95"]
+[WhiteTimeControl "1/move"]
+
+1. d4 {book} Nf6 {book} 2. c4 {book} e6 {book} 3. Nf3 {book} d5 {book}
+4. Nc3 {book} Be7 {book} 5. Bf4 {book} O-O {book} 6. e3 {book} Nbd7 {book}
+7. c5 {book} c6 {book} 8. h3 {book} b6 {book} 9. b4 {book} a5 {book}
+10. a3 {book} h6 {book} 11. Bd3 {book} Ba6 {book} 12. O-O {book} Qc8 {book}
+13. Rb1 {book} axb4 {book} 14. axb4 {book} Bxd3 {book} 15. Qxd3 {book}
+Qb7 {book} 16. Rfc1 {book} Rfc8 {book} 17. Ne1 {book} Bd8 {book} 18. Qd1 {book}
+Bc7 {book} 19. Nd3 {book} Bxf4 {book} 20. exf4 {book} Ne4 {book} 21. Ne2 {book}
+Ra2 {book} 22. Rc2 {book} Rca8 {book} 23. f3 {book} Rxc2 {book} 24. Qxc2 {book}
+Nef6 {book} 25. b5 {book} Rc8 {book} 26. Qa4 {book} Qc7 {book} 27. bxc6 {book}
+Qxc6 {book} 28. Qxc6 {book} Rxc6 {book} 29. Rc1 {book} Rc7 {book} 30. Nc3 {book}
+bxc5 {book} 31. Nxc5 {1.1s} Nxc5 {1.1s} 32. Nb5 {1.1s} Rc6 {1.0s} 33. g4 {1.2s}
+Nb7 {1.1s} 34. Rxc6 {1.1s} Kh7 {1.0s} 35. Rc3 {1.1s} Kg8 {1.1s} 36. Rc7 {1.1s}
+Kh7 {1.1s} 37. Rxb7 {1.2s} Kg8 {1.1s} 38. Nd6 {1.1s} Kh7 {1.1s} 39. Nxf7 {1.1s}
+Kg8 {1.0s} 40. Nd8 {1.1s} Kh7 {1.0s} 41. Nxe6 {1.1s} Kh8 {1.0s} 42. Rxg7 {1.2s}
+h5 {1.1s} 43. Rb7 {1.2s} hxg4 {1.0s} 44. hxg4 {1.1s} Ne4 {1.0s} 45. Rb8+ {1.1s}
+Kh7 {1.0s} 46. fxe4 {1.0s} dxe4 {1.1s} 47. f5 {1.1s} Kh6 {1.3s}
+48. Rh8# {1.1s, White mates} 1-0
+
+[Event "?"]
+[Site "?"]
+[Date "2021.06.17"]
+[Round "14"]
+[White "Rival Haskell Build 90"]
+[Black "Rival Haskell Build 65"]
+[Result "0-1"]
+[BlackTimeControl "1/move"]
+[ECO "E10"]
+[GameDuration "00:02:04"]
+[GameEndTime "2021-06-17T23:06:57.140 BST"]
+[GameStartTime "2021-06-17T23:04:52.560 BST"]
+[Opening "Queen's pawn game"]
+[PlyCount "170"]
+[WhiteTimeControl "1/move"]
+
+1. d4 {book} Nf6 {book} 2. c4 {book} e6 {book} 3. Nf3 {book} d5 {book}
+4. Nc3 {book} c5 {book} 5. cxd5 {book} Nxd5 {book} 6. e4 {book} Nxc3 {book}
+7. bxc3 {book} cxd4 {book} 8. cxd4 {book} Bb4+ {book} 9. Bd2 {book} Bxd2+ {book}
+10. Qxd2 {book} O-O {book} 11. Bc4 {book} Nd7 {book} 12. O-O {book} b6 {book}
+13. Rfe1 {book} Bb7 {book} 14. Rad1 {book} Rc8 {book} 15. Bb3 {book} Re8 {book}
+16. h3 {book} Nf6 {book} 17. Qf4 {book} Nh5 {book} 18. Qh2 {book} h6 {book}
+19. d5 {book} exd5 {book} 20. exd5 {book} Rxe1+ {book} 21. Nxe1 {book}
+Qf6 {book} 22. Nd3 {book} Ba6 {book} 23. Qe5 {book} Bxd3 {book} 24. Qxh5 {book}
+Bc2 {book} 25. Rc1 {book} Bf5 {book} 26. Rxc8+ {book} Bxc8 {book} 27. d6 {book}
+g5 {book} 28. Qd1 {book} Bd7 {book} 29. Be6 {1.0s} Bxe6 {1.1s} 30. a3 {1.0s}
+Bf5 {1.1s} 31. f3 {1.0s} Qe6 {1.1s} 32. Qd2 {1.0s} Qe5 {1.1s} 33. Qd1 {1.1s}
+Qc5+ {1.1s} 34. Kh2 {1.1s} Be6 {1.1s} 35. Qd3 {1.1s} Bc4 {1.3s} 36. Qd1 {1.1s}
+Bd5 {1.1s} 37. Qd3 {1.1s} Qxd6+ {1.1s} 38. Kh1 {1.1s} Qc6 {1.1s} 39. Kh2 {1.1s}
+Qc5 {1.2s} 40. Kh1 {1.0s} Qc1+ {1.1s} 41. Kh2 {1.2s} Bc4 {1.1s} 42. Qd6 {1.0s}
+Qf4+ {1.1s} 43. Qxf4 {1.1s} gxf4 {1.2s} 44. g4 {1.0s} fxg3+ {1.1s}
+45. Kxg3 {1.0s} f6 {1.1s} 46. f4 {1.3s} f5 {1.1s} 47. Kf3 {1.0s} Be6 {1.1s}
+48. Kg3 {1.0s} Bd5 {1.1s} 49. Kf2 {1.0s} Bc6 {1.0s} 50. Kg3 {1.1s} Be4 {1.1s}
+51. Kf2 {1.0s} Bd5 {1.1s} 52. Kg3 {1.0s} Bc6 {1.1s} 53. Kf2 {1.1s} Be4 {1.4s}
+54. Kg3 {1.1s} Bd3 {1.1s} 55. Kf2 {1.1s} Kf7 {1.1s} 56. Kg3 {1.0s} Ke6 {1.2s}
+57. Kf2 {1.1s} Kd6 {1.1s} 58. Kg3 {1.1s} Kc6 {1.2s} 59. Kf2 {1.0s} Kc5 {1.3s}
+60. Kg3 {1.0s} Kd6 {1.2s} 61. Kf2 {1.0s} Kc6 {1.1s} 62. Kg3 {1.2s} Kc5 {1.1s}
+63. Kf2 {1.1s} Kd5 {1.1s} 64. Kg3 {1.1s} Ke4 {1.2s} 65. Kf2 {1.0s} Kxf4 {1.1s}
+66. Kg2 {1.1s} Bc4 {1.1s} 67. Kf2 {1.1s} Bd5 {1.1s} 68. Ke2 {1.0s} Bc6 {1.1s}
+69. Kf2 {1.2s} b5 {1.1s} 70. Ke1 {1.0s} Kg3 {1.1s} 71. Kd2 {1.0s} Bd7 {1.1s}
+72. Ke1 {1.0s} Kxh3 {1.1s} 73. Ke2 {1.0s} Bc6 {1.2s} 74. Ke1 {1.1s} Bd5 {1.1s}
+75. Ke2 {1.1s} Be4 {1.2s} 76. Ke1 {1.0s} f4 {1.1s} 77. Ke2 {1.0s} Bb7 {1.1s}
+78. Ke1 {1.0s} Kg3 {1.1s} 79. Ke2 {1.0s} f3+ {1.1s} 80. Kd2 {1.1s} f2 {1.1s}
+81. Kc3 {1.1s} f1=Q {1.1s} 82. Kb3 {1.0s} Qc1 {1.0s} 83. a4 {1.0s} Bd5+ {1.1s}
+84. Kb4 {1.0s} Qc4+ {1.0s} 85. Ka3 {1.0s} Qc3# {1.2s, Black mates} 0-1
+
+[Event "?"]
+[Site "?"]
+[Date "2021.06.17"]
+[Round "15"]
+[White "Rival Haskell Build 65"]
+[Black "Rival Haskell Build 90"]
+[Result "1-0"]
+[BlackTimeControl "1/move"]
+[ECO "C88"]
+[GameDuration "00:02:21"]
+[GameEndTime "2021-06-17T23:09:18.834 BST"]
+[GameStartTime "2021-06-17T23:06:57.176 BST"]
+[Opening "Ruy Lopez"]
+[PlyCount "189"]
+[Variation "Closed, 7...O-O"]
+[WhiteTimeControl "1/move"]
+
+1. e4 {book} e5 {book} 2. Nf3 {book} Nc6 {book} 3. Bb5 {book} a6 {book}
+4. Ba4 {book} Nf6 {book} 5. O-O {book} Be7 {book} 6. Re1 {book} b5 {book}
+7. Bb3 {book} O-O {book} 8. h3 {book} Bb7 {book} 9. d3 {book} d6 {book}
+10. a3 {book} Na5 {book} 11. Ba2 {book} c5 {book} 12. Nbd2 {book} Nc6 {book}
+13. Nf1 {book} Bc8 {book} 14. Ne3 {book} Be6 {book} 15. Nd5 {book} Nb8 {book}
+16. Nxe7+ {book} Qxe7 {book} 17. Bb1 {book} Nc6 {book} 18. Ng5 {book} Bd7 {book}
+19. f4 {book} exf4 {book} 20. Bxf4 {book} Rae8 {book} 21. c3 {book} Ne5 {book}
+22. Bc2 {book} Bc6 {book} 23. Nf3 {book} Nxf3+ {book} 24. Qxf3 {book} c4 {book}
+25. d4 {book} Bxe4 {book} 26. Bxe4 {book} Nxe4 {book} 27. Bxd6 {book}
+Qxd6 {book} 28. Rxe4 {book} Rxe4 {book} 29. Qxe4 {book} g6 {book} 30. Re1 {book}
+h5 {book} 31. Qe5 {1.1s} Qxe5 {1.2s} 32. dxe5 {1.1s} f6 {1.2s} 33. exf6 {1.1s}
+Rxf6 {1.0s} 34. Re5 {1.3s} Rc6 {1.1s} 35. Rd5 {1.3s} Re6 {1.1s} 36. Rd7 {1.1s}
+Rf6 {1.1s} 37. Rd4 {1.1s} Kf7 {1.1s} 38. Rd5 {1.1s} Ke6 {1.1s} 39. Rc5 {1.2s}
+Kd6 {1.0s} 40. Rg5 {1.1s} Kc6 {1.0s} 41. Re5 {1.1s} Rd6 {1.0s} 42. Re3 {1.1s}
+Kc5 {1.0s} 43. Rf3 {1.1s} Rc6 {1.0s} 44. Rf4 {1.2s} Re6 {1.1s} 45. Rf7 {1.1s}
+Re4 {1.1s} 46. Rf6 {1.1s} Re6 {1.0s} 47. Rxe6 {1.0s} Kd5 {1.1s} 48. Rxg6 {1.0s}
+a5 {1.1s} 49. Rg5+ {1.1s} Kc6 {1.1s} 50. Rxh5 {1.2s} Kb6 {1.1s} 51. Rd5 {1.2s}
+Kc6 {1.1s} 52. Re5 {1.1s} Kb6 {1.0s} 53. Re6+ {1.1s} Kc5 {1.0s} 54. Rf6 {1.1s}
+Kd5 {1.1s} 55. Rf5+ {1.2s} Kc6 {1.1s} 56. a4 {1.1s} bxa4 {1.0s} 57. Rxa5 {1.1s}
+Kd6 {1.1s} 58. Rxa4 {1.1s} Kd5 {1.1s} 59. Rb4 {1.1s} Kd6 {1.0s} 60. Rxc4 {1.1s}
+Ke6 {1.0s} 61. Rc6+ {1.1s} Kd5 {1.0s} 62. Rf6 {1.3s} Ke5 {1.0s} 63. Rf3 {1.0s}
+Kd5 {1.0s} 64. Rf5+ {1.1s} Kc6 {1.1s} 65. Rf6+ {1.1s} Kd5 {1.0s} 66. Rf4 {1.1s}
+Kc6 {1.0s} 67. Rf5 {1.1s} Kd6 {1.0s} 68. c4 {1.0s} Kc6 {1.0s} 69. Rd5 {1.1s}
+Kb7 {1.0s} 70. Rd6 {1.2s} Kc7 {1.1s} 71. Re6 {1.1s} Kb7 {1.0s} 72. Rf6 {1.1s}
+Kc7 {1.1s} 73. Rf4 {1.3s} Kd6 {1.0s} 74. Rf7 {1.3s} Ke6 {1.1s} 75. Rf3 {1.1s}
+Kd6 {1.2s} 76. b4 {1.3s} Ke6 {1.0s} 77. c5 {1.1s} Kd5 {1.0s} 78. Rf6 {1.2s}
+Ke5 {1.1s} 79. c6 {1.1s} Kxf6 {1.1s} 80. c7 {1.4s} Ke6 {1.1s} 81. c8=Q+ {1.2s}
+Kf6 {1.0s} 82. Qc7 {1.1s} Ke6 {1.0s} 83. g4 {1.1s} Kd5 {1.1s} 84. Qc5+ {1.1s}
+Ke4 {1.0s} 85. Qf5+ {1.1s} Ke3 {1.0s} 86. Qc2 {1.1s} Kd4 {1.0s} 87. g5 {1.1s}
+Ke5 {1.1s} 88. Qc6 {1.1s} Kd4 {1.1s} 89. g6 {1.1s} Ke3 {1.0s} 90. Qd6 {1.1s}
+Ke4 {1.1s} 91. Qc7 {1.3s} Kd4 {1.0s} 92. Qc5+ {1.1s} Ke4 {1.1s} 93. g7 {1.1s}
+Kf4 {1.1s} 94. g8=Q {1.1s} Kf3 {1.0s} 95. Qg4# {1.1s, White mates} 1-0
+
+[Event "?"]
+[Site "?"]
+[Date "2021.06.17"]
+[Round "16"]
+[White "Rival Haskell Build 90"]
+[Black "Rival Haskell Build 65"]
+[Result "0-1"]
+[BlackTimeControl "1/move"]
+[ECO "C89"]
+[GameDuration "00:00:54"]
+[GameEndTime "2021-06-17T23:10:13.129 BST"]
+[GameStartTime "2021-06-17T23:09:18.835 BST"]
+[Opening "Ruy Lopez"]
+[PlyCount "110"]
+[Variation "Marshall, Main line, 14...Qh3"]
+[WhiteTimeControl "1/move"]
+
+1. e4 {book} e5 {book} 2. Nf3 {book} Nc6 {book} 3. Bb5 {book} a6 {book}
+4. Ba4 {book} Nf6 {book} 5. O-O {book} Be7 {book} 6. Re1 {book} b5 {book}
+7. Bb3 {book} O-O {book} 8. c3 {book} d5 {book} 9. exd5 {book} Nxd5 {book}
+10. Nxe5 {book} Nxe5 {book} 11. Rxe5 {book} c6 {book} 12. d4 {book} Bd6 {book}
+13. Re1 {book} Qh4 {book} 14. g3 {book} Qh3 {book} 15. Be3 {book} Bg4 {book}
+16. Qd3 {book} Rae8 {book} 17. Nd2 {book} Qh5 {book} 18. Qf1 {book} Re7 {book}
+19. a4 {book} Rfe8 {book} 20. Bxd5 {book} Qxd5 {book} 21. axb5 {book}
+axb5 {book} 22. Qg2 {book} Qxg2+ {book} 23. Kxg2 {book} h5 {book}
+24. Rec1 {book} f6 {book} 25. b3 {book} g5 {book} 26. c4 {book} bxc4 {book}
+27. Nxc4 {book} Bc7 {book} 28. Na5 {book} Bxa5 {book} 29. Rxa5 {book} Bd7 {book}
+30. b4 {book} Rb8 {book} 31. Rac5 {1.0s} Rbe8 {1.2s} 32. R5c4 {1.0s} Rb8 {1.2s}
+33. R1c3 {1.1s} Rbe8 {1.1s} 34. Rc5 {1.1s} Rb8 {1.1s} 35. R3c4 {1.0s}
+Rbe8 {1.1s} 36. Rc2 {1.1s} Rb8 {1.1s} 37. R2c3 {1.1s} Rbe8 {1.1s}
+38. R5c4 {1.1s} Rb8 {1.1s} 39. f3 {1.0s} Be6 {1.2s} 40. Rxc6 {1.0s} Rxb4 {1.2s}
+41. Rc2 {1.1s} Bf5 {1.1s} 42. g4 {1.0s} Bxc2 {1.1s} 43. Bf2 {1.0s} Bd3 {1.1s}
+44. Be3 {1.1s} hxg4 {1.1s} 45. Bf2 {1.1s} gxf3+ {1.3s} 46. Kg3 {1.1s} f5 {1.0s}
+47. Rg6+ {1.0s} Kf7 {1.1s} 48. Rc6 {1.0s} Rb2 {1.1s} 49. Rg6 {1.0s} Kxg6 {1.1s}
+50. h3 {1.0s} Re3 {1.2s} 51. d5 {1.1s} Be4 {1.1s} 52. d6 {1.0s} f4+ {1.1s}
+53. Kh2 {1.0s} Rxf2+ {1.1s} 54. Kg1 {1.1s} Rg2+ {1.2s} 55. Kh1 {1.0s}
+Re1# {1.0s, Black mates} 0-1
+
+[Event "?"]
+[Site "?"]
+[Date "2021.06.17"]
+[Round "17"]
+[White "Rival Haskell Build 65"]
+[Black "Rival Haskell Build 90"]
+[Result "1-0"]
+[BlackTimeControl "1/move"]
+[ECO "C89"]
+[GameDuration "00:00:18"]
+[GameEndTime "2021-06-17T23:10:31.275 BST"]
+[GameStartTime "2021-06-17T23:10:13.130 BST"]
+[Opening "Ruy Lopez"]
+[PlyCount "73"]
+[Variation "Marshall, Main line, Spassky Variation"]
+[WhiteTimeControl "1/move"]
+
+1. e4 {book} e5 {book} 2. Nf3 {book} Nc6 {book} 3. Bb5 {book} a6 {book}
+4. Ba4 {book} Nf6 {book} 5. O-O {book} Be7 {book} 6. Re1 {book} b5 {book}
+7. Bb3 {book} O-O {book} 8. c3 {book} d5 {book} 9. exd5 {book} Nxd5 {book}
+10. Nxe5 {book} Nxe5 {book} 11. Rxe5 {book} c6 {book} 12. d4 {book} Bd6 {book}
+13. Re1 {book} Qh4 {book} 14. g3 {book} Qh3 {book} 15. Be3 {book} Bg4 {book}
+16. Qd3 {book} Rae8 {book} 17. Nd2 {book} Re6 {book} 18. a4 {book} Qh5 {book}
+19. axb5 {book} axb5 {book} 20. Nf1 {book} Bf5 {book} 21. Qd2 {book} Bh3 {book}
+22. Bd1 {book} Qg6 {book} 23. Bc2 {book} Qh5 {book} 24. Qd1 {book} Bg4 {book}
+25. Qd3 {book} f5 {book} 26. Bd2 {book} f4 {book} 27. Rxe6 {book} Bxe6 {book}
+28. Bd1 {book} Qf7 {book} 29. gxf4 {1.1s} Qxf4 {1.1s} 30. Bxf4 {1.1s}
+Nxf4 {1.1s} 31. Qe3 {1.1s} Ra8 {1.1s} 32. Rxa8+ {1.0s} Bf8 {1.0s}
+33. Qxf4 {1.1s} h6 {1.1s} 34. Qxf8+ {1.1s} Kh7 {1.0s} 35. Bc2+ {1.2s} Bf5 {1.0s}
+36. Qxf5+ {1.0s} g6 {1.1s} 37. Qxg6# {1.1s, White mates} 1-0
+
+[Event "?"]
+[Site "?"]
+[Date "2021.06.17"]
+[Round "18"]
+[White "Rival Haskell Build 90"]
+[Black "Rival Haskell Build 65"]
+[Result "1-0"]
+[BlackTimeControl "1/move"]
+[ECO "B90"]
+[GameDuration "00:01:11"]
+[GameEndTime "2021-06-17T23:11:42.771 BST"]
+[GameStartTime "2021-06-17T23:10:31.276 BST"]
+[Opening "Sicilian"]
+[PlyCount "111"]
+[Variation "Najdorf, Byrne (English) attack"]
+[WhiteTimeControl "1/move"]
+
+1. e4 {book} c5 {book} 2. Nf3 {book} d6 {book} 3. d4 {book} cxd4 {book}
+4. Nxd4 {book} Nf6 {book} 5. Nc3 {book} a6 {book} 6. Be3 {book} e5 {book}
+7. Nb3 {book} Be6 {book} 8. f3 {book} Nbd7 {book} 9. g4 {book} Nb6 {book}
+10. g5 {book} Nh5 {book} 11. Qd2 {book} Be7 {book} 12. O-O-O {book} Rc8 {book}
+13. Rg1 {book} O-O {book} 14. Kb1 {book} g6 {book} 15. Qf2 {book} Nc4 {book}
+16. Bxc4 {book} Bxc4 {book} 17. Na4 {book} Be6 {book} 18. Nb6 {book} Rc7 {book}
+19. Qd2 {book} Rc6 {book} 20. Nd5 {book} Bxd5 {book} 21. Qxd5 {book} Qc8 {book}
+22. Rd2 {book} Bd8 {book} 23. Nc1 {book} Qe6 {1.1s} 24. Qxe6 {1.1s} fxe6 {1.2s}
+25. Rf2 {1.0s} Rc4 {1.1s} 26. c3 {1.0s} d5 {1.1s} 27. exd5 {1.1s} exd5 {1.1s}
+28. Nd3 {1.1s} Rf5 {1.0s} 29. Nb4 {1.1s} d4 {1.1s} 30. Bd2 {1.0s} dxc3 {1.2s}
+31. bxc3 {1.1s} Bxg5 {1.1s} 32. Rxg5 {1.0s} Rxg5 {1.1s} 33. Bxg5 {1.0s}
+Rxc3 {1.0s} 34. Nd5 {1.2s} Rc5 {1.2s} 35. Ne3 {1.0s} Rc3 {1.1s} 36. Ng4 {1.1s}
+Rc5 {1.1s} 37. Rb2 {1.0s} Rc3 {1.1s} 38. Nxe5 {1.0s} b5 {1.1s} 39. Bd2 {1.1s}
+Rc5 {1.1s} 40. Nd3 {1.1s} Rc3 {1.1s} 41. Bxc3 {1.1s} Kf7 {1.1s} 42. Nc5 {1.1s}
+Kg8 {1.1s} 43. Nxa6 {1.1s} Nf4 {1.0s} 44. Rxb5 {1.0s} g5 {1.1s} 45. Rb4 {1.0s}
+Nd5 {1.1s} 46. Rb8+ {1.0s} Kf7 {1.2s} 47. Rb7+ {1.0s} Kg8 {1.1s} 48. Bd4 {1.1s}
+h6 {1.2s} 49. Nb4 {1.0s} Nf4 {1.1s} 50. Bf6 {1.0s} Nd5 {1.1s} 51. Nxd5 {1.0s}
+Kf8 {1.0s} 52. Re7 {1.0s} Kg8 {1.2s} 53. Rg7+ {1.2s} Kf8 {1.2s} 54. Nc7 {1.0s}
+g4 {1.1s} 55. Ne6+ {1.0s} Ke8 {1.1s} 56. Re7# {1.0s, White mates} 1-0
+
+[Event "?"]
+[Site "?"]
+[Date "2021.06.17"]
+[Round "19"]
+[White "Rival Haskell Build 65"]
+[Black "Rival Haskell Build 90"]
+[Result "0-1"]
+[BlackTimeControl "1/move"]
+[ECO "E10"]
+[GameDuration "00:00:43"]
+[GameEndTime "2021-06-17T23:12:26.145 BST"]
+[GameStartTime "2021-06-17T23:11:42.772 BST"]
+[Opening "Queen's pawn game"]
+[PlyCount "100"]
+[WhiteTimeControl "1/move"]
+
+1. d4 {book} Nf6 {book} 2. c4 {book} e6 {book} 3. Nf3 {book} d5 {book}
+4. Nc3 {book} Be7 {book} 5. Bg5 {book} h6 {book} 6. Bh4 {book} O-O {book}
+7. e3 {book} Ne4 {book} 8. Bxe7 {book} Qxe7 {book} 9. Rc1 {book} c6 {book}
+10. Bd3 {book} Nxc3 {book} 11. Rxc3 {book} dxc4 {book} 12. Bxc4 {book}
+Nd7 {book} 13. O-O {book} b6 {book} 14. Bd3 {book} c5 {book} 15. Be4 {book}
+Rb8 {book} 16. Qc2 {book} Nf6 {book} 17. dxc5 {book} Nxe4 {book} 18. Qxe4 {book}
+bxc5 {book} 19. Qc2 {book} Bb7 {book} 20. e4 {book} f5 {book} 21. exf5 {book}
+Rxf5 {book} 22. Nd2 {book} Qf6 {book} 23. Nc4 {book} Ba6 {book} 24. b3 {book}
+Rf4 {book} 25. Rc1 {book} Rd8 {book} 26. h3 {book} Bxc4 {book} 27. Rxc4 {book}
+Rxc4 {book} 28. Qxc4 {book} Rd2 {book} 29. Qxc5 {book} Rxa2 {book}
+30. Rc4 {book} Ra1+ {book} 31. Rc1 {1.0s} Rxc1+ {1.0s} 32. Qxc1 {1.2s}
+Qe5 {1.1s} 33. f4 {1.0s} Qd4+ {1.1s} 34. Kh2 {1.1s} Qd7 {1.2s} 35. Qc5 {1.1s}
+Kf7 {1.2s} 36. Qe5 {1.2s} Qe7 {1.1s} 37. Qd4 {1.1s} Qb7 {1.0s} 38. Qc4 {1.0s}
+Qd7 {1.0s} 39. Qc5 {1.3s} Kg6 {1.1s} 40. Qe5 {1.1s} Qc6 {1.0s} 41. Qc5 {1.1s}
+Qxc5 {1.0s} 42. b4 {1.1s} Qd4 {1.1s} 43. f5+ {1.2s} exf5 {1.1s} 44. b5 {1.1s}
+f4 {1.1s} 45. b6 {1.1s} axb6 {1.0s} 46. h4 {1.0s} h5 {1.0s} 47. g4 {1.1s}
+Qf2+ {1.0s} 48. Kh1 {1.1s} f3 {1.0s} 49. gxh5+ {1.1s} Kf7 {1.0s} 50. h6 {1.1s}
+Qg2# {1.1s, Black mates} 0-1
+
+[Event "?"]
+[Site "?"]
+[Date "2021.06.17"]
+[Round "20"]
+[White "Rival Haskell Build 90"]
+[Black "Rival Haskell Build 65"]
+[Result "1-0"]
+[BlackTimeControl "1/move"]
+[ECO "C65"]
+[GameDuration "00:00:35"]
+[GameEndTime "2021-06-17T23:13:01.897 BST"]
+[GameStartTime "2021-06-17T23:12:26.146 BST"]
+[Opening "Ruy Lopez"]
+[PlyCount "93"]
+[Variation "Berlin defense"]
+[WhiteTimeControl "1/move"]
+
+1. e4 {book} e5 {book} 2. Nf3 {book} Nc6 {book} 3. Bb5 {book} Nf6 {book}
+4. d3 {book} Bc5 {book} 5. c3 {book} O-O {book} 6. O-O {book} d6 {book}
+7. Nbd2 {book} Ne7 {book} 8. d4 {book} exd4 {book} 9. cxd4 {book} Bb6 {book}
+10. Re1 {book} Bg4 {book} 11. h3 {book} Bh5 {book} 12. Qb3 {book} a6 {book}
+13. Bd3 {book} Nc6 {book} 14. d5 {book} Nd4 {book} 15. Nxd4 {book} Bxd4 {book}
+16. Bc2 {book} Nd7 {book} 17. g4 {book} Bg6 {book} 18. Nf3 {book} Bb6 {book}
+19. Bg5 {book} Qb8 {book} 20. Be3 {book} Bxe3 {book} 21. Qxe3 {book} Re8 {book}
+22. Rad1 {book} h6 {book} 23. Kg2 {book} Qd8 {book} 24. Qd4 {book} Rc8 {book}
+25. Re3 {book} Ne5 {book} 26. Nxe5 {book} dxe5 {book} 27. Qd2 {book} Qd6 {book}
+28. Rb3 {book} c6 {book} 29. Rxb7 {book} cxd5 {book} 30. Ba4 {book} d4 {book}
+31. Qd3 {1.1s} Qc6 {1.1s} 32. Bxc6 {1.0s} Rxc6 {1.0s} 33. Qf3 {1.1s} Rd6 {1.1s}
+34. Rd3 {1.0s} Rc6 {1.2s} 35. Rd7 {1.0s} Rd6 {1.1s} 36. Rxd6 {1.1s} Ra8 {1.1s}
+37. Rc6 {1.1s} Re8 {1.2s} 38. Rxa6 {1.1s} Ra8 {1.0s} 39. Rxa8+ {1.1s} Kh7 {1.0s}
+40. Rb3 {1.1s} f6 {1.1s} 41. Qf5 {1.1s} Bxf5 {1.1s} 42. exf5 {1.0s} h5 {1.1s}
+43. gxh5 {1.0s} Kh6 {1.1s} 44. Rg3 {1.2s} Kh7 {1.1s} 45. Rd3 {1.1s} Kh6 {1.1s}
+46. f4 {1.2s} Kxh5 {1.1s} 47. Rh8# {1.0s, White mates} 1-0
+
+[Event "?"]
+[Site "?"]
+[Date "2021.06.17"]
+[Round "21"]
+[White "Rival Haskell Build 65"]
+[Black "Rival Haskell Build 90"]
+[Result "1-0"]
+[BlackTimeControl "1/move"]
+[ECO "C65"]
+[GameDuration "00:02:00"]
+[GameEndTime "2021-06-17T23:15:02.165 BST"]
+[GameStartTime "2021-06-17T23:13:01.897 BST"]
+[Opening "Ruy Lopez"]
+[PlyCount "169"]
+[Variation "Berlin defense"]
+[WhiteTimeControl "1/move"]
+
+1. e4 {book} e5 {book} 2. Nf3 {book} Nc6 {book} 3. Bb5 {book} Nf6 {book}
+4. d3 {book} Bc5 {book} 5. c3 {book} O-O {book} 6. O-O {book} Re8 {book}
+7. Nbd2 {book} a6 {book} 8. Ba4 {book} b5 {book} 9. Bb3 {book} d6 {book}
+10. Re1 {book} Be6 {book} 11. Nf1 {book} Bxb3 {book} 12. axb3 {book} h6 {book}
+13. b4 {book} Bb6 {book} 14. Be3 {book} Bxe3 {book} 15. Nxe3 {book} Qd7 {book}
+16. h3 {book} a5 {book} 17. bxa5 {book} Nxa5 {book} 18. b4 {book} Nc6 {book}
+19. Qb3 {book} Ne7 {book} 20. Kh2 {book} Qc6 {book} 21. g3 {book} Rxa1 {book}
+22. Rxa1 {book} Ra8 {book} 23. Rxa8+ {book} Qxa8 {book} 24. Kg2 {book} g6 {book}
+25. Nc2 {book} Kg7 {book} 26. Qa3 {book} Qc6 {book} 27. Ne3 {book} Nc8 {book}
+28. Qb3 {book} Nb6 {book} 29. Nd2 {book} Na4 {book} 30. c4 {book} Nb6 {book}
+31. cxb5 {1.2s} Qd7 {1.1s} 32. Qc3 {1.1s} Qxb5 {1.1s} 33. Qxc7 {1.2s}
+Qxb4 {1.1s} 34. Nec4 {1.1s} Nxc4 {1.1s} 35. Nxc4 {1.2s} Nxe4 {1.1s}
+36. dxe4 {1.2s} Qc5 {1.0s} 37. Qxc5 {1.1s} dxc5 {1.0s} 38. Nxe5 {1.2s} f6 {1.1s}
+39. Nc6 {1.1s} f5 {1.0s} 40. exf5 {1.2s} gxf5 {1.0s} 41. Ne7 {1.1s} Kf6 {1.0s}
+42. Nd5+ {1.2s} Kg7 {1.1s} 43. f3 {1.1s} Kf7 {1.1s} 44. Ne3 {1.2s} Kg7 {1.1s}
+45. Nxf5+ {1.1s} Kg6 {1.0s} 46. Nd6 {1.1s} Kg7 {1.0s} 47. Nb7 {1.2s} Kg6 {1.0s}
+48. Nxc5 {1.1s} Kf6 {1.2s} 49. Ne4+ {1.1s} Kg6 {1.1s} 50. Nd6 {1.1s} Kf6 {1.0s}
+51. Nc4 {1.1s} Kg6 {1.2s} 52. Ne5+ {1.2s} Kf6 {1.0s} 53. Nc6 {1.1s} Kg6 {1.1s}
+54. Nd4 {1.1s} Kf6 {1.0s} 55. f4 {1.0s} Kf7 {1.0s} 56. g4 {1.2s} Kg6 {1.1s}
+57. Nf5 {1.1s} Kf7 {1.0s} 58. Nxh6+ {1.1s} Kf8 {1.1s} 59. Nf5 {1.1s} Kf7 {1.2s}
+60. Nd6+ {1.0s} Kf8 {1.0s} 61. Nc4 {1.1s} Kf7 {1.1s} 62. Ne5+ {1.2s} Kf8 {1.1s}
+63. Nc6 {1.3s} Kf7 {1.1s} 64. Nd4 {1.1s} Kf8 {1.1s} 65. Ne6+ {1.1s} Kf7 {1.0s}
+66. Nc5 {1.3s} Kf8 {1.0s} 67. Ne4 {1.1s} Kf7 {1.0s} 68. Nc3 {1.1s} Kf8 {1.0s}
+69. f5 {1.1s} Ke7 {1.0s} 70. Nd5+ {1.2s} Kf8 {1.1s} 71. Nf6 {1.1s} Ke7 {1.0s}
+72. Ne4 {1.2s} Kf8 {1.1s} 73. Nd6 {1.1s} Ke7 {1.0s} 74. Nc4 {1.1s} Kf8 {1.1s}
+75. Ne5 {1.1s} Ke7 {1.0s} 76. Kf3 {1.0s} Kf8 {1.0s} 77. f6 {1.1s} Ke8 {1.1s}
+78. g5 {1.1s} Kd8 {1.0s} 79. g6 {1.2s} Kc7 {1.2s} 80. f7 {1.4s} Kb7 {1.1s}
+81. f8=Q {1.1s} Ka7 {1.0s} 82. Qd6 {1.2s} Kb7 {1.1s} 83. g7 {1.1s} Ka7 {1.0s}
+84. g8=Q {1.2s} Kb7 {1.0s} 85. Qgb8# {1.1s, White mates} 1-0
+
+[Event "?"]
+[Site "?"]
+[Date "2021.06.17"]
+[Round "22"]
+[White "Rival Haskell Build 90"]
+[Black "Rival Haskell Build 65"]
+[Result "0-1"]
+[BlackTimeControl "1/move"]
+[ECO "C88"]
+[GameDuration "00:00:41"]
+[GameEndTime "2021-06-17T23:15:43.569 BST"]
+[GameStartTime "2021-06-17T23:15:02.166 BST"]
+[Opening "Ruy Lopez"]
+[PlyCount "70"]
+[Variation "Closed, anti-Marshall 8.a4"]
+[WhiteTimeControl "1/move"]
+
+1. e4 {book} e5 {book} 2. Nf3 {book} Nc6 {book} 3. Bb5 {book} a6 {book}
+4. Ba4 {book} Nf6 {book} 5. O-O {book} Be7 {book} 6. Re1 {book} b5 {book}
+7. Bb3 {book} O-O {book} 8. a4 {book} b4 {book} 9. d4 {book} d6 {book}
+10. dxe5 {book} dxe5 {book} 11. Nbd2 {book} Bc5 {book} 12. a5 {book} Ng4 {book}
+13. Rf1 {book} Nf6 {book} 14. h3 {book} Qe7 {book} 15. Re1 {book} Rd8 {book}
+16. Ng5 {book} Rf8 {book} 17. Bc4 {1.1s} Bxf2+ {1.1s} 18. Kh2 {1.1s} Bxe1 {1.1s}
+19. Qxe1 {1.2s} Be6 {1.2s} 20. Bxa6 {1.0s} Rxa6 {1.1s} 21. Nxe6 {1.0s}
+Qxe6 {1.1s} 22. Ra2 {1.1s} Qxa2 {1.2s} 23. Nb3 {1.0s} Nxa5 {1.1s}
+24. Qxb4 {1.2s} Nxb3 {1.1s} 25. cxb3 {1.0s} Rc6 {1.1s} 26. Be3 {1.0s}
+Qxb2 {1.1s} 27. Bc5 {1.1s} Qe2 {1.2s} 28. Be3 {1.0s} Rc2 {1.1s} 29. Bd2 {1.0s}
+Rxd2 {1.0s} 30. Qxd2 {1.0s} Qxd2 {1.1s} 31. h4 {1.2s} Nxe4 {1.1s} 32. h5 {1.0s}
+Qe1 {1.1s} 33. b4 {1.0s} Qg3+ {1.1s} 34. Kh1 {1.0s} Ra8 {1.1s} 35. b5 {1.1s}
+Ra1# {1.1s, Black mates} 0-1
+
+[Event "?"]
+[Site "?"]
+[Date "2021.06.17"]
+[Round "23"]
+[White "Rival Haskell Build 65"]
+[Black "Rival Haskell Build 90"]
+[Result "0-1"]
+[BlackTimeControl "1/move"]
+[ECO "D86"]
+[GameDuration "00:01:05"]
+[GameEndTime "2021-06-17T23:16:48.853 BST"]
+[GameStartTime "2021-06-17T23:15:43.570 BST"]
+[Opening "Gruenfeld"]
+[PlyCount "94"]
+[Variation "Exchange, Classical Variation"]
+[WhiteTimeControl "1/move"]
+
+1. d4 {book} Nf6 {book} 2. c4 {book} g6 {book} 3. Nc3 {book} d5 {book}
+4. cxd5 {book} Nxd5 {book} 5. e4 {book} Nxc3 {book} 6. bxc3 {book} Bg7 {book}
+7. Bc4 {book} c5 {book} 8. Ne2 {book} Nc6 {book} 9. Be3 {book} O-O {book}
+10. O-O {book} b6 {book} 11. Rc1 {book} Bb7 {book} 12. Bb5 {book} Rc8 {book}
+13. Qd2 {book} e6 {book} 14. Rfd1 {book} cxd4 {book} 15. cxd4 {book} Na5 {book}
+16. Rxc8 {book} Qxc8 {book} 17. Bg5 {book} Qc7 {book} 18. Bd3 {1.1s} Bc6 {1.1s}
+19. Bf4 {1.1s} e5 {1.0s} 20. dxe5 {1.1s} Bxe5 {1.1s} 21. Bxe5 {1.1s} Qxe5 {1.0s}
+22. Qf4 {1.1s} Qxf4 {1.1s} 23. Nxf4 {1.1s} f6 {1.0s} 24. Ne6 {1.1s} Rf7 {1.0s}
+25. Nd4 {1.1s} Rb7 {1.1s} 26. Nxc6 {1.1s} Nxc6 {1.0s} 27. Bc4+ {1.1s} Kg7 {1.0s}
+28. Be6 {1.1s} Ne5 {1.1s} 29. Bd5 {1.0s} Rc7 {1.1s} 30. f4 {1.0s} Nc4 {1.0s}
+31. Bxc4 {1.2s} Rxc4 {1.0s} 32. e5 {1.1s} Rc7 {1.1s} 33. exf6+ {1.2s}
+Kxf6 {1.0s} 34. Rd6+ {1.1s} Kf5 {1.1s} 35. Rc6 {1.1s} Rxc6 {1.2s} 36. g3 {1.1s}
+Rc4 {1.0s} 37. Kf2 {1.2s} Rc2+ {1.1s} 38. Kg1 {1.2s} Rxa2 {1.0s} 39. h3 {1.0s}
+Ke4 {1.1s} 40. f5 {1.1s} gxf5 {1.1s} 41. g4 {1.1s} fxg4 {1.1s} 42. hxg4 {1.1s}
+h6 {1.0s} 43. Kf1 {1.3s} Ke3 {1.1s} 44. Kg1 {1.1s} Kf4 {1.1s} 45. Kf1 {1.2s}
+Ke4 {1.0s} 46. Kg1 {1.1s} Kf3 {1.1s} 47. Kf1 {1.1s} Ra1# {1.0s, Black mates} 0-1
+
+[Event "?"]
+[Site "?"]
+[Date "2021.06.17"]
+[Round "24"]
+[White "Rival Haskell Build 90"]
+[Black "Rival Haskell Build 65"]
+[Result "1-0"]
+[BlackTimeControl "1/move"]
+[ECO "C67"]
+[GameDuration "00:00:46"]
+[GameEndTime "2021-06-17T23:17:34.999 BST"]
+[GameStartTime "2021-06-17T23:16:48.853 BST"]
+[Opening "Ruy Lopez"]
+[PlyCount "71"]
+[Variation "Berlin defense, Open Variation"]
+[WhiteTimeControl "1/move"]
+
+1. e4 {book} e5 {book} 2. Nf3 {book} Nc6 {book} 3. Bb5 {book} Nf6 {book}
+4. O-O {book} Nxe4 {book} 5. d4 {book} Nd6 {book} 6. Bxc6 {book} dxc6 {book}
+7. dxe5 {book} Nf5 {book} 8. Qxd8+ {book} Kxd8 {book} 9. Nc3 {book} h6 {book}
+10. h3 {book} Bd7 {book} 11. b3 {book} Kc8 {book} 12. Bb2 {book} b6 {book}
+13. Rad1 {book} Ne7 {book} 14. Ne4 {book} a5 {book} 15. a3 {1.1s} Be6 {1.1s}
+16. Nd4 {1.1s} c5 {1.1s} 17. Nxe6 {1.0s} fxe6 {1.0s} 18. Nc3 {1.1s} Nc6 {1.0s}
+19. f4 {1.0s} Nd4 {1.0s} 20. Rd2 {1.1s} c6 {1.1s} 21. Ne4 {1.2s} Nf5 {1.1s}
+22. Nd6+ {1.0s} Bxd6 {1.1s} 23. exd6 {1.1s} Nxd6 {1.1s} 24. Rxd6 {1.0s}
+Kc7 {1.1s} 25. Rxe6 {1.0s} Kd7 {1.2s} 26. Rg6 {1.0s} Kc7 {1.1s} 27. Rxg7+ {1.1s}
+Kc8 {1.1s} 28. Be5 {1.1s} Kd8 {1.1s} 29. Rc7 {1.0s} Rh7 {1.1s} 30. Rxh7 {1.0s}
+Rc8 {1.1s} 31. Rh8+ {1.0s} Kd7 {1.1s} 32. Rd1+ {1.0s} Ke6 {1.1s} 33. Rxc8 {1.1s}
+Kf5 {1.1s} 34. Rxc6 {1.0s} Ke4 {1.2s} 35. Re1+ {1.1s} Kf5 {1.1s}
+36. Rf6# {1.1s, White mates} 1-0
+
+[Event "?"]
+[Site "?"]
+[Date "2021.06.17"]
+[Round "25"]
+[White "Rival Haskell Build 65"]
+[Black "Rival Haskell Build 90"]
+[Result "1-0"]
+[BlackTimeControl "1/move"]
+[ECO "C88"]
+[GameDuration "00:00:35"]
+[GameEndTime "2021-06-17T23:18:10.982 BST"]
+[GameStartTime "2021-06-17T23:17:35.000 BST"]
+[Opening "Ruy Lopez"]
+[PlyCount "93"]
+[Variation "Closed, anti-Marshall 8.a4"]
+[WhiteTimeControl "1/move"]
+
+1. e4 {book} e5 {book} 2. Nf3 {book} Nc6 {book} 3. Bb5 {book} a6 {book}
+4. Ba4 {book} Nf6 {book} 5. O-O {book} Be7 {book} 6. Re1 {book} b5 {book}
+7. Bb3 {book} O-O {book} 8. a4 {book} b4 {book} 9. d3 {book} d6 {book}
+10. a5 {book} Be6 {book} 11. Bxe6 {book} fxe6 {book} 12. Nbd2 {book} Rb8 {book}
+13. c3 {book} bxc3 {book} 14. bxc3 {book} Rb5 {book} 15. Nf1 {book} Qd7 {book}
+16. Bg5 {book} Rxa5 {book} 17. Rxa5 {book} Nxa5 {book} 18. d4 {book} exd4 {book}
+19. cxd4 {book} h6 {book} 20. Bh4 {book} Nc6 {book} 21. d5 {book} Ne5 {book}
+22. Nxe5 {book} dxe5 {book} 23. dxe6 {book} Qxe6 {book} 24. Qc2 {book}
+Bb4 {book} 25. Rd1 {book} Ba5 {book} 26. Ne3 {book} Bb6 {book} 27. Nf5 {book}
+Kh8 {book} 28. Bxf6 {book} Qxf6 {book} 29. Qd2 {book} a5 {book} 30. h4 {book}
+h5 {book} 31. Qb2 {1.1s} Bc5 {1.0s} 32. Qd2 {1.1s} Qxh4 {1.2s} 33. Nxh4 {1.1s}
+Kh7 {1.0s} 34. Nf3 {1.1s} Kh8 {1.1s} 35. Qxa5 {1.1s} Bd6 {1.1s} 36. Nxe5 {1.1s}
+Bxe5 {1.0s} 37. Qxe5 {1.1s} Kg8 {1.0s} 38. Qd5+ {1.0s} Kh8 {1.1s} 39. Qd6 {1.1s}
+Kg8 {1.1s} 40. Qxc7 {1.1s} Rf6 {1.0s} 41. Qc4+ {1.1s} Kh7 {1.0s} 42. Qc5 {1.2s}
+Kg8 {1.0s} 43. Rd8+ {1.2s} Kh7 {1.1s} 44. Qxh5+ {1.1s} Rh6 {1.1s}
+45. Qf5+ {1.0s} Rg6 {1.0s} 46. e5 {1.2s} Kh6 {1.0s} 47. Rh8# {1.1s, White mates}
+1-0
+
+[Event "?"]
+[Site "?"]
+[Date "2021.06.17"]
+[Round "26"]
+[White "Rival Haskell Build 90"]
+[Black "Rival Haskell Build 65"]
+[Result "0-1"]
+[BlackTimeControl "1/move"]
+[ECO "C67"]
+[GameDuration "00:01:47"]
+[GameEndTime "2021-06-17T23:19:58.266 BST"]
+[GameStartTime "2021-06-17T23:18:10.983 BST"]
+[Opening "Ruy Lopez"]
+[PlyCount "158"]
+[Variation "Berlin defense, Open Variation"]
+[WhiteTimeControl "1/move"]
+
+1. e4 {book} e5 {book} 2. Nf3 {book} Nc6 {book} 3. Bb5 {book} Nf6 {book}
+4. O-O {book} Nxe4 {book} 5. Re1 {book} Nd6 {book} 6. Nxe5 {book} Be7 {book}
+7. Bf1 {book} Nxe5 {book} 8. Rxe5 {book} O-O {book} 9. d4 {book} Bf6 {book}
+10. Re1 {book} Re8 {book} 11. c3 {book} Rxe1 {book} 12. Qxe1 {book} Ne8 {book}
+13. d5 {book} c6 {book} 14. Nd2 {book} cxd5 {book} 15. Nf3 {book} d6 {book}
+16. Be3 {book} Nc7 {book} 17. Qd2 {book} Bd7 {book} 18. g3 {book} Bc6 {book}
+19. Bg2 {book} Ne6 {book} 20. Rd1 {book} Qa5 {book} 21. a3 {book} h6 {book}
+22. Nd4 {book} Nxd4 {book} 23. Bxd4 {book} Bxd4 {book} 24. Qxd4 {book}
+Re8 {book} 25. Bxd5 {book} Bxd5 {book} 26. Qxd5 {book} Qxd5 {book}
+27. Rxd5 {book} Re2 {book} 28. b4 {book} Rc2 {book} 29. Rxd6 {book} Rxc3 {book}
+30. Rd8+ {book} Kh7 {book} 31. Rd7 {1.0s} Rxa3 {1.1s} 32. Kg2 {1.0s} f6 {1.1s}
+33. Rxb7 {1.1s} f5 {1.1s} 34. Rc7 {1.1s} Rb3 {1.1s} 35. Rxa7 {1.0s} Rxb4 {1.1s}
+36. Rc7 {1.1s} f4 {1.2s} 37. gxf4 {1.0s} Rxf4 {1.2s} 38. Rc5 {1.1s} Rf6 {1.1s}
+39. Rd5 {1.1s} Rc6 {1.1s} 40. Re5 {1.0s} Rd6 {1.0s} 41. Rf5 {1.0s} Re6 {1.1s}
+42. Rf4 {1.0s} Rc6 {1.1s} 43. Rd4 {1.0s} Rc5 {1.1s} 44. Re4 {1.0s} Rd5 {1.3s}
+45. Rc4 {1.0s} Rd6 {1.1s} 46. Rc3 {1.1s} Re6 {1.1s} 47. Rd3 {1.0s} Re5 {1.1s}
+48. Re3 {1.0s} Rxe3 {1.1s} 49. fxe3 {1.1s} g6 {1.2s} 50. e4 {1.0s} Kg7 {1.1s}
+51. e5 {1.1s} Kf7 {1.1s} 52. Kf3 {1.0s} Ke6 {1.2s} 53. Ke4 {1.1s} Kd7 {1.2s}
+54. Kd5 {1.1s} Ke7 {1.1s} 55. Kc6 {1.0s} Ke6 {1.2s} 56. Kc5 {1.0s} Kxe5 {1.3s}
+57. Kc6 {1.0s} Ke6 {1.1s} 58. Kc5 {1.0s} Kf6 {1.1s} 59. Kc6 {1.1s} Ke5 {1.2s}
+60. Kc5 {1.1s} Ke6 {1.1s} 61. Kc6 {1.0s} Kf6 {1.1s} 62. Kc5 {1.1s} Kf5 {1.2s}
+63. Kc6 {1.0s} Kg4 {1.1s} 64. Kc5 {1.0s} Kg5 {1.2s} 65. Kc6 {1.1s} Kh4 {1.2s}
+66. Kc5 {1.0s} Kh3 {1.2s} 67. Kc6 {1.0s} Kxh2 {1.1s} 68. Kd7 {1.1s} g5 {1.1s}
+69. Ke6 {1.0s} g4 {1.1s} 70. Kf6 {1.0s} g3 {1.1s} 71. Kg7 {1.0s} g2 {1.0s}
+72. Kxh6 {1.1s} g1=Q {1.2s} 73. Kh7 {1.0s} Qc5 {1.1s} 74. Kh6 {1.0s} Qe7 {1.1s}
+75. Kg6 {1.2s} Kg3 {1.4s} 76. Kh6 {1.1s} Kf4 {1.1s} 77. Kg6 {1.0s} Kg4 {1.2s}
+78. Kh6 {1.0s} Kf5 {1.1s} 79. Kh5 {1.0s} Qg5# {1.1s, Black mates} 0-1
+
+[Event "?"]
+[Site "?"]
+[Date "2021.06.17"]
+[Round "27"]
+[White "Rival Haskell Build 65"]
+[Black "Rival Haskell Build 90"]
+[Result "1-0"]
+[BlackTimeControl "1/move"]
+[ECO "B90"]
+[GameDuration "00:00:38"]
+[GameEndTime "2021-06-17T23:20:37.117 BST"]
+[GameStartTime "2021-06-17T23:19:58.266 BST"]
+[Opening "Sicilian"]
+[PlyCount "65"]
+[Variation "Najdorf, Byrne (English) attack"]
+[WhiteTimeControl "1/move"]
+
+1. e4 {book} c5 {book} 2. Nf3 {book} d6 {book} 3. d4 {book} cxd4 {book}
+4. Nxd4 {book} Nf6 {book} 5. Nc3 {book} a6 {book} 6. Be3 {book} e5 {book}
+7. Nf3 {book} Be7 {book} 8. Bc4 {book} O-O {book} 9. O-O {book} Be6 {book}
+10. Bb3 {book} Nc6 {book} 11. Bg5 {book} Nd7 {book} 12. Bxe7 {book} Qxe7 {book}
+13. Nd5 {book} Qd8 {book} 14. Qe2 {book} Nc5 {book} 15. Rfd1 {book} Bxd5 {1.1s}
+16. exd5 {1.1s} Nxb3 {1.1s} 17. axb3 {1.2s} Ne7 {1.1s} 18. c4 {1.0s} Nf5 {1.0s}
+19. c5 {1.2s} dxc5 {1.1s} 20. Nxe5 {1.1s} Qd6 {1.1s} 21. Nc4 {1.0s} Qf6 {1.1s}
+22. d6 {1.1s} Qe6 {1.0s} 23. Qxe6 {1.1s} fxe6 {1.1s} 24. Rd3 {1.1s} Rf6 {1.0s}
+25. Ne5 {1.1s} Nd4 {1.1s} 26. d7 {1.1s} Rf5 {1.0s} 27. Nc4 {1.1s} e5 {1.1s}
+28. Re3 {1.1s} e4 {1.0s} 29. Rxe4 {1.0s} Nxb3 {1.1s} 30. Nb6 {1.1s} Rc8 {1.0s}
+31. dxc8=Q+ {1.2s} Kf7 {1.1s} 32. Qe6+ {1.1s} Kf8 {1.0s}
+33. Nd7# {1.1s, White mates} 1-0
+
+[Event "?"]
+[Site "?"]
+[Date "2021.06.17"]
+[Round "28"]
+[White "Rival Haskell Build 90"]
+[Black "Rival Haskell Build 65"]
+[Result "0-1"]
+[BlackTimeControl "1/move"]
+[ECO "C88"]
+[GameDuration "00:02:04"]
+[GameEndTime "2021-06-17T23:22:41.559 BST"]
+[GameStartTime "2021-06-17T23:20:37.117 BST"]
+[Opening "Ruy Lopez"]
+[PlyCount "174"]
+[Variation "Closed, 7...O-O"]
+[WhiteTimeControl "1/move"]
+
+1. e4 {book} e5 {book} 2. Nf3 {book} Nc6 {book} 3. Bb5 {book} a6 {book}
+4. Ba4 {book} Nf6 {book} 5. O-O {book} Be7 {book} 6. Re1 {book} b5 {book}
+7. Bb3 {book} O-O {book} 8. h3 {book} Bb7 {book} 9. d3 {book} d6 {book}
+10. a3 {book} Na5 {book} 11. Ba2 {book} c5 {book} 12. Nbd2 {book} Nc6 {book}
+13. Nf1 {book} Bc8 {book} 14. c3 {book} Be6 {book} 15. Bxe6 {book} fxe6 {book}
+16. b4 {book} Qd7 {book} 17. Ng3 {book} a5 {book} 18. bxc5 {book} dxc5 {book}
+19. a4 {book} b4 {book} 20. Be3 {book} c4 {book} 21. dxc4 {book} Qxd1 {book}
+22. Rexd1 {book} bxc3 {book} 23. c5 {book} c2 {book} 24. Rdc1 {book} Nb4 {book}
+25. Ne1 {book} Rfc8 {book} 26. Nxc2 {book} Bxc5 {book} 27. Nxb4 {book}
+Bxe3 {book} 28. Rxc8+ {book} Rxc8 {book} 29. fxe3 {book} axb4 {book}
+30. Rb1 {book} Rb8 {book} 31. Rb2 {1.0s} Rb7 {1.1s} 32. Rb3 {1.1s} Kf7 {1.1s}
+33. Kf2 {1.0s} Rb6 {1.2s} 34. Kf1 {1.1s} Ke7 {1.1s} 35. Rb2 {1.0s} g6 {1.2s}
+36. Rb3 {1.2s} Kf7 {1.0s} 37. Ke2 {1.0s} Kg7 {1.1s} 38. Kd3 {1.1s} Rd6+ {1.1s}
+39. Kc4 {1.0s} Rd2 {1.1s} 40. Rxb4 {1.0s} Rxg2 {1.1s} 41. Nf1 {1.0s} Nxe4 {1.2s}
+42. Rb6 {1.0s} Kh6 {1.1s} 43. Rxe6 {1.0s} Rf2 {1.2s} 44. Rxe5 {1.1s} Nd6+ {1.1s}
+45. Kc3 {1.0s} Rxf1 {1.1s} 46. Kd3 {1.0s} Rh1 {1.1s} 47. Kc3 {1.1s} Rxh3 {1.1s}
+48. Kd4 {1.1s} Nf5+ {1.2s} 49. Kc3 {1.0s} Nxe3 {1.1s} 50. Re4 {1.1s} Nd5+ {1.1s}
+51. Kb2 {1.1s} Nf6 {1.1s} 52. Re5 {1.0s} Rd3 {1.1s} 53. Re4 {1.1s} Nxe4 {1.1s}
+54. Ka2 {1.0s} Nc5 {1.1s} 55. Kb2 {1.1s} Nxa4+ {1.1s} 56. Kc2 {1.1s} Nc5 {1.1s}
+57. Kb2 {1.0s} Ne6 {1.1s} 58. Kc2 {1.1s} Nf4 {1.2s} 59. Kb2 {1.0s} Nd5 {1.1s}
+60. Kc2 {1.1s} Rd4 {1.2s} 61. Kb2 {1.0s} Nf6 {1.2s} 62. Kc2 {1.1s} Ne4 {1.1s}
+63. Kb2 {1.0s} Rd6 {1.1s} 64. Kc2 {1.0s} Rc6+ {1.1s} 65. Kb2 {1.0s} Re6 {1.2s}
+66. Kc2 {1.0s} Rd6 {1.1s} 67. Kb2 {1.1s} Rc6 {1.2s} 68. Kb3 {1.0s} Rf6 {1.2s}
+69. Kb2 {1.0s} Rf5 {1.1s} 70. Kb3 {1.1s} Rc5 {1.1s} 71. Kb2 {1.1s} Nd2 {1.2s}
+72. Ka1 {1.0s} Rb5 {1.1s} 73. Ka2 {1.0s} g5 {1.1s} 74. Ka1 {1.1s} Nc4 {1.1s}
+75. Ka2 {1.0s} Ne5 {1.1s} 76. Ka1 {1.1s} Nf3 {1.1s} 77. Ka2 {1.0s} Ne1 {1.2s}
+78. Ka1 {1.1s} Re5 {1.1s} 79. Ka2 {1.0s} Re6 {1.1s} 80. Ka1 {1.0s} Nd3 {1.1s}
+81. Ka2 {1.1s} g4 {1.2s} 82. Kb3 {1.0s} g3 {1.1s} 83. Kc4 {1.0s} Nf4 {1.1s}
+84. Kb3 {1.0s} g2 {1.2s} 85. Kc4 {1.1s} g1=Q {1.1s} 86. Kb4 {1.0s} Qb6+ {1.1s}
+87. Kc4 {1.2s} Rc6# {1.1s, Black mates} 0-1
+
+[Event "?"]
+[Site "?"]
+[Date "2021.06.17"]
+[Round "29"]
+[White "Rival Haskell Build 65"]
+[Black "Rival Haskell Build 90"]
+[Result "1-0"]
+[BlackTimeControl "1/move"]
+[ECO "C88"]
+[GameDuration "00:00:10"]
+[GameEndTime "2021-06-17T23:22:52.439 BST"]
+[GameStartTime "2021-06-17T23:22:41.562 BST"]
+[Opening "Ruy Lopez"]
+[PlyCount "41"]
+[Variation "Closed, 7...O-O"]
+[WhiteTimeControl "1/move"]
+
+1. e4 {book} e5 {book} 2. Nf3 {book} Nc6 {book} 3. Bb5 {book} a6 {book}
+4. Ba4 {book} Nf6 {book} 5. O-O {book} Be7 {book} 6. Re1 {book} b5 {book}
+7. Bb3 {book} O-O {book} 8. h3 {book} Bb7 {book} 9. d3 {book} d6 {book}
+10. a3 {book} Nb8 {book} 11. Nbd2 {book} Nbd7 {book} 12. Nf1 {book} Re8 {book}
+13. Ng3 {book} c6 {book} 14. Nf5 {book} Bf8 {book} 15. Nh2 {book} d5 {book}
+16. Qf3 {book} Nxe4 {1.1s} 17. dxe4 {1.1s} Qf6 {1.0s} 18. Nh6+ {1.1s}
+Qxh6 {1.0s} 19. Bxh6 {1.0s} Bxa3 {1.1s} 20. Qg4 {1.2s} f5 {1.0s}
+21. Qxg7# {1.1s, White mates} 1-0
+
+[Event "?"]
+[Site "?"]
+[Date "2021.06.17"]
+[Round "30"]
+[White "Rival Haskell Build 90"]
+[Black "Rival Haskell Build 65"]
+[Result "1-0"]
+[BlackTimeControl "1/move"]
+[ECO "E10"]
+[GameDuration "00:00:18"]
+[GameEndTime "2021-06-17T23:23:11.035 BST"]
+[GameStartTime "2021-06-17T23:22:52.439 BST"]
+[Opening "Queen's pawn game"]
+[PlyCount "77"]
+[WhiteTimeControl "1/move"]
+
+1. d4 {book} Nf6 {book} 2. c4 {book} e6 {book} 3. Nf3 {book} d5 {book}
+4. Nc3 {book} Bb4 {book} 5. Bg5 {book} h6 {book} 6. Bxf6 {book} Qxf6 {book}
+7. Qa4+ {book} Nc6 {book} 8. e3 {book} O-O {book} 9. Be2 {book} dxc4 {book}
+10. O-O {book} Bd7 {book} 11. Bxc4 {book} Bxc3 {book} 12. bxc3 {book}
+Rfd8 {book} 13. Be2 {book} Be8 {book} 14. Qa3 {book} Qe7 {book} 15. Qb2 {book}
+b6 {book} 16. c4 {book} Na5 {book} 17. e4 {book} Qf6 {book} 18. Rad1 {book}
+c5 {book} 19. e5 {book} Qf4 {book} 20. dxc5 {book} Nxc4 {book} 21. Qc1 {book}
+Qxc1 {book} 22. Rxc1 {book} Na5 {book} 23. cxb6 {book} axb6 {book}
+24. Rb1 {book} Nc6 {book} 25. Bc4 {book} b5 {book} 26. Bxb5 {book} Rxa2 {book}
+27. Rfc1 {book} Ne7 {book} 28. Bxe8 {book} Rxe8 {book} 29. Rb7 {book} Nd5 {book}
+30. g3 {book} Rea8 {book} 31. Nd4 {1.1s} g6 {1.1s} 32. Nc6 {1.0s} Kg7 {1.2s}
+33. f4 {1.0s} Ne3 {1.1s} 34. Nd4 {1.1s} Rg2+ {1.2s} 35. Kh1 {1.0s} Kf8 {1.1s}
+36. Nxe6+ {1.0s} Kg8 {1.1s} 37. Rxf7 {1.2s} Ra4 {1.1s} 38. Rg7+ {1.0s}
+Kh8 {1.1s} 39. Rc8# {1.1s, White mates} 1-0
+
+[Event "?"]
+[Site "?"]
+[Date "2021.06.17"]
+[Round "31"]
+[White "Rival Haskell Build 65"]
+[Black "Rival Haskell Build 90"]
+[Result "0-1"]
+[BlackTimeControl "1/move"]
+[ECO "C88"]
+[GameDuration "00:03:07"]
+[GameEndTime "2021-06-17T23:26:18.201 BST"]
+[GameStartTime "2021-06-17T23:23:11.036 BST"]
+[Opening "Ruy Lopez"]
+[PlyCount "196"]
+[Variation "Closed, anti-Marshall 8.a4"]
+[WhiteTimeControl "1/move"]
+
+1. e4 {book} e5 {book} 2. Nf3 {book} Nc6 {book} 3. Bb5 {book} a6 {book}
+4. Ba4 {book} Nf6 {book} 5. O-O {book} Be7 {book} 6. Re1 {book} b5 {book}
+7. Bb3 {book} O-O {book} 8. a4 {book} b4 {book} 9. d4 {book} d6 {book}
+10. dxe5 {book} dxe5 {book} 11. Qxd8 {book} Rxd8 {book} 12. Nbd2 {book}
+h6 {book} 13. a5 {book} Be6 {1.1s} 14. Bxe6 {1.1s} fxe6 {1.3s} 15. c4 {1.0s}
+bxc3 {1.1s} 16. bxc3 {1.1s} Rd6 {1.0s} 17. c4 {1.1s} Kh7 {1.1s} 18. c5 {1.1s}
+Rd3 {1.0s} 19. Nc4 {1.0s} Bxc5 {1.1s} 20. Ncxe5 {1.2s} Rxf3 {1.1s}
+21. Nxc6 {1.1s} Bxf2+ {1.0s} 22. Kf1 {1.3s} Bxe1+ {1.0s} 23. gxf3 {1.1s}
+Bh4 {1.2s} 24. Ne5 {1.1s} Nxe4 {1.0s} 25. fxe4 {1.1s} Bf6 {1.0s} 26. Kg2 {1.3s}
+Bxe5 {1.1s} 27. Ra4 {1.2s} c6 {1.1s} 28. Rc4 {1.2s} Rc8 {1.1s} 29. Ra4 {1.1s}
+c5 {1.2s} 30. Rc4 {1.0s} Rc6 {1.0s} 31. Ra4 {1.1s} c4 {1.1s} 32. Be3 {1.2s}
+Bd6 {1.0s} 33. Bc1 {1.2s} Rc5 {1.0s} 34. Be3 {1.1s} Rb5 {1.1s} 35. Bc1 {1.1s}
+c3 {1.1s} 36. Rd4 {1.1s} Bc7 {1.0s} 37. Ra4 {1.1s} Rxa5 {1.1s} 38. Rxa5 {1.1s}
+Bxa5 {1.1s} 39. Kf3 {1.1s} g6 {1.1s} 40. e5 {1.1s} Kg7 {1.0s} 41. Ke4 {1.1s}
+g5 {1.1s} 42. Kd4 {1.1s} Bc7 {1.0s} 43. Ke4 {1.1s} Bb6 {1.1s} 44. Kd3 {1.1s}
+Kg6 {1.1s} 45. Ke4 {1.1s} Bg1 {1.1s} 46. Kd3 {1.1s} Bxh2 {1.0s} 47. Kxc3 {1.1s}
+Bxe5+ {1.1s} 48. Kc4 {1.2s} Kf6 {1.0s} 49. Kc5 {1.1s} Bc7 {1.0s} 50. Kc4 {1.2s}
+Bd6 {1.1s} 51. Kd3 {1.1s} Bc5 {1.0s} 52. Kc4 {1.1s} Be7 {1.0s} 53. Kd3 {1.1s}
+Bd6 {1.0s} 54. Kc4 {1.1s} Ke5 {1.0s} 55. Kd3 {1.1s} Bc5 {1.0s} 56. Kc4 {1.1s}
+Be7 {1.0s} 57. Kd3 {1.1s} Bd6 {1.0s} 58. Kc4 {1.1s} Kf5 {1.1s} 59. Kd3 {1.2s}
+Bc5 {1.0s} 60. Kc4 {1.2s} Be7 {1.1s} 61. Kd3 {1.0s} Bd6 {1.0s} 62. Kc4 {1.0s}
+Be5 {1.1s} 63. Kd3 {1.1s} Bf6 {1.1s} 64. Kc4 {1.1s} Ke5 {1.1s} 65. Kd3 {1.1s}
+Kd6 {1.0s} 66. Kc4 {1.1s} Kc6 {1.0s} 67. Kd3 {1.1s} Kc5 {1.1s} 68. Ke4 {1.2s}
+Bc3 {1.1s} 69. Kd3 {1.1s} Be5 {1.1s} 70. Ke4 {1.1s} Bf6 {1.0s} 71. Kd3 {1.1s}
+Kc6 {1.0s} 72. Ke4 {1.2s} a5 {1.0s} 73. Kd3 {1.1s} Kd6 {1.0s} 74. Ke4 {1.1s}
+Kc5 {1.0s} 75. Kd3 {1.1s} Be5 {1.0s} 76. Ke4 {1.1s} Bd6 {1.0s} 77. Kd3 {1.1s}
+Kc6 {1.1s} 78. Ke4 {1.1s} Bc5 {1.1s} 79. Kd3 {1.3s} Kd6 {1.0s} 80. Ke4 {1.0s}
+Kd7 {1.0s} 81. Kd3 {1.1s} Kc6 {1.1s} 82. Ke4 {1.3s} Kd6 {1.0s} 83. Kd3 {1.1s}
+Kd5 {1.1s} 84. Be3 {1.1s} Bxe3 {1.0s} 85. Kxe3 {1.2s} e5 {1.0s} 86. Kd2 {1.0s}
+Kc6 {1.1s} 87. Ke3 {1.3s} Kd6 {1.0s} 88. Kd2 {1.1s} Kc5 {1.0s} 89. Ke3 {1.1s}
+a4 {1.0s} 90. Kd3 {1.2s} a3 {1.0s} 91. Kc3 {1.1s} g4 {1.2s} 92. Kb3 {1.2s}
+g3 {1.1s} 93. Kxa3 {1.2s} g2 {1.0s} 94. Kb3 {1.2s} g1=Q {1.1s} 95. Kb2 {1.2s}
+Kc4 {1.1s} 96. Kc2 {1.2s} Qf2+ {1.0s} 97. Kb1 {1.1s} Kb3 {1.1s} 98. Ka1 {1.1s}
+Qb2# {1.1s, Black mates} 0-1
+
+[Event "?"]
+[Site "?"]
+[Date "2021.06.17"]
+[Round "32"]
+[White "Rival Haskell Build 90"]
+[Black "Rival Haskell Build 65"]
+[Result "0-1"]
+[BlackTimeControl "1/move"]
+[ECO "E10"]
+[GameDuration "00:01:45"]
+[GameEndTime "2021-06-17T23:28:03.559 BST"]
+[GameStartTime "2021-06-17T23:26:18.202 BST"]
+[Opening "Queen's pawn game"]
+[PlyCount "156"]
+[WhiteTimeControl "1/move"]
+
+1. d4 {book} Nf6 {book} 2. c4 {book} e6 {book} 3. Nf3 {book} d5 {book}
+4. Nc3 {book} Be7 {book} 5. Bf4 {book} O-O {book} 6. e3 {book} Nbd7 {book}
+7. c5 {book} c6 {book} 8. h3 {book} b6 {book} 9. b4 {book} a5 {book}
+10. a3 {book} h6 {book} 11. Bd3 {book} Ba6 {book} 12. O-O {book} Qc8 {book}
+13. Rb1 {book} axb4 {book} 14. axb4 {book} Bxd3 {book} 15. Qxd3 {book}
+Qb7 {book} 16. Ra1 {book} Rxa1 {book} 17. Rxa1 {book} Ra8 {book} 18. Qb1 {book}
+Bd8 {book} 19. Ra2 {book} bxc5 {book} 20. Rxa8 {book} Qxa8 {book}
+21. bxc5 {book} Qa3 {book} 22. Ne2 {book} Qa6 {book} 23. Nc1 {book} Ne4 {book}
+24. Nd3 {book} Bf6 {book} 25. Qc2 {book} Qa3 {book} 26. Nd2 {book} Nxd2 {book}
+27. Qxd2 {book} e5 {book} 28. dxe5 {book} Nxe5 {book} 29. Nxe5 {book}
+Qa1+ {book} 30. Kh2 {book} Bxe5 {book} 31. Qd3 {1.0s} Bxf4+ {1.1s}
+32. exf4 {1.0s} f6 {1.1s} 33. Qf5 {1.1s} Qa8 {1.1s} 34. Qe6+ {1.0s} Kf8 {1.1s}
+35. Qd6+ {1.1s} Kf7 {1.1s} 36. f5 {1.0s} Qc8 {1.0s} 37. Qf4 {1.2s} Qb7 {1.1s}
+38. f3 {1.1s} Qe7 {1.0s} 39. Qd6 {1.0s} Qxd6+ {1.1s} 40. cxd6 {1.0s} d4 {1.1s}
+41. Kg3 {1.0s} c5 {1.1s} 42. f4 {1.0s} Ke8 {1.1s} 43. Kf3 {1.1s} Kd7 {1.2s}
+44. Ke4 {1.0s} d3 {1.1s} 45. Kxd3 {1.0s} Kxd6 {1.2s} 46. Kc4 {1.1s} Kc6 {1.1s}
+47. Kc3 {1.0s} Kd5 {1.1s} 48. Kb3 {1.1s} Ke4 {1.3s} 49. Kc3 {1.0s} Kxf4 {1.1s}
+50. Kc4 {1.0s} Kg3 {1.2s} 51. Kc3 {1.1s} Kxg2 {1.1s} 52. h4 {1.1s} Kg3 {1.2s}
+53. h5 {1.0s} Kf4 {1.1s} 54. Kc4 {1.1s} Kxf5 {1.2s} 55. Kxc5 {1.1s} Kg5 {1.0s}
+56. Kd6 {1.0s} Kxh5 {1.2s} 57. Ke7 {1.0s} f5 {1.2s} 58. Kf7 {1.0s} g6 {1.1s}
+59. Ke6 {1.1s} f4 {1.4s} 60. Ke5 {1.0s} f3 {1.1s} 61. Ke4 {1.1s} f2 {1.3s}
+62. Ke5 {1.1s} f1=Q {1.1s} 63. Kd6 {1.0s} Qf6+ {1.1s} 64. Kc5 {1.0s} Qe6 {1.3s}
+65. Kd4 {1.0s} Qc6 {1.1s} 66. Kd3 {1.1s} Qd6+ {1.1s} 67. Kc4 {1.0s} Qe5 {1.2s}
+68. Kd3 {1.1s} Qf6 {1.1s} 69. Kc4 {1.1s} Qd6 {1.3s} 70. Kc3 {1.0s} Qc5+ {1.1s}
+71. Kd3 {1.0s} Qc6 {1.0s} 72. Ke3 {1.1s} Qd6 {1.2s} 73. Kf2 {1.1s} Qe6 {1.2s}
+74. Kg1 {1.0s} Qe1+ {1.1s} 75. Kh2 {1.0s} Kg4 {1.1s} 76. Kg2 {1.1s} Kf4 {1.1s}
+77. Kh2 {1.0s} Kf3 {1.1s} 78. Kh3 {1.1s} Qg3# {1.1s, Black mates} 0-1
+
+[Event "?"]
+[Site "?"]
+[Date "2021.06.17"]
+[Round "33"]
+[White "Rival Haskell Build 65"]
+[Black "Rival Haskell Build 90"]
+[Result "1-0"]
+[BlackTimeControl "1/move"]
+[ECO "E10"]
+[GameDuration "00:00:20"]
+[GameEndTime "2021-06-17T23:28:24.451 BST"]
+[GameStartTime "2021-06-17T23:28:03.560 BST"]
+[Opening "Queen's pawn game"]
+[PlyCount "79"]
+[WhiteTimeControl "1/move"]
+
+1. d4 {book} Nf6 {book} 2. c4 {book} e6 {book} 3. Nf3 {book} d5 {book}
+4. Nc3 {book} Be7 {book} 5. Bf4 {book} O-O {book} 6. e3 {book} Nbd7 {book}
+7. c5 {book} Nh5 {book} 8. Bd3 {book} Nxf4 {book} 9. exf4 {book} b6 {book}
+10. b4 {book} a5 {book} 11. a3 {book} c6 {book} 12. O-O {book} Qc7 {book}
+13. g3 {book} Ba6 {book} 14. Bxa6 {book} Rxa6 {book} 15. Qe2 {book} Rfa8 {book}
+16. b5 {book} cxb5 {book} 17. Nxd5 {book} exd5 {book} 18. Qxe7 {book} Rc8 {book}
+19. Rfb1 {book} bxc5 {book} 20. Rxb5 {book} Re6 {book} 21. Qg5 {book} h6 {book}
+22. Qxd5 {book} Rd6 {book} 23. Qc4 {book} cxd4 {book} 24. Qxc7 {book}
+Rxc7 {book} 25. Rxa5 {book} d3 {book} 26. Rd1 {book} Kh7 {book} 27. Rb5 {book}
+Rc2 {book} 28. Rb4 {book} Nc5 {book} 29. Rd4 {book} Rxd4 {book} 30. Nxd4 {book}
+Ra2 {book} 31. Nb5 {1.1s} Rc2 {1.2s} 32. Nd6 {1.2s} Ra2 {1.1s} 33. Nxf7 {1.1s}
+Ne4 {1.1s} 34. Rxd3 {1.1s} Ra1+ {1.0s} 35. Kg2 {1.1s} Ra2 {1.1s} 36. f5 {1.1s}
+Nxf2 {1.0s} 37. Rd8 {1.1s} Ng4+ {1.1s} 38. Kh3 {1.1s} Nf2+ {1.0s} 39. Kh4 {1.1s}
+Ng4 {1.0s} 40. Rh8# {1.1s, White mates} 1-0
+
+[Event "?"]
+[Site "?"]
+[Date "2021.06.17"]
+[Round "34"]
+[White "Rival Haskell Build 90"]
+[Black "Rival Haskell Build 65"]
+[Result "1-0"]
+[BlackTimeControl "1/move"]
+[ECO "C89"]
+[GameDuration "00:00:24"]
+[GameEndTime "2021-06-17T23:28:49.230 BST"]
+[GameStartTime "2021-06-17T23:28:24.452 BST"]
+[Opening "Ruy Lopez"]
+[PlyCount "83"]
+[Variation "Marshall, Main line, 14...Qh3"]
+[WhiteTimeControl "1/move"]
+
+1. e4 {book} e5 {book} 2. Nf3 {book} Nc6 {book} 3. Bb5 {book} a6 {book}
+4. Ba4 {book} Nf6 {book} 5. O-O {book} Be7 {book} 6. Re1 {book} b5 {book}
+7. Bb3 {book} O-O {book} 8. c3 {book} d5 {book} 9. exd5 {book} Nxd5 {book}
+10. Nxe5 {book} Nxe5 {book} 11. Rxe5 {book} c6 {book} 12. d4 {book} Bd6 {book}
+13. Re1 {book} Qh4 {book} 14. g3 {book} Qh3 {book} 15. Re4 {book} g5 {book}
+16. Qf1 {book} Qh5 {book} 17. Nd2 {book} Bf5 {book} 18. f3 {book} Nf6 {book}
+19. Qg2 {book} Qg6 {book} 20. Re3 {book} Rae8 {book} 21. Ne4 {book} Nxe4 {book}
+22. g4 {book} Ng3 {book} 23. hxg3 {book} Bd3 {book} 24. Bd2 {book} Rxe3 {book}
+25. Bxe3 {book} Re8 {book} 26. Re1 {book} c5 {book} 27. dxc5 {book} Bxc5 {book}
+28. Qd2 {book} Bxe3+ {book} 29. Rxe3 {book} Qb6 {book} 30. Kf2 {book} Rd8 {book}
+31. f4 {1.0s} gxf4 {1.1s} 32. gxf4 {1.1s} Rd6 {1.0s} 33. g5 {1.1s} Qc5 {1.1s}
+34. Kg3 {1.0s} Qb6 {1.2s} 35. Re5 {1.0s} Qc5 {1.1s} 36. Rxc5 {1.0s} Rc6 {1.1s}
+37. Rxc6 {1.1s} Bc4 {1.0s} 38. Bxc4 {1.1s} h5 {1.1s} 39. Qd8+ {1.0s} Kg7 {1.1s}
+40. Rg6+ {1.0s} Kxg6 {1.1s} 41. Qg8+ {1.0s} Kf5 {1.1s}
+42. Qh7# {1.1s, White mates} 1-0
+
+[Event "?"]
+[Site "?"]
+[Date "2021.06.17"]
+[Round "35"]
+[White "Rival Haskell Build 65"]
+[Black "Rival Haskell Build 90"]
+[Result "0-1"]
+[BlackTimeControl "1/move"]
+[ECO "C88"]
+[GameDuration "00:01:45"]
+[GameEndTime "2021-06-17T23:30:34.822 BST"]
+[GameStartTime "2021-06-17T23:28:49.230 BST"]
+[Opening "Ruy Lopez"]
+[PlyCount "128"]
+[Variation "Closed, anti-Marshall 8.a4"]
+[WhiteTimeControl "1/move"]
+
+1. e4 {book} e5 {book} 2. Nf3 {book} Nc6 {book} 3. Bb5 {book} a6 {book}
+4. Ba4 {book} Nf6 {book} 5. O-O {book} Be7 {book} 6. Re1 {book} b5 {book}
+7. Bb3 {book} O-O {book} 8. a4 {book} b4 {book} 9. d4 {book} d6 {book}
+10. dxe5 {book} dxe5 {book} 11. Nbd2 {book} Bc5 {book} 12. Qe2 {book} Qe7 {book}
+13. h3 {book} Na5 {book} 14. Nc4 {book} Nxc4 {book} 15. Bxc4 {book} a5 {book}
+16. Bd5 {1.0s} Nxd5 {1.1s} 17. exd5 {1.1s} f6 {1.0s} 18. c4 {1.1s} bxc3 {1.0s}
+19. bxc3 {1.1s} Bf5 {1.0s} 20. c4 {1.1s} Bd6 {1.0s} 21. Nd4 {1.1s} exd4 {1.0s}
+22. Qxe7 {1.1s} Bxe7 {1.1s} 23. Rxe7 {1.1s} Rf7 {1.1s} 24. Rxf7 {1.1s}
+Kxf7 {1.1s} 25. f4 {1.1s} Be4 {1.0s} 26. g4 {1.1s} c5 {1.0s} 27. dxc6 {1.1s}
+Bxc6 {1.1s} 28. c5 {1.1s} Bd5 {1.1s} 29. f5 {1.0s} Bc6 {1.0s} 30. Bf4 {1.1s}
+Be4 {1.1s} 31. Bd6 {1.1s} Bf3 {1.1s} 32. Bc7 {1.1s} d3 {1.1s} 33. Bf4 {1.1s}
+Bc6 {1.0s} 34. Bd6 {1.1s} Re8 {1.0s} 35. Bg3 {1.0s} Re3 {1.0s} 36. Bd6 {1.1s}
+Re2 {1.1s} 37. Bf4 {1.1s} Bd5 {1.0s} 38. Bc7 {1.3s} Be4 {1.0s} 39. Bxa5 {1.1s}
+Bf3 {1.1s} 40. Bc7 {1.1s} Rg2+ {1.1s} 41. Kf1 {1.1s} Rc2 {1.0s} 42. Kg1 {1.1s}
+d2 {1.0s} 43. Bf4 {1.2s} Rb2 {1.0s} 44. Bc7 {1.1s} Ke8 {1.0s} 45. Bf4 {1.2s}
+d1=Q+ {1.1s} 46. Rxd1 {1.1s} Bxd1 {1.0s} 47. Be3 {1.1s} Bxa4 {1.1s}
+48. Bd4 {1.0s} Rb7 {1.1s} 49. Be3 {1.1s} Rb3 {1.0s} 50. Bd4 {1.1s} Rxh3 {1.0s}
+51. Bb2 {1.1s} h5 {1.1s} 52. Be5 {1.1s} fxe5 {1.0s} 53. gxh5 {1.1s} Rxh5 {1.1s}
+54. Kf2 {1.1s} Kd7 {1.1s} 55. Kg1 {1.2s} Rxf5 {1.1s} 56. Kg2 {1.1s} Kc6 {1.0s}
+57. Kg1 {1.1s} e4 {1.0s} 58. Kg2 {1.1s} e3 {1.0s} 59. Kg3 {1.1s} e2 {1.0s}
+60. Kg4 {1.1s} Rxc5 {1.0s} 61. Kf3 {1.1s} e1=Q {1.1s} 62. Kg2 {1.1s} Rg5+ {1.0s}
+63. Kf3 {1.1s} Bc2 {1.0s} 64. Kf4 {1.1s} Qg3# {1.1s, Black mates} 0-1
+
+[Event "?"]
+[Site "?"]
+[Date "2021.06.17"]
+[Round "36"]
+[White "Rival Haskell Build 90"]
+[Black "Rival Haskell Build 65"]
+[Result "1-0"]
+[BlackTimeControl "1/move"]
+[ECO "C88"]
+[GameDuration "00:02:16"]
+[GameEndTime "2021-06-17T23:32:51.058 BST"]
+[GameStartTime "2021-06-17T23:30:34.823 BST"]
+[Opening "Ruy Lopez"]
+[PlyCount "185"]
+[Variation "Closed, 7...O-O"]
+[WhiteTimeControl "1/move"]
+
+1. e4 {book} e5 {book} 2. Nf3 {book} Nc6 {book} 3. Bb5 {book} a6 {book}
+4. Ba4 {book} Nf6 {book} 5. O-O {book} Be7 {book} 6. Re1 {book} b5 {book}
+7. Bb3 {book} O-O {book} 8. h3 {book} Bb7 {book} 9. d3 {book} d6 {book}
+10. a3 {book} Na5 {book} 11. Ba2 {book} c5 {book} 12. Nbd2 {book} Nc6 {book}
+13. Nf1 {book} Bc8 {book} 14. c3 {book} Be6 {book} 15. Bxe6 {book} fxe6 {book}
+16. b4 {book} Qd7 {book} 17. Ng3 {book} a5 {book} 18. bxc5 {book} dxc5 {book}
+19. Qb3 {book} Rab8 {book} 20. a4 {book} b4 {book} 21. Rd1 {book} bxc3 {book}
+22. Qxc3 {book} Nd4 {book} 23. Nxd4 {book} exd4 {book} 24. Qc2 {book} Bd6 {book}
+25. Bd2 {book} Qc7 {book} 26. Nf1 {book} c4 {book} 27. dxc4 {book} Rbc8 {book}
+28. Rab1 {book} Qxc4 {book} 29. Qxc4 {book} Rxc4 {book} 30. Re1 {book}
+Nd7 {book} 31. Bxa5 {1.0s} Rxa4 {1.1s} 32. Bd2 {1.0s} Rf6 {1.1s} 33. f3 {1.0s}
+Ne5 {1.1s} 34. f4 {1.2s} Rxf4 {1.1s} 35. Bxf4 {1.0s} Nf3+ {1.1s} 36. gxf3 {1.1s}
+Bxf4 {1.1s} 37. e5 {1.2s} Bg5 {1.0s} 38. Re4 {1.1s} Bf4 {1.1s} 39. Rb8+ {1.1s}
+Kf7 {1.1s} 40. Rxf4+ {1.1s} Kg6 {1.0s} 41. Rb6 {1.1s} Kg5 {1.1s} 42. Rg4+ {1.1s}
+Kf5 {1.1s} 43. Rb7 {1.0s} Kxe5 {1.3s} 44. Rbxg7 {1.2s} Kd6 {1.1s}
+45. Rxh7 {1.1s} Kc6 {1.1s} 46. Re4 {1.1s} Kd6 {1.1s} 47. Rh6 {1.1s} Kc6 {1.1s}
+48. Rexe6+ {1.1s} Kc5 {1.0s} 49. Rc6+ {1.0s} Kb4 {1.0s} 50. Rcd6 {1.0s}
+Kc5 {1.1s} 51. Rde6 {1.0s} Kb4 {1.1s} 52. Rc6 {1.0s} Kb5 {1.1s} 53. Rcf6 {1.1s}
+Kc5 {1.1s} 54. Rd6 {1.0s} Kb5 {1.1s} 55. Nd2 {1.1s} Kc5 {1.1s} 56. Rc6+ {1.0s}
+Kb5 {1.2s} 57. Nb3 {1.0s} Kb4 {1.1s} 58. Nxd4 {1.0s} Ra8 {1.1s} 59. Rcd6 {1.0s}
+Ra4 {1.1s} 60. Ra6 {1.0s} Rxa6 {1.1s} 61. Rxa6 {1.0s} Kc5 {1.1s} 62. Nc6 {1.0s}
+Kb5 {1.3s} 63. Nb8 {1.1s} Kc5 {1.1s} 64. Rc6+ {1.2s} Kb5 {1.2s} 65. Rd6 {1.0s}
+Kc5 {1.1s} 66. Re6 {1.0s} Kb5 {1.1s} 67. Nc6 {1.1s} Kc5 {1.2s} 68. Rf6 {1.1s}
+Kb5 {1.1s} 69. Ne5 {1.0s} Kc5 {1.1s} 70. Rf5 {1.1s} Kb5 {1.1s} 71. Nd3+ {1.1s}
+Kc4 {1.3s} 72. Nc5 {1.2s} Kb5 {1.1s} 73. Ne6+ {1.1s} Kc4 {1.3s} 74. Nf4 {1.0s}
+Kc3 {1.1s} 75. Rf6 {1.1s} Kc4 {1.1s} 76. Rc6+ {1.1s} Kb5 {1.0s} 77. Rd6 {1.1s}
+Kc4 {1.1s} 78. Re6 {1.1s} Kc3 {1.1s} 79. Rc6+ {1.1s} Kb4 {1.3s} 80. Ne6 {1.0s}
+Kb3 {1.1s} 81. Rd6 {1.0s} Kb4 {1.1s} 82. Rd4+ {1.0s} Kb3 {1.1s} 83. Nc5+ {1.0s}
+Kb2 {1.1s} 84. Ne4 {1.0s} Kb3 {1.1s} 85. Rd6 {1.0s} Kb2 {1.1s} 86. f4 {1.0s}
+Kb3 {1.2s} 87. f5 {1.1s} Kc4 {1.1s} 88. f6 {1.0s} Kb4 {1.1s} 89. f7 {1.1s}
+Kb3 {1.2s} 90. f8=Q {1.1s} Kb2 {1.2s} 91. Qf3 {1.0s} Ka2 {1.1s} 92. Rb6 {1.0s}
+Ka1 {1.1s} 93. Qa3# {1.0s, White mates} 1-0
+
+[Event "?"]
+[Site "?"]
+[Date "2021.06.17"]
+[Round "37"]
+[White "Rival Haskell Build 65"]
+[Black "Rival Haskell Build 90"]
+[Result "1-0"]
+[BlackTimeControl "1/move"]
+[ECO "C67"]
+[GameDuration "00:03:05"]
+[GameEndTime "2021-06-17T23:35:56.459 BST"]
+[GameStartTime "2021-06-17T23:32:51.059 BST"]
+[Opening "Ruy Lopez"]
+[PlyCount "229"]
+[Variation "Berlin defense, Open Variation"]
+[WhiteTimeControl "1/move"]
+
+1. e4 {book} e5 {book} 2. Nf3 {book} Nc6 {book} 3. Bb5 {book} Nf6 {book}
+4. O-O {book} Nxe4 {book} 5. d4 {book} Nd6 {book} 6. Bxc6 {book} dxc6 {book}
+7. dxe5 {book} Nf5 {book} 8. Qxd8+ {book} Kxd8 {book} 9. Nc3 {book} Ke8 {book}
+10. h3 {book} h5 {book} 11. Bf4 {book} Be7 {book} 12. Rad1 {book} Be6 {book}
+13. Ng5 {book} Rh6 {book} 14. Rfe1 {book} Bb4 {book} 15. a3 {book} Bxc3 {book}
+16. bxc3 {book} h4 {book} 17. Ne4 {book} Rg6 {book} 18. g4 {book} hxg3 {book}
+19. fxg3 {book} Kf8 {book} 20. Kh2 {book} Ne7 {book} 21. g4 {book} Re8 {book}
+22. Rd3 {book} Kg8 {book} 23. Ng3 {book} Bd5 {book} 24. Rde3 {book} c5 {book}
+25. e6 {book} Rxe6 {book} 26. Bxc7 {book} Rxe3 {book} 27. Rxe3 {book} Be6 {book}
+28. Bd6 {book} Nd5 {book} 29. Rf3 {book} b6 {book} 30. Kg1 {book} f6 {book}
+31. Bf4 {1.1s} Nxf4 {1.1s} 32. Rxf4 {1.1s} Bd5 {1.0s} 33. Kf2 {1.2s} Re6 {1.1s}
+34. Rf5 {1.2s} Bc4 {1.0s} 35. Rf3 {1.1s} Rc6 {1.1s} 36. Rf4 {1.1s} Be6 {1.0s}
+37. Re4 {1.1s} Rd6 {1.0s} 38. Ke3 {1.3s} Kf7 {1.0s} 39. Rf4 {1.1s} Rc6 {1.2s}
+40. Kf3 {1.0s} Bd5+ {1.1s} 41. Ke3 {1.0s} g5 {1.1s} 42. Rf5 {1.0s} Re6+ {1.0s}
+43. Kf2 {1.0s} Rd6 {1.3s} 44. c4 {1.1s} Bxc4 {1.0s} 45. Ne4 {1.1s} Rc6 {1.0s}
+46. Nxg5+ {1.1s} Ke7 {1.0s} 47. Ne4 {1.1s} Re6 {1.0s} 48. Rf4 {1.2s} Re5 {1.1s}
+49. Nc3 {1.2s} Bd5 {1.0s} 50. Nxd5+ {1.0s} Rxd5 {1.2s} 51. Re4+ {1.3s}
+Kd6 {1.0s} 52. Re3 {1.1s} Kc6 {1.0s} 53. Re6+ {1.1s} Rd6 {1.0s} 54. Rxd6+ {1.1s}
+Kxd6 {1.1s} 55. c4 {1.1s} Kc6 {1.0s} 56. Ke3 {1.1s} Kd6 {1.0s} 57. Ke4 {1.2s}
+Ke6 {1.2s} 58. Kf4 {1.1s} Kd7 {1.1s} 59. Kf5 {1.1s} Ke7 {1.1s} 60. Kg6 {1.1s}
+Ke6 {1.1s} 61. Kg7 {1.2s} Ke5 {1.0s} 62. Kf7 {1.1s} Kd4 {1.0s} 63. Kxf6 {1.1s}
+Kc3 {1.0s} 64. g5 {1.1s} Kc2 {1.1s} 65. g6 {1.1s} Kc3 {1.1s} 66. g7 {1.1s}
+Kxc4 {1.0s} 67. g8=Q+ {1.2s} Kb5 {1.0s} 68. Qe8+ {1.1s} Kc4 {1.1s}
+69. Qf7+ {1.1s} Kb5 {1.0s} 70. Qxa7 {1.1s} Kc4 {1.0s} 71. Qxb6 {1.1s} Kd4 {1.1s}
+72. Ke6 {1.1s} Kc4 {1.0s} 73. Kd6 {1.1s} Kd4 {1.1s} 74. Qb3 {1.0s} Ke4 {1.1s}
+75. Qc3 {1.1s} Kf5 {1.0s} 76. Qg7 {1.1s} Ke4 {1.1s} 77. Qg3 {1.1s} Kf5 {1.0s}
+78. Kd5 {1.2s} Kf6 {1.1s} 79. Qg8 {1.1s} Kf5 {1.0s} 80. Qe6+ {1.1s} Kf4 {1.1s}
+81. Qg6 {1.1s} Ke3 {1.1s} 82. Qc2 {1.1s} Kf4 {1.2s} 83. Qc3 {1.1s} Kf5 {1.1s}
+84. Qg7 {1.1s} Kf4 {1.1s} 85. Qg4+ {1.1s} Ke3 {1.0s} 86. Qd1 {1.1s} Kf4 {1.0s}
+87. Kxc5 {1.2s} Ke4 {1.0s} 88. Kd6 {1.1s} Kf4 {1.0s} 89. Qb3 {1.2s} Ke4 {1.1s}
+90. Qc3 {1.1s} Kf4 {1.1s} 91. Ke6 {1.2s} Ke4 {1.0s} 92. Kf6 {1.1s} Kf4 {1.1s}
+93. Ke7 {1.4s} Ke4 {1.1s} 94. Ke6 {1.1s} Kf4 {1.0s} 95. Kf6 {1.2s} Ke4 {1.0s}
+96. Ke7 {1.1s} Kf4 {1.0s} 97. Kd6 {1.1s} Ke4 {1.1s} 98. Qg3 {1.2s} Kd4 {1.0s}
+99. Qf3 {1.2s} Kc4 {1.1s} 100. Kc6 {1.3s} Kd4 {1.0s} 101. Kb7 {1.4s} Kc4 {1.0s}
+102. Qe3 {1.1s} Kd5 {1.0s} 103. Kb6 {1.3s} Kc4 {1.0s} 104. Qf3 {1.1s} Kd4 {1.0s}
+105. Kc6 {1.1s} Kc4 {1.1s} 106. Kd6 {1.4s} Kd4 {1.1s} 107. Ke6 {1.1s} Kc4 {1.0s}
+108. Ke5 {1.2s} Kb5 {1.1s} 109. Qb7+ {1.1s} Kc4 {1.0s} 110. Ke4 {1.1s}
+Kc3 {1.0s} 111. h4 {1.1s} Kc2 {1.1s} 112. Kd4 {1.2s} Kd2 {1.0s} 113. Qb2+ {1.2s}
+Ke1 {1.1s} 114. Ke3 {1.1s} Kf1 {1.0s} 115. Qf2# {1.2s, White mates} 1-0
+
+[Event "?"]
+[Site "?"]
+[Date "2021.06.17"]
+[Round "38"]
+[White "Rival Haskell Build 90"]
+[Black "Rival Haskell Build 65"]
+[Result "1-0"]
+[BlackTimeControl "1/move"]
+[ECO "C88"]
+[GameDuration "00:01:07"]
+[GameEndTime "2021-06-17T23:37:03.960 BST"]
+[GameStartTime "2021-06-17T23:35:56.460 BST"]
+[Opening "Ruy Lopez"]
+[PlyCount "115"]
+[Variation "Closed, 7...O-O"]
+[WhiteTimeControl "1/move"]
+
+1. e4 {book} e5 {book} 2. Nf3 {book} Nc6 {book} 3. Bb5 {book} a6 {book}
+4. Ba4 {book} Nf6 {book} 5. O-O {book} Be7 {book} 6. Re1 {book} b5 {book}
+7. Bb3 {book} O-O {book} 8. h3 {book} Bb7 {book} 9. d3 {book} d6 {book}
+10. a3 {book} Qd7 {book} 11. Nc3 {book} Nd8 {book} 12. d4 {book} exd4 {book}
+13. Nxd4 {book} Re8 {book} 14. Nf5 {book} Ne6 {book} 15. Bd5 {book} Nxd5 {book}
+16. exd5 {book} Nc5 {book} 17. Qg4 {book} Bf6 {book} 18. Ne4 {book} Rxe4 {book}
+19. Rxe4 {book} h5 {book} 20. Nh6+ {book} Kf8 {book} 21. Qxd7 {book} Nxd7 {book}
+22. Nf5 {book} Bxd5 {book} 23. Re1 {book} Nc5 {book} 24. Ne3 {book} Re8 {book}
+25. Bd2 {book} Be6 {book} 26. Rab1 {book} Ba2 {book} 27. Ra1 {book} Be6 {1.0s}
+28. c3 {1.0s} c6 {1.2s} 29. Nc2 {1.1s} d5 {1.0s} 30. Nd4 {1.0s} Bxd4 {1.1s}
+31. cxd4 {1.1s} Nd3 {1.1s} 32. Bb4+ {1.0s} Nc5 {1.1s} 33. Bxc5+ {1.1s}
+Kg8 {1.2s} 34. Bd6 {1.0s} f6 {1.1s} 35. Bc5 {1.1s} f5 {1.2s} 36. Bd6 {1.0s}
+Kf7 {1.1s} 37. Be5 {1.0s} Kg8 {1.2s} 38. Bf4 {1.2s} Kf7 {1.0s} 39. Bd6 {1.1s}
+Kg8 {1.1s} 40. Bc5 {1.0s} Kf7 {1.1s} 41. f4 {1.0s} Kf6 {1.1s} 42. Bd6 {1.1s}
+g6 {1.0s} 43. Bc5 {1.0s} Re7 {1.1s} 44. Bxe7+ {1.0s} Kxe7 {1.1s} 45. Re5 {1.0s}
+Kd6 {1.1s} 46. Re3 {1.1s} Ke7 {1.1s} 47. Rae1 {1.1s} Kd6 {1.2s} 48. Rxe6+ {1.2s}
+Kc7 {1.1s} 49. Rxg6 {1.2s} Kb7 {1.1s} 50. Rf6 {1.0s} Kc7 {1.1s} 51. Ree6 {1.0s}
+Kb7 {1.1s} 52. Rxc6 {1.2s} b4 {1.0s} 53. axb4 {1.0s} a5 {1.1s} 54. bxa5 {1.0s}
+h4 {1.1s} 55. Rc5 {1.1s} Ka8 {1.1s} 56. Rf7 {1.0s} Kb8 {1.1s} 57. Rc6 {1.0s}
+Ka8 {1.1s} 58. Rc8# {1.1s, White mates} 1-0
+
+[Event "?"]
+[Site "?"]
+[Date "2021.06.17"]
+[Round "39"]
+[White "Rival Haskell Build 65"]
+[Black "Rival Haskell Build 90"]
+[Result "1-0"]
+[BlackTimeControl "1/move"]
+[ECO "E10"]
+[GameDuration "00:01:07"]
+[GameEndTime "2021-06-17T23:38:10.971 BST"]
+[GameStartTime "2021-06-17T23:37:03.960 BST"]
+[Opening "Queen's pawn game"]
+[PlyCount "99"]
+[WhiteTimeControl "1/move"]
+
+1. d4 {book} Nf6 {book} 2. c4 {book} e6 {book} 3. Nf3 {book} d5 {book}
+4. Nc3 {book} Be7 {book} 5. Bf4 {book} O-O {book} 6. e3 {book} c5 {book}
+7. dxc5 {book} Bxc5 {book} 8. a3 {book} Nc6 {book} 9. Qc2 {book} Qa5 {book}
+10. Rd1 {book} Re8 {book} 11. Nd2 {book} e5 {book} 12. Bg5 {book} Nd4 {book}
+13. Qb1 {book} Bf5 {book} 14. Bd3 {book} Bxd3 {book} 15. Qxd3 {book} Ne4 {book}
+16. Nxd5 {book} Nxg5 {book} 17. b4 {book} Qd8 {book} 18. bxc5 {book} Nde6 {book}
+19. Qf5 {book} Nd4 {1.1s} 20. exd4 {1.0s} g6 {1.1s} 21. Qxe5 {1.1s} Rxe5+ {1.0s}
+22. dxe5 {1.1s} Ne6 {1.1s} 23. Nf6+ {1.1s} Kg7 {1.0s} 24. Nde4 {1.1s}
+Qxd1+ {1.0s} 25. Kxd1 {1.1s} Rd8+ {1.0s} 26. Nd2 {1.1s} Ra8 {1.0s}
+27. Nfe4 {1.0s} Rd8 {1.1s} 28. f3 {1.0s} Rd3 {1.0s} 29. Nd6 {1.2s} Nxc5 {1.1s}
+30. Ne8+ {1.1s} Kh8 {1.1s} 31. Kc2 {1.1s} Rxa3 {1.0s} 32. Kb2 {1.1s} Rd3 {1.0s}
+33. Kc1 {1.1s} Ra3 {1.0s} 34. Kc2 {1.1s} Rd3 {1.0s} 35. f4 {1.0s} Rd4 {1.0s}
+36. g3 {1.1s} Ne6 {1.0s} 37. Nd6 {1.1s} Nc5 {1.1s} 38. Nf3 {1.1s} Ne6 {1.0s}
+39. Nxf7+ {1.1s} Kg8 {1.1s} 40. Nxd4 {1.2s} Nxd4+ {1.0s} 41. Kd3 {1.2s}
+Kxf7 {1.0s} 42. Kxd4 {1.3s} Ke6 {1.0s} 43. Ke4 {1.2s} Kf7 {1.1s} 44. Kd5 {1.1s}
+Ke7 {1.1s} 45. Ra1 {1.1s} Kf7 {1.0s} 46. Rxa7 {1.3s} Kf8 {1.1s} 47. Rxb7 {1.1s}
+h6 {1.0s} 48. Ke6 {1.1s} Kg8 {1.0s} 49. Kf6 {1.1s} Kf8 {1.1s}
+50. Rb8# {1.2s, White mates} 1-0
+
+[Event "?"]
+[Site "?"]
+[Date "2021.06.17"]
+[Round "40"]
+[White "Rival Haskell Build 90"]
+[Black "Rival Haskell Build 65"]
+[Result "0-1"]
+[BlackTimeControl "1/move"]
+[ECO "C65"]
+[GameDuration "00:02:10"]
+[GameEndTime "2021-06-17T23:40:21.200 BST"]
+[GameStartTime "2021-06-17T23:38:10.971 BST"]
+[Opening "Ruy Lopez"]
+[PlyCount "180"]
+[Variation "Berlin defense"]
+[WhiteTimeControl "1/move"]
+
+1. e4 {book} e5 {book} 2. Nf3 {book} Nc6 {book} 3. Bb5 {book} Nf6 {book}
+4. d3 {book} Bc5 {book} 5. Bxc6 {book} dxc6 {book} 6. Nbd2 {book} Be6 {book}
+7. O-O {book} Bd6 {book} 8. b3 {book} O-O {book} 9. Nc4 {book} Nd7 {book}
+10. Ng5 {book} Qe7 {book} 11. Qh5 {book} h6 {book} 12. Nxe6 {book} Qxe6 {book}
+13. f4 {book} f5 {book} 14. Qh3 {book} Rae8 {book} 15. fxe5 {book} Bxe5 {book}
+16. Nxe5 {book} Qxe5 {book} 17. Ba3 {book} c5 {book} 18. Rad1 {book} Qd4+ {book}
+19. Kh1 {book} fxe4 {book} 20. dxe4 {book} Rxf1+ {book} 21. Rxf1 {book}
+Rxe4 {book} 22. Qf5 {book} Re7 {book} 23. h3 {book} b6 {book} 24. Bc1 {book}
+Qe4 {book} 25. Qf2 {book} Qg6 {book} 26. Bb2 {book} Rf7 {book} 27. Qxf7+ {book}
+Qxf7 {book} 28. Rxf7 {book} Kxf7 {book} 29. Kg1 {book} Nf6 {book} 30. Kf2 {book}
+Nd5 {book} 31. Kg1 {1.0s} c6 {1.1s} 32. Be5 {1.0s} Nf6 {1.1s} 33. Bb2 {1.0s}
+Ke6 {1.1s} 34. Be5 {1.1s} Kxe5 {1.3s} 35. c4 {1.1s} Ne4 {1.1s} 36. g3 {1.1s}
+Nxg3 {1.1s} 37. Kf2 {1.0s} Kf4 {1.1s} 38. Kg1 {1.1s} Kf3 {1.1s} 39. a3 {1.1s}
+g6 {1.2s} 40. h4 {1.2s} Kf4 {1.1s} 41. Kg2 {1.0s} Kg4 {1.1s} 42. Kg1 {1.0s}
+Kxh4 {1.2s} 43. Kf2 {1.0s} Nf5 {1.1s} 44. Kg1 {1.0s} a5 {1.1s} 45. Kf2 {1.1s}
+Nd4 {1.3s} 46. Ke3 {1.1s} Nxb3 {1.1s} 47. a4 {1.0s} Nd4 {1.1s} 48. Ke4 {1.0s}
+Nf5 {1.1s} 49. Ke5 {1.0s} Kg4 {1.1s} 50. Ke4 {1.0s} Nd6+ {1.3s} 51. Ke5 {1.0s}
+Nxc4+ {1.1s} 52. Kf6 {1.0s} Nb2 {1.1s} 53. Ke5 {1.1s} c4 {1.1s} 54. Kd4 {1.1s}
+Nxa4 {1.1s} 55. Kxc4 {1.0s} Nc5 {1.1s} 56. Kd4 {1.0s} Kf5 {1.1s} 57. Kc4 {1.0s}
+Ne6 {1.0s} 58. Kc3 {1.1s} c5 {1.3s} 59. Kc4 {1.1s} Nc7 {1.1s} 60. Kc3 {1.0s}
+Nd5+ {1.1s} 61. Kc4 {1.0s} Ke6 {1.3s} 62. Kb5 {1.0s} Kd6 {1.2s} 63. Kc4 {1.1s}
+Kc6 {1.1s} 64. Kd3 {1.1s} Nf6 {1.1s} 65. Kc4 {1.1s} b5+ {1.1s} 66. Kc3 {1.0s}
+Kd6 {1.3s} 67. Kb2 {1.0s} Ke6 {1.1s} 68. Kc3 {1.0s} Kd5 {1.1s} 69. Kb2 {1.0s}
+Ne4 {1.1s} 70. Kc2 {1.1s} c4 {1.1s} 71. Kb2 {1.0s} Kc6 {1.2s} 72. Kc2 {1.0s}
+Kd6 {1.0s} 73. Kb2 {1.1s} Ke6 {1.0s} 74. Kc2 {1.0s} Kf6 {1.1s} 75. Kb2 {1.0s}
+Ke5 {1.1s} 76. Kc2 {1.1s} Ke6 {1.1s} 77. Kb2 {1.0s} Kd6 {1.1s} 78. Kc2 {1.0s}
+Kc6 {1.1s} 79. Kb2 {1.1s} Kc5 {1.1s} 80. Kc2 {1.0s} Kd4 {1.1s} 81. Kb2 {1.0s}
+Kd5 {1.1s} 82. Kc2 {1.0s} Kc5 {1.1s} 83. Kb2 {1.0s} Kd4 {1.1s} 84. Kc2 {1.1s}
+c3 {1.1s} 85. Kb1 {1.0s} Kd3 {1.1s} 86. Ka2 {1.0s} Kd2 {1.2s} 87. Kb1 {1.1s}
+c2+ {1.1s} 88. Kb2 {1.0s} c1=Q+ {1.1s} 89. Ka2 {1.0s} b4 {1.1s} 90. Kb3 {1.0s}
+Qc2# {1.1s, Black mates} 0-1
+
+[Event "?"]
+[Site "?"]
+[Date "2021.06.17"]
+[Round "41"]
+[White "Rival Haskell Build 65"]
+[Black "Rival Haskell Build 90"]
+[Result "0-1"]
+[BlackTimeControl "1/move"]
+[ECO "E15"]
+[GameDuration "00:01:50"]
+[GameEndTime "2021-06-17T23:42:11.702 BST"]
+[GameStartTime "2021-06-17T23:40:21.201 BST"]
+[Opening "Queen's Indian"]
+[PlyCount "162"]
+[Variation "Nimzovich Variation (exaggerated Fianchetto)"]
+[WhiteTimeControl "1/move"]
+
+1. d4 {book} Nf6 {book} 2. c4 {book} e6 {book} 3. Nf3 {book} b6 {book}
+4. g3 {book} Ba6 {book} 5. b3 {book} Bb4+ {book} 6. Bd2 {book} Be7 {book}
+7. Bg2 {book} c6 {book} 8. Bc3 {book} d5 {book} 9. Ne5 {book} Nfd7 {book}
+10. Nxd7 {book} Nxd7 {book} 11. Nd2 {book} O-O {book} 12. O-O {book} Rc8 {book}
+13. e4 {book} c5 {book} 14. exd5 {book} exd5 {book} 15. dxc5 {book} dxc4 {book}
+16. c6 {book} cxb3 {book} 17. Re1 {book} b2 {book} 18. Bxb2 {book} Nc5 {book}
+19. Nc4 {book} Bxc4 {book} 20. Qg4 {book} Bg5 {book} 21. Qxc4 {book} Nd3 {book}
+22. Be5 {book} Nxe1 {book} 23. Rxe1 {book} Bf6 {book} 24. Bxf6 {book}
+Qxf6 {book} 25. c7 {book} Qd6 {book} 26. Rc1 {book} b5 {book} 27. Qc2 {book}
+g6 {book} 28. Bb7 {book} b4 {book} 29. h4 {book} h5 {book} 30. Kf1 {book}
+a5 {book} 31. Bxc8 {1.2s} Rxc8 {1.1s} 32. Kg1 {1.1s} Qe6 {1.0s} 33. Qc4 {1.1s}
+Qxc4 {1.0s} 34. Rxc4 {1.1s} f6 {1.1s} 35. Rc6 {1.1s} Kf7 {1.0s} 36. Rc5 {1.1s}
+f5 {1.1s} 37. Rxa5 {1.0s} Rxc7 {1.1s} 38. Kg2 {1.1s} Rb7 {1.0s} 39. Rc5 {1.2s}
+Ke6 {1.0s} 40. Rc6+ {1.1s} Kf7 {1.0s} 41. Rd6 {1.1s} Rb5 {1.0s} 42. Rd4 {1.1s}
+Ke6 {1.1s} 43. Rc4 {1.1s} Kd6 {1.0s} 44. f4 {1.0s} Ke6 {1.1s} 45. Rc6+ {1.1s}
+Kf7 {1.1s} 46. Rd6 {1.0s} Rc5 {1.0s} 47. Rd4 {1.1s} Rc2+ {1.1s} 48. Kh3 {1.1s}
+Rxa2 {1.0s} 49. Rxb4 {1.1s} Ke6 {1.0s} 50. Rc4 {1.1s} Kd6 {1.2s} 51. Rd4+ {1.1s}
+Kc6 {1.0s} 52. Rd3 {1.2s} Kc5 {1.0s} 53. Rc3+ {1.1s} Kd6 {1.0s} 54. Rc4 {1.1s}
+Ke6 {1.1s} 55. Rc6+ {1.1s} Kf7 {1.0s} 56. Rd6 {1.1s} Kg7 {1.1s} 57. Re6 {1.1s}
+Rb2 {1.0s} 58. Rc6 {1.1s} Kf7 {1.0s} 59. Rd6 {1.0s} Rb7 {1.1s} 60. Rd5 {1.1s}
+Kf6 {1.1s} 61. Rc5 {1.1s} Rd7 {1.0s} 62. Rc6+ {1.2s} Kf7 {1.0s} 63. Rc4 {1.1s}
+Rd6 {1.1s} 64. Rc5 {1.2s} Kf6 {1.0s} 65. Re5 {1.1s} Rc6 {1.0s} 66. Rd5 {1.1s}
+Re6 {1.0s} 67. Rd4 {1.1s} Re7 {1.0s} 68. Rd6+ {1.2s} Kf7 {1.1s} 69. Rd5 {1.1s}
+Re6 {1.0s} 70. Rc5 {1.1s} Kf6 {1.1s} 71. Rc4 {1.1s} Rd6 {1.0s} 72. Rc3 {1.1s}
+Rd5 {1.1s} 73. Rc6+ {1.1s} Kf7 {1.0s} 74. Rd6 {1.3s} Rxd6 {1.0s} 75. Kg2 {1.2s}
+Ke6 {1.1s} 76. Kh3 {1.2s} Rd2 {1.0s} 77. g4 {1.0s} hxg4+ {1.0s} 78. Kg3 {1.0s}
+Kf6 {1.1s} 79. h5 {1.1s} gxh5 {1.0s} 80. Kh4 {1.2s} Rd3 {1.0s} 81. Kxh5 {1.2s}
+Rh3# {1.0s, Black mates} 0-1
+
+[Event "?"]
+[Site "?"]
+[Date "2021.06.17"]
+[Round "42"]
+[White "Rival Haskell Build 90"]
+[Black "Rival Haskell Build 65"]
+[Result "0-1"]
+[BlackTimeControl "1/move"]
+[ECO "C88"]
+[GameDuration "00:00:21"]
+[GameEndTime "2021-06-17T23:42:33.326 BST"]
+[GameStartTime "2021-06-17T23:42:11.703 BST"]
+[Opening "Ruy Lopez"]
+[PlyCount "80"]
+[Variation "Closed, anti-Marshall 8.a4"]
+[WhiteTimeControl "1/move"]
+
+1. e4 {book} e5 {book} 2. Nf3 {book} Nc6 {book} 3. Bb5 {book} a6 {book}
+4. Ba4 {book} Nf6 {book} 5. O-O {book} Be7 {book} 6. Re1 {book} b5 {book}
+7. Bb3 {book} O-O {book} 8. a4 {book} b4 {book} 9. d3 {book} d6 {book}
+10. a5 {book} Be6 {book} 11. Bxe6 {book} fxe6 {book} 12. Nbd2 {book} Rb8 {book}
+13. c3 {book} bxc3 {book} 14. bxc3 {book} Rb5 {book} 15. d4 {book} exd4 {book}
+16. cxd4 {book} Nb4 {book} 17. d5 {book} Ng4 {book} 18. Rf1 {book} c5 {book}
+19. dxc6 {book} Nxc6 {book} 20. Nb3 {book} Bf6 {book} 21. Ra4 {book} Qd7 {book}
+22. Ba3 {book} Nge5 {book} 23. Nxe5 {book} Nxe5 {book} 24. Nd4 {book} Rb7 {book}
+25. Rb4 {book} Rxb4 {book} 26. Bxb4 {book} Rc8 {book} 27. Nf3 {book}
+Nxf3+ {book} 28. Qxf3 {book} Rc4 {book} 29. Bd2 {book} d5 {book} 30. exd5 {book}
+Qxd5 {book} 31. Qxd5 {1.1s} exd5 {1.1s} 32. f4 {1.0s} Bd4+ {1.0s} 33. Kh1 {1.0s}
+Rc6 {1.1s} 34. f5 {1.0s} Rd6 {1.1s} 35. Bf4 {1.1s} Rd7 {1.1s} 36. Rf3 {1.0s}
+Bf6 {1.1s} 37. Be3 {1.0s} Rd6 {1.1s} 38. Bc5 {1.1s} Rc6 {1.2s} 39. Be7 {1.0s}
+Rc1+ {1.3s} 40. Rf1 {1.0s} Rxf1# {1.1s, Black mates} 0-1
+
+[Event "?"]
+[Site "?"]
+[Date "2021.06.17"]
+[Round "43"]
+[White "Rival Haskell Build 65"]
+[Black "Rival Haskell Build 90"]
+[Result "1-0"]
+[BlackTimeControl "1/move"]
+[ECO "C65"]
+[GameDuration "00:02:48"]
+[GameEndTime "2021-06-17T23:45:21.430 BST"]
+[GameStartTime "2021-06-17T23:42:33.327 BST"]
+[Opening "Ruy Lopez"]
+[PlyCount "213"]
+[Variation "Berlin defense"]
+[WhiteTimeControl "1/move"]
+
+1. e4 {book} e5 {book} 2. Nf3 {book} Nc6 {book} 3. Bb5 {book} Nf6 {book}
+4. d3 {book} Bc5 {book} 5. c3 {book} O-O {book} 6. O-O {book} d6 {book}
+7. Nbd2 {book} a6 {book} 8. Ba4 {book} Ba7 {book} 9. h3 {book} Ne7 {book}
+10. Re1 {book} Ng6 {book} 11. Nf1 {book} b5 {book} 12. Bb3 {book} Re8 {book}
+13. a4 {book} Bb7 {book} 14. Be3 {book} Bxe3 {book} 15. Nxe3 {book} h6 {book}
+16. Nh2 {book} d5 {book} 17. axb5 {book} axb5 {book} 18. Rxa8 {book} Bxa8 {book}
+19. exd5 {book} Nxd5 {book} 20. Nxd5 {book} Bxd5 {book} 21. Bxd5 {book}
+Qxd5 {book} 22. Qf3 {book} Rd8 {book} 23. Qxd5 {book} Rxd5 {book} 24. Nf3 {book}
+c5 {book} 25. c4 {book} Rxd3 {book} 26. Nxe5 {book} Rb3 {book} 27. Nxg6 {book}
+fxg6 {book} 28. Re5 {book} Rxb2 {book} 29. Rxc5 {book} bxc4 {book}
+30. Rxc4 {book} Rb7 {1.0s} 31. Rc5 {1.1s} Kf7 {1.0s} 32. Rd5 {1.2s} Rb1+ {1.1s}
+33. Kh2 {1.1s} Kf8 {1.0s} 34. Rd6 {1.1s} g5 {1.0s} 35. Rc6 {1.1s} Ke7 {1.0s}
+36. Rc5 {1.1s} Kd6 {1.1s} 37. Rf5 {1.1s} Kc6 {1.0s} 38. Re5 {1.1s} Kd7 {1.0s}
+39. Rd5+ {1.1s} Ke6 {1.0s} 40. Rd4 {1.2s} Kf6 {1.0s} 41. Rd6+ {1.1s} Ke5 {1.0s}
+42. Rc6 {1.1s} Kd5 {1.0s} 43. Rc3 {1.2s} Kd6 {1.0s} 44. Rc4 {1.2s} g6 {1.0s}
+45. Rd4+ {1.2s} Kc6 {1.0s} 46. Re4 {1.2s} Kd5 {1.0s} 47. Re3 {1.0s} Kd6 {1.0s}
+48. Rc3 {1.1s} Ke6 {1.0s} 49. Rc6+ {1.2s} Kf7 {1.2s} 50. Rd6 {1.2s} Kg7 {1.0s}
+51. Re6 {1.0s} Rb7 {1.1s} 52. Rc6 {1.2s} Rd7 {1.1s} 53. Rc5 {1.1s} Rd6 {1.1s}
+54. Re5 {1.2s} Kf6 {1.1s} 55. Re4 {1.1s} Rc6 {1.0s} 56. Rd4 {1.2s} Re6 {1.1s}
+57. Rd5 {1.1s} Re5 {1.1s} 58. Rxe5 {1.2s} Kxe5 {1.0s} 59. f3 {1.1s} Kd6 {1.1s}
+60. g4 {1.1s} Kc6 {1.1s} 61. Kg3 {1.2s} Kb6 {1.2s} 62. f4 {1.4s} Ka5 {1.1s}
+63. fxg5 {1.1s} hxg5 {1.0s} 64. h4 {1.1s} gxh4+ {1.1s} 65. Kxh4 {1.1s}
+Kb6 {1.0s} 66. Kg5 {1.1s} Ka5 {1.0s} 67. Kxg6 {1.1s} Kb6 {1.2s} 68. Kf6 {1.1s}
+Ka5 {1.1s} 69. g5 {1.1s} Kb6 {1.1s} 70. g6 {1.2s} Kc5 {1.0s} 71. g7 {1.1s}
+Kc4 {1.1s} 72. g8=Q+ {1.1s} Kc5 {1.0s} 73. Qb3 {1.1s} Kc6 {1.1s} 74. Ke6 {1.2s}
+Kc5 {1.1s} 75. Ke5 {1.2s} Kc6 {1.0s} 76. Qb8 {1.1s} Kc5 {1.0s} 77. Qb7 {1.1s}
+Kc4 {1.0s} 78. Ke4 {1.1s} Kc5 {1.1s} 79. Kd3 {1.1s} Kd6 {1.0s} 80. Kd4 {1.3s}
+Ke6 {1.0s} 81. Ke4 {1.1s} Kd6 {1.0s} 82. Kf5 {1.2s} Kc5 {1.0s} 83. Ke6 {1.2s}
+Kc4 {1.0s} 84. Qb2 {1.2s} Kc5 {1.1s} 85. Qb3 {1.3s} Kd4 {1.0s} 86. Kd6 {1.4s}
+Ke4 {1.1s} 87. Qg3 {1.1s} Kd4 {1.0s} 88. Qf3 {1.1s} Kc4 {1.0s} 89. Kc6 {1.2s}
+Kd4 {1.0s} 90. Kb6 {1.1s} Kc4 {1.0s} 91. Qe3 {1.2s} Kd5 {1.0s} 92. Kb5 {1.2s}
+Kd6 {1.1s} 93. Qe8 {1.2s} Kd5 {1.0s} 94. Qe7 {1.2s} Kd4 {1.0s} 95. Qe2 {1.2s}
+Kd5 {1.0s} 96. Qc4+ {1.1s} Kd6 97. Qc6+ Ke5 {1.1s} 98. Qf3 {1.2s} Kd6 {1.1s}
+99. Qf7 {1.1s} Ke5 {1.0s} 100. Kc5 {1.1s} Ke4 {1.0s} 101. Kc4 {1.1s} Ke5 {1.0s}
+102. Kc3 {1.1s} Ke4 {1.0s} 103. Qf6 {1.2s} Ke3 {1.0s} 104. Qf5 {1.3s} Ke2 {1.1s}
+105. Qf4 {1.1s} Ke1 {1.1s} 106. Kd3 {1.3s} Kd1 {1.1s}
+107. Qd2# {1.2s, White mates} 1-0
+
+[Event "?"]
+[Site "?"]
+[Date "2021.06.17"]
+[Round "44"]
+[White "Rival Haskell Build 90"]
+[Black "Rival Haskell Build 65"]
+[Result "0-1"]
+[BlackTimeControl "1/move"]
+[ECO "E10"]
+[GameDuration "00:01:30"]
+[GameEndTime "2021-06-17T23:46:51.666 BST"]
+[GameStartTime "2021-06-17T23:45:21.431 BST"]
+[Opening "Queen's pawn game"]
+[PlyCount "142"]
+[WhiteTimeControl "1/move"]
+
+1. d4 {book} Nf6 {book} 2. c4 {book} e6 {book} 3. Nf3 {book} d5 {book}
+4. Nc3 {book} Be7 {book} 5. Bf4 {book} O-O {book} 6. e3 {book} Nbd7 {book}
+7. c5 {book} c6 {book} 8. h3 {book} b6 {book} 9. b4 {book} a5 {book}
+10. a3 {book} h6 {book} 11. Bd3 {book} Ba6 {book} 12. O-O {book} Qc8 {book}
+13. Rb1 {book} axb4 {book} 14. axb4 {book} Bxd3 {book} 15. Qxd3 {book}
+Qb7 {book} 16. Ra1 {book} Rxa1 {book} 17. Rxa1 {book} Ra8 {book} 18. Qb1 {book}
+Bd8 {book} 19. Ra2 {book} bxc5 {book} 20. Rxa8 {book} Qxa8 {book}
+21. bxc5 {book} Qa3 {book} 22. Ne2 {book} Qa6 {book} 23. Nc1 {book} Ne4 {book}
+24. Nd3 {book} Bf6 {book} 25. Qc2 {book} Qa3 {book} 26. Nd2 {book} Nxd2 {book}
+27. Qxd2 {book} e5 {book} 28. dxe5 {book} Nxe5 {book} 29. Nxe5 {book}
+Qa1+ {book} 30. Kh2 {book} Bxe5 {book} 31. Qd3 {1.1s} Bxf4+ {1.1s}
+32. exf4 {1.0s} f6 {1.1s} 33. Qf5 {1.0s} Qa8 {1.1s} 34. Qe6+ {1.0s} Kf8 {1.1s}
+35. Qd6+ {1.0s} Kf7 {1.0s} 36. f5 {1.0s} Qc8 {1.1s} 37. Qf4 {1.0s} Qb7 {1.2s}
+38. f3 {1.1s} Qe7 {1.1s} 39. Qd6 {1.0s} Qxd6+ {1.1s} 40. cxd6 {1.1s} Ke8 {1.1s}
+41. Kg3 {1.0s} Kd7 {1.1s} 42. Kf2 {1.1s} Kxd6 {1.2s} 43. Kg3 {1.0s} Ke5 {1.1s}
+44. Kf2 {1.2s} Kxf5 {1.1s} 45. Ke3 {1.0s} c5 {1.4s} 46. f4 {1.0s} Ke6 {1.3s}
+47. Kf3 {1.0s} Kd6 {1.1s} 48. Ke3 {1.0s} Kc6 {1.2s} 49. Kf3 {1.0s} f5 {1.2s}
+50. Kg3 {1.0s} Kd6 {1.1s} 51. Kf3 {1.0s} Ke6 {1.1s} 52. Kg3 {1.2s} Kf6 {1.1s}
+53. Kf3 {1.1s} d4 {1.1s} 54. Kg3 {1.1s} Ke6 {1.1s} 55. Kf3 {1.0s} Kd6 {1.1s}
+56. Kg3 {1.1s} Kc6 {1.1s} 57. Kf3 {1.2s} Kd5 {1.1s} 58. Kg3 {1.0s} Ke4 {1.1s}
+59. Kf2 {1.1s} Kd3 {1.4s} 60. Kg3 {1.1s} Kc2 {1.3s} 61. Kf2 {1.2s} d3 {1.1s}
+62. Kf3 {1.0s} d2 {1.1s} 63. g4 {1.0s} d1=Q+ {1.1s} 64. Ke3 {1.0s} fxg4 {1.1s}
+65. hxg4 {1.1s} g5 {1.2s} 66. fxg5 {1.1s} hxg5 {1.2s} 67. Ke4 {1.0s} Qd6 {1.2s}
+68. Ke3 {1.0s} Qf4+ {1.1s} 69. Ke2 {1.0s} c4 {1.1s} 70. Ke1 {1.0s} Kd3 {1.1s}
+71. Kd1 {1.1s} Qd2# {1.2s, Black mates} 0-1
+
+[Event "?"]
+[Site "?"]
+[Date "2021.06.17"]
+[Round "45"]
+[White "Rival Haskell Build 65"]
+[Black "Rival Haskell Build 90"]
+[Result "1-0"]
+[BlackTimeControl "1/move"]
+[ECO "D15"]
+[GameDuration "00:02:04"]
+[GameEndTime "2021-06-17T23:48:56.267 BST"]
+[GameStartTime "2021-06-17T23:46:51.667 BST"]
+[Opening "QGD Slav"]
+[PlyCount "173"]
+[Variation "4.Nc3"]
+[WhiteTimeControl "1/move"]
+
+1. d4 {book} d5 {book} 2. c4 {book} c6 {book} 3. Nf3 {book} Nf6 {book}
+4. Nc3 {book} e6 {book} 5. e3 {book} Nbd7 {book} 6. Qc2 {book} Bd6 {book}
+7. Bd3 {book} O-O {book} 8. O-O {book} dxc4 {book} 9. Bxc4 {book} a6 {book}
+10. Rd1 {book} b5 {book} 11. Bd3 {book} Bb7 {book} 12. Ng5 {book} h6 {book}
+13. Nge4 {book} Be7 {book} 14. a3 {book} a5 {book} 15. Rb1 {book} Nxe4 {book}
+16. Nxe4 {book} b4 {book} 17. Nc5 {book} Bxc5 {book} 18. dxc5 {book} b3 {book}
+19. Qxb3 {book} Nxc5 {book} 20. Bh7+ {book} Kh8 {book} 21. Rxd8 {book}
+Nxb3 {book} 22. Rxf8+ {book} Rxf8 {book} 23. Bc2 {book} Nxc1 {book}
+24. Rxc1 {book} Rd8 {book} 25. h3 {book} Rd2 {book} 26. b4 {book} axb4 {book}
+27. axb4 {book} Rd5 {book} 28. Be4 {book} Rb5 {book} 29. Rc4 {book} Kg8 {book}
+30. Bxc6 {book} Bxc6 {1.0s} 31. Rxc6 {1.1s} Rxb4 {1.0s} 32. Rc5 {1.1s} f6 {1.0s}
+33. Rc3 {1.3s} e5 {1.0s} 34. Rd3 {1.1s} e4 {1.1s} 35. Rd5 {1.2s} Rc4 {1.0s}
+36. f4 {1.1s} Rc6 {1.0s} 37. f5 {1.1s} Rc4 {1.0s} 38. Rb5 {1.2s} Kf7 {1.0s}
+39. Rb7+ {1.1s} Kf8 {1.1s} 40. Rb3 {1.2s} Ke7 {1.1s} 41. Rb2 {1.1s} Kd6 {1.0s}
+42. Rb6+ {1.2s} Kd5 {1.1s} 43. Rb5+ {1.2s} Kc6 {1.0s} 44. Rb3 {1.1s} Rc5 {1.1s}
+45. g4 {1.1s} Kd5 {1.1s} 46. Rb2 {1.1s} Rc6 {1.1s} 47. Rb5+ {1.0s} Kd6 {1.1s}
+48. Rb3 {1.1s} Rc4 {1.0s} 49. Rb6+ {1.2s} Kc5 {1.0s} 50. Rb2 {1.3s} Kc6 {1.0s}
+51. Rd2 {1.1s} Rc3 {1.1s} 52. Re2 {1.1s} Kc5 {1.1s} 53. Kf2 {1.2s} Kc4 {1.0s}
+54. Rb2 {1.1s} Kd3 {1.0s} 55. Rb7 {1.2s} Rc2+ {1.1s} 56. Kg3 {1.1s} Kxe3 {1.0s}
+57. Rxg7 {1.1s} Kd4 {1.1s} 58. Rb7 {1.1s} Kd5 {1.0s} 59. Rd7+ {1.2s} Ke5 {1.2s}
+60. Re7+ {1.1s} Kd5 {1.0s} 61. Kh4 {1.1s} Rf2 {1.1s} 62. Re6 {1.1s} Kc5 {1.0s}
+63. Rxf6 {1.1s} Kd5 {1.1s} 64. Rxh6 {1.1s} Kc5 {1.0s} 65. Re6 {1.1s} Kd5 {1.1s}
+66. Rf6 {1.1s} Kc5 {1.1s} 67. Rf7 {1.1s} Kd5 {1.1s} 68. Re7 {1.1s} Kc5 {1.0s}
+69. Rxe4 {1.1s} Kd5 {1.0s} 70. Re3 {1.1s} Kc5 {1.0s} 71. Re6 {1.2s} Kd5 {1.1s}
+72. Rf6 {1.1s} Kc5 {1.1s} 73. Rf7 {1.1s} Kd5 {1.0s} 74. Rb7 {1.1s} Kc5 {1.0s}
+75. Rc7+ {1.2s} Kd5 {1.1s} 76. Rc3 {1.1s} Re2 {1.2s} 77. f6 {1.1s} Kd6 {1.0s}
+78. Rc4 {1.1s} Kd5 {1.0s} 79. Rf4 {1.3s} Kd6 {1.0s} 80. f7 {1.1s} Kd7 {1.0s}
+81. f8=Q {1.1s} Re6 {1.0s} 82. Rd4+ {1.1s} Kc6 {1.0s} 83. Qc8+ {1.1s} Kb6 {1.0s}
+84. Qxe6+ {1.1s} Kc5 {1.1s} 85. Qd6+ {1.1s} Kb5 {1.0s} 86. Rb4+ {1.1s}
+Ka5 {1.0s} 87. Qb6# {1.1s, White mates} 1-0
+
+[Event "?"]
+[Site "?"]
+[Date "2021.06.17"]
+[Round "46"]
+[White "Rival Haskell Build 90"]
+[Black "Rival Haskell Build 65"]
+[Result "0-1"]
+[BlackTimeControl "1/move"]
+[ECO "E10"]
+[GameDuration "00:00:19"]
+[GameEndTime "2021-06-17T23:49:15.697 BST"]
+[GameStartTime "2021-06-17T23:48:56.268 BST"]
+[Opening "Queen's pawn game"]
+[PlyCount "78"]
+[WhiteTimeControl "1/move"]
+
+1. d4 {book} Nf6 {book} 2. c4 {book} e6 {book} 3. Nf3 {book} d5 {book}
+4. Nc3 {book} Be7 {book} 5. Bf4 {book} O-O {book} 6. e3 {book} Nbd7 {book}
+7. c5 {book} Nh5 {book} 8. Bd3 {book} Nxf4 {book} 9. exf4 {book} b6 {book}
+10. b4 {book} a5 {book} 11. a3 {book} c6 {book} 12. O-O {book} Qc7 {book}
+13. g3 {book} Ba6 {book} 14. Kg2 {book} Bf6 {book} 15. Qc2 {book} Bxd3 {book}
+16. Qxd3 {book} Qb7 {book} 17. Rfc1 {book} axb4 {book} 18. axb4 {book}
+Rxa1 {book} 19. Rxa1 {book} Ra8 {book} 20. Qb1 {book} h6 {book} 21. Ne5 {book}
+Bxe5 {book} 22. fxe5 {book} Rxa1 {book} 23. Qxa1 {book} bxc5 {book}
+24. bxc5 {book} Nf8 {book} 25. Qb1 {book} Qa6 {book} 26. Nd1 {book} Qc4 {book}
+27. Qa1 {book} Qd3 {book} 28. Ne3 {book} Ng6 {book} 29. h4 {book} Ne7 {book}
+30. Qa8+ {book} Kh7 {book} 31. Qa6 {1.1s} Qxa6 {1.1s} 32. Nc2 {1.0s} Qc4 {1.0s}
+33. Ne3 {1.1s} Qxd4 {1.1s} 34. Nd1 {1.0s} Qxd1 {1.1s} 35. Kh2 {1.1s} d4 {1.1s}
+36. Kg2 {1.0s} Qe2 {1.0s} 37. Kh2 {1.1s} Qxf2+ {1.0s} 38. Kh3 {1.1s} Nf5 {1.1s}
+39. g4 {1.0s} Qg3# {1.1s, Black mates} 0-1
+
+[Event "?"]
+[Site "?"]
+[Date "2021.06.17"]
+[Round "47"]
+[White "Rival Haskell Build 65"]
+[Black "Rival Haskell Build 90"]
+[Result "1-0"]
+[BlackTimeControl "1/move"]
+[ECO "E10"]
+[GameDuration "00:00:35"]
+[GameEndTime "2021-06-17T23:49:51.053 BST"]
+[GameStartTime "2021-06-17T23:49:15.698 BST"]
+[Opening "Queen's pawn game"]
+[PlyCount "93"]
+[WhiteTimeControl "1/move"]
+
+1. d4 {book} Nf6 {book} 2. c4 {book} e6 {book} 3. Nf3 {book} d5 {book}
+4. Nc3 {book} Be7 {book} 5. Bf4 {book} O-O {book} 6. e3 {book} Nbd7 {book}
+7. c5 {book} c6 {book} 8. h3 {book} b6 {book} 9. b4 {book} a5 {book}
+10. a3 {book} h6 {book} 11. Bd3 {book} Ba6 {book} 12. O-O {book} Qc8 {book}
+13. Rb1 {book} axb4 {book} 14. axb4 {book} Bxd3 {book} 15. Qxd3 {book}
+Qb7 {book} 16. Rfc1 {book} Rfc8 {book} 17. Ne1 {book} Bd8 {book} 18. Qd1 {book}
+Bc7 {book} 19. Nd3 {book} b5 {book} 20. Ra1 {book} Ne4 {book} 21. Ne2 {book}
+Bd8 {book} 22. f3 {book} Nef6 {book} 23. Nc3 {book} Nf8 {book} 24. Rc2 {book}
+Ng6 {book} 25. Rca2 {book} Rxa2 {book} 26. Rxa2 {book} Ra8 {book} 27. Qa1 {book}
+Rxa2 {book} 28. Qxa2 {book} Nxf4 {book} 29. exf4 {book} Nd7 {book}
+30. Ne2 {book} Bc7 {book} 31. Ne5 {1.1s} Bxe5 {1.0s} 32. dxe5 {1.2s} f6 {1.0s}
+33. exf6 {1.1s} Nxf6 {1.1s} 34. Nd4 {1.2s} e5 {1.1s} 35. fxe5 {1.1s} Nd7 {1.1s}
+36. e6 {1.0s} Ne5 {1.1s} 37. Nf5 {1.1s} Nd7 {1.0s} 38. Ne7+ {1.1s} Kf8 {1.0s}
+39. Ng6+ {1.1s} Kg8 {1.1s} 40. exd7 {1.1s} Qb8 {1.0s} 41. Ne7+ {1.0s} Kf7 {1.0s}
+42. Nxc6 {1.1s} Qf4 {1.0s} 43. Qxd5+ {1.0s} Kg6 {1.0s} 44. Ne7+ {1.0s}
+Kf6 {1.0s} 45. Qc6+ {1.1s} Kxe7 {1.0s} 46. d8=Q+ {1.1s} Kf7 {1.0s}
+47. Qde8# {1.1s, White mates} 1-0
+
+[Event "?"]
+[Site "?"]
+[Date "2021.06.17"]
+[Round "48"]
+[White "Rival Haskell Build 90"]
+[Black "Rival Haskell Build 65"]
+[Result "1-0"]
+[BlackTimeControl "1/move"]
+[ECO "C88"]
+[GameDuration "00:00:56"]
+[GameEndTime "2021-06-17T23:50:47.702 BST"]
+[GameStartTime "2021-06-17T23:49:51.054 BST"]
+[Opening "Ruy Lopez"]
+[PlyCount "113"]
+[Variation "Closed"]
+[WhiteTimeControl "1/move"]
+
+1. e4 {book} e5 {book} 2. Nf3 {book} Nc6 {book} 3. Bb5 {book} a6 {book}
+4. Ba4 {book} Nf6 {book} 5. O-O {book} Be7 {book} 6. Re1 {book} b5 {book}
+7. Bb3 {book} d6 {book} 8. c3 {book} O-O {book} 9. h3 {book} Nb8 {book}
+10. d4 {book} Nbd7 {book} 11. Nbd2 {book} Bb7 {book} 12. Bc2 {book} Re8 {book}
+13. Nf1 {book} Bf8 {book} 14. Ng3 {book} g6 {book} 15. b3 {book} d5 {book}
+16. Bg5 {book} h6 {book} 17. Bh4 {book} g5 {book} 18. Nxg5 {book} hxg5 {book}
+19. Bxg5 {book} exd4 {book} 20. e5 {book} Rxe5 {book} 21. Rxe5 {book}
+Nxe5 {book} 22. cxd4 {book} Nc6 {book} 23. Qd3 {book} Nb4 {book} 24. Qf3 {book}
+Be7 {book} 25. Bb1 {book} Bc8 {book} 26. Qf4 {book} Ne4 {book} 27. Bxe7 {book}
+Qxe7 {book} 28. a3 {book} Nc6 {book} 29. Bxe4 {book} dxe4 {book} 30. Nh5 {book}
+Qd6 {book} 31. Nf6+ {1.0s} Qxf6 {1.1s} 32. Qxf6 {1.1s} Bf5 {1.1s}
+33. Qxc6 {1.0s} Rc8 {1.1s} 34. Qxa6 {1.0s} Bg6 {1.2s} 35. Qxc8+ {1.1s}
+Kg7 {1.1s} 36. Qxc7 {1.1s} Kf8 {1.1s} 37. Qc6 {1.1s} Kg7 {1.0s} 38. Qxb5 {1.0s}
+f6 {1.1s} 39. Qc6 {1.0s} f5 {1.1s} 40. Qd6 {1.0s} f4 {1.1s} 41. Qxf4 {1.0s}
+e3 {1.1s} 42. Qe5+ {1.0s} Kf7 {1.1s} 43. Qc7+ {1.0s} Ke6 {1.1s} 44. fxe3 {1.0s}
+Kf6 {1.0s} 45. e4 {1.0s} Kg5 {1.1s} 46. e5 {1.1s} Kh6 {1.0s} 47. Qc6 {1.0s}
+Kg5 {1.1s} 48. Qc5 {1.0s} Kh6 {1.1s} 49. Qe7 {1.0s} Bd3 {1.0s} 50. Qh4+ {1.0s}
+Kg7 {1.1s} 51. a4 {1.0s} Kf7 {1.1s} 52. Qf6+ {1.1s} Ke8 {1.1s} 53. Qf3 {1.0s}
+Bf5 {1.2s} 54. Qxf5 {1.1s} Kd8 {1.2s} 55. Qh7 {1.0s} Ke8 {1.1s} 56. e6 {1.0s}
+Kd8 {1.1s} 57. Qd7# {1.1s, White mates} 1-0
+
+[Event "?"]
+[Site "?"]
+[Date "2021.06.17"]
+[Round "49"]
+[White "Rival Haskell Build 65"]
+[Black "Rival Haskell Build 90"]
+[Result "1-0"]
+[BlackTimeControl "1/move"]
+[ECO "B90"]
+[GameDuration "00:00:42"]
+[GameEndTime "2021-06-17T23:51:30.657 BST"]
+[GameStartTime "2021-06-17T23:50:47.703 BST"]
+[Opening "Sicilian"]
+[PlyCount "71"]
+[Variation "Najdorf, Byrne (English) attack"]
+[WhiteTimeControl "1/move"]
+
+1. e4 {book} c5 {book} 2. Nf3 {book} d6 {book} 3. d4 {book} cxd4 {book}
+4. Nxd4 {book} Nf6 {book} 5. Nc3 {book} a6 {book} 6. Be3 {book} e5 {book}
+7. Nb3 {book} Be6 {book} 8. f3 {book} h5 {book} 9. Nd5 {book} Bxd5 {book}
+10. exd5 {book} Nbd7 {book} 11. Qd2 {book} g6 {book} 12. Be2 {book} Bg7 {book}
+13. O-O {book} b6 {book} 14. c4 {book} O-O {book} 15. Rae1 {book} Rc8 {book}
+16. Kh1 {book} Nc5 {1.0s} 17. Nxc5 {1.1s} bxc5 {1.0s} 18. f4 {1.0s} exf4 {1.1s}
+19. Bxf4 {1.0s} Ne4 {1.1s} 20. Qd3 {1.0s} f5 {1.1s} 21. Bf3 {1.0s} Bxb2 {1.0s}
+22. Bxe4 {1.1s} Qf6 {1.1s} 23. Bf3 {1.1s} Qd4 {1.1s} 24. Qxd4 {1.0s} cxd4 {1.0s}
+25. Bxd6 {1.1s} Rf6 {1.0s} 26. Be5 {1.2s} Rff8 {1.0s} 27. Be2 {1.0s} Rf6 {1.0s}
+28. Bxf6 {1.0s} d3 {1.0s} 29. Bxb2 {1.1s} Re8 {1.2s} 30. Bxd3 {1.1s} Rxe1 {1.0s}
+31. Rxe1 {1.0s} g5 {1.0s} 32. d6 {1.2s} g4 {1.0s} 33. Re7 {1.1s} Kf8 {1.1s}
+34. Bxf5 {1.2s} g3 {1.1s} 35. Be6 {1.2s} h4 {1.0s} 36. Bg7# {1.1s, White mates}
+1-0
+
+[Event "?"]
+[Site "?"]
+[Date "2021.06.17"]
+[Round "50"]
+[White "Rival Haskell Build 90"]
+[Black "Rival Haskell Build 65"]
+[Result "0-1"]
+[BlackTimeControl "1/move"]
+[ECO "E10"]
+[GameDuration "00:00:46"]
+[GameEndTime "2021-06-17T23:52:17.130 BST"]
+[GameStartTime "2021-06-17T23:51:30.659 BST"]
+[Opening "Queen's pawn game"]
+[PlyCount "72"]
+[WhiteTimeControl "1/move"]
+
+1. d4 {book} Nf6 {book} 2. c4 {book} e6 {book} 3. Nf3 {book} d5 {book}
+4. Nc3 {book} Be7 {book} 5. Bf4 {book} O-O {book} 6. e3 {book} Nbd7 {book}
+7. c5 {book} c6 {book} 8. h3 {book} b6 {book} 9. b4 {book} a5 {book}
+10. a3 {book} h6 {book} 11. Bd3 {book} Ba6 {book} 12. O-O {book} Qc8 {book}
+13. Qc2 {book} Bxd3 {book} 14. Qxd3 {book} Qb7 {book} 15. Qc2 {book} bxc5 {1.2s}
+16. bxc5 {1.0s} g5 {1.1s} 17. Bd6 {1.1s} Bxd6 {1.1s} 18. cxd6 {1.0s} Qb8 {1.1s}
+19. Rad1 {1.0s} Qxd6 {1.1s} 20. Rd3 {1.1s} Qxa3 {1.1s} 21. Nxd5 {1.0s}
+Qd6 {1.2s} 22. Nxf6+ {1.1s} Nxf6 {1.1s} 23. Qxc6 {1.1s} Qxc6 {1.1s}
+24. Ne5 {1.0s} Qd6 {1.1s} 25. Nf3 {1.0s} Qd5 {1.0s} 26. Ne5 {1.0s} Ne4 {1.1s}
+27. Nf3 {1.0s} f6 {1.1s} 28. Ra1 {1.1s} e5 {1.1s} 29. Rxa5 {1.1s} Rxa5 {1.1s}
+30. Nh2 {1.0s} exd4 {1.1s} 31. Rb3 {1.0s} Qxb3 {1.1s} 32. Nf3 {1.0s} Ra1+ {1.3s}
+33. Kh2 {1.1s} dxe3 {1.0s} 34. Ne1 {1.1s} exf2 {1.1s} 35. Nf3 {1.0s} f1=Q {1.1s}
+36. h4 {1.1s} Qh1# {1.0s, Black mates} 0-1
+
+[Event "?"]
+[Site "?"]
+[Date "2021.06.17"]
+[Round "51"]
+[White "Rival Haskell Build 65"]
+[Black "Rival Haskell Build 90"]
+[Result "1-0"]
+[BlackTimeControl "1/move"]
+[ECO "E35"]
+[GameDuration "00:00:18"]
+[GameEndTime "2021-06-17T23:52:35.300 BST"]
+[GameStartTime "2021-06-17T23:52:17.131 BST"]
+[Opening "Nimzo-Indian"]
+[PlyCount "71"]
+[Variation "Classical, Noa Variation , 5.cd ed"]
+[WhiteTimeControl "1/move"]
+
+1. d4 {book} Nf6 {book} 2. c4 {book} e6 {book} 3. Nc3 {book} Bb4 {book}
+4. Qc2 {book} d5 {book} 5. cxd5 {book} exd5 {book} 6. Bg5 {book} h6 {book}
+7. Bh4 {book} c5 {book} 8. dxc5 {book} g5 {book} 9. Bg3 {book} Ne4 {book}
+10. Bxb8 {book} Bxc3+ {book} 11. bxc3 {book} Rxb8 {book} 12. Qa4+ {book}
+Bd7 {book} 13. Qd4 {book} O-O {book} 14. f3 {book} Nf6 {book} 15. g4 {book}
+b6 {book} 16. c6 {book} Bxc6 {book} 17. h4 {book} Re8 {book} 18. hxg5 {book}
+hxg5 {book} 19. e3 {book} Qd6 {book} 20. Ne2 {book} Bb5 {book} 21. Kf2 {book}
+Bxe2 {book} 22. Bxe2 {book} Rbc8 {book} 23. Bd3 {book} Qe5 {book}
+24. Rac1 {book} Kg7 {book} 25. Rc2 {book} Re7 {book} 26. a4 {book} Rce8 {book}
+27. Re2 {book} Rc8 {book} 28. Qxe5 {1.2s} Rxe5 {1.1s} 29. Rc2 {1.2s} Rxc3 {1.0s}
+30. Rxc3 {1.1s} Ne4+ {1.0s} 31. fxe4 {1.1s} dxe4 {1.0s} 32. Bc4 {1.0s} f6 {1.0s}
+33. Bb5 {1.1s} Kg6 {1.0s} 34. Rc7 {1.1s} Re6 {1.0s} 35. Rch7 {1.1s} Re5 {1.0s}
+36. R1h6# {1.1s, White mates} 1-0
+
+[Event "?"]
+[Site "?"]
+[Date "2021.06.17"]
+[Round "52"]
+[White "Rival Haskell Build 90"]
+[Black "Rival Haskell Build 65"]
+[Result "0-1"]
+[BlackTimeControl "1/move"]
+[ECO "B90"]
+[GameDuration "00:00:40"]
+[GameEndTime "2021-06-17T23:53:16.270 BST"]
+[GameStartTime "2021-06-17T23:52:35.302 BST"]
+[Opening "Sicilian"]
+[PlyCount "98"]
+[Variation "Najdorf, Byrne (English) attack"]
+[WhiteTimeControl "1/move"]
+
+1. e4 {book} c5 {book} 2. Nf3 {book} d6 {book} 3. d4 {book} cxd4 {book}
+4. Nxd4 {book} Nf6 {book} 5. Nc3 {book} a6 {book} 6. Be3 {book} Ng4 {book}
+7. Bg5 {book} h6 {book} 8. Bh4 {book} g5 {book} 9. Bg3 {book} Bg7 {book}
+10. h3 {book} Ne5 {book} 11. f3 {book} Nbc6 {book} 12. Bf2 {book} Be6 {book}
+13. Qd2 {book} Rc8 {book} 14. Nd5 {book} Nxd4 {book} 15. Bxd4 {book} Bxd5 {book}
+16. exd5 {book} Qc7 {book} 17. c3 {book} Qa5 {book} 18. Be3 {book} Nc4 {book}
+19. Bxc4 {book} Rxc4 {book} 20. O-O {book} Be5 {book} 21. Qd3 {book} Qb5 {book}
+22. Rac1 {book} Ra4 {book} 23. Qxb5+ {book} axb5 {book} 24. a3 {book} Kd7 {book}
+25. Kf2 {book} Rc8 {book} 26. Rcd1 {book} f5 {book} 27. Ke2 {book} Rg8 {book}
+28. Kd3 {book} h5 {book} 29. Rde1 {book} h4 {book} 30. Bf2 {book} Bf6 {book}
+31. Bd4 {1.1s} Bxd4 {1.1s} 32. c4 {1.0s} Bxb2 {1.1s} 33. Kc2 {1.0s} Bxa3 {1.1s}
+34. cxb5 {1.1s} Bc5 {1.2s} 35. Ra1 {1.0s} Rc4+ {1.1s} 36. Kd3 {1.0s} Rd4+ {1.1s}
+37. Kc2 {1.0s} Rxd5 {1.1s} 38. b6 {1.0s} Bxb6 {1.1s} 39. Kb1 {1.0s} g4 {1.0s}
+40. Ra3 {1.0s} gxf3 {1.1s} 41. gxf3 {1.1s} Kc6 {1.1s} 42. Rc3+ {1.0s} Rc5 {1.1s}
+43. Ra3 {1.0s} Rb5+ {1.1s} 44. Kc2 {1.0s} Rg2+ {1.1s} 45. Kd3 {1.1s} Bc5 {1.1s}
+46. Ra4 {1.0s} d5 {1.1s} 47. Rf2 {1.0s} Bxf2 {1.1s} 48. Rf4 {1.0s} Bb6 {1.3s}
+49. Ra4 {1.0s} Rb3# {1.0s, Black mates} 0-1
+
+[Event "?"]
+[Site "?"]
+[Date "2021.06.17"]
+[Round "53"]
+[White "Rival Haskell Build 65"]
+[Black "Rival Haskell Build 90"]
+[Result "1-0"]
+[BlackTimeControl "1/move"]
+[ECO "E10"]
+[GameDuration "00:01:02"]
+[GameEndTime "2021-06-17T23:54:18.343 BST"]
+[GameStartTime "2021-06-17T23:53:16.271 BST"]
+[Opening "Queen's pawn game"]
+[PlyCount "117"]
+[WhiteTimeControl "1/move"]
+
+1. d4 {book} Nf6 {book} 2. c4 {book} e6 {book} 3. Nf3 {book} d5 {book}
+4. Nc3 {book} Be7 {book} 5. Bg5 {book} h6 {book} 6. Bh4 {book} O-O {book}
+7. e3 {book} Ne4 {book} 8. Bxe7 {book} Qxe7 {book} 9. Rc1 {book} c6 {book}
+10. Bd3 {book} Nxc3 {book} 11. Rxc3 {book} dxc4 {book} 12. Rxc4 {book}
+Nd7 {book} 13. Bc2 {book} c5 {book} 14. dxc5 {book} Nxc5 {book} 15. Qd4 {book}
+b6 {book} 16. b4 {book} Rd8 {book} 17. Qc3 {book} Nd7 {book} 18. Be4 {book}
+Ba6 {book} 19. Bxa8 {book} Bxc4 {book} 20. Qxc4 {book} Rxa8 {book}
+21. O-O {book} Qd6 {book} 22. Rc1 {book} Ne5 {book} 23. Nxe5 {book} Qxe5 {book}
+24. Rd1 {book} Qf6 {book} 25. Qc7 {book} Qb2 {book} 26. Qb7 {book} Rf8 {book}
+27. Qxa7 {book} Qxb4 {book} 28. g3 {book} g6 {book} 29. h4 {book} Qb2 {book}
+30. Kg2 {book} Qc2 {book} 31. Rd6 {1.1s} Qe4+ {1.0s} 32. Kh2 {1.1s} Qf5 {1.0s}
+33. Rd2 {1.0s} b5 {1.0s} 34. Qd4 {1.1s} e5 {1.0s} 35. Qd6 {1.1s} Qf6 {1.0s}
+36. Qxf6 {1.2s} e4 {1.0s} 37. Qc6 {1.1s} g5 {1.1s} 38. Rd6 {1.1s} gxh4 {1.1s}
+39. Rg6+ {1.1s} fxg6 {1.1s} 40. Qxg6+ {1.0s} Kh8 {1.0s} 41. Qxh6+ {1.1s}
+Kg8 {1.1s} 42. Qg5+ {1.1s} Kh8 {1.0s} 43. Qe5+ {1.1s} Kg8 {1.1s} 44. Kg1 {1.1s}
+h3 {1.0s} 45. Qe6+ {1.1s} Rf7 {1.1s} 46. Qd5 {1.1s} h2+ {1.0s} 47. Kxh2 {1.0s}
+Kh7 {1.2s} 48. Qxf7+ {1.0s} Kh6 {1.0s} 49. Qf6+ {1.1s} Kh7 {1.1s} 50. Qc6 {1.2s}
+Kg7 {1.0s} 51. Qxe4 {1.1s} Kf7 {1.0s} 52. Qd5+ {1.1s} Kg7 {1.0s} 53. Qxb5 {1.1s}
+Kf6 {1.0s} 54. Qb7 {1.2s} Ke6 {1.1s} 55. e4 {1.1s} Kf6 {1.0s} 56. f4 {1.1s}
+Kg6 {1.1s} 57. Qe7 {1.1s} Kh6 {1.0s} 58. f5 {1.1s} Kh5 {1.2s}
+59. Qh4# {1.1s, White mates} 1-0
+
+[Event "?"]
+[Site "?"]
+[Date "2021.06.17"]
+[Round "54"]
+[White "Rival Haskell Build 90"]
+[Black "Rival Haskell Build 65"]
+[Result "1-0"]
+[BlackTimeControl "1/move"]
+[ECO "E10"]
+[GameDuration "00:01:09"]
+[GameEndTime "2021-06-17T23:55:28.241 BST"]
+[GameStartTime "2021-06-17T23:54:18.343 BST"]
+[Opening "Queen's pawn game"]
+[PlyCount "93"]
+[WhiteTimeControl "1/move"]
+
+1. d4 {book} Nf6 {book} 2. c4 {book} e6 {book} 3. Nf3 {book} d5 {book}
+4. Nc3 {book} Be7 {book} 5. Bf4 {book} O-O {book} 6. e3 {book} Nbd7 {book}
+7. c5 {book} Nh5 {book} 8. Bd3 {book} Nxf4 {book} 9. exf4 {book} b6 {book}
+10. b4 {book} a5 {book} 11. a3 {book} c6 {book} 12. O-O {book} Qc7 {book}
+13. g3 {book} Ba6 {book} 14. Re1 {book} Bf6 {book} 15. Bc2 {book} bxc5 {1.2s}
+16. bxc5 {1.1s} Qxf4 {1.1s} 17. gxf4 {1.0s} Bxd4 {1.2s} 18. Nxd4 {1.0s}
+Nxc5 {1.1s} 19. Nxc6 {1.1s} f6 {1.0s} 20. Nxa5 {1.1s} Bc4 {1.0s}
+21. Bxh7+ {1.0s} Kh8 {1.1s} 22. Nxc4 {1.1s} Rxa3 {1.1s} 23. Qh5 {1.1s} e5 {1.0s}
+24. Be4+ {1.1s} Kg8 {1.1s} 25. Kg2 {1.1s} Nxe4 {1.1s} 26. Nxa3 {1.0s}
+Nxc3 {1.0s} 27. Qh3 {1.1s} d4 {1.1s} 28. Qe6+ {1.0s} Rf7 {1.2s} 29. Qe8+ {1.0s}
+Rf8 {1.1s} 30. Qd7 {1.0s} Rf7 {1.1s} 31. Qxd4 {1.0s} exd4 {1.1s} 32. f5 {1.0s}
+d3 {1.1s} 33. Nc4 {1.1s} Nd5 {1.2s} 34. Ne3 {1.0s} Nc3 {1.1s} 35. f4 {1.1s}
+Ne4 {1.2s} 36. Nd5 {1.0s} Nc5 {1.1s} 37. Kf3 {1.0s} Ne4 {1.1s} 38. Kxe4 {1.1s}
+Rb7 {1.1s} 39. Kxd3 {1.0s} Kf7 {1.1s} 40. Nc3 {1.0s} Kg8 {1.0s} 41. Kc4 {1.1s}
+Kf7 {1.2s} 42. Kc5 {1.0s} Kg8 {1.1s} 43. Kc6 {1.2s} Kf7 {1.1s} 44. Kxb7 {1.1s}
+Kg8 {1.1s} 45. Ra8+ {1.1s} Kf7 {1.0s} 46. Nd5 {1.1s} g6 {1.2s}
+47. Re7# {1.0s, White mates} 1-0
+
+[Event "?"]
+[Site "?"]
+[Date "2021.06.17"]
+[Round "55"]
+[White "Rival Haskell Build 65"]
+[Black "Rival Haskell Build 90"]
+[Result "0-1"]
+[BlackTimeControl "1/move"]
+[ECO "C88"]
+[GameDuration "00:00:21"]
+[GameEndTime "2021-06-17T23:55:50.087 BST"]
+[GameStartTime "2021-06-17T23:55:28.246 BST"]
+[Opening "Ruy Lopez"]
+[PlyCount "80"]
+[Variation "Closed, 7...O-O"]
+[WhiteTimeControl "1/move"]
+
+1. e4 {book} e5 {book} 2. Nf3 {book} Nc6 {book} 3. Bb5 {book} a6 {book}
+4. Ba4 {book} Nf6 {book} 5. O-O {book} Be7 {book} 6. Re1 {book} b5 {book}
+7. Bb3 {book} O-O {book} 8. h3 {book} Bb7 {book} 9. d3 {book} d6 {book}
+10. a3 {book} Na5 {book} 11. Ba2 {book} c5 {book} 12. Nbd2 {book} Nc6 {book}
+13. Nf1 {book} Bc8 {book} 14. Ne3 {book} Be6 {book} 15. Nd5 {book} Bxd5 {book}
+16. exd5 {book} Nd4 {book} 17. Nd2 {book} Nf5 {book} 18. Ne4 {book} Nd7 {book}
+19. b4 {book} Rc8 {book} 20. Bd2 {book} c4 {book} 21. dxc4 {book} bxc4 {book}
+22. a4 {book} Nh4 {book} 23. Qh5 {book} g6 {book} 24. Qd1 {book} f5 {book}
+25. Ng3 {book} e4 {book} 26. Ne2 {book} Bf6 {book} 27. Rb1 {book} Be5 {book}
+28. Bh6 {book} Rf7 {book} 29. Nf4 {book} Nf3+ {book} 30. gxf3 {book} Qh4 {book}
+31. Nxg6 {1.4s} Qxh6 {1.1s} 32. f4 {1.1s} Qxg6+ {1.0s} 33. Kf1 {1.1s}
+Bxf4 {1.1s} 34. Qd2 {1.1s} Rg7 {1.0s} 35. Qd1 {1.1s} Qg2+ {1.0s} 36. Ke2 {1.1s}
+Qf3+ {1.1s} 37. Kf1 {1.1s} Rg2 {1.1s} 38. Qxf3 {1.1s} exf3 {1.0s}
+39. Rbd1 {1.1s} Bh2 {1.0s} 40. Rb1 {1.0s} Rg1# {1.0s, Black mates} 0-1
+
+[Event "?"]
+[Site "?"]
+[Date "2021.06.17"]
+[Round "56"]
+[White "Rival Haskell Build 90"]
+[Black "Rival Haskell Build 65"]
+[Result "0-1"]
+[BlackTimeControl "1/move"]
+[ECO "E10"]
+[GameDuration "00:00:44"]
+[GameEndTime "2021-06-17T23:56:34.513 BST"]
+[GameStartTime "2021-06-17T23:55:50.088 BST"]
+[Opening "Queen's pawn game"]
+[PlyCount "74"]
+[WhiteTimeControl "1/move"]
+
+1. d4 {book} Nf6 {book} 2. c4 {book} e6 {book} 3. Nf3 {book} d5 {book}
+4. Nc3 {book} Be7 {book} 5. Bg5 {book} h6 {book} 6. Bh4 {book} O-O {book}
+7. e3 {book} b6 {book} 8. Be2 {book} Bb7 {book} 9. Bxf6 {book} Bxf6 {book}
+10. cxd5 {book} exd5 {book} 11. O-O {book} Nd7 {book} 12. b4 {book} c5 {book}
+13. bxc5 {book} bxc5 {book} 14. Rb1 {book} Bc6 {book} 15. Bb5 {book} Qc7 {book}
+16. Qd3 {book} Rfc8 {book} 17. Rfd1 {book} Bxb5 {1.1s} 18. Nxb5 {1.0s}
+Qb6 {1.2s} 19. Qe4 {1.1s} dxe4 {1.0s} 20. dxc5 {1.0s} Rxc5 {1.1s} 21. Rd6 {1.0s}
+exf3 {1.1s} 22. Rxb6 {1.1s} axb6 {1.1s} 23. Nd6 {1.0s} fxg2 {1.1s}
+24. Kxg2 {1.0s} Rxa2 {1.1s} 25. Ne4 {1.1s} Rc6 {1.1s} 26. Nd6 {1.0s}
+Rxf2+ {1.1s} 27. Kxf2 {1.0s} Rxd6 {1.3s} 28. Ke2 {1.0s} Nc5 {1.1s}
+29. Kf2 {1.1s} Rd3 {1.0s} 30. Ke2 {1.0s} Be5 {1.2s} 31. Kf2 {1.0s} Ne4+ {1.2s}
+32. Ke2 {1.1s} Rd6 {1.1s} 33. Rh1 {1.0s} f6 {1.2s} 34. Kf3 {1.0s} f5 {1.1s}
+35. h4 {1.1s} Rd2 {1.1s} 36. Rf1 {1.0s} g6 {1.1s} 37. Re1 {1.1s}
+Rf2# {1.1s, Black mates} 0-1
+
+[Event "?"]
+[Site "?"]
+[Date "2021.06.17"]
+[Round "57"]
+[White "Rival Haskell Build 65"]
+[Black "Rival Haskell Build 90"]
+[Result "1-0"]
+[BlackTimeControl "1/move"]
+[ECO "C88"]
+[GameDuration "00:01:44"]
+[GameEndTime "2021-06-17T23:58:18.687 BST"]
+[GameStartTime "2021-06-17T23:56:34.562 BST"]
+[Opening "Ruy Lopez"]
+[PlyCount "155"]
+[Variation "Closed, 7...O-O"]
+[WhiteTimeControl "1/move"]
+
+1. e4 {book} e5 {book} 2. Nf3 {book} Nc6 {book} 3. Bb5 {book} a6 {book}
+4. Ba4 {book} Nf6 {book} 5. O-O {book} Be7 {book} 6. Re1 {book} b5 {book}
+7. Bb3 {book} O-O {book} 8. h3 {book} Bb7 {book} 9. d3 {book} d6 {book}
+10. a3 {book} Na5 {book} 11. Ba2 {book} c5 {book} 12. Nbd2 {book} Nc6 {book}
+13. Nf1 {book} Bc8 {book} 14. c3 {book} Be6 {book} 15. Bxe6 {book} fxe6 {book}
+16. b4 {book} Qd7 {book} 17. Ng3 {book} Rfb8 {book} 18. d4 {book} exd4 {book}
+19. cxd4 {book} cxd4 {book} 20. Nxd4 {book} Nxd4 {book} 21. Qxd4 {book}
+Rc8 {book} 22. Bb2 {book} Rc2 {book} 23. Rad1 {book} Qa7 {book} 24. e5 {book}
+dxe5 {book} 25. Qxa7 {book} Rxa7 {book} 26. Bxe5 {book} Rd7 {book}
+27. Rxd7 {book} Nxd7 {book} 28. Bd4 {book} Kf7 {book} 29. Rd1 {book} Nf6 {book}
+30. Be5 {book} Ra2 {book} 31. Bxf6 {1.3s} gxf6 {1.0s} 32. Rd3 {1.1s} e5 {1.0s}
+33. Rc3 {1.1s} Bd6 {1.0s} 34. f3 {1.2s} Ke6 {1.0s} 35. Rb3 {1.1s} Rb2 {1.1s}
+36. Rxb2 {1.1s} Bc7 {1.0s} 37. Ne2 {1.2s} Bd6 {1.0s} 38. Nc3 {1.1s} Bc7 {1.0s}
+39. Ne4 {1.2s} Bd6 {1.1s} 40. Rc2 {1.1s} Bc7 {1.0s} 41. Rxc7 {1.2s} h5 {1.0s}
+42. Rc6+ {1.1s} Ke7 {1.0s} 43. Rxf6 {1.1s} Kd7 {1.1s} 44. Rxa6 {1.1s} Kc7 {1.2s}
+45. Re6 {1.3s} Kd7 {1.1s} 46. Rxe5 {1.2s} Kd8 {1.0s} 47. h4 {1.1s} Kc7 {1.1s}
+48. Rxb5 {1.1s} Kc8 {1.0s} 49. Rd5 {1.1s} Kc7 {1.0s} 50. Re5 {1.2s} Kc8 {1.1s}
+51. Re6 {1.1s} Kc7 {1.0s} 52. Nf6 {1.1s} Kc8 {1.0s} 53. Rd6 {1.1s} Kc7 {1.0s}
+54. Rd5 {1.2s} Kc8 {1.1s} 55. Rc5+ {1.1s} Kb7 {1.0s} 56. Nd5 {1.1s} Ka7 {1.0s}
+57. Rc6 {1.1s} Kb7 {1.0s} 58. Rd6 {1.1s} Kc8 {1.1s} 59. Re6 {1.1s} Kb7 {1.0s}
+60. Rf6 {1.1s} Kc8 {1.0s} 61. Rd6 {1.1s} Kb7 {1.1s} 62. Re6 {1.1s} Kc8 {1.1s}
+63. Rf6 {1.2s} Kb7 {1.1s} 64. Nf4 {1.1s} Kc8 {1.1s} 65. Rf5 {1.1s} Kb7 {1.0s}
+66. Rc5 {1.1s} Kb8 {1.0s} 67. Rd5 {1.2s} Kb7 {1.2s} 68. Re5 {1.0s} Kb8 {1.1s}
+69. Rc5 {1.2s} Kb7 {1.1s} 70. Rd5 {1.1s} Kb8 {1.0s} 71. Re5 {1.1s} Kb7 {1.1s}
+72. Rf5 {1.1s} Kb8 {1.0s} 73. b5 {1.1s} Kb7 {1.0s} 74. Rf6 {1.2s} Kb8 {1.1s}
+75. Ne6 {1.1s} Kb7 {1.0s} 76. Nc5+ {1.3s} Kb8 {1.1s} 77. b6 {1.1s} Kc8 {1.1s}
+78. Rf8# {1.1s, White mates} 1-0
+
+[Event "?"]
+[Site "?"]
+[Date "2021.06.17"]
+[Round "58"]
+[White "Rival Haskell Build 90"]
+[Black "Rival Haskell Build 65"]
+[Result "0-1"]
+[BlackTimeControl "1/move"]
+[ECO "E21"]
+[GameDuration "00:01:05"]
+[GameEndTime "2021-06-17T23:59:24.183 BST"]
+[GameStartTime "2021-06-17T23:58:18.688 BST"]
+[Opening "Nimzo-Indian"]
+[PlyCount "92"]
+[Variation "Three knights Variation"]
+[WhiteTimeControl "1/move"]
+
+1. d4 {book} Nf6 {book} 2. c4 {book} e6 {book} 3. Nc3 {book} Bb4 {book}
+4. Nf3 {book} d5 {book} 5. Bg5 {book} h6 {book} 6. Bxf6 {book} Qxf6 {book}
+7. e3 {book} O-O {book} 8. Rc1 {book} dxc4 {book} 9. Bxc4 {book} c5 {book}
+10. O-O {book} cxd4 {book} 11. Nxd4 {book} Bd7 {book} 12. Qb3 {book} Nc6 {book}
+13. Nxc6 {book} Bxc3 {book} 14. Rxc3 {book} Bxc6 {book} 15. Bb5 {book}
+Bd5 {book} 16. Bc4 {book} Bxc4 {1.1s} 17. Qxc4 {1.0s} e5 {1.1s} 18. Qc5 {1.0s}
+Qe6 {1.1s} 19. Rd3 {1.1s} Qxa2 {1.0s} 20. Qxe5 {1.0s} f6 {1.0s} 21. Qe6+ {1.1s}
+Qxe6 {1.0s} 22. Rd4 {1.1s} Qc6 {1.1s} 23. Rd3 {1.0s} Qc2 {1.0s} 24. Rd4 {1.1s}
+Qxb2 {1.2s} 25. Rd6 {1.1s} f5 {1.1s} 26. Rxh6 {1.2s} gxh6 {1.1s} 27. g3 {1.1s}
+Rf6 {1.0s} 28. Kg2 {1.0s} Rc6 {1.1s} 29. Kg1 {1.1s} Rd6 {1.0s} 30. Kg2 {1.0s}
+Re6 {1.0s} 31. Kg1 {1.1s} Rc6 {1.1s} 32. Kg2 {1.0s} Rd6 {1.1s} 33. Kg1 {1.0s}
+Re6 {1.1s} 34. Kg2 {1.0s} Rxe3 {1.1s} 35. Kg1 {1.0s} Re6 {1.0s} 36. Kg2 {1.1s}
+Rc6 {1.1s} 37. Kg1 {1.0s} Rd6 {1.1s} 38. Kg2 {1.0s} Re6 {1.1s} 39. Kg1 {1.0s}
+Rc6 {1.1s} 40. Kg2 {1.0s} Rd6 {1.1s} 41. Kg1 {1.1s} Rf6 {1.2s} 42. Kg2 {1.0s}
+f4 {1.1s} 43. gxf4 {1.1s} Rxf4 {1.1s} 44. h3 {1.0s} Raf8 {1.1s} 45. Kh1 {1.1s}
+Rxf2 {1.2s} 46. h4 {1.0s} Rxf1# {1.1s, Black mates} 0-1
+
+[Event "?"]
+[Site "?"]
+[Date "2021.06.17"]
+[Round "59"]
+[White "Rival Haskell Build 65"]
+[Black "Rival Haskell Build 90"]
+[Result "1-0"]
+[BlackTimeControl "1/move"]
+[ECO "E10"]
+[GameDuration "00:01:34"]
+[GameEndTime "2021-06-18T00:00:58.198 BST"]
+[GameStartTime "2021-06-17T23:59:24.184 BST"]
+[Opening "Queen's pawn game"]
+[PlyCount "147"]
+[WhiteTimeControl "1/move"]
+
+1. d4 {book} Nf6 {book} 2. c4 {book} e6 {book} 3. Nf3 {book} d5 {book}
+4. Nc3 {book} Be7 {book} 5. Bf4 {book} O-O {book} 6. e3 {book} c5 {book}
+7. dxc5 {book} Bxc5 {book} 8. cxd5 {book} Nxd5 {book} 9. Nxd5 {book} exd5 {book}
+10. Bd3 {book} Bb4+ {book} 11. Nd2 {book} Nc6 {book} 12. O-O {book} Be7 {book}
+13. Rc1 {book} Bf6 {book} 14. Nb3 {book} g6 {book} 15. Qd2 {book} Qb6 {book}
+16. Bd6 {book} Rd8 {book} 17. Bc5 {book} Qc7 {book} 18. Bd4 {book} Bxd4 {book}
+19. exd4 {book} Qd6 {book} 20. Rfe1 {book} b6 {book} 21. Bb5 {book} Ne7 {book}
+22. Qg5 {book} Be6 {book} 23. Qf6 {book} Rac8 {book} 24. a3 {book} Rxc1 {book}
+25. Nxc1 {book} Nf5 {book} 26. Ne2 {book} Bc8 {book} 27. Qxd6 {book} Nxd6 {book}
+28. Nc3 {book} Nf5 {book} 29. Rd1 {book} Ng7 {book} 30. f3 {book} Bb7 {book}
+31. Bd3 {1.1s} Bc6 {1.0s} 32. f4 {1.1s} Rd6 {1.0s} 33. Nb5 {1.1s} Bxb5 {1.0s}
+34. Bxb5 {1.2s} f6 {1.1s} 35. Bd3 {1.0s} Ne6 {1.0s} 36. f5 {1.1s} Nxd4 {1.1s}
+37. fxg6 {1.0s} hxg6 {1.1s} 38. Bxg6 {1.1s} Nc6 {1.0s} 39. Bf5 {1.1s} d4 {1.0s}
+40. Be4 {1.1s} Ne7 {1.0s} 41. Bd3 {1.1s} Rc6 {1.0s} 42. Bb5 {1.1s} Rd6 {1.0s}
+43. Bc4+ {1.2s} Kg7 {1.0s} 44. Bd3 {1.1s} Nc6 {1.0s} 45. Be4 {1.0s} Ne5 {1.1s}
+46. Bf5 {1.1s} Nc4 {1.0s} 47. Rb1 {1.1s} Kf7 {1.0s} 48. Be4 {1.1s} Ke6 {1.0s}
+49. Bd3 {1.1s} Rc6 {1.0s} 50. Bxc4+ {1.1s} Rxc4 {1.2s} 51. b4 {1.1s} Kd5 {1.0s}
+52. g4 {1.1s} Ke6 {1.1s} 53. b5 {1.1s} Kd6 {1.1s} 54. Rb2 {1.1s} Kc5 {1.1s}
+55. Rb1 {1.1s} Kd5 {1.0s} 56. Rb3 {1.2s} Rc5 {1.0s} 57. Rf3 {1.1s} Rxb5 {1.0s}
+58. Rf5+ {1.0s} Kc4 {1.1s} 59. Kg2 {1.1s} Re5 {1.1s} 60. Rxf6 {1.1s} Rc5 {1.0s}
+61. Rf4 {1.1s} Rc6 {1.0s} 62. Rf5 {1.1s} Rd6 {1.1s} 63. Rf3 {1.1s} Re6 {1.1s}
+64. g5 {1.0s} Rc6 {1.0s} 65. Rf5 {1.1s} Rc5 {1.0s} 66. Rxc5+ {1.1s} Kxc5 {1.0s}
+67. g6 {1.1s} d3 {1.0s} 68. Kf3 {1.2s} d2 {1.1s} 69. Ke2 {1.1s} Kb5 {1.2s}
+70. g7 {1.2s} Ka5 {1.0s} 71. g8=Q {1.1s} Ka4 {1.0s} 72. Kxd2 {1.1s} a5 {1.1s}
+73. Kc3 {1.1s} Kxa3 {1.1s} 74. Qb3# {1.1s, White mates} 1-0
+
+[Event "?"]
+[Site "?"]
+[Date "2021.06.18"]
+[Round "60"]
+[White "Rival Haskell Build 90"]
+[Black "Rival Haskell Build 65"]
+[Result "0-1"]
+[BlackTimeControl "1/move"]
+[ECO "E10"]
+[GameDuration "00:00:32"]
+[GameEndTime "2021-06-18T00:01:30.486 BST"]
+[GameStartTime "2021-06-18T00:00:58.199 BST"]
+[Opening "Queen's pawn game"]
+[PlyCount "90"]
+[WhiteTimeControl "1/move"]
+
+1. d4 {book} Nf6 {book} 2. c4 {book} e6 {book} 3. Nf3 {book} d5 {book}
+4. Nc3 {book} Be7 {book} 5. Bf4 {book} O-O {book} 6. e3 {book} Nbd7 {book}
+7. c5 {book} Nh5 {book} 8. Bd3 {book} Nxf4 {book} 9. exf4 {book} b6 {book}
+10. b4 {book} a5 {book} 11. a3 {book} c6 {book} 12. O-O {book} Qc7 {book}
+13. g3 {book} Ba6 {book} 14. Bxa6 {book} Rxa6 {book} 15. Qe2 {book} Rfa8 {book}
+16. b5 {book} cxb5 {book} 17. c6 {book} Qxc6 {book} 18. Nxb5 {book} Rc8 {book}
+19. Rac1 {book} Qxc1 {book} 20. Rxc1 {book} Rxc1+ {book} 21. Kg2 {book}
+Ra8 {book} 22. f5 {book} Rc6 {book} 23. fxe6 {book} fxe6 {book} 24. Ne1 {book}
+a4 {book} 25. Nd3 {book} Ra5 {book} 26. Nf4 {book} Nf8 {book} 27. h4 {book}
+Bf6 {book} 28. Kh3 {book} g6 {book} 29. Kg2 {book} Bg7 {book} 30. g4 {book}
+h6 {book} 31. Nxg6 {1.0s} Nxg6 {1.0s} 32. Nc3 {1.0s} Nf4+ {1.1s} 33. Kg3 {1.0s}
+Nxe2+ {1.1s} 34. Nxe2 {1.0s} Bf8 {1.2s} 35. Kf4 {1.1s} Bxa3 {1.1s}
+36. Ke5 {1.1s} Be7 {1.1s} 37. Kf4 {1.0s} Bxh4 {1.1s} 38. Ke3 {1.0s} a3 {1.1s}
+39. Nf4 {1.1s} Bg5 {1.1s} 40. Kf3 {1.0s} a2 {1.1s} 41. Nxe6 {1.0s} Rxe6 {1.1s}
+42. Kg3 {1.0s} a1=Q {1.2s} 43. Kg2 {1.0s} Re4 {1.1s} 44. Kg3 {1.0s} Qh1 {1.1s}
+45. f4 {1.1s} Bh4# {1.2s, Black mates} 0-1
+
+[Event "?"]
+[Site "?"]
+[Date "2021.06.18"]
+[Round "61"]
+[White "Rival Haskell Build 65"]
+[Black "Rival Haskell Build 90"]
+[Result "0-1"]
+[BlackTimeControl "1/move"]
+[ECO "C88"]
+[GameDuration "00:01:20"]
+[GameEndTime "2021-06-18T00:02:50.971 BST"]
+[GameStartTime "2021-06-18T00:01:30.487 BST"]
+[Opening "Ruy Lopez"]
+[PlyCount "104"]
+[Variation "Closed"]
+[WhiteTimeControl "1/move"]
+
+1. e4 {book} e5 {book} 2. Nf3 {book} Nc6 {book} 3. Bb5 {book} a6 {book}
+4. Ba4 {book} Nf6 {book} 5. O-O {book} Be7 {book} 6. Re1 {book} b5 {book}
+7. Bb3 {book} d6 {book} 8. c3 {book} O-O {book} 9. h3 {book} Nb8 {book}
+10. d4 {book} Nbd7 {book} 11. Nbd2 {book} Bb7 {book} 12. Bc2 {book} Re8 {book}
+13. a4 {book} Bf8 {book} 14. Bd3 {book} c6 {book} 15. Qc2 {book} Rc8 {book}
+16. dxe5 {1.3s} dxe5 {1.0s} 17. axb5 {1.3s} axb5 {1.1s} 18. c4 {1.2s}
+bxc4 {1.1s} 19. Bxc4 {1.1s} Bc5 {1.0s} 20. Qb3 {1.1s} Bf8 {1.0s}
+21. Bxf7+ {1.1s} Kh8 {1.0s} 22. Qxb7 {1.1s} Ra8 {1.0s} 23. Qxa8 {1.1s}
+Qxa8 {1.1s} 24. Rxa8 {1.1s} Rxa8 {1.0s} 25. Be6 {1.1s} Bc5 {1.0s}
+26. Bxd7 {1.2s} Nxd7 {1.0s} 27. Nc4 {1.1s} Bd4 {1.0s} 28. Nxd4 {1.1s}
+exd4 {1.0s} 29. Nd6 {1.2s} Ne5 {1.0s} 30. Nf5 {1.3s} Nd7 {1.1s} 31. Nxd4 {1.2s}
+Ne5 {1.1s} 32. Ne6 {1.1s} Nd7 {1.0s} 33. Nf4 {1.1s} Ne5 {1.1s} 34. f3 {1.1s}
+c5 {1.0s} 35. Ne6 {1.1s} c4 {1.0s} 36. Nc5 {1.1s} Nd3 {1.0s} 37. Nxd3 {1.2s}
+cxd3 {1.0s} 38. e5 {1.1s} Kg8 {1.0s} 39. e6 {1.0s} g6 {1.0s} 40. f4 {1.0s}
+Kg7 {1.1s} 41. Be3 {1.1s} Kg8 {1.0s} 42. Bc5 {1.1s} Kg7 {1.0s} 43. Bd4+ {1.1s}
+Kg8 {1.0s} 44. Bf6 {1.1s} d2 {1.1s} 45. Bg5 {1.1s} dxe1=Q+ {1.0s} 46. Kh2 {1.1s}
+h6 {1.1s} 47. Bf6 {1.1s} Qxe6 {1.1s} 48. Be7 {1.1s} Qxe7 {1.0s} 49. Kg3 {1.1s}
+Qe3+ {1.1s} 50. Kh2 {1.1s} Qxf4+ {1.0s} 51. g3 {1.2s} Qf2+ {1.1s} 52. Kh1 {1.0s}
+Ra1# {1.0s, Black mates} 0-1
+
+[Event "?"]
+[Site "?"]
+[Date "2021.06.18"]
+[Round "62"]
+[White "Rival Haskell Build 90"]
+[Black "Rival Haskell Build 65"]
+[Result "1-0"]
+[BlackTimeControl "1/move"]
+[ECO "E21"]
+[GameDuration "00:00:20"]
+[GameEndTime "2021-06-18T00:03:11.853 BST"]
+[GameStartTime "2021-06-18T00:02:50.972 BST"]
+[Opening "Nimzo-Indian"]
+[PlyCount "57"]
+[Variation "Three knights Variation"]
+[WhiteTimeControl "1/move"]
+
+1. d4 {book} Nf6 {book} 2. c4 {book} e6 {book} 3. Nc3 {book} Bb4 {book}
+4. Nf3 {book} c5 {book} 5. g3 {book} cxd4 {book} 6. Nxd4 {book} O-O {book}
+7. Bg2 {book} d5 {book} 8. cxd5 {book} Nxd5 {book} 9. Qb3 {book} Qa5 {book}
+10. Bd2 {book} Nc6 {book} 11. Nxc6 {book} bxc6 {book} 12. O-O {book} Bxc3 {book}
+13. bxc3 {book} Ba6 {book} 14. Rfd1 {book} Qc5 {book} 15. e4 {book} Bc4 {book}
+16. Qa4 {book} Nb6 {book} 17. Qb4 {book} Qh5 {book} 18. Bf4 {book} c5 {book}
+19. Qb2 {book} Rad8 {book} 20. Rxd8 {1.1s} Rxd8 {1.1s} 21. f3 {1.3s} Rd3 {1.2s}
+22. Rb1 {1.0s} f6 {1.1s} 23. Bc7 {1.1s} e5 {1.1s} 24. Bxb6 {1.0s} g6 {1.1s}
+25. Bxc5 {1.1s} Bd5 {1.1s} 26. g4 {1.1s} Qxg4 {1.1s} 27. Qb8+ {1.1s} Kf7 {1.1s}
+28. Qf8+ {1.2s} Ke6 {1.1s} 29. Qe7# {1.0s, White mates} 1-0
+
+[Event "?"]
+[Site "?"]
+[Date "2021.06.18"]
+[Round "63"]
+[White "Rival Haskell Build 65"]
+[Black "Rival Haskell Build 90"]
+[Result "0-1"]
+[BlackTimeControl "1/move"]
+[ECO "B33"]
+[GameDuration "00:00:08"]
+[GameEndTime "2021-06-18T00:03:20.434 BST"]
+[GameStartTime "2021-06-18T00:03:11.853 BST"]
+[Opening "Sicilian"]
+[PlyCount "46"]
+[Variation "Pelikan, Chelyabinsk Variation"]
+[WhiteTimeControl "1/move"]
+
+1. e4 {book} c5 {book} 2. Nf3 {book} Nc6 {book} 3. d4 {book} cxd4 {book}
+4. Nxd4 {book} Nf6 {book} 5. Nc3 {book} e5 {book} 6. Ndb5 {book} d6 {book}
+7. Bg5 {book} a6 {book} 8. Na3 {book} b5 {book} 9. Nd5 {book} Be7 {book}
+10. Bxf6 {book} Bxf6 {book} 11. c3 {book} Bg5 {book} 12. Nc2 {book} Rb8 {book}
+13. a4 {book} bxa4 {book} 14. Ncb4 {book} Nxb4 {book} 15. cxb4 {book} O-O {book}
+16. Rxa4 {book} a5 {book} 17. b5 {book} Bd7 {book} 18. Nc3 {book} Qb6 {book}
+19. Be2 {book} Rbc8 {book} 20. Qxd6 {1.1s} Qxd6 {1.0s} 21. Kf1 {1.2s}
+Rxc3 {1.0s} 22. b6 {1.0s} Rc1+ {1.0s} 23. Bd1 {1.1s} Qxd1# {1.1s, Black mates}
+0-1
+
+[Event "?"]
+[Site "?"]
+[Date "2021.06.18"]
+[Round "64"]
+[White "Rival Haskell Build 90"]
+[Black "Rival Haskell Build 65"]
+[Result "0-1"]
+[BlackTimeControl "1/move"]
+[ECO "D15"]
+[GameDuration "00:05:18"]
+[GameEndTime "2021-06-18T00:08:39.433 BST"]
+[GameStartTime "2021-06-18T00:03:20.435 BST"]
+[Opening "QGD Slav"]
+[PlyCount "318"]
+[Variation "4.Nc3"]
+[WhiteTimeControl "1/move"]
+
+1. d4 {book} d5 {book} 2. c4 {book} c6 {book} 3. Nf3 {book} Nf6 {book}
+4. Nc3 {book} e6 {book} 5. Bg5 {book} h6 {book} 6. Bxf6 {book} Qxf6 {book}
+7. e3 {book} g6 {book} 8. Be2 {book} Bg7 {book} 9. e4 {book} O-O {book}
+10. e5 {book} Qd8 {book} 11. O-O {book} c5 {book} 12. cxd5 {book} exd5 {1.1s}
+13. dxc5 {book} Nc6 {1.1s} 14. Qxd5 {book} Qxd5 {1.1s} 15. Nxd5 {1.0s}
+Bxe5 {1.1s} 16. Nxe5 {1.0s} Nxe5 {1.1s} 17. Nb4 {1.1s} Be6 {1.1s} 18. Nd3 {1.1s}
+Bc8 {1.0s} 19. Nxe5 {1.0s} Be6 {1.1s} 20. c6 {1.0s} bxc6 {1.1s} 21. Nxc6 {1.1s}
+Bf5 {1.1s} 22. Ne5 {1.0s} Be6 {1.1s} 23. Nd3 {1.1s} Bf5 {1.1s} 24. Nc5 {1.0s}
+Be6 {1.2s} 25. Nxe6 {1.0s} fxe6 {1.1s} 26. Bf3 {1.1s} Rab8 {1.1s} 27. Be4 {1.0s}
+Ra8 {1.1s} 28. Bxa8 {1.0s} Rxa8 {1.1s} 29. f4 {1.1s} Kf7 {1.1s} 30. Rf3 {1.2s}
+Kf6 {1.1s} 31. Rc3 {1.1s} Kf7 {1.1s} 32. Rc6 {1.0s} Kf6 {1.1s} 33. Rd6 {1.0s}
+Kf7 {1.1s} 34. Rd4 {1.1s} Kf6 {1.1s} 35. Rc4 {1.0s} Kf7 {1.1s} 36. Rc5 {1.0s}
+Kf6 {1.1s} 37. Rc6 {1.0s} Kf7 {1.1s} 38. Rd6 {1.0s} Kf6 {1.1s} 39. Rd4 {1.0s}
+Kf7 {1.1s} 40. Rc4 {1.0s} Kf6 {1.1s} 41. Rc5 {1.0s} Kf7 {1.0s} 42. Re5 {1.1s}
+Kf6 {1.1s} 43. Re4 {1.0s} Kf7 {1.0s} 44. Re3 {1.1s} Kf6 {1.1s} 45. Re5 {1.0s}
+Kf7 {1.1s} 46. Re4 {1.1s} Kf6 {1.1s} 47. Re3 {1.0s} Kf7 {1.1s} 48. Rc3 {1.0s}
+Kf6 {1.1s} 49. Rd3 {1.0s} Kf7 {1.0s} 50. Rd7+ {1.0s} Kf6 {1.2s} 51. Rb7 {1.0s}
+e5 {1.0s} 52. Rc1 {1.0s} Kf5 {1.2s} 53. fxe5 {1.1s} Ke6 {1.1s} 54. Rc5 {1.0s}
+Kf5 {1.1s} 55. Rd5 {1.1s} Ke6 {1.1s} 56. Rd6+ {1.0s} Kf5 {1.1s} 57. Rf6+ {1.0s}
+Kxe5 {1.1s} 58. Rxg6 {1.0s} Kd5 {1.1s} 59. Rb5+ {1.2s} Kc4 {1.1s} 60. Re5 {1.0s}
+Rb8 {1.2s} 61. Rxh6 {1.0s} Rxb2 {1.1s} 62. Rh4+ {1.0s} Kc3 {1.1s}
+63. Rc5+ {1.0s} Kd3 {1.1s} 64. Rd5+ {1.0s} Kc3 {1.1s} 65. Rb4 {1.0s} Kxb4 {1.1s}
+66. Ra5 {1.2s} Kxa5 {1.3s} 67. a3 {1.1s} Rb3 {1.1s} 68. g4 {1.0s} Rxa3 {1.1s}
+69. Kf2 {1.0s} Rc3 {1.1s} 70. Kg1 {1.1s} Rc6 {1.1s} 71. Kf2 {1.1s} Rd6 {1.2s}
+72. Kg1 {1.1s} Re6 {1.1s} 73. Kf2 {1.0s} Rc6 {1.1s} 74. Kg1 {1.1s} Rd6 {1.1s}
+75. Kf2 {1.1s} Re6 {1.2s} 76. Kg1 {1.0s} Rf6 {1.1s} 77. Kg2 {1.1s} Rf4 {1.1s}
+78. Kg1 {1.2s} Rxg4+ {1.3s} 79. Kf2 {1.0s} Rc4 {1.2s} 80. Kg1 {1.0s} Rc6 {1.0s}
+81. Kf2 {1.0s} Rd6 {1.1s} 82. Kg1 {1.0s} Re6 {1.1s} 83. Kf2 {1.1s} Rc6 {1.1s}
+84. Kg1 {1.0s} Rd6 {1.1s} 85. Kf2 {1.0s} Re6 {1.2s} 86. Kg1 {1.0s} Rf6 {1.2s}
+87. Kg2 {1.0s} Rf5 {1.1s} 88. Kg1 {1.0s} Rc5 {1.1s} 89. Kf2 {1.1s} Rd5 {1.2s}
+90. Kg2 {1.1s} Re5 {1.2s} 91. Kf2 {1.0s} Rc5 {1.1s} 92. Kg2 {1.0s} Rd5 {1.1s}
+93. Kf2 {1.0s} Re5 {1.1s} 94. Kg2 {1.0s} Re4 {1.2s} 95. Kf2 {1.0s} Rd4 {1.1s}
+96. Kg2 {1.0s} Rf4 {1.1s} 97. Kg1 {1.1s} Rf5 {1.1s} 98. Kg2 {1.1s} Rf6 {1.3s}
+99. Kg1 {1.1s} Rf4 {1.1s} 100. Kg2 {1.1s} Rd4 {1.1s} 101. Kf2 {1.0s} Re4 {1.1s}
+102. Kg2 {1.0s} Re7 {1.1s} 103. Kf2 {1.1s} a6 {1.2s} 104. Kf3 {1.0s} Re6 {1.1s}
+105. Kf2 {1.1s} Rc6 {1.2s} 106. Kf3 {1.0s} Rd6 {1.1s} 107. Kf2 {1.0s} Re6 {1.1s}
+108. Kf3 {1.0s} Rc6 {1.1s} 109. Kf2 {1.0s} Rd6 {1.1s} 110. Kf3 {1.1s}
+Rf6+ {1.1s} 111. Kg4 {1.0s} Rf7 {1.1s} 112. Kg5 {1.1s} Rf3 {1.1s}
+113. Kg4 {1.0s} Rf6 {1.1s} 114. Kg5 {1.0s} Rc6 {1.2s} 115. Kg4 {1.0s} Rc5 {1.1s}
+116. Kf3 {1.1s} Rd5 {1.3s} 117. Kg4 {1.1s} Re5 {1.2s} 118. Kf3 {1.0s} Rc5 {1.1s}
+119. Kg4 {1.1s} Rd5 {1.2s} 120. Kf3 {1.0s} Re5 {1.1s} 121. Kg4 {1.1s}
+Re4+ {1.2s} 122. Kf3 {1.1s} Rc4 {1.2s} 123. Kf2 {1.0s} Rd4 {1.1s}
+124. Kf3 {1.0s} Rd3+ {1.1s} 125. Kg4 {1.0s} Rc3 {1.2s} 126. Kg5 {1.0s}
+Rh3 {1.1s} 127. Kg4 {1.1s} Rxh2 {1.1s} 128. Kf5 {1.0s} Kb6 {1.2s}
+129. Kg4 {1.1s} Kc6 {1.1s} 130. Kf5 {1.1s} Kd6 {1.1s} 131. Kg4 {1.1s} Ke6 {1.2s}
+132. Kf4 {1.0s} Kf6 {1.1s} 133. Kg4 {1.0s} Ke5 {1.1s} 134. Kf3 {1.1s} Kd5 {1.2s}
+135. Kg4 {1.1s} Kd6 {1.1s} 136. Kf3 {1.0s} Kc6 {1.1s} 137. Kg4 {1.0s} Kc5 {1.1s}
+138. Kf5 {1.0s} Kc4 {1.0s} 139. Kg4 {1.0s} Kd5 {1.1s} 140. Kf5 {1.0s} Kc5 {1.1s}
+141. Kg4 {1.1s} Kc4 {1.1s} 142. Kf5 {1.0s} Kd4 {1.0s} 143. Kg4 {1.0s} Ke4 {1.1s}
+144. Kg5 {1.1s} Ke5 {1.1s} 145. Kg4 {1.1s} Kf6 {1.2s} 146. Kf4 {1.0s} Ke6 {1.1s}
+147. Kf3 {1.0s} Kf5 {1.1s} 148. Ke3 {1.0s} Kg6 {1.1s} 149. Kf4 {1.0s} Kf7 {1.2s}
+150. Ke3 {1.0s} Ke7 {1.3s} 151. Kf4 {1.0s} a5 {1.3s} 152. Ke5 {1.1s} a4 {1.1s}
+153. Kf5 {1.0s} a3 {1.1s} 154. Kg4 {1.2s} a2 {1.2s} 155. Kf3 {1.0s} a1=Q {1.1s}
+156. Kf4 {1.1s} Qd4+ {1.1s} 157. Kf3 {1.0s} Kf6 {1.1s} 158. Kg3 {1.0s}
+Qf2+ {1.1s} 159. Kg4 {1.1s} Rh4# {1.2s, Black mates} 0-1
+
+[Event "?"]
+[Site "?"]
+[Date "2021.06.18"]
+[Round "65"]
+[White "Rival Haskell Build 65"]
+[Black "Rival Haskell Build 90"]
+[Result "1-0"]
+[BlackTimeControl "1/move"]
+[ECO "E10"]
+[GameDuration "00:01:13"]
+[GameEndTime "2021-06-18T00:09:52.508 BST"]
+[GameStartTime "2021-06-18T00:08:39.444 BST"]
+[Opening "Queen's pawn game"]
+[PlyCount "115"]
+[WhiteTimeControl "1/move"]
+
+1. d4 {book} Nf6 {book} 2. c4 {book} e6 {book} 3. Nf3 {book} d5 {book}
+4. Nc3 {book} Be7 {book} 5. Bg5 {book} h6 {book} 6. Bh4 {book} O-O {book}
+7. e3 {book} Ne4 {book} 8. Bxe7 {book} Qxe7 {book} 9. Rc1 {book} c6 {book}
+10. Bd3 {book} Nxc3 {book} 11. Rxc3 {book} dxc4 {book} 12. Bxc4 {book}
+Nd7 {book} 13. O-O {book} b6 {book} 14. Bd3 {book} c5 {book} 15. Be4 {book}
+Rb8 {book} 16. Qa4 {book} Bb7 {book} 17. Bxb7 {book} Rxb7 {book} 18. Qc2 {book}
+a5 {book} 19. Rd1 {book} Re8 {book} 20. h3 {book} e5 {book} 21. dxe5 {book}
+Nxe5 {book} 22. Nxe5 {book} Qxe5 {book} 23. Rcd3 {book} Rbe7 {book}
+24. Rd5 {book} Qe6 {1.0s} 25. Rd6 {1.0s} Qxa2 {1.0s} 26. Rxb6 {1.1s} Re5 {1.0s}
+27. Rc6 {1.1s} Qd5 {1.0s} 28. Rxd5 {1.0s} Rxd5 {1.0s} 29. Rxc5 {1.1s}
+Rxc5 {1.0s} 30. Qxc5 {1.1s} Ra8 {1.0s} 31. Qc6 {1.0s} Re8 {1.1s}
+32. Qxe8+ {1.2s} Kh7 {1.0s} 33. Qxf7 {1.1s} Kh8 {1.0s} 34. Qa7 {1.2s} Kh7 {1.0s}
+35. Qxa5 {1.1s} Kg6 {1.0s} 36. Qc5 {1.1s} Kh7 {1.0s} 37. Qc6 {1.1s} Kg8 {1.0s}
+38. Qd6 {1.1s} Kh7 {1.2s} 39. Qe6 {1.1s} Kh8 {1.0s} 40. Qd5 {1.0s} Kh7 {1.0s}
+41. Qd6 {1.1s} Kh8 {1.0s} 42. Qe6 {1.1s} Kh7 {1.0s} 43. Qe8 {1.1s} h5 {1.0s}
+44. Qxh5+ {1.1s} Kg8 {1.0s} 45. Qc5 {1.1s} Kh7 {1.1s} 46. Qc6 {1.1s} Kg8 {1.1s}
+47. Qd6 {1.1s} Kh7 {1.0s} 48. Qe6 {1.1s} Kh8 {1.1s} 49. Qd5 {1.1s} Kh7 {1.0s}
+50. Qd6 {1.1s} Kg8 {1.1s} 51. Qc6 {1.1s} Kh8 {1.0s} 52. Qe6 {1.1s} Kh7 {1.0s}
+53. f4 {1.1s} Kh8 {1.0s} 54. f5 {1.1s} g6 {1.1s} 55. Qe8+ {1.2s} Kg7 {1.0s}
+56. Qe7+ {1.1s} Kh8 {1.1s} 57. f6 {1.1s} Kg8 {1.1s} 58. Qg7# {1.1s, White mates}
+1-0
+
+[Event "?"]
+[Site "?"]
+[Date "2021.06.18"]
+[Round "66"]
+[White "Rival Haskell Build 90"]
+[Black "Rival Haskell Build 65"]
+[Result "0-1"]
+[BlackTimeControl "1/move"]
+[ECO "C89"]
+[GameDuration "00:00:34"]
+[GameEndTime "2021-06-18T00:10:27.212 BST"]
+[GameStartTime "2021-06-18T00:09:52.509 BST"]
+[Opening "Ruy Lopez"]
+[PlyCount "92"]
+[Variation "Marshall, Main line, Spassky Variation"]
+[WhiteTimeControl "1/move"]
+
+1. e4 {book} e5 {book} 2. Nf3 {book} Nc6 {book} 3. Bb5 {book} a6 {book}
+4. Ba4 {book} Nf6 {book} 5. O-O {book} Be7 {book} 6. Re1 {book} b5 {book}
+7. Bb3 {book} O-O {book} 8. c3 {book} d5 {book} 9. exd5 {book} Nxd5 {book}
+10. Nxe5 {book} Nxe5 {book} 11. Rxe5 {book} c6 {book} 12. d4 {book} Bd6 {book}
+13. Re1 {book} Qh4 {book} 14. g3 {book} Qh3 {book} 15. Be3 {book} Bg4 {book}
+16. Qd3 {book} Rae8 {book} 17. Nd2 {book} Re6 {book} 18. a4 {book} Qh5 {book}
+19. axb5 {book} axb5 {book} 20. Qf1 {book} Bh3 {book} 21. Bd1 {book} Qf5 {book}
+22. Qe2 {book} c5 {book} 23. Nf3 {book} Bf4 {book} 24. Bc2 {book} Qg4 {book}
+25. Qd3 {book} g6 {book} 26. Ne5 {book} Bxe5 {book} 27. dxe5 {book} Qf3 {book}
+28. Qe4 {book} Qxe4 {book} 29. Bxe4 {book} Nxe3 {book} 30. Rxe3 {book}
+Rxe5 {book} 31. f4 {1.1s} Re6 {1.1s} 32. b4 {1.0s} cxb4 {1.1s} 33. cxb4 {1.2s}
+Bf5 {1.1s} 34. Rf3 {1.0s} Rxe4 {1.1s} 35. Rb3 {1.0s} f6 {1.1s} 36. Rb2 {1.2s}
+Be6 {1.1s} 37. Rb3 {1.0s} Bxb3 {1.1s} 38. f5 {1.0s} gxf5 {1.1s} 39. Rf1 {1.0s}
+Rxb4 {1.1s} 40. Rxf5 {1.0s} Bc4 {1.1s} 41. Rc5 {1.0s} Rb1+ {1.1s} 42. Kf2 {1.1s}
+Rb2+ {1.0s} 43. Kg1 {1.0s} Rd8 {1.2s} 44. Rc8 {1.1s} Rxc8 {1.1s} 45. h4 {1.0s}
+Bd5 {1.1s} 46. Kf1 {1.1s} Rc1# {1.3s, Black mates} 0-1
+
+[Event "?"]
+[Site "?"]
+[Date "2021.06.18"]
+[Round "67"]
+[White "Rival Haskell Build 65"]
+[Black "Rival Haskell Build 90"]
+[Result "1-0"]
+[BlackTimeControl "1/move"]
+[ECO "E32"]
+[GameDuration "00:01:13"]
+[GameEndTime "2021-06-18T00:11:40.861 BST"]
+[GameStartTime "2021-06-18T00:10:27.213 BST"]
+[Opening "Nimzo-Indian"]
+[PlyCount "127"]
+[Variation "Classical Variation"]
+[WhiteTimeControl "1/move"]
+
+1. d4 {book} Nf6 {book} 2. c4 {book} e6 {book} 3. Nc3 {book} Bb4 {book}
+4. Qc2 {book} O-O {book} 5. a3 {book} Bxc3+ {book} 6. Qxc3 {book} d5 {book}
+7. Nf3 {book} dxc4 {book} 8. Qxc4 {book} b6 {book} 9. Bg5 {book} Ba6 {book}
+10. Qa4 {book} Qd7 {book} 11. Qc2 {book} c5 {book} 12. dxc5 {book} Rc8 {book}
+13. Bxf6 {book} gxf6 {book} 14. Rd1 {book} Qe7 {book} 15. Qe4 {book} Qxc5 {book}
+16. e3 {book} Bxf1 {book} 17. Kxf1 {book} Nc6 {book} 18. g3 {book} Ne5 {book}
+19. Kg2 {book} Qc6 {book} 20. Qxc6 {book} Rxc6 {book} 21. Nxe5 {book}
+fxe5 {book} 22. Rd2 {book} Rac8 {book} 23. Rhd1 {book} Rc2 {book} 24. Kf3 {book}
+Kg7 {book} 25. e4 {book} a5 {book} 26. Ke3 {book} R2c5 {book} 27. Rb1 {book}
+a4 {book} 28. b3 {book} axb3 {book} 29. Rxb3 {book} Ra5 {book} 30. Rdd3 {book}
+b5 {book} 31. Rbc3 {1.1s} Rc4 {1.0s} 32. Rxc4 {1.2s} bxc4 {1.0s} 33. Rc3 {1.0s}
+f6 {1.0s} 34. Rxc4 {1.1s} Rxa3+ {1.0s} 35. Kd2 {1.1s} Rc3 {1.2s} 36. Rxc3 {1.1s}
+f5 {1.0s} 37. Rc5 {1.1s} Kf6 {1.1s} 38. exf5 {1.1s} exf5 {1.0s} 39. f3 {1.2s}
+Ke6 {1.0s} 40. Rc7 {1.1s} Kf6 {1.0s} 41. Rxh7 {1.2s} Ke6 {1.0s} 42. Rh5 {1.3s}
+Kf6 {1.0s} 43. Kc3 {1.2s} Ke6 {1.1s} 44. Kc4 {1.4s} Kf6 {1.0s} 45. Rh6+ {1.2s}
+Kf7 {1.0s} 46. Rc6 {1.1s} Ke7 {1.0s} 47. Kd5 {1.1s} Kf7 {1.0s} 48. Kxe5 {1.1s}
+Kg7 {1.0s} 49. Kf4 {1.2s} Kf7 {1.0s} 50. Rc3 {1.1s} Kg7 {1.1s} 51. Rc5 {1.1s}
+Kf7 {1.1s} 52. Rb5 {1.2s} Kg7 {1.0s} 53. Rd5 {1.1s} Kf7 {1.0s} 54. Rd3 {1.1s}
+Kg7 {1.0s} 55. Rc3 {1.1s} Kf7 {1.0s} 56. Rb3 {1.2s} Kg7 {1.1s} 57. Rd3 {1.1s}
+Kf7 {1.1s} 58. Rd2 {1.2s} Kg7 {1.1s} 59. Kxf5 {1.1s} Kf7 {1.0s} 60. Rd7+ {1.1s}
+Ke8 {1.0s} 61. Ke6 {1.2s} Kf8 {1.0s} 62. Kf6 {1.1s} Ke8 {1.1s} 63. Rd6 {1.2s}
+Kf8 {1.0s} 64. Rd8# {1.1s, White mates} 1-0
+
+[Event "?"]
+[Site "?"]
+[Date "2021.06.18"]
+[Round "68"]
+[White "Rival Haskell Build 90"]
+[Black "Rival Haskell Build 65"]
+[Result "0-1"]
+[BlackTimeControl "1/move"]
+[ECO "C88"]
+[GameDuration "00:01:13"]
+[GameEndTime "2021-06-18T00:12:54.565 BST"]
+[GameStartTime "2021-06-18T00:11:40.862 BST"]
+[Opening "Ruy Lopez"]
+[PlyCount "128"]
+[Variation "Closed, 7...O-O"]
+[WhiteTimeControl "1/move"]
+
+1. e4 {book} e5 {book} 2. Nf3 {book} Nc6 {book} 3. Bb5 {book} a6 {book}
+4. Ba4 {book} Nf6 {book} 5. O-O {book} Be7 {book} 6. Re1 {book} b5 {book}
+7. Bb3 {book} O-O {book} 8. h3 {book} Bb7 {book} 9. d3 {book} d6 {book}
+10. a3 {book} Na5 {book} 11. Ba2 {book} c5 {book} 12. Nbd2 {book} Nc6 {book}
+13. Nf1 {book} Bc8 {book} 14. c3 {book} Be6 {book} 15. Bxe6 {book} fxe6 {book}
+16. b4 {book} Qd7 {book} 17. Ng3 {book} a5 {book} 18. bxc5 {book} dxc5 {book}
+19. Qb3 {book} Rab8 {book} 20. a4 {book} b4 {book} 21. Rd1 {book} bxc3 {book}
+22. Qxc3 {book} Nd4 {book} 23. Nxd4 {book} exd4 {book} 24. Qc2 {book} Bd6 {book}
+25. Bd2 {book} Qc7 {book} 26. Nf1 {book} c4 {book} 27. dxc4 {book} Rbc8 {book}
+28. Rab1 {book} Qxc4 {book} 29. Qxc4 {book} Rxc4 {book} 30. Re1 {book}
+Nd7 {book} 31. Bxa5 {1.0s} Rxa4 {1.1s} 32. Bd2 {1.0s} Rf6 {1.0s} 33. f3 {1.0s}
+Ne5 {1.1s} 34. f4 {1.3s} Rxf4 {1.1s} 35. Bxf4 {1.1s} Nf3+ {1.2s} 36. gxf3 {1.2s}
+Bxf4 {1.0s} 37. Rb6 {1.0s} e5 {1.1s} 38. Rd6 {1.1s} Rc4 {1.0s} 39. Re6 {1.0s}
+Ra4 {1.1s} 40. Re7 {1.1s} Rc4 {1.1s} 41. Rb7 {1.0s} Ra4 {1.1s} 42. Rd7 {1.1s}
+Rc4 {1.3s} 43. Rd6 {1.0s} Ra4 {1.0s} 44. Re6 {1.1s} Rc4 {1.2s} 45. Re7 {1.0s}
+Ra4 {1.1s} 46. Rb7 {1.1s} Rc4 {1.1s} 47. Rd7 {1.0s} Ra4 {1.1s} 48. Re2 {1.1s}
+Rc4 {1.1s} 49. Rd6 {1.0s} Ra4 {1.2s} 50. Ra6 {1.0s} Rxa6 {1.1s} 51. Rb2 {1.0s}
+Rc6 {1.1s} 52. Re2 {1.1s} Rd6 {1.0s} 53. Rb2 {1.0s} Re6 {1.1s} 54. Re2 {1.0s}
+Rc6 {1.0s} 55. Rb2 {1.0s} Rd6 {1.1s} 56. Re2 {1.0s} Re6 {1.1s} 57. Rb2 {1.0s}
+Rf6 {1.2s} 58. Re2 {1.1s} d3 {1.3s} 59. Rb2 {1.0s} Rc6 {1.1s} 60. Ne3 {1.0s}
+Bxe3+ {1.1s} 61. Kf1 {1.1s} Rc1+ {1.0s} 62. Kg2 {1.0s} Rc2+ {1.1s}
+63. Kf1 {1.0s} Rxb2 {1.2s} 64. Ke1 {1.0s} Rb1# {1.1s, Black mates} 0-1
+
+[Event "?"]
+[Site "?"]
+[Date "2021.06.18"]
+[Round "69"]
+[White "Rival Haskell Build 65"]
+[Black "Rival Haskell Build 90"]
+[Result "1-0"]
+[BlackTimeControl "1/move"]
+[ECO "D86"]
+[GameDuration "00:00:28"]
+[GameEndTime "2021-06-18T00:13:23.272 BST"]
+[GameStartTime "2021-06-18T00:12:54.566 BST"]
+[Opening "Gruenfeld"]
+[PlyCount "61"]
+[Variation "Exchange, Classical Variation"]
+[WhiteTimeControl "1/move"]
+
+1. d4 {book} Nf6 {book} 2. c4 {book} g6 {book} 3. Nc3 {book} d5 {book}
+4. cxd5 {book} Nxd5 {book} 5. e4 {book} Nxc3 {book} 6. bxc3 {book} Bg7 {book}
+7. Bc4 {book} c5 {book} 8. Ne2 {book} Nc6 {book} 9. Be3 {book} O-O {book}
+10. O-O {book} b6 {book} 11. Rc1 {book} Bb7 {book} 12. Qd2 {book} e6 {book}
+13. Rfd1 {book} cxd4 {book} 14. cxd4 {book} Rc8 {book} 15. Bb5 {book} Na5 {book}
+16. Rxc8 {book} Qxc8 {book} 17. Bg5 {book} Qc7 {book} 18. Bd3 {1.0s} Bc6 {1.1s}
+19. Bf4 {1.0s} f5 {1.0s} 20. Bxc7 {1.1s} Bxe4 {1.0s} 21. Bxe4 {1.1s} fxe4 {1.0s}
+22. Qe3 {1.1s} Rxf2 {1.1s} 23. Kxf2 {1.1s} Bf6 {1.0s} 24. Qxe4 {1.1s} Kf8 {1.0s}
+25. Qxe6 {1.2s} a6 {1.0s} 26. Qxf6+ {1.1s} Ke8 {1.0s} 27. Bd6 {1.1s} Kd7 {1.0s}
+28. Be5 {1.1s} Ke8 {1.0s} 29. Qe6+ {1.1s} Kf8 {1.0s} 30. Rd3 {1.1s} Nb7 {1.1s}
+31. Rf3# {1.1s, White mates} 1-0
+
+[Event "?"]
+[Site "?"]
+[Date "2021.06.18"]
+[Round "70"]
+[White "Rival Haskell Build 90"]
+[Black "Rival Haskell Build 65"]
+[Result "1-0"]
+[BlackTimeControl "1/move"]
+[ECO "E10"]
+[GameDuration "00:02:11"]
+[GameEndTime "2021-06-18T00:15:34.841 BST"]
+[GameStartTime "2021-06-18T00:13:23.273 BST"]
+[Opening "Queen's pawn game"]
+[PlyCount "181"]
+[WhiteTimeControl "1/move"]
+
+1. d4 {book} Nf6 {book} 2. c4 {book} e6 {book} 3. Nf3 {book} d5 {book}
+4. Nc3 {book} Be7 {book} 5. Bf4 {book} O-O {book} 6. e3 {book} Nbd7 {book}
+7. c5 {book} Nh5 {book} 8. Bd3 {book} Nxf4 {book} 9. exf4 {book} b6 {book}
+10. b4 {book} a5 {book} 11. a3 {book} c6 {book} 12. O-O {book} Qc7 {book}
+13. g3 {book} Ba6 {book} 14. Kg2 {book} Bxd3 {book} 15. Qxd3 {book} Ra7 {book}
+16. Rfc1 {book} Rfa8 {book} 17. Rab1 {book} axb4 {book} 18. axb4 {book}
+Ra3 {book} 19. Qc2 {book} Bf6 {book} 20. Nd1 {book} b5 {book} 21. Ne3 {book}
+g6 {book} 22. Qd1 {book} R8a4 {book} 23. Nc2 {book} Ra2 {book} 24. Ne5 {book}
+Bg7 {book} 25. Ra1 {book} f6 {book} 26. Nxd7 {book} Qxd7 {book} 27. Rxa2 {book}
+Rxa2 {book} 28. Ra1 {book} Qa7 {book} 29. Qe1 {book} Kf7 {book} 30. Qc3 {book}
+Rxa1 {book} 31. Qxa1 {1.1s} Qxa1 {1.1s} 32. Nxa1 {1.0s} e5 {1.0s}
+33. dxe5 {1.0s} fxe5 {1.1s} 34. fxe5 {1.0s} Bxe5 {1.0s} 35. Nc2 {1.0s}
+Ke6 {1.1s} 36. f3 {1.1s} Kf6 {1.1s} 37. Ne3 {1.1s} Ke7 {1.1s} 38. f4 {1.1s}
+d4 {1.1s} 39. fxe5 {1.1s} dxe3 {1.1s} 40. Kf3 {1.0s} Ke6 {1.1s} 41. Kxe3 {1.0s}
+Kxe5 {1.1s} 42. Kd3 {1.0s} Ke6 {1.2s} 43. Kd4 {1.0s} Kf6 {1.1s} 44. h4 {1.0s}
+Ke6 {1.1s} 45. Ke4 {1.0s} Kf6 {1.2s} 46. Kf4 {1.1s} Ke7 {1.1s} 47. Ke5 {1.0s}
+h5 {1.1s} 48. Kd4 {1.0s} Ke6 {1.1s} 49. Ke4 {1.1s} Kf6 {1.1s} 50. Kf4 {1.0s}
+Kf7 {1.1s} 51. Kg5 {1.1s} Kg7 {1.1s} 52. g4 {1.1s} hxg4 {1.1s} 53. Kf4 {1.0s}
+Kf6 {1.1s} 54. Kxg4 {1.0s} Ke6 {1.1s} 55. Kg5 {1.0s} Kf7 {1.1s} 56. Kf4 {1.0s}
+Ke8 {1.1s} 57. Ke5 {1.1s} Ke7 {1.1s} 58. Kd4 {1.0s} Ke6 {1.1s} 59. Ke4 {1.0s}
+Kf6 {1.1s} 60. Kf4 {1.0s} Kf7 {1.0s} 61. Ke3 {1.1s} Kg7 {1.1s} 62. Kd4 {1.0s}
+Kf6 {1.2s} 63. Kd3 {1.1s} Kf5 {1.1s} 64. Kd4 {1.1s} Kf4 {1.3s} 65. Kd3 {1.0s}
+Kf3 {1.1s} 66. Kd4 {1.0s} Ke2 {1.3s} 67. Ke5 {1.0s} Kd3 {1.1s} 68. Kd6 {1.0s}
+Kc4 {1.1s} 69. Kxc6 {1.0s} Kc3 {1.2s} 70. Kd5 {1.1s} Kxb4 {1.1s} 71. c6 {1.1s}
+Kc3 {1.1s} 72. c7 {1.1s} Kd3 {1.1s} 73. c8=Q {1.0s} b4 {1.1s} 74. Qc1 {1.0s}
+b3 {1.1s} 75. Kc6 {1.0s} Ke2 {1.1s} 76. Qc5 {1.0s} Kd3 {1.1s} 77. Qf2 {1.0s}
+Ke4 {1.1s} 78. Kc5 {1.1s} Kd3 {1.1s} 79. Kd6 {1.1s} Ke4 {1.1s} 80. Qg3 {1.0s}
+g5 {1.2s} 81. hxg5 {1.0s} Kf5 {1.1s} 82. Ke7 {1.0s} Ke4 {1.0s} 83. Qxb3 {1.0s}
+Kf5 {1.3s} 84. Qd5+ {1.0s} Kg6 {1.1s} 85. Qc6+ {1.1s} Kf5 {1.1s} 86. Qc4 {1.1s}
+Kg6 {1.1s} 87. Qe6+ {1.1s} Kxg5 {1.1s} 88. Qe4 {1.0s} Kh6 {1.2s} 89. Kf6 {1.1s}
+Kh5 {1.1s} 90. Qa4 {1.0s} Kh6 {1.1s} 91. Qh4# {1.2s, White mates} 1-0
+
+[Event "?"]
+[Site "?"]
+[Date "2021.06.18"]
+[Round "71"]
+[White "Rival Haskell Build 65"]
+[Black "Rival Haskell Build 90"]
+[Result "1-0"]
+[BlackTimeControl "1/move"]
+[ECO "C88"]
+[GameDuration "00:00:40"]
+[GameEndTime "2021-06-18T00:16:15.455 BST"]
+[GameStartTime "2021-06-18T00:15:34.843 BST"]
+[Opening "Ruy Lopez"]
+[PlyCount "97"]
+[Variation "Closed, 7...O-O"]
+[WhiteTimeControl "1/move"]
+
+1. e4 {book} e5 {book} 2. Nf3 {book} Nc6 {book} 3. Bb5 {book} a6 {book}
+4. Ba4 {book} Nf6 {book} 5. O-O {book} Be7 {book} 6. Re1 {book} b5 {book}
+7. Bb3 {book} O-O {book} 8. h3 {book} Bb7 {book} 9. d3 {book} Re8 {book}
+10. a4 {book} h6 {book} 11. c3 {book} Bc5 {book} 12. Nbd2 {book} Bb6 {book}
+13. Ba2 {book} Rf8 {book} 14. Nf1 {book} d6 {book} 15. Ng3 {book} Ne7 {book}
+16. Nh4 {book} Kh7 {book} 17. Qf3 {book} bxa4 {book} 18. Bb1 {book} Bc6 {book}
+19. Bc2 {book} a5 {book} 20. Rd1 {book} Qe8 {book} 21. Nhf5 {book} Nfg8 {book}
+22. d4 {book} Nxf5 {book} 23. Qxf5+ {book} g6 {book} 24. Qg4 {book} Bd7 {book}
+25. Qf3 {book} Bc6 {book} 26. h4 {book} f5 {book} 27. h5 {book} fxe4 {book}
+28. Qg4 {book} d5 {book} 29. Be3 {book} g5 {book} 30. c4 {book} exd4 {book}
+31. Bxd4 {1.3s} Bxd4 {1.1s} 32. Rxd4 {1.1s} Rxf2 {1.2s} 33. Kxf2 {1.0s}
+Qe5 {1.0s} 34. Qf5+ {1.1s} Qxf5+ {1.1s} 35. Nxf5 {1.1s} Bd7 {1.1s}
+36. Rxd5 {1.2s} Nf6 {1.1s} 37. Ne3 {1.1s} Ng8 {1.0s} 38. Rxd7+ {1.0s} Kh8 {1.0s}
+39. Rxc7 {1.1s} Rf8+ {1.0s} 40. Ke2 {1.1s} Ra8 {1.0s} 41. Bxe4 {1.2s} Nf6 {1.1s}
+42. Bxa8 {1.1s} Nxh5 {1.0s} 43. Kf3 {1.0s} Nf4 {1.0s} 44. Bd5 {1.0s} Nh5 {1.0s}
+45. Rxa4 {1.1s} Nf6 {1.0s} 46. Rxa5 {1.2s} g4+ {1.1s} 47. Nxg4 {1.1s} Nd7 {1.0s}
+48. Rxd7 {1.1s} h5 {1.0s} 49. Ra8# {1.1s, White mates} 1-0
+
+[Event "?"]
+[Site "?"]
+[Date "2021.06.18"]
+[Round "72"]
+[White "Rival Haskell Build 90"]
+[Black "Rival Haskell Build 65"]
+[Result "0-1"]
+[BlackTimeControl "1/move"]
+[ECO "C65"]
+[GameDuration "00:00:29"]
+[GameEndTime "2021-06-18T00:16:44.740 BST"]
+[GameStartTime "2021-06-18T00:16:15.508 BST"]
+[Opening "Ruy Lopez"]
+[PlyCount "60"]
+[Variation "Berlin defense"]
+[WhiteTimeControl "1/move"]
+
+1. e4 {book} e5 {book} 2. Nf3 {book} Nc6 {book} 3. Bb5 {book} Nf6 {book}
+4. d3 {book} Bc5 {book} 5. c3 {book} O-O {book} 6. O-O {book} d6 {book}
+7. Nbd2 {book} a6 {book} 8. Ba4 {book} Ba7 {book} 9. h3 {book} Ne7 {book}
+10. Re1 {book} Ng6 {book} 11. Nf1 {book} b5 {book} 12. Bb3 {book} Re8 {book}
+13. Ng3 {book} Bb7 {book} 14. Be3 {book} Bxe3 {book} 15. fxe3 {book} d5 {book}
+16. exd5 {book} Bxd5 {book} 17. e4 {book} Bxb3 {1.1s} 18. axb3 {1.2s} Qd6 {1.1s}
+19. Rxa6 {1.0s} Rxa6 {1.1s} 20. c4 {1.0s} Ra1 {1.2s} 21. d4 {1.0s} Rxd1 {1.1s}
+22. dxe5 {1.0s} Nxe5 {1.1s} 23. Rxd1 {1.0s} Qxd1+ {1.1s} 24. Nf1 {1.1s}
+g6 {1.1s} 25. Kh2 {1.0s} Nxf3+ {1.2s} 26. gxf3 {1.0s} Nxe4 {1.2s}
+27. fxe4 {1.0s} Re5 {1.1s} 28. Kg2 {1.0s} Rg5+ {1.2s} 29. Kh2 {1.0s} Qxf1 {1.0s}
+30. cxb5 {1.0s} Rg2# {1.1s, Black mates} 0-1
+
+[Event "?"]
+[Site "?"]
+[Date "2021.06.18"]
+[Round "73"]
+[White "Rival Haskell Build 65"]
+[Black "Rival Haskell Build 90"]
+[Result "1-0"]
+[BlackTimeControl "1/move"]
+[ECO "C88"]
+[GameDuration "00:00:41"]
+[GameEndTime "2021-06-18T00:17:26.243 BST"]
+[GameStartTime "2021-06-18T00:16:44.741 BST"]
+[Opening "Ruy Lopez"]
+[PlyCount "69"]
+[Variation "Closed, anti-Marshall 8.a4"]
+[WhiteTimeControl "1/move"]
+
+1. e4 {book} e5 {book} 2. Nf3 {book} Nc6 {book} 3. Bb5 {book} a6 {book}
+4. Ba4 {book} Nf6 {book} 5. O-O {book} Be7 {book} 6. Re1 {book} b5 {book}
+7. Bb3 {book} O-O {book} 8. a4 {book} b4 {book} 9. d4 {book} d6 {book}
+10. dxe5 {book} dxe5 {book} 11. Nbd2 {book} Bc5 {book} 12. Qe2 {book} Qe7 {book}
+13. h3 {book} Na5 {book} 14. Nc4 {book} Nxc4 {book} 15. Bxc4 {book} a5 {book}
+16. Bd5 {1.1s} Nxd5 {1.0s} 17. exd5 {1.1s} f6 {1.0s} 18. c4 {1.1s} bxc3 {1.1s}
+19. bxc3 {1.2s} Bf5 {1.0s} 20. c4 {1.1s} Bxf2+ {1.0s} 21. Qxf2 {1.1s} Rf7 {1.1s}
+22. c5 {1.1s} e4 {1.0s} 23. c6 {1.1s} Qc5 {1.1s} 24. Qxc5 {1.1s} exf3 {1.0s}
+25. Qf2 {1.1s} Bd3 {1.0s} 26. Qxf3 {1.1s} Bc4 {1.0s} 27. Qf5 {1.1s} Bd3 {1.1s}
+28. Qxd3 {1.1s} f5 {1.0s} 29. d6 {1.1s} cxd6 {1.0s} 30. Qxd6 {1.0s} g6 {1.0s}
+31. Qc5 {1.1s} Kg7 {1.1s} 32. Qd5 {1.1s} Kg8 {1.0s} 33. Re7 {1.1s} Kg7 {1.0s}
+34. Qxf7+ {1.1s} Kh8 {1.0s} 35. Qxh7# {1.1s, White mates} 1-0
+
+[Event "?"]
+[Site "?"]
+[Date "2021.06.18"]
+[Round "74"]
+[White "Rival Haskell Build 90"]
+[Black "Rival Haskell Build 65"]
+[Result "0-1"]
+[BlackTimeControl "1/move"]
+[ECO "E10"]
+[GameDuration "00:00:39"]
+[GameEndTime "2021-06-18T00:18:05.905 BST"]
+[GameStartTime "2021-06-18T00:17:26.244 BST"]
+[Opening "Queen's pawn game"]
+[PlyCount "96"]
+[WhiteTimeControl "1/move"]
+
+1. d4 {book} Nf6 {book} 2. c4 {book} e6 {book} 3. Nf3 {book} d5 {book}
+4. Nc3 {book} Bb4 {book} 5. cxd5 {book} exd5 {book} 6. Bg5 {book} Nbd7 {book}
+7. Qc2 {book} c5 {book} 8. g3 {book} cxd4 {book} 9. Nxd4 {book} Qb6 {book}
+10. a3 {book} Bxc3+ {book} 11. bxc3 {book} Ne4 {book} 12. Bf4 {book} Ndf6 {book}
+13. Rb1 {book} Qc5 {book} 14. f3 {book} Nd6 {book} 15. Qa4+ {book} Bd7 {book}
+16. Qb4 {book} Qxb4 {book} 17. axb4 {book} Ke7 {book} 18. e3 {book} Rhc8 {book}
+19. Bxd6+ {book} Kxd6 {book} 20. Kd2 {book} g6 {book} 21. Bd3 {book} Ne8 {book}
+22. Rhe1 {book} Nc7 {book} 23. e4 {book} dxe4 {book} 24. Bxe4 {book} Rab8 {book}
+25. Ra1 {book} a6 {book} 26. c4 {book} Ne6 {book} 27. c5+ {book} Kc7 {book}
+28. Nxe6+ {book} Bxe6 {book} 29. Kc3 {book} Rd8 {book} 30. f4 {book} Re8 {book}
+31. c6 {1.0s} bxc6 {1.1s} 32. Bxc6 {1.1s} Kxc6 {1.1s} 33. Rxa6+ {1.0s}
+Kb7 {1.1s} 34. Ra5 {1.0s} Bd7 {1.1s} 35. Ra6 {1.1s} Rxe1 {1.1s} 36. Ra5 {1.0s}
+Bc6 {1.2s} 37. Ra6 {1.0s} Re3+ {1.1s} 38. Kd4 {1.1s} Re4+ {1.2s} 39. Kc3 {1.1s}
+Kxa6 {1.1s} 40. Kd3 {1.0s} Rc8 {1.1s} 41. Kc3 {1.2s} f6 {1.1s} 42. Kb3 {1.1s}
+Bd5+ {1.2s} 43. Ka3 {1.3s} Rc6 {1.1s} 44. h4 {1.1s} Rd6 {1.1s} 45. b5+ {1.0s}
+Kxb5 {1.0s} 46. Kb2 {1.1s} Rc6 {1.1s} 47. Ka3 {1.2s} Rc2 {1.1s} 48. g4 {1.1s}
+Re3# {1.1s, Black mates} 0-1
+
+[Event "?"]
+[Site "?"]
+[Date "2021.06.18"]
+[Round "75"]
+[White "Rival Haskell Build 65"]
+[Black "Rival Haskell Build 90"]
+[Result "0-1"]
+[BlackTimeControl "1/move"]
+[ECO "C65"]
+[GameDuration "00:01:34"]
+[GameEndTime "2021-06-18T00:19:39.978 BST"]
+[GameStartTime "2021-06-18T00:18:05.906 BST"]
+[Opening "Ruy Lopez"]
+[PlyCount "146"]
+[Variation "Berlin defense"]
+[WhiteTimeControl "1/move"]
+
+1. e4 {book} e5 {book} 2. Nf3 {book} Nc6 {book} 3. Bb5 {book} Nf6 {book}
+4. d3 {book} Bc5 {book} 5. Bxc6 {book} dxc6 {book} 6. Nbd2 {book} Nd7 {book}
+7. Nc4 {book} f6 {book} 8. Bd2 {book} Nf8 {book} 9. b4 {book} Be7 {book}
+10. Nh4 {book} g6 {book} 11. O-O {book} Ne6 {book} 12. g3 {book} O-O {book}
+13. Ng2 {book} b6 {book} 14. Kh1 {book} c5 {book} 15. a3 {book} Bb7 {book}
+16. Bh6 {book} Rf7 {book} 17. c3 {book} Qd7 {book} 18. Qe2 {book} Rd8 {book}
+19. Rad1 {book} cxb4 {book} 20. axb4 {book} c5 {book} 21. bxc5 {book}
+Nxc5 {book} 22. f3 {book} Nxd3 {book} 23. Nb2 {book} Qh3 {book} 24. Nxd3 {book}
+Qxh6 {book} 25. Qa2 {book} a5 {book} 26. Nb2 {book} Qf8 {book} 27. Qe6 {book}
+Bc5 {book} 28. Na4 {book} Bc8 {book} 29. Qc4 {book} Rxd1 {book} 30. Rxd1 {book}
+Kg7 {book} 31. Nxc5 {1.1s} Qxc5 {1.0s} 32. Qxc5 {1.1s} bxc5 {1.0s} 33. c4 {1.1s}
+Be6 {1.0s} 34. Ne3 {1.2s} f5 {1.0s} 35. exf5 {1.2s} gxf5 {1.0s} 36. Nd5 {1.1s}
+Bxd5 {1.0s} 37. Rxd5 {1.1s} Rb7 {1.0s} 38. Rxc5 {1.2s} Rb1+ {1.0s}
+39. Kg2 {1.2s} Rb2+ {1.1s} 40. Kh3 {1.1s} Rb1 {1.0s} 41. Rxe5 {1.1s} Rb2 {1.0s}
+42. Rxf5 {1.1s} Rf2 {1.0s} 43. Rg5+ {1.1s} Kf6 {1.1s} 44. Rxa5 {1.1s}
+Rxf3 {1.2s} 45. Ra6+ {1.0s} Ke5 {1.1s} 46. Rc6 {1.1s} Rf7 {1.0s} 47. Rh6 {1.1s}
+Rf3 {1.1s} 48. Rf6 {1.2s} Kxf6 {1.0s} 49. c5 {1.1s} Rf5 {1.0s} 50. c6 {1.1s}
+Ke6 {1.1s} 51. c7 {1.0s} Rc5 {1.0s} 52. g4 {1.1s} Rxc7 {1.1s} 53. Kg3 {1.2s}
+Rc6 {1.1s} 54. Kh3 {1.1s} Rc5 {1.1s} 55. Kg3 {1.1s} Kd6 {1.0s} 56. Kh3 {1.2s}
+Kc6 {1.1s} 57. Kg3 {1.1s} Re5 {1.0s} 58. Kh3 {1.1s} Re2 {1.1s} 59. Kg3 {1.2s}
+Re4 {1.0s} 60. Kh3 {1.2s} Kd6 {1.0s} 61. Kg3 {1.1s} Ke6 {1.0s} 62. Kh3 {1.1s}
+Kd7 {1.0s} 63. Kg3 {1.1s} Kd6 {1.0s} 64. Kh3 {1.1s} Kc6 {1.0s} 65. Kg3 {1.1s}
+Kd5 {1.1s} 66. Kh3 {1.1s} Ke6 {1.0s} 67. Kg3 {1.1s} Kf6 {1.1s} 68. Kh3 {1.1s}
+Kg5 {1.0s} 69. Kg3 {1.1s} Rxg4+ {1.0s} 70. Kh3 {1.2s} Rc4 {1.1s} 71. Kg3 {1.2s}
+Rc2 {1.1s} 72. Kh3 {1.1s} Kf4 {1.0s} 73. Kh4 {1.1s} Rxh2# {1.1s, Black mates}
+0-1
+
+[Event "?"]
+[Site "?"]
+[Date "2021.06.18"]
+[Round "76"]
+[White "Rival Haskell Build 90"]
+[Black "Rival Haskell Build 65"]
+[Result "0-1"]
+[BlackTimeControl "1/move"]
+[ECO "D97"]
+[GameDuration "00:00:52"]
+[GameEndTime "2021-06-18T00:20:32.294 BST"]
+[GameStartTime "2021-06-18T00:19:39.979 BST"]
+[Opening "Gruenfeld"]
+[PlyCount "108"]
+[Variation "Russian, Alekhine (Hungarian) Variation"]
+[WhiteTimeControl "1/move"]
+
+1. d4 {book} Nf6 {book} 2. c4 {book} g6 {book} 3. Nc3 {book} d5 {book}
+4. Nf3 {book} Bg7 {book} 5. Qb3 {book} dxc4 {book} 6. Qxc4 {book} O-O {book}
+7. e4 {book} a6 {book} 8. Be2 {book} b5 {book} 9. Qb3 {book} c5 {book}
+10. dxc5 {book} Be6 {book} 11. Qc2 {book} Nbd7 {book} 12. Be3 {book} Rc8 {book}
+13. Rd1 {book} b4 {book} 14. Nd5 {book} Bxd5 {book} 15. exd5 {book} Nxc5 {book}
+16. O-O {book} Nce4 {book} 17. Qd3 {book} Qd6 {book} 18. g3 {book} Rfd8 {book}
+19. Bf4 {book} Qxd5 {book} 20. Qxa6 {book} Qa8 {book} 21. Qxa8 {book}
+Rxa8 {book} 22. Rxd8+ {book} Rxd8 {book} 23. Ne5 {book} Nd5 {book}
+24. Rd1 {book} Rd6 {book} 25. Nxg6 {book} Nxf4 {book} 26. Nxf4 {book}
+Rxd1+ {book} 27. Bxd1 {book} Bxb2 {book} 28. Bc2 {book} Nf6 {book}
+29. Nd3 {book} Bc3 {book} 30. f4 {book} e6 {book} 31. Nc5 {1.1s} Bd4+ {1.1s}
+32. Kh1 {1.1s} Bxc5 {1.1s} 33. Bd3 {1.0s} Nd5 {1.1s} 34. Bc2 {1.0s} f5 {1.1s}
+35. Bd3 {1.0s} Bd6 {1.3s} 36. Bc4 {1.1s} Kf7 {1.3s} 37. Bd3 {1.0s} Kf6 {1.1s}
+38. Bc4 {1.0s} Bc5 {1.0s} 39. Bd3 {1.0s} e5 {1.2s} 40. fxe5+ {1.0s} Kxe5 {1.1s}
+41. Bb5 {1.0s} Bd6 {1.1s} 42. Bd3 {1.0s} Nf6 {1.1s} 43. Bb5 {1.1s} Bc5 {1.1s}
+44. Bd3 {1.0s} Ne4 {1.2s} 45. Bb5 {1.0s} Bd6 {1.1s} 46. Bd3 {1.0s} Nf2+ {1.1s}
+47. Kg2 {1.0s} Nxd3 {1.1s} 48. Kf3 {1.0s} Nc1 {1.1s} 49. Kg2 {1.0s} Nxa2 {1.1s}
+50. Kh3 {1.1s} b3 {1.1s} 51. Kg2 {1.1s} b2 {1.1s} 52. Kf3 {1.1s} b1=Q {1.1s}
+53. Kg2 {1.0s} Bc5 {1.1s} 54. Kf3 {1.1s} Qe4# {1.1s, Black mates} 0-1
+
+[Event "?"]
+[Site "?"]
+[Date "2021.06.18"]
+[Round "77"]
+[White "Rival Haskell Build 65"]
+[Black "Rival Haskell Build 90"]
+[Result "1-0"]
+[BlackTimeControl "1/move"]
+[ECO "B90"]
+[GameDuration "00:01:18"]
+[GameEndTime "2021-06-18T00:21:51.154 BST"]
+[GameStartTime "2021-06-18T00:20:32.344 BST"]
+[Opening "Sicilian"]
+[PlyCount "133"]
+[Variation "Najdorf, Adams attack"]
+[WhiteTimeControl "1/move"]
+
+1. e4 {book} c5 {book} 2. Nf3 {book} d6 {book} 3. d4 {book} cxd4 {book}
+4. Nxd4 {book} Nf6 {book} 5. Nc3 {book} a6 {book} 6. h3 {book} e5 {book}
+7. Nb3 {book} Be6 {book} 8. Be3 {book} Be7 {book} 9. Qf3 {book} O-O {book}
+10. O-O-O {book} b5 {book} 11. g4 {book} b4 {book} 12. Nd5 {book} Nxd5 {book}
+13. exd5 {book} Bc8 {book} 14. Bd3 {book} a5 {book} 15. Nc5 {book} a4 {book}
+16. Ne4 {book} Ba6 {book} 17. g5 {book} b3 {book} 18. a3 {book} Qc8 {book}
+19. c3 {book} Bxd3 {book} 20. Rxd3 {book} Nd7 {book} 21. Rg1 {book} f5 {book}
+22. gxf6 {book} Nxf6 {book} 23. Nxf6+ {book} Rxf6 {book} 24. Qg4 {book}
+Qf8 {book} 25. Rdd1 {book} Qf7 {book} 26. h4 {book} Rg6 {book} 27. Qe4 {book}
+Rxg1 {book} 28. Rxg1 {book} Bxh4 {book} 29. Rh1 {book} g5 {book} 30. Kd2 {book}
+Bxf2 {book} 31. Bxg5 {1.1s} Qd7 {1.1s} 32. Bf6 {1.1s} Qf7 {1.1s} 33. Rh4 {1.1s}
+Qxf6 {1.1s} 34. Qxh7+ {1.1s} Kf8 {1.1s} 35. Qh8+ {1.1s} Qxh8 {1.1s}
+36. Rxh8+ {1.0s} Kf7 {1.0s} 37. Rxa8 {1.1s} e4 {1.0s} 38. Ke2 {1.2s} e3 {1.1s}
+39. Rxa4 {1.1s} Kf6 {1.0s} 40. Re4 {1.1s} Kf7 {1.2s} 41. Re6 {1.1s} Bg3 {1.0s}
+42. Rxe3 {1.0s} Be5 {1.1s} 43. Re4 {1.2s} Bg3 {1.1s} 44. Rb4 {1.1s} Be5 {1.0s}
+45. Rxb3 {1.1s} Kf6 {1.0s} 46. c4 {1.1s} Bd4 {1.0s} 47. Rf3+ {1.1s} Ke7 {1.0s}
+48. b4 {1.1s} Bf6 {1.0s} 49. c5 {1.1s} Be5 {1.1s} 50. c6 {1.1s} Kd8 {1.0s}
+51. Rf7 {1.3s} Bg3 {1.1s} 52. Rg7 {1.1s} Be5 {1.0s} 53. Rb7 {1.1s} Bg3 {1.0s}
+54. Rb8+ {1.1s} Kc7 {1.0s} 55. Ra8 {1.1s} Bf4 {1.0s} 56. Kd3 {1.1s} Bg3 {1.2s}
+57. b5 {1.1s} Bf2 {1.1s} 58. Rf8 {1.1s} Bg3 {1.0s} 59. Kc4 {1.1s} Bf2 {1.1s}
+60. Rxf2 {1.1s} Kd8 {1.1s} 61. Kd4 {1.0s} Kc7 {1.0s} 62. Rf8 {1.2s} Kb6 {1.0s}
+63. Rf7 {1.1s} Ka5 {1.0s} 64. Rb7 {1.1s} Ka4 {1.0s} 65. Kc3 {1.2s} Ka5 {1.0s}
+66. Kc4 {1.1s} Ka4 {1.1s} 67. Ra7# {1.1s, White mates} 1-0
+
+[Event "?"]
+[Site "?"]
+[Date "2021.06.18"]
+[Round "78"]
+[White "Rival Haskell Build 90"]
+[Black "Rival Haskell Build 65"]
+[Result "1-0"]
+[BlackTimeControl "1/move"]
+[ECO "A05"]
+[GameDuration "00:01:05"]
+[GameEndTime "2021-06-18T00:22:57.149 BST"]
+[GameStartTime "2021-06-18T00:21:51.155 BST"]
+[Opening "Reti Opening"]
+[PlyCount "95"]
+[WhiteTimeControl "1/move"]
+
+1. Nf3 {book} Nf6 {book} 2. c4 {book} g6 {book} 3. Nc3 {book} Bg7 {book}
+4. e4 {book} d6 {book} 5. d4 {book} O-O {book} 6. Be2 {book} e5 {book}
+7. Be3 {book} Ng4 {book} 8. Bg5 {book} f6 {book} 9. Bh4 {book} g5 {book}
+10. Bg3 {book} Nh6 {book} 11. d5 {book} Nd7 {book} 12. Nd2 {book} f5 {book}
+13. exf5 {book} Nf6 {book} 14. Nde4 {book} Nxe4 {book} 15. Nxe4 {book}
+Bxf5 {book} 16. Bd3 {book} g4 {book} 17. O-O {book} Bxe4 {1.1s} 18. Bxe4 {1.0s}
+Rf4 {1.0s} 19. Bxh7+ {1.0s} Kh8 {1.1s} 20. Bxf4 {1.0s} exf4 {1.0s}
+21. Qc2 {1.2s} Bxb2 {1.1s} 22. Qxb2+ {1.1s} Kxh7 {1.0s} 23. Qxb7 {1.0s}
+Nf5 {1.0s} 24. f3 {1.0s} Ne3 {1.1s} 25. Rf2 {1.0s} Nf5 {1.1s} 26. fxg4 {1.0s}
+Nd4 {1.1s} 27. Rd2 {1.0s} Nf5 {1.1s} 28. gxf5 {1.0s} Qf6 {1.0s} 29. Qxc7+ {1.0s}
+Qg7 {1.1s} 30. Qxg7+ {1.0s} Kxg7 {1.0s} 31. Rd4 {1.1s} Kf6 {1.1s}
+32. Rxf4 {1.0s} Re8 {1.1s} 33. Rh4 {1.0s} Ra8 {1.1s} 34. Rh6+ {1.0s} Kg5 {1.1s}
+35. Rg6+ {1.0s} Kxf5 {1.1s} 36. Rg7 {1.1s} Kf6 {1.1s} 37. Rd7 {1.0s} Kf5 {1.2s}
+38. Rxd6 {1.1s} Kg5 {1.0s} 39. Re6 {1.0s} Kf5 {1.1s} 40. Re8 {1.0s} Kg5 {1.1s}
+41. Rxa8 {1.0s} Kf6 {1.1s} 42. Rxa7 {1.1s} Kf5 {1.1s} 43. d6 {1.0s} Ke6 {1.1s}
+44. d7 {1.0s} Kf6 {1.1s} 45. d8=Q+ {1.1s} Kf5 {1.0s} 46. Qd5+ {1.0s} Kf6 {1.0s}
+47. h4 {1.0s} Kg6 {1.1s} 48. Qg5# {1.0s, White mates} 1-0
+
+[Event "?"]
+[Site "?"]
+[Date "2021.06.18"]
+[Round "79"]
+[White "Rival Haskell Build 65"]
+[Black "Rival Haskell Build 90"]
+[Result "1-0"]
+[BlackTimeControl "1/move"]
+[ECO "B90"]
+[GameDuration "00:00:27"]
+[GameEndTime "2021-06-18T00:23:24.442 BST"]
+[GameStartTime "2021-06-18T00:22:57.149 BST"]
+[Opening "Sicilian"]
+[PlyCount "39"]
+[Variation "Najdorf, Byrne (English) attack"]
+[WhiteTimeControl "1/move"]
+
+1. e4 {book} c5 {book} 2. Nf3 {book} d6 {book} 3. d4 {book} cxd4 {book}
+4. Nxd4 {book} Nf6 {book} 5. Nc3 {book} a6 {book} 6. Be3 {book} Ng4 {book}
+7. Bc1 {book} Nc6 {1.1s} 8. f3 {book} Nxd4 {1.1s} 9. Qxd4 {1.1s} Nxh2 {1.1s}
+10. Rxh2 {1.1s} Be6 {1.3s} 11. Qd3 {1.1s} Bc8 {1.1s} 12. e5 {1.0s} dxe5 {1.1s}
+13. Rxh7 {1.1s} Rxh7 {1.1s} 14. Qxh7 {1.2s} Bf5 {1.0s} 15. Qxf5 {1.2s}
+Qd6 {1.0s} 16. Qe4 {1.1s} Qd8 {1.1s} 17. Qxb7 {1.0s} e6 {1.0s} 18. Bxa6 {1.1s}
+Qf6 {1.2s} 19. Bb5+ {1.1s} Kd8 {1.0s} 20. Qd7# {1.1s, White mates} 1-0
+
+[Event "?"]
+[Site "?"]
+[Date "2021.06.18"]
+[Round "80"]
+[White "Rival Haskell Build 90"]
+[Black "Rival Haskell Build 65"]
+[Result "0-1"]
+[BlackTimeControl "1/move"]
+[ECO "B92"]
+[GameDuration "00:01:59"]
+[GameEndTime "2021-06-18T00:25:24.194 BST"]
+[GameStartTime "2021-06-18T00:23:24.443 BST"]
+[Opening "Sicilian"]
+[PlyCount "136"]
+[Variation "Najdorf, Opovcensky Variation"]
+[WhiteTimeControl "1/move"]
+
+1. e4 {book} c5 {book} 2. Nf3 {book} d6 {book} 3. d4 {book} cxd4 {book}
+4. Nxd4 {book} Nf6 {book} 5. Nc3 {book} a6 {book} 6. Be2 {book} e5 {book}
+7. Nb3 {book} Be7 {book} 8. Be3 {book} Be6 {book} 9. Nd5 {book} Nbd7 {book}
+10. Qd3 {book} O-O {book} 11. a4 {book} Bxd5 {1.0s} 12. exd5 {book} Nc5 {1.0s}
+13. Nxc5 {book} dxc5 {1.0s} 14. c4 {book} Qd6 {1.1s} 15. Qf5 {1.0s} e4 {1.0s}
+16. Qf4 {1.0s} Qxf4 {1.1s} 17. Bxf4 {1.1s} b6 {1.0s} 18. d6 {1.0s} Bd8 {1.1s}
+19. Be5 {1.0s} g6 {1.0s} 20. Bf4 {1.0s} Kg7 {1.1s} 21. Bf1 {1.0s} Nd7 {1.1s}
+22. Be3 {1.0s} Bf6 {1.0s} 23. O-O-O {1.0s} Ne5 {1.1s} 24. Bf4 {1.0s} Nc6 {1.0s}
+25. Rd5 {1.0s} Nd4 {1.0s} 26. Rxd4 {1.0s} Bxd4 {1.1s} 27. Be3 {1.0s}
+Bxe3+ {1.1s} 28. fxe3 {1.0s} Rad8 {1.2s} 29. d7 {1.1s} Rxd7 {1.2s} 30. b3 {1.0s}
+Rd6 {1.1s} 31. g4 {1.0s} f6 {1.1s} 32. Kc2 {1.0s} Rc6 {1.1s} 33. Kc1 {1.0s}
+Re6 {1.1s} 34. Kc2 {1.0s} Rd6 {1.2s} 35. Kc1 {1.0s} Rc6 {1.1s} 36. Kc2 {1.0s}
+Re6 {1.1s} 37. Kc1 {1.1s} Re5 {1.1s} 38. Kc2 {1.0s} f5 {1.1s} 39. gxf5 {1.0s}
+Rfxf5 {1.2s} 40. Kc3 {1.0s} Kf6 {1.1s} 41. Kc2 {1.0s} Re6 {1.0s} 42. Kc3 {1.0s}
+Rc6 {1.0s} 43. Kc2 {1.1s} Rd6 {1.1s} 44. Kc3 {1.0s} Rd1 {1.0s} 45. Kc2 {1.0s}
+Rfxf1 {1.1s} 46. Rxf1+ {1.1s} Rxf1 {1.3s} 47. h3 {1.0s} Rg1 {1.1s}
+48. Kd2 {1.1s} Ke6 {1.1s} 49. Kc2 {1.1s} Kd6 {1.1s} 50. Kd2 {1.0s} Rg3 {1.1s}
+51. Kc2 {1.2s} Rxh3 {1.1s} 52. Kc1 {1.0s} Ke6 {1.2s} 53. Kc2 {1.0s} Kf6 {1.1s}
+54. Kc1 {1.1s} Ke5 {1.1s} 55. Kc2 {1.0s} Ke6 {1.3s} 56. Kc1 {1.1s} Kd6 {1.1s}
+57. Kc2 {1.1s} Ke5 {1.0s} 58. Kc1 {1.0s} Kf6 {1.1s} 59. Kc2 {1.0s} Kf5 {1.1s}
+60. Kc1 {1.0s} Rxe3 {1.0s} 61. Kb2 {1.0s} Ke6 {1.1s} 62. Kc1 {1.2s} Rxb3 {1.1s}
+63. Kc2 {1.1s} Rg3 {1.1s} 64. Kc1 {1.0s} Ke5 {1.1s} 65. Kc2 {1.0s} Kd4 {1.2s}
+66. Kc1 {1.0s} Kc3 {1.1s} 67. Kd1 {1.0s} Re3 {1.1s} 68. Kc1 {1.0s}
+Re1# {1.1s, Black mates} 0-1
+
+[Event "?"]
+[Site "?"]
+[Date "2021.06.18"]
+[Round "81"]
+[White "Rival Haskell Build 65"]
+[Black "Rival Haskell Build 90"]
+[Result "0-1"]
+[BlackTimeControl "1/move"]
+[ECO "D15"]
+[GameDuration "00:01:55"]
+[GameEndTime "2021-06-18T00:27:19.337 BST"]
+[GameStartTime "2021-06-18T00:25:24.194 BST"]
+[Opening "QGD Slav"]
+[PlyCount "120"]
+[Variation "4.Nc3"]
+[WhiteTimeControl "1/move"]
+
+1. d4 {book} d5 {book} 2. c4 {book} c6 {book} 3. Nf3 {book} Nf6 {book}
+4. Nc3 {book} a6 {book} 5. a4 {book} e6 {book} 6. Bg5 {book} Nbd7 {book}
+7. Qc2 {book} Bd6 {1.1s} 8. Bxf6 {1.1s} Nxf6 {1.0s} 9. cxd5 {1.2s} cxd5 {1.0s}
+10. Ne5 {1.1s} Ne4 {1.0s} 11. Nxe4 {1.4s} Bxe5 {1.0s} 12. dxe5 {1.0s}
+dxe4 {1.0s} 13. Qxe4 {1.1s} Qd5 {1.1s} 14. Qxd5 {1.1s} exd5 {1.0s} 15. e3 {1.2s}
+f6 {1.0s} 16. exf6 {1.0s} gxf6 {1.0s} 17. f4 {1.0s} Be6 {1.0s} 18. Bd3 {1.1s}
+f5 {1.0s} 19. Bc2 {1.1s} Kd7 {1.1s} 20. Bd3 {1.0s} Kd6 {1.1s} 21. Be2 {1.1s}
+Kd7 {1.0s} 22. Bf3 {1.1s} Kd6 {1.1s} 23. b4 {1.1s} Kc6 {1.1s} 24. Be2 {1.0s}
+Bc8 {1.0s} 25. Bd3 {1.1s} Be6 {1.0s} 26. b5+ {1.1s} axb5 {1.0s} 27. Bxf5 {1.0s}
+Bxf5 {1.0s} 28. axb5+ {1.0s} Kxb5 {1.1s} 29. Rxa8 {1.1s} Rxa8 {1.0s}
+30. Kf2 {1.1s} Kc6 {1.0s} 31. Kg3 {1.2s} Kc5 {1.0s} 32. Kf2 {1.2s} Kd6 {1.0s}
+33. Kg3 {1.1s} Rg8+ {1.0s} 34. Kf2 {1.1s} Ke6 {1.0s} 35. g3 {1.1s} Kd6 {1.0s}
+36. Ke1 {1.1s} Kc6 {1.0s} 37. Kf2 {1.1s} Kb6 {1.0s} 38. Ke1 {1.1s} Be6 {1.0s}
+39. Kf2 {1.1s} Kc6 {1.1s} 40. Ke1 {1.1s} Kc5 {1.0s} 41. Kf2 {1.1s} Kd6 {1.0s}
+42. Ke1 {1.1s} Kc6 {1.2s} 43. Kf2 {1.1s} Kd7 {1.0s} 44. Ke1 {1.1s} Bf5 {1.0s}
+45. Kf2 {1.1s} Ke6 {1.1s} 46. Ke1 {1.2s} Kd6 {1.1s} 47. Kf2 {1.1s} Be4 {1.0s}
+48. Ke1 {1.1s} Bxh1 {1.1s} 49. Kd2 {1.0s} Kc6 {1.1s} 50. Ke1 {1.1s} Kc5 {1.1s}
+51. Kd2 {1.1s} Bf3 {1.1s} 52. Ke1 {1.1s} Kc6 {1.1s} 53. Kd2 {1.1s} Kd6 {1.0s}
+54. Ke1 {1.2s} Ke6 {1.0s} 55. Kd2 {1.1s} Kf5 {1.1s} 56. Ke1 {1.1s} Ke4 {1.0s}
+57. Kd2 {1.1s} Rg7 {1.0s} 58. Ke1 {1.1s} Kxe3 {1.0s} 59. f5 {1.1s} Rc7 {1.0s}
+60. h4 {1.0s} Rc1# {1.0s, Black mates} 0-1
+
+[Event "?"]
+[Site "?"]
+[Date "2021.06.18"]
+[Round "82"]
+[White "Rival Haskell Build 90"]
+[Black "Rival Haskell Build 65"]
+[Result "0-1"]
+[BlackTimeControl "1/move"]
+[ECO "C88"]
+[GameDuration "00:01:13"]
+[GameEndTime "2021-06-18T00:28:33.300 BST"]
+[GameStartTime "2021-06-18T00:27:19.338 BST"]
+[Opening "Ruy Lopez"]
+[PlyCount "122"]
+[Variation "Closed, 7...O-O"]
+[WhiteTimeControl "1/move"]
+
+1. e4 {book} e5 {book} 2. Nf3 {book} Nc6 {book} 3. Bb5 {book} a6 {book}
+4. Ba4 {book} Nf6 {book} 5. O-O {book} Be7 {book} 6. Re1 {book} b5 {book}
+7. Bb3 {book} O-O {book} 8. h3 {book} Bb7 {book} 9. d3 {book} d6 {book}
+10. a3 {book} Qd7 {book} 11. Nc3 {book} Rae8 {book} 12. a4 {book} b4 {book}
+13. Nd5 {book} Nxd5 {book} 14. Bxd5 {book} Na5 {book} 15. Bxb7 {book}
+Nxb7 {book} 16. d4 {book} Bf6 {book} 17. c3 {book} exd4 {book} 18. cxd4 {book}
+c5 {book} 19. Bg5 {book} Bxd4 {book} 20. Nxd4 {book} cxd4 {book} 21. Qxd4 {book}
+Nc5 {book} 22. Bf4 {book} Nb3 {book} 23. Qxd6 {book} Qxd6 {book} 24. Bxd6 {book}
+Nxa1 {book} 25. Rxa1 {book} Rxe4 {book} 26. Bxf8 {book} Kxf8 {book}
+27. Rc1 {book} Re2 {book} 28. Rc6 {book} Re6 {1.1s} 29. Rxe6 {1.0s} fxe6 {1.1s}
+30. f4 {1.0s} Ke7 {1.1s} 31. Kh2 {1.0s} Kd6 {1.1s} 32. b3 {1.0s} Kc5 {1.1s}
+33. g4 {1.1s} Kd4 {1.1s} 34. f5 {1.0s} exf5 {1.1s} 35. gxf5 {1.0s} Kc3 {1.1s}
+36. a5 {1.0s} Kxb3 {1.1s} 37. f6 {1.1s} gxf6 {1.0s} 38. Kg3 {1.0s} Ka4 {1.2s}
+39. Kh2 {1.0s} b3 {1.1s} 40. Kg2 {1.1s} b2 {1.2s} 41. Kh1 {1.1s} b1=Q+ {1.1s}
+42. Kg2 {1.0s} Kxa5 {1.1s} 43. Kf3 {1.1s} f5 {1.1s} 44. Ke3 {1.0s} Qb3+ {1.1s}
+45. Kf4 {1.0s} Qxh3 {1.1s} 46. Ke5 {1.1s} Qh6 {1.3s} 47. Kxf5 {1.1s} Qe3 {1.4s}
+48. Kf6 {1.2s} Qe4 {1.1s} 49. Kf7 {1.0s} Qf5+ {1.1s} 50. Ke8 {1.1s} Qf6 {1.1s}
+51. Kd7 {1.2s} Qe5 {1.1s} 52. Kc6 {1.1s} Qe7 {1.2s} 53. Kd5 {1.1s} Kb5 {1.1s}
+54. Kd4 {1.0s} Qe2 {1.2s} 55. Kd5 {1.0s} Qe3 {1.1s} 56. Kd6 {1.0s} Kb6 {1.5s}
+57. Kd5 {1.0s} Qf4 {1.0s} 58. Ke6 {1.1s} Kc6 {1.3s} 59. Ke7 {1.0s} Qf5 {1.1s}
+60. Ke8 {1.0s} Kd6 {1.2s} 61. Kd8 {1.0s} Qd7# {1.1s, Black mates} 0-1
+
+[Event "?"]
+[Site "?"]
+[Date "2021.06.18"]
+[Round "83"]
+[White "Rival Haskell Build 65"]
+[Black "Rival Haskell Build 90"]
+[Result "1-0"]
+[BlackTimeControl "1/move"]
+[ECO "E10"]
+[GameDuration "00:02:45"]
+[GameEndTime "2021-06-18T00:31:18.723 BST"]
+[GameStartTime "2021-06-18T00:28:33.300 BST"]
+[Opening "Queen's pawn game"]
+[PlyCount "211"]
+[WhiteTimeControl "1/move"]
+
+1. d4 {book} Nf6 {book} 2. c4 {book} e6 {book} 3. Nf3 {book} d5 {book}
+4. Nc3 {book} Be7 {book} 5. Bf4 {book} O-O {book} 6. e3 {book} Nbd7 {book}
+7. c5 {book} Nh5 {book} 8. Bd3 {book} Nxf4 {book} 9. exf4 {book} b6 {book}
+10. b4 {book} a5 {book} 11. a3 {book} c6 {book} 12. O-O {book} Qc7 {book}
+13. g3 {book} Ba6 {book} 14. Bxa6 {book} Rxa6 {book} 15. Qe2 {book} Rfa8 {book}
+16. b5 {book} cxb5 {book} 17. Nxd5 {book} exd5 {book} 18. Qxe7 {book} Rc8 {book}
+19. Rfb1 {book} bxc5 {book} 20. Rxb5 {book} Re6 {book} 21. Qg5 {book} h6 {book}
+22. Qxd5 {book} Rd6 {book} 23. Qc4 {book} cxd4 {book} 24. Qxc7 {book}
+Rxc7 {book} 25. Rxa5 {book} d3 {book} 26. Rd1 {book} Kh7 {book} 27. Rb5 {book}
+Rc2 {book} 28. Rb4 {book} Nc5 {book} 29. Rd4 {book} Rxd4 {book} 30. Nxd4 {book}
+Ra2 {book} 31. Nb5 {1.1s} Rxf2 {1.0s} 32. Kxf2 {1.2s} f6 {1.1s} 33. Ke3 {1.2s}
+g5 {1.1s} 34. fxg5 {1.2s} fxg5 {1.0s} 35. Kd4 {1.1s} Ne6+ {1.1s} 36. Kxd3 {1.0s}
+Ng7 {1.0s} 37. Nd6 {1.1s} Ne6 {1.0s} 38. Nc4 {1.1s} Ng7 {1.0s} 39. Ne5 {1.1s}
+Ne6 {1.0s} 40. Nc6 {1.1s} Ng7 {1.0s} 41. Nd4 {1.0s} Ne6 {1.0s} 42. Nxe6 {1.1s}
+Kg6 {1.1s} 43. Nc5 {1.1s} Kh7 {1.0s} 44. Ne4 {1.1s} Kg6 {1.0s} 45. Nd6 {1.2s}
+Kh7 {1.0s} 46. Nf5 {1.1s} Kg6 {1.1s} 47. Ke4 {1.2s} Kh7 {1.0s} 48. Rd7+ {1.2s}
+Kg6 {1.0s} 49. Rd6+ {1.1s} Kh7 {1.0s} 50. Rxh6+ {1.2s} Kg8 {1.0s} 51. g4 {1.1s}
+Kf7 {1.1s} 52. Ng3 {1.1s} Kg8 {1.1s} 53. Rc6 {1.0s} Kf7 {1.2s} 54. Rd6 {1.1s}
+Kg8 {1.0s} 55. Rd5 {1.1s} Kf7 {1.0s} 56. Rc5 {1.1s} Kg8 {1.0s} 57. Re5 {1.1s}
+Kf7 {1.2s} 58. Rd5 {1.1s} Kg8 {1.1s} 59. Rd6 {1.2s} Kf7 {1.0s} 60. Kd5 {1.0s}
+Kg8 {1.0s} 61. Rc6 {1.1s} Kf7 {1.0s} 62. Kc5 {1.2s} Kg8 {1.0s} 63. Kc4 {1.1s}
+Kf7 {1.0s} 64. Rd6 {1.1s} Kg8 {1.1s} 65. Rf6 {1.2s} Kh7 {1.0s} 66. Rc6 {1.1s}
+Kg8 {1.0s} 67. Rc5 {1.1s} Kh7 {1.1s} 68. Rd5 {1.1s} Kg8 {1.0s} 69. Rd6 {1.2s}
+Kf7 {1.2s} 70. Kc5 {1.1s} Kg8 {1.0s} 71. Rc6 {1.2s} Kf7 {1.1s} 72. Kd5 {1.1s}
+Kg8 {1.0s} 73. Rd6 {1.1s} Kf7 {1.0s} 74. Kc6 {1.1s} Kg8 {1.0s} 75. Rd5 {1.2s}
+Kf7 {1.1s} 76. a4 {1.1s} Kg6 {1.0s} 77. Kc5 {1.2s} Kf7 {1.0s} 78. Kd4 {1.3s}
+Kg6 {1.0s} 79. Rc5 {1.1s} Kf7 {1.0s} 80. Re5 {1.1s} Kg6 {1.0s} 81. Rd5 {1.2s}
+Kf7 {1.0s} 82. Rd6 {1.1s} Kg7 {1.0s} 83. Rc6 {1.1s} Kf7 {1.2s} 84. Kc5 {1.2s}
+Kg7 {1.0s} 85. Kd5 {1.2s} Kf7 {1.1s} 86. Rd6 {1.2s} Kg7 {1.1s} 87. Kc6 {1.3s}
+Kf7 {1.1s} 88. Kc5 {1.1s} Kg7 {1.2s} 89. Rc6 {1.2s} Kf7 {1.0s} 90. Kd5 {1.1s}
+Kg7 {1.0s} 91. Rd6 {1.1s} Kf7 {1.1s} 92. Kc6 {1.1s} Kg7 {1.1s} 93. Kc5 {1.1s}
+Kf7 {1.0s} 94. Kc4 {1.1s} Kg7 {1.0s} 95. Rc6 {1.2s} Kf7 {1.0s} 96. Rc5 {1.2s}
+Kg7 {1.0s} 97. Kd5 {1.1s} Kf7 {1.0s} 98. Ke5 {1.1s} Kg7 {1.0s} 99. Ke6 {1.0s}
+Kg6 {1.0s} 100. Rc6 {1.2s} Kg7 {1.0s} 101. a5 {1.1s} Kf8 {1.0s} 102. a6 {1.1s}
+Kg7 {1.1s} 103. a7 {1.1s} Kg6 {1.2s} 104. a8=Q {1.1s} Kh7 {1.0s} 105. Kf6 {1.1s}
+Kh6 {1.1s} 106. Qh8# {1.1s, White mates} 1-0
+
+[Event "?"]
+[Site "?"]
+[Date "2021.06.18"]
+[Round "84"]
+[White "Rival Haskell Build 90"]
+[Black "Rival Haskell Build 65"]
+[Result "1-0"]
+[BlackTimeControl "1/move"]
+[ECO "C65"]
+[GameDuration "00:00:36"]
+[GameEndTime "2021-06-18T00:31:55.538 BST"]
+[GameStartTime "2021-06-18T00:31:18.724 BST"]
+[Opening "Ruy Lopez"]
+[PlyCount "63"]
+[Variation "Berlin defense"]
+[WhiteTimeControl "1/move"]
+
+1. e4 {book} e5 {book} 2. Nf3 {book} Nc6 {book} 3. Bb5 {book} Nf6 {book}
+4. d3 {book} Bc5 {book} 5. O-O {book} Nd4 {book} 6. Nxd4 {book} Bxd4 {book}
+7. Nd2 {book} c6 {book} 8. Ba4 {book} d6 {book} 9. Nf3 {book} Bb6 {book}
+10. c3 {book} h6 {book} 11. Re1 {book} O-O {book} 12. h3 {book} Re8 {book}
+13. Bc2 {book} d5 {book} 14. exd5 {book} Qxd5 {1.5s} 15. Bb3 {book} Qd6 {1.1s}
+16. Be3 {book} Qxd3 {1.1s} 17. Bxf7+ {1.2s} Kxf7 {1.1s} 18. Qxd3 {1.0s}
+Bxe3 {1.1s} 19. b3 {1.0s} Bc5 {1.1s} 20. Qc4+ {1.0s} Nd5 {1.1s} 21. Qxc5 {1.1s}
+e4 {1.1s} 22. Nd4 {1.1s} Bxh3 {1.1s} 23. gxh3 {1.0s} Re5 {1.1s} 24. Rxe4 {1.1s}
+Rxe4 {1.1s} 25. Qd6 {1.0s} Rd8 {1.1s} 26. Qxd8 {1.0s} Nb6 {1.1s} 27. Qb8 {1.0s}
+Nd5 {1.1s} 28. Qxb7+ {1.0s} Kf6 {1.1s} 29. Qxc6+ {1.1s} Re6 {1.1s}
+30. Qxe6+ {1.0s} Kg5 {1.1s} 31. Qf5+ {1.0s} Kh4 {1.1s}
+32. Nf3# {1.1s, White mates} 1-0
+
+[Event "?"]
+[Site "?"]
+[Date "2021.06.18"]
+[Round "85"]
+[White "Rival Haskell Build 65"]
+[Black "Rival Haskell Build 90"]
+[Result "0-1"]
+[BlackTimeControl "1/move"]
+[ECO "C67"]
+[GameDuration "00:01:09"]
+[GameEndTime "2021-06-18T00:33:04.818 BST"]
+[GameStartTime "2021-06-18T00:31:55.538 BST"]
+[Opening "Ruy Lopez"]
+[PlyCount "124"]
+[Variation "Berlin defense, Open Variation"]
+[WhiteTimeControl "1/move"]
+
+1. e4 {book} e5 {book} 2. Nf3 {book} Nc6 {book} 3. Bb5 {book} Nf6 {book}
+4. O-O {book} Nxe4 {book} 5. d4 {book} Nd6 {book} 6. Bxc6 {book} dxc6 {book}
+7. dxe5 {book} Nf5 {book} 8. Qxd8+ {book} Kxd8 {book} 9. h3 {book} Ke8 {book}
+10. Nc3 {book} h5 {book} 11. Bf4 {book} Be7 {book} 12. Rad1 {book} Be6 {book}
+13. Ng5 {book} Rh6 {book} 14. Rfe1 {book} Bb4 {book} 15. a3 {book} Bxc3 {book}
+16. bxc3 {book} h4 {book} 17. g4 {book} hxg3 {book} 18. fxg3 {book} Ne7 {book}
+19. h4 {book} Nd5 {book} 20. Bc1 {book} Nxc3 {book} 21. Rd3 {book} Na4 {book}
+22. Rf3 {book} Bd5 {book} 23. Rf4 {book} Nb6 {book} 24. Ref1 {book} Bc4 {book}
+25. Nxf7 {book} Rg6 {book} 26. R1f3 {book} Bxf7 {book} 27. h5 {book} Rg4 {book}
+28. Rxf7 {book} Rxg3+ {book} 29. Rxg3 {book} Kxf7 {book} 30. e6+ {book}
+Kxe6 {book} 31. Rxg7 {1.2s} Nd5 {1.0s} 32. c4 {1.1s} Ne7 {1.1s} 33. c5 {1.1s}
+Nd5 {1.0s} 34. Rg6+ {1.2s} Ke5 {1.0s} 35. Rg7 {1.1s} Kd4 {1.0s} 36. Rg6 {1.1s}
+Kxc5 {1.0s} 37. Rg7 {1.1s} Kc4 {1.0s} 38. Rg6 {1.1s} c5 {1.0s} 39. Re6 {1.3s}
+c6 {1.2s} 40. Re4+ {1.1s} Kd3 {1.0s} 41. Re6 {1.1s} Rh8 {1.0s} 42. Re4 {1.1s}
+Kxe4 {1.1s} 43. h6 {1.1s} Ne3 {1.1s} 44. Bb2 {1.1s} Rxh6 {1.1s} 45. Bc3 {1.1s}
+Rd6 {1.0s} 46. Bb2 {1.1s} Rd1+ {1.0s} 47. Kf2 {1.0s} b5 {1.0s} 48. Bc3 {1.1s}
+Kd3 {1.1s} 49. Be1 {1.1s} Nc4 {1.0s} 50. Bc3 {1.2s} Kxc3 {1.0s} 51. Kf3 {1.1s}
+Nxa3 {1.0s} 52. Kf4 {1.2s} c4 {1.0s} 53. Ke4 {1.1s} b4 {1.0s} 54. Ke3 {1.4s}
+b3 {1.0s} 55. Ke2 {1.1s} Rd5 {1.0s} 56. Ke3 {1.1s} b2 {1.1s} 57. Kf4 {1.2s}
+b1=Q {1.0s} 58. Kg4 {1.1s} Qb8 {1.1s} 59. Kf3 {1.1s} Qe5 {1.1s} 60. Kg4 {1.0s}
+Rd3 {1.1s} 61. Kh4 {1.0s} Qg7 {1.0s} 62. Kh5 {1.1s} Rh3# {1.0s, Black mates} 0-1
+
+[Event "?"]
+[Site "?"]
+[Date "2021.06.18"]
+[Round "86"]
+[White "Rival Haskell Build 90"]
+[Black "Rival Haskell Build 65"]
+[Result "0-1"]
+[BlackTimeControl "1/move"]
+[ECO "B90"]
+[GameDuration "00:00:19"]
+[GameEndTime "2021-06-18T00:33:23.929 BST"]
+[GameStartTime "2021-06-18T00:33:04.819 BST"]
+[Opening "Sicilian"]
+[PlyCount "42"]
+[Variation "Najdorf, Byrne (English) attack"]
+[WhiteTimeControl "1/move"]
+
+1. e4 {book} c5 {book} 2. Nf3 {book} d6 {book} 3. d4 {book} cxd4 {book}
+4. Nxd4 {book} Nf6 {book} 5. Nc3 {book} a6 {book} 6. Be3 {book} Ng4 {book}
+7. Bc1 {book} Nc6 {1.0s} 8. Be2 {book} Nf6 {book} 9. Be3 {book} e6 {book}
+10. g4 {book} d5 {book} 11. exd5 {book} Nxd5 {book} 12. Nxd5 {book} Qxd5 {book}
+13. O-O {book} Nxd4 {1.0s} 14. Bxd4 {1.0s} f6 {1.1s} 15. c3 {1.0s} Qc6 {1.0s}
+16. Bxf6 {1.0s} gxf6 {1.0s} 17. Bb5 {1.0s} axb5 {1.2s} 18. Qd6 {1.0s}
+Bxd6 {1.1s} 19. b3 {1.0s} Qxc3 {1.1s} 20. Rfc1 {1.0s} Qh3 {1.0s} 21. Rf1 {1.0s}
+Qxh2# {1.1s, Black mates} 0-1
+
+[Event "?"]
+[Site "?"]
+[Date "2021.06.18"]
+[Round "87"]
+[White "Rival Haskell Build 65"]
+[Black "Rival Haskell Build 90"]
+[Result "1-0"]
+[BlackTimeControl "1/move"]
+[ECO "C88"]
+[GameDuration "00:00:27"]
+[GameEndTime "2021-06-18T00:33:51.109 BST"]
+[GameStartTime "2021-06-18T00:33:23.929 BST"]
+[Opening "Ruy Lopez"]
+[PlyCount "65"]
+[Variation "Closed"]
+[WhiteTimeControl "1/move"]
+
+1. e4 {book} e5 {book} 2. Nf3 {book} Nc6 {book} 3. Bb5 {book} a6 {book}
+4. Ba4 {book} Nf6 {book} 5. O-O {book} Be7 {book} 6. Re1 {book} b5 {book}
+7. Bb3 {book} d6 {book} 8. c3 {book} O-O {book} 9. h3 {book} Nb8 {book}
+10. d4 {book} Nbd7 {book} 11. Nbd2 {book} Bb7 {book} 12. Bc2 {book} Re8 {book}
+13. Nf1 {book} Bf8 {book} 14. Ng3 {book} g6 {book} 15. a4 {book} c5 {book}
+16. d5 {book} c4 {book} 17. Bg5 {book} h6 {book} 18. Be3 {book} Nc5 {book}
+19. Qd2 {book} h5 {book} 20. Bxc5 {book} dxc5 {book} 21. Qe3 {book} bxa4 {1.2s}
+22. Bxa4 {1.1s} Nd7 {1.4s} 23. Qe2 {1.1s} Nf6 {1.1s} 24. Bxe8 {1.1s} Qxe8 {1.2s}
+25. Qxc4 {1.1s} Bxd5 {1.3s} 26. exd5 {1.1s} Bd6 {1.1s} 27. Rxa6 {1.1s}
+Rxa6 {1.4s} 28. Qxa6 {1.1s} Qb5 {1.1s} 29. Qxb5 {1.2s} Nxd5 {1.0s}
+30. Qe8+ {1.1s} Kg7 {1.0s} 31. Nxe5 {1.2s} c4 {1.0s} 32. Qxf7+ {1.1s} Kh8 {1.0s}
+33. Nxg6# {1.2s, White mates} 1-0
+
+[Event "?"]
+[Site "?"]
+[Date "2021.06.18"]
+[Round "88"]
+[White "Rival Haskell Build 90"]
+[Black "Rival Haskell Build 65"]
+[Result "0-1"]
+[BlackTimeControl "1/move"]
+[ECO "B46"]
+[GameDuration "00:01:22"]
+[GameEndTime "2021-06-18T00:35:13.279 BST"]
+[GameStartTime "2021-06-18T00:33:51.110 BST"]
+[Opening "Sicilian"]
+[PlyCount "100"]
+[Variation "Taimanov Variation"]
+[WhiteTimeControl "1/move"]
+
+1. e4 {book} c5 {book} 2. Nf3 {book} e6 {book} 3. d4 {book} cxd4 {book}
+4. Nxd4 {book} Nc6 {book} 5. Nc3 {book} a6 {book} 6. Nxc6 {book} bxc6 {book}
+7. Bd3 {book} d5 {book} 8. O-O {book} Nf6 {book} 9. Re1 {book} Be7 {book}
+10. e5 {book} Nd7 {book} 11. Qg4 {book} g6 {book} 12. Na4 {book} Nc5 {1.1s}
+13. Nxc5 {1.1s} Bxc5 {1.1s} 14. Qf4 {1.1s} d4 {1.0s} 15. Qf6 {1.1s} Qxf6 {1.1s}
+16. exf6 {1.0s} Bd6 {1.1s} 17. g3 {1.0s} Bc5 {1.1s} 18. Be4 {1.1s} Bb7 {1.0s}
+19. Bf3 {1.0s} Bd6 {1.0s} 20. Bxc6+ {1.0s} Bxc6 {1.1s} 21. a3 {1.0s} Bd5 {1.1s}
+22. c3 {1.0s} dxc3 {1.2s} 23. bxc3 {1.0s} Bc5 {1.0s} 24. Be3 {1.0s} Bxe3 {1.1s}
+25. fxe3 {1.1s} e5 {1.2s} 26. e4 {1.0s} Bc6 {1.1s} 27. Re3 {1.1s} Bb7 {1.1s}
+28. Ree1 {1.0s} g5 {1.1s} 29. c4 {1.0s} Bc6 {1.1s} 30. c5 {1.0s} Bb7 {1.1s}
+31. Re3 {1.0s} g4 {1.1s} 32. Re2 {1.0s} Bc6 {1.0s} 33. Re3 {1.0s} Bd7 {1.2s}
+34. Re2 {1.1s} Be6 {1.1s} 35. Re3 {1.1s} Bc4 {1.1s} 36. Re2 {1.0s} Bxe2 {1.1s}
+37. c6 {1.0s} Bc4 {1.0s} 38. Rb1 {1.0s} Be6 {1.0s} 39. Ra1 {1.1s} Bb3 {1.1s}
+40. Rb1 {1.0s} Bc4 {1.0s} 41. Ra1 {1.0s} Rc8 {1.1s} 42. Rc1 {1.1s} Rxc6 {1.0s}
+43. Rxc4 {1.0s} Rxc4 {1.1s} 44. Kh1 {1.0s} Rxe4 {1.1s} 45. Kg1 {1.0s} Kd7 {1.1s}
+46. Kf2 {1.0s} Ra4 {1.0s} 47. Kg1 {1.0s} Rb8 {1.2s} 48. Kf2 {1.0s} Rxa3 {1.1s}
+49. h4 {1.0s} Rb2+ {1.0s} 50. Kf1 {1.0s} Ra1# {1.1s, Black mates} 0-1
+
+[Event "?"]
+[Site "?"]
+[Date "2021.06.18"]
+[Round "89"]
+[White "Rival Haskell Build 65"]
+[Black "Rival Haskell Build 90"]
+[Result "0-1"]
+[BlackTimeControl "1/move"]
+[ECO "C65"]
+[GameDuration "00:01:23"]
+[GameEndTime "2021-06-18T00:36:36.695 BST"]
+[GameStartTime "2021-06-18T00:35:13.280 BST"]
+[Opening "Ruy Lopez"]
+[PlyCount "136"]
+[Variation "Berlin defense"]
+[WhiteTimeControl "1/move"]
+
+1. e4 {book} e5 {book} 2. Nf3 {book} Nc6 {book} 3. Bb5 {book} Nf6 {book}
+4. d3 {book} Bc5 {book} 5. Bxc6 {book} dxc6 {book} 6. Nbd2 {book} Be6 {book}
+7. O-O {book} Bd6 {book} 8. b3 {book} O-O {book} 9. Nc4 {book} Nd7 {book}
+10. Ng5 {book} Qe7 {book} 11. Qh5 {book} h6 {book} 12. Nxe6 {book} Qxe6 {book}
+13. f4 {book} f5 {book} 14. Qh3 {book} Rae8 {book} 15. fxe5 {book} Bxe5 {book}
+16. Nxe5 {book} Qxe5 {book} 17. Ba3 {book} c5 {book} 18. Rad1 {book} Qd4+ {book}
+19. Kh1 {book} fxe4 {book} 20. dxe4 {book} Rxf1+ {book} 21. Rxf1 {book}
+Rxe4 {book} 22. Qf5 {book} Re7 {book} 23. h3 {book} b6 {book} 24. Bc1 {book}
+Qe4 {book} 25. Qf2 {book} Qg6 {book} 26. Bb2 {book} Rf7 {book} 27. Qxf7+ {book}
+Qxf7 {book} 28. Rxf7 {book} Kxf7 {book} 29. Kg1 {book} Nf6 {book} 30. Kf2 {book}
+Nd5 {book} 31. Kg1 {1.2s} c6 {1.0s} 32. Be5 {1.1s} Nf6 {1.0s} 33. Bb2 {1.1s}
+Ke6 {1.0s} 34. Be5 {1.0s} Kxe5 {1.1s} 35. c4 {1.2s} Ne4 {1.1s} 36. g3 {1.1s}
+Nxg3 {1.1s} 37. Kf2 {1.2s} Kf4 {1.1s} 38. Kg1 {1.1s} Kf3 {1.1s} 39. a4 {1.2s}
+g6 {1.0s} 40. Kh2 {1.1s} g5 {1.1s} 41. Kg1 {1.2s} Ke4 {1.0s} 42. Kh2 {1.1s}
+Ne2 {1.0s} 43. Kg2 {1.1s} Nc1 {1.1s} 44. Kh2 {1.1s} Nxb3 {1.1s} 45. Kg3 {1.2s}
+Kf5 {1.0s} 46. Kh2 {1.2s} Nd2 {1.1s} 47. Kg3 {1.1s} Nxc4 {1.2s} 48. h4 {1.1s}
+Nb2 {1.1s} 49. hxg5 {1.1s} hxg5 {1.0s} 50. Kf2 {1.1s} Nxa4 {1.1s} 51. Ke3 {1.1s}
+c4 {1.0s} 52. Kf3 {1.2s} c5 {1.1s} 53. Ke3 {1.1s} Ke6 {1.0s} 54. Kf3 {1.1s}
+Kf6 {1.0s} 55. Ke3 {1.1s} Ke5 {1.0s} 56. Kf3 {1.1s} Kd5 {1.1s} 57. Ke3 {1.1s}
+Kc6 {1.0s} 58. Kf3 {1.1s} c3 {1.0s} 59. Ke3 {1.2s} Kd5 {1.0s} 60. Kf3 {1.1s}
+c2 {1.0s} 61. Kg4 {1.1s} c1=Q {1.1s} 62. Kh5 {1.1s} Kc6 {1.0s} 63. Kg4 {1.2s}
+Qf4+ {1.0s} 64. Kh5 {1.2s} Qf5 {1.1s} 65. Kh6 {1.1s} Kd6 {1.0s} 66. Kh5 {1.1s}
+Ke6 {1.1s} 67. Kh6 {1.4s} Kf6 {1.0s} 68. Kh5 {1.1s} Qh3# {1.0s, Black mates} 0-1
+
+[Event "?"]
+[Site "?"]
+[Date "2021.06.18"]
+[Round "90"]
+[White "Rival Haskell Build 90"]
+[Black "Rival Haskell Build 65"]
+[Result "1-0"]
+[BlackTimeControl "1/move"]
+[ECO "C89"]
+[GameDuration "00:01:10"]
+[GameEndTime "2021-06-18T00:37:47.044 BST"]
+[GameStartTime "2021-06-18T00:36:36.696 BST"]
+[Opening "Ruy Lopez"]
+[PlyCount "125"]
+[Variation "Marshall counter-attack, 11...c6"]
+[WhiteTimeControl "1/move"]
+
+1. e4 {book} e5 {book} 2. Nf3 {book} Nc6 {book} 3. Bb5 {book} a6 {book}
+4. Ba4 {book} Nf6 {book} 5. O-O {book} Be7 {book} 6. Re1 {book} b5 {book}
+7. Bb3 {book} O-O {book} 8. c3 {book} d5 {book} 9. exd5 {book} Nxd5 {book}
+10. Nxe5 {book} Nxe5 {book} 11. Rxe5 {book} c6 {book} 12. d3 {book} Bd6 {book}
+13. Re1 {book} Bf5 {book} 14. Qf3 {book} Qh4 {book} 15. g3 {book} Qh3 {book}
+16. Bxd5 {book} cxd5 {book} 17. Qxd5 {book} Rad8 {book} 18. Qg2 {book}
+Qxg2+ {book} 19. Kxg2 {book} Bxd3 {book} 20. Be3 {book} Rfe8 {book}
+21. Nd2 {book} b4 {book} 22. Bb6 {book} Rxe1 {book} 23. Rxe1 {book} Rb8 {book}
+24. Ba5 {book} bxc3 {book} 25. Bxc3 {book} f6 {book} 26. Ne4 {book} Bf8 {book}
+27. f3 {book} Bc4 {book} 28. b3 {book} Bb5 {book} 29. Ba5 {book} Rc8 {book}
+30. Nc3 {book} Bc6 {book} 31. Re6 {1.0s} Bb5 {1.0s} 32. Re4 {1.0s} Bc6 {1.1s}
+33. Rc4 {1.1s} Bb5 {1.1s} 34. Rxc8 {1.0s} Bd7 {1.1s} 35. Ra8 {1.0s} Bb5 {1.1s}
+36. Nxb5 {1.1s} axb5 {1.2s} 37. Bc3 {1.0s} Kf7 {1.1s} 38. Rb8 {1.0s} Kg8 {1.1s}
+39. Bb4 {1.2s} Kf7 {1.1s} 40. Rxf8+ {1.0s} Kg6 {1.1s} 41. Rb8 {1.1s} Kf7 {1.1s}
+42. Rb7+ {1.0s} Kg6 {1.1s} 43. Bf8 {1.1s} h6 {1.1s} 44. Bxg7 {1.0s} h5 {1.1s}
+45. Bf8 {1.1s} Kf5 {1.0s} 46. f4 {1.0s} Ke6 {1.1s} 47. b4 {1.0s} Kf5 {1.1s}
+48. Kf3 {1.1s} Ke6 {1.1s} 49. Rc7 {1.1s} Kf5 {1.1s} 50. Bc5 {1.0s} Ke6 {1.1s}
+51. Rh7 {1.1s} Kf5 {1.1s} 52. Rxh5+ {1.1s} Kg6 {1.1s} 53. Rd5 {1.1s} Kf7 {1.0s}
+54. Bd4 {1.0s} Kg6 {1.2s} 55. Rxb5 {1.0s} Kf7 {1.1s} 56. Rf5 {1.0s} Kg6 {1.1s}
+57. Rxf6+ {1.0s} Kg7 {1.1s} 58. h4 {1.1s} Kg8 {1.3s} 59. g4 {1.0s} Kg7 {1.1s}
+60. Rf5+ {1.0s} Kg8 {1.2s} 61. h5 {1.1s} Kh7 {1.1s} 62. Rf8 {1.1s} Kh6 {1.2s}
+63. Rh8# {1.0s, White mates} 1-0
+
+[Event "?"]
+[Site "?"]
+[Date "2021.06.18"]
+[Round "91"]
+[White "Rival Haskell Build 65"]
+[Black "Rival Haskell Build 90"]
+[Result "1-0"]
+[BlackTimeControl "1/move"]
+[ECO "C88"]
+[GameDuration "00:00:40"]
+[GameEndTime "2021-06-18T00:38:27.414 BST"]
+[GameStartTime "2021-06-18T00:37:47.045 BST"]
+[Opening "Ruy Lopez"]
+[PlyCount "89"]
+[Variation "Closed, anti-Marshall 8.a4"]
+[WhiteTimeControl "1/move"]
+
+1. e4 {book} e5 {book} 2. Nf3 {book} Nc6 {book} 3. Bb5 {book} a6 {book}
+4. Ba4 {book} Nf6 {book} 5. O-O {book} Be7 {book} 6. Re1 {book} b5 {book}
+7. Bb3 {book} O-O {book} 8. a4 {book} b4 {book} 9. d4 {book} d6 {book}
+10. dxe5 {book} dxe5 {book} 11. Nbd2 {book} Bc5 {book} 12. a5 {book} Ng4 {book}
+13. Rf1 {book} Nf6 {book} 14. h3 {book} Qe7 {book} 15. Re1 {book} Be6 {book}
+16. Qe2 {book} Rfd8 {book} 17. Bxe6 {book} Qxe6 {book} 18. Nb3 {book} Nd4 {book}
+19. Nfxd4 {book} Bxd4 {book} 20. Rb1 {book} h6 {book} 21. Rd1 {book} c5 {book}
+22. Nd2 {book} Qc6 {book} 23. Kf1 {book} Ra7 {book} 24. Re1 {book} Qb5 {book}
+25. Qxb5 {book} axb5 {book} 26. Nb3 {book} c4 {book} 27. Nxd4 {1.1s} Rxd4 {1.0s}
+28. Be3 {1.0s} Rxe4 {1.2s} 29. Bxa7 {1.1s} Rxe1+ {1.1s} 30. Rxe1 {1.2s}
+Nd7 {1.0s} 31. Rd1 {1.1s} Nf6 {1.0s} 32. Rd6 {1.1s} Nd7 {1.0s} 33. Rxd7 {1.1s}
+b3 {1.2s} 34. cxb3 {1.1s} Kf8 {1.0s} 35. Rd8+ {1.1s} Ke7 {1.0s} 36. Rd5 {1.1s}
+Kf8 {1.0s} 37. Rxe5 {1.1s} cxb3 {1.0s} 38. Bc5+ {1.1s} Kg8 {1.0s} 39. a6 {1.1s}
+f6 {1.1s} 40. Re3 {1.1s} Kh7 {1.0s} 41. a7 {1.1s} Kg6 {1.2s} 42. a8=Q {1.2s}
+f5 {1.0s} 43. Re6+ {1.1s} Kg5 {1.1s} 44. Be7+ {1.1s} Kh5 {1.0s}
+45. Qf3# {1.1s, White mates} 1-0
+
+[Event "?"]
+[Site "?"]
+[Date "2021.06.18"]
+[Round "92"]
+[White "Rival Haskell Build 90"]
+[Black "Rival Haskell Build 65"]
+[Result "0-1"]
+[BlackTimeControl "1/move"]
+[ECO "E97"]
+[GameDuration "00:01:29"]
+[GameEndTime "2021-06-18T00:39:56.840 BST"]
+[GameStartTime "2021-06-18T00:38:27.415 BST"]
+[Opening "King's Indian"]
+[PlyCount "142"]
+[Variation "Orthodox, Aronin-Taimanov, bayonet attack"]
+[WhiteTimeControl "1/move"]
+
+1. d4 {book} Nf6 {book} 2. c4 {book} g6 {book} 3. Nc3 {book} Bg7 {book}
+4. e4 {book} d6 {book} 5. Nf3 {book} O-O {book} 6. Be2 {book} e5 {book}
+7. O-O {book} Nc6 {book} 8. d5 {book} Ne7 {book} 9. b4 {book} a5 {book}
+10. Ba3 {book} axb4 {book} 11. Bxb4 {book} b6 {book} 12. a4 {book} Re8 {book}
+13. Re1 {book} Bf8 {book} 14. Bf1 {book} c5 {book} 15. Ba3 {book} Bg7 {book}
+16. Bb2 {book} Rf8 {book} 17. Nb5 {book} Ne8 {book} 18. Nd2 {book} f5 {book}
+19. Bc3 {book} f4 {book} 20. a5 {book} bxa5 {book} 21. Ra4 {book} g5 {book}
+22. Qa1 {book} Ng6 {book} 23. Rxa5 {book} Rxa5 {book} 24. Qxa5 {book} Qf6 {book}
+25. Rb1 {book} f3 {book} 26. g3 {book} h5 {book} 27. Na7 {book} Bg4 {book}
+28. Nc6 {book} h4 {book} 29. Qd8 {book} hxg3 {book} 30. hxg3 {book} Qxd8 {book}
+31. Nxd8 {1.1s} Nf6 {1.1s} 32. Nc6 {1.0s} Nd7 {1.1s} 33. Bd3 {1.1s} Rf6 {1.3s}
+34. Bb2 {1.0s} Rf7 {1.1s} 35. Bc2 {1.1s} Bf6 {1.1s} 36. Bc3 {1.0s} Kg7 {1.1s}
+37. Bd3 {1.0s} Be7 {1.1s} 38. Rb5 {1.0s} Nf6 {1.1s} 39. Nxf3 {1.0s} Bxf3 {1.2s}
+40. Nxe7 {1.0s} Rxe7 {1.1s} 41. Rb6 {1.2s} Bxe4 {1.1s} 42. Bxe4 {1.0s}
+Nxe4 {1.1s} 43. Be1 {1.0s} Rd7 {1.1s} 44. Bc3 {1.0s} Nxc3 {1.1s} 45. Rb3 {1.0s}
+Ne4 {1.3s} 46. Rb6 {1.1s} Nd2 {1.1s} 47. Rb3 {1.0s} Nxb3 {1.1s} 48. Kg2 {1.1s}
+Nd2 {1.1s} 49. Kg1 {1.0s} Nxc4 {1.2s} 50. Kg2 {1.2s} Ne7 {1.2s} 51. Kg1 {1.0s}
+Nxd5 {1.1s} 52. g4 {1.0s} Rf7 {1.1s} 53. Kg2 {1.1s} Rf4 {1.2s} 54. Kg1 {1.2s}
+Rxg4+ {1.0s} 55. Kh2 {1.0s} Nf4 {1.4s} 56. f3 {1.0s} Rg2+ {1.1s} 57. Kh1 {1.0s}
+Rg3 {1.1s} 58. Kh2 {1.0s} Rh3+ {1.1s} 59. Kg1 {1.0s} Nd2 {1.0s} 60. Kf2 {1.0s}
+Rh2+ {1.1s} 61. Kg1 {1.0s} Nd5 {1.1s} 62. Kxh2 {1.1s} Nxf3+ {1.1s}
+63. Kg3 {1.0s} e4 {1.2s} 64. Kg2 {1.1s} Kf6 {1.1s} 65. Kg3 {1.0s} Nf4 {1.1s}
+66. Kf2 {1.0s} Ke5 {1.1s} 67. Kg3 {1.2s} c4 {1.1s} 68. Kf2 {1.0s} c3 {1.1s}
+69. Kg3 {1.0s} c2 {1.1s} 70. Kf2 {1.0s} c1=Q {1.1s} 71. Kg3 {1.0s}
+Qg1# {1.1s, Black mates} 0-1
+
+[Event "?"]
+[Site "?"]
+[Date "2021.06.18"]
+[Round "93"]
+[White "Rival Haskell Build 65"]
+[Black "Rival Haskell Build 90"]
+[Result "1-0"]
+[BlackTimeControl "1/move"]
+[ECO "E32"]
+[GameDuration "00:00:24"]
+[GameEndTime "2021-06-18T00:40:21.515 BST"]
+[GameStartTime "2021-06-18T00:39:56.841 BST"]
+[Opening "Nimzo-Indian"]
+[PlyCount "43"]
+[Variation "Classical Variation"]
+[WhiteTimeControl "1/move"]
+
+1. d4 {book} Nf6 {book} 2. c4 {book} e6 {book} 3. Nc3 {book} Bb4 {book}
+4. Qc2 {book} O-O {book} 5. a3 {book} Bxc3+ {book} 6. Qxc3 {book} d5 {book}
+7. Bg5 {book} h6 {book} 8. Bxf6 {book} Qxf6 {book} 9. Nf3 {book} c6 {book}
+10. h4 {book} dxc4 {book} 11. Qxc4 {1.2s} Qxf3 {1.0s} 12. exf3 {1.0s} b5 {1.0s}
+13. Qc5 {1.1s} f6 {1.0s} 14. Qd6 {1.1s} f5 {1.0s} 15. Qc5 {1.1s} f4 {1.0s}
+16. Qd6 {1.1s} g5 {1.1s} 17. hxg5 {1.1s} Rd8 {1.0s} 18. Qxd8+ {1.1s} Kf7 {1.1s}
+19. Qxc8 {1.1s} Nd7 {1.1s} 20. Qxd7+ {1.0s} Kg6 {1.0s} 21. Bd3+ {1.0s}
+Kxg5 {1.2s} 22. Qe7# {1.1s, White mates} 1-0
+
+[Event "?"]
+[Site "?"]
+[Date "2021.06.18"]
+[Round "94"]
+[White "Rival Haskell Build 90"]
+[Black "Rival Haskell Build 65"]
+[Result "0-1"]
+[BlackTimeControl "1/move"]
+[ECO "D15"]
+[GameDuration "00:00:28"]
+[GameEndTime "2021-06-18T00:40:50.032 BST"]
+[GameStartTime "2021-06-18T00:40:21.516 BST"]
+[Opening "QGD Slav"]
+[PlyCount "48"]
+[Variation "4.Nc3"]
+[WhiteTimeControl "1/move"]
+
+1. d4 {book} d5 {book} 2. c4 {book} c6 {book} 3. Nf3 {book} Nf6 {book}
+4. Nc3 {book} e6 {book} 5. Bg5 {book} Nbd7 {book} 6. e3 {book} Qa5 {book}
+7. cxd5 {book} Nxd5 {book} 8. Qd2 {book} Bb4 {book} 9. Rc1 {book} h6 {book}
+10. Bh4 {book} c5 {book} 11. Bc4 {book} N7b6 {book} 12. g3 {1.6s} Nxc4 {1.0s}
+13. Nb5 {1.1s} Bxd2+ {1.2s} 14. Kf1 {1.1s} Bxc1 {1.1s} 15. Nd6+ {1.0s}
+Nxd6 {1.1s} 16. Bf6 {1.0s} gxf6 {1.0s} 17. Ne5 {1.0s} Qd2 {1.1s} 18. Nf3 {1.2s}
+Qxb2 {1.1s} 19. Ne5 {1.0s} fxe5 {1.1s} 20. e4 {1.0s} Nf4 {1.1s} 21. gxf4 {1.0s}
+Rg8 {1.1s} 22. a4 {1.3s} Nxe4 {1.0s} 23. Ke1 {1.1s} Qd2+ {1.0s} 24. Kf1 {1.1s}
+Qxf2# {1.2s, Black mates} 0-1
+
+[Event "?"]
+[Site "?"]
+[Date "2021.06.18"]
+[Round "95"]
+[White "Rival Haskell Build 65"]
+[Black "Rival Haskell Build 90"]
+[Result "0-1"]
+[BlackTimeControl "1/move"]
+[ECO "E10"]
+[GameDuration "00:00:18"]
+[GameEndTime "2021-06-18T00:41:08.236 BST"]
+[GameStartTime "2021-06-18T00:40:50.033 BST"]
+[Opening "Queen's pawn game"]
+[PlyCount "68"]
+[WhiteTimeControl "1/move"]
+
+1. d4 {book} Nf6 {book} 2. c4 {book} e6 {book} 3. Nf3 {book} d5 {book}
+4. Nc3 {book} Bb4 {book} 5. Bg5 {book} h6 {book} 6. Bxf6 {book} Qxf6 {book}
+7. e3 {book} O-O {book} 8. Rc1 {book} dxc4 {book} 9. Bxc4 {book} c5 {book}
+10. O-O {book} cxd4 {book} 11. Nxd4 {book} Bd7 {book} 12. Ne4 {book} Qe7 {book}
+13. Bd3 {book} Nc6 {book} 14. Nb3 {book} Na5 {book} 15. Rc7 {book} Rfd8 {book}
+16. Nxa5 {book} Bxa5 {book} 17. Rxb7 {book} Qf8 {book} 18. Qh5 {book} Bb6 {book}
+19. Ng5 {book} f5 {book} 20. Bb5 {book} Bxb5 {book} 21. Nxe6 {book} Be8 {book}
+22. Qf3 {book} Qf6 {book} 23. Rxg7+ {book} Kh8 {book} 24. Qb7 {book} Rab8 {book}
+25. Rh7+ {book} Kg8 {book} 26. Rg7+ {book} Kh8 {1.1s} 27. Qf3 {1.1s} Qxe6 {1.1s}
+28. e4 {1.0s} Kxg7 {1.0s} 29. exf5 {1.1s} Qxa2 {1.0s} 30. f6+ {1.1s} Kf7 {1.1s}
+31. b4 {1.1s} Bxf2+ {1.0s} 32. Rxf2 {1.1s} Qd5 {1.0s} 33. Qe4 {1.0s} Qxe4 {1.1s}
+34. Rd2 {1.1s} Qe1# {1.1s, Black mates} 0-1
+
+[Event "?"]
+[Site "?"]
+[Date "2021.06.18"]
+[Round "96"]
+[White "Rival Haskell Build 90"]
+[Black "Rival Haskell Build 65"]
+[Result "0-1"]
+[BlackTimeControl "1/move"]
+[ECO "C84"]
+[GameDuration "00:00:33"]
+[GameEndTime "2021-06-18T00:41:41.600 BST"]
+[GameStartTime "2021-06-18T00:41:08.237 BST"]
+[Opening "Ruy Lopez"]
+[PlyCount "60"]
+[Variation "Closed defense"]
+[WhiteTimeControl "1/move"]
+
+1. e4 {book} e5 {book} 2. Nf3 {book} Nc6 {book} 3. Bb5 {book} a6 {book}
+4. Ba4 {book} Nf6 {book} 5. O-O {book} Be7 {book} 6. d3 {book} b5 {book}
+7. Bb3 {book} d6 {book} 8. a3 {book} O-O {book} 9. Nc3 {book} Na5 {book}
+10. Ba2 {book} Be6 {book} 11. b4 {book} Bxa2 {book} 12. Nxa2 {book} Nb7 {book}
+13. c4 {book} bxc4 {book} 14. dxc4 {book} a5 {book} 15. Qe2 {book} axb4 {1.1s}
+16. axb4 {1.0s} c6 {1.1s} 17. c5 {1.2s} dxc5 {1.3s} 18. bxc5 {1.0s} Nxc5 {1.1s}
+19. Nc3 {1.0s} Rxa1 {1.1s} 20. Bg5 {1.0s} Rxf1+ {1.1s} 21. Kxf1 {1.0s}
+Qd6 {1.0s} 22. Bxf6 {1.1s} Bxf6 {1.1s} 23. Na2 {1.1s} Qe6 {1.2s} 24. Nc3 {1.1s}
+Qb3 {1.1s} 25. Na2 {1.0s} Qb1+ {1.0s} 26. Ne1 {1.0s} Nxe4 {1.1s} 27. Nc3 {1.0s}
+Nxc3 {1.0s} 28. Qxe5 {1.0s} Bxe5 {1.1s} 29. h4 {1.0s} Qe4 {1.1s} 30. g3 {1.0s}
+Qh1# {1.1s, Black mates} 0-1
+
+[Event "?"]
+[Site "?"]
+[Date "2021.06.18"]
+[Round "97"]
+[White "Rival Haskell Build 65"]
+[Black "Rival Haskell Build 90"]
+[Result "1-0"]
+[BlackTimeControl "1/move"]
+[ECO "C65"]
+[GameDuration "00:00:27"]
+[GameEndTime "2021-06-18T00:42:09.067 BST"]
+[GameStartTime "2021-06-18T00:41:41.601 BST"]
+[Opening "Ruy Lopez"]
+[PlyCount "85"]
+[Variation "Berlin defense"]
+[WhiteTimeControl "1/move"]
+
+1. e4 {book} e5 {book} 2. Nf3 {book} Nc6 {book} 3. Bb5 {book} Nf6 {book}
+4. d3 {book} Bc5 {book} 5. Bxc6 {book} dxc6 {book} 6. Nbd2 {book} Nd7 {book}
+7. Nc4 {book} f6 {book} 8. Bd2 {book} Nf8 {book} 9. Nh4 {book} g6 {book}
+10. Be3 {book} Bxe3 {book} 11. Nxe3 {book} Ne6 {book} 12. Qd2 {book} Qe7 {book}
+13. g3 {book} b6 {book} 14. O-O-O {book} Bb7 {book} 15. f4 {book} exf4 {book}
+16. gxf4 {book} O-O-O {book} 17. f5 {book} Nf4 {book} 18. fxg6 {book}
+hxg6 {book} 19. Qf2 {book} g5 {book} 20. Nhg2 {book} Nxg2 {book} 21. Qxg2 {book}
+Kb8 {book} 22. Rdf1 {book} Bc8 {book} 23. Qf2 {book} Rh6 {book} 24. Nf5 {book}
+Bxf5 {book} 25. Qxf5 {book} Rdh8 {book} 26. h3 {book} Qh7 {book} 27. Qxh7 {book}
+R8xh7 {book} 28. Rhg1 {book} Kc8 {book} 29. Rf3 {book} c5 {book} 30. Rgf1 {book}
+Kd7 {book} 31. Rxf6 {1.1s} Ke7 {1.1s} 32. Rxh6 {1.0s} c4 {1.0s} 33. Rxh7+ {1.1s}
+Kd6 {1.0s} 34. dxc4 {1.2s} Kc6 {1.1s} 35. Rff7 {1.1s} Kd6 {1.0s} 36. Rf5 {1.2s}
+Kc6 {1.0s} 37. Rxg5 {1.2s} a6 {1.1s} 38. Rgg7 {1.0s} Kc5 {1.1s} 39. Rxc7+ {1.2s}
+Kd4 {1.0s} 40. Rc6 {1.1s} Ke5 {1.1s} 41. Re7+ {1.1s} Kd4 {1.0s} 42. Kd2 {1.1s}
+a5 {1.1s} 43. c3# {1.1s, White mates} 1-0
+
+[Event "?"]
+[Site "?"]
+[Date "2021.06.18"]
+[Round "98"]
+[White "Rival Haskell Build 90"]
+[Black "Rival Haskell Build 65"]
+[Result "0-1"]
+[BlackTimeControl "1/move"]
+[ECO "E10"]
+[GameDuration "00:00:18"]
+[GameEndTime "2021-06-18T00:42:27.470 BST"]
+[GameStartTime "2021-06-18T00:42:09.067 BST"]
+[Opening "Queen's pawn game"]
+[PlyCount "74"]
+[WhiteTimeControl "1/move"]
+
+1. d4 {book} Nf6 {book} 2. c4 {book} e6 {book} 3. Nf3 {book} d5 {book}
+4. Nc3 {book} Be7 {book} 5. Bg5 {book} h6 {book} 6. Bh4 {book} O-O {book}
+7. e3 {book} Ne4 {book} 8. Bxe7 {book} Qxe7 {book} 9. Rc1 {book} c6 {book}
+10. Bd3 {book} Nxc3 {book} 11. Rxc3 {book} dxc4 {book} 12. Bxc4 {book}
+Nd7 {book} 13. O-O {book} b6 {book} 14. Bd3 {book} c5 {book} 15. Be4 {book}
+Rb8 {book} 16. Qa4 {book} Bb7 {book} 17. Bxb7 {book} Rxb7 {book} 18. Rd1 {book}
+b5 {book} 19. Qb3 {book} a5 {book} 20. dxc5 {book} Nxc5 {book} 21. Qc2 {book}
+Na6 {book} 22. a3 {book} b4 {book} 23. Rc6 {book} Rc7 {book} 24. Nd4 {book}
+bxa3 {book} 25. bxa3 {book} Rfc8 {book} 26. Rxc7 {book} Qxc7 {book}
+27. Qe2 {book} Qc4 {book} 28. Qf3 {book} Nc7 {book} 29. h3 {book} Nd5 {1.1s}
+30. Nf5 {1.0s} exf5 {1.1s} 31. g3 {1.1s} Nc3 {1.0s} 32. Rd6 {1.0s} Rc5 {1.2s}
+33. Rd1 {1.0s} Nxd1 {1.1s} 34. Qxd1 {1.0s} f6 {1.1s} 35. f3 {1.0s} Qc3 {1.1s}
+36. Qd2 {1.0s} Qxd2 {1.1s} 37. a4 {1.1s} Rc1# {1.2s, Black mates} 0-1
+
+[Event "?"]
+[Site "?"]
+[Date "2021.06.18"]
+[Round "99"]
+[White "Rival Haskell Build 65"]
+[Black "Rival Haskell Build 90"]
+[Result "1-0"]
+[BlackTimeControl "1/move"]
+[ECO "C89"]
+[GameDuration "00:00:48"]
+[GameEndTime "2021-06-18T00:43:16.328 BST"]
+[GameStartTime "2021-06-18T00:42:27.471 BST"]
+[Opening "Ruy Lopez"]
+[PlyCount "105"]
+[Variation "Marshall counter-attack, 11...c6"]
+[WhiteTimeControl "1/move"]
+
+1. e4 {book} e5 {book} 2. Nf3 {book} Nc6 {book} 3. Bb5 {book} a6 {book}
+4. Ba4 {book} Nf6 {book} 5. O-O {book} Be7 {book} 6. Re1 {book} b5 {book}
+7. Bb3 {book} O-O {book} 8. c3 {book} d5 {book} 9. exd5 {book} Nxd5 {book}
+10. Nxe5 {book} Nxe5 {book} 11. Rxe5 {book} c6 {book} 12. d3 {book} Bd6 {book}
+13. Re1 {book} Bf5 {book} 14. Qf3 {book} Qh4 {book} 15. g3 {book} Qh3 {book}
+16. Be3 {book} Bxd3 {book} 17. Nd2 {book} Qf5 {book} 18. Bd4 {book} Rfe8 {book}
+19. a4 {book} h6 {book} 20. Kg2 {book} Qxf3+ {book} 21. Nxf3 {book} Rac8 {book}
+22. axb5 {book} axb5 {book} 23. Kg1 {book} Bf5 {book} 24. Ra6 {book}
+Rxe1+ {book} 25. Nxe1 {book} Be6 {book} 26. Nd3 {book} Bf8 {book} 27. Bc5 {book}
+Bf5 {book} 28. Bxf8 {book} Bxd3 {book} 29. Bc5 {book} Re8 {book} 30. Kg2 {book}
+Re2 {book} 31. Bxd5 {1.2s} cxd5 {1.0s} 32. Ra8+ {1.0s} Re8 {1.0s}
+33. Rxe8+ {1.1s} Kh7 {1.1s} 34. Re5 {1.1s} Kg8 {1.1s} 35. Bd6 {1.1s} Kh7 {1.0s}
+36. Re3 {1.1s} Kg8 {1.0s} 37. Rxd3 {1.1s} d4 {1.0s} 38. cxd4 {1.1s} f6 {1.0s}
+39. Rb3 {1.1s} f5 {1.0s} 40. Rxb5 {1.1s} f4 {1.1s} 41. Bxf4 {1.1s} Kf7 {1.1s}
+42. Be5 {1.1s} Kg8 {1.0s} 43. Rb7 {1.2s} g6 {1.0s} 44. f4 {1.1s} g5 {1.0s}
+45. fxg5 {1.1s} hxg5 {1.1s} 46. Bf6 {1.2s} Kf8 {1.0s} 47. d5 {1.3s} g4 {1.0s}
+48. d6 {1.1s} Ke8 {1.0s} 49. d7+ {1.1s} Kf7 {1.1s} 50. d8=Q+ {1.1s} Kg6 {1.0s}
+51. Qe7 {1.0s} Kf5 {1.0s} 52. Qe5+ {1.1s} Kg6 {1.0s}
+53. Qg5# {1.1s, White mates} 1-0
+
+[Event "?"]
+[Site "?"]
+[Date "2021.06.18"]
+[Round "100"]
+[White "Rival Haskell Build 90"]
+[Black "Rival Haskell Build 65"]
+[Result "0-1"]
+[BlackTimeControl "1/move"]
+[ECO "C65"]
+[GameDuration "00:00:08"]
+[GameEndTime "2021-06-18T00:43:25.209 BST"]
+[GameStartTime "2021-06-18T00:43:16.329 BST"]
+[Opening "Ruy Lopez"]
+[PlyCount "68"]
+[Variation "Berlin defense"]
+[WhiteTimeControl "1/move"]
+
+1. e4 {book} e5 {book} 2. Nf3 {book} Nc6 {book} 3. Bb5 {book} Nf6 {book}
+4. d3 {book} Bc5 {book} 5. Bxc6 {book} dxc6 {book} 6. Nbd2 {book} Be6 {book}
+7. O-O {book} Bd6 {book} 8. b3 {book} O-O {book} 9. Nc4 {book} Bxc4 {book}
+10. bxc4 {book} Nd7 {book} 11. Rb1 {book} b6 {book} 12. g3 {book} f5 {book}
+13. exf5 {book} Rxf5 {book} 14. Be3 {book} Qe8 {book} 15. Nd2 {book} Qg6 {book}
+16. Ne4 {book} Raf8 {book} 17. Kg2 {book} Nf6 {book} 18. Qe2 {book} Nxe4 {book}
+19. dxe4 {book} Rf3 {book} 20. Kg1 {book} Qxe4 {book} 21. Rfe1 {book} c5 {book}
+22. Qd3 {book} Qg4 {book} 23. Re2 {book} h5 {book} 24. Qd5+ {book} Kh8 {book}
+25. Rbe1 {book} a5 {book} 26. Bd2 {book} Ra3 {book} 27. Bc1 {book} Rxa2 {book}
+28. Rxe5 {book} Bxe5 {book} 29. Rxe5 {book} g6 {book} 30. Bf4 {book} Ra1+ {book}
+31. Bc1 {1.1s} Rxc1+ {1.1s} 32. Re1 {1.0s} Rxe1+ {1.1s} 33. Kg2 {1.0s}
+Rxf2+ {1.1s} 34. Kxf2 {1.1s} Qe2# {1.1s, Black mates} 0-1
+

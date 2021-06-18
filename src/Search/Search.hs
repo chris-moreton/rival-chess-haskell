@@ -103,7 +103,7 @@ search position moveZero depth low high endTime rootBest c = do
                             else do
                                 hrm <- highestRatedMove notInCheckPositions moveZero low high depth endTime (snd (head notInCheckPositions),low) rootBest c
                                 if snd hrm > low && snd hrm < high then do
-                                    updateHashTable hpos HashEntry { score=snd hrm, move=fst hrm, height=depth } c
+                                    -- updateHashTable hpos HashEntry { score=snd hrm, move=fst hrm, height=depth } c
                                     return hrm
                                 else do 
                                     return hrm
