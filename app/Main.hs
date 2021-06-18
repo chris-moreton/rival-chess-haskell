@@ -18,7 +18,7 @@ import Text.Printf ( printf )
 import Util.Utils ( timeMillis )
 import System.IO ( stdout, hFlush )
 import Data.IORef ()
-import State.State ( Counter, makeCounter, showCounter )
+import State.State ( SearchState, makeCounter, showCounter )
 import qualified Data.HashTable.IO as H
                      
 data UCIState = UCIState {
@@ -26,7 +26,7 @@ data UCIState = UCIState {
     , quit :: Bool
     , errorMessage :: String
     , output :: String
-    , counter :: Counter
+    , counter :: SearchState
 }
 
 main :: IO ()
@@ -37,7 +37,7 @@ main = do
 
 showId :: IO ()
 showId = do
-    putStrLn "id name Rival Haskell Build 91"
+    putStrLn "id name Rival Haskell Build 92"
     putStrLn "id author Chris Moreton"
     putStrLn "uciok"
 

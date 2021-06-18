@@ -4,28 +4,28 @@ import Data.IORef ( modifyIORef, newIORef, readIORef, IORef )
 import qualified Data.HashTable.IO as H
 import Types ( HashTable, HashEntry )
 
-data Counter = Counter { 
+data SearchState = SearchState { 
      h :: HashTable
    , x :: IORef Int 
 }
 
-makeCounter :: HashTable -> Int -> IO Counter
+makeCounter :: HashTable -> Int -> IO SearchState
 makeCounter h i = do 
     iref <- newIORef i
     href <- H.new
-    return (Counter href iref)
+    return (SearchState href iref)
 
-incCounter :: Int -> Counter -> IO ()
-incCounter i (Counter _ c) = do modifyIORef c (+ i)
+incCounter :: Int -> SearchState -> IO ()
+incCounter i (SearchState _ c) = do modifyIORef c (+ i)
 
-decCounter :: Int -> Counter -> IO ()
-decCounter i (Counter _ c) = do modifyIORef c (i -)
+decCounter :: Int -> SearchState -> IO ()
+decCounter i (SearchState _ c) = do modifyIORef c (i -)
 
-showCounter :: Counter -> IO ()
-showCounter (Counter _ c) = do 
+showCounter :: SearchState -> IO ()
+showCounter (SearchState _ c) = do 
     c' <- readIORef c
     print c'
 
-updateHashTable :: Int -> HashEntry -> Counter -> IO ()
-updateHashTable i he (Counter h _) = do H.insert h i he
+updateHashTable :: Int -> HashEntry -> SearchState -> IO ()
+updateHashTable i he (SearchState h _) = do H.insert h i he
 
