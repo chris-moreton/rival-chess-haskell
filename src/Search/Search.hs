@@ -81,7 +81,7 @@ highestRatedMoveZero (thisP:ps) positions low high depth endTime best rootBest c
 goodHashEntry :: Int -> Maybe HashEntry -> Bool
 goodHashEntry depth he = do
     case he of
-        Just x -> height x >= depth && bound x == Exact
+        Just x -> False && height x >= depth && bound x == Exact
         _      -> False
 
 search :: Position -> Move -> Int -> Int -> Int -> Int -> MoveScore -> SearchState -> IO MoveScore
