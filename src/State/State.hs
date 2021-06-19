@@ -6,19 +6,19 @@ import Types ( HashTable, HashEntry )
 
 data SearchState = SearchState { 
      h :: HashTable
-   , x :: IORef Int 
+   , x :: IORef Integer
 }
 
-makeCounter :: HashTable -> Int -> IO SearchState
+makeCounter :: HashTable -> Integer -> IO SearchState
 makeCounter h i = do 
     iref <- newIORef i
     href <- H.new
     return (SearchState href iref)
 
-incCounter :: Int -> SearchState -> IO ()
+incCounter :: Integer -> SearchState -> IO ()
 incCounter i (SearchState _ c) = do modifyIORef c (+ i)
 
-decCounter :: Int -> SearchState -> IO ()
+decCounter :: Integer -> SearchState -> IO ()
 decCounter i (SearchState _ c) = do modifyIORef c (i -)
 
 zeroCounter :: SearchState -> IO ()
