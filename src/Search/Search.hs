@@ -97,18 +97,17 @@ search position moveZero depth low high endTime rootBest c = do
                 Exact -> do
                     return (mkMs (move (fromJust hentry), score (fromJust hentry)))
                 Lower -> do    
-                    searchNoHash position moveZero depth (score (fromJust hentry)) high endTime rootBest c
+                    searchNoHash position moveZero depth (score (fromJust hentry)) high endTime rootBest c hpos
                 Upper -> do    
-                    searchNoHash position moveZero depth low (score (fromJust hentry)) endTime rootBest c
+                    searchNoHash position moveZero depth low (score (fromJust hentry)) endTime rootBest c hpos
         Nothing -> do
-            searchNoHash position moveZero depth low high endTime rootBest c
+            searchNoHash position moveZero depth low high endTime rootBest c hpos
 
-searchNoHash :: Position -> Move -> Int -> Int -> Int -> Int -> MoveScore -> SearchState -> IO MoveScore
-searchNoHash position moveZero 0 low high endTime _ c = do
+searchNoHash :: Position -> Move -> Int -> Int -> Int -> Int -> MoveScore -> SearchState -> Int -> IO MoveScore
+searchNoHash position moveZero 0 low high endTime _ c _ = do
     q <- quiesce position low high c
     return (mkMs (moveZero,q))
-searchNoHash position moveZero depth low high endTime rootBest c = do
-    let hpos = hashIndex position
+searchNoHash position moveZero depth low high endTime rootBest c hpos = do
     incCounter 1 c
     if halfMoves position == 50
         then return (mkMs (moveZero, 0))
