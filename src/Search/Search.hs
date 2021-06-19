@@ -81,7 +81,7 @@ highestRatedMoveZero (thisP:ps) positions low high depth endTime best rootBest c
 goodHashEntry :: Int -> Maybe HashEntry -> Bool
 goodHashEntry depth he = do
     case he of
-        Just x -> height x >= depth
+        Just x -> height x >= depth && bound x == Exact
         _      -> False
 
 search :: Position -> Move -> Int -> Int -> Int -> Int -> MoveScore -> SearchState -> IO MoveScore
@@ -104,12 +104,9 @@ search position moveZero depth low high endTime rootBest c = do
                         if null notInCheckPositions
                             then return (mkMs (moveZero, if isCheck position (mover position) then (-9000)-depth else 0))
                             else do
-                                hrm <- highestRatedMove notInCheckPositions moveZero low high depth endTime (mkMs (snd (head notInCheckPositions),low)) rootBest c
-                                if msScore hrm > low && msScore hrm < high then do
-                                    updateHashTable hpos HashEntry { score=msScore hrm, move=msMove hrm, height=depth } c
-                                    return hrm
-                                else do 
-                                    return hrm
+                                hrm <- highestRatedMove notInCheckPositions moveZero low high depth endTime MoveScore { msMove=snd (head notInCheckPositions), msScore=low, msBound=Upper } rootBest c
+                                updateHashTable hpos HashEntry { score=msScore hrm, move=msMove hrm, height=depth, bound=msBound hrm } c
+                                return hrm
 
 highestRatedMove :: [(Position,Move)] -> Move -> Int -> Int -> Int -> Int -> MoveScore -> MoveScore -> SearchState -> IO MoveScore
 highestRatedMove [] _ _ _ _ _ best _ _ = return best
@@ -118,10 +115,10 @@ highestRatedMove notInCheckPositions moveZero low high depth endTime best rootBe
     ms <- search (fst thisP) moveZero (depth-1) (-high) (-low) endTime rootBest c
     let negatedScore = -(msScore ms)
     if negatedScore >= high
-        then return (mkMs (msMove ms,negatedScore))
+        then return ms { msScore=negatedScore, msBound=Lower }
         else do
             if negatedScore > low
-                then highestRatedMove (tail notInCheckPositions) moveZero negatedScore high depth endTime (mkMs (msMove ms,negatedScore)) rootBest c
+                then highestRatedMove (tail notInCheckPositions) moveZero negatedScore high depth endTime ms { msScore=negatedScore, msBound=Exact } rootBest c
                 else highestRatedMove (tail notInCheckPositions) moveZero low high depth endTime best rootBest c
 
 newPositions :: Position -> [(Position,Move)]
