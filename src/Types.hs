@@ -11,6 +11,8 @@ import qualified Data.HashTable.IO as H
 data Mover = White | Black deriving (Enum,Show,Eq,NFData,Generic)
 data Piece = Pawn | King | Queen | Bishop | Knight | Rook deriving (Enum,Show,Eq)
 data HashEntry = HashEntry { score :: Int, move :: Move, height :: Int }
+data Bound = Exact | Lower | Upper deriving (Enum,Show,Eq,Generic)
+data MoveScore = MoveScore { msMove :: Move, msScore :: Int, msBound :: Bound }
 
 type HashTable = H.LinearHashTable Int HashEntry
 

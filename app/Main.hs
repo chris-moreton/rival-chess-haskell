@@ -10,7 +10,7 @@ import Util.Fen
       moveFromAlgebraicMove,
       getPosition,
       verifyFen )
-import Types ( Position )
+import Types
 import Search.MakeMove ( makeMove )
 import Alias ()
 import Search.Search ( startSearch )
@@ -37,7 +37,7 @@ main = do
 
 showId :: IO ()
 showId = do
-    putStrLn "id name Rival Haskell Build 92"
+    putStrLn "id name Rival Haskell Build -"
     putStrLn "id author Chris Moreton"
     putStrLn "uciok"
 
@@ -92,14 +92,14 @@ runGo uciState ("movetime":xs) = do
     t <- timeMillis
     let endTime = t + read moveTime
     move <- startSearch (position uciState) 50 endTime (counter uciState)
-    return uciState{output="bestmove " ++ algebraicMoveFromMove (fst move)}
+    return uciState{output="bestmove " ++ algebraicMoveFromMove (msMove move)}
 
 runGo uciState ("depth":xs) = do
     let depth = read (head xs)
     t <- timeMillis
     let endTime = t + 1000000
     move <- startSearch (position uciState) depth endTime (counter uciState)
-    return uciState{output="bestmove " ++ algebraicMoveFromMove (fst move)}
+    return uciState{output="bestmove " ++ algebraicMoveFromMove (msMove move)}
 
 runPosition :: UCIState -> [String] -> IO UCIState
 runPosition uciState ("startpos":xs) = runPosition uciState (["fen",startPosition] ++ xs)
