@@ -21,6 +21,9 @@ incCounter i (SearchState _ c) = do modifyIORef c (+ i)
 decCounter :: Int -> SearchState -> IO ()
 decCounter i (SearchState _ c) = do modifyIORef c (i -)
 
+zeroCounter :: SearchState -> IO ()
+zeroCounter (SearchState _ c) = do modifyIORef c (0 *)
+
 showCounter :: SearchState -> IO ()
 showCounter (SearchState _ c) = do 
     c' <- readIORef c

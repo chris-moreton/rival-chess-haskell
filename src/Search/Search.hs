@@ -81,7 +81,7 @@ highestRatedMoveZero (thisP:ps) positions low high depth endTime best rootBest c
 goodHashEntry :: Int -> Maybe HashEntry -> Bool
 goodHashEntry depth he = do
     case he of
-        Just x -> False && height x >= depth && bound x == Exact
+        Just x -> height x >= depth && bound x == Exact
         _      -> False
 
 search :: Position -> Move -> Int -> Int -> Int -> Int -> MoveScore -> SearchState -> IO MoveScore
@@ -92,7 +92,9 @@ search position moveZero depth low high endTime rootBest c = do
     let hpos = hashIndex position
     hentry <- H.lookup (h c) hpos
     if goodHashEntry depth hentry
-        then return (mkMs (move (fromJust hentry), score (fromJust hentry)))
+        then do
+            incCounter 100000000 c
+            return (mkMs (move (fromJust hentry), score (fromJust hentry)))
         else do
             incCounter 1 c
             if halfMoves position == 50
@@ -104,7 +106,8 @@ search position moveZero depth low high endTime rootBest c = do
                         if null notInCheckPositions
                             then return (mkMs (moveZero, if isCheck position (mover position) then (-9000)-depth else 0))
                             else do
-                                hrm <- highestRatedMove notInCheckPositions moveZero low high depth endTime MoveScore { msMove=snd (head notInCheckPositions), msScore=low, msBound=Upper } rootBest c
+                                hrm <- highestRatedMove notInCheckPositions moveZero low high depth endTime 
+                                            MoveScore { msMove=snd (head notInCheckPositions), msScore=low, msBound=Upper } rootBest c
                                 updateHashTable hpos HashEntry { score=msScore hrm, move=msMove hrm, height=depth, bound=msBound hrm } c
                                 return hrm
 
