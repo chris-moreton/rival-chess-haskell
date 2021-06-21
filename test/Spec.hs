@@ -25,6 +25,7 @@ import Data.Bifunctor
 import Data.Vector as V ( (!) )
 import Util.Zobrist
 import Search.Evaluate
+import Data.Maybe
 import qualified Data.HashTable.IO as H
 
 main :: IO ()
@@ -573,10 +574,21 @@ main = hspec $ do
                      ]
       quiescePositions (getPosition "rnbqkbn1/ppp4r/5p2/3P4/2P4P/8/PP1P1PP1/RNBQK2R w KQq - 0 1") `shouldBe` []
 
+  describe "hashtable" $
+    it "stores and retrieves hashtable values" $ do
+        h' <- H.new
+        c <- makeCounter h' 0
+        updateHashTable 1 HashEntry { score=1, move=2, height=3, bound=Exact } c
+        updateHashTable 2 HashEntry { score=10, move=20, height=30, bound=Upper } c
+        hentry <- H.lookup (h c) 2
+        move (fromJust hentry) `shouldBe` 20
+        hentry <- H.lookup (h c) 1
+        move (fromJust hentry) `shouldBe` 2
+
   describe "quiesce" $
     it "evaluates a position using a quiescence search" $ do
-        h <- H.new
-        c <- makeCounter h 0
+        h' <- H.new
+        c <- makeCounter h' 0
         let position = getPosition "rnbqkbnr/ppp3pp/5p2/3PB1N1/2P4P/8/PP1P1PP1/RNBQK2R b KQkq - 0 1"
         q <- quiesce position -100000 100000 c
         q `shouldBe` 150
