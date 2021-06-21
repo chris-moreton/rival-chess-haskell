@@ -64,4 +64,4 @@ zobristRecur p square result
     where piece = pieceOnSquare p square
  
 hashIndex :: Position -> Int 
-hashIndex position = mod (zobrist position) 42949672
+hashIndex position = mod (zobrist position) 42949672000
