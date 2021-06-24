@@ -7,6 +7,7 @@ import Types
 import Data.Vector as V ( Vector, fromList, (!) )
 import Search.Evaluate ( pieceOnSquare )
 import Data.Bits (xor)
+import Data.Maybe ( isNothing )
 
 startZobristValue :: Int
 startZobristValue = 1427869295504964227
@@ -48,20 +49,21 @@ zobrist p = if enPassantSquare p == 0 then z else xor z enPassantZobristValue
 zobristRecur :: Position -> Int -> Int -> Int
 zobristRecur _ 64 result = result
 zobristRecur p square result
-    | piece == Just (White,Pawn) = zobristRecur p (square + 1) (xor result (whitePawnZobristSquares V.! square))
-    | piece == Just (White,Knight) = zobristRecur p (square + 1) (xor result (whiteKnightZobristSquares V.! square))
-    | piece == Just (White,Bishop) = zobristRecur p (square + 1) (xor result (whiteBishopZobristSquares V.! square))
-    | piece == Just (White,Rook) = zobristRecur p (square + 1) (xor result (whiteRookZobristSquares V.! square))
-    | piece == Just (White,Queen) = zobristRecur p (square + 1) (xor result (whiteQueenZobristSquares V.! square))
-    | piece == Just (White,King) = zobristRecur p (square + 1) (xor result (whiteKingZobristSquares V.! square))
-    | piece == Just (Black,Pawn) = zobristRecur p (square + 1) (xor result (blackPawnZobristSquares V.! square))
-    | piece == Just (Black,Knight) = zobristRecur p (square + 1) (xor result (blackKnightZobristSquares V.! square))
-    | piece == Just (Black,Bishop) = zobristRecur p (square + 1) (xor result (blackBishopZobristSquares V.! square))
-    | piece == Just (Black,Rook) = zobristRecur p (square + 1) (xor result (blackRookZobristSquares V.! square))
-    | piece == Just (Black,Queen) = zobristRecur p (square + 1) (xor result (blackQueenZobristSquares V.! square))
-    | piece == Just (Black,King) = zobristRecur p (square + 1) (xor result (blackKingZobristSquares V.! square))
-    | otherwise = zobristRecur p (square + 1) result
+    | isNothing piece = zobristRecur p sp1 result
+    | piece == Just (White,Pawn) = zobristRecur p sp1 (xor result (whitePawnZobristSquares V.! square))
+    | piece == Just (White,Knight) = zobristRecur p sp1 (xor result (whiteKnightZobristSquares V.! square))
+    | piece == Just (White,Bishop) = zobristRecur p sp1 (xor result (whiteBishopZobristSquares V.! square))
+    | piece == Just (White,Rook) = zobristRecur p sp1 (xor result (whiteRookZobristSquares V.! square))
+    | piece == Just (White,Queen) = zobristRecur p sp1 (xor result (whiteQueenZobristSquares V.! square))
+    | piece == Just (White,King) = zobristRecur p sp1 (xor result (whiteKingZobristSquares V.! square))
+    | piece == Just (Black,Pawn) = zobristRecur p sp1 (xor result (blackPawnZobristSquares V.! square))
+    | piece == Just (Black,Knight) = zobristRecur p sp1 (xor result (blackKnightZobristSquares V.! square))
+    | piece == Just (Black,Bishop) = zobristRecur p sp1 (xor result (blackBishopZobristSquares V.! square))
+    | piece == Just (Black,Rook) = zobristRecur p sp1 (xor result (blackRookZobristSquares V.! square))
+    | piece == Just (Black,Queen) = zobristRecur p sp1 (xor result (blackQueenZobristSquares V.! square))
+    | piece == Just (Black,King) = zobristRecur p sp1 (xor result (blackKingZobristSquares V.! square))
     where piece = pieceOnSquare p square
- 
-hashIndex :: Position -> Int 
+          sp1 = square + 1
+
+hashIndex :: Position -> Int
 hashIndex position = mod (zobrist position) 42949672000

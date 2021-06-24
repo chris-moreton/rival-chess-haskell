@@ -14,10 +14,10 @@ import Control.Monad ()
 import System.Exit ()
 import Data.Sort ( sortBy )
 import Data.Maybe ( isJust, fromJust )
-import State.State
+import State.State ( incCounter, updateHashTable, SearchState(h) )
 import qualified Data.HashTable.IO as H
-import Util.Zobrist
-import Search.Evaluate
+import Util.Zobrist ( hashIndex )
+import Search.Evaluate ( evaluate, isCapture, scoreMove )
 
 canLeadToDrawByRepetition :: Position -> [Position] -> Bool
 canLeadToDrawByRepetition p ps
@@ -79,11 +79,10 @@ highestRatedMoveZero (thisP:ps) positions low high depth endTime best rootBest c
                 else highestRatedMoveZero ps positions low high depth endTime best rootBest c
 
 hashBound :: Int -> Maybe HashEntry -> Maybe Bound
-hashBound depth he = Nothing
--- do
---     case he of
---         Just x -> if height x >= depth then return (bound x) else Nothing
---         _      -> Nothing
+hashBound depth he = do
+     case he of
+         Just x -> if height x >= depth then return (bound x) else Nothing
+         _      -> Nothing
 
 search :: Position -> Move -> Int -> Int -> Int -> Int -> MoveScore -> SearchState -> IO MoveScore
 search position moveZero 0 low high endTime _ c = do
