@@ -16,7 +16,7 @@ import Data.Sort ( sortBy )
 import Data.Maybe ( isJust, fromJust )
 import State.State ( incCounter, updateHashTable, SearchState(h) )
 import qualified Data.HashTable.IO as H
-import Util.Zobrist ( hashIndex )
+import Util.Zobrist ( hashIndex, zobrist )
 import Search.Evaluate ( evaluate, isCapture, scoreMove )
 
 canLeadToDrawByRepetition :: Position -> [Position] -> Bool
@@ -78,10 +78,10 @@ highestRatedMoveZero (thisP:ps) positions low high depth endTime best rootBest c
                 then highestRatedMoveZero ps positions negatedScore high depth endTime MoveScore { msMove=snd thisP,msScore=negatedScore,msBound=Exact } rootBest c
                 else highestRatedMoveZero ps positions low high depth endTime best rootBest c
 
-hashBound :: Int -> Maybe HashEntry -> Maybe Bound
-hashBound depth he = do
+hashBound :: Int -> Int -> Maybe HashEntry -> Maybe Bound
+hashBound depth lockVal he = do
      case he of
-         Just x -> if height x >= depth then return (bound x) else Nothing
+         Just x -> if height x >= depth && lock x == lockVal then return (bound x) else Nothing
          _      -> Nothing
 
 search :: Position -> Move -> Int -> Int -> Int -> Int -> MoveScore -> SearchState -> IO MoveScore
@@ -89,9 +89,9 @@ search position moveZero 0 low high endTime _ c = do
     q <- quiesce position low high c
     return (mkMs (moveZero,q))
 search position moveZero depth low high endTime rootBest c = do
-    let hpos = hashIndex position
+    let hpos = zobrist position
     hentry <- H.lookup (h c) hpos
-    case hashBound depth hentry of
+    case hashBound depth hpos hentry of
         Just hb -> do
             case hb of
                 Exact -> do
@@ -120,7 +120,7 @@ searchNoHash position moveZero depth low high endTime rootBest c hpos = do
                     else do
                         hrm <- highestRatedMove notInCheckPositions moveZero low high depth endTime 
                                     MoveScore { msMove=snd (head notInCheckPositions), msScore=low, msBound=Upper } rootBest c
-                        updateHashTable hpos HashEntry { score=msScore hrm, move=msMove hrm, height=depth, bound=msBound hrm } c
+                        updateHashTable hpos HashEntry { score=msScore hrm, move=msMove hrm, height=depth, bound=msBound hrm, lock=hpos } c
                         return hrm
 
 highestRatedMove :: [(Position,Move)] -> Move -> Int -> Int -> Int -> Int -> MoveScore -> MoveScore -> SearchState -> IO MoveScore

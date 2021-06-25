@@ -30,5 +30,5 @@ showCounter (SearchState _ c) = do
     print c'
 
 updateHashTable :: Int -> HashEntry -> SearchState -> IO ()
-updateHashTable i he (SearchState h _) = do H.insert h i he
+updateHashTable i he (SearchState h _) = do H.insert h (i `mod` 16777216) he
 

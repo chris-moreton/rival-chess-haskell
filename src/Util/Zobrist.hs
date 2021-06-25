@@ -67,3 +67,4 @@ zobristRecur p square result
 
 hashIndex :: Position -> Int
 hashIndex position = mod (zobrist position) 42949672000
+

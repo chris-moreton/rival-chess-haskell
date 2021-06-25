@@ -578,8 +578,8 @@ main = hspec $ do
     it "stores and retrieves hashtable values" $ do
         h' <- H.new
         c <- makeCounter h' 0
-        updateHashTable 1 HashEntry { score=1, move=2, height=3, bound=Exact } c
-        updateHashTable 2 HashEntry { score=10, move=20, height=30, bound=Upper } c
+        updateHashTable 1 HashEntry { score=1, move=2, height=3, bound=Exact, lock=0 } c
+        updateHashTable 2 HashEntry { score=10, move=20, height=30, bound=Upper, lock=0 } c
         hentry <- H.lookup (h c) 2
         move (fromJust hentry) `shouldBe` 20
         hentry <- H.lookup (h c) 1
