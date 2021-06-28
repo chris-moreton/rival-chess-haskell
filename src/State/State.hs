@@ -29,6 +29,9 @@ showCounter (SearchState _ c) = do
     c' <- readIORef c
     print c'
 
+calcHashIndex :: Int -> Int 
+calcHashIndex i = i `mod` 16777216
+
 updateHashTable :: Int -> HashEntry -> SearchState -> IO ()
-updateHashTable i he (SearchState h _) = do H.insert h (i `mod` 16777216) he
+updateHashTable i he (SearchState h _) = do H.insert h (calcHashIndex i) he
 

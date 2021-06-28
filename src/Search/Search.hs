@@ -14,7 +14,7 @@ import Control.Monad ()
 import System.Exit ()
 import Data.Sort ( sortBy )
 import Data.Maybe ( isJust, fromJust )
-import State.State ( incCounter, updateHashTable, SearchState(h) )
+import State.State ( incCounter, updateHashTable, SearchState(h), calcHashIndex )
 import qualified Data.HashTable.IO as H
 import Util.Zobrist ( hashIndex, zobrist )
 import Search.Evaluate ( evaluate, isCapture, scoreMove )
@@ -81,7 +81,7 @@ highestRatedMoveZero (thisP:ps) positions low high depth endTime best rootBest c
 hashBound :: Int -> Int -> Maybe HashEntry -> Maybe Bound
 hashBound depth lockVal he = do
      case he of
-         Just x -> if False && height x >= depth && lock x == lockVal then return (bound x) else Nothing
+         Just x -> if height x >= depth && lock x == lockVal then return (bound x) else Nothing
          _      -> Nothing
 
 search :: Position -> Move -> Int -> Int -> Int -> Int -> MoveScore -> SearchState -> IO MoveScore
@@ -90,11 +90,12 @@ search position moveZero 0 low high endTime _ c = do
     return (mkMs (moveZero,q))
 search position moveZero depth low high endTime rootBest c = do
     let hpos = zobrist position
-    hentry <- H.lookup (h c) hpos
+    hentry <- H.lookup (h c) (calcHashIndex hpos)
     case hashBound depth hpos hentry of
         Just hb -> do
             case hb of
                 Exact -> do
+                    incCounter 1000000000 c
                     return (mkMs (move (fromJust hentry), score (fromJust hentry)))
                 Lower -> do    
                     searchNoHash position moveZero depth (score (fromJust hentry)) high endTime rootBest c hpos
