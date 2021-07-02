@@ -3,6 +3,10 @@
 module Search.Search where
 
 import Types
+    ( Bound(..),
+      HashEntry(..),
+      MoveScore(..),
+      Position(halfMoves, mover) )
 import Alias ( Move, Bitboard, MoveList )
 import Search.MoveGenerator (moves,isCheck)
 import Util.Utils ( timeMillis, toSquarePart )
@@ -98,31 +102,31 @@ search position moveZero depth low high endTime rootBest c = do
                     incCounter 1000000000 c
                     return (mkMs (move (fromJust hentry), score (fromJust hentry)))
                 Lower -> do    
-                    searchNoHash position moveZero depth (score (fromJust hentry)) high endTime rootBest c hpos
+                    go position moveZero depth (score (fromJust hentry)) high endTime rootBest c hpos
                 Upper -> do    
-                    searchNoHash position moveZero depth low (score (fromJust hentry)) endTime rootBest c hpos
+                    go position moveZero depth low (score (fromJust hentry)) endTime rootBest c hpos
         Nothing -> do
-            searchNoHash position moveZero depth low high endTime rootBest c hpos
-
-searchNoHash :: Position -> Move -> Int -> Int -> Int -> Int -> MoveScore -> SearchState -> Int -> IO MoveScore
-searchNoHash position moveZero 0 low high endTime _ c _ = do
-    q <- quiesce position low high c
-    return (mkMs (moveZero,q))
-searchNoHash position moveZero depth low high endTime rootBest c hpos = do
-    incCounter 1 c
-    if halfMoves position == 50
-        then return (mkMs (moveZero, 0))
-        else do
-            t <- timeMillis
-            if t > endTime then return rootBest else do
-                let notInCheckPositions = filter (\(p,m) -> not (isCheck p (mover position))) (newPositions position)
-                if null notInCheckPositions
-                    then return (mkMs (moveZero, if isCheck position (mover position) then (-9000)-depth else 0))
-                    else do
-                        hrm <- highestRatedMove notInCheckPositions moveZero low high depth endTime 
-                                    MoveScore { msMove=snd (head notInCheckPositions), msScore=low, msBound=Upper } rootBest c
-                        updateHashTable hpos HashEntry { score=msScore hrm, move=msMove hrm, height=depth, bound=msBound hrm, lock=hpos } c
-                        return hrm
+            go position moveZero depth low high endTime rootBest c hpos
+    where 
+        go :: Position -> Move -> Int -> Int -> Int -> Int -> MoveScore -> SearchState -> Int -> IO MoveScore
+        go position moveZero 0 low high endTime _ c _ = do
+            q <- quiesce position low high c
+            return (mkMs (moveZero,q))
+        go position moveZero depth low high endTime rootBest c hpos = do
+            incCounter 1 c
+            if halfMoves position == 50
+                then return (mkMs (moveZero, 0))
+                else do
+                    t <- timeMillis
+                    if t > endTime then return rootBest else do
+                        let notInCheckPositions = filter (\(p,m) -> not (isCheck p (mover position))) (newPositions position)
+                        if null notInCheckPositions
+                            then return (mkMs (moveZero, if isCheck position (mover position) then (-9000)-depth else 0))
+                            else do
+                                hrm <- highestRatedMove notInCheckPositions moveZero low high depth endTime 
+                                            MoveScore { msMove=snd (head notInCheckPositions), msScore=low, msBound=Upper } rootBest c
+                                updateHashTable hpos HashEntry { score=msScore hrm, move=msMove hrm, height=depth, bound=msBound hrm, lock=hpos } c
+                                return hrm
 
 highestRatedMove :: [(Position,Move)] -> Move -> Int -> Int -> Int -> Int -> MoveScore -> MoveScore -> SearchState -> IO MoveScore
 highestRatedMove [] _ _ _ _ _ best _ _ = return best
@@ -138,7 +142,7 @@ highestRatedMove notInCheckPositions moveZero low high depth endTime best rootBe
                 else highestRatedMove (tail notInCheckPositions) moveZero low high depth endTime best rootBest c
 
 newPositions :: Position -> [(Position,Move)]
-newPositions position = map (\move -> (makeMove position move,move)) (moves position)
+newPositions position = map (\move -> (makeMove position move,move)) (sortMoves position (moves position))
 
 quiescePositions :: Position -> [(Position,Move)]
 quiescePositions position = do
