@@ -85,7 +85,7 @@ highestRatedMoveZero (thisP:ps) positions low high depth endTime best rootBest c
 hashBound :: Int -> Int -> Maybe HashEntry -> Maybe Bound
 hashBound depth lockVal he = do
      case he of
-         Just x -> Nothing
+         Just x -> Nothing -- if height x >= depth && lock x == lockVal then return (bound x) else Nothing
          _      -> Nothing
 
 search :: Position -> Move -> Int -> Int -> Int -> Int -> MoveScore -> SearchState -> IO MoveScore

@@ -31,7 +31,7 @@ centreScore position move
 
 {-# INLINE scoreMove #-}
 scoreMove :: Position -> Move -> Move -> Int
-scoreMove position hashMove move = captureScore position move + centreScore position move -- + (if hashMove == move then 100000 else 0)
+scoreMove position hashMove move = captureScore position move + centreScore position move + (if hashMove == move then 100000 else 0)
 
 {-# INLINE pieceValue #-}
 pieceValue :: Piece -> Int
