@@ -85,7 +85,7 @@ highestRatedMoveZero (thisP:ps) positions low high depth endTime best rootBest c
 hashBound :: Int -> Int -> Maybe HashEntry -> Maybe Bound
 hashBound depth lockVal he = do
      case he of
-         Just x -> if height x >= depth && lock x == lockVal then return (bound x) else Nothing
+         Just x -> Nothing
          _      -> Nothing
 
 search :: Position -> Move -> Int -> Int -> Int -> Int -> MoveScore -> SearchState -> IO MoveScore
@@ -101,13 +101,13 @@ search position moveZero depth low high endTime rootBest c = do
                 Exact -> do
                     incCounter 1000000000 c
                     return (mkMs (move (fromJust hentry), score (fromJust hentry)))
-                Lower -> do    
+                Lower -> do
                     go position moveZero (move (fromJust hentry)) depth (score (fromJust hentry)) high endTime rootBest c hpos
-                Upper -> do    
+                Upper -> do
                     go position moveZero (move (fromJust hentry)) depth low (score (fromJust hentry)) endTime rootBest c hpos
         Nothing -> do
             go position moveZero 0 depth low high endTime rootBest c hpos
-    where 
+    where
         go :: Position -> Move -> Move -> Int -> Int -> Int -> Int -> MoveScore -> SearchState -> Int -> IO MoveScore
         go position moveZero _ 0 low high endTime _ c _ = do
             q <- quiesce position low high c
@@ -123,7 +123,7 @@ search position moveZero depth low high endTime rootBest c = do
                         if null notInCheckPositions
                             then return (mkMs (moveZero, if isCheck position (mover position) then (-9000)-depth else 0))
                             else do
-                                hrm <- highestRatedMove notInCheckPositions moveZero low high depth endTime 
+                                hrm <- highestRatedMove notInCheckPositions moveZero low high depth endTime
                                             MoveScore { msMove=snd (head notInCheckPositions), msScore=low, msBound=Upper } rootBest c
                                 updateHashTable hpos HashEntry { score=msScore hrm, move=msMove hrm, height=depth, bound=msBound hrm, lock=hpos } c
                                 return hrm
