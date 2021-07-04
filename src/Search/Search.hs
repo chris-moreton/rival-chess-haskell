@@ -102,9 +102,9 @@ search position moveZero depth low high endTime rootBest c = do
                     incCounter 1000000000 c
                     return (mkMs (move (fromJust hentry), score (fromJust hentry)))
                 Lower -> do    
-                    go position moveZero 0 depth (score (fromJust hentry)) high endTime rootBest c hpos
+                    go position moveZero (move (fromJust hentry)) depth (score (fromJust hentry)) high endTime rootBest c hpos
                 Upper -> do    
-                    go position moveZero 0 depth low (score (fromJust hentry)) endTime rootBest c hpos
+                    go position moveZero (move (fromJust hentry)) depth low (score (fromJust hentry)) endTime rootBest c hpos
         Nothing -> do
             go position moveZero 0 depth low high endTime rootBest c hpos
     where 
