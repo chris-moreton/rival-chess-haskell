@@ -31,7 +31,7 @@ canLeadToDrawByRepetition p ps
 
 startSearch :: [Position] -> Int -> Int -> SearchState -> IO MoveScore
 startSearch (position:positions) maxDepth endTime c = do
-    let theseMoves = sortMoves position 0 (moves position)
+    let theseMoves = sortMoves position (moves position)
     let newPositions = map (\move -> (makeMove position move,move)) theseMoves
     let notInCheckPositions = filter (\(p,m) -> not (isCheck p (mover position))) newPositions
     iterativeDeepening (position:positions) 1 maxDepth endTime (mkMs (snd (head notInCheckPositions),-100000)) c
@@ -54,7 +54,7 @@ sortMoves position moves = do
 
 bestMoveFirst :: Position -> MoveScore -> [(Position,Move)]
 bestMoveFirst position best = do
-    let movesWithoutBest = sortMoves position 0 (filter (\m -> m /= msScore best) (moves position))
+    let movesWithoutBest = sortMoves position (filter (\m -> m /= msScore best) (moves position))
     let newPositionsWithoutBest = map (\move -> (makeMove position move,move)) movesWithoutBest
     let bestPosition = (makeMove position (msMove best),msMove best)
     let notInCheckPositions = filter (\(p,m) -> not (isCheck p (mover position))) newPositionsWithoutBest
