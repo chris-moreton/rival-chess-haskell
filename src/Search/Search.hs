@@ -47,9 +47,9 @@ iterativeDeepening positions depth maxDepth endTime rootBest c = do
         then return result
         else iterativeDeepening positions (depth+1) maxDepth endTime result c
 
-sortMoves :: Position -> Move -> MoveList -> MoveList
-sortMoves position hashMove moves = do
-    let scoredMoves = map (\m -> m + (scoreMove position hashMove m `shiftL` 32)) moves
+sortMoves :: Position -> MoveList -> MoveList
+sortMoves position moves = do
+    let scoredMoves = map (\m -> m + (scoreMove position m `shiftL` 32)) moves
     map (0b0000000000000000000000000000000011111111111111111111111111111111 .&.) (sortBy (flip compare) scoredMoves)
 
 bestMoveFirst :: Position -> MoveScore -> [(Position,Move)]
@@ -119,7 +119,7 @@ search position moveZero depth low high endTime rootBest c = do
                 else do
                     t <- timeMillis
                     if t > endTime then return rootBest else do
-                        let notInCheckPositions = filter (\(p,m) -> not (isCheck p (mover position))) (newPositions position hashMove)
+                        let notInCheckPositions = filter (\(p,m) -> not (isCheck p (mover position))) (newPositions position)
                         if null notInCheckPositions
                             then return (mkMs (moveZero, if isCheck position (mover position) then (-9000)-depth else 0))
                             else do
@@ -141,8 +141,8 @@ highestRatedMove notInCheckPositions moveZero low high depth endTime best rootBe
                 then highestRatedMove (tail notInCheckPositions) moveZero negatedScore high depth endTime ms { msScore=negatedScore, msBound=Exact } rootBest c
                 else highestRatedMove (tail notInCheckPositions) moveZero low high depth endTime best rootBest c
 
-newPositions :: Position -> Move -> [(Position,Move)]
-newPositions position hashMove = map (\move -> (makeMove position move,move)) (sortMoves position hashMove (moves position))
+newPositions :: Position -> [(Position,Move)]
+newPositions position = map (\move -> (makeMove position move,move)) (sortMoves position (moves position))
 
 quiescePositions :: Position -> [(Position,Move)]
 quiescePositions position = do
