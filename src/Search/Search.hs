@@ -49,7 +49,7 @@ iterativeDeepening positions depth maxDepth endTime rootBest c = do
 
 sortMoves :: Position -> MoveList -> MoveList
 sortMoves position moves = do
-    let scoredMoves = map (\m -> m + (scoreMove position m `shiftL` 32)) moves
+    let scoredMoves = map (\m -> m + (scoreMove position 0 m `shiftL` 32)) moves
     map (0b0000000000000000000000000000000011111111111111111111111111111111 .&.) (sortBy (flip compare) scoredMoves)
 
 bestMoveFirst :: Position -> MoveScore -> [(Position,Move)]
