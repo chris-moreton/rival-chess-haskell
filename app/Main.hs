@@ -48,9 +48,7 @@ commandCycle uciState = do
   uciState' <- run uciState (splitOn " " command)
   let e = errorMessage uciState'
   let o = output uciState'
-  putStrLn "Nodes"
   let c = counter uciState
-  showCounter c
   zeroCounter c
   if quit uciState'
       then do
