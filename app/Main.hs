@@ -37,7 +37,7 @@ main = do
 
 showId :: IO ()
 showId = do
-    putStrLn "id name Rival Haskell Build 602"
+    putStrLn "id name Rival Haskell Build 603"
     putStrLn "id author Chris Moreton"
     putStrLn "uciok"
 
@@ -48,9 +48,9 @@ commandCycle uciState = do
   uciState' <- run uciState (splitOn " " command)
   let e = errorMessage uciState'
   let o = output uciState'
-  putStrLn "Nodes"
+  -- putStrLn "Nodes"
   let c = counter uciState
-  -- showCounter c
+  showCounter c
   zeroCounter c
   if quit uciState'
       then do
