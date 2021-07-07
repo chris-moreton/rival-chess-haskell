@@ -49,6 +49,7 @@ commandCycle uciState = do
   let e = errorMessage uciState'
   let o = output uciState'
   let c = counter uciState
+  showCounter c
   zeroCounter c
   if quit uciState'
       then do
