@@ -18,7 +18,7 @@ import Control.Monad ()
 import System.Exit ()
 import Data.Sort ( sortBy )
 import Data.Maybe ( isJust, fromJust )
-import State.State ( incCounter, updateHashTable, SearchState(h), calcHashIndex )
+import State.State ( incNodes, updateHashTable, SearchState(..), calcHashIndex )
 import qualified Data.HashTable.IO as H
 import Util.Zobrist ( hashIndex, zobrist )
 import Search.Evaluate ( evaluate, isCapture, scoreMove )
@@ -94,12 +94,12 @@ search position moveZero 0 low high endTime _ c = do
     return (mkMs (moveZero,q))
 search position moveZero depth low high endTime rootBest c = do
     let hpos = zobrist position
-    hentry <- H.lookup (h c) (calcHashIndex hpos)
+    hentry <- H.lookup (hashTable c) (calcHashIndex hpos)
     case hashBound depth hpos hentry of
         Just hb -> do
             case hb of
                 Exact -> do
-                    incCounter 1000000000 c
+                    incNodes 1000000000 c
                     return (mkMs (move (fromJust hentry), score (fromJust hentry)))
                 Lower -> do
                     go position moveZero (move (fromJust hentry)) depth (score (fromJust hentry)) high endTime rootBest c hpos
@@ -113,7 +113,7 @@ search position moveZero depth low high endTime rootBest c = do
             q <- quiesce position low high c
             return (mkMs (moveZero,q))
         go position moveZero hashMove depth low high endTime rootBest c hpos = do
-            incCounter 1 c
+            incNodes 1 c
             if halfMoves position == 50
                 then return (mkMs (moveZero, 0))
                 else do
@@ -155,10 +155,10 @@ quiesce position low high = quiesceRecur position low high 0
 
 quiesceRecur :: Position -> Int -> Int -> Int -> SearchState -> IO Int
 quiesceRecur position _ _ 10 c = do
-    incCounter 1 c
+    incNodes 1 c
     return (evaluate position)
 quiesceRecur position low high depth c = do
-    incCounter 1 c
+    incNodes 1 c
     let eval = evaluate position
     let newLow = max eval low
     let qp = quiescePositions position

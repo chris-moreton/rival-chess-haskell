@@ -5,33 +5,30 @@ import qualified Data.HashTable.IO as H
 import Types ( HashTable, HashEntry )
 
 data SearchState = SearchState { 
-     h :: HashTable
-   , x :: IORef Integer
+     hashTable  :: HashTable
+   , nodes      :: IORef Integer
 }
 
-makeCounter :: HashTable -> Integer -> IO SearchState
-makeCounter h i = do 
+makeSearchState :: HashTable -> Integer -> IO SearchState
+makeSearchState h i = do 
     iref <- newIORef i
     href <- H.new
     return (SearchState href iref)
 
-incCounter :: Integer -> SearchState -> IO ()
-incCounter i (SearchState _ c) = do modifyIORef c (+ i)
+incNodes :: Integer -> SearchState -> IO ()
+incNodes i (SearchState _ c) = do modifyIORef c (+ i)
 
-decCounter :: Integer -> SearchState -> IO ()
-decCounter i (SearchState _ c) = do modifyIORef c (i -)
+zeroNodes :: SearchState -> IO ()
+zeroNodes (SearchState _ c) = do modifyIORef c (0 *)
 
-zeroCounter :: SearchState -> IO ()
-zeroCounter (SearchState _ c) = do modifyIORef c (0 *)
-
-showCounter :: SearchState -> IO ()
-showCounter (SearchState _ c) = do 
-    c' <- readIORef c
-    print c'
+showNodes:: SearchState -> IO ()
+showNodes (SearchState _ nodes) = do 
+    nodes' <- readIORef nodes
+    print nodes'
 
 calcHashIndex :: Int -> Int 
 calcHashIndex i = i `mod` 16777216
 
 updateHashTable :: Int -> HashEntry -> SearchState -> IO ()
-updateHashTable i he (SearchState h _) = do H.insert h (calcHashIndex i) he
+updateHashTable i he (SearchState hashTable _) = do H.insert hashTable (calcHashIndex i) he
 

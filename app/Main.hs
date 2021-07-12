@@ -18,7 +18,7 @@ import Text.Printf ( printf )
 import Util.Utils ( timeMillis )
 import System.IO ( stdout, hFlush )
 import Data.IORef ()
-import State.State ( SearchState, makeCounter, showCounter, zeroCounter )
+import State.State ( SearchState, makeSearchState, showNodes, zeroNodes )
 import qualified Data.HashTable.IO as H
                      
 data UCIState = UCIState {
@@ -32,12 +32,12 @@ data UCIState = UCIState {
 main :: IO ()
 main = do
     h <- H.new
-    c <- makeCounter h 0
+    c <- makeSearchState h 0
     commandCycle UCIState {position = [getPosition startPosition], quit=False, errorMessage="", output="", counter=c}
 
 showId :: IO ()
 showId = do
-    putStrLn "id name Rival Haskell Build 701"
+    putStrLn "id name Rival Haskell Build -"
     putStrLn "id author Chris Moreton"
     putStrLn "uciok"
 
@@ -49,8 +49,8 @@ commandCycle uciState = do
   let e = errorMessage uciState'
   let o = output uciState'
   let c = counter uciState
-  showCounter c
-  zeroCounter c
+  showNodes c
+  zeroNodes c
   if quit uciState'
       then do
           putStrLn "Bye"
