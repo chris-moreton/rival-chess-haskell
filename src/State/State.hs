@@ -9,23 +9,23 @@ import Util.Fen ( algebraicMoveFromMove )
 data SearchState = SearchState {
      hashTable  :: HashTable
    , nodes      :: IORef Integer
-   , pv         :: [IORef Move]
+   , pv         :: IORef [Move]
    , pvScore    :: IORef Integer
 }
 
-makeSearchState :: HashTable -> Integer -> [IORef Move] -> Integer -> IO SearchState
-makeSearchState h n pv s = do
+makeSearchState :: HashTable -> Integer -> [Move] -> Integer -> IO SearchState
+makeSearchState h n p s = do
     hRef <- H.new
     nRef <- newIORef n
+    pRef <- newIORef p
     sRef <- newIORef s
-    return (SearchState hRef nRef pv sRef)
+    return (SearchState hRef nRef pRef sRef)
 
 incNodes :: Integer -> SearchState -> IO ()
 incNodes i (SearchState _ nodes _ _) = do modifyIORef nodes (+ i)
 
-setPvMove :: Int -> Move -> SearchState -> IO ()
-setPvMove depth move (SearchState _ _ moves _) = do
-    writeIORef (moves !! depth) move
+setPv :: [Move] -> SearchState -> IO ()
+setPv pv (SearchState _ _ moves _) = do writeIORef moves pv
 
 zeroNodes :: SearchState -> IO ()
 zeroNodes (SearchState _ nodes _ _) = do modifyIORef nodes (0 *)
@@ -35,24 +35,17 @@ showNodes (SearchState _ nodes _ _) = do
     nodes' <- readIORef nodes
     print nodes'
 
-clearPv :: SearchState -> IO SearchState
-clearPv searchState = go searchState 100
-    where
-        go :: SearchState -> Integer -> IO SearchState
-        go searchState 0 = return searchState
-        go searchState c = do
-            r <- newIORef 0
-            go (searchState { pv = r : pv searchState }) (c-1)
-
 showPv:: SearchState -> Position -> String -> IO String
-showPv (SearchState _ _ [] _) _ result = return ""
-showPv searchState position result = do
-    let pv' = pv searchState
-    move <- readIORef (head pv')
-    if move == 0 then do
-        return result
-    else do
-        showPv searchState { pv = tail pv' } position (algebraicMoveFromMove move ++ " " ++ result)
+showPv (SearchState _ _ pv _) position result = do
+    pv' <- readIORef pv
+    return (go pv' position "")
+    where 
+        go :: [Move] -> Position -> String -> String
+        go [] _ result = result
+        go (m:ms) position result =
+            if m == 0 
+                then result
+                else go ms position (algebraicMoveFromMove m ++ " " ++ result)
 
 calcHashIndex :: Int -> Int
 calcHashIndex i = i `mod` 16777216
