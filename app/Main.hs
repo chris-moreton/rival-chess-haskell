@@ -18,7 +18,7 @@ import Text.Printf ( printf )
 import Util.Utils ( timeMillis )
 import System.IO ( stdout, hFlush )
 import Data.IORef ()
-import State.State ( SearchState, makeSearchState, showNodes, zeroNodes )
+import State.State ( SearchState, makeSearchState, showNodes, zeroNodes, showPv )
 import qualified Data.HashTable.IO as H
                      
 data UCIState = UCIState {
@@ -26,18 +26,18 @@ data UCIState = UCIState {
     , quit :: Bool
     , errorMessage :: String
     , output :: String
-    , counter :: SearchState
+    , searchState :: SearchState
 }
 
 main :: IO ()
 main = do
     h <- H.new
-    c <- makeSearchState h 0 [] 0
-    commandCycle UCIState {position = [getPosition startPosition], quit=False, errorMessage="", output="", counter=c}
+    searchState <- makeSearchState h 0 [] 0
+    commandCycle UCIState {position = [getPosition startPosition], quit=False, errorMessage="", output="", searchState=searchState}
 
 showId :: IO ()
 showId = do
-    putStrLn "id name Rival Haskell Build -"
+    putStrLn "id name Rival Haskell Build 702"
     putStrLn "id author Chris Moreton"
     putStrLn "uciok"
 
@@ -48,7 +48,7 @@ commandCycle uciState = do
   uciState' <- run uciState (splitOn " " command)
   let e = errorMessage uciState'
   let o = output uciState'
-  let c = counter uciState
+  let c = searchState uciState
   showNodes c
   zeroNodes c
   if quit uciState'
@@ -91,14 +91,19 @@ runGo uciState ("movetime":xs) = do
     let moveTime = head xs
     t <- timeMillis
     let endTime = t + read moveTime
-    move <- startSearch (position uciState) 50 endTime (counter uciState)
-    return uciState{output="score " ++ show (msScore move) ++ "\nbestmove " ++ algebraicMoveFromMove (msMove move)}
+    move <- startSearch (position uciState) 50 endTime (searchState uciState)
+    pvText <- showPv (searchState uciState) (head (position uciState)) ""
+    return uciState{
+        output = "score " ++ show (msScore move) ++ "\n" ++
+                 "pv " ++ pvText ++ "\n" ++ 
+                 "bestmove " ++ algebraicMoveFromMove (msMove move)
+    }
 
 runGo uciState ("depth":xs) = do
     let depth = read (head xs)
     t <- timeMillis
     let endTime = t + 1000000
-    move <- startSearch (position uciState) depth endTime (counter uciState)
+    move <- startSearch (position uciState) depth endTime (searchState uciState)
     return uciState{output="bestmove " ++ algebraicMoveFromMove (msMove move)}
 
 runPosition :: UCIState -> [String] -> IO UCIState

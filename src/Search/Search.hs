@@ -18,7 +18,7 @@ import Control.Monad ()
 import System.Exit ()
 import Data.Sort ( sortBy )
 import Data.Maybe ( isJust, fromJust )
-import State.State ( incNodes, updateHashTable, SearchState(..), calcHashIndex )
+import State.State ( incNodes, updateHashTable, SearchState(..), calcHashIndex, setPvMove, clearPv )
 import qualified Data.HashTable.IO as H
 import Util.Zobrist ( hashIndex, zobrist )
 import Search.Evaluate ( evaluate, isCapture, scoreMove )
@@ -34,7 +34,8 @@ startSearch (position:positions) maxDepth endTime searchState = do
     let theseMoves = sortMoves position 0 (moves position)
     let newPositions = map (\move -> (makeMove position move,move)) theseMoves
     let notInCheckPositions = filter (\(p,m) -> not (isCheck p (mover position))) newPositions
-    iterativeDeepening (position:positions) 1 maxDepth endTime (mkMs (snd (head notInCheckPositions),-100000)) searchState
+    searchState' <- clearPv searchState
+    iterativeDeepening (position:positions) 1 maxDepth endTime (mkMs (snd (head notInCheckPositions),-100000)) searchState'
 
 mkMs :: (Move,Int) -> MoveScore
 mkMs mi = MoveScore { msMove=fst mi, msScore=snd mi, msBound=Exact }
@@ -61,10 +62,12 @@ bestMoveFirst position best = do
     bestPosition : notInCheckPositions
 
 searchZero :: [Position] -> Int -> Int -> MoveScore -> SearchState -> IO MoveScore
-searchZero positions depth endTime rootBest c = do
+searchZero positions depth endTime rootBest searchState = do
     let position = head positions
     let positionsWithBestFirst = bestMoveFirst position rootBest
-    highestRatedMoveZero positionsWithBestFirst positions (-100000) 100000 depth endTime (mkMs (snd (head positionsWithBestFirst),-100000)) rootBest c
+    moveScore <- highestRatedMoveZero positionsWithBestFirst positions (-100000) 100000 depth endTime (mkMs (snd (head positionsWithBestFirst),-100000)) rootBest searchState
+    setPvMove depth (msMove moveScore) searchState
+    return moveScore
 
 highestRatedMoveZero :: [(Position,Move)] -> [Position] -> Int -> Int -> Int -> Int -> MoveScore -> MoveScore -> SearchState -> IO MoveScore
 highestRatedMoveZero [] _ _ _ _ _ best _ _ = return best
@@ -89,31 +92,31 @@ hashBound depth lockVal he = do
          _      -> Nothing
 
 search :: Position -> Move -> Int -> Int -> Int -> Int -> MoveScore -> SearchState -> IO MoveScore
-search position moveZero 0 low high endTime _ c = do
-    q <- quiesce position low high c
+search position moveZero 0 low high endTime _ searchState = do
+    q <- quiesce position low high searchState
     return (mkMs (moveZero,q))
-search position moveZero depth low high endTime rootBest c = do
+search position moveZero depth low high endTime rootBest searchState = do
     let hpos = zobrist position
-    hentry <- H.lookup (hashTable c) (calcHashIndex hpos)
+    hentry <- H.lookup (hashTable searchState) (calcHashIndex hpos)
     case hashBound depth hpos hentry of
         Just hb -> do
             case hb of
                 Exact -> do
-                    incNodes 1000000000 c
+                    incNodes 1000000000 searchState
                     return (mkMs (move (fromJust hentry), score (fromJust hentry)))
                 Lower -> do
-                    go position moveZero (move (fromJust hentry)) depth (score (fromJust hentry)) high endTime rootBest c hpos
+                    go position moveZero (move (fromJust hentry)) depth (score (fromJust hentry)) high endTime rootBest searchState hpos
                 Upper -> do
-                    go position moveZero (move (fromJust hentry)) depth low (score (fromJust hentry)) endTime rootBest c hpos
+                    go position moveZero (move (fromJust hentry)) depth low (score (fromJust hentry)) endTime rootBest searchState hpos
         Nothing -> do
-            go position moveZero 0 depth low high endTime rootBest c hpos
+            go position moveZero 0 depth low high endTime rootBest searchState hpos
     where
         go :: Position -> Move -> Move -> Int -> Int -> Int -> Int -> MoveScore -> SearchState -> Int -> IO MoveScore
-        go position moveZero _ 0 low high endTime _ c _ = do
-            q <- quiesce position low high c
+        go position moveZero _ 0 low high endTime _ searchState _ = do
+            q <- quiesce position low high searchState
             return (mkMs (moveZero,q))
-        go position moveZero hashMove depth low high endTime rootBest c hpos = do
-            incNodes 1 c
+        go position moveZero hashMove depth low high endTime rootBest searchState hpos = do
+            incNodes 1 searchState
             if halfMoves position == 50
                 then return (mkMs (moveZero, 0))
                 else do
@@ -124,8 +127,9 @@ search position moveZero depth low high endTime rootBest c = do
                             then return (mkMs (moveZero, if isCheck position (mover position) then (-9000)-depth else 0))
                             else do
                                 hrm <- highestRatedMove notInCheckPositions moveZero low high depth endTime
-                                            MoveScore { msMove=snd (head notInCheckPositions), msScore=low, msBound=Upper } rootBest c
-                                updateHashTable hpos HashEntry { score=msScore hrm, move=msMove hrm, height=depth, bound=msBound hrm, lock=hpos } c
+                                            MoveScore { msMove=snd (head notInCheckPositions), msScore=low, msBound=Upper } rootBest searchState
+                                setPvMove depth (msMove hrm) searchState
+                                updateHashTable hpos HashEntry { score=msScore hrm, move=msMove hrm, height=depth, bound=msBound hrm, lock=hpos } searchState
                                 return hrm
 
 highestRatedMove :: [(Position,Move)] -> Move -> Int -> Int -> Int -> Int -> MoveScore -> MoveScore -> SearchState -> IO MoveScore
@@ -154,11 +158,11 @@ quiesce :: Position -> Int -> Int -> SearchState -> IO Int
 quiesce position low high = quiesceRecur position low high 0
 
 quiesceRecur :: Position -> Int -> Int -> Int -> SearchState -> IO Int
-quiesceRecur position _ _ 10 c = do
-    incNodes 1 c
+quiesceRecur position _ _ 10 searchState = do
+    incNodes 1 searchState
     return (evaluate position)
-quiesceRecur position low high depth c = do
-    incNodes 1 c
+quiesceRecur position low high depth searchState = do
+    incNodes 1 searchState
     let eval = evaluate position
     let newLow = max eval low
     let qp = quiescePositions position
@@ -168,18 +172,18 @@ quiesceRecur position low high depth c = do
             let notInCheckPositions = filter (\(p,m) -> not (isCheck p (mover position))) qp
             if null notInCheckPositions
                 then return (if isCheck position (mover position) then (-9000)-depth else 0)
-                else highestQuiesceMove notInCheckPositions newLow high depth newLow c
+                else highestQuiesceMove notInCheckPositions newLow high depth newLow searchState
         else return newLow
 
 highestQuiesceMove :: [(Position,Move)] -> Int -> Int -> Int -> Int -> SearchState -> IO Int
-highestQuiesceMove [] _ _ _ best c = return best
-highestQuiesceMove notInCheckPositions low high depth best c = do
+highestQuiesceMove [] _ _ _ best _ = return best
+highestQuiesceMove notInCheckPositions low high depth best searchState = do
     let thisP = head notInCheckPositions
-    score <- quiesceRecur (fst thisP) (-high) (-low) (depth+1) c
+    score <- quiesceRecur (fst thisP) (-high) (-low) (depth+1) searchState
     let negatedScore = -score
     if negatedScore >= high
         then return negatedScore
         else do
             if negatedScore > low
-                then highestQuiesceMove (tail notInCheckPositions) negatedScore high depth negatedScore c
-                else highestQuiesceMove (tail notInCheckPositions) low high depth best c
+                then highestQuiesceMove (tail notInCheckPositions) negatedScore high depth negatedScore searchState
+                else highestQuiesceMove (tail notInCheckPositions) low high depth best searchState
