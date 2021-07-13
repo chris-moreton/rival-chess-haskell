@@ -92,7 +92,7 @@ runGo uciState ("movetime":xs) = do
     t <- timeMillis
     let endTime = t + read moveTime
     move <- startSearch (position uciState) 50 endTime (counter uciState)
-    return uciState{output="bestmove " ++ algebraicMoveFromMove (msMove move)}
+    return uciState{output="score " ++ show (msScore move) ++ "\nbestmove " ++ algebraicMoveFromMove (msMove move)}
 
 runGo uciState ("depth":xs) = do
     let depth = read (head xs)
