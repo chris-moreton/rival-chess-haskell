@@ -69,7 +69,7 @@ searchZero positions depth endTime rootBest searchState = do
     let position = head positions
     let positionsWithBestFirst = bestMoveFirst position rootBest
     let thisM = snd (head positionsWithBestFirst)
-    let best = mkMs (-100000, [thisM])
+    let best = mkMs (-100000, [])
     highestRatedMoveZero positionsWithBestFirst positions (-100000) 100000 depth endTime best searchState
 
 highestRatedMoveZero :: [(Position,Move)] -> [Position] -> Int -> Int -> Int -> Int -> MoveScore -> SearchState -> IO MoveScore
@@ -87,7 +87,7 @@ highestRatedMoveZero (thisP:ps) positions low high depth endTime best searchStat
             if negatedScore > low
                 then do
                     let thisM = snd thisP
-                    let best' = MoveScore { msScore = negatedScore, msBound = Exact, msPath = [thisM] }
+                    let best' = MoveScore { msScore = negatedScore, msBound = Exact, msPath = thisM : msPath searchResult }
                     highestRatedMoveZero ps positions negatedScore high depth endTime best' searchState
                 else highestRatedMoveZero ps positions low high depth endTime best searchState
 

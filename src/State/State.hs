@@ -42,10 +42,7 @@ showPv (SearchState _ _ pv _) position result = do
     where 
         go :: [Move] -> Position -> String -> String
         go [] _ result = result
-        go (m:ms) position result =
-            if m == 0 
-                then result
-                else go ms position (algebraicMoveFromMove m ++ " " ++ result)
+        go (m:ms) position result = go ms position (result ++ " " ++ algebraicMoveFromMove m)
 
 calcHashIndex :: Int -> Int
 calcHashIndex i = i `mod` 16777216
