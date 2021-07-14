@@ -4,7 +4,7 @@ module Types where
 
 import GHC.Generics ( Generic )
 import Data.Bits ( Bits((.|.)) )
-import Alias ( Bitboard, Square, Move )
+import Alias ( Bitboard, Square, Move, Path )
 import Control.DeepSeq ( NFData )
 import qualified Data.HashTable.IO as H
 
@@ -12,7 +12,7 @@ data Mover = White | Black deriving (Enum,Show,Eq,NFData,Generic)
 data Piece = Pawn | King | Queen | Bishop | Knight | Rook deriving (Enum,Show,Eq)
 data HashEntry = HashEntry { score :: Int, move :: Move, height :: Int, bound :: Bound, lock :: Int }
 data Bound = Exact | Lower | Upper deriving (Enum,Show,Eq,Generic)
-data MoveScore = MoveScore { msMove :: Move, msScore :: Int, msBound :: Bound }
+data MoveScore = MoveScore { msMove :: Move, msScore :: Int, msBound :: Bound, msPath :: Path }
 
 type HashTable = H.LinearHashTable Int HashEntry
 

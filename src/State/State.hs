@@ -3,7 +3,7 @@ module State.State where
 import Data.IORef ( modifyIORef, writeIORef, newIORef, readIORef, IORef )
 import qualified Data.HashTable.IO as H
 import Types ( HashTable, HashEntry, Position )
-import Alias ( Move )
+import Alias ( Move, Path )
 import Util.Fen ( algebraicMoveFromMove )
 
 data SearchState = SearchState {
@@ -24,7 +24,7 @@ makeSearchState h n p s = do
 incNodes :: Integer -> SearchState -> IO ()
 incNodes i (SearchState _ nodes _ _) = do modifyIORef nodes (+ i)
 
-setPv :: [Move] -> SearchState -> IO ()
+setPv :: Path -> SearchState -> IO ()
 setPv pv (SearchState _ _ moves _) = do writeIORef moves pv
 
 zeroNodes :: SearchState -> IO ()
