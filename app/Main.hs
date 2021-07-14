@@ -96,7 +96,7 @@ runGo uciState ("movetime":xs) = do
     return uciState{
         output = "score " ++ show (msScore move) ++ "\n" ++
                  "pv " ++ pvText ++ "\n" ++ 
-                 "bestmove " ++ algebraicMoveFromMove (msMove move)
+                 "bestmove " ++ algebraicMoveFromMove (head $ msPath move)
     }
 
 runGo uciState ("depth":xs) = do
@@ -104,7 +104,7 @@ runGo uciState ("depth":xs) = do
     t <- timeMillis
     let endTime = t + 1000000
     move <- startSearch (position uciState) depth endTime (searchState uciState)
-    return uciState{output="bestmove " ++ algebraicMoveFromMove (msMove move)}
+    return uciState{output="bestmove " ++ algebraicMoveFromMove (head $ msPath move)}
 
 runPosition :: UCIState -> [String] -> IO UCIState
 runPosition uciState ("startpos":xs) = runPosition uciState (["fen",startPosition] ++ xs)
