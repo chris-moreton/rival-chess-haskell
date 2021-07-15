@@ -1,4 +1,5 @@
 {-# LANGUAGE TupleSections #-}
+{-# LANGUAGE MultiWayIf #-}
 
 module Main where
 
@@ -87,24 +88,18 @@ run uciState (x:xs) = do
 runGo :: UCIState -> [String] -> IO UCIState
 runGo uciState ("infinite":_) = runGo uciState ["movetime","10000000"]
 
-runGo uciState ("movetime":xs) = do
-    let moveTime = head xs
+runGo uciState (command:xs) = do
     t <- timeMillis
-    let endTime = t + read moveTime
-    move <- startSearch (position uciState) 50 endTime (searchState uciState)
+    let param = read (head xs)
+    let endTime = t + if command == "depth" then 1000000 else param
+    let depth = if command == "movetime" then 50 else param
+    move <- startSearch (position uciState) depth endTime (searchState uciState)
     pvText <- showPv (searchState uciState) (head (position uciState)) ""
-    return uciState{
+    return uciState {
         output = "score " ++ show (msScore move) ++ "\n" ++
                  "pv " ++ pvText ++ "\n" ++ 
                  "bestmove " ++ algebraicMoveFromMove (head $ msPath move)
     }
-
-runGo uciState ("depth":xs) = do
-    let depth = read (head xs)
-    t <- timeMillis
-    let endTime = t + 1000000
-    move <- startSearch (position uciState) depth endTime (searchState uciState)
-    return uciState{output="bestmove " ++ algebraicMoveFromMove (head $ msPath move)}
 
 runPosition :: UCIState -> [String] -> IO UCIState
 runPosition uciState ("startpos":xs) = runPosition uciState (["fen",startPosition] ++ xs)

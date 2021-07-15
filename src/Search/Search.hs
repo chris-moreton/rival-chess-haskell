@@ -69,7 +69,7 @@ searchZero positions depth endTime rootBest searchState = do
     let position = head positions
     let positionsWithBestFirst = bestMoveFirst position rootBest
     let thisM = snd (head positionsWithBestFirst)
-    let best = mkMs (-100000, [])
+    let best = mkMs (-100000, [thisM])
     highestRatedMoveZero positionsWithBestFirst positions (-100000) 100000 depth endTime best searchState
 
 highestRatedMoveZero :: [(Position,Move)] -> [Position] -> Int -> Int -> Int -> Int -> MoveScore -> SearchState -> IO MoveScore
@@ -87,7 +87,7 @@ highestRatedMoveZero (thisP:ps) positions low high depth endTime best searchStat
             if negatedScore > low
                 then do
                     let thisM = snd thisP
-                    let best' = MoveScore { msScore = negatedScore, msBound = Exact, msPath = thisM : msPath searchResult }
+                    let best' = MoveScore { msScore = negatedScore, msBound = Exact, msPath = thisM : tail (msPath searchResult) }
                     highestRatedMoveZero ps positions negatedScore high depth endTime best' searchState
                 else highestRatedMoveZero ps positions low high depth endTime best searchState
 
@@ -100,7 +100,7 @@ hashBound depth lockVal he =
 search :: Position -> Move -> Int -> Int -> Int -> Int -> MoveScore -> SearchState -> IO MoveScore
 search position moveZero 0 low high endTime best searchState = do
     q <- quiesce position low high searchState
-    return (mkMs (q,msPath best))
+    return (mkMs (q,[]))
 search position moveZero depth low high endTime best searchState = do
     let hpos = zobrist position
     hentry <- H.lookup (hashTable searchState) (calcHashIndex hpos)
@@ -134,7 +134,7 @@ search position moveZero depth low high endTime best searchState = do
                             then return (mkMs (if isCheck position (mover position) then (-9000)-depth else 0, msPath best))
                             else do
                                 let thisM = snd (head notInCheckPositions)
-                                let best' = MoveScore { msScore=low, msBound=Upper, msPath = msPath best ++ [thisM] }
+                                let best' = MoveScore { msScore=low, msBound=Upper, msPath = msPath best }
                                 hrm <- highestRatedMove notInCheckPositions moveZero low high depth endTime best' searchState
                                 updateHashTable hpos HashEntry { score=msScore hrm, move=thisM, height=depth, bound=msBound hrm, lock=hpos } searchState
                                 return hrm
@@ -151,7 +151,7 @@ highestRatedMove notInCheckPositions moveZero low high depth endTime best c = do
             if negatedScore > low
                 then do
                     let thisM = snd thisP
-                    let best' = ms { msScore=negatedScore, msBound=Exact, msPath = msPath ms ++ [thisM] }
+                    let best' = ms { msScore=negatedScore, msBound=Exact, msPath = thisM : msPath best }
                     highestRatedMove (tail notInCheckPositions) moveZero negatedScore high depth endTime best' c
                 else highestRatedMove (tail notInCheckPositions) moveZero low high depth endTime best c
 
