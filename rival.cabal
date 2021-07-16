@@ -43,6 +43,7 @@ library
       Search.MoveUtils
       Search.Search
       Search.Evaluate
+      Search.SearchHelper
       State.State
       Types
       Alias
