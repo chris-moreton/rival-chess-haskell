@@ -99,8 +99,7 @@ runGo uciState (command:xs) = do
     move <- startSearch (position uciState) depth endTime (searchState uciState)
     pvText <- showPv (searchState uciState) (head (position uciState)) ""
     return uciState {
-        output = "score " ++ show (msScore move) ++ "\n" ++
-                 "pv " ++ pvText ++ "\n" ++
+        output = "info score cp " ++ show (msScore move) ++ " pv" ++ pvText ++ "\n" ++
                  "bestmove " ++ algebraicMoveFromMove (head $ msPath move)
     }
 

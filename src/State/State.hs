@@ -38,11 +38,11 @@ showNodes (SearchState _ nodes _ _) = do
 showPv:: SearchState -> Position -> String -> IO String
 showPv (SearchState _ _ pv _) position result = do
     pv' <- readIORef pv
-    return (go pv' position "")
-    where 
-        go :: [Move] -> Position -> String -> String
-        go [] _ result = result
-        go (m:ms) position result = go ms position (result ++ " " ++ algebraicMoveFromMove m)
+    return (pathString pv' position "")
+
+pathString :: [Move] -> Position -> String -> String
+pathString [] _ result = result
+pathString (m:ms) position result = pathString ms position (result ++ " " ++ algebraicMoveFromMove m)
 
 calcHashIndex :: Int -> Int
 calcHashIndex i = i `mod` 16777216

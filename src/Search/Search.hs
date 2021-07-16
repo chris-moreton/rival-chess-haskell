@@ -18,7 +18,7 @@ import Control.Monad ()
 import System.Exit ()
 import Data.Sort ( sortBy )
 import Data.Maybe ( isJust, fromJust )
-import State.State ( incNodes, updateHashTable, SearchState(..), calcHashIndex, setPv )
+import State.State ( incNodes, updateHashTable, SearchState(..), calcHashIndex, setPv, showPv, pathString )
 import qualified Data.HashTable.IO as H
 import Util.Zobrist ( hashIndex, zobrist )
 import Search.Evaluate ( evaluate, isCapture, scoreMove )
@@ -71,7 +71,11 @@ searchZero positions depth endTime rootBest searchState = do
                         if negatedScore > low
                             then do
                                 let thisM = snd thisP
-                                let best' = MoveScore { msScore = negatedScore, msBound = Exact, msPath = thisM : msPath searchResult }
+                                let path' = thisM : msPath searchResult
+                                let best' = MoveScore { msScore = negatedScore, msBound = Exact, msPath = path' }
+                                let pvText = pathString path' (fst thisP) ""
+                                let output = "info score cp " ++ show negatedScore ++ " pv" ++ pvText
+                                putStrLn output
                                 highestRatedMoveZero ps positions negatedScore high depth endTime best' searchState
                             else highestRatedMoveZero ps positions low high depth endTime best searchState
 
