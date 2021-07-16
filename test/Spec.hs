@@ -20,6 +20,8 @@ import Data.Bits
 import Data.Sort
 import Search.MakeMove
 import Search.Search
+import Search.SearchHelper
+import Search.Quiesce
 import State.State
 import Data.Bifunctor
 import Data.Vector as V ( (!) )
