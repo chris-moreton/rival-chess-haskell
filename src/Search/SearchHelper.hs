@@ -37,12 +37,11 @@ sortMoves position hashMove moves = do
     let scoredMoves = map (\m -> m + scoreMove position hashMove m `shiftL` 32) moves
     map (0b0000000000000000000000000000000011111111111111111111111111111111 .&.) (sortBy (flip compare) scoredMoves)
 
-bestMoveFirst :: Position -> MoveScore -> [(Position,Move)]
+bestMoveFirst :: Position -> Move -> [(Position,Move)]
 bestMoveFirst position best = do
-    let movesWithoutBest = sortMoves position 0 (filter (\m -> m /= msScore best) (moves position))
+    let movesWithoutBest = sortMoves position 0 (filter (/= best) (moves position))
     let newPositionsWithoutBest = map (\move -> (makeMove position move,move)) movesWithoutBest
-    let rootMove = head $ msPath best
-    let bestPosition = (makeMove position rootMove, rootMove)
+    let bestPosition = (makeMove position best, best)
     let notInCheckPositions = filter (\(p,m) -> not (isCheck p (mover position))) newPositionsWithoutBest
     bestPosition : notInCheckPositions
 
