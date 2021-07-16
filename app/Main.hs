@@ -21,7 +21,7 @@ import System.IO ( stdout, hFlush )
 import Data.IORef ()
 import State.State ( SearchState, makeSearchState, showNodes, zeroNodes, showPv )
 import qualified Data.HashTable.IO as H
-                     
+
 data UCIState = UCIState {
       position :: [Position]
     , quit :: Bool
@@ -38,7 +38,7 @@ main = do
 
 showId :: IO ()
 showId = do
-    putStrLn "id name Rival Haskell Build 804"
+    putStrLn "id name Rival Haskell Build -"
     putStrLn "id author Chris Moreton"
     putStrLn "uciok"
 
@@ -92,12 +92,15 @@ runGo uciState (command:xs) = do
     t <- timeMillis
     let param = read (head xs)
     let endTime = t + if command == "depth" then 1000000 else param
-    let depth = if command == "movetime" then 50 else param
+    let depth
+          | command == "movetime" = 50
+          | param > 0 = param
+          | otherwise = 1
     move <- startSearch (position uciState) depth endTime (searchState uciState)
     pvText <- showPv (searchState uciState) (head (position uciState)) ""
     return uciState {
         output = "score " ++ show (msScore move) ++ "\n" ++
-                 "pv " ++ pvText ++ "\n" ++ 
+                 "pv " ++ pvText ++ "\n" ++
                  "bestmove " ++ algebraicMoveFromMove (head $ msPath move)
     }
 

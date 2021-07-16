@@ -36,14 +36,12 @@ startSearch (position:positions) maxDepth endTime searchState = do
     let theseMoves = sortMoves position 0 (moves position)
     let newPositions = map (\move -> (makeMove position move,move)) theseMoves
     let notInCheckPositions = filter (\(p,m) -> not (isCheck p (mover position))) newPositions
-    -- result will contain the PV, pass in best move for ply zero ordering
     result <- iterativeDeepening (position:positions) 1 maxDepth endTime (snd (head notInCheckPositions)) searchState
     setPv (msPath result) searchState
     return result
     where
         iterativeDeepening :: [Position] -> Int -> Int -> Int -> Move -> SearchState -> IO MoveScore
         iterativeDeepening positions depth maxDepth endTime rootBest searchState = do
-            -- result will contain the PV, pass in best move for ply zero ordering
             result <- searchZero positions depth endTime rootBest searchState
             t <- timeMillis
             if t > endTime || depth == maxDepth
@@ -65,7 +63,7 @@ searchZero positions depth endTime rootBest searchState = do
             if t > endTime
                 then return best
                 else do
-                        searchResult <- uncurry search thisP depth (-high) (-low) endTime searchState
+                        searchResult <- uncurry search thisP (depth-1) (-high) (-low) endTime searchState
                         let ms = if canLeadToDrawByRepetition (fst thisP) positions
                             then mkMs (1, msPath best)
                             else searchResult
@@ -83,18 +81,20 @@ search inPosition inMove 0 low high endTime searchState = do
     return (mkMs (q,[]))
 search inPosition inMove depth low high endTime searchState = do
     let hpos = zobrist inPosition
-    hentry <- H.lookup (hashTable searchState) (calcHashIndex hpos)
+    let hashIndex = calcHashIndex hpos
+    hentry <- H.lookup (hashTable searchState) hashIndex
+    let hashTablePath = hePath (fromJust hentry)
     case hashBound depth hpos hentry of
         Just hb -> do
+            let hashTableMove = head hashTablePath
             case hb of
                 Exact -> do
                     incNodes 1000000000 searchState
-                    let thisM = move (fromJust hentry)
-                    return (mkMs (score (fromJust hentry), [thisM]))
+                    return (mkMs (score (fromJust hentry), hashTablePath))
                 Lower ->
-                    go inPosition inMove (move (fromJust hentry)) depth (score (fromJust hentry)) high endTime searchState hpos
+                    go inPosition inMove hashTableMove depth (score (fromJust hentry)) high endTime searchState hpos
                 Upper ->
-                    go inPosition inMove (move (fromJust hentry)) depth low (score (fromJust hentry)) endTime searchState hpos
+                    go inPosition inMove hashTableMove depth low (score (fromJust hentry)) endTime searchState hpos
         Nothing ->
             go inPosition inMove 0 depth low high endTime searchState hpos
     where
@@ -119,7 +119,7 @@ search inPosition inMove depth low high endTime searchState = do
                                     let thisM = snd (head notInCheckPositions)
                                     let best' = MoveScore { msScore=low, msBound=Upper, msPath = [thisM] }
                                     hrm <- highestRatedMove notInCheckPositions low high depth endTime best' searchState
-                                    updateHashTable hpos HashEntry { score = msScore hrm, move = head $ msPath hrm, height = depth, bound = msBound hrm, lock = hpos } searchState
+                                    updateHashTable hpos HashEntry { score = msScore hrm, hePath = msPath hrm, height = depth, bound = msBound hrm, lock = hpos } searchState
                                     return hrm
 
         highestRatedMove :: [(Position,Move)] -> Int -> Int -> Int -> Int -> MoveScore -> SearchState -> IO MoveScore
