@@ -44,6 +44,7 @@ library
       Search.Search
       Search.Evaluate
       Search.SearchHelper
+      Search.Quiesce
       State.State
       Types
       Alias
