@@ -46,7 +46,9 @@ startSearch (position:positions) maxDepth endTime searchState = do
             t <- timeMillis
             if t > endTime || depth == maxDepth
                 then return result
-                else iterativeDeepening positions (depth+1) maxDepth endTime (head $ msPath result) searchState
+                else do
+                    putStrLn "Iteration"
+                    iterativeDeepening positions (depth+1) maxDepth endTime (head $ msPath result) searchState
 
 searchZero :: [Position] -> Int -> Int -> Move -> SearchState -> IO MoveScore
 searchZero positions depth endTime rootBest searchState = do
