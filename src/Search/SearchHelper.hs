@@ -57,7 +57,7 @@ newPositions position hashMove = map (\move -> (makeMove position move,move)) (s
 quiescePositions :: Position -> [(Position,Move)]
 quiescePositions position = do
     let m = moves position
-    let captures = filter (isCapture position) m
-    map (\m -> (makeMove position m,m)) captures
+    map (\m -> (makeMove position m,m)) 
+        (if isCheck position (mover position) then m else filter (isCapture position) m)
 
 

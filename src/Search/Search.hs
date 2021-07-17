@@ -65,21 +65,21 @@ searchZero positions depth endTime rootBest searchState = do
             if t > endTime
                 then return best
                 else do
-                        searchResult <- uncurry search thisP (depth-1) (-high) (-low) endTime searchState
-                        let ms = if canLeadToDrawByRepetition (fst thisP) positions
-                            then mkMs (1, msPath best)
-                            else searchResult
-                        let negatedScore = -(msScore ms)
-                        if negatedScore > low
-                            then do
-                                let thisM = snd thisP
-                                let path' = thisM : msPath searchResult
-                                let best' = MoveScore { msScore = negatedScore, msBound = Exact, msPath = path' }
-                                let pvText = pathString path' (fst thisP) ""
-                                let output = "info score cp " ++ show negatedScore ++ " pv" ++ pvText
-                                putStrLn output
-                                highestRatedMoveZero ps positions negatedScore high depth endTime best' searchState
-                            else highestRatedMoveZero ps positions low high depth endTime best searchState
+                    searchResult <- uncurry search thisP (depth-1) (-high) (-low) endTime searchState
+                    let ms = if canLeadToDrawByRepetition (fst thisP) positions
+                        then mkMs (1, msPath best)
+                        else searchResult
+                    let negatedScore = -(msScore ms)
+                    if negatedScore > low
+                        then do
+                            let thisM = snd thisP
+                            let path' = thisM : msPath searchResult
+                            let best' = MoveScore { msScore = negatedScore, msBound = Exact, msPath = path' }
+                            let pvText = pathString path' (fst thisP) ""
+                            let output = "info score cp " ++ show negatedScore ++ " pv" ++ pvText
+                            putStrLn output
+                            highestRatedMoveZero ps positions negatedScore high depth endTime best' searchState
+                        else highestRatedMoveZero ps positions low high depth endTime best searchState
 
 search :: Position -> Move -> Int -> Int -> Int -> Int -> SearchState -> IO MoveScore
 search inPosition inMove 0 low high endTime searchState = do

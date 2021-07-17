@@ -34,7 +34,6 @@ quiesce position low high = quiesceRecur position low high 0
             let eval = evaluate position
             let newLow = max eval low
             let qp = quiescePositions position
-            let l = length qp
             if not (null qp)
                 then do
                     let notInCheckPositions = filter (\(p,m) -> not (isCheck p (mover position))) qp
