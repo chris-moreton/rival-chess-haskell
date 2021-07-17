@@ -38,7 +38,7 @@ main = do
 
 showId :: IO ()
 showId = do
-    putStrLn "id name Rival Haskell Build 900"
+    putStrLn "id name Rival Haskell Build 901"
     putStrLn "id author Chris Moreton"
     putStrLn "uciok"
 

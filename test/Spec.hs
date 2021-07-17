@@ -580,12 +580,12 @@ main = hspec $ do
     it "stores and retrieves hashtable values" $ do
         h' <- H.new
         c <- makeSearchState h' 0 [] 0
-        updateHashTable 1 HashEntry { score=1, move=2, height=3, bound=Exact, lock=0 } c
-        updateHashTable 2 HashEntry { score=10, move=20, height=30, bound=Upper, lock=0 } c
+        updateHashTable 1 HashEntry { score=1, hePath=[2], height=3, bound=Exact, lock=0 } c
+        updateHashTable 2 HashEntry { score=10, hePath=[20], height=30, bound=Upper, lock=0 } c
         hentry <- H.lookup (hashTable c) 2
-        move (fromJust hentry) `shouldBe` 20
+        hePath (fromJust hentry) `shouldBe` [20]
         hentry <- H.lookup (hashTable c) 1
-        move (fromJust hentry) `shouldBe` 2
+        hePath (fromJust hentry) `shouldBe` [2]
 
   describe "quiesce" $
     it "evaluates a position using a quiescence search" $ do
