@@ -38,7 +38,7 @@ main = do
 
 showId :: IO ()
 showId = do
-    putStrLn "id name Rival Haskell Build -"
+    putStrLn "id name Rival Haskell Build 1000"
     putStrLn "id author Chris Moreton"
     putStrLn "uciok"
 
@@ -83,6 +83,7 @@ run uciState ("position":xs) = runPosition uciState xs
 run uciState ("quit":_) = return uciState{quit=True}
 
 run uciState ("test1":_) = runPosition uciState ["fen","r5rk/5p1p/5R2/4B3/8/8/7P/7K w - - 1 1"]
+run uciState ("test2":_) = runPosition uciState ["fen","6k1/3b3r/1p1p4/p1n2p2/1PPNpP1q/P3Q1p1/1R1RB1P1/5K2 b - - 0 1"]
 
 run uciState (x:xs) = return uciState
 

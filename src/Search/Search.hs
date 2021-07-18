@@ -46,9 +46,7 @@ startSearch (position:positions) maxDepth endTime searchState = do
             t <- timeMillis
             if t > endTime || depth == maxDepth
                 then return result
-                else do
-                    putStrLn "Iteration"
-                    iterativeDeepening positions (depth+1) maxDepth endTime (head $ msPath result) searchState
+                else iterativeDeepening positions (depth+1) maxDepth endTime (head $ msPath result) searchState
 
 searchZero :: [Position] -> Int -> Int -> Move -> SearchState -> IO MoveScore
 searchZero positions depth endTime rootBest searchState = do
@@ -98,17 +96,17 @@ search inPosition inMove depth low high endTime searchState ply = do
                     incNodes 1000000000 searchState
                     return (mkMs (score (fromJust hentry), hashTablePath))
                 Lower ->
-                    go inPosition inMove hashTableMove depth (score (fromJust hentry)) high endTime searchState hpos ply
+                    go inPosition hashTableMove depth (score (fromJust hentry)) high endTime searchState hpos ply
                 Upper ->
-                    go inPosition inMove hashTableMove depth low (score (fromJust hentry)) endTime searchState hpos ply
+                    go inPosition hashTableMove depth low (score (fromJust hentry)) endTime searchState hpos ply
         Nothing ->
-            go inPosition inMove 0 depth low high endTime searchState hpos ply
+            go inPosition 0 depth low high endTime searchState hpos ply
     where
-        go :: Position -> Move -> Move -> Int -> Int -> Int -> Int -> SearchState -> Int -> Int -> IO MoveScore
-        go inPosition inMove _ 0 low high endTime searchState _ ply = do
+        go :: Position -> Move -> Int -> Int -> Int -> Int -> SearchState -> Int -> Int -> IO MoveScore
+        go inPosition _ 0 low high endTime searchState _ ply = do
             q <- quiesce inPosition low high ply searchState
             return (mkMs (q,[]))
-        go inPosition inMove hashMove depth low high endTime searchState hpos ply = do
+        go inPosition hashMove depth low high endTime searchState hpos ply = do
             incNodes 1 searchState
             if halfMoves inPosition == 50
                 then return (mkMs (0, []))
