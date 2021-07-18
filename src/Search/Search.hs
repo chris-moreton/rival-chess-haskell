@@ -93,11 +93,11 @@ search inPosition inMove depth low high endTime searchState ply isOnNullMove = d
                 then do
                     let negatedScore = -(msScore nullMoveSearch)
                     return nullMoveSearch { msScore=negatedScore, msBound=Lower, msPath = [] } 
-                else hashLookUp inPosition inMove depth low high endTime searchState ply hpos
-        else hashLookUp inPosition inMove depth low high endTime searchState ply hpos
+                else hashLookUp inPosition inMove depth low high endTime searchState ply hpos False
+        else hashLookUp inPosition inMove depth low high endTime searchState ply hpos isOnNullMove
     where
-        hashLookUp :: Position -> Move -> Int -> Int -> Int -> Int -> SearchState -> Int -> Int -> IO MoveScore
-        hashLookUp inPosition inMove depth low high endTime searchState ply hpos = do
+        hashLookUp :: Position -> Move -> Int -> Int -> Int -> Int -> SearchState -> Int -> Int -> Bool -> IO MoveScore
+        hashLookUp inPosition inMove depth low high endTime searchState ply hpos isOnNullMove = do
             let hashIndex = calcHashIndex hpos
 
             hentry <- H.lookup (hashTable searchState) hashIndex
@@ -110,11 +110,11 @@ search inPosition inMove depth low high endTime searchState ply isOnNullMove = d
                             incNodes 1000000000 searchState
                             return (mkMs (score (fromJust hentry), hashTablePath))
                         Lower ->
-                            go inPosition hashTableMove depth (score (fromJust hentry)) high endTime searchState hpos ply False
+                            go inPosition hashTableMove depth (score (fromJust hentry)) high endTime searchState hpos ply isOnNullMove
                         Upper ->
-                            go inPosition hashTableMove depth low (score (fromJust hentry)) endTime searchState hpos ply False
+                            go inPosition hashTableMove depth low (score (fromJust hentry)) endTime searchState hpos ply isOnNullMove
                 Nothing ->
-                    go inPosition 0 depth low high endTime searchState hpos ply False
+                    go inPosition 0 depth low high endTime searchState hpos ply isOnNullMove
 
         go :: Position -> Move -> Int -> Int -> Int -> Int -> SearchState -> Int -> Int -> Bool -> IO MoveScore
         go inPosition _ 0 low high endTime searchState _ ply _ = do
