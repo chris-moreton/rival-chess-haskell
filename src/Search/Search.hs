@@ -88,7 +88,7 @@ search inPosition inMove depth low high endTime searchState ply isOnNullMove = d
 
     if not isOnNullMove && not (isCheck inPosition (mover inPosition))
         then do
-            let nullMoveReduceDepth = 3
+            let nullMoveReduceDepth = 1
             let nextDepth = if depth >= nullMoveReduceDepth then depth - nullMoveReduceDepth else 0
             nullMoveSearch <- search inPosition { mover = switchSide (mover inPosition) } 0 nextDepth (-high) (-low) endTime searchState (ply+1) True
             let negatedScore = -(msScore nullMoveSearch)
