@@ -518,6 +518,31 @@ main = hspec $ do
     createIfPromotion False 0b0000000010000000000000000000000000000000000000000000000000000000 0b0000000000000000000000000000000000000000000000000000000000000000 a7Bit a8Bit
       `shouldBe` 0b0000000000000000000000000000000000000000000000000000000000000000
 
+  describe "whitePieceValues" $
+    it "Returns the value of non-pawn white pieces" $ do
+    whitePieceValues (getPosition "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1") `shouldBe` 
+          (pieceValue Rook * 2) + (pieceValue Bishop * 2) + pieceValue Queen + (pieceValue Knight * 2)
+    whitePieceValues (getPosition "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RN-QK2R w KQkq - 0 1") `shouldBe` 
+          (pieceValue Rook * 2) + pieceValue Queen + pieceValue Knight
+
+  describe "blackPieceValues" $
+    it "Returns the value of non-pawn black pieces" $ do
+    blackPieceValues (getPosition "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1") `shouldBe` 
+          (pieceValue Rook * 2) + (pieceValue Bishop * 2) + pieceValue Queen + (pieceValue Knight * 2)
+    blackPieceValues (getPosition "-nbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1") `shouldBe` 
+          pieceValue Rook + (pieceValue Bishop * 2) + pieceValue Queen + (pieceValue Knight * 2)
+
+  describe "friendlyPieceValues" $
+    it "Returns the value of non-pawn pieces for the player to move" $ do
+    friendlyPieceValues (getPosition "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1") `shouldBe` 
+          (pieceValue Rook * 2) + (pieceValue Bishop * 2) + pieceValue Queen + (pieceValue Knight * 2)
+    friendlyPieceValues (getPosition "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RN-QK2R w KQkq - 0 1") `shouldBe` 
+          (pieceValue Rook * 2) + pieceValue Queen + pieceValue Knight
+    friendlyPieceValues (getPosition "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR b KQkq - 0 1") `shouldBe` 
+          (pieceValue Rook * 2) + (pieceValue Bishop * 2) + pieceValue Queen + (pieceValue Knight * 2)
+    friendlyPieceValues (getPosition "-nbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR b KQkq - 0 1") `shouldBe` 
+          pieceValue Rook + (pieceValue Bishop * 2) + pieceValue Queen + (pieceValue Knight * 2)
+
   describe "makeMove" $
     it "Makes a move from a position and returns a new position" $ do
     makeMove (getPosition "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1")

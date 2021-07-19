@@ -58,6 +58,26 @@ materialWhite position =
     (popCount (whiteRookBitboard position) - popCount (blackRookBitboard position)) * pieceValue Rook +
     (popCount (whiteQueenBitboard position) - popCount (blackQueenBitboard position)) * pieceValue Queen
 
+whitePieceValues :: Position -> Int
+whitePieceValues position =
+    popCount (whiteKnightBitboard position) * pieceValue Knight +
+    popCount (whiteBishopBitboard position) * pieceValue Bishop +
+    popCount (whiteRookBitboard position) * pieceValue Rook +
+    popCount (whiteQueenBitboard position) * pieceValue Queen
+
+blackPieceValues :: Position -> Int
+blackPieceValues position =
+    popCount (blackKnightBitboard position) * pieceValue Knight +
+    popCount (blackBishopBitboard position) * pieceValue Bishop +
+    popCount (blackRookBitboard position) * pieceValue Rook +
+    popCount (blackQueenBitboard position) * pieceValue Queen
+
+friendlyPieceValues :: Position -> Int 
+friendlyPieceValues position
+    | m == White = whitePieceValues position
+    | m == Black = blackPieceValues position
+    where m = mover position
+
 {-# INLINE evaluate #-}
 evaluate :: Position -> Int
 evaluate position = material position (mover position)
