@@ -10,27 +10,47 @@ From start position
 
     position startpos       
     go depth 3
-    bestmove h2h4
+
+    info score cp 0 pv c2c4 b8c6 c4c5
+    bestmove c2c4
+
+Start position with move list
 
     position startpos moves e2e4 d7d5
     go depth 3
-    bestmove e4e5
 
-From FEN - this one is a mate in three
+    info score cp 0 pv e4d5
+    info score cp 0 pv e4d5 d8d5
+    info score cp 0 pv e4d5 d8d5 c2c4
+    bestmove e4d5
 
-    position fen r5rk/5p1p/5R2/4B3/8/8/7P/7K w K - 0 1
-    go depth 1
-    bestmove f6f7
-    go depth 5
-    bestmove f6a6
-    
+From FEN - this one is a mate in five
+
+    position fen 6k1/3b3r/1p1p4/p1n2p2/1PPNpP1q/P3Q1p1/1R1RB1P1/5K2 b - - 0 1
+    go infinite
+
+    info score cp -1200 pv h4f4
+    info score cp -400 pv a5b4
+    info score cp -400 pv a5b4 a3b4
+    info score cp -400 pv a5b4 a3b4 c5b7
+    info score cp 350 pv h4f4 f1e1 f4e3
+    info score cp 500 pv h4f4 e2f3 f4e3 b4c5
+    info score cp 600 pv h4f4 f1e1 f4e3 e1d1 a5b4
+    info score cp 700 pv h4f4 e2f3 f4e3 f3h5 h7h5 b4c5
+    info score cp 950 pv h4f4 e2f3 f4e3 f3h5 h7h5 d4f3 e4f3
+    info score cp 9991 pv h4f4 e2f3 f4e3 f3h5 h7h5 d4f3 h5h1 f3g1
+
 You can also add moves to a FEN
 
     position fen 2q1q1q1/8/1K6/8/7p/6kP/8/8 w - - 22 72 moves b6a5 g8f8 a5b6
     go depth 3
+
+    info score cp 2800 pv c8h3
+    info score cp 9999 pv f8c5
+    info score cp 9999 pv f8c5
     bestmove f8c5
 
-If you want to, you can also exit the application
+To exit the UCI application
 
     quit
 
