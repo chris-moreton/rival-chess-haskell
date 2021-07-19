@@ -14,14 +14,17 @@ From start position
     info score cp 0 pv c2c4 b8c6 c4c5
     bestmove c2c4
 
-Start position with move list
+Start position with move list and time limit in milliseconds
 
     position startpos moves e2e4 d7d5
-    go depth 3
+    go movetime 1000
 
     info score cp 0 pv e4d5
     info score cp 0 pv e4d5 d8d5
     info score cp 0 pv e4d5 d8d5 c2c4
+    info score cp 0 pv e4d5 d8d5 c2c4 d5c6
+    info score cp 0 pv e4d5 d8d5 c2c4 d5c6 d2d4
+    info score cp 0 pv e4d5 d8d5 c2c4 d5c6 d2d4 c8e6
     bestmove e4d5
 
 From FEN - this one is a mate in five
