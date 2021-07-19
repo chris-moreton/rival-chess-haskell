@@ -56,10 +56,12 @@ To exit the UCI application
 
 ## Some useful functions
 
+Here are some of the functions used in the program. I've written them here as test cases showing the inputs and expected outputs.
+
 ### Get moves for a position (does not filter checks)
 
     describe "moves" $ do
-        it "Get all moves for a position" $ do
+        it "Gets all moves for a position" $ do
             sort (map algebraicMoveFromMove (moves (getPosition "n5k1/1P2P1n1/1n2q2p/P1pP4/5R2/3K1B2/1r2N2P/6r1 w - c6 0 1")))
                 `shouldBe` [
                       "a5a6","a5b6"
