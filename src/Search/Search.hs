@@ -88,10 +88,12 @@ search inPosition inMove depth low high endTime searchState ply isOnNullMove = d
 
     if not isOnNullMove && not (isCheck inPosition (mover inPosition))
         then do
-            nullMoveSearch <- go inPosition { mover = switchSide (mover inPosition) } 0 (depth-1) (high-1) high endTime searchState hpos ply True
-            if msScore nullMoveSearch >= high
+            let nullMoveReduceDepth = 3
+            let nextDepth = if depth >= nullMoveReduceDepth then depth - nullMoveReduceDepth else 0
+            nullMoveSearch <- search inPosition { mover = switchSide (mover inPosition) } 0 nextDepth (-high) (-low) endTime searchState (ply+1) True
+            let negatedScore = -(msScore nullMoveSearch)
+            if negatedScore >= high
                 then do
-                    let negatedScore = -(msScore nullMoveSearch)
                     return nullMoveSearch { msScore=negatedScore, msBound=Lower, msPath = [] } 
                 else hashLookUp inPosition inMove depth low high endTime searchState ply hpos False
         else hashLookUp inPosition inMove depth low high endTime searchState ply hpos isOnNullMove
@@ -136,13 +138,13 @@ search inPosition inMove depth low high endTime searchState ply isOnNullMove = d
                                 else do
                                     let thisM = snd (head notInCheckPositions)
                                     let best' = MoveScore { msScore=low, msBound=Upper, msPath = [thisM] }
-                                    hrm <- highestRatedMove notInCheckPositions low high depth endTime best' searchState ply isOnNullMove
+                                    hrm <- moveLoop notInCheckPositions low high depth endTime best' searchState ply isOnNullMove
                                     updateHashTable hpos HashEntry { score = msScore hrm, hePath = msPath hrm, height = depth, bound = msBound hrm, lock = hpos } searchState
                                     return hrm
 
-        highestRatedMove :: [(Position,Move)] -> Int -> Int -> Int -> Int -> MoveScore -> SearchState -> Int -> Bool -> IO MoveScore
-        highestRatedMove [] _ _ _ _ best _ _ _ = return best
-        highestRatedMove notInCheckPositions low high depth endTime best c ply isOnNullMove = do
+        moveLoop :: [(Position,Move)] -> Int -> Int -> Int -> Int -> MoveScore -> SearchState -> Int -> Bool -> IO MoveScore
+        moveLoop [] _ _ _ _ best _ _ _ = return best
+        moveLoop notInCheckPositions low high depth endTime best c ply isOnNullMove = do
             let thisPM = head notInCheckPositions
             let thisM = snd thisPM
             ms <- uncurry search thisPM (depth-1) (-high) (-low) endTime c (ply+1) isOnNullMove
@@ -153,6 +155,6 @@ search inPosition inMove depth low high endTime searchState ply isOnNullMove = d
                     if negatedScore > low
                         then do
                             let best' = ms { msScore=negatedScore, msBound=Exact, msPath = thisM : msPath ms }
-                            highestRatedMove (tail notInCheckPositions) negatedScore high depth endTime best' c ply isOnNullMove
-                        else highestRatedMove (tail notInCheckPositions) low high depth endTime best c ply isOnNullMove
+                            moveLoop (tail notInCheckPositions) negatedScore high depth endTime best' c ply isOnNullMove
+                        else moveLoop (tail notInCheckPositions) low high depth endTime best c ply isOnNullMove
 
