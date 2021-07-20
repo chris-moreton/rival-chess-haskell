@@ -20,7 +20,7 @@ import Data.Sort ( sortBy )
 import Data.Maybe ( isJust, fromJust )
 import State.State ( incNodes, updateHashTable, SearchState(..), calcHashIndex, setPv )
 import qualified Data.HashTable.IO as H
-import Util.Zobrist ( hashIndex, zobrist )
+import Util.Zobrist ( zobrist )
 import Search.Evaluate ( evaluate, isCapture, scoreMove )
 
 canLeadToDrawByRepetition :: Position -> [Position] -> Bool

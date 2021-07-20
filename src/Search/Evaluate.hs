@@ -1,3 +1,4 @@
+{-# LANGUAGE BangPatterns #-}
 {-# LANGUAGE BinaryLiterals #-}
 
 module Search.Evaluate where
@@ -17,13 +18,13 @@ import Data.Bits ( Bits(popCount), Bits(testBit), Bits(bit), (.|.), (.&.), clear
 
 {-# INLINE captureScore #-}
 captureScore :: Position -> Move -> Int
-captureScore position move
+captureScore !position !move
     | isCapture position move = pieceValue (capturePiece position move)
     | otherwise = 0
 
 {-# INLINE centreScore #-}
 centreScore :: Position -> Move -> Int
-centreScore position move
+centreScore !position !move
     | 0b0000000000000000001111000011110000111100001111000000000000000000 .&. toSquareMask /= 0 = 25
     | 0b0000000001111110010000100100001001000010010000100111111000000000 .&. toSquareMask /= 0 = 10
     | otherwise = 0
@@ -31,7 +32,7 @@ centreScore position move
 
 {-# INLINE scoreMove #-}
 scoreMove :: Position -> Move -> Move -> Int
-scoreMove position hashMove move = captureScore position move + centreScore position move + (if hashMove == move then 100000 else 0)
+scoreMove !position !hashMove !move = captureScore position move + centreScore position move + (if hashMove == move then 100000 else 0)
 
 {-# INLINE pieceValue #-}
 pieceValue :: Piece -> Int
@@ -44,47 +45,50 @@ pieceValue King = 3000
 
 {-# INLINE material #-}
 material :: Position -> Mover -> Int
-material position m
+material !position !m
     | m == White = mw
     | otherwise = -mw
     where mw = materialWhite position
 
 {-# INLINE materialWhite #-}
 materialWhite :: Position -> Int
-materialWhite position =
+materialWhite !position =
     (popCount (whitePawnBitboard position) - popCount (blackPawnBitboard position)) * pieceValue Pawn +
     (popCount (whiteKnightBitboard position) - popCount (blackKnightBitboard position)) * pieceValue Knight +
     (popCount (whiteBishopBitboard position) - popCount (blackBishopBitboard position)) * pieceValue Bishop +
     (popCount (whiteRookBitboard position) - popCount (blackRookBitboard position)) * pieceValue Rook +
     (popCount (whiteQueenBitboard position) - popCount (blackQueenBitboard position)) * pieceValue Queen
 
+{-# INLINE whitePieceValues #-}
 whitePieceValues :: Position -> Int
-whitePieceValues position =
+whitePieceValues !position =
     popCount (whiteKnightBitboard position) * pieceValue Knight +
     popCount (whiteBishopBitboard position) * pieceValue Bishop +
     popCount (whiteRookBitboard position) * pieceValue Rook +
     popCount (whiteQueenBitboard position) * pieceValue Queen
 
+{-# INLINE blackPieceValues #-}
 blackPieceValues :: Position -> Int
-blackPieceValues position =
+blackPieceValues !position =
     popCount (blackKnightBitboard position) * pieceValue Knight +
     popCount (blackBishopBitboard position) * pieceValue Bishop +
     popCount (blackRookBitboard position) * pieceValue Rook +
     popCount (blackQueenBitboard position) * pieceValue Queen
 
+{-# INLINE friendlyPieceValues #-}
 friendlyPieceValues :: Position -> Int 
-friendlyPieceValues position
+friendlyPieceValues !position
     | m == White = whitePieceValues position
     | m == Black = blackPieceValues position
     where m = mover position
 
 {-# INLINE evaluate #-}
 evaluate :: Position -> Int
-evaluate position = material position (mover position)
+evaluate !position = material position (mover position)
 
 {-# INLINE isCapture #-}
 isCapture :: Position -> Move -> Bool
-isCapture position move
+isCapture !position !move
     | m == White = testBit (blackPiecesBitboard position) t || e == t
     | otherwise = testBit (whitePiecesBitboard position) t || e == t
     where m = mover position
@@ -93,7 +97,7 @@ isCapture position move
 
 {-# INLINE capturePiece #-}
 capturePiece :: Position -> Move -> Piece
-capturePiece position move
+capturePiece !position !move
     | e == t = Pawn
     | otherwise = pieceOnSquareFast position t
     where t = toSquarePart move
@@ -101,7 +105,7 @@ capturePiece position move
 
 {-# INLINE pieceOnSquareFast #-}
 pieceOnSquareFast :: Position -> Int -> Piece
-pieceOnSquareFast position square
+pieceOnSquareFast !position !square
     | testBit (whitePawnBitboard position) square = Pawn
     | testBit (blackPawnBitboard position) square = Pawn
     | testBit (whiteKnightBitboard position) square = Knight
@@ -116,7 +120,7 @@ pieceOnSquareFast position square
     | testBit (blackKingBitboard position) square = King
 
 pieceOnSquare :: Position -> Int -> Maybe (Mover,Piece)
-pieceOnSquare position square
+pieceOnSquare !position !square
     | testBit (whitePawnBitboard position) square = Just (White,Pawn)
     | testBit (blackPawnBitboard position) square = Just (Black,Pawn)
     | testBit (whiteKnightBitboard position) square = Just (White,Knight)

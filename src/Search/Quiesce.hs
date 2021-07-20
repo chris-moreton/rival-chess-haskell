@@ -1,3 +1,4 @@
+{-# LANGUAGE BangPatterns #-}
 module Search.Quiesce where
 
 import Types
@@ -18,15 +19,15 @@ import Data.Sort ( sortBy )
 import Data.Maybe ( isJust, fromJust )
 import State.State ( incNodes, updateHashTable, SearchState(..), calcHashIndex, setPv )
 import qualified Data.HashTable.IO as H
-import Util.Zobrist ( hashIndex, zobrist )
+import Util.Zobrist ( zobrist )
 import Search.Evaluate ( evaluate, isCapture, scoreMove )
-import Search.SearchHelper
+import Search.SearchHelper ( quiescePositions )
 
 quiesce :: Position -> Int -> Int -> Int -> SearchState -> IO Int
 quiesce position _ _ 10 searchState = do
     incNodes 1 searchState
     return (evaluate position)
-quiesce position low high ply searchState = do
+quiesce !position !low !high !ply !searchState = do
     incNodes 1 searchState
     let eval = evaluate position
     let newLow = max eval low
@@ -41,7 +42,7 @@ quiesce position low high ply searchState = do
     where
         highestQuiesceMove :: [(Position,Move)] -> Int -> Int -> Int -> Int -> SearchState -> IO Int
         highestQuiesceMove [] _ _ _ best _ = return best
-        highestQuiesceMove notInCheckPositions low high depth best searchState = do
+        highestQuiesceMove !notInCheckPositions !low !high !depth !best !searchState = do
             let thisP = head notInCheckPositions
             score <- quiesce (fst thisP) (-high) (-low) (depth+1) searchState
             let negatedScore = -score

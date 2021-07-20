@@ -10,10 +10,10 @@ import qualified Data.HashTable.IO as H
 
 data Mover = White | Black deriving (Enum,Show,Eq,NFData,Generic)
 data Piece = Pawn | King | Queen | Bishop | Knight | Rook deriving (Enum,Show,Eq)
-data HashEntry = HashEntry { score :: Int, hePath :: Path, height :: Int, bound :: Bound, lock :: Int }
+data HashEntry = HashEntry { score :: {-# UNPACK #-} !Int, hePath :: !Path, height :: {-# UNPACK #-} !Int, bound :: !Bound, lock :: {-# UNPACK #-} !Int }
 data Bound = Exact | Lower | Upper deriving (Enum,Show,Eq,Generic)
 data MoveScore = 
-  MoveScore { msScore :: Int, msBound :: Bound, msPath :: Path } |
+  MoveScore { msScore :: {-# UNPACK #-} !Int, msBound :: !Bound, msPath :: !Path } |
   NoMoveScore
   deriving Eq
 
