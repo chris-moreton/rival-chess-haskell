@@ -120,10 +120,8 @@ makeMoveWithPromotion !position !move !promotionPiece =
           !to = toSquarePart move
           !m = mover position
           currentMoveNumber = moveNumber position
-          !newWhitePawnBitboard = movePieceWithinBitboard from to (whitePawnBitboard position)
-          !newBlackPawnBitboard = movePieceWithinBitboard from to (blackPawnBitboard position)
-          !wp = removePawnIfPromotion (removePawnWhenEnPassant newBlackPawnBitboard newWhitePawnBitboard to (enPassantSquare position))
-          !bp = removePawnIfPromotion (removePawnWhenEnPassant newWhitePawnBitboard newBlackPawnBitboard to (enPassantSquare position))
+          !wp = removePawnIfPromotion $ movePieceWithinBitboard from to (whitePawnBitboard position)
+          !bp = removePawnIfPromotion $ movePieceWithinBitboard from to (blackPawnBitboard position)
           !wn = createIfPromotion (promotionPiece == Knight) (whitePawnBitboard position) (movePieceWithinBitboard from to (whiteKnightBitboard position)) from to
           !bn = createIfPromotion (promotionPiece == Knight) (blackPawnBitboard position) (movePieceWithinBitboard from to (blackKnightBitboard position)) from to
           !wb = createIfPromotion (promotionPiece == Bishop) (whitePawnBitboard position) (movePieceWithinBitboard from to (whiteBishopBitboard position)) from to
@@ -170,8 +168,8 @@ makeSimpleComplexMove !position !from !to =
           !newWhitePawnBitboard = movePieceWithinBitboard from to (whitePawnBitboard position)
           !newBlackPawnBitboard = movePieceWithinBitboard from to (blackPawnBitboard position)
           !isPawnMove = newWhitePawnBitboard /= whitePawnBitboard position || newBlackPawnBitboard /= blackPawnBitboard position
-          !wp = removePawnIfPromotion (removePawnWhenEnPassant newBlackPawnBitboard newWhitePawnBitboard to (enPassantSquare position))
-          !bp = removePawnIfPromotion (removePawnWhenEnPassant newWhitePawnBitboard newBlackPawnBitboard to (enPassantSquare position))
+          !wp = removePawnWhenEnPassant newBlackPawnBitboard newWhitePawnBitboard to (enPassantSquare position)
+          !bp = removePawnWhenEnPassant newWhitePawnBitboard newBlackPawnBitboard to (enPassantSquare position)
           !wn = movePieceWithinBitboard from to (whiteKnightBitboard position)
           !bn = movePieceWithinBitboard from to (blackKnightBitboard position)
           !wb = movePieceWithinBitboard from to (whiteBishopBitboard position)

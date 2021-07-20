@@ -34,7 +34,10 @@ isSimpleCapture !position = testBit (allPiecesBitboard position)
 
 {-# INLINE isSimpleMove #-}
 isSimpleMove :: Position -> Move -> Square -> Square -> Piece -> Bool
-isSimpleMove !position move from to piece = not (isSimpleCapture position to) && not (piece == Pawn && isComplexPawnMove position from to) && not (piece == King && isPotentialFirstKingMove position from)
+isSimpleMove !position move from to piece = 
+    not (isSimpleCapture position to) && 
+    not (piece == Pawn && isComplexPawnMove position from to) && 
+    not (piece == King && isPotentialFirstKingMove position from)
 
 {-# INLINE movingPiece #-}
 movingPiece :: Position -> Square -> Piece
