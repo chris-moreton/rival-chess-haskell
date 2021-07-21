@@ -6,7 +6,7 @@ import Types
       Piece(King, Pawn, Knight, Bishop, Rook, Queen),
       Position(mover, enPassantSquare) )
 import Data.Vector as V ( Vector, fromList, (!) )
-import Search.Evaluate ( pieceOnSquare )
+import Evaluate.Evaluate ( pieceOnSquare )
 import Data.Bits (xor)
 import Data.Maybe ( isNothing )
 

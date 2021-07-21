@@ -1,7 +1,7 @@
 {-# LANGUAGE BangPatterns #-}
 {-# LANGUAGE BinaryLiterals #-}
 
-module Search.Evaluate where
+module Evaluate.Evaluate where
 
 import Types
     ( bitboardForColour,
@@ -16,10 +16,16 @@ import Alias ( Bitboard, Move )
 import Util.Utils ( toSquarePart )
 import Util.Bitboards ( exactlyOneBitSet )
 import Data.Bits ( Bits(popCount), Bits(testBit), Bits(bit), (.|.), (.&.), clearBit, shiftL )
+import Evaluate.Attacks ( allAttacks )
 
 {-# INLINE evaluate #-}
 evaluate :: Position -> Int
-evaluate !position = material position (mover position)
+evaluate !position 
+    | onlyKingsRemain position = 0
+    | otherwise = do
+        let attacks = allAttacks position
+        material position (mover position)
+
 
 onlyKingsRemain :: Position -> Bool
 onlyKingsRemain position = exactlyOneBitSet (whitePiecesBitboard position) && exactlyOneBitSet (blackPiecesBitboard position)

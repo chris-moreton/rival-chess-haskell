@@ -42,7 +42,8 @@ library
       Search.MoveConstants
       Search.MoveUtils
       Search.Search
-      Search.Evaluate
+      Evaluate.Evaluate
+      Evaluate.Attacks
       Search.SearchHelper
       Search.Quiesce
       State.State

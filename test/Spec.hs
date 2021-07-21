@@ -26,7 +26,7 @@ import State.State
 import Data.Bifunctor
 import Data.Vector as V ( (!) )
 import Util.Zobrist
-import Search.Evaluate
+import Evaluate.Evaluate
 import Data.Maybe
 import qualified Data.HashTable.IO as H
 

@@ -22,7 +22,7 @@ import Data.Maybe ( isJust, fromJust )
 import State.State ( incNodes, updateHashTable, SearchState(..), calcHashIndex, setPv, showPv, pathString )
 import qualified Data.HashTable.IO as H
 import Util.Zobrist ( zobrist )
-import Search.Evaluate ( evaluate, isCapture, scoreMove, friendlyPieceValues )
+import Evaluate.Evaluate ( evaluate, isCapture, scoreMove, friendlyPieceValues )
 import Search.SearchHelper
     ( newPositions,
       hashBound,

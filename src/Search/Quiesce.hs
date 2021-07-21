@@ -20,7 +20,7 @@ import Data.Maybe ( isJust, fromJust )
 import State.State ( incNodes, updateHashTable, SearchState(..), calcHashIndex, setPv )
 import qualified Data.HashTable.IO as H
 import Util.Zobrist ( zobrist )
-import Search.Evaluate ( evaluate, isCapture, scoreMove )
+import Evaluate.Evaluate ( evaluate, isCapture, scoreMove )
 import Search.SearchHelper ( quiescePositions )
 
 quiesce :: Position -> Int -> Int -> Int -> SearchState -> IO Int
