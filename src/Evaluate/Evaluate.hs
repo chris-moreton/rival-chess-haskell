@@ -26,7 +26,6 @@ evaluate !position
         let attacks = allAttacks position
         material position (mover position)
 
-
 onlyKingsRemain :: Position -> Bool
 onlyKingsRemain position = exactlyOneBitSet (whitePiecesBitboard position) && exactlyOneBitSet (blackPiecesBitboard position)
 
