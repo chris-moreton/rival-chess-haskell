@@ -29,17 +29,19 @@ quiesce position _ _ 10 searchState = do
     return (evaluate position)
 quiesce !position !low !high !ply !searchState = do
     incNodes 1 searchState
-    let eval = evaluate position
-    let newLow = max eval low
-    let qp = quiescePositions position
     if not (null qp)
         then do
-            let notInCheckPositions = filter (\(p,m) -> not (isCheck p (mover position))) qp
             if null notInCheckPositions
                 then return (if isCheck position (mover position) then ply-10000 else 0)
                 else highestQuiesceMove notInCheckPositions newLow high ply newLow searchState
         else return newLow
     where
+        eval = evaluate position
+        newLow = max eval low
+        qp = quiescePositions position
+        currentMover = mover position
+        notInCheckPositions = filter (\(p,m) -> not (isCheck p currentMover)) qp
+        
         highestQuiesceMove :: [(Position,Move)] -> Int -> Int -> Int -> Int -> SearchState -> IO Int
         highestQuiesceMove [] _ _ _ best _ = return best
         highestQuiesceMove !notInCheckPositions !low !high !depth !best !searchState = do
