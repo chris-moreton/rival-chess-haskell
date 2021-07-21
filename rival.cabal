@@ -71,6 +71,7 @@ executable rival-exe
       Paths_rival
   hs-source-dirs:
       app
+--enable-library-profiling -prof -fprof-auto       
   ghc-options: -threaded -rtsopts -O2 "-with-rtsopts=-N -s -h -i0.1"
   build-depends:
       base >=4.7 && <5

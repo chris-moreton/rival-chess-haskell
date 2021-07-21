@@ -518,6 +518,23 @@ main = hspec $ do
     createIfPromotion False 0b0000000010000000000000000000000000000000000000000000000000000000 0b0000000000000000000000000000000000000000000000000000000000000000 a7Bit a8Bit
       `shouldBe` 0b0000000000000000000000000000000000000000000000000000000000000000
 
+  describe "exactlyOneBitSet" $
+    it "Checks if exactly one bit is set in a bitboard" $ do
+    exactlyOneBitSet 0b0000000010000000000000000000000000000000000000000000000000000000 `shouldBe` True
+    exactlyOneBitSet 0b0000000010000000000001000000000000000000000000000000000000000000 `shouldBe` False
+    exactlyOneBitSet 0b0000000000000000000000000000000000000000000000000000000000000000 `shouldBe` False
+    exactlyOneBitSet 0b1000000000000000000000000000000000000000000000000000000000000000 `shouldBe` True
+    exactlyOneBitSet 0b0000000000000000000000000000000000000000000000000000000000000001 `shouldBe` True
+    exactlyOneBitSet 0b1000000000000000000000000000000000000000000000000000000000000001 `shouldBe` False
+    exactlyOneBitSet 0b1111111111111111111111111111111111111111111111111111111111111111 `shouldBe` False
+
+  describe "onlyKingsRemain" $
+    it "Checks if only kings remain" $ do
+    onlyKingsRemain (getPosition "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1") `shouldBe` False
+    onlyKingsRemain (getPosition "7k/8/8/8/8/8/8/K7 w - - 0 1") `shouldBe` True
+    onlyKingsRemain (getPosition "K7/8/8/8/8/8/8/7k w - - 0 1") `shouldBe` True
+    onlyKingsRemain (getPosition "K7/8/8/3p4/8/8/8/7k w - - 0 1") `shouldBe` False
+
   describe "whitePieceValues" $
     it "Returns the value of non-pawn white pieces" $ do
     whitePieceValues (getPosition "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1") `shouldBe` 

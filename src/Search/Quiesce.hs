@@ -33,7 +33,7 @@ quiesce !position !low !high !ply !searchState = do
         then do
             if null notInCheckPositions
                 then return (if isCheck position (mover position) then ply-10000 else 0)
-                else highestQuiesceMove notInCheckPositions newLow high ply newLow searchState
+                else highestQuiesceMove notInCheckPositions newLow high ply searchState
         else return newLow
     where
         eval = evaluate position
@@ -42,15 +42,12 @@ quiesce !position !low !high !ply !searchState = do
         currentMover = mover position
         notInCheckPositions = filter (\(p,m) -> not (isCheck p currentMover)) qp
         
-        highestQuiesceMove :: [(Position,Move)] -> Int -> Int -> Int -> Int -> SearchState -> IO Int
-        highestQuiesceMove [] _ _ _ best _ = return best
-        highestQuiesceMove !notInCheckPositions !low !high !depth !best !searchState = do
+        highestQuiesceMove :: [(Position,Move)] -> Int -> Int -> Int -> SearchState -> IO Int
+        highestQuiesceMove [] low _ _ _ = return low
+        highestQuiesceMove !notInCheckPositions !low !high !depth !searchState = do
             let thisP = head notInCheckPositions
             score <- quiesce (fst thisP) (-high) (-low) (depth+1) searchState
             let negatedScore = -score
             if negatedScore >= high
                 then return negatedScore
-                else do
-                    if negatedScore > low
-                        then highestQuiesceMove (tail notInCheckPositions) negatedScore high depth negatedScore searchState
-                        else highestQuiesceMove (tail notInCheckPositions) low high depth best searchState
+                else highestQuiesceMove (tail notInCheckPositions) (if negatedScore > low then negatedScore else low) high depth searchState

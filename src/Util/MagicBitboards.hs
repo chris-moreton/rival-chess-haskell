@@ -4,35 +4,35 @@
 
 module Util.MagicBitboards where
 
-import Util.MagicMovesBishop
-import Util.MagicMovesRook
-import Alias
+import Util.MagicMovesBishop ( magicMovesBishop )
+import Util.MagicMovesRook ( magicMovesRook )
+import Alias ( Bitboard, Square )
 
 {-# INLINE magic #-}
 magic :: MagicVars -> Square -> Int -> Bitboard
 magic !magicVars !fromSquare !toSquaresMagicIndex = magicMoves magicVars fromSquare toSquaresMagicIndex
 
 data MagicVars = MagicVars {
-      occupancyMask :: Int -> Bitboard
-    , magicNumber :: Int -> Bitboard
+      occupancyMask     :: Int -> Bitboard
+    , magicNumber       :: Int -> Bitboard
     , magicNumberShifts :: Int -> Int
-    , magicMoves :: Int -> Int -> Bitboard
+    , magicMoves        :: Int -> Int -> Bitboard
 }
 
 magicRookVars :: MagicVars
 magicRookVars = MagicVars {
-      occupancyMask = occupancyMaskRook
-    , magicNumber = magicNumberRook
+      occupancyMask     = occupancyMaskRook
+    , magicNumber       = magicNumberRook
     , magicNumberShifts = magicNumberShiftsRook
-    , magicMoves = magicMovesRook
+    , magicMoves        = magicMovesRook
   }
 
 magicBishopVars :: MagicVars
 magicBishopVars = MagicVars {
-      occupancyMask = occupancyMaskBishop
-    , magicNumber = magicNumberBishop
+      occupancyMask     = occupancyMaskBishop
+    , magicNumber       = magicNumberBishop
     , magicNumberShifts = magicNumberShiftsBishop
-    , magicMoves = magicMovesBishop
+    , magicMoves        = magicMovesBishop
   }
 
 occupancyMaskRook :: Int -> Bitboard

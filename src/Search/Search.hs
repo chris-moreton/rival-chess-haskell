@@ -85,27 +85,22 @@ search !inPosition !inMove 0 !low !high !endTime !searchState !ply _ = do
     return (mkMs (q,[]))
 search !inPosition !inMove !depth !low !high !endTime !searchState !ply !isOnNullMove = do
     let hpos = zobrist inPosition
-    start inPosition inMove depth low high endTime searchState ply hpos False
-
-    where
-        start :: Position -> Move -> Int -> Int -> Int -> Int -> SearchState -> Int -> Int -> Bool -> IO MoveScore
-        start !inPosition !inMove !depth !low !high !endTime !searchState !ply !hpos !isOnNullMove = do
-            let hashIndex = calcHashIndex hpos
-            hentry <- H.lookup (hashTable searchState) hashIndex
-            let hashTablePath = hePath (fromJust hentry)
-            case hashBound depth hpos hentry of
-                Just hb -> do
-                    let hashTableMove = head hashTablePath
-                    case hb of
-                        Exact -> do
-                            return (mkMs (score (fromJust hentry), hashTablePath))
-                        Lower ->
-                            main inPosition hashTableMove depth (score (fromJust hentry)) high endTime searchState hpos ply isOnNullMove
-                        Upper ->
-                            main inPosition hashTableMove depth low (score (fromJust hentry)) endTime searchState hpos ply isOnNullMove
-                Nothing ->
-                    main inPosition 0 depth low high endTime searchState hpos ply isOnNullMove
-
+    let hashIndex = calcHashIndex hpos
+    hentry <- H.lookup (hashTable searchState) hashIndex
+    let hashTablePath = hePath (fromJust hentry)
+    case hashBound depth hpos hentry of
+        Just hb -> do
+            let hashTableMove = head hashTablePath
+            case hb of
+                Exact -> do
+                    return (mkMs (score (fromJust hentry), hashTablePath))
+                Lower ->
+                    main inPosition hashTableMove depth (score (fromJust hentry)) high endTime searchState hpos ply isOnNullMove
+                Upper ->
+                    main inPosition hashTableMove depth low (score (fromJust hentry)) endTime searchState hpos ply isOnNullMove
+        Nothing ->
+            main inPosition 0 depth low high endTime searchState hpos ply isOnNullMove
+    where            
         main :: Position -> Move -> Int -> Int -> Int -> Int -> SearchState -> Int -> Int -> Bool -> IO MoveScore
         main !inPosition _ 0 !low !high !endTime !searchState _ !ply _ = do
             q <- quiesce inPosition low high ply searchState

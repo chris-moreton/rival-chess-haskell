@@ -14,7 +14,15 @@ import Types
                whiteQueenBitboard, blackQueenBitboard, whiteKingBitboard, blackKingBitboard) )
 import Alias ( Bitboard, Move )
 import Util.Utils ( toSquarePart )
+import Util.Bitboards ( exactlyOneBitSet )
 import Data.Bits ( Bits(popCount), Bits(testBit), Bits(bit), (.|.), (.&.), clearBit, shiftL )
+
+{-# INLINE evaluate #-}
+evaluate :: Position -> Int
+evaluate !position = material position (mover position)
+
+onlyKingsRemain :: Position -> Bool
+onlyKingsRemain position = exactlyOneBitSet (whitePiecesBitboard position) && exactlyOneBitSet (blackPiecesBitboard position)
 
 {-# INLINE captureScore #-}
 captureScore :: Position -> Move -> Int
@@ -82,26 +90,22 @@ friendlyPieceValues !position
     | m == Black = blackPieceValues position
     where m = mover position
 
-{-# INLINE evaluate #-}
-evaluate :: Position -> Int
-evaluate !position = material position (mover position)
-
 {-# INLINE isCapture #-}
 isCapture :: Position -> Move -> Bool
 isCapture !position !move
-    | m == White = testBit (blackPiecesBitboard position) t || e == t
-    | otherwise = testBit (whitePiecesBitboard position) t || e == t
-    where m = mover position
-          t = toSquarePart move
-          e = enPassantSquare position
+    | m == White = testBit (blackPiecesBitboard position) t || ep == t
+    | otherwise  = testBit (whitePiecesBitboard position) t || ep == t
+    where m  = mover position
+          t  = toSquarePart move
+          ep = enPassantSquare position
 
 {-# INLINE capturePiece #-}
 capturePiece :: Position -> Move -> Piece
 capturePiece !position !move
-    | e == t = Pawn
+    | ep == t   = Pawn
     | otherwise = pieceOnSquareFast position t
-    where t = toSquarePart move
-          e = enPassantSquare position
+    where t  = toSquarePart move
+          ep = enPassantSquare position
 
 {-# INLINE pieceOnSquareFast #-}
 pieceOnSquareFast :: Position -> Int -> Piece

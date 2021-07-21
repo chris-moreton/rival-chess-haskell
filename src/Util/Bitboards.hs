@@ -50,6 +50,9 @@ northFill x = orWithULeftShiftedSelf (orWithULeftShiftedSelf (orWithULeftShifted
 everyEighthBitFrom :: Int -> Bitboard
 everyEighthBitFrom x = if x < 8 then shiftL 1 x else (.|.) (shiftL 1 x) (everyEighthBitFrom ((-) x 8))
 
+exactlyOneBitSet :: Bitboard -> Bool 
+exactlyOneBitSet bb = bb .&. (bb - 1) == 0 && bb /= 0
+
 setBits :: [Int] -> Bitboard
 setBits [] = 0
 setBits [x] = shiftL 1 x
