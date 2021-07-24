@@ -1,6 +1,8 @@
+{-# LANGUAGE ExistentialQuantification, ExplicitNamespaces, FlexibleContexts, FlexibleInstances, KindSignatures, LiberalTypeSynonyms, MultiParamTypeClasses, PostfixOperators, RankNTypes, ScopedTypeVariables, UnicodeSyntax, UnliftedFFITypes #-}
+
 module Util.MagicMovesBishop where
 
-import Alias
+import Alias ( Bitboard )
 
 magicMovesBishop :: Int -> Int -> Bitboard
 magicMovesBishop 0 0 = fromIntegral(-9205322385119247872) :: Bitboard

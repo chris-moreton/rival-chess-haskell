@@ -1,4 +1,5 @@
 {-# LANGUAGE DeriveGeneric,BangPatterns,DeriveAnyClass #-}
+{-# LANGUAGE ExistentialQuantification, ExplicitNamespaces, FlexibleContexts, FlexibleInstances, KindSignatures, LiberalTypeSynonyms, MultiParamTypeClasses, PostfixOperators, RankNTypes, ScopedTypeVariables, UnicodeSyntax, UnliftedFFITypes #-}
 
 module Types where
 

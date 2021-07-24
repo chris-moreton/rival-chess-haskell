@@ -1,4 +1,5 @@
 {-# LANGUAGE StrictData,BangPatterns #-}
+{-# LANGUAGE ExistentialQuantification, ExplicitNamespaces, FlexibleContexts, FlexibleInstances, KindSignatures, LiberalTypeSynonyms, MultiParamTypeClasses, PostfixOperators, RankNTypes, ScopedTypeVariables, UnicodeSyntax, UnliftedFFITypes #-}
 
 {-# OPTIONS_GHC -Wno-overflowed-literals #-}
 
@@ -7,10 +8,24 @@ module Util.MagicBitboards where
 import Util.MagicMovesBishop ( magicMovesBishop )
 import Util.MagicMovesRook ( magicMovesRook )
 import Alias ( Bitboard, Square )
+import qualified Data.MemoCombinators as Memo
 
 {-# INLINE magic #-}
 magic :: MagicVars -> Square -> Int -> Bitboard
 magic !magicVars !fromSquare !toSquaresMagicIndex = magicMoves magicVars fromSquare toSquaresMagicIndex
+
+{-# INLINE magicBishop #-}
+magicBishop :: Square -> Int -> Bitboard
+magicBishop !fromSquare !toSquaresMagicIndex = magicMovesBishop fromSquare toSquaresMagicIndex
+
+{-# INLINE magicRook #-}
+magicRook :: Square -> Int -> Bitboard
+magicRook !fromSquare !toSquaresMagicIndex = magicMovesRook fromSquare toSquaresMagicIndex
+
+-- {-# INLINE magic2 #-}
+-- magic2 :: MagicVars -> Square -> Int -> Bitboard
+-- magic2 magicVars fromSquare = Memo.integral (magic' magicVars fromSquare)
+--   where magic' magicVars fromSquare toSquaresMagicIndex = magicMoves magicVars fromSquare toSquaresMagicIndex
 
 data MagicVars = MagicVars {
       occupancyMask     :: Int -> Bitboard
@@ -35,6 +50,7 @@ magicBishopVars = MagicVars {
     , magicMoves        = magicMovesBishop
   }
 
+{-# INLINE occupancyMaskRook #-}
 occupancyMaskRook :: Int -> Bitboard
 occupancyMaskRook 0 = 0x101010101017e
 occupancyMaskRook 1 = 0x202020202027c
@@ -101,6 +117,7 @@ occupancyMaskRook 61 = 0x5e20202020202000
 occupancyMaskRook 62 = 0x3e40404040404000
 occupancyMaskRook 63 = 0x7e80808080808000
 
+{-# INLINE occupancyMaskBishop #-}
 occupancyMaskBishop :: Int -> Bitboard
 occupancyMaskBishop 0 = 0x40201008040200
 occupancyMaskBishop 1 = 0x402010080400
@@ -167,6 +184,7 @@ occupancyMaskBishop 61 = 0x50080402000000
 occupancyMaskBishop 62 = 0x20100804020000
 occupancyMaskBishop 63 = 0x40201008040200
 
+{-# INLINE magicNumberRook #-}
 magicNumberRook :: Int -> Bitboard
 magicNumberRook 0 = fromIntegral (-0x5e7ffddf7fbffdd0) :: Bitboard
 magicNumberRook 1 = 0x40100040022000
@@ -233,6 +251,7 @@ magicNumberRook 61 = 0x801000804000603
 magicNumberRook 62 = 0xc0900220024a401
 magicNumberRook 63 = 0x1000200608243
 
+{-# INLINE magicNumberBishop #-}
 magicNumberBishop :: Int -> Bitboard
 magicNumberBishop 0 = 0x2910054208004104
 magicNumberBishop 1 = 0x2100630a7020180
@@ -299,6 +318,7 @@ magicNumberBishop 61 = 0x800633408100500
 magicNumberBishop 62 = 0x2404080a1410
 magicNumberBishop 63 = 0x138200122002900
 
+{-# INLINE magicNumberShiftsRook #-}
 magicNumberShiftsRook :: Int -> Int
 magicNumberShiftsRook 0 = 52
 magicNumberShiftsRook 1 =  53
@@ -365,6 +385,7 @@ magicNumberShiftsRook 61 =  53
 magicNumberShiftsRook 62 =  53
 magicNumberShiftsRook 63 =  52
 
+{-# INLINE magicNumberShiftsBishop #-}
 magicNumberShiftsBishop :: Int -> Int 
 magicNumberShiftsBishop 0 = 58
 magicNumberShiftsBishop 1 = 59

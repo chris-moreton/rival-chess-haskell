@@ -46,6 +46,8 @@ import Util.Bitboards
       whitePawnMovesForward )
 import Util.MagicBitboards
     ( magic,
+      magicBishop,
+      magicRook,
       magicBishopVars,
       magicRookVars,
       MagicVars(magicNumber, magicNumberShifts, occupancyMask) )
@@ -107,11 +109,11 @@ generateSliderMoves !position !piece = go bitboard position magicVars []
                     !fromSquare = countTrailingZeros fromSquares
                     !thisResult = recurGenerateSliderMovesWithToSquares (fromSquareMask fromSquare) toSquaresBitboard []
 
-recurGenerateSliderMovesWithToSquares :: Square -> Bitboard -> MoveList -> MoveList
-recurGenerateSliderMovesWithToSquares !fromSquare 0 !result = result
-recurGenerateSliderMovesWithToSquares !fromSquare !toSquares !result =
-    recurGenerateSliderMovesWithToSquares fromSquare (clearBit toSquares square) ((.|.) fromSquare square : result)
-    where !square = countTrailingZeros toSquares
+          recurGenerateSliderMovesWithToSquares :: Square -> Bitboard -> MoveList -> MoveList
+          recurGenerateSliderMovesWithToSquares !fromSquare 0 !result = result
+          recurGenerateSliderMovesWithToSquares !fromSquare !toSquares !result =
+              recurGenerateSliderMovesWithToSquares fromSquare (clearBit toSquares square) ((.|.) fromSquare square : result)
+              where !square = countTrailingZeros toSquares
 
 {-# INLINE promotionMoves #-}
 promotionMoves :: Move -> MoveList
@@ -275,12 +277,12 @@ isSquareAttackedByAnyRook !allPieces !attackingRooks !attackedSquare =
 {-# INLINE isBishopAttackingSquare #-}
 isBishopAttackingSquare :: Square -> Square -> Bitboard -> Bool
 isBishopAttackingSquare !attackedSquare !pieceSquare !allPieceBitboard =
-    testBit (magic magicBishopVars pieceSquare (magicIndexForBishop pieceSquare allPieceBitboard)) attackedSquare
+    testBit (magicBishop pieceSquare (magicIndexForBishop pieceSquare allPieceBitboard)) attackedSquare
 
 {-# INLINE isRookAttackingSquare #-}
 isRookAttackingSquare :: Square -> Square -> Bitboard -> Bool
 isRookAttackingSquare !attackedSquare !pieceSquare !allPieceBitboard = 
-    testBit (magic magicRookVars pieceSquare (magicIndexForRook pieceSquare allPieceBitboard)) attackedSquare
+    testBit (magicRook pieceSquare (magicIndexForRook pieceSquare allPieceBitboard)) attackedSquare
 
 {-# INLINE isSquareAttackedBy #-}
 isSquareAttackedBy :: Position -> Square -> Mover -> Bool

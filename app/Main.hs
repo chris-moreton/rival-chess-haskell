@@ -1,5 +1,4 @@
-{-# LANGUAGE TupleSections #-}
-{-# LANGUAGE MultiWayIf #-}
+{-# LANGUAGE ExistentialQuantification, ExplicitNamespaces, FlexibleContexts, FlexibleInstances, KindSignatures, LiberalTypeSynonyms, MultiParamTypeClasses, PostfixOperators, RankNTypes, ScopedTypeVariables, UnicodeSyntax, UnliftedFFITypes #-}
 
 module Main where
 
