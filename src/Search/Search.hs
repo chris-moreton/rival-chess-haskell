@@ -33,7 +33,7 @@ import Search.SearchHelper
       bestMoveFirst,
       sortMoves )
 import Search.Quiesce ( quiesce )
-
+    
 startSearch :: [Position] -> Int -> Int -> SearchState -> IO MoveScore
 startSearch (position:positions) maxDepth endTime searchState = do
     let theseMoves = sortMoves position 0 (moves position)

@@ -2,11 +2,12 @@
 
 module Search.Perft where
 
-import Types
-import Search.MakeMove
-import Search.MoveGenerator
-import Control.DeepSeq
+import Types ( Position(mover) )
+import Search.MakeMove ( makeMove )
+import Search.MoveGenerator ( isCheck, moves )
+import Control.DeepSeq ()
 import Control.Parallel.Strategies
+    ( parList, rdeepseq, withStrategy )
 
 perft :: Position -> Int -> Int
 perft !position !depth =
