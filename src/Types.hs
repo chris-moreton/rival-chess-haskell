@@ -13,6 +13,7 @@ data Mover = White | Black deriving (Enum,Show,Eq,NFData,Generic)
 data Piece = Pawn | King | Queen | Bishop | Knight | Rook deriving (Enum,Show,Eq)
 data HashEntry = HashEntry { score :: {-# UNPACK #-} !Int, hePath :: !Path, height :: {-# UNPACK #-} !Int, bound :: !Bound, lock :: {-# UNPACK #-} !Int }
 data Bound = Exact | Lower | Upper deriving (Enum,Show,Eq,Generic)
+data Window = Window { winLow :: !Int, winHigh :: !Int }
 data MoveScore = 
   MoveScore { msScore :: {-# UNPACK #-} !Int, msBound :: !Bound, msPath :: !Path } |
   NoMoveScore

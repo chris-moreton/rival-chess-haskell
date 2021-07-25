@@ -95,6 +95,7 @@ search !inPosition !inMove !depth !low !high !endTime !searchState !ply !isOnNul
             let hashTableMove = head hashTablePath
             case hb of
                 Exact -> do
+                    incNodes 1000000000 searchState                    
                     return (mkMs (score (fromJust hentry), hashTablePath))
                 Lower ->
                     main inPosition hashTableMove depth (score (fromJust hentry)) high endTime searchState hpos ply isOnNullMove

@@ -11,14 +11,14 @@ import Types
                whiteQueenBitboard, blackQueenBitboard),
       Piece(..) )
 import Alias ( Move, Square )
-import Util.Fen
-import Util.Utils
-import Data.Bits
-import Util.Bitboards
-import Search.MoveConstants
-import Search.MakeSimpleMove
-import Search.MoveUtils
-import Search.MakeComplexMove
+import Util.Fen ( moveFromAlgebraicMove )
+import Util.Utils ( fromSquarePart, toSquarePart )
+import Data.Bits ( Bits((.|.), testBit) )
+import Util.Bitboards ( e1Bit, e8Bit, promotionSquares )
+import Search.MoveConstants ()
+import Search.MakeSimpleMove ( makeSimpleMove )
+import Search.MoveUtils ()
+import Search.MakeComplexMove ( makeComplexMove )
 
 {-# INLINE isPotentialFirstKingMove #-}
 isPotentialFirstKingMove :: Position -> Square -> Bool

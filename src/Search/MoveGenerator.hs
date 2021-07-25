@@ -121,16 +121,18 @@ promotionMoves !move = [(.|.) move promotionQueenMoveMask, (.|.) move promotionR
 
 {-# INLINE generatePawnMovesFromToSquares #-}
 generatePawnMovesFromToSquares :: Square -> Bitboard -> MoveList
-generatePawnMovesFromToSquares !fromSquare !toSquares = recurGeneratePawnMovesFromToSquares (fromSquareMask fromSquare) toSquares []
-
-recurGeneratePawnMovesFromToSquares :: Move -> Bitboard -> MoveList -> MoveList
-recurGeneratePawnMovesFromToSquares _ 0 !result = result
-recurGeneratePawnMovesFromToSquares !mask !toSquares !result = recurGeneratePawnMovesFromToSquares mask (xor toSquares (bit thisToSquare)) newResult
-  where !thisToSquare = countTrailingZeros toSquares
-        !baseMove = (.|.) mask thisToSquare
-        !newResult = if thisToSquare >= 56 || thisToSquare <= 7
-                        then promotionMoves baseMove ++ result
-                        else baseMove : result
+generatePawnMovesFromToSquares !fromSquare !toSquares = 
+    recurGeneratePawnMovesFromToSquares (fromSquareMask fromSquare) toSquares []
+      where
+        recurGeneratePawnMovesFromToSquares :: Move -> Bitboard -> MoveList -> MoveList
+        recurGeneratePawnMovesFromToSquares _ 0 !result = result
+        recurGeneratePawnMovesFromToSquares !mask !toSquares !result = recurGeneratePawnMovesFromToSquares mask (xor toSquares (bit thisToSquare)) newResult
+            where 
+                !thisToSquare = countTrailingZeros toSquares
+                !baseMove = (.|.) mask thisToSquare
+                !newResult = if thisToSquare >= 56 || thisToSquare <= 7
+                                then promotionMoves baseMove ++ result
+                                else baseMove : result
 
 {-# INLINE generatePawnMoves #-}
 generatePawnMoves :: Position -> MoveList
