@@ -61,10 +61,5 @@ hashBound depth lockVal he =
 newPositions :: Position -> Move -> [(Position,Move)]
 newPositions position hashMove = map (\move -> (makeMove position move,move)) (sortMoves position hashMove (moves position))
 
-{-# INLINE quiescePositions #-}
-quiescePositions :: Position -> [Position]
-quiescePositions position = do
-    let m = moves position
-    map (makeMove position) $ if isCheck position (mover position) then m else filter (isCapture position) m
 
 

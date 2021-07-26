@@ -23,7 +23,6 @@ import State.State ( incNodes, updateHashTable, SearchState(..), calcHashIndex, 
 import qualified Data.HashTable.IO as H
 import Util.Zobrist ( zobrist )
 import Evaluate.Evaluate ( evaluate, isCapture, scoreMove )
-import Search.SearchHelper ( quiescePositions )
 
 quiesce :: Position -> Int -> Int -> Int -> SearchState -> IO Int
 quiesce position _ _ 10 searchState = do
@@ -32,10 +31,12 @@ quiesce position _ _ 10 searchState = do
 quiesce !position !low !high !ply !searchState = do
     incNodes searchState
     if null notInCheckPositions
-        then return (if isCheck position (mover position) then ply-10000 else 0)
+        then return (if inCheck then ply-10000 else 0)
         else highestQuiesceMove notInCheckPositions newLow high ply searchState
     where
-        newLow = max (evaluate position) low
+        eval = evaluate position
+        inCheck = isCheck position (mover position)
+        newLow = if inCheck then low else max eval low
         notInCheckPositions = filter (\p -> not (isCheck p $ mover position)) $ quiescePositions position
         
         highestQuiesceMove :: [Position] -> Int -> Int -> Int -> SearchState -> IO Int
@@ -46,3 +47,9 @@ quiesce !position !low !high !ply !searchState = do
             if negatedScore >= high
                 then return negatedScore
                 else highestQuiesceMove (tail notInCheckPositions) (if negatedScore > low then negatedScore else low) high depth searchState
+
+        {-# INLINE quiescePositions #-}
+        quiescePositions :: Position -> [Position]
+        quiescePositions position = do
+            let m = moves position
+            map (makeMove position) $ if isCheck position (mover position) then m else filter (isCapture position) m
