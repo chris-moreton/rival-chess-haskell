@@ -27,28 +27,21 @@ import Search.SearchHelper ( quiescePositions )
 
 quiesce :: Position -> Int -> Int -> Int -> SearchState -> IO Int
 quiesce position _ _ 10 searchState = do
-    incNodes 1 searchState
+    incNodes searchState
     return (evaluate position)
 quiesce !position !low !high !ply !searchState = do
-    incNodes 1 searchState
-    if not (null qp)
-        then do
-            if null notInCheckPositions
-                then return (if isCheck position (mover position) then ply-10000 else 0)
-                else highestQuiesceMove notInCheckPositions newLow high ply searchState
-        else return newLow
+    incNodes searchState
+    if null notInCheckPositions
+        then return (if isCheck position (mover position) then ply-10000 else 0)
+        else highestQuiesceMove notInCheckPositions newLow high ply searchState
     where
-        eval = evaluate position
-        newLow = max eval low
-        qp = quiescePositions position
-        currentMover = mover position
-        notInCheckPositions = filter (\(p,m) -> not (isCheck p currentMover)) qp
+        newLow = max (evaluate position) low
+        notInCheckPositions = filter (\p -> not (isCheck p $ mover position)) $ quiescePositions position
         
-        highestQuiesceMove :: [(Position,Move)] -> Int -> Int -> Int -> SearchState -> IO Int
+        highestQuiesceMove :: [Position] -> Int -> Int -> Int -> SearchState -> IO Int
         highestQuiesceMove [] low _ _ _ = return low
         highestQuiesceMove !notInCheckPositions !low !high !depth !searchState = do
-            let thisP = head notInCheckPositions
-            score <- quiesce (fst thisP) (-high) (-low) (depth+1) searchState
+            score <- quiesce (head notInCheckPositions) (-high) (-low) (depth+1) searchState
             let negatedScore = -score
             if negatedScore >= high
                 then return negatedScore

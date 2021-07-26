@@ -18,7 +18,7 @@ import Text.Printf ( printf )
 import Util.Utils ( timeMillis )
 import System.IO ( stdout, hFlush )
 import Data.IORef ()
-import State.State ( SearchState, makeSearchState, showNodes, zeroNodes, showPv )
+import State.State ( SearchState, makeSearchState, showNodes, zeroNodes, showPv, startStats, stats, setMillisTaken )
 import qualified Data.HashTable.IO as H
 
 data UCIState = UCIState {
@@ -32,7 +32,7 @@ data UCIState = UCIState {
 main :: IO ()
 main = do
     h <- H.new
-    searchState <- makeSearchState h 0 [] 0
+    searchState <- makeSearchState h startStats [] 0
     commandCycle UCIState {position = [getPosition startPosition], quit=False, errorMessage="", output="", searchState=searchState}
 
 showId :: IO ()
@@ -49,8 +49,8 @@ commandCycle uciState = do
   let e = errorMessage uciState'
   let o = output uciState'
   let c = searchState uciState
-  showNodes c
-  zeroNodes c
+  showStats c
+  zeroStats c
   if quit uciState'
       then do
           putStrLn "Bye"
@@ -90,14 +90,16 @@ runGo :: UCIState -> [String] -> IO UCIState
 runGo uciState ("infinite":_) = runGo uciState ["movetime","10000000"]
 
 runGo uciState (command:xs) = do
-    t <- timeMillis
+    t1 <- timeMillis
     let param = read (head xs)
-    let endTime = t + if command == "depth" then 1000000 else param
+    let endTime = t1 + if command == "depth" then 1000000 else param
     let depth
           | command == "movetime" = 50
           | param > 0 = param
           | otherwise = 1
     move <- startSearch (position uciState) depth endTime (searchState uciState)
+    t2 <- timeMillis
+    setMillisTaken (t2 - t1) (searchState uciState)
     pvText <- showPv (searchState uciState) (head (position uciState)) ""
     return uciState {
         output = "info score cp " ++ show (msScore move) ++ " pv" ++ pvText ++ "\n" ++

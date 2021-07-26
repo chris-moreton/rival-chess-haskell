@@ -21,7 +21,7 @@ import Control.Monad ()
 import System.Exit ()
 import Data.Sort ( sortBy )
 import Data.Maybe ( isJust, fromJust )
-import State.State ( incNodes, updateHashTable, SearchState(..), calcHashIndex, setPv, showPv, pathString )
+import State.State ( incNodes, incHashExact, incHashLower, incHashUpper, updateHashTable, SearchState(..), calcHashIndex, setPv, showPv, pathString )
 import qualified Data.HashTable.IO as H
 import Util.Zobrist ( zobrist )
 import Evaluate.Evaluate ( evaluate, isCapture, scoreMove, friendlyPieceValues )
@@ -95,11 +95,13 @@ search !inPosition !inMove !depth !low !high !endTime !searchState !ply !isOnNul
             let hashTableMove = head hashTablePath
             case hb of
                 Exact -> do
-                    incNodes 1000000000 searchState                    
+                    incHashExact searchState
                     return (mkMs (score (fromJust hentry), hashTablePath))
-                Lower ->
+                Lower -> do
+                    incHashLower searchState
                     main inPosition hashTableMove depth (score (fromJust hentry)) high endTime searchState hpos ply isOnNullMove
-                Upper ->
+                Upper -> do
+                    incHashUpper searchState
                     main inPosition hashTableMove depth low (score (fromJust hentry)) endTime searchState hpos ply isOnNullMove
         Nothing ->
             main inPosition 0 depth low high endTime searchState hpos ply isOnNullMove
@@ -109,7 +111,7 @@ search !inPosition !inMove !depth !low !high !endTime !searchState !ply !isOnNul
             q <- quiesce inPosition low high ply searchState
             return (mkMs (q,[]))
         main !inPosition !hashMove !depth !low !high !endTime !searchState !hpos !ply !isOnNullMove = do
-            incNodes 1 searchState
+            incNodes searchState
             if halfMoves inPosition == 50
                 then return (mkMs (0, []))
                 else do

@@ -191,10 +191,10 @@ potentialPawnJumpMoves !bb Position{mover=Black} = (.&.) (bb `shiftR` 8) rank5Bi
 {-# INLINE generateCastleMoves #-}
 generateCastleMoves :: Position -> MoveList
 generateCastleMoves !position = if mover position == White
-    then [(.|.) (fromSquareMask 3) 1 :: Move | whiteKingCastleAvailable position && (.&.) allPieces emptyCastleSquaresWhiteKing == 0 && not (anySquaresInBitboardAttacked position Black noCheckCastleSquaresWhiteKing)] ++
-         [(.|.) (fromSquareMask 3) 5 :: Move | whiteQueenCastleAvailable position && (.&.) allPieces emptyCastleSquaresWhiteQueen == 0 && not (anySquaresInBitboardAttacked position Black noCheckCastleSquaresWhiteQueen)]
-    else [(.|.) (fromSquareMask 59) 57 :: Move | blackKingCastleAvailable position && (.&.) allPieces emptyCastleSquaresBlackKing == 0 && not (anySquaresInBitboardAttacked position White noCheckCastleSquaresBlackKing)] ++
-         [(.|.) (fromSquareMask 59) 61 :: Move | blackQueenCastleAvailable position && (.&.) allPieces emptyCastleSquaresBlackQueen == 0 && not (anySquaresInBitboardAttacked position White noCheckCastleSquaresBlackQueen)]
+    then [(.|.) (fromSquareMask 3) 1 :: Move | whiteKingCastleAvailable position && allPieces .&. emptyCastleSquaresWhiteKing == 0 && not (anySquaresInBitboardAttacked position Black noCheckCastleSquaresWhiteKing)] ++
+         [(.|.) (fromSquareMask 3) 5 :: Move | whiteQueenCastleAvailable position && allPieces .&. emptyCastleSquaresWhiteQueen == 0 && not (anySquaresInBitboardAttacked position Black noCheckCastleSquaresWhiteQueen)]
+    else [(.|.) (fromSquareMask 59) 57 :: Move | blackKingCastleAvailable position && allPieces .&. emptyCastleSquaresBlackKing == 0 && not (anySquaresInBitboardAttacked position White noCheckCastleSquaresBlackKing)] ++
+         [(.|.) (fromSquareMask 59) 61 :: Move | blackQueenCastleAvailable position && allPieces .&. emptyCastleSquaresBlackQueen == 0 && not (anySquaresInBitboardAttacked position White noCheckCastleSquaresBlackQueen)]
     where !allPieces = allPiecesBitboard position
 
 anySquaresInBitboardAttacked :: Position -> Mover -> Bitboard -> Bool
@@ -291,7 +291,7 @@ isSquareAttackedBy :: Position -> Square -> Mover -> Bool
 
 isSquareAttackedBy !position !attackedSquare White =
   attackedByRook || attackedByBishop || attackedByKing || attackedByPawn || attackedByKnight
-  where !allPieces       = allPiecesBitboard position
+  where allPieces       = allPiecesBitboard position
         attackedByPawn   = isSquareAttackedByAnyPawn (whitePawnBitboard position) (pawnMovesCaptureOfColour Black attackedSquare) attackedSquare
         attackedByKnight = isSquareAttackedByAnyKnight (whiteKnightBitboard position) attackedSquare
         attackedByRook   = isSquareAttackedByAnyRook allPieces (rookMovePiecesBitboard position White) attackedSquare
@@ -300,7 +300,7 @@ isSquareAttackedBy !position !attackedSquare White =
 
 isSquareAttackedBy !position !attackedSquare Black =
   attackedByRook || attackedByBishop || attackedByKing || attackedByPawn || attackedByKnight
-  where !allPieces       = allPiecesBitboard position
+  where allPieces       = allPiecesBitboard position
         attackedByPawn   = isSquareAttackedByAnyPawn (blackPawnBitboard position) (pawnMovesCaptureOfColour White attackedSquare) attackedSquare
         attackedByKnight = isSquareAttackedByAnyKnight (blackKnightBitboard position) attackedSquare
         attackedByRook   = isSquareAttackedByAnyRook allPieces (rookMovePiecesBitboard position Black) attackedSquare

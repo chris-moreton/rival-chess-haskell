@@ -6,14 +6,22 @@ import Types ( HashTable, HashEntry, Position )
 import Alias ( Move, Path )
 import Util.Fen ( algebraicMoveFromMove )
 
+data Stats = Stats {
+      nodes :: Integer
+    , hashHitsExact :: Integer
+    , hashHitsLower :: Integer
+    , hashHitsUpper :: Integer
+    , millisTaken   :: Int
+}
+
 data SearchState = SearchState {
      hashTable  :: HashTable
-   , nodes      :: IORef Integer
+   , stats      :: IORef Stats
    , pv         :: IORef [Move]
    , pvScore    :: IORef Integer
 }
 
-makeSearchState :: HashTable -> Integer -> [Move] -> Integer -> IO SearchState
+makeSearchState :: HashTable -> Stats -> [Move] -> Integer -> IO SearchState
 makeSearchState h n p s = do
     hRef <- H.new
     nRef <- newIORef n
@@ -21,19 +29,62 @@ makeSearchState h n p s = do
     sRef <- newIORef s
     return (SearchState hRef nRef pRef sRef)
 
-incNodes :: Integer -> SearchState -> IO ()
-incNodes i (SearchState _ nodes _ _) = do modifyIORef nodes (+ i)
+incNodes :: SearchState -> IO ()
+incNodes (SearchState _ stats _ _) = do modifyIORef stats go
+    where
+        go :: Stats -> Stats
+        go stats = stats { nodes = nodes stats + 1 }
+
+incHashExact :: SearchState -> IO ()
+incHashExact (SearchState _ stats _ _) = do modifyIORef stats go
+    where
+        go :: Stats -> Stats
+        go stats = stats { hashHitsExact = hashHitsExact stats + 1 }
+
+incHashLower :: SearchState -> IO ()
+incHashLower (SearchState _ stats _ _) = do modifyIORef stats go
+    where
+        go :: Stats -> Stats
+        go stats = stats { hashHitsLower = hashHitsLower stats + 1 }
+
+incHashUpper :: SearchState -> IO ()
+incHashUpper (SearchState _ stats _ _) = do modifyIORef stats go
+    where
+        go :: Stats -> Stats
+        go stats = stats { hashHitsUpper = hashHitsUpper stats + 1 }
+
+setMillisTaken :: Int -> SearchState -> IO ()
+setMillisTaken mt (SearchState _ stats _ _) = do modifyIORef stats go
+    where
+        go :: Stats -> Stats
+        go stats = stats { millisTaken = mt }
+
+startStats :: Stats
+startStats = Stats 0 0 0 0 0
 
 setPv :: Path -> SearchState -> IO ()
 setPv pv (SearchState _ _ moves _) = do writeIORef moves pv
 
-zeroNodes :: SearchState -> IO ()
-zeroNodes (SearchState _ nodes _ _) = do modifyIORef nodes (0 *)
+zeroStats :: SearchState -> IO ()
+zeroStats (SearchState _ nodes _ _) = do modifyIORef nodes go
+    where
+        go :: Stats -> Stats
+        go stats = Stats 0 0 0 0 0
 
-showNodes:: SearchState -> IO ()
-showNodes (SearchState _ nodes _ _) = do
-    nodes' <- readIORef nodes
-    print nodes'
+showStats :: SearchState -> IO ()
+showStats (SearchState _ stats _ _) = do
+    stats' <- readIORef stats
+    let n = nodes stats'
+    let mt = millisTaken stats'
+    let he = hashHitsExact stats'
+    let hl = hashHitsLower stats'
+    let hu = hashHitsUpper stats'
+    let nps = (fromIntegral n / fromIntegral mt) * 1000
+    putStrLn $ "Nodes = " ++ show n
+    putStrLn $ "NPS = " ++ show nps
+    putStrLn $ "Hash Hits Exact = " ++ show he
+    putStrLn $ "Hash Hits Lower = " ++ show hl
+    putStrLn $ "Hash Hits Upper = " ++ show hu
 
 showPv:: SearchState -> Position -> String -> IO String
 showPv (SearchState _ _ pv _) position result = do
