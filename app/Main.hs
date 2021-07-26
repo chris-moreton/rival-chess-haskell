@@ -18,7 +18,7 @@ import Text.Printf ( printf )
 import Util.Utils ( timeMillis )
 import System.IO ( stdout, hFlush )
 import Data.IORef ()
-import State.State ( SearchState, makeSearchState, showNodes, zeroNodes, showPv, startStats, stats, setMillisTaken )
+import State.State ( SearchState, makeSearchState, showStats, zeroStats, showPv, startStats, stats, setMillisTaken )
 import qualified Data.HashTable.IO as H
 
 data UCIState = UCIState {
