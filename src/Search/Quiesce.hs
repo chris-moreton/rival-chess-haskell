@@ -48,8 +48,8 @@ quiesce !position !low !high !ply !searchState = do
                 then return negatedScore
                 else highestQuiesceMove (tail notInCheckPositions) (if negatedScore > low then negatedScore else low) high depth searchState
 
-        {-# INLINE quiescePositions #-}
-        quiescePositions :: Position -> [Position]
-        quiescePositions position = do
-            let m = moves position
-            map (makeMove position) $ if isCheck position (mover position) then m else filter (isCapture position) m
+{-# INLINE quiescePositions #-}
+quiescePositions :: Position -> [Position]
+quiescePositions position = do
+    let m = moves position
+    map (makeMove position) $ if isCheck position (mover position) then m else filter (isCapture position) m
