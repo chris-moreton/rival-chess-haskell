@@ -44,11 +44,9 @@ sortMoves position hashMove moves = do
 {-# INLINE bestMoveFirst #-}
 bestMoveFirst :: Position -> Move -> [(Position,Move)]
 bestMoveFirst position bestMove = do
-    let movesFromPosition = moves position
-    let sortedMoves = sortMoves position bestMove movesFromPosition
+    let sortedMoves = sortMoves position bestMove (moves position)
     let newPositions = map (\move -> (makeMove position move,move)) sortedMoves
-    let notInCheckPositions = filter (\(p,m) -> not (isCheck p (mover position))) newPositions
-    notInCheckPositions
+    filter (\(p,m) -> not (isCheck p (mover position))) newPositions
 
 {-# INLINE hashBound #-}
 hashBound :: Int -> Int -> Maybe HashEntry -> Maybe Bound
@@ -61,10 +59,5 @@ hashBound depth lockVal he =
 newPositions :: Position -> Move -> [(Position,Move)]
 newPositions position hashMove = map (\move -> (makeMove position move,move)) (sortMoves position hashMove (moves position))
 
-{-# INLINE quiescePositions #-}
-quiescePositions :: Position -> [Position]
-quiescePositions position = do
-    let m = moves position
-    map (makeMove position) $ if isCheck position (mover position) then m else filter (isCapture position) m
 
 
