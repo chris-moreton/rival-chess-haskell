@@ -621,7 +621,7 @@ main = hspec $ do
   describe "hashtable" $
     it "stores and retrieves hashtable values" $ do
         h' <- H.new
-        c <- makeSearchState h' 0 [] 0
+        c <- makeSearchState h' startStats [] 0
         updateHashTable 1 HashEntry { score=1, hePath=[2], height=3, bound=Exact, lock=0 } c
         updateHashTable 2 HashEntry { score=10, hePath=[20], height=30, bound=Upper, lock=0 } c
         hentry <- H.lookup (hashTable c) 2
