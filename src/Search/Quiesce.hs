@@ -26,40 +26,32 @@ import Evaluate.Evaluate ( evaluate, isCapture, scoreMove )
 import Util.Bitboards ( exactlyOneBitSet )
 
 quiesce :: Position -> Int -> Int -> Int -> SearchState -> IO Int
-quiesce position _ _ 10 searchState = do
+quiesce position _ _ 100 searchState = do
     incNodes searchState
     return (evaluate position)
 quiesce !position !low !high !ply !searchState = do
     incNodes searchState
-    result <- highestQuiesceMove position ms newLow high ply searchState 0
-    if snd result == 0 && inCheck
-        then return (ply-10000)
-        else return (fst result)
+    highestQuiesceMove position ms newLow high ply searchState
     where
-        inCheck = isCheck position (mover position)
-        newLow = max (evaluate position) low
-        ms = quiesceMoves position inCheck
+        newLow  = max (evaluate position) low
+        m       = moves position
+        ms      = filter (isCapture position) m
         
         {-# INLINE highestQuiesceMove #-}
-        highestQuiesceMove :: Position -> [Move] -> Int -> Int -> Int -> SearchState -> Int -> IO (Int, Int)
-        highestQuiesceMove _ [] low _ _ _ validMoves = return (low, validMoves)
-        highestQuiesceMove position ms !low !high !depth !searchState validMoves = do
+        highestQuiesceMove :: Position -> [Move] -> Int -> Int -> Int -> SearchState -> IO Int
+        highestQuiesceMove _ [] low _ _ _ = return low
+        highestQuiesceMove position ms !low !high !ply !searchState = do
             let thisM = head ms
             let thisP = makeMove position thisM
             if kingCaptured thisP
                 then do
-                    highestQuiesceMove position (tail ms) low high depth searchState validMoves
+                    return 10001
                 else do
-                    score <- quiesce thisP (-high) (-low) (depth+1) searchState
+                    score <- quiesce thisP (-high) (-low) (ply+1) searchState
                     let negatedScore = -score
                     if negatedScore >= high
-                        then return (negatedScore, validMoves + 1)
-                        else highestQuiesceMove position (tail ms) (if negatedScore > low then negatedScore else low) high depth searchState (validMoves + 1)
-
-        {-# INLINE quiesceMoves #-}
-        quiesceMoves :: Position -> Bool -> MoveList
-        quiesceMoves position inCheck = if inCheck then m else filter (isCapture position) m
-            where m = moves position
+                        then return negatedScore
+                        else highestQuiesceMove position (tail ms) (if negatedScore > low then negatedScore else low) high ply searchState
 
         kingCaptured :: Position -> Bool
         kingCaptured position = exactlyOneBitSet (whiteKingBitboard position .|. blackKingBitboard position)
