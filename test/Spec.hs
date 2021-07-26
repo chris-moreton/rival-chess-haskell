@@ -611,10 +611,10 @@ main = hspec $ do
       let position = getPosition "rnbqkbnr/p1p2ppp/8/1pPpp3/4PP2/8/PP1P2PP/RNBQKBNR w KQkq d6 0 1"
       let qp = quiescePositions position
       length qp `shouldBe` 4
-      qp `shouldBe` [(getPosition "rnbqkbnr/p1p2ppp/8/1pPpP3/4P3/8/PP1P2PP/RNBQKBNR b KQkq - 0 1",moveFromAlgebraicMove "f4e5"),
-                     (getPosition "rnbqkbnr/p1p2ppp/8/1pPPp3/5P2/8/PP1P2PP/RNBQKBNR b KQkq - 0 1",moveFromAlgebraicMove "e4d5"),
-                     (getPosition "rnbqkbnr/p1p2ppp/3P4/1p2p3/4PP2/8/PP1P2PP/RNBQKBNR b KQkq - 0 1",moveFromAlgebraicMove "c5d6"),
-                     (getPosition "rnbqkbnr/p1p2ppp/8/1BPpp3/4PP2/8/PP1P2PP/RNBQK1NR b KQkq - 0 1",moveFromAlgebraicMove "f1b5")
+      qp `shouldBe` [(getPosition "rnbqkbnr/p1p2ppp/8/1pPpP3/4P3/8/PP1P2PP/RNBQKBNR b KQkq - 0 1"),
+                     (getPosition "rnbqkbnr/p1p2ppp/8/1pPPp3/5P2/8/PP1P2PP/RNBQKBNR b KQkq - 0 1"),
+                     (getPosition "rnbqkbnr/p1p2ppp/3P4/1p2p3/4PP2/8/PP1P2PP/RNBQKBNR b KQkq - 0 1"),
+                     (getPosition "rnbqkbnr/p1p2ppp/8/1BPpp3/4PP2/8/PP1P2PP/RNBQK1NR b KQkq - 0 1")
                      ]
       quiescePositions (getPosition "rnbqkbn1/ppp4r/5p2/3P4/2P4P/8/PP1P1PP1/RNBQK2R w KQq - 0 1") `shouldBe` []
 
