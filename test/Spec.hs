@@ -632,7 +632,7 @@ main = hspec $ do
   describe "quiesce" $
     it "evaluates a position using a quiescence search" $ do
         h' <- H.new
-        c <- makeSearchState h' 0 [] 0
+        c <- makeSearchState h' startStats [] 0
         let position = getPosition "rnbqkbnr/ppp3pp/5p2/3PB1N1/2P4P/8/PP1P1PP1/RNBQK2R b KQkq - 0 1"
         q <- quiesce position -100000 100000 0 c
         q `shouldBe` 150
