@@ -31,7 +31,7 @@ quiesce position _ _ 10 searchState = do
 quiesce !position !low !high !ply !searchState = do
     incNodes searchState
     if null notInCheckPositions
-        then return (if inCheck then ply-10000 else 0)
+        then return (if inCheck then ply-10000 else newLow)
         else highestQuiesceMove notInCheckPositions newLow high ply searchState
     where
         eval = evaluate position
