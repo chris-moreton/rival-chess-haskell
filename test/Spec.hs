@@ -34,11 +34,11 @@ main :: IO ()
 main = hspec $ do
 
   describe "southFill" $
-    it "South fills a bitboard" $ do
+    it "South fills a bitboard" $
     southFill 4611936708517363882 `shouldBe` 4629952088967215103
 
   describe "northFill" $
-    it "North fills a bitboard" $ do
+    it "North fills a bitboard" $
     northFill 4611936708517363882 `shouldBe` -1332566
 
   describe "rankBitboards" $
@@ -61,11 +61,11 @@ main = hspec $ do
     low32Bits `shouldBe` 4294967295
 
   describe "fenBoardPart" $
-    it "Extracts board part from FEN" $ do
+    it "Extracts board part from FEN" $
     fenBoardPart "6k1/6p1/1p2q2p/1p5P/1P3RP1/2PK1B2/1r2N3/8 b - g3 5 56" `shouldBe` "6k1/6p1/1p2q2p/1p5P/1P3RP1/2PK1B2/1r2N3/8"
 
   describe "fenRanks" $
-    it "Extracts ranks from FEN board part from" $ do
+    it "Extracts ranks from FEN board part from" $
     getFenRanks "6k1/6p1/1p2q2p/1p5P/1P3RP1/2PK1B2/1r2N3/8" `shouldBe` ["6k1","6p1","1p2q2p","1p5P","1P3RP1","2PK1B2","1r2N3","8"]
 
   describe "rankBits" $
@@ -155,7 +155,7 @@ main = hspec $ do
     bitboardForMover position Bishop `shouldNotBe` whiteBishopBitboard bitboards
 
   describe "bitString" $
-    it "Converts a bitboard to a string of 1s and 0s" $ do
+    it "Converts a bitboard to a string of 1s and 0s" $
     bitString 15 `shouldBe` "0000000000000000000000000000000000000000000000000000000000001111"
 
   describe "allBitsExceptFriendlyPieces" $
@@ -174,48 +174,48 @@ main = hspec $ do
     bitString (emptySquaresBitboard position) `shouldBe` "0111110111111101101101101011111010111001110010111011011111111111"
 
   describe "movesFromToSquares" $
-    it "Creates a list of moves from a fromSquare and a list of toSquares" $ do
+    it "Creates a list of moves from a fromSquare and a list of toSquares" $
     sort ((movesFromToSquaresBitboard 11 (bit 22 .|. (bit 33 .|. bit 44)))) `shouldBe` [720918,720929,720940]
 
   describe "generateKnightMoves" $
     it "Generates knight moves from a given FEN (ignoring checks)" $ do
-    sort (map algebraicMoveFromMove ((generateKnightMoves (getPosition "n5k1/6n1/1n2q2p/1p5P/1P3RP1/2PK1B2/1r2N3/8 b kQKq g3 5 56"))))
+    sort (map algebraicMoveFromMove (generateKnightMoves (getPosition "n5k1/6n1/1n2q2p/1p5P/1P3RP1/2PK1B2/1r2N3/8 b kQKq g3 5 56")))
       `shouldBe` ["a8c7","b6a4","b6c4","b6c8","b6d5","b6d7","g7e8","g7f5","g7h5"]
-    sort (map algebraicMoveFromMove ((generateKnightMoves (getPosition "n5k1/6n1/1n2q2p/1p5P/1P3RP1/2PK1B2/1r2N3/8 w kQKq g3 5 56"))))
+    sort (map algebraicMoveFromMove (generateKnightMoves (getPosition "n5k1/6n1/1n2q2p/1p5P/1P3RP1/2PK1B2/1r2N3/8 w kQKq g3 5 56")))
       `shouldBe` ["e2c1","e2d4","e2g1","e2g3"]
 
   describe "generateKingMoves" $
     it "Generates king moves from a given FEN (ignoring checks)" $ do
-    sort (map algebraicMoveFromMove ((generateKingMoves (getPosition "n5k1/6n1/1n2q2p/1p5P/1P3RP1/2PK1B2/1r2N3/8 b kQKq g3 5 56"))))
+    sort (map algebraicMoveFromMove (generateKingMoves (getPosition "n5k1/6n1/1n2q2p/1p5P/1P3RP1/2PK1B2/1r2N3/8 b kQKq g3 5 56")))
       `shouldBe` ["g8f7","g8f8","g8h7","g8h8"]
-    sort (map algebraicMoveFromMove ((generateKingMoves (getPosition "n5k1/6n1/1n2q2p/1p5P/1P3RP1/2PK1B2/1r2N3/8 w kQKq g3 5 56"))))
+    sort (map algebraicMoveFromMove (generateKingMoves (getPosition "n5k1/6n1/1n2q2p/1p5P/1P3RP1/2PK1B2/1r2N3/8 w kQKq g3 5 56")))
       `shouldBe` ["d3c2","d3c4","d3d2","d3d4","d3e3","d3e4"]
 
   describe "generateBishopMoves" $
     it "Generates bishop moves (including diagonal queen moves) from a given FEN (ignoring checks)" $ do
-    sort (map algebraicMoveFromMove ((generateSliderMoves (getPosition "n5k1/6n1/1n2q2p/1p5P/1P3RP1/2PK1B2/1r2N3/7R w kQKq g3 5 56") Bishop)))
+    sort (map algebraicMoveFromMove (generateSliderMoves (getPosition "n5k1/6n1/1n2q2p/1p5P/1P3RP1/2PK1B2/1r2N3/7R w kQKq g3 5 56") Bishop))
       `shouldBe` ["f3a8","f3b7","f3c6","f3d5","f3e4","f3g2"]
-    sort (map algebraicMoveFromMove ((generateSliderMoves (getPosition "n5k1/6n1/1n2q2p/1p5P/1P3RP1/2PK1B2/1r2N3/8 b kQKq g3 5 56") Bishop)))
+    sort (map algebraicMoveFromMove (generateSliderMoves (getPosition "n5k1/6n1/1n2q2p/1p5P/1P3RP1/2PK1B2/1r2N3/8 b kQKq g3 5 56") Bishop))
       `shouldBe` ["e6a2","e6b3","e6c4","e6c8","e6d5","e6d7","e6f5","e6f7","e6g4"]
 
   describe "generateRookMoves" $
     it "Generates rook moves (including non-diagonal queen moves) from a given FEN (ignoring checks)" $ do
-    sort (map algebraicMoveFromMove ((generateSliderMoves (getPosition "n5k1/6n1/1n2q2p/1p5P/1P3RP1/2PK1B2/1r2N3/8 w kQKq g3 5 56") Rook)))
+    sort (map algebraicMoveFromMove (generateSliderMoves (getPosition "n5k1/6n1/1n2q2p/1p5P/1P3RP1/2PK1B2/1r2N3/8 w kQKq g3 5 56") Rook))
       `shouldBe` ["f4c4","f4d4","f4e4","f4f5","f4f6","f4f7","f4f8"]
-    sort (map algebraicMoveFromMove ((generateSliderMoves (getPosition "n5k1/6n1/1n2q2p/1p5P/1P3RP1/2PK1B2/1r2N3/6r1 b kQKq g3 5 56") Rook)))
+    sort (map algebraicMoveFromMove (generateSliderMoves (getPosition "n5k1/6n1/1n2q2p/1p5P/1P3RP1/2PK1B2/1r2N3/6r1 b kQKq g3 5 56") Rook))
       `shouldBe` ["b2a2","b2b1","b2b3","b2b4","b2c2","b2d2","b2e2","e6c6","e6d6","e6e2","e6e3","e6e4","e6e5","e6e7","e6e8","e6f6","e6g6","g1a1","g1b1","g1c1","g1d1","g1e1","g1f1","g1g2","g1g3","g1g4","g1h1"]
 
   describe "generatePawnMovesFromToSquares" $
     it "Creates a list of moves from a given From Square and a list of To Squares" $ do
-    sort (map algebraicMoveFromMove ((generatePawnMovesFromToSquares 54 (bit 63 .|. (bit 62 .|. bit 61)))))
+    sort (map algebraicMoveFromMove (generatePawnMovesFromToSquares 54 (bit 63 .|. (bit 62 .|. bit 61))))
       `shouldBe` ["b7a8b","b7a8n","b7a8q","b7a8r","b7b8b","b7b8n","b7b8q","b7b8r","b7c8b","b7c8n","b7c8q","b7c8r"]
-    sort (map algebraicMoveFromMove ((generatePawnMovesFromToSquares 46 (bit 55 .|. (bit 54 .|. bit 53)))))
+    sort (map algebraicMoveFromMove (generatePawnMovesFromToSquares 46 (bit 55 .|. (bit 54 .|. bit 53))))
       `shouldBe` ["b6a7","b6b7","b6c7"]
 
   describe "enemyBitboard" $
-    it "Returns a bitboard with bits set for enemy pieces" $ do
+    it "Returns a bitboard with bits set for enemy pieces" $
     enemyBitboard (getPosition "n5k1/1P2P1n1/1n2q2p/Pp1pP3/3P1R2/3K1B2/1r2N2P/6r1 b - - 0 1")
-      `shouldBe` 0b0000000001001000000000001000100000010100000101000000100100000000
+    `shouldBe` 0b0000000001001000000000001000100000010100000101000000100100000000
 
   describe "pawnCaptures" $
     it "Returns a bitboard showing target squares for pawn captures, from a given square and an enemy piece bitboard" $ do
@@ -229,9 +229,9 @@ main = hspec $ do
       `shouldBe` 0b0000000000000000000000000000000000000000000000000000000000000000
 
   describe "potentialPawnJumpMoves" $
-    it "Returns a bitboard showing target squares for pawn moves that would land on the two-move rank if moved one more rank" $ do
+    it "Returns a bitboard showing target squares for pawn moves that would land on the two-move rank if moved one more rank" $
     potentialPawnJumpMoves 0b0101000000000100010000011000000001000000010101010000001100010001 (getPosition "n5k1/1P2P1n1/1n2q2p/Pp6/3P1R2/3K1B2/1r2N2P/6r1 w - d5 0 1")
-      `shouldBe` 0b0000000000000000000000000000000001010101000000000000000000000000
+    `shouldBe` 0b0000000000000000000000000000000001010101000000000000000000000000
 
   describe "enPassantSquare position" $
     it "Identifies the enPassant square from a position" $ do
@@ -253,9 +253,9 @@ main = hspec $ do
 
   describe "generatePawnMoves" $
     it "Generates pawn moves from a given FEN (ignoring checks)" $ do
-    sort (map algebraicMoveFromMove ((generatePawnMoves (getPosition "n5k1/4P1n1/1n2q2p/1p1p4/5R2/3K1B2/1r2N3/6r1 w - - 0 1"))))
+    sort (map algebraicMoveFromMove (generatePawnMoves (getPosition "n5k1/4P1n1/1n2q2p/1p1p4/5R2/3K1B2/1r2N3/6r1 w - - 0 1")))
       `shouldBe` ["e7e8b","e7e8n","e7e8q","e7e8r"]
-    sort (map algebraicMoveFromMove ((generatePawnMoves (getPosition "n5k1/1P2P1n1/1n2q2p/P1pP4/5R2/3K1B2/1r2N2P/6r1 w - c6 0 1"))))
+    sort (map algebraicMoveFromMove (generatePawnMoves (getPosition "n5k1/1P2P1n1/1n2q2p/P1pP4/5R2/3K1B2/1r2N2P/6r1 w - c6 0 1")))
       `shouldBe` ["a5a6","a5b6","b7a8b","b7a8n","b7a8q","b7a8r","b7b8b","b7b8n","b7b8q","b7b8r","d5c6","d5d6","d5e6","e7e8b","e7e8n","e7e8q","e7e8r","h2h3","h2h4"]
 
   describe "anySquaresInBitboardAttacked" $
@@ -281,41 +281,41 @@ main = hspec $ do
   describe "generateCastleMovesForMover" $
     it "Generates castle moves for a given mover" $ do
     let position = getPosition "n5k1/1P2P1n1/1n2q2p/P1pP4/5R2/5B2/1r2N2P/R3K1r1 w Q - 0 1"
-    sort (map algebraicMoveFromMove ((generateCastleMoves position)))
+    sort (map algebraicMoveFromMove (generateCastleMoves position))
       `shouldBe` []
     let position = getPosition "n5k1/1P2P1n1/1n2q2p/P1pP4/5R2/5B2/1r2N2P/R3K2R w KQ - 0 1"
-    sort (map algebraicMoveFromMove ((generateCastleMoves position)))
+    sort (map algebraicMoveFromMove (generateCastleMoves position))
       `shouldBe` ["e1c1","e1g1"]
     let position = getPosition "n5k1/1P2P1n1/1n2q2p/P1pP4/5R2/5B2/3rN2P/R3K2R w KQ - 0 1"
-    sort (map algebraicMoveFromMove ((generateCastleMoves position)))
+    sort (map algebraicMoveFromMove (generateCastleMoves position))
       `shouldBe` ["e1g1"]
     let position = getPosition "n5k1/1P2P1n1/1n2q2p/P1pP4/5R2/5B2/4Nr1P/R3K2R w Q - 0 1"
-    sort (map algebraicMoveFromMove ((generateCastleMoves position)))
+    sort (map algebraicMoveFromMove (generateCastleMoves position))
       `shouldBe` ["e1c1"]
     let position = getPosition "n5k1/1P2P1n1/1n5p/P1pP4/5R2/1q3B2/4Nr1P/R3K2R w Q - 0 1"
-    sort (map algebraicMoveFromMove ((generateCastleMoves position)))
+    sort (map algebraicMoveFromMove (generateCastleMoves position))
       `shouldBe` []
-    sort (map algebraicMoveFromMove ((generateCastleMoves position)))
+    sort (map algebraicMoveFromMove (generateCastleMoves position))
       `shouldBe` []
-    sort (map algebraicMoveFromMove ((generateCastleMoves position)))
+    sort (map algebraicMoveFromMove (generateCastleMoves position))
       `shouldBe` []
-    sort (map algebraicMoveFromMove ((generateCastleMoves position)))
+    sort (map algebraicMoveFromMove (generateCastleMoves position))
       `shouldBe` []
     let position = getPosition "r3k1R1/1P2P1n1/1n2q2p/P1pP4/5R2/5B2/1r2N2P/R3K1r1 b Q - 0 1"
-    sort (map algebraicMoveFromMove ((generateCastleMoves position))) `shouldBe` []
+    sort (map algebraicMoveFromMove (generateCastleMoves position)) `shouldBe` []
     let position = getPosition "r3k2r/1P2P1n1/1n2q2p/P1pP4/5R2/5B2/1r2N2P/R3K2R b Q - 0 1"
-    sort (map algebraicMoveFromMove ((generateCastleMoves position))) `shouldBe` []
+    sort (map algebraicMoveFromMove (generateCastleMoves position)) `shouldBe` []
     let position = getPosition "r3k2r/1P2PRn1/1n2q2p/P1pP4/8/5B2/1r2N2P/R3K2R b Q - 0 1"
-    sort (map algebraicMoveFromMove ((generateCastleMoves position)))
+    sort (map algebraicMoveFromMove (generateCastleMoves position))
       `shouldBe` []
-    sort (map algebraicMoveFromMove ((generateCastleMoves position)))
+    sort (map algebraicMoveFromMove (generateCastleMoves position))
       `shouldBe` []
-    sort (map algebraicMoveFromMove ((generateCastleMoves position)))
+    sort (map algebraicMoveFromMove (generateCastleMoves position))
       `shouldBe` []
-    sort (map algebraicMoveFromMove ((generateCastleMoves position)))
+    sort (map algebraicMoveFromMove (generateCastleMoves position))
       `shouldBe` []
     let position = getPosition "r3k2r/1P3Rn1/1n2q2p/P1pP2P1/8/5B2/1r2N2P/R3K2R b qQ - 0 1"
-    sort (map algebraicMoveFromMove ((generateCastleMoves position)))
+    sort (map algebraicMoveFromMove (generateCastleMoves position))
       `shouldBe` ["e8c8"]
 
   describe "moves" $
@@ -448,6 +448,37 @@ main = hspec $ do
     isCheck position Black `shouldBe` False
     isCheck (getPosition "r2k3r/p6p/8/B7/1p2p3/2pb4/P4K1P/R6R w - - 0 1") Black `shouldBe` True
 
+  describe "captureMoves" $
+    it "returns all and only capture moves" $ do
+    let position = getPosition "n5k1/1P2P1n1/1n5p/P1pP4/5R2/1q3B2/4Nr1P/R3K2R w Q - 0 1" in captureMoves position `shouldBe` filter (isCapture position) (moves position)
+    let position = getPosition "n4Rk1/1P2P1n1/1n5p/P1pP4/8/1q3B2/4Nr1P/R3K2R w Q - 0 1" in captureMoves position `shouldBe` filter (isCapture position) (moves position)
+    let position = getPosition "n5k1/1P3Pn1/1n5p/P1pP1R2/8/3q1B2/4Nr1P/R3K2R w Q - 0 1" in captureMoves position `shouldBe` filter (isCapture position) (moves position)
+    let position = getPosition "n5k1/1P2P1n1/1n5p/P1pP1R2/8/3q1B2/4N2P/R3Kr1R w Q - 0 1" in captureMoves position `shouldBe` filter (isCapture position) (moves position)
+    let position = getPosition "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1" in captureMoves position `shouldBe` filter (isCapture position) (moves position)
+    let position = getPosition "8/2p5/3p4/KP5r/1R3pPk/8/4P3/8 b - g3 0 1" in captureMoves position `shouldBe` filter (isCapture position) (moves position)
+    -- let position = getPosition "r2Bk2r/p6p/8/8/1pp1p3/3b4/P6P/R3K2R b KQkq - 0 1"
+    -- captureMoves position `shouldBe` filter (isCapture position) $ moves position
+    -- let position = getPosition "r3k2r/p6p/8/B7/1pp1p3/3b4/P4K1P/R6R b kq - 0 1"
+    -- captureMoves position `shouldBe` filter (isCapture position) $ moves position
+    -- let position = getPosition "r3k2r/p6p/8/B7/1pp1p3/3b4/P2K3P/R6R b kq - 0 1"
+    -- captureMoves position `shouldBe` filter (isCapture position) $ moves position
+    -- let position = getPosition "r3k2r/p1B4p/8/8/1pp1p3/3b4/P6P/R3K2R b KQkq - 0 1"
+    -- captureMoves position `shouldBe` filter (isCapture position) $ moves position
+    -- let position = getPosition "r3k2r/p6p/8/B7/1pp1p3/3b4/P6P/R3K1R1 b Qkq - 0 1"
+    -- captureMoves position `shouldBe` filter (isCapture position) $ moves position
+    -- let position = getPosition "r3k2r/p6p/1B6/8/1pp1p3/3b4/P6P/R3K2R b KQkq - 0 1"
+    -- captureMoves position `shouldBe` filter (isCapture position) $ moves position
+    -- let position = getPosition "r3k2r/p1ppqpb1/bn2pnp1/3PN3/1p2P3/2N2Q1p/PPPBBPPP/R3K2R w KQkq -"
+    -- captureMoves position `shouldBe` filter (isCapture position) $ moves position
+    -- let position = getPosition "8/2p5/3p4/KP5r/1R3p1k/8/4P1P1/8 w - -"
+    -- captureMoves position `shouldBe` filter (isCapture position) $ moves position
+    -- let position = getPosition "8/2p5/3p4/KP5r/1R3p1k/8/4P1P1/8 w - -"
+    -- captureMoves position `shouldBe` filter (isCapture position) $ moves position
+    -- let position = getPosition "r3k2r/p1ppqpb1/bn2pnp1/3PN3/1p2P3/2N2Q1p/PPPBBPPP/R3K2R w KQkq -"
+    -- captureMoves position `shouldBe` filter (isCapture position) $ moves position
+    -- let position = getPosition "8/2p5/3p4/KP5r/1R3p1k/8/4P1P1/8 w - -"
+    -- captureMoves position `shouldBe` filter (isCapture position) $ moves position
+
   describe "makeAlgebraicMoves" $
     it "Makes a move from a position and returns a new position" $ do
     let expected = getPosition "rnbqkbnr/ppppppp1/8/8/2PPPP1P/8/PP6/RNBQKqNR w KQkq - 0 7"
@@ -461,11 +492,11 @@ main = hspec $ do
     algebraicMoveFromMove (moveFromAlgebraicMove "h7g8b") `shouldBe` "h7g8b"
 
   describe "fromSquarePart" $
-    it "Gets the Square for the from part of a compact move" $ do
+    it "Gets the Square for the from part of a compact move" $
     fromSquarePart (moveFromAlgebraicMove "h1a8") `shouldBe` bitRefFromAlgebraicSquareRef "h1"
 
   describe "toSquarePart" $
-    it "Gets the Square for the to part of a compact move" $ do
+    it "Gets the Square for the to part of a compact move" $
     toSquarePart (moveFromAlgebraicMove "h1a8") `shouldBe` bitRefFromAlgebraicSquareRef "a8"
 
   describe "movePieceWithinBitboard" $
@@ -488,11 +519,11 @@ main = hspec $ do
 
   describe "enPassantCapturedPieceSquare" $
     it "Returns the square the captured pawn was on before it was captured en passant" $ do
-    enPassantCapturedPieceSquare (bitRefFromAlgebraicSquareRef "a3") `shouldBe` (bitRefFromAlgebraicSquareRef "a4")
-    enPassantCapturedPieceSquare (bitRefFromAlgebraicSquareRef "a6") `shouldBe` (bitRefFromAlgebraicSquareRef "a5")
+    enPassantCapturedPieceSquare (bitRefFromAlgebraicSquareRef "a3") `shouldBe` bitRefFromAlgebraicSquareRef "a4"
+    enPassantCapturedPieceSquare (bitRefFromAlgebraicSquareRef "a6") `shouldBe` bitRefFromAlgebraicSquareRef "a5"
 
   describe "removePawnIfPromotion" $
-    it "Removes the bit from the pawn bitboard if it has just moved to a promotion rank" $ do
+    it "Removes the bit from the pawn bitboard if it has just moved to a promotion rank" $
     removePawnIfPromotion 0b1000000000000000000000000000000000000000000000000000000000000000 `shouldBe` 0b0000000000000000000000000000000000000000000000000000000000000000
 
   describe "isPromotionSquare" $
@@ -537,28 +568,28 @@ main = hspec $ do
 
   describe "whitePieceValues" $
     it "Returns the value of non-pawn white pieces" $ do
-    whitePieceValues (getPosition "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1") `shouldBe` 
-          (pieceValue Rook * 2) + (pieceValue Bishop * 2) + pieceValue Queen + (pieceValue Knight * 2)
-    whitePieceValues (getPosition "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RN-QK2R w KQkq - 0 1") `shouldBe` 
-          (pieceValue Rook * 2) + pieceValue Queen + pieceValue Knight
+    whitePieceValues (getPosition "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1") `shouldBe`
+          pieceValue Rook * 2 + pieceValue Bishop * 2 + pieceValue Queen + pieceValue Knight * 2
+    whitePieceValues (getPosition "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RN-QK2R w KQkq - 0 1") `shouldBe`
+          pieceValue Rook * 2 + pieceValue Queen + pieceValue Knight
 
   describe "blackPieceValues" $
     it "Returns the value of non-pawn black pieces" $ do
-    blackPieceValues (getPosition "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1") `shouldBe` 
-          (pieceValue Rook * 2) + (pieceValue Bishop * 2) + pieceValue Queen + (pieceValue Knight * 2)
-    blackPieceValues (getPosition "-nbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1") `shouldBe` 
-          pieceValue Rook + (pieceValue Bishop * 2) + pieceValue Queen + (pieceValue Knight * 2)
+    blackPieceValues (getPosition "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1") `shouldBe`
+          pieceValue Rook * 2 + pieceValue Bishop * 2 + pieceValue Queen + pieceValue Knight * 2
+    blackPieceValues (getPosition "-nbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1") `shouldBe`
+          pieceValue Rook + pieceValue Bishop * 2 + pieceValue Queen + pieceValue Knight * 2
 
   describe "friendlyPieceValues" $
     it "Returns the value of non-pawn pieces for the player to move" $ do
-    friendlyPieceValues (getPosition "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1") `shouldBe` 
-          (pieceValue Rook * 2) + (pieceValue Bishop * 2) + pieceValue Queen + (pieceValue Knight * 2)
-    friendlyPieceValues (getPosition "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RN-QK2R w KQkq - 0 1") `shouldBe` 
-          (pieceValue Rook * 2) + pieceValue Queen + pieceValue Knight
-    friendlyPieceValues (getPosition "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR b KQkq - 0 1") `shouldBe` 
-          (pieceValue Rook * 2) + (pieceValue Bishop * 2) + pieceValue Queen + (pieceValue Knight * 2)
-    friendlyPieceValues (getPosition "-nbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR b KQkq - 0 1") `shouldBe` 
-          pieceValue Rook + (pieceValue Bishop * 2) + pieceValue Queen + (pieceValue Knight * 2)
+    friendlyPieceValues (getPosition "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1") `shouldBe`
+          pieceValue Rook * 2 + pieceValue Bishop * 2 + pieceValue Queen + pieceValue Knight * 2
+    friendlyPieceValues (getPosition "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RN-QK2R w KQkq - 0 1") `shouldBe`
+          pieceValue Rook * 2 + pieceValue Queen + pieceValue Knight
+    friendlyPieceValues (getPosition "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR b KQkq - 0 1") `shouldBe`
+          pieceValue Rook * 2 + pieceValue Bishop * 2 + pieceValue Queen + pieceValue Knight * 2
+    friendlyPieceValues (getPosition "-nbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR b KQkq - 0 1") `shouldBe`
+          pieceValue Rook + pieceValue Bishop * 2 + pieceValue Queen + pieceValue Knight * 2
 
   describe "makeMove" $
     it "Makes a move from a position and returns a new position" $ do
@@ -607,16 +638,16 @@ main = hspec $ do
       isCapture position (moveFromAlgebraicMove "c5c6") `shouldBe` False
 
   describe "quiescePositions" $
-    it "returns a list of positions and the move that caused them where the move is a capture" $ do
+    it "returns a list of positions where the move that created them was a capture" $ do
       let position = getPosition "rnbqkbnr/p1p2ppp/8/1pPpp3/4PP2/8/PP1P2PP/RNBQKBNR w KQkq d6 0 1"
-      let qp = quiescePositions position
+      let qp = quiescePositions position False
       length qp `shouldBe` 4
-      qp `shouldBe` [(getPosition "rnbqkbnr/p1p2ppp/8/1pPpP3/4P3/8/PP1P2PP/RNBQKBNR b KQkq - 0 1"),
-                     (getPosition "rnbqkbnr/p1p2ppp/8/1pPPp3/5P2/8/PP1P2PP/RNBQKBNR b KQkq - 0 1"),
-                     (getPosition "rnbqkbnr/p1p2ppp/3P4/1p2p3/4PP2/8/PP1P2PP/RNBQKBNR b KQkq - 0 1"),
-                     (getPosition "rnbqkbnr/p1p2ppp/8/1BPpp3/4PP2/8/PP1P2PP/RNBQK1NR b KQkq - 0 1")
-                     ]
-      quiescePositions (getPosition "rnbqkbn1/ppp4r/5p2/3P4/2P4P/8/PP1P1PP1/RNBQK2R w KQq - 0 1") `shouldBe` []
+      qp `shouldBe` [getPosition "rnbqkbnr/p1p2ppp/3P4/1p2p3/4PP2/8/PP1P2PP/RNBQKBNR b KQkq - 0 1",
+                     getPosition "rnbqkbnr/p1p2ppp/8/1pPPp3/5P2/8/PP1P2PP/RNBQKBNR b KQkq - 0 1",
+                     getPosition "rnbqkbnr/p1p2ppp/8/1pPpP3/4P3/8/PP1P2PP/RNBQKBNR b KQkq - 0 1",
+                     getPosition "rnbqkbnr/p1p2ppp/8/1BPpp3/4PP2/8/PP1P2PP/RNBQK1NR b KQkq - 0 1"
+                    ]
+      quiescePositions (getPosition "rnbqkbn1/ppp4r/5p2/3P4/2P4P/8/PP1P1PP1/RNBQK2R w KQq - 0 1") False `shouldBe` []
 
   describe "hashtable" $
     it "stores and retrieves hashtable values" $ do
@@ -634,10 +665,10 @@ main = hspec $ do
         h' <- H.new
         c <- makeSearchState h' startStats [] 0
         let position = getPosition "rnbqkbnr/ppp3pp/5p2/3PB1N1/2P4P/8/PP1P1PP1/RNBQK2R b KQkq - 0 1"
-        q <- quiesce position -100000 100000 0 c
+        q <- goQuiesce position -100000 100000 0 c
         q `shouldBe` 150
         let position = getPosition "rnbqkbnr/ppp3pp/5p2/3PB1N1/2P4P/8/PP1P1PP1/RNBQK2R w KQkq - 0 1"
-        q <- quiesce position -100000 100000 0 c
+        q <- goQuiesce position -100000 100000 0 c
         q `shouldBe` 200
 
   describe "Perft Test" $

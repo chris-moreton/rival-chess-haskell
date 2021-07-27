@@ -58,6 +58,7 @@ import Search.MoveConstants
       promotionKnightMoveMask,
       promotionQueenMoveMask,
       promotionRookMoveMask )
+import Evaluate.Evaluate ( isCapture )      
 
 {-# INLINE allBitsExceptFriendlyPieces #-}
 allBitsExceptFriendlyPieces :: Position -> Bitboard
@@ -76,24 +77,36 @@ movesFromToSquaresBitboard !fromSquare !toSquares = go (fromSquareMask fromSquar
 {-# INLINE generateKnightMoves #-}
 {-# SCC generateKnightMoves #-}
 generateKnightMoves :: Position -> MoveList
-generateKnightMoves !position = go position (bitboardForMover position Knight) []
+generateKnightMoves !position = generateKnightMovesWithTargets position (allBitsExceptFriendlyPieces position)
+
+{-# INLINE generateKnightMovesWithTargets #-}
+{-# SCC generateKnightMovesWithTargets #-}
+generateKnightMovesWithTargets :: Position -> Bitboard -> MoveList
+generateKnightMovesWithTargets !position validLandingSquares = go position (bitboardForMover position Knight) []
     where
         go :: Position -> Bitboard -> MoveList -> MoveList
         go _ 0 !result = result
         go !position fromSquares !result =
-            go position (clearBit fromSquares fromSquare) (result ++ movesFromToSquaresBitboard fromSquare ((.&.) (knightMovesBitboards fromSquare) (allBitsExceptFriendlyPieces position)))
+            go position (clearBit fromSquares fromSquare) (result ++ movesFromToSquaresBitboard fromSquare ((.&.) (knightMovesBitboards fromSquare) validLandingSquares))
             where !fromSquare = countTrailingZeros fromSquares
 
 {-# INLINE generateKingMoves #-}
 generateKingMoves :: Position -> MoveList
-generateKingMoves !position =
-    movesFromToSquaresBitboard kingSquare ((.&.) (kingMovesBitboards kingSquare) (allBitsExceptFriendlyPieces position))
+generateKingMoves !position = generateKingMovesWithTargets position (allBitsExceptFriendlyPieces position)
+
+{-# INLINE generateKingMovesWithTargets #-}
+generateKingMovesWithTargets :: Position -> Bitboard -> MoveList
+generateKingMovesWithTargets !position validLandingSquares =
+    movesFromToSquaresBitboard kingSquare ((.&.) (kingMovesBitboards kingSquare) validLandingSquares)
         where !kingSquare = countTrailingZeros (bitboardForMover position King)
 
 generateSliderMoves :: Position -> Piece -> MoveList
-generateSliderMoves !position !piece = 
-    go bitboard []
-    where !magicVars = if piece == Bishop then magicBishopVars else magicRookVars
+generateSliderMoves !position !piece = generateSliderMovesWithTargets position piece (allBitsExceptFriendlyPieces position)
+          
+generateSliderMovesWithTargets :: Position -> Piece -> Bitboard -> MoveList
+generateSliderMovesWithTargets position piece validLandingSquares = go bitboard [] 
+    where
+          !magicVars = if piece == Bishop then magicBishopVars else magicRookVars
           !bitboard = sliderBitboardForColour position (mover position) piece
 
           go :: Bitboard -> MoveList -> MoveList
@@ -106,7 +119,7 @@ generateSliderMoves !position !piece =
                     !occupancy = (.&.) (allPiecesBitboard position) maskMagic
                     !rawIndex = fromIntegral (occupancy * numberMagic) :: Word
                     !toSquaresMagicIndex = fromIntegral(shiftR rawIndex shiftMagic) :: Int
-                    !toSquaresBitboard = (.&.) (magic magicVars fromSquare toSquaresMagicIndex) (allBitsExceptFriendlyPieces position)
+                    !toSquaresBitboard = (.&.) (magic magicVars fromSquare toSquaresMagicIndex) validLandingSquares
                     !fromSquare = countTrailingZeros fromSquares
                     !thisResult = recurGenerateSliderMovesWithToSquares (fromSquareMask fromSquare) toSquaresBitboard []
 
@@ -318,3 +331,12 @@ moves !position = generatePawnMoves position ++
                   generateSliderMoves position Bishop ++ 
                   generateKingMoves position
 
+{-# INLINE captureMoves #-}
+captureMoves :: Position -> MoveList
+captureMoves !position = 
+                  filter (isCapture position) (generatePawnMoves position) ++ 
+                  generateKnightMovesWithTargets position (enemyBitboard position) ++ 
+                  generateSliderMovesWithTargets position Rook (enemyBitboard position) ++ 
+                  generateSliderMovesWithTargets position Bishop (enemyBitboard position) ++ 
+                  generateKingMovesWithTargets position (enemyBitboard position)
+                  

@@ -9,7 +9,7 @@ import Types
       MoveScore(..),
       Position(halfMoves, mover) )
 import Alias ( Move, Bitboard, MoveList, Path )
-import Search.MoveGenerator (moves,isCheck)
+import Search.MoveGenerator (moves,isCheck,captureMoves)
 import Util.Utils ( timeMillis, toSquarePart )
 import Text.Printf ()
 import Util.Fen ( algebraicMoveFromMove )
@@ -31,19 +31,18 @@ goQuiesce !position !low !high !ply !searchState = quiesce position low high ply
 quiesce :: Position -> Int -> Int -> Int -> SearchState -> Int -> IO Int
 quiesce position _ _ 100 searchState _ = do
     incNodes searchState
-    return (evaluate position)
+    return $ evaluate position
 quiesce !position !low !high !ply !searchState !maxChecks = do
     incNodes searchState
     if null notInCheckPositions
-        then return (if inCheck then ply-10000 else newLow)
-        else highestQuiesceMove notInCheckPositions newLow high
+        then return (if inCheck then ply-10000 else startLow)
+        else highestQuiesceMove notInCheckPositions startLow high
     where
         eval = evaluate position
         inCheck = maxChecks > 0 && isCheck position (mover position)
-        newLow = if inCheck then low else max eval low
-        qp = quiescePositions position inCheck
-        notInCheckPositions = filter (\p -> not (isCheck p $ mover position)) qp
-        newMaxChecks = if inCheck then maxChecks - 1 else maxChecks
+        startLow = if inCheck then low else max eval low
+        notInCheckPositions = quiescePositions position inCheck
+        newMaxChecks = if inCheck then maxChecks-1 else maxChecks
         
         highestQuiesceMove :: [Position] -> Int -> Int -> IO Int
         highestQuiesceMove [] low _ = return low
@@ -56,6 +55,11 @@ quiesce !position !low !high !ply !searchState !maxChecks = do
 
 {-# INLINE quiescePositions #-}
 quiescePositions :: Position -> Bool -> [Position]
-quiescePositions position inCheck = do
-    let m = moves position
-    map (makeMove position) $ if inCheck then m else filter (isCapture position) m
+quiescePositions position inCheck = 
+    if null ps && inCheck
+        then take 1 $ filter (\p -> not (isCheck p $ mover position)) $ map (makeMove position) (moves position)
+        else ps
+    where 
+        ps = filter (\p -> not (isCheck p $ mover position)) $ map (makeMove position) (sortMoves position 0 $ captureMoves position)
+
+            

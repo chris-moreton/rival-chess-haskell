@@ -7,7 +7,7 @@ import Types
     ( Bound(..),
       HashEntry(..),
       MoveScore(..),
-      Position(halfMoves, mover) )
+      Position(halfMoves, mover, whiteKingBitboard,blackKingBitboard) )
 import Alias ( Move, Bitboard, MoveList, Path )
 import Search.MoveGenerator (moves,isCheck)
 import Util.Utils ( timeMillis, toSquarePart )
@@ -23,6 +23,7 @@ import State.State ( incNodes, updateHashTable, SearchState(..), calcHashIndex, 
 import qualified Data.HashTable.IO as H
 import Util.Zobrist ( zobrist )
 import Evaluate.Evaluate ( evaluate, isCapture, scoreMove )
+import Util.Bitboards ( exactlyOneBitSet )
 
 {-# INLINE canLeadToDrawByRepetition #-}
 canLeadToDrawByRepetition :: Position -> [Position] -> Bool
@@ -61,5 +62,5 @@ hashBound depth lockVal he =
 newPositions :: Position -> Move -> [(Position,Move)]
 newPositions position hashMove = map (\move -> (makeMove position move,move)) (sortMoves position hashMove (moves position))
 
-
-
+kingCaptured :: Position -> Bool
+kingCaptured position = exactlyOneBitSet (whiteKingBitboard  position .|. blackKingBitboard position)
