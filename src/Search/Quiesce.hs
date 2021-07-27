@@ -36,7 +36,7 @@ quiesce !position !low !high !ply !searchState !maxChecks = do
     incNodes searchState
     if null notInCheckPositions
         then return (if inCheck then ply-10000 else newLow)
-        else highestQuiesceMove notInCheckPositions newLow high ply searchState
+        else highestQuiesceMove notInCheckPositions newLow high
     where
         eval = evaluate position
         inCheck = maxChecks > 0 && isCheck position (mover position)
@@ -45,14 +45,14 @@ quiesce !position !low !high !ply !searchState !maxChecks = do
         notInCheckPositions = filter (\p -> not (isCheck p $ mover position)) qp
         newMaxChecks = if inCheck then maxChecks - 1 else maxChecks
         
-        highestQuiesceMove :: [Position] -> Int -> Int -> Int -> SearchState -> IO Int
-        highestQuiesceMove [] low _ _ _ = return low
-        highestQuiesceMove !notInCheckPositions !low !high !depth !searchState = do
-            score <- quiesce (head notInCheckPositions) (-high) (-low) (depth+1) searchState newMaxChecks
+        highestQuiesceMove :: [Position] -> Int -> Int -> IO Int
+        highestQuiesceMove [] low _ = return low
+        highestQuiesceMove !notInCheckPositions !low !high = do
+            score <- quiesce (head notInCheckPositions) (-high) (-low) (ply+1) searchState newMaxChecks
             let negatedScore = -score
             if negatedScore >= high
                 then return negatedScore
-                else highestQuiesceMove (tail notInCheckPositions) (if negatedScore > low then negatedScore else low) high depth searchState
+                else highestQuiesceMove (tail notInCheckPositions) (if negatedScore > low then negatedScore else low) high
 
 {-# INLINE quiescePositions #-}
 quiescePositions :: Position -> Bool -> [Position]
