@@ -22,34 +22,40 @@ import Data.Maybe ( isJust, fromJust )
 import State.State ( incNodes, updateHashTable, SearchState(..), calcHashIndex, setPv )
 import qualified Data.HashTable.IO as H
 import Util.Zobrist ( zobrist )
+import Search.SearchHelper ( sortMoves )
 import Evaluate.Evaluate ( evaluate, isCapture, scoreMove )
 
-quiesce :: Position -> Int -> Int -> Int -> SearchState -> IO Int
-quiesce position _ _ 10 searchState = do
+goQuiesce :: Position -> Int -> Int -> Int -> SearchState -> IO Int
+goQuiesce !position !low !high !ply !searchState = quiesce position low high ply searchState 1
+
+quiesce :: Position -> Int -> Int -> Int -> SearchState -> Int -> IO Int
+quiesce position _ _ 100 searchState _ = do
     incNodes searchState
     return (evaluate position)
-quiesce !position !low !high !ply !searchState = do
+quiesce !position !low !high !ply !searchState !maxChecks = do
     incNodes searchState
     if null notInCheckPositions
         then return (if inCheck then ply-10000 else newLow)
         else highestQuiesceMove notInCheckPositions newLow high ply searchState
     where
         eval = evaluate position
-        inCheck = isCheck position (mover position)
+        inCheck = maxChecks > 0 && isCheck position (mover position)
         newLow = if inCheck then low else max eval low
-        notInCheckPositions = filter (\p -> not (isCheck p $ mover position)) $ quiescePositions position
+        qp = quiescePositions position inCheck
+        notInCheckPositions = filter (\p -> not (isCheck p $ mover position)) qp
+        newMaxChecks = if inCheck then maxChecks - 1 else maxChecks
         
         highestQuiesceMove :: [Position] -> Int -> Int -> Int -> SearchState -> IO Int
         highestQuiesceMove [] low _ _ _ = return low
         highestQuiesceMove !notInCheckPositions !low !high !depth !searchState = do
-            score <- quiesce (head notInCheckPositions) (-high) (-low) (depth+1) searchState
+            score <- quiesce (head notInCheckPositions) (-high) (-low) (depth+1) searchState newMaxChecks
             let negatedScore = -score
             if negatedScore >= high
                 then return negatedScore
                 else highestQuiesceMove (tail notInCheckPositions) (if negatedScore > low then negatedScore else low) high depth searchState
 
 {-# INLINE quiescePositions #-}
-quiescePositions :: Position -> [Position]
-quiescePositions position = do
+quiescePositions :: Position -> Bool -> [Position]
+quiescePositions position inCheck = do
     let m = moves position
-    map (makeMove position) $ if isCheck position (mover position) then m else filter (isCapture position) m
+    map (makeMove position) $ if inCheck then m else filter (isCapture position) m
