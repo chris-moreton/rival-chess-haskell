@@ -26,7 +26,7 @@ import Search.SearchHelper ( sortMoves )
 import Evaluate.Evaluate ( evaluate, isCapture, scoreMove )
 
 goQuiesce :: Position -> Int -> Int -> Int -> SearchState -> IO Int
-goQuiesce !position !low !high !ply !searchState = quiesce position low high ply searchState 1
+goQuiesce !position !low !high !ply !searchState = quiesce position low high ply searchState 2
 
 quiesce :: Position -> Int -> Int -> Int -> SearchState -> Int -> IO Int
 quiesce position _ _ 100 searchState _ = do
