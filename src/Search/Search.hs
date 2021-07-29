@@ -82,9 +82,7 @@ searchZero positions depth endTime rootBest searchState = do
                         else highestRatedMoveZero ps positions low high depth endTime best
 
 search :: Position -> Move -> Int -> Int -> Int -> Int -> SearchState -> Int -> Bool -> IO MoveScore
-search !inPosition !inMove 0 !low !high !endTime !searchState !ply _ = do
-    q <- goQuiesce inPosition low high ply searchState
-    return (mkMs (q,[]))
+search !inPosition !inMove 0 !low !high !endTime !searchState !ply _ = goQuiesce inPosition low high ply searchState
 search !inPosition !inMove !depth !low !high !endTime !searchState !ply !isOnNullMove = do
     let hpos = zobrist inPosition
     let hashIndex = calcHashIndex hpos
@@ -103,13 +101,11 @@ search !inPosition !inMove !depth !low !high !endTime !searchState !ply !isOnNul
                 Upper -> do
                     incHashUpper searchState
                     main inPosition hashTableMove depth low (score (fromJust hentry)) endTime hpos ply isOnNullMove
-        Nothing ->
-            main inPosition 0 depth low high endTime hpos ply isOnNullMove
+                Quiesce -> main inPosition 0 depth low high endTime hpos ply isOnNullMove
+        Nothing -> main inPosition 0 depth low high endTime hpos ply isOnNullMove
     where            
         main :: Position -> Move -> Int -> Int -> Int -> Int -> Int -> Int -> Bool -> IO MoveScore
-        main !inPosition _ 0 !low !high !endTime _ !ply _ = do
-            q <- goQuiesce inPosition low high ply searchState
-            return (mkMs (q,[]))
+        main !inPosition _ 0 !low !high !endTime _ !ply _ = goQuiesce inPosition low high ply searchState
         main !inPosition !hashMove !depth !low !high !endTime !hpos !ply !isOnNullMove = do
             incNodes searchState
             if halfMoves inPosition == 50

@@ -175,7 +175,7 @@ main = hspec $ do
 
   describe "movesFromToSquares" $
     it "Creates a list of moves from a fromSquare and a list of toSquares" $
-    sort ((movesFromToSquaresBitboard 11 (bit 22 .|. (bit 33 .|. bit 44)))) `shouldBe` [720918,720929,720940]
+    sort (movesFromToSquaresBitboard 11 (bit 22 .|. (bit 33 .|. bit 44))) `shouldBe` [720918,720929,720940]
 
   describe "generateKnightMoves" $
     it "Generates knight moves from a given FEN (ignoring checks)" $ do
@@ -293,27 +293,13 @@ main = hspec $ do
     sort (map algebraicMoveFromMove (generateCastleMoves position))
       `shouldBe` ["e1c1"]
     let position = getPosition "n5k1/1P2P1n1/1n5p/P1pP4/5R2/1q3B2/4Nr1P/R3K2R w Q - 0 1"
-    sort (map algebraicMoveFromMove (generateCastleMoves position))
-      `shouldBe` []
-    sort (map algebraicMoveFromMove (generateCastleMoves position))
-      `shouldBe` []
-    sort (map algebraicMoveFromMove (generateCastleMoves position))
-      `shouldBe` []
-    sort (map algebraicMoveFromMove (generateCastleMoves position))
-      `shouldBe` []
+    sort (map algebraicMoveFromMove (generateCastleMoves position)) `shouldBe` []
     let position = getPosition "r3k1R1/1P2P1n1/1n2q2p/P1pP4/5R2/5B2/1r2N2P/R3K1r1 b Q - 0 1"
     sort (map algebraicMoveFromMove (generateCastleMoves position)) `shouldBe` []
     let position = getPosition "r3k2r/1P2P1n1/1n2q2p/P1pP4/5R2/5B2/1r2N2P/R3K2R b Q - 0 1"
     sort (map algebraicMoveFromMove (generateCastleMoves position)) `shouldBe` []
     let position = getPosition "r3k2r/1P2PRn1/1n2q2p/P1pP4/8/5B2/1r2N2P/R3K2R b Q - 0 1"
-    sort (map algebraicMoveFromMove (generateCastleMoves position))
-      `shouldBe` []
-    sort (map algebraicMoveFromMove (generateCastleMoves position))
-      `shouldBe` []
-    sort (map algebraicMoveFromMove (generateCastleMoves position))
-      `shouldBe` []
-    sort (map algebraicMoveFromMove (generateCastleMoves position))
-      `shouldBe` []
+    sort (map algebraicMoveFromMove (generateCastleMoves position)) `shouldBe` []
     let position = getPosition "r3k2r/1P3Rn1/1n2q2p/P1pP2P1/8/5B2/1r2N2P/R3K2R b qQ - 0 1"
     sort (map algebraicMoveFromMove (generateCastleMoves position))
       `shouldBe` ["e8c8"]
@@ -642,10 +628,11 @@ main = hspec $ do
       let position = getPosition "rnbqkbnr/p1p2ppp/8/1pPpp3/4PP2/8/PP1P2PP/RNBQKBNR w KQkq d6 0 1"
       let qp = quiescePositions position False
       length qp `shouldBe` 4
-      qp `shouldBe` [getPosition "rnbqkbnr/p1p2ppp/3P4/1p2p3/4PP2/8/PP1P2PP/RNBQKBNR b KQkq - 0 1",
-                     getPosition "rnbqkbnr/p1p2ppp/8/1pPPp3/5P2/8/PP1P2PP/RNBQKBNR b KQkq - 0 1",
-                     getPosition "rnbqkbnr/p1p2ppp/8/1pPpP3/4P3/8/PP1P2PP/RNBQKBNR b KQkq - 0 1",
-                     getPosition "rnbqkbnr/p1p2ppp/8/1BPpp3/4PP2/8/PP1P2PP/RNBQK1NR b KQkq - 0 1"
+      map (\pm -> (fst pm, algebraicMoveFromMove $ snd pm)) qp `shouldBe` [
+                     (getPosition "rnbqkbnr/p1p2ppp/3P4/1p2p3/4PP2/8/PP1P2PP/RNBQKBNR b KQkq - 0 1","c5d6"),
+                     (getPosition "rnbqkbnr/p1p2ppp/8/1pPPp3/5P2/8/PP1P2PP/RNBQKBNR b KQkq - 0 1","e4d5"),
+                     (getPosition "rnbqkbnr/p1p2ppp/8/1pPpP3/4P3/8/PP1P2PP/RNBQKBNR b KQkq - 0 1","f4e5"),
+                     (getPosition "rnbqkbnr/p1p2ppp/8/1BPpp3/4PP2/8/PP1P2PP/RNBQK1NR b KQkq - 0 1","f1b5")
                     ]
       quiescePositions (getPosition "rnbqkbn1/ppp4r/5p2/3P4/2P4P/8/PP1P1PP1/RNBQK2R w KQq - 0 1") False `shouldBe` []
 
@@ -666,10 +653,10 @@ main = hspec $ do
         c <- makeSearchState h' startStats [] 0
         let position = getPosition "rnbqkbnr/ppp3pp/5p2/3PB1N1/2P4P/8/PP1P1PP1/RNBQK2R b KQkq - 0 1"
         q <- goQuiesce position -100000 100000 0 c
-        q `shouldBe` 150
+        msScore q `shouldBe` 150
         let position = getPosition "rnbqkbnr/ppp3pp/5p2/3PB1N1/2P4P/8/PP1P1PP1/RNBQK2R w KQkq - 0 1"
         q <- goQuiesce position -100000 100000 0 c
-        q `shouldBe` 200
+        msScore q `shouldBe` 200
 
   describe "Perft Test" $
    it "Returns the total number of moves in a full move tree of a given depth with a given position as its head" $ do

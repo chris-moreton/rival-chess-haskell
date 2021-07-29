@@ -52,13 +52,14 @@ movingPiece position from
 makeAlgebraicMoves :: Position -> [String] -> Position
 makeAlgebraicMoves = foldl (\ position move -> makeMove position (moveFromAlgebraicMove move))    
 
+{-# INLINE makeMove #-}
 makeMove :: Position -> Move -> Position
 makeMove !position !move =
     if isSimpleMove position move from to piece
         then makeSimpleMove position move from piece
         else makeComplexMove position move
-    where !from = fromSquarePart move
-          !to = toSquarePart move
+    where !from  = fromSquarePart move
+          !to    = toSquarePart move
           !piece = movingPiece position from
 
 
