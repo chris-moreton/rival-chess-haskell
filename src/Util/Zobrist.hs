@@ -46,24 +46,24 @@ enPassantZobristValue = 6687912736785776762
 zobrist :: Position -> Int
 zobrist p = if enPassantSquare p == 0 then z else xor z enPassantZobristValue
     where 
-        z = go p 0 startZobristValue `xor` (if mover p == White then whiteMoveZobristValue else blackMoverZobristValue)
+        z = go 0 startZobristValue `xor` (if mover p == White then whiteMoveZobristValue else blackMoverZobristValue)
         
-        go :: Position -> Int -> Int -> Int
-        go _ 64 result = result
-        go !p !square !result
-            | isNothing piece = go p sp1 result
-            | piece == Just (White,Pawn) = go p sp1 (xor result (whitePawnZobristSquares V.! square))
-            | piece == Just (White,Knight) = go p sp1 (xor result (whiteKnightZobristSquares V.! square))
-            | piece == Just (White,Bishop) = go p sp1 (xor result (whiteBishopZobristSquares V.! square))
-            | piece == Just (White,Rook) = go p sp1 (xor result (whiteRookZobristSquares V.! square))
-            | piece == Just (White,Queen) = go p sp1 (xor result (whiteQueenZobristSquares V.! square))
-            | piece == Just (White,King) = go p sp1 (xor result (whiteKingZobristSquares V.! square))
-            | piece == Just (Black,Pawn) = go p sp1 (xor result (blackPawnZobristSquares V.! square))
-            | piece == Just (Black,Knight) = go p sp1 (xor result (blackKnightZobristSquares V.! square))
-            | piece == Just (Black,Bishop) = go p sp1 (xor result (blackBishopZobristSquares V.! square))
-            | piece == Just (Black,Rook) = go p sp1 (xor result (blackRookZobristSquares V.! square))
-            | piece == Just (Black,Queen) = go p sp1 (xor result (blackQueenZobristSquares V.! square))
-            | piece == Just (Black,King) = go p sp1 (xor result (blackKingZobristSquares V.! square))
+        go :: Int -> Int -> Int
+        go 64 result = result
+        go !square !result
+            | isNothing piece = go sp1 result
+            | piece == Just (White,Pawn) = go sp1 (xor result (whitePawnZobristSquares V.! square))
+            | piece == Just (White,Knight) = go sp1 (xor result (whiteKnightZobristSquares V.! square))
+            | piece == Just (White,Bishop) = go sp1 (xor result (whiteBishopZobristSquares V.! square))
+            | piece == Just (White,Rook) = go sp1 (xor result (whiteRookZobristSquares V.! square))
+            | piece == Just (White,Queen) = go sp1 (xor result (whiteQueenZobristSquares V.! square))
+            | piece == Just (White,King) = go sp1 (xor result (whiteKingZobristSquares V.! square))
+            | piece == Just (Black,Pawn) = go sp1 (xor result (blackPawnZobristSquares V.! square))
+            | piece == Just (Black,Knight) = go sp1 (xor result (blackKnightZobristSquares V.! square))
+            | piece == Just (Black,Bishop) = go sp1 (xor result (blackBishopZobristSquares V.! square))
+            | piece == Just (Black,Rook) = go sp1 (xor result (blackRookZobristSquares V.! square))
+            | piece == Just (Black,Queen) = go sp1 (xor result (blackQueenZobristSquares V.! square))
+            | piece == Just (Black,King) = go sp1 (xor result (blackKingZobristSquares V.! square))
             where piece = pieceOnSquare p square
                   sp1 = square + 1
 

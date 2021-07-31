@@ -14,13 +14,13 @@ import Types
 import Alias ( Bitboard )
 
 bitString :: Bitboard -> String
-bitString bitboard = recurBitString bitboard 63 ""
-
-recurBitString :: Bitboard -> Int -> String -> String
-recurBitString _ (-1) result = result
-recurBitString bitboard square result = do
-  let bitMask = bit square
-  recurBitString (xor bitboard bitMask) (square - 1) (result ++ if bitMask == (.&.) bitMask bitboard then "1" else "0")
+bitString bitboard = go bitboard 63 ""
+  where
+    go :: Bitboard -> Int -> String -> String
+    go _ (-1) result = result
+    go bitboard square result = do
+      let bitMask = bit square
+      go (xor bitboard bitMask) (square - 1) (result ++ if bitMask == (.&.) bitMask bitboard then "1" else "0")
 
 enemyBitboard :: Position -> Bitboard
 {-# INLINE enemyBitboard #-}

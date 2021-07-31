@@ -14,17 +14,16 @@ import Types
                blackBishopBitboard, whiteRookBitboard, blackRookBitboard,
                whiteQueenBitboard, blackQueenBitboard, whiteKingBitboard, blackKingBitboard) )
 import Alias ( Bitboard, Move )
-import Util.Utils ( toSquarePart )
+import Util.Utils ( toSquarePart, fromSquarePart )
 import Util.Bitboards ( exactlyOneBitSet )
 import Data.Bits ( Bits(popCount), Bits(testBit), Bits(bit), (.|.), (.&.), clearBit, shiftL )
 import Evaluate.Attacks ( allAttacks )
 
 {-# INLINE evaluate #-}
 evaluate :: Position -> Int
-evaluate !position 
+evaluate !position
     | onlyKingsRemain position = 0
-    | otherwise = do
-        let attacks = allAttacks position
+    | otherwise =
         material position (mover position)
 
 onlyKingsRemain :: Position -> Bool
@@ -90,7 +89,7 @@ blackPieceValues !position =
     popCount (blackQueenBitboard position) * pieceValue Queen
 
 {-# INLINE friendlyPieceValues #-}
-friendlyPieceValues :: Position -> Int 
+friendlyPieceValues :: Position -> Int
 friendlyPieceValues !position
     | m == White = whitePieceValues position
     | m == Black = blackPieceValues position
@@ -99,10 +98,11 @@ friendlyPieceValues !position
 {-# INLINE isCapture #-}
 isCapture :: Position -> Move -> Bool
 isCapture !position !move
-    | m == White = testBit (blackPiecesBitboard position) t || ep == t
-    | otherwise  = testBit (whitePiecesBitboard position) t || ep == t
+    | m == White = testBit (blackPiecesBitboard position) t || ep == t && testBit (whitePawnBitboard position) f
+    | otherwise  = testBit (whitePiecesBitboard position) t || ep == t && testBit (blackPawnBitboard position) f
     where m  = mover position
           t  = toSquarePart move
+          f  = fromSquarePart move
           ep = enPassantSquare position
 
 {-# INLINE capturePiece #-}
@@ -143,4 +143,4 @@ pieceOnSquare !position !square
     | testBit (blackQueenBitboard position) square = Just (Black,Queen)
     | testBit (whiteKingBitboard position) square = Just (White,King)
     | testBit (blackKingBitboard position) square = Just (Black,King)
-    | otherwise = Nothing      
+    | otherwise = Nothing
