@@ -7,7 +7,8 @@ import Types
     ( Bound(..),
       HashEntry(..),
       MoveScore(..),
-      Position(halfMoves, mover) )
+      Position(halfMoves, mover),
+      HashEntry )
 import Alias ( Move, Bitboard, MoveList, Path )
 import Search.MoveGenerator (moves,isCheck,captureMoves)
 import Util.Utils ( timeMillis, toSquarePart )
@@ -17,13 +18,21 @@ import Search.MakeMove ( makeMove )
 import Data.Bits ( Bits(popCount), Bits(testBit), Bits(bit), (.|.), (.&.), clearBit, shiftL )
 import Control.Monad ()
 import System.Exit ()
+import State.State
 import Data.Sort ( sortBy )
 import Data.Maybe ( isJust, fromJust )
 import State.State ( incNodes, updateHashTable, SearchState(..), calcHashIndex, setPv )
 import qualified Data.HashTable.IO as H
 import Util.Zobrist ( zobrist )
-import Search.SearchHelper ( sortMoves )
+import Search.SearchHelper ( sortMoves, mkMs )
 import Evaluate.Evaluate ( evaluate, isCapture, scoreMove )
+
+{-# INLINE hashMoveQ #-}
+hashMoveQ :: Int -> Maybe HashEntry -> Maybe Bound
+hashMoveQ lockVal he =
+     case he of
+         Just x -> if lock x == lockVal && bound x == Quiesce then return (bound x) else Nothing
+         _      -> Nothing
 
 goQuiesce :: Position -> Int -> Int -> Int -> SearchState -> IO MoveScore
 goQuiesce !position !low !high !ply !searchState = quiesce position low high ply searchState 2
@@ -38,11 +47,22 @@ quiesce !position !low !high !ply !searchState !maxChecks = do
         then return MoveScore { msScore=if inCheck then ply-10000 else startLow, msPath=[], msBound=Exact }
         else do
             let hpos = zobrist position
-            let thisM = snd (head notInCheckPositions)
-            let best = MoveScore { msScore=startLow, msBound=Upper, msPath = [thisM] }
-            hqm <- highestQuiesceMove notInCheckPositions startLow high best
-            updateHashTable hpos HashEntry { score = msScore hqm, hePath = msPath hqm, height = 0, bound = Quiesce, lock = hpos } searchState
-            return hqm
+            let hashIndex = calcHashIndex hpos
+            hentry <- H.lookup (hashTable searchState) hashIndex
+            let hashTablePath = hePath (fromJust hentry)
+            case hashMoveQ hpos hentry of
+                Just hb -> do
+                    let hashTableMove = head hashTablePath
+                    case hb of
+                        Quiesce -> do
+                            incHashQuiesce searchState
+                            return MoveScore { msScore=score (fromJust hentry), msBound=Quiesce, msPath=hashTablePath }
+                Nothing -> do
+                    let thisM = snd (head notInCheckPositions)
+                    let best = MoveScore { msScore=startLow, msBound=Upper, msPath = [thisM] }
+                    hqm <- highestQuiesceMove notInCheckPositions startLow high best
+                    updateHashTable hpos HashEntry { score = msScore hqm, hePath = msPath hqm, height = 0, bound = Quiesce, lock = hpos } searchState
+                    return hqm
     where
         eval = evaluate position
         inCheck = maxChecks > 0 && isCheck position (mover position)
