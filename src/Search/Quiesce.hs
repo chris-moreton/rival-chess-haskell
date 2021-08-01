@@ -27,13 +27,6 @@ import Util.Zobrist ( zobrist )
 import Search.SearchHelper ( sortMoves, mkMs )
 import Evaluate.Evaluate ( evaluate, isCapture, scoreMove )
 
-{-# INLINE hashMoveQ #-}
-hashMoveQ :: Int -> Maybe HashEntry -> Maybe Bound
-hashMoveQ lockVal he =
-     case he of
-         Just x -> if lock x == lockVal && bound x == Quiesce then return (bound x) else Nothing
-         _      -> Nothing
-
 goQuiesce :: Position -> Int -> Int -> Int -> SearchState -> IO MoveScore
 goQuiesce !position !low !high !ply !searchState = quiesce position low high ply searchState 2
 
@@ -46,23 +39,9 @@ quiesce !position !low !high !ply !searchState !maxChecks = do
     if null notInCheckPositions
         then return MoveScore { msScore=if inCheck then ply-10000 else startLow, msPath=[], msBound=Exact }
         else do
-            let hpos = zobrist position
-            let hashIndex = calcHashIndex hpos
-            hentry <- H.lookup (hashTable searchState) hashIndex
-            let hashTablePath = hePath (fromJust hentry)
-            case hashMoveQ hpos hentry of
-                Just hb -> do
-                    let hashTableMove = head hashTablePath
-                    case hb of
-                        Quiesce -> do
-                            incHashQuiesce searchState
-                            return MoveScore { msScore=score (fromJust hentry), msBound=Quiesce, msPath=hashTablePath }
-                Nothing -> do
-                    let thisM = snd (head notInCheckPositions)
-                    let best = MoveScore { msScore=startLow, msBound=Upper, msPath = [thisM] }
-                    hqm <- highestQuiesceMove notInCheckPositions startLow high best
-                    updateHashTable hpos HashEntry { score = msScore hqm, hePath = msPath hqm, height = 0, bound = Quiesce, lock = hpos } searchState
-                    return hqm
+            let thisM = snd (head notInCheckPositions)
+            let best = MoveScore { msScore=startLow, msBound=Upper, msPath = [thisM] }
+            highestQuiesceMove notInCheckPositions startLow high best
     where
         eval = evaluate position
         inCheck = maxChecks > 0 && isCheck position (mover position)
@@ -89,7 +68,7 @@ quiesce !position !low !high !ply !searchState !maxChecks = do
 quiescePositions :: Position -> Bool -> [(Position,Move)]
 quiescePositions position inCheck =
     if null ps && inCheck
-        then take 1 $ filter (\(p,m) -> not (isCheck p $ mover position)) $ map (\m -> (makeMove position m, m)) (moves position)
+        then filter (\(p,m) -> not (isCheck p $ mover position)) $ map (\m -> (makeMove position m, m)) (moves position)
         else ps
     where
         ps = filter (\(p,m) -> not (isCheck p $ mover position)) $ map (\m -> (makeMove position m, m)) (sortMoves position 0 $ captureMoves position)
