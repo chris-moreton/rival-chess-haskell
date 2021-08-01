@@ -315,7 +315,7 @@ isSquareAttackedBy !position !attackedSquare White =
 
 isSquareAttackedBy !position !attackedSquare Black =
   attackedByRook || attackedByBishop || attackedByKing || attackedByPawn || attackedByKnight
-  where allPieces       = allPiecesBitboard position
+  where allPieces        = allPiecesBitboard position
         attackedByPawn   = isSquareAttackedByAnyPawn (blackPawnBitboard position) (pawnMovesCaptureOfColour White attackedSquare) attackedSquare
         attackedByKnight = isSquareAttackedByAnyKnight (blackKnightBitboard position) attackedSquare
         attackedByRook   = isSquareAttackedByAnyRook allPieces (rookMovePiecesBitboard position Black) attackedSquare

@@ -106,7 +106,7 @@ search !inPosition !inMove !depth !low !high !endTime !searchState !ply !isOnNul
     where            
         main :: Position -> Move -> Int -> Int -> Int -> Int -> Int -> Int -> Bool -> IO MoveScore
         main !inPosition _ 0 !low !high !endTime _ !ply _ = goQuiesce inPosition low high ply searchState
-        main !inPosition !hashMove !depth !low !high !endTime !hpos !ply !isOnNullMove = do
+        main !inPosition hashMove !depth !low !high !endTime hpos !ply !isOnNullMove = do
             incNodes searchState
             if halfMoves inPosition == 50
                 then return (mkMs (0, []))
@@ -145,7 +145,7 @@ search !inPosition !inMove !depth !low !high !endTime !searchState !ply !isOnNul
 
         moveLoop :: [(Position,Move)] -> Int -> Int -> Int -> Int -> MoveScore -> Int -> Bool -> IO MoveScore
         moveLoop [] _ _ _ _ best _ _ = return best
-        moveLoop !notInCheckPositions !low !high !depth !endTime !best !ply !isOnNullMove = do
+        moveLoop notInCheckPositions !low !high !depth !endTime best !ply !isOnNullMove = do
             let thisPM = head notInCheckPositions
             let thisM = snd thisPM
             ms <- uncurry search thisPM (depth-1) (-high) (-low) endTime searchState (ply+1) isOnNullMove

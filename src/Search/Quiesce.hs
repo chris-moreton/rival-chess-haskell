@@ -40,7 +40,7 @@ quiesce !position !low !high !ply !searchState !maxChecks = do
         then return MoveScore { msScore=if inCheck then ply-10000 else startLow, msPath=[], msBound=Exact }
         else do
             let thisM = snd (head notInCheckPositions)
-            let best = MoveScore { msScore=startLow, msBound=Upper, msPath = [thisM] }
+            let best = MoveScore { msScore=startLow, msBound=Upper, msPath = [] }
             highestQuiesceMove notInCheckPositions startLow high best
     where
         eval = evaluate position
@@ -51,7 +51,7 @@ quiesce !position !low !high !ply !searchState !maxChecks = do
 
         highestQuiesceMove :: [(Position,Move)] -> Int -> Int -> MoveScore -> IO MoveScore
         highestQuiesceMove [] _ _ best = return best
-        highestQuiesceMove !notInCheckPositions !low !high best = do
+        highestQuiesceMove notInCheckPositions !low !high best = do
             let (thisP,thisM) = head notInCheckPositions
             ms <- quiesce thisP (-high) (-low) (ply+1) searchState newMaxChecks
             let negatedScore = -(msScore ms)
