@@ -5,7 +5,6 @@ module Search.Perft where
 import Types ( Position(mover) )
 import Search.MakeMove ( makeMove )
 import Search.MoveGenerator ( isCheck, moves )
-import Control.DeepSeq ()
 import Control.Parallel.Strategies
     ( parList, rdeepseq, withStrategy )
 

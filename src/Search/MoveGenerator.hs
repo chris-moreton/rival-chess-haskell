@@ -75,12 +75,10 @@ movesFromToSquaresBitboard !fromSquare !toSquares = go (fromSquareMask fromSquar
             where !square = countTrailingZeros toSquares
 
 {-# INLINE generateKnightMoves #-}
-{-# SCC generateKnightMoves #-}
 generateKnightMoves :: Position -> MoveList
 generateKnightMoves !position = generateKnightMovesWithTargets position (allBitsExceptFriendlyPieces position)
 
 {-# INLINE generateKnightMovesWithTargets #-}
-{-# SCC generateKnightMovesWithTargets #-}
 generateKnightMovesWithTargets :: Position -> Bitboard -> MoveList
 generateKnightMovesWithTargets !position validLandingSquares = go position (bitboardForMover position Knight) []
     where

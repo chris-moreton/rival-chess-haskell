@@ -26,6 +26,8 @@ import qualified Data.HashTable.IO as H
 import Util.Zobrist ( zobrist )
 import Search.SearchHelper ( sortMoves, mkMs )
 import Evaluate.Evaluate ( evaluate, isCapture, scoreMove )
+import Control.Parallel.Strategies
+    ( parList, rdeepseq, withStrategy )
 
 goQuiesce :: Position -> Int -> Int -> Int -> SearchState -> IO MoveScore
 goQuiesce !position !low !high !ply !searchState = quiesce position low high ply searchState 2
@@ -46,12 +48,12 @@ quiesce !position !low !high !ply !searchState !maxChecks = do
         eval = evaluate position
         inCheck = maxChecks > 0 && isCheck position (mover position)
         startLow = if inCheck then low else max eval low
-        notInCheckPositions = quiescePositions position inCheck
+        notInCheckPositions = withStrategy (parList rdeepseq) $ quiescePositions position inCheck
         newMaxChecks = if inCheck then maxChecks-1 else maxChecks
 
         highestQuiesceMove :: [(Position,Move)] -> Int -> Int -> MoveScore -> IO MoveScore
         highestQuiesceMove [] _ _ best = return best
-        highestQuiesceMove notInCheckPositions !low !high best = do
+        highestQuiesceMove !notInCheckPositions !low !high best = do
             let (thisP,thisM) = head notInCheckPositions
             ms <- quiesce thisP (-high) (-low) (ply+1) searchState newMaxChecks
             let negatedScore = -(msScore ms)
