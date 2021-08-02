@@ -30,13 +30,13 @@ import Control.Parallel.Strategies
     ( parList, rdeepseq, withStrategy )
 
 goQuiesce :: Position -> Int -> Int -> Int -> SearchState -> IO MoveScore
-goQuiesce !position !low !high !ply !searchState = quiesce position low high ply searchState 2
+goQuiesce !position !low !high !ply searchState = quiesce position low high ply searchState 2
 
 quiesce :: Position -> Int -> Int -> Int -> SearchState -> Int -> IO MoveScore
 quiesce position _ _ 100 searchState _ = do
     incNodes searchState
     return $ MoveScore { msScore=evaluate position, msPath=[], msBound=Exact }
-quiesce !position !low !high !ply !searchState !maxChecks = do
+quiesce !position !low !high !ply searchState !maxChecks = do
     incNodes searchState
     if null notInCheckPositions
         then return MoveScore { msScore=if inCheck then ply-10000 else startLow, msPath=[], msBound=Exact }
@@ -48,7 +48,7 @@ quiesce !position !low !high !ply !searchState !maxChecks = do
         eval = evaluate position
         inCheck = maxChecks > 0 && isCheck position (mover position)
         startLow = if inCheck then low else max eval low
-        notInCheckPositions = withStrategy (parList rdeepseq) $ quiescePositions position inCheck
+        notInCheckPositions = quiescePositions position inCheck
         newMaxChecks = if inCheck then maxChecks-1 else maxChecks
 
         highestQuiesceMove :: [(Position,Move)] -> Int -> Int -> MoveScore -> IO MoveScore
@@ -70,9 +70,9 @@ quiesce !position !low !high !ply !searchState !maxChecks = do
 quiescePositions :: Position -> Bool -> [(Position,Move)]
 quiescePositions position inCheck =
     if null ps && inCheck
-        then filter (\(p,m) -> not (isCheck p $ mover position)) $ map (\m -> (makeMove position m, m)) (moves position)
+        then withStrategy (parList rdeepseq) $ filter (\(p,m) -> not (isCheck p $ mover position)) $ map (\m -> (makeMove position m, m)) (moves position)
         else ps
     where
-        ps = filter (\(p,m) -> not (isCheck p $ mover position)) $ map (\m -> (makeMove position m, m)) (sortMoves position 0 $ captureMoves position)
+        ps = withStrategy (parList rdeepseq) $ filter (\(p,m) -> not (isCheck p $ mover position)) $ map (\m -> (makeMove position m, m)) (sortMoves position 0 $ captureMoves position)
 
             

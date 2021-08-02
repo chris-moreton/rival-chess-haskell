@@ -84,7 +84,7 @@ searchZero positions depth endTime rootBest searchState = do
                         else highestRatedMoveZero ps positions low high depth endTime best
 
 search :: Position -> Move -> Int -> Int -> Int -> Int -> SearchState -> Int -> Bool -> IO MoveScore
-search !inPosition !inMove 0 !low !high !endTime !searchState !ply _ = goQuiesce inPosition low high ply searchState
+search !inPosition !inMove 0 !low !high !endTime searchState !ply _ = goQuiesce inPosition low high ply searchState
 search !inPosition !inMove !depth !low !high !endTime !searchState !ply !isOnNullMove = do
     let hpos = zobrist inPosition
     let hashIndex = calcHashIndex hpos
@@ -118,7 +118,7 @@ search !inPosition !inMove !depth !low !high !endTime !searchState !ply !isOnNul
                         then do
                             return MoveScore { msScore = -100000, msBound = Lower, msPath = [] }
                         else do
-                            let notInCheckPositions = withStrategy (parList rdeepseq) $ filter (\(p,m) -> not (isCheck p (mover inPosition))) (newPositions inPosition hashMove)
+                            let notInCheckPositions = filter (\(p,m) -> not (isCheck p (mover inPosition))) (newPositions inPosition hashMove)
                             if null notInCheckPositions
                                 then return (mkMs (if isCheck inPosition (mover inPosition) then ply-10000 else 0, []))
                                 else do
