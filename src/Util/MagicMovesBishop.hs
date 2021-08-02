@@ -3,6 +3,11 @@
 module Util.MagicMovesBishop where
 
 import Alias ( Bitboard )
+import Data.IntMap as IM
+
+{-# INLINE magicMovesBishopIntMap #-}
+magicMovesBishopIntMap :: IM.IntMap Bitboard
+magicMovesBishopIntMap = IM.fromList [ (i*1024+j, magicMovesBishop i j) | i <- [0..63], j <- [0..1023] ]
 
 magicMovesBishop :: Int -> Int -> Bitboard
 magicMovesBishop 0 0 = fromIntegral(-9205322385119247872) :: Bitboard

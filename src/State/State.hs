@@ -22,8 +22,8 @@ data SearchState = SearchState {
    , pvScore    :: IORef Integer
 }
 
-makeSearchState :: HashTable -> Stats -> [Move] -> Integer -> IO SearchState
-makeSearchState h n p s = do
+makeSearchState :: Stats -> [Move] -> Integer -> IO SearchState
+makeSearchState n p s = do
     hRef <- H.new
     nRef <- newIORef n
     pRef <- newIORef p

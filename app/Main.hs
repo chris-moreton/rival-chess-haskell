@@ -31,8 +31,7 @@ data UCIState = UCIState {
 
 main :: IO ()
 main = do
-    h <- H.new
-    searchState <- makeSearchState h startStats [] 0
+    searchState <- makeSearchState startStats [] 0
     commandCycle UCIState {position = [getPosition startPosition], quit=False, errorMessage="", output="", searchState=searchState}
 
 showId :: IO ()

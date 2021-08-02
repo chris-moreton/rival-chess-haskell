@@ -3,6 +3,11 @@
 module Util.MagicMovesRook where
 
 import Alias
+import Data.IntMap as IM
+
+{-# INLINE magicMovesRookIntMap #-}
+magicMovesRookIntMap :: IM.IntMap Bitboard
+magicMovesRookIntMap = IM.fromList [ (i*4096+j, magicMovesRook i j) | i <- [0..63], j <- [0..4095] ]
 
 magicMovesRook :: Int -> Int -> Bitboard
 magicMovesRook 0 0 = 72340172838076926

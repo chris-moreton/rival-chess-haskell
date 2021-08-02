@@ -65,6 +65,7 @@ library
     , hashtables
     , vector
     , data-memocombinators
+    , containers
   default-language: Haskell2010
 
 executable rival-exe

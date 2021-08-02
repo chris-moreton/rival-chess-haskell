@@ -20,6 +20,7 @@ data MoveScore =
   deriving Eq
 
 type HashTable = H.LinearHashTable Int HashEntry
+type MagicHashTable = H.LinearHashTable Int Int
 
 data Position = Position {
     whitePawnBitboard :: {-# UNPACK #-} !Bitboard

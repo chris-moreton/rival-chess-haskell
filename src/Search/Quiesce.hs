@@ -18,7 +18,6 @@ import Search.MakeMove ( makeMove )
 import Data.Bits ( Bits(popCount), Bits(testBit), Bits(bit), (.|.), (.&.), clearBit, shiftL )
 import Control.Monad ()
 import System.Exit ()
-import State.State
 import Data.Sort ( sortBy )
 import Data.Maybe ( isJust, fromJust )
 import State.State ( incNodes, updateHashTable, SearchState(..), calcHashIndex, setPv )
@@ -27,7 +26,7 @@ import Util.Zobrist ( zobrist )
 import Search.SearchHelper ( sortMoves, mkMs )
 import Evaluate.Evaluate ( evaluate, isCapture, scoreMove )
 import Control.Parallel.Strategies
-    ( parList, rdeepseq, withStrategy )
+    ( parList, rdeepseq, withStrategy, rseq )
 
 goQuiesce :: Position -> Int -> Int -> Int -> SearchState -> IO MoveScore
 goQuiesce !position !low !high !ply searchState = quiesce position low high ply searchState 2
@@ -70,9 +69,9 @@ quiesce !position !low !high !ply searchState !maxChecks = do
 quiescePositions :: Position -> Bool -> [(Position,Move)]
 quiescePositions position inCheck =
     if null ps && inCheck
-        then withStrategy (parList rdeepseq) $ filter (\(p,m) -> not (isCheck p $ mover position)) $ map (\m -> (makeMove position m, m)) (moves position)
+        then withStrategy (parList rseq) $ filter (\(p,m) -> not (isCheck p $ mover position)) $ map (\m -> (makeMove position m, m)) (moves position)
         else ps
     where
-        ps = withStrategy (parList rdeepseq) $ filter (\(p,m) -> not (isCheck p $ mover position)) $ map (\m -> (makeMove position m, m)) (sortMoves position 0 $ captureMoves position)
+        ps = withStrategy (parList rseq) $ filter (\(p,m) -> not (isCheck p $ mover position)) $ map (\m -> (makeMove position m, m)) (sortMoves position 0 $ captureMoves position)
 
             

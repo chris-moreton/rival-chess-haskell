@@ -5,22 +5,25 @@
 
 module Util.MagicBitboards where
 
-import Util.MagicMovesBishop ( magicMovesBishop )
-import Util.MagicMovesRook ( magicMovesRook )
+import Util.MagicMovesBishop ( magicMovesBishop, magicMovesBishopIntMap )
+import Util.MagicMovesRook ( magicMovesRook, magicMovesRookIntMap )
 import Alias ( Bitboard, Square )
 import qualified Data.MemoCombinators as Memo
+import Data.IntMap as IM
 
 {-# INLINE magic #-}
 magic :: MagicVars -> Square -> Int -> Bitboard
-magic !magicVars !fromSquare !toSquaresMagicIndex = magicMoves magicVars fromSquare toSquaresMagicIndex
+magic !magicVars !fromSquare !toSquaresMagicIndex = 
+  magicMovesIntMap magicVars IM.! ((fromSquare * indexSize) + toSquaresMagicIndex)
+  where indexSize = magicNumberIndexSize magicVars
 
 {-# INLINE magicBishop #-}
 magicBishop :: Square -> Int -> Bitboard
-magicBishop !fromSquare !toSquaresMagicIndex = magicMovesBishop fromSquare toSquaresMagicIndex
+magicBishop !fromSquare !toSquaresMagicIndex = magicMovesBishopIntMap IM.! ((fromSquare * 1024) + toSquaresMagicIndex)
 
 {-# INLINE magicRook #-}
 magicRook :: Square -> Int -> Bitboard
-magicRook !fromSquare !toSquaresMagicIndex = magicMovesRook fromSquare toSquaresMagicIndex
+magicRook !fromSquare !toSquaresMagicIndex = magicMovesRookIntMap IM.! ((fromSquare * 4096) + toSquaresMagicIndex)
 
 -- {-# INLINE magic2 #-}
 -- magic2 :: MagicVars -> Square -> Int -> Bitboard
@@ -28,26 +31,32 @@ magicRook !fromSquare !toSquaresMagicIndex = magicMovesRook fromSquare toSquares
 --   where magic' magicVars fromSquare toSquaresMagicIndex = magicMoves magicVars fromSquare toSquaresMagicIndex
 
 data MagicVars = MagicVars {
-      occupancyMask     :: Int -> Bitboard
-    , magicNumber       :: Int -> Bitboard
-    , magicNumberShifts :: Int -> Int
-    , magicMoves        :: Int -> Int -> Bitboard
+      occupancyMask        :: Int -> Bitboard
+    , magicNumber          :: Int -> Bitboard
+    , magicNumberShifts    :: Int -> Int
+    , magicNumberIndexSize :: Int
+    , magicMoves           :: Int -> Int -> Bitboard
+    , magicMovesIntMap     :: IM.IntMap Bitboard
 }
 
 magicRookVars :: MagicVars
 magicRookVars = MagicVars {
-      occupancyMask     = occupancyMaskRook
-    , magicNumber       = magicNumberRook
-    , magicNumberShifts = magicNumberShiftsRook
-    , magicMoves        = magicMovesRook
+      occupancyMask        = occupancyMaskRook
+    , magicNumber          = magicNumberRook
+    , magicNumberShifts    = magicNumberShiftsRook
+    , magicNumberIndexSize = 4096
+    , magicMoves           = magicMovesRook
+    , magicMovesIntMap     = magicMovesRookIntMap
   }
 
 magicBishopVars :: MagicVars
 magicBishopVars = MagicVars {
-      occupancyMask     = occupancyMaskBishop
-    , magicNumber       = magicNumberBishop
-    , magicNumberShifts = magicNumberShiftsBishop
-    , magicMoves        = magicMovesBishop
+      occupancyMask        = occupancyMaskBishop
+    , magicNumber          = magicNumberBishop
+    , magicNumberShifts    = magicNumberShiftsBishop
+    , magicNumberIndexSize = 1024
+    , magicMoves           = magicMovesBishop
+    , magicMovesIntMap     = magicMovesBishopIntMap
   }
 
 {-# INLINE occupancyMaskRook #-}
