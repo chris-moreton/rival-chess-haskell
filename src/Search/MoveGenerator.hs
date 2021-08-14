@@ -42,6 +42,7 @@ import Util.Bitboards
       rank4Bits,
       rank5Bits,
       rank6Bits,
+      bitList,
       whitePawnMovesCapture,
       whitePawnMovesForward )
 import Util.MagicBitboards
@@ -58,7 +59,10 @@ import Search.MoveConstants
       promotionKnightMoveMask,
       promotionQueenMoveMask,
       promotionRookMoveMask )
-import Evaluate.Evaluate ( isCapture )      
+import Evaluate.Evaluate ( isCapture )
+import Control.Parallel   
+import Control.Parallel.Strategies
+    ( parList, rdeepseq, withStrategy, rseq )
 
 {-# INLINE allBitsExceptFriendlyPieces #-}
 allBitsExceptFriendlyPieces :: Position -> Bitboard
@@ -96,7 +100,7 @@ generateKingMoves !position = generateKingMovesWithTargets position (allBitsExce
 generateKingMovesWithTargets :: Position -> Bitboard -> MoveList
 generateKingMovesWithTargets !position validLandingSquares =
     movesFromToSquaresBitboard kingSquare ((.&.) (kingMovesBitboards kingSquare) validLandingSquares)
-        where !kingSquare = countTrailingZeros (bitboardForMover position King)
+        where !kingSquare = countTrailingZeros $! bitboardForMover position King
 
 generateSliderMoves :: Position -> Piece -> MoveList
 generateSliderMoves !position !piece = generateSliderMovesWithTargets position piece (allBitsExceptFriendlyPieces position)
@@ -119,13 +123,7 @@ generateSliderMovesWithTargets position piece validLandingSquares = go bitboard 
                     !toSquaresMagicIndex = fromIntegral(shiftR rawIndex shiftMagic) :: Int
                     !toSquaresBitboard = (.&.) (magic magicVars fromSquare toSquaresMagicIndex) validLandingSquares
                     !fromSquare = countTrailingZeros fromSquares
-                    !thisResult = recurGenerateSliderMovesWithToSquares (fromSquareMask fromSquare) toSquaresBitboard []
-
-          recurGenerateSliderMovesWithToSquares :: Square -> Bitboard -> MoveList -> MoveList
-          recurGenerateSliderMovesWithToSquares !fromSquare 0 !result = result
-          recurGenerateSliderMovesWithToSquares !fromSquare !toSquares !result =
-              recurGenerateSliderMovesWithToSquares fromSquare (clearBit toSquares square) ((.|.) fromSquare square : result)
-              where !square = countTrailingZeros toSquares
+                    !thisResult = [fromSquareMask fromSquare .|. sq | sq <- bitList toSquaresBitboard]
 
 {-# INLINE promotionMoves #-}
 promotionMoves :: Move -> MoveList
@@ -142,7 +140,7 @@ generatePawnMovesFromToSquares !fromSquare !toSquares =
         go !toSquares !result = go (xor toSquares (bit thisToSquare)) newResult
             where 
                 !thisToSquare = countTrailingZeros toSquares
-                !baseMove = (.|.) mask thisToSquare
+                !baseMove =  mask .|. thisToSquare
                 !newResult = if thisToSquare >= 56 || thisToSquare <= 7
                                 then promotionMoves baseMove ++ result
                                 else baseMove : result
@@ -304,7 +302,7 @@ isSquareAttackedBy :: Position -> Square -> Mover -> Bool
 
 isSquareAttackedBy !position !attackedSquare White =
   attackedByRook || attackedByBishop || attackedByKing || attackedByPawn || attackedByKnight
-  where allPieces       = allPiecesBitboard position
+  where allPieces        = allPiecesBitboard position
         attackedByPawn   = isSquareAttackedByAnyPawn (whitePawnBitboard position) (pawnMovesCaptureOfColour Black attackedSquare) attackedSquare
         attackedByKnight = isSquareAttackedByAnyKnight (whiteKnightBitboard position) attackedSquare
         attackedByRook   = isSquareAttackedByAnyRook allPieces (rookMovePiecesBitboard position White) attackedSquare
@@ -322,17 +320,18 @@ isSquareAttackedBy !position !attackedSquare Black =
 
 {-# INLINE moves #-}
 moves :: Position -> MoveList
-moves !position = generatePawnMoves position ++ 
-                  generateCastleMoves position ++ 
-                  generateKnightMoves position ++ 
-                  generateSliderMoves position Rook ++ 
-                  generateSliderMoves position Bishop ++ 
+moves !position = generatePawnMoves position ++
+                  generateCastleMoves position ++
+                  generateKnightMoves position ++
+                  generateSliderMoves position Rook ++
+                  generateSliderMoves position Bishop ++
                   generateKingMoves position
 
 {-# INLINE captureMoves #-}
 captureMoves :: Position -> MoveList
 captureMoves !position = 
-                  filter (isCapture position) (generatePawnMoves position) ++ 
+                  filter (isCapture position) $
+                  generatePawnMoves position ++ 
                   generateKnightMovesWithTargets position (enemyBitboard position) ++ 
                   generateSliderMovesWithTargets position Rook (enemyBitboard position) ++ 
                   generateSliderMovesWithTargets position Bishop (enemyBitboard position) ++ 

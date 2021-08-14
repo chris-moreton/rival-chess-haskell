@@ -8,33 +8,24 @@ module Util.MagicBitboards where
 import Util.MagicMovesBishop ( magicMovesBishop, magicMovesBishopIntMap )
 import Util.MagicMovesRook ( magicMovesRook, magicMovesRookIntMap )
 import Alias ( Bitboard, Square )
-import qualified Data.MemoCombinators as Memo
 import Data.IntMap as IM
 
 {-# INLINE magic #-}
 magic :: MagicVars -> Square -> Int -> Bitboard
-magic !magicVars !fromSquare !toSquaresMagicIndex = 
-  magicMovesIntMap magicVars IM.! ((fromSquare * indexSize) + toSquaresMagicIndex)
-  where indexSize = magicNumberIndexSize magicVars
+magic !magicVars !fromSquare !toSquaresMagicIndex = magicMoves magicVars fromSquare toSquaresMagicIndex
 
 {-# INLINE magicBishop #-}
 magicBishop :: Square -> Int -> Bitboard
-magicBishop !fromSquare !toSquaresMagicIndex = magicMovesBishopIntMap IM.! ((fromSquare * 1024) + toSquaresMagicIndex)
+magicBishop !fromSquare !toSquaresMagicIndex = magicMovesBishop fromSquare toSquaresMagicIndex
 
 {-# INLINE magicRook #-}
 magicRook :: Square -> Int -> Bitboard
-magicRook !fromSquare !toSquaresMagicIndex = magicMovesRookIntMap IM.! ((fromSquare * 4096) + toSquaresMagicIndex)
-
--- {-# INLINE magic2 #-}
--- magic2 :: MagicVars -> Square -> Int -> Bitboard
--- magic2 magicVars fromSquare = Memo.integral (magic' magicVars fromSquare)
---   where magic' magicVars fromSquare toSquaresMagicIndex = magicMoves magicVars fromSquare toSquaresMagicIndex
+magicRook !fromSquare !toSquaresMagicIndex = magicMovesRook fromSquare toSquaresMagicIndex
 
 data MagicVars = MagicVars {
       occupancyMask        :: Int -> Bitboard
     , magicNumber          :: Int -> Bitboard
     , magicNumberShifts    :: Int -> Int
-    , magicNumberIndexSize :: Int
     , magicMoves           :: Int -> Int -> Bitboard
     , magicMovesIntMap     :: IM.IntMap Bitboard
 }
@@ -44,7 +35,6 @@ magicRookVars = MagicVars {
       occupancyMask        = occupancyMaskRook
     , magicNumber          = magicNumberRook
     , magicNumberShifts    = magicNumberShiftsRook
-    , magicNumberIndexSize = 4096
     , magicMoves           = magicMovesRook
     , magicMovesIntMap     = magicMovesRookIntMap
   }
@@ -54,7 +44,6 @@ magicBishopVars = MagicVars {
       occupancyMask        = occupancyMaskBishop
     , magicNumber          = magicNumberBishop
     , magicNumberShifts    = magicNumberShiftsBishop
-    , magicNumberIndexSize = 1024
     , magicMoves           = magicMovesBishop
     , magicMovesIntMap     = magicMovesBishopIntMap
   }

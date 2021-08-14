@@ -50,7 +50,7 @@ movingPiece position from
     | otherwise = King
 
 makeAlgebraicMoves :: Position -> [String] -> Position
-makeAlgebraicMoves = foldl (\ position move -> makeMove position (moveFromAlgebraicMove move))    
+makeAlgebraicMoves = foldl (\ position move -> makeMove position $ moveFromAlgebraicMove move)
 
 makeMove :: Position -> Move -> Position
 makeMove !position !move =

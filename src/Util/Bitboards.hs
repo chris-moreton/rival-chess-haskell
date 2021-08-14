@@ -5,13 +5,21 @@
 module Util.Bitboards where
 
 import Data.Bits
-    ( Bits(shiftL, bit, xor, shiftR, (.&.), complement, (.|.)) )
+    ( Bits(shiftL, bit, xor, shiftR, (.&.), complement, clearBit, (.|.)), FiniteBits(countTrailingZeros) )
 import Util.Utils ()
 import Types
     ( Mover(White),
       Position(mover, blackPiecesBitboard, whitePiecesBitboard,
                allPiecesBitboard) )
 import Alias ( Bitboard )
+
+bitList :: Bitboard -> [Int]
+bitList bb = go bb []
+  where 
+    go :: Bitboard -> [Int] -> [Int]
+    go 0 result = result
+    go bb result = go (clearBit bb b) (b : result)
+      where b = countTrailingZeros bb
 
 bitString :: Bitboard -> String
 bitString bitboard = go bitboard 63 ""

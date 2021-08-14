@@ -32,7 +32,7 @@ import Search.SearchHelper
       mkMs,
       bestMoveFirst,
       sortMoves )
-import Search.Quiesce ( goQuiesce )
+import Search.Quiesce ( quiesce )
 import Control.Parallel.Strategies
     ( parList, rdeepseq, withStrategy )
         
@@ -84,7 +84,7 @@ searchZero positions depth endTime rootBest searchState = do
                         else highestRatedMoveZero ps positions low high depth endTime best
 
 search :: Position -> Move -> Int -> Int -> Int -> Int -> SearchState -> Int -> Bool -> IO MoveScore
-search !inPosition !inMove 0 !low !high !endTime searchState !ply _ = goQuiesce inPosition low high ply searchState
+search !inPosition !inMove 0 !low !high !endTime searchState !ply _ = quiesce inPosition low high ply searchState
 search !inPosition !inMove !depth !low !high !endTime !searchState !ply !isOnNullMove = do
     let hpos = zobrist inPosition
     let hashIndex = calcHashIndex hpos
@@ -107,7 +107,7 @@ search !inPosition !inMove !depth !low !high !endTime !searchState !ply !isOnNul
         Nothing -> main inPosition 0 depth low high endTime hpos ply isOnNullMove
     where            
         main :: Position -> Move -> Int -> Int -> Int -> Int -> Int -> Int -> Bool -> IO MoveScore
-        main !inPosition _ 0 !low !high !endTime _ !ply _ = goQuiesce inPosition low high ply searchState
+        main !inPosition _ 0 !low !high !endTime _ !ply _ = quiesce inPosition low high ply searchState
         main !inPosition hashMove !depth !low !high !endTime hpos !ply !isOnNullMove = do
             incNodes searchState
             if halfMoves inPosition == 50

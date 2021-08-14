@@ -650,11 +650,18 @@ main = hspec $ do
     it "evaluates a position using a quiescence search" $ do
         c <- makeSearchState startStats [] 0
         let position = getPosition "rnbqkbnr/ppp3pp/5p2/3PB1N1/2P4P/8/PP1P1PP1/RNBQK2R b KQkq - 0 1"
-        q <- goQuiesce position -100000 100000 0 c
+        q <- quiesce position -100000 100000 0 c
         msScore q `shouldBe` 150
         let position = getPosition "rnbqkbnr/ppp3pp/5p2/3PB1N1/2P4P/8/PP1P1PP1/RNBQK2R w KQkq - 0 1"
-        q <- goQuiesce position -100000 100000 0 c
+        q <- quiesce position -100000 100000 0 c
         msScore q `shouldBe` 200
+
+  describe "bitList" $
+    it "returns a list of indexes of bits set in a bitboard" $ do
+        bitList 0b0000000000000000000000000000000000000000000000000000000000000000 `shouldBe` []
+        bitList 0b0000000010000000000000000000000000000000000000000000000000000000 `shouldBe` [55]
+        bitList 0b0000000010000000000000000000000000000000000000000000000000000001 `shouldBe` [55,0]
+        bitList 0b1000000010000000000000000000000000000000000000000000000000000001 `shouldBe` [63,55,0]
 
   describe "Perft Test" $
    it "Returns the total number of moves in a full move tree of a given depth with a given position as its head" $ do
