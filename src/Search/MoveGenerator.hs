@@ -26,6 +26,7 @@ import Data.Bits
 import Util.Bitboards
     ( blackPawnMovesCapture,
       blackPawnMovesForward,
+      bitList,
       emptyCastleSquaresBlackKing,
       emptyCastleSquaresBlackQueen,
       emptyCastleSquaresWhiteKing,
@@ -42,7 +43,6 @@ import Util.Bitboards
       rank4Bits,
       rank5Bits,
       rank6Bits,
-      bitList,
       whitePawnMovesCapture,
       whitePawnMovesForward )
 import Util.MagicBitboards
@@ -106,24 +106,18 @@ generateSliderMoves :: Position -> Piece -> MoveList
 generateSliderMoves !position !piece = generateSliderMovesWithTargets position piece (allBitsExceptFriendlyPieces position)
           
 generateSliderMovesWithTargets :: Position -> Piece -> Bitboard -> MoveList
-generateSliderMovesWithTargets position piece validLandingSquares = go bitboard [] 
+generateSliderMovesWithTargets position piece validLandingSquares = go (sliderBitboardForColour position (mover position) piece)
     where
-          !magicVars = if piece == Bishop then magicBishopVars else magicRookVars
-          !bitboard = sliderBitboardForColour position (mover position) piece
-
-          go :: Bitboard -> MoveList -> MoveList
-          go 0 !result = result
-          go fromSquares !result = 
-              go (clearBit fromSquares fromSquare) (result ++ thisResult)
-              where !numberMagic = magicNumber magicVars fromSquare
-                    !shiftMagic = magicNumberShifts magicVars fromSquare
-                    !maskMagic = occupancyMask magicVars fromSquare
-                    !occupancy = (.&.) (allPiecesBitboard position) maskMagic
-                    !rawIndex = fromIntegral (occupancy * numberMagic) :: Word
-                    !toSquaresMagicIndex = fromIntegral(shiftR rawIndex shiftMagic) :: Int
-                    !toSquaresBitboard = (.&.) (magic magicVars fromSquare toSquaresMagicIndex) validLandingSquares
-                    !fromSquare = countTrailingZeros fromSquares
-                    !thisResult = [fromSquareMask fromSquare .|. sq | sq <- bitList toSquaresBitboard]
+    !magicVars = if piece == Bishop then magicBishopVars else magicRookVars
+    go fromSquares = [fromSquareMask fromSquare .|. toSquare | fromSquare <- bitList fromSquares, toSquare <- bitList $ toSquaresBitboard fromSquare]
+    toSquaresBitboard fromSquare = (.&.) (magic magicVars fromSquare toSquaresMagicIndex) validLandingSquares
+        where
+        !numberMagic = magicNumber magicVars fromSquare
+        !shiftMagic = magicNumberShifts magicVars fromSquare
+        !maskMagic = occupancyMask magicVars fromSquare
+        !occupancy = (.&.) (allPiecesBitboard position) maskMagic
+        !rawIndex = fromIntegral (occupancy * numberMagic) :: Word
+        !toSquaresMagicIndex = fromIntegral(shiftR rawIndex shiftMagic) :: Int
 
 {-# INLINE promotionMoves #-}
 promotionMoves :: Move -> MoveList
