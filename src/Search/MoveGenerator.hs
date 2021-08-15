@@ -70,13 +70,7 @@ allBitsExceptFriendlyPieces !position = complement (if mover position == White t
 
 {-# INLINE movesFromToSquaresBitboard #-}
 movesFromToSquaresBitboard :: Square -> Bitboard -> MoveList
-movesFromToSquaresBitboard !fromSquare !toSquares = go (fromSquareMask fromSquare) toSquares []
-    where
-        go :: Square -> Bitboard -> MoveList -> MoveList
-        go _ 0 !result = result
-        go !fromSquare !toSquares !result = 
-            go fromSquare (clearBit toSquares square) ((.|.) fromSquare square : result)
-            where !square = countTrailingZeros toSquares
+movesFromToSquaresBitboard !fromSquare !toSquares = [fromSquareMask fromSquare .|. toSquare | toSquare <- bitList toSquares]
 
 {-# INLINE generateKnightMoves #-}
 generateKnightMoves :: Position -> MoveList
@@ -84,13 +78,8 @@ generateKnightMoves !position = generateKnightMovesWithTargets position (allBits
 
 {-# INLINE generateKnightMovesWithTargets #-}
 generateKnightMovesWithTargets :: Position -> Bitboard -> MoveList
-generateKnightMovesWithTargets !position validLandingSquares = go position (bitboardForMover position Knight) []
-    where
-        go :: Position -> Bitboard -> MoveList -> MoveList
-        go _ 0 !result = result
-        go !position fromSquares !result =
-            go position (clearBit fromSquares fromSquare) (result ++ movesFromToSquaresBitboard fromSquare ((.&.) (knightMovesBitboards fromSquare) validLandingSquares))
-            where !fromSquare = countTrailingZeros fromSquares
+generateKnightMovesWithTargets !position validLandingSquares =
+    [fromSquareMask fromSquare .|. toSquare | fromSquare <- bitList (bitboardForMover position Knight), toSquare <- bitList ((.&.) (knightMovesBitboards fromSquare) validLandingSquares)]
 
 {-# INLINE generateKingMoves #-}
 generateKingMoves :: Position -> MoveList
