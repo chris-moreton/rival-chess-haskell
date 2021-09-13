@@ -103,7 +103,6 @@ search !inPosition !inMove !depth !low !high !endTime !searchState !ply !isOnNul
                 Upper -> do
                     incHashUpper searchState
                     main inPosition hashTableMove depth low (score (fromJust hentry)) endTime hpos ply isOnNullMove
-                Quiesce -> main inPosition 0 depth low high endTime hpos ply isOnNullMove
         Nothing -> main inPosition 0 depth low high endTime hpos ply isOnNullMove
     where            
         main :: Position -> Move -> Int -> Int -> Int -> Int -> Int -> Int -> Bool -> IO MoveScore

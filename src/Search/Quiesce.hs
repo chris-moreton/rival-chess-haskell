@@ -25,8 +25,7 @@ import qualified Data.HashTable.IO as H
 import Util.Zobrist ( zobrist )
 import Search.SearchHelper ( sortMoves, mkMs )
 import Evaluate.Evaluate ( evaluate, isCapture, scoreMove )
-import Control.Parallel.Strategies
-    ( parList, rdeepseq, withStrategy, rseq )
+import Control.Parallel.Strategies ( parList, rdeepseq, withStrategy, rseq )
 
 quiesce :: Position -> Int -> Int -> Int -> SearchState -> IO MoveScore
 quiesce position _ _ 100 searchState = do

@@ -60,13 +60,14 @@ import Search.MoveConstants
       promotionQueenMoveMask,
       promotionRookMoveMask )
 import Evaluate.Evaluate ( isCapture )
+import Control.Concurrent
+import Control.DeepSeq
 import Control.Parallel   
 import Control.Parallel.Strategies
-    ( parList, rdeepseq, withStrategy, rseq )
 
 {-# INLINE allBitsExceptFriendlyPieces #-}
 allBitsExceptFriendlyPieces :: Position -> Bitboard
-allBitsExceptFriendlyPieces !position = complement (if mover position == White then whitePiecesBitboard position else blackPiecesBitboard position)
+allBitsExceptFriendlyPieces !position = complement $ (if mover position == White then whitePiecesBitboard else blackPiecesBitboard) position
 
 {-# INLINE movesFromToSquaresBitboard #-}
 movesFromToSquaresBitboard :: Square -> Bitboard -> MoveList
@@ -79,7 +80,8 @@ generateKnightMoves !position = generateKnightMovesWithTargets position (allBits
 {-# INLINE generateKnightMovesWithTargets #-}
 generateKnightMovesWithTargets :: Position -> Bitboard -> MoveList
 generateKnightMovesWithTargets !position validLandingSquares =
-    [fromSquareMask fromSquare .|. toSquare | fromSquare <- bitList (bitboardForMover position Knight), toSquare <- bitList ((.&.) (knightMovesBitboards fromSquare) validLandingSquares)]
+    [fromSquareMask fromSquare .|. toSquare | fromSquare <- bitList $ bitboardForMover position Knight,
+                                              toSquare   <- bitList $ knightMovesBitboards fromSquare .&. validLandingSquares]
 
 {-# INLINE generateKingMoves #-}
 generateKingMoves :: Position -> MoveList
@@ -303,20 +305,38 @@ isSquareAttackedBy !position !attackedSquare Black =
 
 {-# INLINE moves #-}
 moves :: Position -> MoveList
-moves !position = generatePawnMoves position ++
-                  generateCastleMoves position ++
-                  generateKnightMoves position ++
-                  generateSliderMoves position Rook ++
-                  generateSliderMoves position Bishop ++
-                  generateKingMoves position
+moves !position = runEval $ do
+    p <- rpar (force $ generatePawnMoves position)
+    k <- rpar (force $ generateKingMoves position)
+    c <- rpar (force $ generateCastleMoves position)
+    n <- rpar (force $ generateKnightMoves position)
+    r <- rpar (force $ generateSliderMoves position Rook)
+    b <- rpar (force $ generateSliderMoves position Bishop)
+    rseq p
+    rseq k
+    rseq n 
+    rseq c
+    rseq r
+    rseq b
+    return (p ++ n ++ k ++ c ++ r ++ b)
 
 {-# INLINE captureMoves #-}
 captureMoves :: Position -> MoveList
-captureMoves !position = 
-                  filter (isCapture position) $
-                  generatePawnMoves position ++ 
-                  generateKnightMovesWithTargets position (enemyBitboard position) ++ 
-                  generateSliderMovesWithTargets position Rook (enemyBitboard position) ++ 
-                  generateSliderMovesWithTargets position Bishop (enemyBitboard position) ++ 
-                  generateKingMovesWithTargets position (enemyBitboard position)
+captureMoves !position = filter (isCapture position) $ potentialCaptureMoves position
+               
+{-# INLINE potentialCaptureMoves #-}
+potentialCaptureMoves :: Position -> MoveList
+potentialCaptureMoves !position = runEval $ do
+    a <- rpar (force $ generatePawnMoves position)
+    b <- rpar (force $ generateKnightMovesWithTargets position (enemyBitboard position))
+    c <- rpar (force $ generateSliderMovesWithTargets position Rook (enemyBitboard position))
+    d <- rpar (force $ generateSliderMovesWithTargets position Bishop (enemyBitboard position))
+    e <- rpar (force $ generateKingMovesWithTargets position (enemyBitboard position))
+    rseq a
+    rseq b
+    rseq c 
+    rseq d 
+    rseq e 
+    return (a ++ b ++ c ++ d ++ e)
                   
+                      
