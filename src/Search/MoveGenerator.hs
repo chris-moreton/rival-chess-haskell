@@ -284,15 +284,19 @@ isRookAttackingSquare !attackedSquare !pieceSquare !allPieceBitboard =
 
 {-# INLINE isSquareAttackedBy #-}
 isSquareAttackedBy :: Position -> Square -> Mover -> Bool
-
-isSquareAttackedBy !position !attackedSquare White =
-  attackedByRook || attackedByBishop || attackedByKing || attackedByPawn || attackedByKnight
-  where allPieces        = allPiecesBitboard position
-        attackedByPawn   = isSquareAttackedByAnyPawn (whitePawnBitboard position) (pawnMovesCaptureOfColour Black attackedSquare) attackedSquare
-        attackedByKnight = isSquareAttackedByAnyKnight (whiteKnightBitboard position) attackedSquare
-        attackedByRook   = isSquareAttackedByAnyRook allPieces (rookMovePiecesBitboard position White) attackedSquare
-        attackedByBishop = isSquareAttackedByAnyBishop allPieces (bishopMovePiecesBitboard position White) attackedSquare
-        attackedByKing   = isSquareAttackedByKing (whiteKingBitboard position) attackedSquare
+isSquareAttackedBy !position !attackedSquare White = runEval $ do
+    a <- rseq (isSquareAttackedByAnyPawn (whitePawnBitboard position) (pawnMovesCaptureOfColour Black attackedSquare) attackedSquare)
+    b <- rseq (isSquareAttackedByAnyKnight (whiteKnightBitboard position) attackedSquare)
+    c <- rseq (isSquareAttackedByAnyRook allPieces (rookMovePiecesBitboard position White) attackedSquare)
+    d <- rseq (isSquareAttackedByAnyBishop allPieces (bishopMovePiecesBitboard position White) attackedSquare)
+    e <- rseq (isSquareAttackedByKing (whiteKingBitboard position) attackedSquare)
+    rseq a
+    rseq b
+    rseq c
+    rseq d
+    rseq e
+    return (a || b || c || d || e)
+  where allPieces = allPiecesBitboard position
 
 isSquareAttackedBy !position !attackedSquare Black =
   attackedByRook || attackedByBishop || attackedByKing || attackedByPawn || attackedByKnight
