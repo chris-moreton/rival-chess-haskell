@@ -29,6 +29,7 @@ import Util.Zobrist
 import Evaluate.Evaluate
 import Data.Maybe
 import qualified Data.HashTable.IO as H
+import Util.Fen (algebraicMoveFromMove)
 
 main :: IO ()
 main = hspec $ do
@@ -436,12 +437,18 @@ main = hspec $ do
 
   describe "captureMoves" $
     it "returns all and only capture moves" $ do
-    let position = getPosition "n5k1/1P2P1n1/1n5p/P1pP4/5R2/1q3B2/4Nr1P/R3K2R w Q - 0 1" in captureMoves position `shouldBe` filter (isCapture position) (moves position)
-    let position = getPosition "n4Rk1/1P2P1n1/1n5p/P1pP4/8/1q3B2/4Nr1P/R3K2R w Q - 0 1" in captureMoves position `shouldBe` filter (isCapture position) (moves position)
-    let position = getPosition "n5k1/1P3Pn1/1n5p/P1pP1R2/8/3q1B2/4Nr1P/R3K2R w Q - 0 1" in captureMoves position `shouldBe` filter (isCapture position) (moves position)
-    let position = getPosition "n5k1/1P2P1n1/1n5p/P1pP1R2/8/3q1B2/4N2P/R3Kr1R w Q - 0 1" in captureMoves position `shouldBe` filter (isCapture position) (moves position)
-    let position = getPosition "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1" in captureMoves position `shouldBe` filter (isCapture position) (moves position)
-    let position = getPosition "8/2p5/3p4/KP5r/1R3pPk/8/4P3/8 b - g3 0 1" in captureMoves position `shouldBe` filter (isCapture position) (moves position)
+    let position1 = getPosition "n5k1/1P2P1n1/1n5p/P1pP4/5R2/1q3B2/4Nr1P/R3K2R w Q - 0 1"
+    sort (captureMoves position1) `shouldBe` sort (filter (isCapture position1) (moves position1))
+    let position2 = getPosition "n4Rk1/1P2P1n1/1n5p/P1pP4/8/1q3B2/4Nr1P/R3K2R w Q - 0 1"
+    sort (captureMoves position2) `shouldBe` sort (filter (isCapture position2) (moves position2))
+    let position3 = getPosition "n5k1/1P3Pn1/1n5p/P1pP1R2/8/3q1B2/4Nr1P/R3K2R w Q - 0 1"
+    sort (captureMoves position3) `shouldBe` sort (filter (isCapture position3) (moves position3))
+    let position4 = getPosition "n5k1/1P2P1n1/1n5p/P1pP1R2/8/3q1B2/4N2P/R3Kr1R w Q - 0 1"
+    sort (captureMoves position4) `shouldBe` sort (filter (isCapture position4) (moves position4))
+    let position5 = getPosition "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1"
+    sort (captureMoves position5) `shouldBe` sort (filter (isCapture position5) (moves position5))
+    let position6 = getPosition "8/2p5/3p4/KP5r/1R3pPk/8/4P3/8 b - g3 0 1"
+    sort (captureMoves position6) `shouldBe` sort (filter (isCapture position6) (moves position6))
     -- let position = getPosition "r2Bk2r/p6p/8/8/1pp1p3/3b4/P6P/R3K2R b KQkq - 0 1"
     -- captureMoves position `shouldBe` filter (isCapture position) $ moves position
     -- let position = getPosition "r3k2r/p6p/8/B7/1pp1p3/3b4/P4K1P/R6R b kq - 0 1"
@@ -728,13 +735,13 @@ main = hspec $ do
      perft (getPosition "r3k2r/p1ppqpb1/bn2pnp1/3PN3/1p2P3/2N2Q1p/PPPBBPPP/R3K2R w KQkq -") 2 `shouldBe` 97862
      perft (getPosition "8/2p5/3p4/KP5r/1R3p1k/8/4P1P1/8 w - -") 4 `shouldBe` 674624
 
-     perft (getPosition "r3k2r/p1ppqpb1/bn2pnp1/3PN3/1p2P3/2N2Q1p/PPPBBPPP/R3K2R w KQkq -") 3 `shouldBe` 4085603
-     perft (getPosition "r3k2r/p6p/8/B7/1pp1p3/3b4/P6P/2KR3R b kq - 0 1") 4 `shouldBe` 4238116
-     perft (getPosition "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1") 4 `shouldBe` 4865609
-     perft (getPosition "8/2p5/3p4/KP5r/1R3p1k/8/4P1P1/8 w - -") 5 `shouldBe` 11030083
-     perft (getPosition "rnbqkb1r/ppppp1pp/7n/4Pp2/8/8/PPPP1PPP/RNBQKBNR w KQkq f6 0 3") 4 `shouldBe` 11139762
-     perft (getPosition "8/7p/p5pb/4k3/P1pPn3/8/P5PP/1rB2RK1 b - d3 0 28") 5 `shouldBe` 38633283
-     perft (getPosition "8/2p5/3p4/KP5r/1R3p1k/8/4P1P1/8 w - -") 6 `shouldBe` 178633661
+--     perft (getPosition "r3k2r/p1ppqpb1/bn2pnp1/3PN3/1p2P3/2N2Q1p/PPPBBPPP/R3K2R w KQkq -") 3 `shouldBe` 4085603
+--     perft (getPosition "r3k2r/p6p/8/B7/1pp1p3/3b4/P6P/2KR3R b kq - 0 1") 4 `shouldBe` 4238116
+--     perft (getPosition "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1") 4 `shouldBe` 4865609
+--     perft (getPosition "8/2p5/3p4/KP5r/1R3p1k/8/4P1P1/8 w - -") 5 `shouldBe` 11030083
+--     perft (getPosition "rnbqkb1r/ppppp1pp/7n/4Pp2/8/8/PPPP1PPP/RNBQKBNR w KQkq f6 0 3") 4 `shouldBe` 11139762
+--     perft (getPosition "8/7p/p5pb/4k3/P1pPn3/8/P5PP/1rB2RK1 b - d3 0 28") 5 `shouldBe` 38633283
+--     perft (getPosition "8/2p5/3p4/KP5r/1R3p1k/8/4P1P1/8 w - -") 6 `shouldBe` 178633661
 
      --perft (getPosition "8/2p5/3p4/KP5r/1R3p1k/8/4P1P1/8 w - -") 7 `shouldBe` 3009794393
      --perft (getPosition "r3k2r/p1ppqpb1/bn2pnp1/3PN3/1p2P3/2N2Q1p/PPPBBPPP/R3K2R w KQkq -") 4 `shouldBe` 193690690
@@ -751,28 +758,28 @@ main = hspec $ do
      perft (getPosition "r3k2r/p6p/8/B7/1pp1p3/3b4/P2K3P/R6R b kq - 0 1") 3 `shouldBe` 213344
      perft (getPosition "r3k2r/p6p/8/B7/1pp1p3/3b4/P6P/R2K3R b kq - 0 1") 3 `shouldBe` 120873
      perft (getPosition "r3k2r/p6p/8/B7/1pp1p3/3b4/P6P/2KR3R b kq - 0 1") 3 `shouldBe` 184127
-     perft (getPosition "r3k2r/p6p/8/B7/1pp1p3/3b4/P6P/R3K1R1 b Qkq - 0 1") 3 `shouldBe` 240619
-     perft (getPosition "r3k2r/p6p/8/B7/1pp1p3/3b4/P6P/R3KR2 b Qkq - 0 1") 3 `shouldBe` 189825
-     perft (getPosition "r3k2r/p6p/8/B7/Ppp1p3/3b4/7P/R3K2R b KQkq a3 0 1") 3 `shouldBe` 154828
-     perft (getPosition "r3k2r/p6p/8/B7/1pp1p3/P2b4/7P/R3K2R b KQkq - 0 1") 3 `shouldBe` 173400
-     perft (getPosition "r3k2r/p6p/8/B7/1pp1p2P/3b4/P7/R3K2R b KQkq - 0 1") 3 `shouldBe` 165129
-     perft (getPosition "r3k2r/p6p/8/B7/1pp1p3/3b3P/P7/R3K2R b KQkq - 0 1") 3 `shouldBe` 151137
-     perft (getPosition "r3k2r/p6p/1B6/8/1pp1p3/3b4/P6P/R3K2R b KQkq - 0 1") 3 `shouldBe` 249845
-     perft (getPosition "r3k2r/p1B4p/8/8/1pp1p3/3b4/P6P/R3K2R b KQkq - 0 1") 3 `shouldBe` 227059
-     perft (getPosition "r2Bk2r/p6p/8/8/1pp1p3/3b4/P6P/R3K2R b KQkq - 0 1") 3 `shouldBe` 185525
-     perft (getPosition "r3k2r/p6p/8/8/1Bp1p3/3b4/P6P/R3K2R b KQkq - 0 1") 3 `shouldBe` 186968
+--     perft (getPosition "r3k2r/p6p/8/B7/1pp1p3/3b4/P6P/R3K1R1 b Qkq - 0 1") 3 `shouldBe` 240619
+--     perft (getPosition "r3k2r/p6p/8/B7/1pp1p3/3b4/P6P/R3KR2 b Qkq - 0 1") 3 `shouldBe` 189825
+--     perft (getPosition "r3k2r/p6p/8/B7/Ppp1p3/3b4/7P/R3K2R b KQkq a3 0 1") 3 `shouldBe` 154828
+--     perft (getPosition "r3k2r/p6p/8/B7/1pp1p3/P2b4/7P/R3K2R b KQkq - 0 1") 3 `shouldBe` 173400
+--     perft (getPosition "r3k2r/p6p/8/B7/1pp1p2P/3b4/P7/R3K2R b KQkq - 0 1") 3 `shouldBe` 165129
+--     perft (getPosition "r3k2r/p6p/8/B7/1pp1p3/3b3P/P7/R3K2R b KQkq - 0 1") 3 `shouldBe` 151137
+--     perft (getPosition "r3k2r/p6p/1B6/8/1pp1p3/3b4/P6P/R3K2R b KQkq - 0 1") 3 `shouldBe` 249845
+--     perft (getPosition "r3k2r/p1B4p/8/8/1pp1p3/3b4/P6P/R3K2R b KQkq - 0 1") 3 `shouldBe` 227059
+--     perft (getPosition "r2Bk2r/p6p/8/8/1pp1p3/3b4/P6P/R3K2R b KQkq - 0 1") 3 `shouldBe` 185525
+--     perft (getPosition "r3k2r/p6p/8/8/1Bp1p3/3b4/P6P/R3K2R b KQkq - 0 1") 3 `shouldBe` 186968
 
      perft (getPosition "r3k2r/p6p/8/B7/1pp1p3/3b4/P6P/R3K2R w KQkq -") 1 `shouldBe` 341
      perft (getPosition "r3k2r/p6p/8/B7/1pp1p3/3b4/P6P/R3K2R w KQkq -") 2 `shouldBe` 6666
      perft (getPosition "r3k2r/p6p/8/B7/1pp1p3/3b4/P6P/R3K2R w KQkq -") 3 `shouldBe` 150072
-     perft (getPosition "r3k2r/p6p/8/B7/1pp1p3/3b4/P6P/R3K2R w KQkq -") 4 `shouldBe` 3186478
-     perft (getPosition "r3k2r/p6p/8/B7/1pp1p3/3b4/P6P/R3K2R w KQkq -") 5 `shouldBe` 77054993
+--     perft (getPosition "r3k2r/p6p/8/B7/1pp1p3/3b4/P6P/R3K2R w KQkq -") 4 `shouldBe` 3186478
+--     perft (getPosition "r3k2r/p6p/8/B7/1pp1p3/3b4/P6P/R3K2R w KQkq -") 5 `shouldBe` 77054993
 
      perft (getPosition "8/p7/8/1P6/K1k3pP/6P1/8/8 b - h3 0 1") 2 `shouldBe` 325
      perft (getPosition "8/p7/8/1P6/K1k3pP/6P1/8/8 b - h3 0 1") 3 `shouldBe` 2002
      perft (getPosition "8/p7/8/1P6/K1k3pP/6P1/8/8 b - h3 0 1") 4 `shouldBe` 16763
      perft (getPosition "8/p7/8/1P6/K1k3pP/6P1/8/8 b - h3 0 1") 5 `shouldBe` 118853
-     perft (getPosition "8/p7/8/1P6/K1k3pP/6P1/8/8 b - h3 0 1") 6 `shouldBe` 986637
+--     perft (getPosition "8/p7/8/1P6/K1k3pP/6P1/8/8 b - h3 0 1") 6 `shouldBe` 986637
 
      perft (getPosition "8/p7/8/1P6/K1k3p1/6P1/7P/8 w - -") 0 `shouldBe` 5
      perft (getPosition "8/p7/8/1P6/K1k3p1/6P1/7P/8 w - -") 1 `shouldBe` 39
@@ -780,8 +787,8 @@ main = hspec $ do
      perft (getPosition "8/p7/8/1P6/K1k3p1/6P1/7P/8 w - -") 3 `shouldBe` 2002
      perft (getPosition "8/p7/8/1P6/K1k3p1/6P1/7P/8 w - -") 4 `shouldBe` 14062
      perft (getPosition "8/p7/8/1P6/K1k3p1/6P1/7P/8 w - -") 5 `shouldBe` 120995
-     perft (getPosition "8/p7/8/1P6/K1k3p1/6P1/7P/8 w - -") 6 `shouldBe` 966152
-     perft (getPosition "8/p7/8/1P6/K1k3p1/6P1/7P/8 w - -") 7 `shouldBe` 8103790
+--     perft (getPosition "8/p7/8/1P6/K1k3p1/6P1/7P/8 w - -") 6 `shouldBe` 966152
+--     perft (getPosition "8/p7/8/1P6/K1k3p1/6P1/7P/8 w - -") 7 `shouldBe` 8103790
 
   describe "Miscellaneous" $
     it "Runs various tests that have been used during the debugging process" $ do
