@@ -11,7 +11,7 @@ import Search.Search (search)
 import Search.STSearch (searchST)
 import Data.Time.Clock
 import Text.Printf
-import State.State (initialSearchState)
+import State.State (SearchState)
 import System.Environment (getArgs)
 
 -- | Test positions for benchmarking
@@ -35,8 +35,9 @@ main = do
     putStrLn "======================================"
     putStrLn ""
 
-    -- Initialize the search state
-    let searchState = initialSearchState
+    -- Create a placeholder SearchState - in a real implementation, 
+    -- we would initialize a proper SearchState with HashTables
+    let searchState = error "Need to implement: Create SearchState"
     
     -- Get arguments for test depth
     args <- getArgs
