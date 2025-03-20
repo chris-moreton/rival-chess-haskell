@@ -18,7 +18,11 @@
 # resolver: ./custom-snapshot.yaml
 # resolver: https://example.com/snapshots/2018-01-01.yaml
 resolver:
-  url: https://raw.githubusercontent.com/commercialhaskell/stackage-snapshots/master/lts/17/8.yaml
+  url: https://raw.githubusercontent.com/commercialhaskell/stackage-snapshots/master/lts/21/25.yaml
+
+# Ensure we use the system GHC since that's what's installed
+system-ghc: true
+compiler: ghc-9.4.8
 
 # User packages to be built.
 # Various formats can be used as shown in the example below.

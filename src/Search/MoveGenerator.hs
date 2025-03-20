@@ -61,7 +61,7 @@ import Search.MoveConstants
       promotionRookMoveMask )
 import Evaluate.Evaluate ( isCapture )
 import Control.Concurrent
-import Control.DeepSeq
+import Control.DeepSeq (force)
 import Control.Parallel   
 import Control.Parallel.Strategies
 
@@ -326,12 +326,15 @@ moves !position = runEval $ do
 
 {-# INLINE captureMoves #-}
 captureMoves :: Position -> MoveList
-captureMoves !position = filter (isCapture position) $ potentialCaptureMoves position
+captureMoves !position = filter (isCapture position) $ moves position
                
 {-# INLINE potentialCaptureMoves #-}
 potentialCaptureMoves :: Position -> MoveList
 potentialCaptureMoves !position = runEval $ do
-    a <- rpar (force $ generatePawnMoves position)
+    -- For pawns, instead of generating all moves, we should focus on capture moves
+    -- but still need to filter since not all of these are necessarily captures
+    -- (en passant and edge cases might need the filter)
+    a <- rpar (force $ generatePawnCaptureMoves position)
     b <- rpar (force $ generateKnightMovesWithTargets position (enemyBitboard position))
     c <- rpar (force $ generateSliderMovesWithTargets position Rook (enemyBitboard position))
     d <- rpar (force $ generateSliderMovesWithTargets position Bishop (enemyBitboard position))
@@ -342,5 +345,31 @@ potentialCaptureMoves !position = runEval $ do
     rseq d 
     rseq e 
     return (a ++ b ++ c ++ d ++ e)
+
+-- | Generate only pawn capture moves
+generatePawnCaptureMoves :: Position -> MoveList
+generatePawnCaptureMoves !position
+    | mover position == White = generateWhitePawnCaptureMoves (bitboardForMover position Pawn) position (enemyBitboard position) []
+    | otherwise               = generateBlackPawnCaptureMoves (bitboardForMover position Pawn) position (enemyBitboard position) []
+
+-- | Generate white pawn capture moves
+generateWhitePawnCaptureMoves :: Bitboard -> Position -> Bitboard -> MoveList -> MoveList
+generateWhitePawnCaptureMoves 0 _ _ !result = result
+generateWhitePawnCaptureMoves !fromSquares !position !enemyPieces !result =
+  generateWhitePawnCaptureMoves (clearBit fromSquares fromSquare) position enemyPieces (result ++ thisResult)
+  where !fromSquare = countTrailingZeros fromSquares
+        -- Generate captures including en passant
+        !captureTargets = pawnCapturesPlusEnPassantSquare whitePawnMovesCapture fromSquare position
+        !thisResult = generatePawnMovesFromToSquares fromSquare captureTargets
+
+-- | Generate black pawn capture moves
+generateBlackPawnCaptureMoves :: Bitboard -> Position -> Bitboard -> MoveList -> MoveList
+generateBlackPawnCaptureMoves 0 _ _ !result = result
+generateBlackPawnCaptureMoves !fromSquares !position !enemyPieces !result =
+  generateBlackPawnCaptureMoves (clearBit fromSquares fromSquare) position enemyPieces (result ++ thisResult)
+  where !fromSquare = countTrailingZeros fromSquares
+        -- Generate captures including en passant
+        !captureTargets = pawnCapturesPlusEnPassantSquare blackPawnMovesCapture fromSquare position
+        !thisResult = generatePawnMovesFromToSquares fromSquare captureTargets
                   
                       
