@@ -214,7 +214,7 @@ magicIndexForRook !pieceSquare !allPieceBitboard =
     let !maskMagic = occupancyMask magicRookVars pieceSquare
         !occupancy = (.&.) allPieceBitboard maskMagic
         !numberMagic = magicNumber magicRookVars pieceSquare
-        !rawIndex = occupancy * numberMagic
+        !rawIndex = fromIntegral (occupancy * numberMagic) :: Word
         !shiftMagic = magicNumberShifts magicRookVars pieceSquare
     in fromIntegral (shiftR rawIndex shiftMagic)
 
@@ -224,7 +224,7 @@ magicIndexForBishop !pieceSquare !allPieceBitboard =
     let !maskMagic = occupancyMask magicBishopVars pieceSquare
         !occupancy = (.&.) allPieceBitboard maskMagic
         !numberMagic = magicNumber magicBishopVars pieceSquare
-        !rawIndex = occupancy * numberMagic
+        !rawIndex = fromIntegral (occupancy * numberMagic) :: Word
         !shiftMagic = magicNumberShifts magicBishopVars pieceSquare
     in fromIntegral (shiftR rawIndex shiftMagic)
 
