@@ -5,6 +5,7 @@ module Search.Perft where
 import Types ( Position(mover) )
 import Search.MakeMove ( makeMove )
 import Search.MoveGenerator ( isCheck, moves )
+import qualified Data.Vector.Unboxed as V
 import Control.Parallel.Strategies
     ( parList, rdeepseq, withStrategy )
 
@@ -13,6 +14,6 @@ perft !position !depth =
     if depth == 0
         then length notInCheckPositions
         else sum (withStrategy (parList rdeepseq) $ map (\x -> perft x (depth - 1)) notInCheckPositions)
-    where !newPositions = map (makeMove position) (moves position)
+    where !newPositions = map (makeMove position) (V.toList $ moves position)
           !notInCheckPositions = filter (\x -> not (isCheck x (mover position))) newPositions
 

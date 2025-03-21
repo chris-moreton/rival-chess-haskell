@@ -9,6 +9,7 @@ import Types
       MoveScore(..),
       Position(halfMoves, mover, whiteKingBitboard,blackKingBitboard) )
 import Alias ( Move, Bitboard, MoveList, Path )
+import qualified Data.Vector.Unboxed as V
 import Search.MoveGenerator (moves,isCheck)
 import Util.Utils ( timeMillis, toSquarePart )
 import Text.Printf ()
@@ -29,7 +30,7 @@ import Util.Bitboards ( exactlyOneBitSet )
 canLeadToDrawByRepetition :: Position -> [Position] -> Bool
 canLeadToDrawByRepetition p ps
     | p `elem` ps = True
-    | or ([makeMove p m `elem` ps | m <- moves p]) = True
+    | or ([makeMove p m `elem` ps | m <- V.toList (moves p)]) = True
     | otherwise = False
 
 {-# INLINE mkMs #-}
@@ -39,15 +40,16 @@ mkMs (score, path) = MoveScore { msScore=score, msBound=Exact, msPath=path }
 {-# INLINE sortMoves #-}
 sortMoves :: Position -> Move -> MoveList -> MoveList
 sortMoves position hashMove moves = do
-    let scoredMoves = map (\m -> m + scoreMove position hashMove m `shiftL` 32) moves
-    map (0b0000000000000000000000000000000011111111111111111111111111111111 .&.) (sortBy (flip compare) scoredMoves)
+    let movesToList = V.toList moves
+    let scoredMoves = map (\m -> m + scoreMove position hashMove m `shiftL` 32) movesToList
+    V.fromList $ map (0b0000000000000000000000000000000011111111111111111111111111111111 .&.) (sortBy (flip compare) scoredMoves)
 
 {-# INLINE bestMoveFirst #-}
 bestMoveFirst :: Position -> Move -> [(Position,Move)]
 bestMoveFirst position bestMove = do
     let movesFromPosition = moves position
     let sortedMoves = sortMoves position bestMove movesFromPosition
-    let newPositions = map (\move -> (makeMove position move,move)) sortedMoves
+    let newPositions = map (\move -> (makeMove position move,move)) (V.toList sortedMoves)
     let notInCheckPositions = filter (\(p,m) -> not (isCheck p (mover position))) newPositions
     notInCheckPositions
 
@@ -60,7 +62,7 @@ hashBound depth lockVal he =
 
 {-# INLINE newPositions #-}
 newPositions :: Position -> Move -> [(Position,Move)]
-newPositions position hashMove = map (\move -> (makeMove position move,move)) (sortMoves position hashMove (moves position))
+newPositions position hashMove = map (\move -> (makeMove position move,move)) (V.toList $ sortMoves position hashMove (moves position))
 
 kingCaptured :: Position -> Bool
 kingCaptured position = exactlyOneBitSet (whiteKingBitboard  position .|. blackKingBitboard position)

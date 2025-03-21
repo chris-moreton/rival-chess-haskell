@@ -11,6 +11,7 @@ import Types
       MoveScore(..),
       Position(halfMoves, mover) )
 import Alias ( Move, Bitboard, MoveList, Path )
+import qualified Data.Vector.Unboxed as V
 import Search.MoveGenerator (moves,isCheck)
 import Util.Utils ( timeMillis, toSquarePart, switchSide )
 import Text.Printf ()
@@ -39,7 +40,7 @@ import Control.Parallel.Strategies
 startSearch :: [Position] -> Int -> Int -> SearchState -> IO MoveScore
 startSearch (position:positions) maxDepth endTime searchState = do
     let theseMoves = sortMoves position 0 (moves position)
-    let newPositions = map (\move -> (makeMove position move,move)) theseMoves
+    let newPositions = map (\move -> (makeMove position move,move)) (V.toList theseMoves)
     let notInCheckPositions = filter (\(p,m) -> not (isCheck p (mover position))) newPositions
     result <- iterativeDeepening (position:positions) 1 maxDepth endTime (snd (head notInCheckPositions))
     setPv (msPath result) searchState
