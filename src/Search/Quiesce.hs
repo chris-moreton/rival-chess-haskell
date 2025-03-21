@@ -10,6 +10,7 @@ import Types
       Position(halfMoves, mover),
       HashEntry )
 import Alias ( Move, Bitboard, MoveList, Path )
+import qualified Data.Vector.Unboxed as V
 import Search.MoveGenerator (moves,isCheck,captureMoves)
 import Util.Utils ( timeMillis, toSquarePart )
 import Text.Printf ()
@@ -64,9 +65,9 @@ quiesce !position !low !high !ply searchState = do
 quiescePositions :: Position -> Bool -> [(Position,Move)]
 quiescePositions position inCheck =
     if null ps && inCheck
-        then filter (\(p,m) -> not (isCheck p $ mover position)) $ map (\m -> (makeMove position m, m)) (moves position)
+        then filter (\(p,m) -> not (isCheck p $ mover position)) $ map (\m -> (makeMove position m, m)) (V.toList $ moves position)
         else ps
     where
-        ps = filter (\(p,m) -> not (isCheck p $ mover position)) $ map (\m -> (makeMove position m, m)) (sortMoves position 0 $ captureMoves position)
+        ps = filter (\(p,m) -> not (isCheck p $ mover position)) $ map (\m -> (makeMove position m, m)) (V.toList $ sortMoves position 0 $ captureMoves position)
 
             

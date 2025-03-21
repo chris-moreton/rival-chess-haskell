@@ -62,7 +62,7 @@ hashBound depth lockVal he =
 
 {-# INLINE newPositions #-}
 newPositions :: Position -> Move -> [(Position,Move)]
-newPositions position hashMove = map (\move -> (makeMove position move,move)) (sortMoves position hashMove (moves position))
+newPositions position hashMove = map (\move -> (makeMove position move,move)) (V.toList $ sortMoves position hashMove (moves position))
 
 kingCaptured :: Position -> Bool
 kingCaptured position = exactlyOneBitSet (whiteKingBitboard  position .|. blackKingBitboard position)
