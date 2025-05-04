@@ -42,6 +42,7 @@ library
       Search.MoveConstants
       Search.MoveUtils
       Search.Search
+      Search.STSearch
       Evaluate.Evaluate
       Evaluate.Attacks
       Search.SearchHelper
@@ -66,6 +67,7 @@ library
     , vector
     , data-memocombinators
     , containers
+    , array
   default-language: Haskell2010
 
 executable rival-exe
@@ -112,6 +114,29 @@ executable rival-eve
     , hashtables
     , vector
   default-language: Haskell2010  
+
+executable st-search-test
+  main-is: STSearchTest.hs
+  other-modules:
+      Paths_rival
+  hs-source-dirs:
+      app
+  ghc-options: -threaded -rtsopts -O2 "-with-rtsopts=-N"
+  build-depends:
+      base >=4.7 && <5
+    , rival
+    , time
+    , split
+    , text
+    , sort
+    , time
+    , parallel
+    , bits-extra
+    , deepseq 
+    , hashtables
+    , vector
+    , array
+  default-language: Haskell2010
 
 test-suite rival-test
   type: exitcode-stdio-1.0
